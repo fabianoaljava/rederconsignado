@@ -43,26 +43,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ConsignadoRepresentante.exe" size="843224">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ConsignadoRepresentante.exe" size="837592">
       <assemblyIdentity name="ConsignadoRepresentante" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>i2A0mGehsDXdqkIV6AW5iHuVjnX2tzDTnkSO75iMIl0=</dsig:DigestValue>
+        <dsig:DigestValue>ALSuChCjn6R3N3QpbKtHKbGWoCxOcK10L3WkgEGsrd0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ControllerLibrary.dll" size="6656">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ControllerLibrary.dll" size="7168">
       <assemblyIdentity name="ControllerLibrary" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>MAPF7rhSy7cm4tyZoOjxETinSG/Zcm6OMmSLObBbrdE=</dsig:DigestValue>
+        <dsig:DigestValue>Z+i6G5M3SLfq1VzG3E6r8gkgkKfNWT2a4WmiaYLjjEI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -139,14 +139,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ModelLibrary.dll" size="316928">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ModelLibrary.dll" size="323072">
       <assemblyIdentity name="ModelLibrary" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>d3tNvjQEqp9FSHcVD+TzSaZbXCuDQVLSWYAfK4Fwoxg=</dsig:DigestValue>
+        <dsig:DigestValue>NconCA+EaF6cDk3Yf769fvxcy3e75pm4QA4vb7XbhAM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

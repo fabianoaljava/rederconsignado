@@ -169,7 +169,8 @@ namespace ModelLibrary
                     PracaId = pPracaId,
                     Mes = pMes,
                     Ano = pAno,
-                    DataAbertura = dataabertura
+                    DataAbertura = dataabertura,
+                    Status = "A"
                 };
 
                 context.Carga.Add(novacarga);
@@ -183,9 +184,48 @@ namespace ModelLibrary
         }
 
 
+        public static void AlterarrStatusCarga(long pCargaId, string pStatus)
+        {
 
 
-        
+            using (DepositoDBEntities context = new DepositoDBEntities())
+            {
+
+
+                var result = context.Carga.SingleOrDefault(cg => cg.Id == pCargaId);
+                if (result != null)
+                {
+                    result.Status = pStatus;
+
+
+                    switch (pStatus)
+                    {
+                        case "E":
+                            result.DataExportacao = DateTime.Now;
+                            break;
+                        case "R":
+                            result.DataRetorno = DateTime.Now;
+                            break;
+                        case "C":
+                            result.DataConferencia = DateTime.Now;
+                            break;
+                        case "F":
+                            result.DataFinalizacao = DateTime.Now;
+                            break;
+                    }
+
+
+                    context.SaveChanges();
+                }
+
+
+            }
+
+        }
+
+
+
+
         public static List<ListaProdutosCarga> ObterProdutosCarga(int pCargaId)
         {
             using (DepositoDBEntities context = new DepositoDBEntities())

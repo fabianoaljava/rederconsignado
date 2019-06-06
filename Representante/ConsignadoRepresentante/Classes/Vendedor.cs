@@ -625,7 +625,7 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.grdVendedorPedido.DataSource = ModelLibrary.MetodosRepresentante.ObterVendedorPedidoItem(pVendedorId, localRepresentanteForm.cCargaId);
 
             var pedido = ModelLibrary.MetodosRepresentante.ObterVendedorPedido(pVendedorId, localRepresentanteForm.cCargaId);
-            cPedidoId = pedido.Id;
+            cPedidoId = pedido != null ? pedido.Id : 0;
 
 
             localRepresentanteForm.grdVendedorPedido.Columns[0].Visible = false;
@@ -945,26 +945,31 @@ namespace ConsignadoRepresentante
 
             var pedido = ModelLibrary.MetodosRepresentante.ObterVendedorPedido(cVendedorId, localRepresentanteForm.cCargaId);
 
+            if (pedido != null)
+            {
+                localRepresentanteForm.dlbValorPedido.Text = string.Format("{0:C2}", pedido.ValorPedido);
+                localRepresentanteForm.dlbValorCompra.Text = string.Format("{0:C2}", pedido.ValorCompra);
+                localRepresentanteForm.dlbPercentualCompra.Text = string.Format("{0}%", pedido.PercentualCompra);
+                localRepresentanteForm.dlbFaixaComissao.Text = string.Format("{0}", pedido.FaixaComissao);
+                localRepresentanteForm.dlbPercentualComissao.Text = string.Format("{0}%", pedido.PercentualFaixa);
+                localRepresentanteForm.dlbValorComissao.Text = string.Format("{0:C2}", pedido.ValorComissao);
+                localRepresentanteForm.dlbValorLiquido.Text = string.Format("{0:C2}", pedido.ValorLiquido);
+                localRepresentanteForm.dlbRecebimentoAnterior.Text = string.Format("{0:C2}", pedido.RecebidoAnterior);
 
-            localRepresentanteForm.dlbValorPedido.Text = string.Format("{0:C2}", pedido.ValorPedido);
-            localRepresentanteForm.dlbValorCompra.Text = string.Format("{0:C2}", pedido.ValorCompra);
-            localRepresentanteForm.dlbPercentualCompra.Text = string.Format("{0}%", pedido.PercentualCompra);
-            localRepresentanteForm.dlbFaixaComissao.Text = string.Format("{0}", pedido.FaixaComissao);
-            localRepresentanteForm.dlbPercentualComissao.Text = string.Format("{0}%", pedido.PercentualFaixa);
-            localRepresentanteForm.dlbValorComissao.Text = string.Format("{0:C2}", pedido.ValorComissao);
-            localRepresentanteForm.dlbValorLiquido.Text = string.Format("{0:C2}", pedido.ValorLiquido);
-            localRepresentanteForm.dlbRecebimentoAnterior.Text = string.Format("{0:C2}", pedido.RecebidoAnterior);            
+                localRepresentanteForm.dlbTotalAPagar.Text = string.Format("{0:C2}", pedido.ValorLiquido + pedido.RecebidoAnterior);
 
-            localRepresentanteForm.dlbTotalAPagar.Text = string.Format("{0:C2}", pedido.ValorLiquido + pedido.RecebidoAnterior);
-
-            cValorTotalAPagar = Convert.ToDecimal(pedido.ValorLiquido + pedido.RecebidoAnterior);
-            cValorRecebido = Convert.ToDecimal(pedido.ValorAcerto);
-
-
-            localRepresentanteForm.dlbAcertoAberto.Text = string.Format("{0:C2}", cValorTotalAPagar - cValorRecebido);
+                cValorTotalAPagar = Convert.ToDecimal(pedido.ValorLiquido + pedido.RecebidoAnterior);
+                cValorRecebido = Convert.ToDecimal(pedido.ValorAcerto);
 
 
-            localRepresentanteForm.txtValorRecebido.Text = string.Format("{0}", pedido.ValorAcerto);
+                localRepresentanteForm.dlbAcertoAberto.Text = string.Format("{0:C2}", cValorTotalAPagar - cValorRecebido);
+
+
+                localRepresentanteForm.txtValorRecebido.Text = string.Format("{0}", pedido.ValorAcerto);
+            }
+
+
+
 
 
 

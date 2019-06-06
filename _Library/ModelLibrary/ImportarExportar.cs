@@ -12,8 +12,8 @@ namespace ModelLibrary
     public class ImportarExportar
     {
         public static string cResult;
+        public static long cCargaId;
 
-        public static List<ListaExportacao> cResultExportacao;
 
 
         public static Boolean Importar(long pRepresentanteId, long pPracaId, int pMes, int pAno)
@@ -819,146 +819,224 @@ namespace ModelLibrary
 
 
         public static List<ListaExportacao> ObterListaExportacao(long pCargaId) {
-           
 
-            var vTable = new ListaExportacao();
-
-
+            cCargaId = pCargaId;
 
             using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                int count = 0;                                                                           
 
-                
-                vTable.Tabela = "Atualizar Carga";
-                vTable.TotalLinhas = 1;
-                vTable.TotalExportado = 0;
-                vTable.Status = "Preparando...";
+                var result = new List<ListaExportacao>();
 
-                cResultExportacao.Add(vTable);
+                var vTable = new ListaExportacao();
 
+
+                int count = 1;
+
+                vTable.Tabela = "Carga";
+                vTable.Acao = "Atualizar Carga";
+                vTable.Rotina = "ExportarAtualizarCarga";
+                vTable.TotalLinhas = count;
+                vTable.Status = "Preparando...";                
+
+                result.Add(vTable);
+
+
+                vTable = new ListaExportacao();
 
                 count = representante.RepPedido.Where(rp => rp.CargaId != pCargaId).Count();
 
-                vTable.Tabela = "Atualizar Pedido(s)";
+                vTable.Tabela = "Pedido";
+                vTable.Acao = "Atualizar Pedido(s)";
+                vTable.Rotina = "ExportarAtualizarPedido";
                 vTable.TotalLinhas = count;
-                vTable.TotalExportado = 0;
                 vTable.Status = "Preparando...";
 
-                cResultExportacao.Add(vTable);
+                result.Add(vTable);
+
+                vTable = new ListaExportacao();
 
 
-                count = representante.RepPedidoItem.Join(representante.RepPedido, pi => pi.PedidoId, pd => pd.Id, (pi, pd) => new { RepPedidoItem = pi, RepPedido = pd } ).Where(pd => pd.RepPedido.CargaId != pCargaId).Count();
+                count = representante.RepPedidoItem.Join(representante.RepPedido, pi => pi.PedidoId, pd => pd.Id, (pi, pd) => new { RepPedidoItem = pi, RepPedido = pd }).Where(pd => pd.RepPedido.CargaId != pCargaId).Count();
 
-
-                vTable.Tabela = "Atualizar Item(s) do(s) Pedido(s)";
+                vTable.Tabela = "PedidoItem";
+                vTable.Acao = "Atualizar Item(s) do(s) Pedido(s)";
+                vTable.Rotina = "ExportarAtualizarPedidoItem";
                 vTable.TotalLinhas = count;
-                vTable.TotalExportado = 0;
                 vTable.Status = "Preparando...";
 
-                cResultExportacao.Add(vTable);
+                result.Add(vTable);
 
+                vTable = new ListaExportacao();
 
                 count = representante.RepPedido.Where(rp => rp.CargaId == pCargaId).Count();
 
-
-                vTable.Tabela = "Inserir Pedido(s)";
+                vTable.Tabela = "Pedido";
+                vTable.Acao = "Inserir Pedido(s)";
+                vTable.Rotina = "ExportarInserirPedido";
                 vTable.TotalLinhas = count;
-                vTable.TotalExportado = 0;
                 vTable.Status = "Preparando...";
 
-                cResultExportacao.Add(vTable);
+                result.Add(vTable);
+
+                vTable = new ListaExportacao();
 
 
                 count = representante.RepPedidoItem.Join(representante.RepPedido, pi => pi.PedidoId, pd => pd.Id, (pi, pd) => new { RepPedidoItem = pi, RepPedido = pd }).Where(pd => pd.RepPedido.CargaId == pCargaId).Count();
 
-
-                vTable.Tabela = "Inserir Item(s) do(s) Pedido(s)";
+                vTable.Tabela = "PedidoItem";
+                vTable.Acao = "Inserir Item(s) do(s) Pedido(s)";
+                vTable.Rotina = "ExportarInserirPedidoItem";
                 vTable.TotalLinhas = count;
-                vTable.TotalExportado = 0;
                 vTable.Status = "Preparando...";
 
-                cResultExportacao.Add(vTable);
+                result.Add(vTable);
+
+                vTable = new ListaExportacao();
 
 
                 count = representante.RepReceber.Count();
 
-
-                vTable.Tabela = "Atualizar Contas a Receber";
+                vTable.Tabela = "Receber";
+                vTable.Acao = "Atualizar Contas a Receber";
+                vTable.Rotina = "ExportarAtualizarReceber";
                 vTable.TotalLinhas = count;
-                vTable.TotalExportado = 0;
                 vTable.Status = "Preparando...";
 
-                cResultExportacao.Add(vTable);
+                result.Add(vTable);
+
+                vTable = new ListaExportacao();
 
                 count = representante.RepReceberBaixa.Where(rb => rb.CargaId != pCargaId).Count();
 
-
-                vTable.Tabela = "Atualizar Baixa de Contas a Receber";
+                vTable.Tabela = "ReceberBaixa";
+                vTable.Acao = "Atualizar Baixa de Contas a Receber";
+                vTable.Rotina = "ExportarAtualizarReceberBaixa";
                 vTable.TotalLinhas = count;
-                vTable.TotalExportado = 0;
                 vTable.Status = "Preparando...";
 
-                cResultExportacao.Add(vTable);
+                result.Add(vTable);
+
+
+                vTable = new ListaExportacao();
 
 
 
                 count = representante.RepReceberBaixa.Where(rb => rb.CargaId == pCargaId).Count();
 
-
-                vTable.Tabela = "Inserir Baixa de Contas a Receber";
+                vTable.Tabela = "ReceberBaixa";
+                vTable.Acao = "Inserir Baixa de Contas a Receber";
+                vTable.Rotina = "ExportarInserirReceberBaixa";
                 vTable.TotalLinhas = count;
-                vTable.TotalExportado = 0;
                 vTable.Status = "Preparando...";
 
-                cResultExportacao.Add(vTable);
+                result.Add(vTable);
+
+                vTable = new ListaExportacao();
 
 
                 count = representante.RepVendedor.Where(vd => vd.Status == "N").Count();
 
-
-                vTable.Tabela = "Inserir Baixa de Contas a Receber";
+                vTable.Tabela = "Vendedor";
+                vTable.Acao = "Atualizar Vendedor...";
+                vTable.Rotina = "ExportarAtualizarVendedor";
                 vTable.TotalLinhas = count;
-                vTable.TotalExportado = 0;
                 vTable.Status = "Preparando...";
 
-                cResultExportacao.Add(vTable);
+                result.Add(vTable);
 
+
+
+
+
+
+
+
+                return result.ToList<ListaExportacao>();
 
             }
 
 
-            return cResultExportacao;
+
 
 
         }
 
         // Atualizar Tabela Carga: Data Exportação / Status
-        public static Boolean ExportarCargaAtualizar()
+        public static Boolean ExportarAtualizarCarga()
         {
-                        
+
+            ModelLibrary.MetodosDeposito.AlterarrStatusCarga(cCargaId, "E");
+            ModelLibrary.MetodosRepresentante.AlterarrStatusCarga(cCargaId, "E");
             return true;
 
         }
 
 
-
         // Atualizar Pedido QuantidadeRetorno / Remarcado / Status
+        public static Boolean ExportarAtualizarPedido()
+        {
+
+            return true;
+
+        }
 
         // Atualizar PedidoItem / Retorno / Preço
+        public static Boolean ExportarAtualizarPedidoItem()
+        {
+
+            return true;
+
+        }
 
         // Inserir Novos Registros em Pedido
+        public static Boolean ExportarInserirPedido()
+        {
+
+            return true;
+
+        }
 
         // Inserir Registros em PedidoItem
+        public static Boolean ExportarInserirPedidoItem()
+        {
+
+            return true;
+
+        }
 
         // Atualizar Receber - DataPagamento / Status
+        public static Boolean ExportarAtualizarReceber()
+        {
 
-        // Inserir novos registros de ReceberBaixa
+            return true;
+
+        }
 
         // Atualizar ReceberBaixa / DataPagamento
+        public static Boolean ExportarAtualizarReceberBaixa()
+        {
+
+            return true;
+
+        }
+
+        // Inserir novos registros de ReceberBaixa
+        public static Boolean ExportarInserirReceberBaixa()
+        {
+
+            return true;
+
+        }
 
         // Atualizar Vendedor - Negativado
+        // Atualizar ReceberBaixa / DataPagamento
+        public static Boolean ExportarAtualizarVendedor()
+        {
+
+            return true;
+
+        }
 
 
         //Tratar a tabela Suplemento - aguardando definição no Trello.

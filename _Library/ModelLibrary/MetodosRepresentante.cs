@@ -146,6 +146,46 @@ namespace ModelLibrary
             }
         }
 
+
+        public static void AlterarrStatusCarga(long pCargaId, string pStatus)
+        {
+
+
+            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            {
+
+
+                var result = context.RepCarga.SingleOrDefault(cg => cg.Id == pCargaId);
+                if (result != null)
+                {
+                    result.Status = pStatus;
+
+
+                    switch (pStatus)
+                    {
+                        case "E":
+                            result.DataExportacao = DateTime.Now;
+                            break;
+                        case "R":
+                            result.DataRetorno = DateTime.Now;
+                            break;
+                        case "C":
+                            result.DataConferencia = DateTime.Now;
+                            break;
+                        case "F":
+                            result.DataFinalizacao = DateTime.Now;
+                            break;
+                    }
+
+
+                    context.SaveChanges();
+                }
+
+
+            }
+
+        }
+
         public static List<ListaRepProdutosConferencia> ObterProdutosConferencia(long pCargaId)
         {
             using (RepresentanteDBEntities context = new RepresentanteDBEntities())

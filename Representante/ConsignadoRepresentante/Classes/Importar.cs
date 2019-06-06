@@ -131,27 +131,41 @@ namespace ConsignadoRepresentante
 
             if (carga != null) /* Se existir Carga */
             {
-                //verificar status da carga e aplicar regras de negócio
-                // realizar importação 
-
-                Cursor.Current = Cursors.WaitCursor;
-
-                localDeposito.btnImportar.Text = "Importando...";
-                localDeposito.pnlImportarPesquisa.Enabled = false;
-
-
-
-                if (ModelLibrary.ImportarExportar.Importar(representanteId, pracaId, mes, ano))
+                //verificar status da carga e aplicar regras de negócio // Colocar código no motor de regras.
+                if (ControllerLibrary.Regras.PermiteImportacaoCarga(carga.Status))
                 {
 
-                    MessageBox.Show("Carga Importada com sucesso");
-                    localDeposito.CarregarRepresentante();
+                    // realizar importação 
 
+                    Cursor.Current = Cursors.WaitCursor;
+
+                    localDeposito.btnImportar.Text = "Importando...";
+                    localDeposito.pnlImportarPesquisa.Enabled = false;
+
+
+
+                    if (ModelLibrary.ImportarExportar.Importar(representanteId, pracaId, mes, ano))
+                    {
+
+                        MessageBox.Show("Carga Importada com sucesso");
+                        localDeposito.CarregarRepresentante();
+
+                    }
+
+                    Cursor.Current = Cursors.Default;
+
+                    //- alterar status da carga no servidor informando a exportacao para o modulo representante (importacao)
+
+                    ModelLibrary.MetodosDeposito.AlterarrStatusCarga(carga.Id, "E");
+
+                } else
+                {
+                    MessageBox.Show("A carga informada não pode ser importada, pois não está em aberto. Status: " + carga.Status, "Importação de Carga Não Permitida.", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 }
 
-                Cursor.Current = Cursors.Default;
 
-                //- alterar status da carga
+
+
             }
             else /* Se não existir */
             {
@@ -235,6 +249,23 @@ namespace ConsignadoRepresentante
             //Exibir opção para Re-importar
             localDeposito.btnExcluirImportacao.Visible = true;
             localDeposito.btnExcluirImportacao.Enabled = true;
+
+
+            //se a carga já foi exportada
+
+            if (carga.Status != "A")
+            {
+                localDeposito.lblExportacaoAlerta.Text = "A Carga foi exportada em " + carga.DataExportacao.ToString();
+                localDeposito.pnlExportacaoMain.Enabled = false;
+                
+                //Desativar aba conferencia de produtos 
+                //Desativar aba suplemento
+            }
+            
+
+           
+
+
         }
 
 

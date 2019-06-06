@@ -103,20 +103,20 @@
             this.lblImportarMesAno = new MetroFramework.Controls.MetroLabel();
             this.lblImportarRepresentante = new MetroFramework.Controls.MetroLabel();
             this.lblImportarPraca = new MetroFramework.Controls.MetroLabel();
+            this.tabConferenciaProdutos = new System.Windows.Forms.TabPage();
             this.tabExportar = new System.Windows.Forms.TabPage();
+            this.pnlExportacaoGrid = new MetroFramework.Controls.MetroPanel();
+            this.grdExportacao = new MetroFramework.Controls.MetroGrid();
+            this.pnlExportacaoMain = new MetroFramework.Controls.MetroPanel();
+            this.lblExportacaoAlerta = new MetroFramework.Controls.MetroLabel();
+            this.btnExportar = new MetroFramework.Controls.MetroButton();
             this.tabRelatorios = new System.Windows.Forms.TabPage();
             this.pnlRetorno = new MetroFramework.Controls.MetroPanel();
             this.lblRelatorios = new MetroFramework.Controls.MetroLabel();
-            this.tabSuplemento = new System.Windows.Forms.TabPage();
             this.tabConfiguracoes = new System.Windows.Forms.TabPage();
             this.pnlHome = new MetroFramework.Controls.MetroPanel();
+            this.tabSuplemento = new System.Windows.Forms.TabPage();
             this.tabAjuda = new System.Windows.Forms.TabPage();
-            this.tabConferenciaProdutos = new System.Windows.Forms.TabPage();
-            this.pnlExportacaoMain = new MetroFramework.Controls.MetroPanel();
-            this.pnlExportacaoGrid = new MetroFramework.Controls.MetroPanel();
-            this.btnExportar = new MetroFramework.Controls.MetroButton();
-            this.lblExportacaoAlerta = new MetroFramework.Controls.MetroLabel();
-            this.grdExportacao = new MetroFramework.Controls.MetroGrid();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
@@ -134,12 +134,12 @@
             this.grpImportarViagemAnterior.SuspendLayout();
             this.grpCargaDataViagem.SuspendLayout();
             this.tabExportar.SuspendLayout();
+            this.pnlExportacaoGrid.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdExportacao)).BeginInit();
+            this.pnlExportacaoMain.SuspendLayout();
             this.tabRelatorios.SuspendLayout();
             this.pnlRetorno.SuspendLayout();
             this.tabConfiguracoes.SuspendLayout();
-            this.pnlExportacaoMain.SuspendLayout();
-            this.pnlExportacaoGrid.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdExportacao)).BeginInit();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -1108,6 +1108,14 @@
             this.lblImportarPraca.TabIndex = 2;
             this.lblImportarPraca.Text = "Praça";
             // 
+            // tabConferenciaProdutos
+            // 
+            this.tabConferenciaProdutos.Location = new System.Drawing.Point(4, 38);
+            this.tabConferenciaProdutos.Name = "tabConferenciaProdutos";
+            this.tabConferenciaProdutos.Size = new System.Drawing.Size(852, 603);
+            this.tabConferenciaProdutos.TabIndex = 10;
+            this.tabConferenciaProdutos.Text = "CONFERÊNCIA";
+            // 
             // tabExportar
             // 
             this.tabExportar.Controls.Add(this.pnlExportacaoGrid);
@@ -1117,6 +1125,111 @@
             this.tabExportar.Size = new System.Drawing.Size(852, 603);
             this.tabExportar.TabIndex = 2;
             this.tabExportar.Text = "EXPORTAR";
+            // 
+            // pnlExportacaoGrid
+            // 
+            this.pnlExportacaoGrid.Controls.Add(this.grdExportacao);
+            this.pnlExportacaoGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlExportacaoGrid.HorizontalScrollbarBarColor = true;
+            this.pnlExportacaoGrid.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlExportacaoGrid.HorizontalScrollbarSize = 10;
+            this.pnlExportacaoGrid.Location = new System.Drawing.Point(0, 136);
+            this.pnlExportacaoGrid.Name = "pnlExportacaoGrid";
+            this.pnlExportacaoGrid.Size = new System.Drawing.Size(852, 467);
+            this.pnlExportacaoGrid.TabIndex = 1;
+            this.pnlExportacaoGrid.VerticalScrollbarBarColor = true;
+            this.pnlExportacaoGrid.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlExportacaoGrid.VerticalScrollbarSize = 10;
+            // 
+            // grdExportacao
+            // 
+            this.grdExportacao.AllowUserToResizeRows = false;
+            this.grdExportacao.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.grdExportacao.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.grdExportacao.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdExportacao.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.grdExportacao.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.grdExportacao.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdExportacao.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.grdExportacao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grdExportacao.DefaultCellStyle = dataGridViewCellStyle6;
+            this.grdExportacao.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdExportacao.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.grdExportacao.EnableHeadersVisualStyles = false;
+            this.grdExportacao.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.grdExportacao.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdExportacao.Location = new System.Drawing.Point(0, 0);
+            this.grdExportacao.Name = "grdExportacao";
+            this.grdExportacao.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdExportacao.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.grdExportacao.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.grdExportacao.RowTemplate.DividerHeight = 1;
+            this.grdExportacao.RowTemplate.Height = 35;
+            this.grdExportacao.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.grdExportacao.ShowEditingIcon = false;
+            this.grdExportacao.Size = new System.Drawing.Size(852, 467);
+            this.grdExportacao.TabIndex = 2;
+            // 
+            // pnlExportacaoMain
+            // 
+            this.pnlExportacaoMain.Controls.Add(this.lblExportacaoAlerta);
+            this.pnlExportacaoMain.Controls.Add(this.btnExportar);
+            this.pnlExportacaoMain.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlExportacaoMain.HorizontalScrollbarBarColor = true;
+            this.pnlExportacaoMain.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlExportacaoMain.HorizontalScrollbarSize = 10;
+            this.pnlExportacaoMain.Location = new System.Drawing.Point(0, 0);
+            this.pnlExportacaoMain.Name = "pnlExportacaoMain";
+            this.pnlExportacaoMain.Size = new System.Drawing.Size(852, 136);
+            this.pnlExportacaoMain.TabIndex = 0;
+            this.pnlExportacaoMain.VerticalScrollbarBarColor = true;
+            this.pnlExportacaoMain.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlExportacaoMain.VerticalScrollbarSize = 10;
+            // 
+            // lblExportacaoAlerta
+            // 
+            this.lblExportacaoAlerta.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblExportacaoAlerta.ForeColor = System.Drawing.Color.Red;
+            this.lblExportacaoAlerta.Location = new System.Drawing.Point(28, 18);
+            this.lblExportacaoAlerta.Name = "lblExportacaoAlerta";
+            this.lblExportacaoAlerta.Size = new System.Drawing.Size(793, 48);
+            this.lblExportacaoAlerta.TabIndex = 3;
+            this.lblExportacaoAlerta.Text = "ATENÇÃO! \r\nNa exportação, os pedidos que estiverem com baixa parcial do contas a " +
+    "receber serão baixados integralmente.";
+            this.lblExportacaoAlerta.UseCustomForeColor = true;
+            this.lblExportacaoAlerta.UseStyleColors = true;
+            this.lblExportacaoAlerta.WrapToLine = true;
+            // 
+            // btnExportar
+            // 
+            this.btnExportar.Location = new System.Drawing.Point(28, 69);
+            this.btnExportar.Name = "btnExportar";
+            this.btnExportar.Size = new System.Drawing.Size(122, 48);
+            this.btnExportar.TabIndex = 2;
+            this.btnExportar.Text = "Exportar";
+            this.btnExportar.UseSelectable = true;
+            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // tabRelatorios
             // 
@@ -1151,14 +1264,6 @@
             this.lblRelatorios.TabIndex = 7;
             this.lblRelatorios.Text = "Botões para os Principais Relatórios";
             // 
-            // tabSuplemento
-            // 
-            this.tabSuplemento.Location = new System.Drawing.Point(4, 38);
-            this.tabSuplemento.Name = "tabSuplemento";
-            this.tabSuplemento.Size = new System.Drawing.Size(852, 603);
-            this.tabSuplemento.TabIndex = 9;
-            this.tabSuplemento.Text = "SUPLEMENTO";
-            // 
             // tabConfiguracoes
             // 
             this.tabConfiguracoes.Controls.Add(this.pnlHome);
@@ -1182,6 +1287,14 @@
             this.pnlHome.VerticalScrollbarHighlightOnWheel = false;
             this.pnlHome.VerticalScrollbarSize = 10;
             // 
+            // tabSuplemento
+            // 
+            this.tabSuplemento.Location = new System.Drawing.Point(4, 38);
+            this.tabSuplemento.Name = "tabSuplemento";
+            this.tabSuplemento.Size = new System.Drawing.Size(852, 603);
+            this.tabSuplemento.TabIndex = 9;
+            this.tabSuplemento.Text = "SUPLEMENTO";
+            // 
             // tabAjuda
             // 
             this.tabAjuda.Location = new System.Drawing.Point(4, 38);
@@ -1189,113 +1302,6 @@
             this.tabAjuda.Size = new System.Drawing.Size(852, 603);
             this.tabAjuda.TabIndex = 8;
             this.tabAjuda.Text = "AJUDA";
-            // 
-            // tabConferenciaProdutos
-            // 
-            this.tabConferenciaProdutos.Location = new System.Drawing.Point(4, 38);
-            this.tabConferenciaProdutos.Name = "tabConferenciaProdutos";
-            this.tabConferenciaProdutos.Size = new System.Drawing.Size(852, 603);
-            this.tabConferenciaProdutos.TabIndex = 10;
-            this.tabConferenciaProdutos.Text = "CONFERÊNCIA";
-            // 
-            // pnlExportacaoMain
-            // 
-            this.pnlExportacaoMain.Controls.Add(this.lblExportacaoAlerta);
-            this.pnlExportacaoMain.Controls.Add(this.btnExportar);
-            this.pnlExportacaoMain.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlExportacaoMain.HorizontalScrollbarBarColor = true;
-            this.pnlExportacaoMain.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlExportacaoMain.HorizontalScrollbarSize = 10;
-            this.pnlExportacaoMain.Location = new System.Drawing.Point(0, 0);
-            this.pnlExportacaoMain.Name = "pnlExportacaoMain";
-            this.pnlExportacaoMain.Size = new System.Drawing.Size(852, 136);
-            this.pnlExportacaoMain.TabIndex = 0;
-            this.pnlExportacaoMain.VerticalScrollbarBarColor = true;
-            this.pnlExportacaoMain.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlExportacaoMain.VerticalScrollbarSize = 10;
-            // 
-            // pnlExportacaoGrid
-            // 
-            this.pnlExportacaoGrid.Controls.Add(this.grdExportacao);
-            this.pnlExportacaoGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlExportacaoGrid.HorizontalScrollbarBarColor = true;
-            this.pnlExportacaoGrid.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlExportacaoGrid.HorizontalScrollbarSize = 10;
-            this.pnlExportacaoGrid.Location = new System.Drawing.Point(0, 136);
-            this.pnlExportacaoGrid.Name = "pnlExportacaoGrid";
-            this.pnlExportacaoGrid.Size = new System.Drawing.Size(852, 467);
-            this.pnlExportacaoGrid.TabIndex = 1;
-            this.pnlExportacaoGrid.VerticalScrollbarBarColor = true;
-            this.pnlExportacaoGrid.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlExportacaoGrid.VerticalScrollbarSize = 10;
-            // 
-            // btnExportar
-            // 
-            this.btnExportar.Location = new System.Drawing.Point(28, 69);
-            this.btnExportar.Name = "btnExportar";
-            this.btnExportar.Size = new System.Drawing.Size(122, 48);
-            this.btnExportar.TabIndex = 2;
-            this.btnExportar.Text = "Exportar";
-            this.btnExportar.UseSelectable = true;
-            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
-            // 
-            // lblExportacaoAlerta
-            // 
-            this.lblExportacaoAlerta.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblExportacaoAlerta.ForeColor = System.Drawing.Color.Red;
-            this.lblExportacaoAlerta.Location = new System.Drawing.Point(28, 18);
-            this.lblExportacaoAlerta.Name = "lblExportacaoAlerta";
-            this.lblExportacaoAlerta.Size = new System.Drawing.Size(793, 48);
-            this.lblExportacaoAlerta.TabIndex = 3;
-            this.lblExportacaoAlerta.Text = "ATENÇÃO! \r\nNa exportação, os pedidos que estiverem com baixa parcial do contas a " +
-    "receber serão baixados integralmente.";
-            this.lblExportacaoAlerta.UseCustomForeColor = true;
-            this.lblExportacaoAlerta.UseStyleColors = true;
-            this.lblExportacaoAlerta.WrapToLine = true;
-            // 
-            // grdExportacao
-            // 
-            this.grdExportacao.AllowUserToResizeRows = false;
-            this.grdExportacao.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.grdExportacao.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.grdExportacao.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.grdExportacao.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdExportacao.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.grdExportacao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdExportacao.DefaultCellStyle = dataGridViewCellStyle6;
-            this.grdExportacao.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdExportacao.EnableHeadersVisualStyles = false;
-            this.grdExportacao.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.grdExportacao.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.grdExportacao.Location = new System.Drawing.Point(0, 0);
-            this.grdExportacao.Name = "grdExportacao";
-            this.grdExportacao.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdExportacao.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            this.grdExportacao.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.grdExportacao.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdExportacao.Size = new System.Drawing.Size(852, 467);
-            this.grdExportacao.TabIndex = 2;
             // 
             // FormDeposito
             // 
@@ -1334,13 +1340,13 @@
             this.grpCargaDataViagem.ResumeLayout(false);
             this.grpCargaDataViagem.PerformLayout();
             this.tabExportar.ResumeLayout(false);
+            this.pnlExportacaoGrid.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grdExportacao)).EndInit();
+            this.pnlExportacaoMain.ResumeLayout(false);
             this.tabRelatorios.ResumeLayout(false);
             this.pnlRetorno.ResumeLayout(false);
             this.pnlRetorno.PerformLayout();
             this.tabConfiguracoes.ResumeLayout(false);
-            this.pnlExportacaoMain.ResumeLayout(false);
-            this.pnlExportacaoGrid.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.grdExportacao)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1419,12 +1425,12 @@
         public System.Windows.Forms.DateTimePicker cbbImportarMesAno;
         private MetroFramework.Controls.MetroPanel pnlConferirProdutos;
         public MetroFramework.Controls.MetroGrid grdConfProduto;
-        private System.Windows.Forms.TabPage tabConferenciaProdutos;
-        private MetroFramework.Controls.MetroPanel pnlExportacaoMain;
+        public System.Windows.Forms.TabPage tabConferenciaProdutos;
+        public MetroFramework.Controls.MetroPanel pnlExportacaoMain;
         private MetroFramework.Controls.MetroPanel pnlExportacaoGrid;
-        private MetroFramework.Controls.MetroGrid grdExportacao;
-        private MetroFramework.Controls.MetroLabel lblExportacaoAlerta;
-        private MetroFramework.Controls.MetroButton btnExportar;
+        public MetroFramework.Controls.MetroGrid grdExportacao;
+        public MetroFramework.Controls.MetroLabel lblExportacaoAlerta;
+        public MetroFramework.Controls.MetroButton btnExportar;
     }
 }
 
