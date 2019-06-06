@@ -38,12 +38,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelHeader = new System.Windows.Forms.Panel();
             this.btnExcluirImportacao = new MetroFramework.Controls.MetroLink();
             this.lblCarga = new MetroFramework.Controls.MetroLabel();
@@ -110,35 +104,6 @@
             this.lblImportarRepresentante = new MetroFramework.Controls.MetroLabel();
             this.lblImportarPraca = new MetroFramework.Controls.MetroLabel();
             this.tabExportar = new System.Windows.Forms.TabPage();
-            this.tbcRetorno = new MetroFramework.Controls.MetroTabControl();
-            this.tabRetornoProdutos = new System.Windows.Forms.TabPage();
-            this.lblRetorno = new MetroFramework.Controls.MetroLabel();
-            this.grdProdutos = new MetroFramework.Controls.MetroGrid();
-            this.pnlPesquisaProdutos = new MetroFramework.Controls.MetroPanel();
-            this.btnProdutoConfirmar = new MetroFramework.Controls.MetroButton();
-            this.txtProdutoQuantidade = new MetroFramework.Controls.MetroTextBox();
-            this.txtProdutoNome = new MetroFramework.Controls.MetroTextBox();
-            this.txtProdutoCodigoBarras = new MetroFramework.Controls.MetroTextBox();
-            this.tabRetornoPedidos = new System.Windows.Forms.TabPage();
-            this.pnlPedidos = new MetroFramework.Controls.MetroPanel();
-            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-            this.grdPedidos = new MetroFramework.Controls.MetroGrid();
-            this.tabRetornoContasAReceber = new System.Windows.Forms.TabPage();
-            this.pnlContasAReceber = new MetroFramework.Controls.MetroPanel();
-            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
-            this.grdContasAReceber = new MetroFramework.Controls.MetroGrid();
-            this.pnlRetornoPesquisa = new MetroFramework.Controls.MetroPanel();
-            this.btnRetornoOK = new MetroFramework.Controls.MetroButton();
-            this.grpRetornoViagemAnterior = new System.Windows.Forms.GroupBox();
-            this.grpRetornoDataViagem = new System.Windows.Forms.GroupBox();
-            this.btnRetornoLimpar = new MetroFramework.Controls.MetroButton();
-            this.btnRetornoPesquisar = new MetroFramework.Controls.MetroButton();
-            this.cbbRetornoMesAno = new MetroFramework.Controls.MetroDateTime();
-            this.cbbRetornoRepresentante = new MetroFramework.Controls.MetroComboBox();
-            this.cbbRetornoPraca = new MetroFramework.Controls.MetroComboBox();
-            this.lblRetornoMesAno = new MetroFramework.Controls.MetroLabel();
-            this.lblRetornoRepresentante = new MetroFramework.Controls.MetroLabel();
-            this.lblRetornoPraca = new MetroFramework.Controls.MetroLabel();
             this.tabRelatorios = new System.Windows.Forms.TabPage();
             this.pnlRetorno = new MetroFramework.Controls.MetroPanel();
             this.lblRelatorios = new MetroFramework.Controls.MetroLabel();
@@ -146,6 +111,12 @@
             this.tabConfiguracoes = new System.Windows.Forms.TabPage();
             this.pnlHome = new MetroFramework.Controls.MetroPanel();
             this.tabAjuda = new System.Windows.Forms.TabPage();
+            this.tabConferenciaProdutos = new System.Windows.Forms.TabPage();
+            this.pnlExportacaoMain = new MetroFramework.Controls.MetroPanel();
+            this.pnlExportacaoGrid = new MetroFramework.Controls.MetroPanel();
+            this.btnExportar = new MetroFramework.Controls.MetroButton();
+            this.lblExportacaoAlerta = new MetroFramework.Controls.MetroLabel();
+            this.grdExportacao = new MetroFramework.Controls.MetroGrid();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
@@ -163,20 +134,12 @@
             this.grpImportarViagemAnterior.SuspendLayout();
             this.grpCargaDataViagem.SuspendLayout();
             this.tabExportar.SuspendLayout();
-            this.tbcRetorno.SuspendLayout();
-            this.tabRetornoProdutos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdProdutos)).BeginInit();
-            this.pnlPesquisaProdutos.SuspendLayout();
-            this.tabRetornoPedidos.SuspendLayout();
-            this.pnlPedidos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdPedidos)).BeginInit();
-            this.tabRetornoContasAReceber.SuspendLayout();
-            this.pnlContasAReceber.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdContasAReceber)).BeginInit();
-            this.pnlRetornoPesquisa.SuspendLayout();
             this.tabRelatorios.SuspendLayout();
             this.pnlRetorno.SuspendLayout();
             this.tabConfiguracoes.SuspendLayout();
+            this.pnlExportacaoMain.SuspendLayout();
+            this.pnlExportacaoGrid.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdExportacao)).BeginInit();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -301,15 +264,16 @@
             // 
             this.tbcPrincipal.Controls.Add(this.tabHome);
             this.tbcPrincipal.Controls.Add(this.tabImportar);
+            this.tbcPrincipal.Controls.Add(this.tabConferenciaProdutos);
             this.tbcPrincipal.Controls.Add(this.tabExportar);
             this.tbcPrincipal.Controls.Add(this.tabRelatorios);
-            this.tbcPrincipal.Controls.Add(this.tabSuplemento);
             this.tbcPrincipal.Controls.Add(this.tabConfiguracoes);
+            this.tbcPrincipal.Controls.Add(this.tabSuplemento);
             this.tbcPrincipal.Controls.Add(this.tabAjuda);
             this.tbcPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tbcPrincipal.Name = "tbcPrincipal";
-            this.tbcPrincipal.SelectedIndex = 2;
+            this.tbcPrincipal.SelectedIndex = 3;
             this.tbcPrincipal.Size = new System.Drawing.Size(860, 645);
             this.tbcPrincipal.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tbcPrincipal.TabIndex = 11;
@@ -1146,505 +1110,13 @@
             // 
             // tabExportar
             // 
-            this.tabExportar.Controls.Add(this.tbcRetorno);
-            this.tabExportar.Controls.Add(this.pnlRetornoPesquisa);
+            this.tabExportar.Controls.Add(this.pnlExportacaoGrid);
+            this.tabExportar.Controls.Add(this.pnlExportacaoMain);
             this.tabExportar.Location = new System.Drawing.Point(4, 38);
             this.tabExportar.Name = "tabExportar";
             this.tabExportar.Size = new System.Drawing.Size(852, 603);
             this.tabExportar.TabIndex = 2;
             this.tabExportar.Text = "EXPORTAR";
-            // 
-            // tbcRetorno
-            // 
-            this.tbcRetorno.Controls.Add(this.tabRetornoProdutos);
-            this.tbcRetorno.Controls.Add(this.tabRetornoPedidos);
-            this.tbcRetorno.Controls.Add(this.tabRetornoContasAReceber);
-            this.tbcRetorno.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbcRetorno.Location = new System.Drawing.Point(0, 131);
-            this.tbcRetorno.Name = "tbcRetorno";
-            this.tbcRetorno.SelectedIndex = 0;
-            this.tbcRetorno.Size = new System.Drawing.Size(852, 472);
-            this.tbcRetorno.TabIndex = 2;
-            this.tbcRetorno.UseSelectable = true;
-            // 
-            // tabRetornoProdutos
-            // 
-            this.tabRetornoProdutos.Controls.Add(this.lblRetorno);
-            this.tabRetornoProdutos.Controls.Add(this.grdProdutos);
-            this.tabRetornoProdutos.Controls.Add(this.pnlPesquisaProdutos);
-            this.tabRetornoProdutos.Location = new System.Drawing.Point(4, 38);
-            this.tabRetornoProdutos.Name = "tabRetornoProdutos";
-            this.tabRetornoProdutos.Size = new System.Drawing.Size(844, 430);
-            this.tabRetornoProdutos.TabIndex = 3;
-            this.tabRetornoProdutos.Text = "Produtos";
-            // 
-            // lblRetorno
-            // 
-            this.lblRetorno.AutoSize = true;
-            this.lblRetorno.Location = new System.Drawing.Point(274, 252);
-            this.lblRetorno.Name = "lblRetorno";
-            this.lblRetorno.Size = new System.Drawing.Size(245, 19);
-            this.lblRetorno.TabIndex = 4;
-            this.lblRetorno.Text = "Grade de Produtos da Carga Retornada";
-            // 
-            // grdProdutos
-            // 
-            this.grdProdutos.AllowUserToResizeRows = false;
-            this.grdProdutos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.grdProdutos.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.grdProdutos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.grdProdutos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdProdutos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.grdProdutos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdProdutos.DefaultCellStyle = dataGridViewCellStyle6;
-            this.grdProdutos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdProdutos.EnableHeadersVisualStyles = false;
-            this.grdProdutos.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.grdProdutos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.grdProdutos.Location = new System.Drawing.Point(0, 57);
-            this.grdProdutos.Name = "grdProdutos";
-            this.grdProdutos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdProdutos.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            this.grdProdutos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.grdProdutos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdProdutos.Size = new System.Drawing.Size(844, 373);
-            this.grdProdutos.TabIndex = 3;
-            // 
-            // pnlPesquisaProdutos
-            // 
-            this.pnlPesquisaProdutos.Controls.Add(this.btnProdutoConfirmar);
-            this.pnlPesquisaProdutos.Controls.Add(this.txtProdutoQuantidade);
-            this.pnlPesquisaProdutos.Controls.Add(this.txtProdutoNome);
-            this.pnlPesquisaProdutos.Controls.Add(this.txtProdutoCodigoBarras);
-            this.pnlPesquisaProdutos.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlPesquisaProdutos.HorizontalScrollbarBarColor = true;
-            this.pnlPesquisaProdutos.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlPesquisaProdutos.HorizontalScrollbarSize = 10;
-            this.pnlPesquisaProdutos.Location = new System.Drawing.Point(0, 0);
-            this.pnlPesquisaProdutos.Name = "pnlPesquisaProdutos";
-            this.pnlPesquisaProdutos.Size = new System.Drawing.Size(844, 57);
-            this.pnlPesquisaProdutos.TabIndex = 1;
-            this.pnlPesquisaProdutos.VerticalScrollbarBarColor = true;
-            this.pnlPesquisaProdutos.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlPesquisaProdutos.VerticalScrollbarSize = 10;
-            // 
-            // btnProdutoConfirmar
-            // 
-            this.btnProdutoConfirmar.Location = new System.Drawing.Point(659, 16);
-            this.btnProdutoConfirmar.Name = "btnProdutoConfirmar";
-            this.btnProdutoConfirmar.Size = new System.Drawing.Size(75, 23);
-            this.btnProdutoConfirmar.TabIndex = 6;
-            this.btnProdutoConfirmar.Text = "Confirmar";
-            this.btnProdutoConfirmar.UseSelectable = true;
-            // 
-            // txtProdutoQuantidade
-            // 
-            // 
-            // 
-            // 
-            this.txtProdutoQuantidade.CustomButton.Image = null;
-            this.txtProdutoQuantidade.CustomButton.Location = new System.Drawing.Point(77, 1);
-            this.txtProdutoQuantidade.CustomButton.Name = "";
-            this.txtProdutoQuantidade.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtProdutoQuantidade.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtProdutoQuantidade.CustomButton.TabIndex = 1;
-            this.txtProdutoQuantidade.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtProdutoQuantidade.CustomButton.UseSelectable = true;
-            this.txtProdutoQuantidade.CustomButton.Visible = false;
-            this.txtProdutoQuantidade.Lines = new string[0];
-            this.txtProdutoQuantidade.Location = new System.Drawing.Point(554, 16);
-            this.txtProdutoQuantidade.MaxLength = 32767;
-            this.txtProdutoQuantidade.Name = "txtProdutoQuantidade";
-            this.txtProdutoQuantidade.PasswordChar = '\0';
-            this.txtProdutoQuantidade.PromptText = "Quantidade";
-            this.txtProdutoQuantidade.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtProdutoQuantidade.SelectedText = "";
-            this.txtProdutoQuantidade.SelectionLength = 0;
-            this.txtProdutoQuantidade.SelectionStart = 0;
-            this.txtProdutoQuantidade.ShortcutsEnabled = true;
-            this.txtProdutoQuantidade.Size = new System.Drawing.Size(99, 23);
-            this.txtProdutoQuantidade.TabIndex = 5;
-            this.txtProdutoQuantidade.UseSelectable = true;
-            this.txtProdutoQuantidade.WaterMark = "Quantidade";
-            this.txtProdutoQuantidade.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtProdutoQuantidade.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // txtProdutoNome
-            // 
-            // 
-            // 
-            // 
-            this.txtProdutoNome.CustomButton.Image = null;
-            this.txtProdutoNome.CustomButton.Location = new System.Drawing.Point(394, 1);
-            this.txtProdutoNome.CustomButton.Name = "";
-            this.txtProdutoNome.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtProdutoNome.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtProdutoNome.CustomButton.TabIndex = 1;
-            this.txtProdutoNome.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtProdutoNome.CustomButton.UseSelectable = true;
-            this.txtProdutoNome.CustomButton.Visible = false;
-            this.txtProdutoNome.Lines = new string[0];
-            this.txtProdutoNome.Location = new System.Drawing.Point(132, 16);
-            this.txtProdutoNome.MaxLength = 32767;
-            this.txtProdutoNome.Name = "txtProdutoNome";
-            this.txtProdutoNome.PasswordChar = '\0';
-            this.txtProdutoNome.PromptText = "Nome do Produto";
-            this.txtProdutoNome.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtProdutoNome.SelectedText = "";
-            this.txtProdutoNome.SelectionLength = 0;
-            this.txtProdutoNome.SelectionStart = 0;
-            this.txtProdutoNome.ShortcutsEnabled = true;
-            this.txtProdutoNome.Size = new System.Drawing.Size(416, 23);
-            this.txtProdutoNome.TabIndex = 4;
-            this.txtProdutoNome.UseSelectable = true;
-            this.txtProdutoNome.WaterMark = "Nome do Produto";
-            this.txtProdutoNome.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtProdutoNome.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // txtProdutoCodigoBarras
-            // 
-            // 
-            // 
-            // 
-            this.txtProdutoCodigoBarras.CustomButton.Image = null;
-            this.txtProdutoCodigoBarras.CustomButton.Location = new System.Drawing.Point(91, 1);
-            this.txtProdutoCodigoBarras.CustomButton.Name = "";
-            this.txtProdutoCodigoBarras.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtProdutoCodigoBarras.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtProdutoCodigoBarras.CustomButton.TabIndex = 1;
-            this.txtProdutoCodigoBarras.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtProdutoCodigoBarras.CustomButton.UseSelectable = true;
-            this.txtProdutoCodigoBarras.CustomButton.Visible = false;
-            this.txtProdutoCodigoBarras.Lines = new string[0];
-            this.txtProdutoCodigoBarras.Location = new System.Drawing.Point(13, 16);
-            this.txtProdutoCodigoBarras.MaxLength = 32767;
-            this.txtProdutoCodigoBarras.Name = "txtProdutoCodigoBarras";
-            this.txtProdutoCodigoBarras.PasswordChar = '\0';
-            this.txtProdutoCodigoBarras.PromptText = "Código de Barras";
-            this.txtProdutoCodigoBarras.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtProdutoCodigoBarras.SelectedText = "";
-            this.txtProdutoCodigoBarras.SelectionLength = 0;
-            this.txtProdutoCodigoBarras.SelectionStart = 0;
-            this.txtProdutoCodigoBarras.ShortcutsEnabled = true;
-            this.txtProdutoCodigoBarras.Size = new System.Drawing.Size(113, 23);
-            this.txtProdutoCodigoBarras.TabIndex = 3;
-            this.txtProdutoCodigoBarras.UseSelectable = true;
-            this.txtProdutoCodigoBarras.WaterMark = "Código de Barras";
-            this.txtProdutoCodigoBarras.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtProdutoCodigoBarras.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // tabRetornoPedidos
-            // 
-            this.tabRetornoPedidos.Controls.Add(this.pnlPedidos);
-            this.tabRetornoPedidos.Location = new System.Drawing.Point(4, 38);
-            this.tabRetornoPedidos.Name = "tabRetornoPedidos";
-            this.tabRetornoPedidos.Size = new System.Drawing.Size(844, 430);
-            this.tabRetornoPedidos.TabIndex = 1;
-            this.tabRetornoPedidos.Text = "Pedidos";
-            // 
-            // pnlPedidos
-            // 
-            this.pnlPedidos.Controls.Add(this.metroLabel3);
-            this.pnlPedidos.Controls.Add(this.grdPedidos);
-            this.pnlPedidos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlPedidos.HorizontalScrollbarBarColor = true;
-            this.pnlPedidos.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlPedidos.HorizontalScrollbarSize = 10;
-            this.pnlPedidos.Location = new System.Drawing.Point(0, 0);
-            this.pnlPedidos.Name = "pnlPedidos";
-            this.pnlPedidos.Size = new System.Drawing.Size(844, 430);
-            this.pnlPedidos.TabIndex = 0;
-            this.pnlPedidos.VerticalScrollbarBarColor = true;
-            this.pnlPedidos.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlPedidos.VerticalScrollbarSize = 10;
-            // 
-            // metroLabel3
-            // 
-            this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(162, 93);
-            this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(390, 19);
-            this.metroLabel3.TabIndex = 4;
-            this.metroLabel3.Text = "Grade dos Pedidos com Link para tela de Lançamento de Pedido";
-            // 
-            // grdPedidos
-            // 
-            this.grdPedidos.AllowUserToResizeRows = false;
-            this.grdPedidos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.grdPedidos.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.grdPedidos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.grdPedidos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdPedidos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
-            this.grdPedidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdPedidos.DefaultCellStyle = dataGridViewCellStyle9;
-            this.grdPedidos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdPedidos.EnableHeadersVisualStyles = false;
-            this.grdPedidos.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.grdPedidos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.grdPedidos.Location = new System.Drawing.Point(0, 0);
-            this.grdPedidos.Name = "grdPedidos";
-            this.grdPedidos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdPedidos.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
-            this.grdPedidos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.grdPedidos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdPedidos.Size = new System.Drawing.Size(844, 430);
-            this.grdPedidos.TabIndex = 2;
-            // 
-            // tabRetornoContasAReceber
-            // 
-            this.tabRetornoContasAReceber.Controls.Add(this.pnlContasAReceber);
-            this.tabRetornoContasAReceber.Location = new System.Drawing.Point(4, 38);
-            this.tabRetornoContasAReceber.Name = "tabRetornoContasAReceber";
-            this.tabRetornoContasAReceber.Size = new System.Drawing.Size(844, 430);
-            this.tabRetornoContasAReceber.TabIndex = 2;
-            this.tabRetornoContasAReceber.Text = "Contas a receber";
-            // 
-            // pnlContasAReceber
-            // 
-            this.pnlContasAReceber.Controls.Add(this.metroLabel4);
-            this.pnlContasAReceber.Controls.Add(this.grdContasAReceber);
-            this.pnlContasAReceber.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContasAReceber.HorizontalScrollbarBarColor = true;
-            this.pnlContasAReceber.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlContasAReceber.HorizontalScrollbarSize = 10;
-            this.pnlContasAReceber.Location = new System.Drawing.Point(0, 0);
-            this.pnlContasAReceber.Name = "pnlContasAReceber";
-            this.pnlContasAReceber.Size = new System.Drawing.Size(844, 430);
-            this.pnlContasAReceber.TabIndex = 0;
-            this.pnlContasAReceber.VerticalScrollbarBarColor = true;
-            this.pnlContasAReceber.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlContasAReceber.VerticalScrollbarSize = 10;
-            // 
-            // metroLabel4
-            // 
-            this.metroLabel4.AutoSize = true;
-            this.metroLabel4.Location = new System.Drawing.Point(194, 93);
-            this.metroLabel4.Name = "metroLabel4";
-            this.metroLabel4.Size = new System.Drawing.Size(447, 19);
-            this.metroLabel4.TabIndex = 4;
-            this.metroLabel4.Text = "Grade de Contas a Receber - Relacionadas a Carga - Com Link para Baixa";
-            // 
-            // grdContasAReceber
-            // 
-            this.grdContasAReceber.AllowUserToResizeRows = false;
-            this.grdContasAReceber.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.grdContasAReceber.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.grdContasAReceber.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.grdContasAReceber.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdContasAReceber.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
-            this.grdContasAReceber.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdContasAReceber.DefaultCellStyle = dataGridViewCellStyle12;
-            this.grdContasAReceber.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdContasAReceber.EnableHeadersVisualStyles = false;
-            this.grdContasAReceber.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.grdContasAReceber.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.grdContasAReceber.Location = new System.Drawing.Point(0, 0);
-            this.grdContasAReceber.Name = "grdContasAReceber";
-            this.grdContasAReceber.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdContasAReceber.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
-            this.grdContasAReceber.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.grdContasAReceber.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdContasAReceber.Size = new System.Drawing.Size(844, 430);
-            this.grdContasAReceber.TabIndex = 2;
-            // 
-            // pnlRetornoPesquisa
-            // 
-            this.pnlRetornoPesquisa.Controls.Add(this.btnRetornoOK);
-            this.pnlRetornoPesquisa.Controls.Add(this.grpRetornoViagemAnterior);
-            this.pnlRetornoPesquisa.Controls.Add(this.grpRetornoDataViagem);
-            this.pnlRetornoPesquisa.Controls.Add(this.btnRetornoLimpar);
-            this.pnlRetornoPesquisa.Controls.Add(this.btnRetornoPesquisar);
-            this.pnlRetornoPesquisa.Controls.Add(this.cbbRetornoMesAno);
-            this.pnlRetornoPesquisa.Controls.Add(this.cbbRetornoRepresentante);
-            this.pnlRetornoPesquisa.Controls.Add(this.cbbRetornoPraca);
-            this.pnlRetornoPesquisa.Controls.Add(this.lblRetornoMesAno);
-            this.pnlRetornoPesquisa.Controls.Add(this.lblRetornoRepresentante);
-            this.pnlRetornoPesquisa.Controls.Add(this.lblRetornoPraca);
-            this.pnlRetornoPesquisa.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlRetornoPesquisa.HorizontalScrollbarBarColor = true;
-            this.pnlRetornoPesquisa.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlRetornoPesquisa.HorizontalScrollbarSize = 10;
-            this.pnlRetornoPesquisa.Location = new System.Drawing.Point(0, 0);
-            this.pnlRetornoPesquisa.Name = "pnlRetornoPesquisa";
-            this.pnlRetornoPesquisa.Size = new System.Drawing.Size(852, 131);
-            this.pnlRetornoPesquisa.TabIndex = 1;
-            this.pnlRetornoPesquisa.VerticalScrollbarBarColor = true;
-            this.pnlRetornoPesquisa.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlRetornoPesquisa.VerticalScrollbarSize = 10;
-            // 
-            // btnRetornoOK
-            // 
-            this.btnRetornoOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnRetornoOK.Location = new System.Drawing.Point(226, 86);
-            this.btnRetornoOK.Name = "btnRetornoOK";
-            this.btnRetornoOK.Size = new System.Drawing.Size(30, 29);
-            this.btnRetornoOK.TabIndex = 12;
-            this.btnRetornoOK.Text = "OK";
-            this.btnRetornoOK.UseSelectable = true;
-            // 
-            // grpRetornoViagemAnterior
-            // 
-            this.grpRetornoViagemAnterior.BackColor = System.Drawing.Color.White;
-            this.grpRetornoViagemAnterior.Location = new System.Drawing.Point(589, 16);
-            this.grpRetornoViagemAnterior.Name = "grpRetornoViagemAnterior";
-            this.grpRetornoViagemAnterior.Size = new System.Drawing.Size(139, 100);
-            this.grpRetornoViagemAnterior.TabIndex = 11;
-            this.grpRetornoViagemAnterior.TabStop = false;
-            this.grpRetornoViagemAnterior.Text = "Viagem Anterior";
-            // 
-            // grpRetornoDataViagem
-            // 
-            this.grpRetornoDataViagem.BackColor = System.Drawing.Color.White;
-            this.grpRetornoDataViagem.Location = new System.Drawing.Point(436, 16);
-            this.grpRetornoDataViagem.Name = "grpRetornoDataViagem";
-            this.grpRetornoDataViagem.Size = new System.Drawing.Size(139, 100);
-            this.grpRetornoDataViagem.TabIndex = 10;
-            this.grpRetornoDataViagem.TabStop = false;
-            this.grpRetornoDataViagem.Text = "Datas da Viagem";
-            // 
-            // btnRetornoLimpar
-            // 
-            this.btnRetornoLimpar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnRetornoLimpar.Location = new System.Drawing.Point(346, 86);
-            this.btnRetornoLimpar.Name = "btnRetornoLimpar";
-            this.btnRetornoLimpar.Size = new System.Drawing.Size(75, 29);
-            this.btnRetornoLimpar.TabIndex = 9;
-            this.btnRetornoLimpar.Text = "Limpar";
-            this.btnRetornoLimpar.UseSelectable = true;
-            // 
-            // btnRetornoPesquisar
-            // 
-            this.btnRetornoPesquisar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnRetornoPesquisar.Location = new System.Drawing.Point(262, 86);
-            this.btnRetornoPesquisar.Name = "btnRetornoPesquisar";
-            this.btnRetornoPesquisar.Size = new System.Drawing.Size(78, 29);
-            this.btnRetornoPesquisar.TabIndex = 8;
-            this.btnRetornoPesquisar.Text = "Pesquisar";
-            this.btnRetornoPesquisar.UseSelectable = true;
-            // 
-            // cbbRetornoMesAno
-            // 
-            this.cbbRetornoMesAno.CustomFormat = "MM/yyyy";
-            this.cbbRetornoMesAno.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.cbbRetornoMesAno.Location = new System.Drawing.Point(127, 86);
-            this.cbbRetornoMesAno.MinimumSize = new System.Drawing.Size(0, 29);
-            this.cbbRetornoMesAno.Name = "cbbRetornoMesAno";
-            this.cbbRetornoMesAno.Size = new System.Drawing.Size(93, 29);
-            this.cbbRetornoMesAno.TabIndex = 7;
-            // 
-            // cbbRetornoRepresentante
-            // 
-            this.cbbRetornoRepresentante.FormattingEnabled = true;
-            this.cbbRetornoRepresentante.ItemHeight = 23;
-            this.cbbRetornoRepresentante.Location = new System.Drawing.Point(127, 51);
-            this.cbbRetornoRepresentante.Name = "cbbRetornoRepresentante";
-            this.cbbRetornoRepresentante.PromptText = "Selecione o Representante";
-            this.cbbRetornoRepresentante.Size = new System.Drawing.Size(294, 29);
-            this.cbbRetornoRepresentante.Sorted = true;
-            this.cbbRetornoRepresentante.TabIndex = 6;
-            this.cbbRetornoRepresentante.UseSelectable = true;
-            // 
-            // cbbRetornoPraca
-            // 
-            this.cbbRetornoPraca.FormattingEnabled = true;
-            this.cbbRetornoPraca.ItemHeight = 23;
-            this.cbbRetornoPraca.Location = new System.Drawing.Point(127, 16);
-            this.cbbRetornoPraca.Name = "cbbRetornoPraca";
-            this.cbbRetornoPraca.PromptText = "Selecione a Praça";
-            this.cbbRetornoPraca.Size = new System.Drawing.Size(294, 29);
-            this.cbbRetornoPraca.Sorted = true;
-            this.cbbRetornoPraca.TabIndex = 5;
-            this.cbbRetornoPraca.UseSelectable = true;
-            // 
-            // lblRetornoMesAno
-            // 
-            this.lblRetornoMesAno.AutoSize = true;
-            this.lblRetornoMesAno.Location = new System.Drawing.Point(18, 92);
-            this.lblRetornoMesAno.Name = "lblRetornoMesAno";
-            this.lblRetornoMesAno.Size = new System.Drawing.Size(62, 19);
-            this.lblRetornoMesAno.TabIndex = 4;
-            this.lblRetornoMesAno.Text = "Mês/Ano";
-            // 
-            // lblRetornoRepresentante
-            // 
-            this.lblRetornoRepresentante.AutoSize = true;
-            this.lblRetornoRepresentante.Location = new System.Drawing.Point(18, 57);
-            this.lblRetornoRepresentante.Name = "lblRetornoRepresentante";
-            this.lblRetornoRepresentante.Size = new System.Drawing.Size(92, 19);
-            this.lblRetornoRepresentante.TabIndex = 3;
-            this.lblRetornoRepresentante.Text = "Representante";
-            // 
-            // lblRetornoPraca
-            // 
-            this.lblRetornoPraca.AutoSize = true;
-            this.lblRetornoPraca.Location = new System.Drawing.Point(18, 22);
-            this.lblRetornoPraca.Name = "lblRetornoPraca";
-            this.lblRetornoPraca.Size = new System.Drawing.Size(42, 19);
-            this.lblRetornoPraca.TabIndex = 2;
-            this.lblRetornoPraca.Text = "Praça";
             // 
             // tabRelatorios
             // 
@@ -1718,6 +1190,113 @@
             this.tabAjuda.TabIndex = 8;
             this.tabAjuda.Text = "AJUDA";
             // 
+            // tabConferenciaProdutos
+            // 
+            this.tabConferenciaProdutos.Location = new System.Drawing.Point(4, 38);
+            this.tabConferenciaProdutos.Name = "tabConferenciaProdutos";
+            this.tabConferenciaProdutos.Size = new System.Drawing.Size(852, 603);
+            this.tabConferenciaProdutos.TabIndex = 10;
+            this.tabConferenciaProdutos.Text = "CONFERÊNCIA";
+            // 
+            // pnlExportacaoMain
+            // 
+            this.pnlExportacaoMain.Controls.Add(this.lblExportacaoAlerta);
+            this.pnlExportacaoMain.Controls.Add(this.btnExportar);
+            this.pnlExportacaoMain.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlExportacaoMain.HorizontalScrollbarBarColor = true;
+            this.pnlExportacaoMain.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlExportacaoMain.HorizontalScrollbarSize = 10;
+            this.pnlExportacaoMain.Location = new System.Drawing.Point(0, 0);
+            this.pnlExportacaoMain.Name = "pnlExportacaoMain";
+            this.pnlExportacaoMain.Size = new System.Drawing.Size(852, 136);
+            this.pnlExportacaoMain.TabIndex = 0;
+            this.pnlExportacaoMain.VerticalScrollbarBarColor = true;
+            this.pnlExportacaoMain.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlExportacaoMain.VerticalScrollbarSize = 10;
+            // 
+            // pnlExportacaoGrid
+            // 
+            this.pnlExportacaoGrid.Controls.Add(this.grdExportacao);
+            this.pnlExportacaoGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlExportacaoGrid.HorizontalScrollbarBarColor = true;
+            this.pnlExportacaoGrid.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlExportacaoGrid.HorizontalScrollbarSize = 10;
+            this.pnlExportacaoGrid.Location = new System.Drawing.Point(0, 136);
+            this.pnlExportacaoGrid.Name = "pnlExportacaoGrid";
+            this.pnlExportacaoGrid.Size = new System.Drawing.Size(852, 467);
+            this.pnlExportacaoGrid.TabIndex = 1;
+            this.pnlExportacaoGrid.VerticalScrollbarBarColor = true;
+            this.pnlExportacaoGrid.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlExportacaoGrid.VerticalScrollbarSize = 10;
+            // 
+            // btnExportar
+            // 
+            this.btnExportar.Location = new System.Drawing.Point(28, 69);
+            this.btnExportar.Name = "btnExportar";
+            this.btnExportar.Size = new System.Drawing.Size(122, 48);
+            this.btnExportar.TabIndex = 2;
+            this.btnExportar.Text = "Exportar";
+            this.btnExportar.UseSelectable = true;
+            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
+            // 
+            // lblExportacaoAlerta
+            // 
+            this.lblExportacaoAlerta.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblExportacaoAlerta.ForeColor = System.Drawing.Color.Red;
+            this.lblExportacaoAlerta.Location = new System.Drawing.Point(28, 18);
+            this.lblExportacaoAlerta.Name = "lblExportacaoAlerta";
+            this.lblExportacaoAlerta.Size = new System.Drawing.Size(793, 48);
+            this.lblExportacaoAlerta.TabIndex = 3;
+            this.lblExportacaoAlerta.Text = "ATENÇÃO! \r\nNa exportação, os pedidos que estiverem com baixa parcial do contas a " +
+    "receber serão baixados integralmente.";
+            this.lblExportacaoAlerta.UseCustomForeColor = true;
+            this.lblExportacaoAlerta.UseStyleColors = true;
+            this.lblExportacaoAlerta.WrapToLine = true;
+            // 
+            // grdExportacao
+            // 
+            this.grdExportacao.AllowUserToResizeRows = false;
+            this.grdExportacao.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdExportacao.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.grdExportacao.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.grdExportacao.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdExportacao.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.grdExportacao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grdExportacao.DefaultCellStyle = dataGridViewCellStyle6;
+            this.grdExportacao.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdExportacao.EnableHeadersVisualStyles = false;
+            this.grdExportacao.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.grdExportacao.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdExportacao.Location = new System.Drawing.Point(0, 0);
+            this.grdExportacao.Name = "grdExportacao";
+            this.grdExportacao.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdExportacao.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.grdExportacao.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.grdExportacao.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.grdExportacao.Size = new System.Drawing.Size(852, 467);
+            this.grdExportacao.TabIndex = 2;
+            // 
             // FormDeposito
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1755,25 +1334,13 @@
             this.grpCargaDataViagem.ResumeLayout(false);
             this.grpCargaDataViagem.PerformLayout();
             this.tabExportar.ResumeLayout(false);
-            this.tbcRetorno.ResumeLayout(false);
-            this.tabRetornoProdutos.ResumeLayout(false);
-            this.tabRetornoProdutos.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdProdutos)).EndInit();
-            this.pnlPesquisaProdutos.ResumeLayout(false);
-            this.tabRetornoPedidos.ResumeLayout(false);
-            this.pnlPedidos.ResumeLayout(false);
-            this.pnlPedidos.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdPedidos)).EndInit();
-            this.tabRetornoContasAReceber.ResumeLayout(false);
-            this.pnlContasAReceber.ResumeLayout(false);
-            this.pnlContasAReceber.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdContasAReceber)).EndInit();
-            this.pnlRetornoPesquisa.ResumeLayout(false);
-            this.pnlRetornoPesquisa.PerformLayout();
             this.tabRelatorios.ResumeLayout(false);
             this.pnlRetorno.ResumeLayout(false);
             this.pnlRetorno.PerformLayout();
             this.tabConfiguracoes.ResumeLayout(false);
+            this.pnlExportacaoMain.ResumeLayout(false);
+            this.pnlExportacaoGrid.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grdExportacao)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1793,35 +1360,6 @@
         private MetroFramework.Controls.MetroPanel panelHome;
         private MetroFramework.Controls.MetroLabel lblHome;
         private System.Windows.Forms.Label lblSair;
-        private MetroFramework.Controls.MetroTabControl tbcRetorno;
-        private System.Windows.Forms.TabPage tabRetornoProdutos;
-        private System.Windows.Forms.TabPage tabRetornoPedidos;
-        private System.Windows.Forms.TabPage tabRetornoContasAReceber;
-        private MetroFramework.Controls.MetroPanel pnlRetornoPesquisa;
-        public MetroFramework.Controls.MetroButton btnRetornoOK;
-        private System.Windows.Forms.GroupBox grpRetornoViagemAnterior;
-        private System.Windows.Forms.GroupBox grpRetornoDataViagem;
-        public MetroFramework.Controls.MetroButton btnRetornoLimpar;
-        public MetroFramework.Controls.MetroButton btnRetornoPesquisar;
-        public MetroFramework.Controls.MetroDateTime cbbRetornoMesAno;
-        public MetroFramework.Controls.MetroComboBox cbbRetornoRepresentante;
-        private MetroFramework.Controls.MetroComboBox cbbRetornoPraca;
-        private MetroFramework.Controls.MetroLabel lblRetornoMesAno;
-        private MetroFramework.Controls.MetroLabel lblRetornoRepresentante;
-        private MetroFramework.Controls.MetroLabel lblRetornoPraca;
-        private MetroFramework.Controls.MetroGrid grdProdutos;
-        private MetroFramework.Controls.MetroPanel pnlPesquisaProdutos;
-        public MetroFramework.Controls.MetroButton btnProdutoConfirmar;
-        public MetroFramework.Controls.MetroTextBox txtProdutoQuantidade;
-        public MetroFramework.Controls.MetroTextBox txtProdutoNome;
-        public MetroFramework.Controls.MetroTextBox txtProdutoCodigoBarras;
-        private MetroFramework.Controls.MetroPanel pnlPedidos;
-        private MetroFramework.Controls.MetroGrid grdPedidos;
-        private MetroFramework.Controls.MetroPanel pnlContasAReceber;
-        private MetroFramework.Controls.MetroGrid grdContasAReceber;
-        private MetroFramework.Controls.MetroLabel lblRetorno;
-        private MetroFramework.Controls.MetroLabel metroLabel3;
-        private MetroFramework.Controls.MetroLabel metroLabel4;
         private MetroFramework.Controls.MetroPanel pnlRetorno;
         private MetroFramework.Controls.MetroLabel lblRelatorios;
         public MetroFramework.Controls.MetroTabControl tbcImportarConferencia;
@@ -1881,6 +1419,12 @@
         public System.Windows.Forms.DateTimePicker cbbImportarMesAno;
         private MetroFramework.Controls.MetroPanel pnlConferirProdutos;
         public MetroFramework.Controls.MetroGrid grdConfProduto;
+        private System.Windows.Forms.TabPage tabConferenciaProdutos;
+        private MetroFramework.Controls.MetroPanel pnlExportacaoMain;
+        private MetroFramework.Controls.MetroPanel pnlExportacaoGrid;
+        private MetroFramework.Controls.MetroGrid grdExportacao;
+        private MetroFramework.Controls.MetroLabel lblExportacaoAlerta;
+        private MetroFramework.Controls.MetroButton btnExportar;
     }
 }
 

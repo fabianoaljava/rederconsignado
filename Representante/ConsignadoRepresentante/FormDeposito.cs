@@ -434,6 +434,15 @@ namespace ConsignadoRepresentante
             cImportar.ConferenciaProdutoLimpar();
         }
 
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+
+
+            cExportar.ExportarDados(cCargaId);
+
+
+        }
+
 
         ////////////////////////////////////////
         /// ORGANIZAR DAQUI PRA BAIXO

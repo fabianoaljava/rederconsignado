@@ -11,7 +11,10 @@ namespace ModelLibrary
 {
     public class ImportarExportar
     {
-        public static string cResult; 
+        public static string cResult;
+
+        public static List<ListaExportacao> cResultExportacao;
+
 
         public static Boolean Importar(long pRepresentanteId, long pPracaId, int pMes, int pAno)
         {
@@ -298,7 +301,7 @@ namespace ModelLibrary
                     var carga = deposito.Carga.FirstOrDefault(r => r.RepresentanteId == pRepresentanteId && r.PracaId == pPracaId && r.Mes == pMes && r.Ano == pAno);
 
                     vCargaId = carga.Id;
-                    
+
 
                     var newReg = new RepCarga
                     {
@@ -367,7 +370,7 @@ namespace ModelLibrary
                         count++;
                     };
 
-                    
+
 
 
                 }
@@ -445,7 +448,7 @@ namespace ModelLibrary
                                     )";
 
 
-                    foreach (var row in deposito.Vendedor.SqlQuery( query , pRepresentanteId, pPracaId, pMes.ToString()+pAno.ToString()))
+                    foreach (var row in deposito.Vendedor.SqlQuery(query, pRepresentanteId, pPracaId, pMes.ToString() + pAno.ToString()))
                     {
                         var newReg = new RepVendedor
                         {
@@ -471,7 +474,7 @@ namespace ModelLibrary
                             LimitePedido = Convert.ToDecimal(row.LimitePedido),
                             LimiteCredito = Convert.ToDecimal(row.LimiteCredito),
                             Status = row.Status,
-                            Observacao = row.Observacao                            
+                            Observacao = row.Observacao
                         };
 
                         newVendedor.Add(newReg);
@@ -581,10 +584,10 @@ namespace ModelLibrary
                             PercentualCompra = Convert.ToDecimal(row.Pedido.PercentualCompra),
                             FaixaComissao = Convert.ToDecimal(row.Pedido.FaixaComissao),
                             PercentualFaixa = Convert.ToDecimal(row.Pedido.PercentualFaixa),
-                            ValorComissao = Convert.ToDecimal(row.Pedido.ValorComissao),                            
+                            ValorComissao = Convert.ToDecimal(row.Pedido.ValorComissao),
                             ValorLiquido = Convert.ToDecimal(row.Pedido.ValorLiquido),
-                            RecebidoAnterior = Convert.ToDecimal(row.Pedido.RecebidoAnterior),                            
-                            ValorAcerto = Convert.ToDecimal(row.Pedido.ValorAcerto),  
+                            RecebidoAnterior = Convert.ToDecimal(row.Pedido.RecebidoAnterior),
+                            ValorAcerto = Convert.ToDecimal(row.Pedido.ValorAcerto),
                             QuantidadeRetorno = row.Pedido.QuantidadeRetorno,
                             Remarcado = row.Pedido.Remarcado,
                             Status = row.Pedido.Status
@@ -598,8 +601,8 @@ namespace ModelLibrary
 
                 using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
                 {
-                        representante.RepPedido.AddRange(newPedido);
-                        representante.SaveChanges();                    
+                    representante.RepPedido.AddRange(newPedido);
+                    representante.SaveChanges();
                 }
 
 
@@ -643,7 +646,7 @@ namespace ModelLibrary
                 Console.WriteLine(count.ToString() + " item(s) do(s) pedido(s) importado(s).");
 
 
-               
+
 
                 //Receber
                 cResult = "Importando pagamento(s) a receber ...<br>";
@@ -682,7 +685,7 @@ namespace ModelLibrary
                             DataPagamento = row.DataPagamento,
                             DataVencimento = row.DataVencimento,
                             Observacoes = row.Observacoes
-                            
+
                         };
 
                         newReceber.Add(newReg);
@@ -701,7 +704,7 @@ namespace ModelLibrary
                 cResult += count.ToString() + " pagamento(s) a receber importado(s).";
                 Console.WriteLine(count.ToString() + " pagamento(s) a receber importado(s).");
 
-               
+
                 //ReceberBaixa
                 cResult = "Importando baixa(s) do pagamento a receber ...<br>";
                 Console.WriteLine(cResult);
@@ -765,21 +768,20 @@ namespace ModelLibrary
 
 
 
-            
+
             } catch (Exception ex)
             {
 
                 MessageBox.Show("Erro ao importar carga:" + ex.Message);
-                
+
                 Console.WriteLine("Erro ao importar carga:" + ex.Message);
-                
+
                 return false;
 
             }
-            
+
 
         }
-
 
         public static void ExcluirImportacao()
         {
@@ -811,5 +813,159 @@ namespace ModelLibrary
 
             }
         }
+
+
+        /// Exportação
+
+
+        public static List<ListaExportacao> ObterListaExportacao(long pCargaId) {
+           
+
+            var vTable = new ListaExportacao();
+
+
+
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+
+                int count = 0;                                                                           
+
+                
+                vTable.Tabela = "Atualizar Carga";
+                vTable.TotalLinhas = 1;
+                vTable.TotalExportado = 0;
+                vTable.Status = "Preparando...";
+
+                cResultExportacao.Add(vTable);
+
+
+                count = representante.RepPedido.Where(rp => rp.CargaId != pCargaId).Count();
+
+                vTable.Tabela = "Atualizar Pedido(s)";
+                vTable.TotalLinhas = count;
+                vTable.TotalExportado = 0;
+                vTable.Status = "Preparando...";
+
+                cResultExportacao.Add(vTable);
+
+
+                count = representante.RepPedidoItem.Join(representante.RepPedido, pi => pi.PedidoId, pd => pd.Id, (pi, pd) => new { RepPedidoItem = pi, RepPedido = pd } ).Where(pd => pd.RepPedido.CargaId != pCargaId).Count();
+
+
+                vTable.Tabela = "Atualizar Item(s) do(s) Pedido(s)";
+                vTable.TotalLinhas = count;
+                vTable.TotalExportado = 0;
+                vTable.Status = "Preparando...";
+
+                cResultExportacao.Add(vTable);
+
+
+                count = representante.RepPedido.Where(rp => rp.CargaId == pCargaId).Count();
+
+
+                vTable.Tabela = "Inserir Pedido(s)";
+                vTable.TotalLinhas = count;
+                vTable.TotalExportado = 0;
+                vTable.Status = "Preparando...";
+
+                cResultExportacao.Add(vTable);
+
+
+                count = representante.RepPedidoItem.Join(representante.RepPedido, pi => pi.PedidoId, pd => pd.Id, (pi, pd) => new { RepPedidoItem = pi, RepPedido = pd }).Where(pd => pd.RepPedido.CargaId == pCargaId).Count();
+
+
+                vTable.Tabela = "Inserir Item(s) do(s) Pedido(s)";
+                vTable.TotalLinhas = count;
+                vTable.TotalExportado = 0;
+                vTable.Status = "Preparando...";
+
+                cResultExportacao.Add(vTable);
+
+
+                count = representante.RepReceber.Count();
+
+
+                vTable.Tabela = "Atualizar Contas a Receber";
+                vTable.TotalLinhas = count;
+                vTable.TotalExportado = 0;
+                vTable.Status = "Preparando...";
+
+                cResultExportacao.Add(vTable);
+
+                count = representante.RepReceberBaixa.Where(rb => rb.CargaId != pCargaId).Count();
+
+
+                vTable.Tabela = "Atualizar Baixa de Contas a Receber";
+                vTable.TotalLinhas = count;
+                vTable.TotalExportado = 0;
+                vTable.Status = "Preparando...";
+
+                cResultExportacao.Add(vTable);
+
+
+
+                count = representante.RepReceberBaixa.Where(rb => rb.CargaId == pCargaId).Count();
+
+
+                vTable.Tabela = "Inserir Baixa de Contas a Receber";
+                vTable.TotalLinhas = count;
+                vTable.TotalExportado = 0;
+                vTable.Status = "Preparando...";
+
+                cResultExportacao.Add(vTable);
+
+
+                count = representante.RepVendedor.Where(vd => vd.Status == "N").Count();
+
+
+                vTable.Tabela = "Inserir Baixa de Contas a Receber";
+                vTable.TotalLinhas = count;
+                vTable.TotalExportado = 0;
+                vTable.Status = "Preparando...";
+
+                cResultExportacao.Add(vTable);
+
+
+            }
+
+
+            return cResultExportacao;
+
+
+        }
+
+        // Atualizar Tabela Carga: Data Exportação / Status
+        public static Boolean ExportarCargaAtualizar()
+        {
+                        
+            return true;
+
+        }
+
+
+
+        // Atualizar Pedido QuantidadeRetorno / Remarcado / Status
+
+        // Atualizar PedidoItem / Retorno / Preço
+
+        // Inserir Novos Registros em Pedido
+
+        // Inserir Registros em PedidoItem
+
+        // Atualizar Receber - DataPagamento / Status
+
+        // Inserir novos registros de ReceberBaixa
+
+        // Atualizar ReceberBaixa / DataPagamento
+
+        // Atualizar Vendedor - Negativado
+
+
+        //Tratar a tabela Suplemento - aguardando definição no Trello.
+
+
+
+
+
     }
 }

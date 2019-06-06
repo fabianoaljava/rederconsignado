@@ -22,5 +22,19 @@ namespace ConsignadoRepresentante
             localDeposito = formDeposito;
 
         }
+
+
+        public void ExportarDados(long pCargaId)
+        {
+
+
+            // Verificar se está conectado ao banco de dados
+
+
+            // se sim, realizar a exportação
+
+
+
+        }
     }
 }
