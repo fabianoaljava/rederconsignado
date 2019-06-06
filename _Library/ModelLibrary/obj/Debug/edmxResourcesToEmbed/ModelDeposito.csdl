@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ModelDeposito" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Carga">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PracaId" Type="Int32" />
+    <Property Name="RepresentanteId" Type="Int32" />
+    <Property Name="Ano" Type="Int32" />
+    <Property Name="Mes" Type="Int32" />
+    <Property Name="DataAbertura" Type="DateTime" Precision="0" />
+    <Property Name="DataExportacao" Type="DateTime" Precision="0" />
+    <Property Name="DataRetorno" Type="DateTime" Precision="0" />
+    <Property Name="DataConferencia" Type="DateTime" Precision="0" />
+    <Property Name="DataFinalizacao" Type="DateTime" Precision="0" />
+    <Property Name="Status" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="temp_old_id" Type="Int32" />
+    <NavigationProperty Name="Praca" Relationship="Self.FK_Carga_Praca" FromRole="Carga" ToRole="Praca" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Carga_Representante" FromRole="Carga" ToRole="Usuario" />
+    <NavigationProperty Name="CargaProduto" Relationship="Self.FK_CargaProduto_Carga" FromRole="Carga" ToRole="CargaProduto" />
+  </EntityType>
+  <EntityType Name="CargaProduto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CargaId" Type="Int32" />
+    <Property Name="ProdutoGradeId" Type="Int32" Nullable="false" />
+    <Property Name="Quantidade" Type="Double" />
+    <Property Name="QuantidadeRetorno" Type="Double" />
+    <Property Name="temp_old_id" Type="Int32" />
+    <NavigationProperty Name="Carga" Relationship="Self.FK_CargaProduto_Carga" FromRole="CargaProduto" ToRole="Carga" />
+    <NavigationProperty Name="ProdutoGrade" Relationship="Self.FK_CargaProduto_ProdutoGrade" FromRole="CargaProduto" ToRole="ProdutoGrade" />
+  </EntityType>
+  <EntityType Name="Categoria">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descricao" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="temp_old_id" Type="Int32" />
+    <NavigationProperty Name="Produto" Relationship="Self.FK_Produto_Categoria" FromRole="Categoria" ToRole="Produto" />
+  </EntityType>
+  <EntityType Name="Fornecedor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NomeFantasia" Type="String" MaxLength="155" FixedLength="true" Unicode="true" />
+    <Property Name="RazaoSocial" Type="String" MaxLength="155" FixedLength="true" Unicode="true" />
+    <Property Name="Endereco" Type="String" MaxLength="155" FixedLength="true" Unicode="true" />
+    <Property Name="Complemento" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Bairro" Type="String" MaxLength="45" FixedLength="true" Unicode="true" />
+    <Property Name="Cidade" Type="String" MaxLength="65" FixedLength="true" Unicode="true" />
+    <Property Name="UF" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="Cep" Type="String" MaxLength="9" FixedLength="true" Unicode="true" />
+    <Property Name="Telefone" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="TelefoneComercial" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="Celular" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="Website" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="TipoPessoa" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="CpfCnpj" Type="String" MaxLength="18" FixedLength="true" Unicode="true" />
+    <Property Name="RGInscricao" Type="String" MaxLength="45" FixedLength="true" Unicode="true" />
+    <Property Name="DataCadastro" Type="DateTime" Precision="0" />
+    <Property Name="Status" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="Observacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="temp_old_id" Type="Int32" />
+    <NavigationProperty Name="Produto" Relationship="Self.FK_Produto_Fornecedor" FromRole="Fornecedor" ToRole="Produto" />
+  </EntityType>
+  <EntityType Name="Praca">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descricao" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="temp_old_id" Type="Int32" />
+    <NavigationProperty Name="Carga" Relationship="Self.FK_Carga_Praca" FromRole="Praca" ToRole="Carga" />
+  </EntityType>
+  <EntityType Name="Produto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descricao" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="CategoriaId" Type="Int32" />
+    <Property Name="FornecedorId" Type="Int32" />
+    <Property Name="Unidade" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="CodigoBarras" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+    <Property Name="Digito" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="Quantidade" Type="Double" />
+    <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="temp_old_id" Type="Int32" />
+    <NavigationProperty Name="Categoria" Relationship="Self.FK_Produto_Categoria" FromRole="Produto" ToRole="Categoria" />
+    <NavigationProperty Name="Fornecedor" Relationship="Self.FK_Produto_Fornecedor" FromRole="Produto" ToRole="Fornecedor" />
+    <NavigationProperty Name="ProdutoGrade" Relationship="Self.FK_ProdutoGrade_Produto" FromRole="Produto" ToRole="ProdutoGrade" />
+  </EntityType>
+  <EntityType Name="ProdutoGrade">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProdutoId" Type="Int32" />
+    <Property Name="Tamanho" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="Cor" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="ValorSaida" Type="Double" />
+    <Property Name="DataInicial" Type="DateTime" Precision="0" />
+    <Property Name="DataFinal" Type="DateTime" Precision="0" />
+    <Property Name="PesoLiquido" Type="Double" />
+    <Property Name="PesoBruto" Type="Double" />
+    <Property Name="CodigoBarras" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+    <Property Name="Digito" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="ValorCusto" Type="Double" />
+    <Property Name="Quantidade" Type="Double" />
+    <Property Name="Status" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="temp_old_id" Type="Int32" />
+    <Property Name="temp_old_proid" Type="Int32" />
+    <NavigationProperty Name="CargaProduto" Relationship="Self.FK_CargaProduto_ProdutoGrade" FromRole="ProdutoGrade" ToRole="CargaProduto" />
+    <NavigationProperty Name="Produto" Relationship="Self.FK_ProdutoGrade_Produto" FromRole="ProdutoGrade" ToRole="Produto" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="55" FixedLength="true" Unicode="true" />
+    <Property Name="Login" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Senha" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TipoModulo" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="Endereco" Type="String" MaxLength="155" FixedLength="true" Unicode="true" />
+    <Property Name="Complemento" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+    <Property Name="Bairro" Type="String" MaxLength="45" FixedLength="true" Unicode="true" />
+    <Property Name="Cidade" Type="String" MaxLength="65" FixedLength="true" Unicode="true" />
+    <Property Name="UF" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="Cep" Type="String" MaxLength="9" FixedLength="true" Unicode="true" />
+    <Property Name="TipoPessoa" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="CpfCnpj" Type="String" MaxLength="18" FixedLength="true" Unicode="true" />
+    <Property Name="RGInscricao" Type="String" MaxLength="45" FixedLength="true" Unicode="true" />
+    <Property Name="Telefone" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="TelefoneComercial" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="Celular" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="DataInicial" Type="DateTime" Precision="0" />
+    <Property Name="DataFinal" Type="DateTime" Precision="0" />
+    <Property Name="Comissao" Type="Double" />
+    <Property Name="Observacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="temp_old_id" Type="Int32" />
+    <NavigationProperty Name="Carga" Relationship="Self.FK_Carga_Representante" FromRole="Usuario" ToRole="Carga" />
+  </EntityType>
+  <EntityType Name="ProdutosCarga">
+    <Key>
+      <PropertyRef Name="Descricao" />
+      <PropertyRef Name="ProdutoId" />
+      <PropertyRef Name="CargaId" />
+      <PropertyRef Name="ProdutoGradeId" />
+      <PropertyRef Name="CargaProdutoId" />
+    </Key>
+    <Property Name="CodigoBarras" Type="String" MaxLength="13" FixedLength="true" Unicode="true" />
+    <Property Name="Descricao" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Cor" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="Tamanho" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+    <Property Name="Quantidade" Type="Double" />
+    <Property Name="QuantidadeRetorno" Type="Double" />
+    <Property Name="ValorSaida" Type="Double" />
+    <Property Name="ValorCusto" Type="Double" />
+    <Property Name="ProdutoId" Type="Int32" Nullable="false" />
+    <Property Name="CargaId" Type="Int32" Nullable="false" />
+    <Property Name="ProdutoGradeId" Type="Int32" Nullable="false" />
+    <Property Name="PracaId" Type="Int32" />
+    <Property Name="RepresentanteId" Type="Int32" />
+    <Property Name="Ano" Type="Int32" />
+    <Property Name="Mes" Type="Int32" />
+    <Property Name="CargaProdutoId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Representante">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Login" />
+      <PropertyRef Name="Senha" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="55" FixedLength="true" Unicode="true" />
+    <Property Name="Login" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Senha" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TipoModulo" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="Endereco" Type="String" MaxLength="155" FixedLength="true" Unicode="true" />
+    <Property Name="Complemento" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+    <Property Name="Bairro" Type="String" MaxLength="45" FixedLength="true" Unicode="true" />
+    <Property Name="Cidade" Type="String" MaxLength="65" FixedLength="true" Unicode="true" />
+    <Property Name="UF" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="Cep" Type="String" MaxLength="9" FixedLength="true" Unicode="true" />
+    <Property Name="TipoPessoa" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <Property Name="CpfCnpj" Type="String" MaxLength="18" FixedLength="true" Unicode="true" />
+    <Property Name="RGInscricao" Type="String" MaxLength="45" FixedLength="true" Unicode="true" />
+    <Property Name="Telefone" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="TelefoneComercial" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="Celular" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+    <Property Name="DataInicial" Type="DateTime" Precision="0" />
+    <Property Name="DataFinal" Type="DateTime" Precision="0" />
+    <Property Name="Comissao" Type="Double" />
+    <Property Name="Observacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="temp_old_id" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_Carga_Praca">
+    <End Role="Praca" Type="Self.Praca" Multiplicity="0..1" />
+    <End Role="Carga" Type="Self.Carga" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Praca">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Carga">
+        <PropertyRef Name="PracaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Carga_Representante">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Carga" Type="Self.Carga" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Carga">
+        <PropertyRef Name="RepresentanteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CargaProduto_Carga">
+    <End Role="Carga" Type="Self.Carga" Multiplicity="0..1" />
+    <End Role="CargaProduto" Type="Self.CargaProduto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Carga">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CargaProduto">
+        <PropertyRef Name="CargaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CargaProduto_ProdutoGrade">
+    <End Role="ProdutoGrade" Type="Self.ProdutoGrade" Multiplicity="1" />
+    <End Role="CargaProduto" Type="Self.CargaProduto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProdutoGrade">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CargaProduto">
+        <PropertyRef Name="ProdutoGradeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Produto_Categoria">
+    <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+    <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Produto">
+        <PropertyRef Name="CategoriaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Produto_Fornecedor">
+    <End Role="Fornecedor" Type="Self.Fornecedor" Multiplicity="0..1" />
+    <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fornecedor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Produto">
+        <PropertyRef Name="FornecedorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProdutoGrade_Produto">
+    <End Role="Produto" Type="Self.Produto" Multiplicity="0..1" />
+    <End Role="ProdutoGrade" Type="Self.ProdutoGrade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produto">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProdutoGrade">
+        <PropertyRef Name="ProdutoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RederConsignadoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Carga" EntityType="Self.Carga" />
+    <EntitySet Name="CargaProduto" EntityType="Self.CargaProduto" />
+    <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+    <EntitySet Name="Fornecedor" EntityType="Self.Fornecedor" />
+    <EntitySet Name="Praca" EntityType="Self.Praca" />
+    <EntitySet Name="Produto" EntityType="Self.Produto" />
+    <EntitySet Name="ProdutoGrade" EntityType="Self.ProdutoGrade" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <EntitySet Name="ProdutosCarga" EntityType="Self.ProdutosCarga" />
+    <EntitySet Name="Representante" EntityType="Self.Representante" />
+    <AssociationSet Name="FK_Carga_Praca" Association="Self.FK_Carga_Praca">
+      <End Role="Praca" EntitySet="Praca" />
+      <End Role="Carga" EntitySet="Carga" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Carga_Representante" Association="Self.FK_Carga_Representante">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Carga" EntitySet="Carga" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CargaProduto_Carga" Association="Self.FK_CargaProduto_Carga">
+      <End Role="Carga" EntitySet="Carga" />
+      <End Role="CargaProduto" EntitySet="CargaProduto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CargaProduto_ProdutoGrade" Association="Self.FK_CargaProduto_ProdutoGrade">
+      <End Role="ProdutoGrade" EntitySet="ProdutoGrade" />
+      <End Role="CargaProduto" EntitySet="CargaProduto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Produto_Categoria" Association="Self.FK_Produto_Categoria">
+      <End Role="Categoria" EntitySet="Categoria" />
+      <End Role="Produto" EntitySet="Produto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Produto_Fornecedor" Association="Self.FK_Produto_Fornecedor">
+      <End Role="Fornecedor" EntitySet="Fornecedor" />
+      <End Role="Produto" EntitySet="Produto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProdutoGrade_Produto" Association="Self.FK_ProdutoGrade_Produto">
+      <End Role="Produto" EntitySet="Produto" />
+      <End Role="ProdutoGrade" EntitySet="ProdutoGrade" />
+    </AssociationSet>
+    <EntitySet Name="Totalizadores" EntityType="ModelDeposito.Totalizadores" />
+  </EntityContainer>
+  <EntityType Name="Totalizadores">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="QtdProdutos" Type="Double" />
+    <Property Name="TotalProdutos" Type="Double" />
+  </EntityType>
+</Schema>

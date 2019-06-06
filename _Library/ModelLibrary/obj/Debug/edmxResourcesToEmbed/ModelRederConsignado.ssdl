@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ModelContext.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="Data Source=C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\consignado_operacao\ConsignadoOperacao\ModelLibrary\RederConsignado.sqlite" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Carga">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PracaId" Type="integer" />
+    <Property Name="RepresentanteId" Type="integer" />
+    <Property Name="Ano" Type="integer" />
+    <Property Name="Mes" Type="integer" />
+    <Property Name="DataAbertura" Type="datetime" />
+    <Property Name="DataExportacao" Type="datetime" />
+    <Property Name="DataRetorno" Type="datetime" />
+    <Property Name="DataConferencia" Type="datetime" />
+    <Property Name="DataFinalizacao" Type="datetime" />
+    <Property Name="Status" Type="nvarchar" MaxLength="2147483647" />
+  </EntityType>
+  <EntityType Name="CargaProduto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CargaId" Type="integer" />
+    <Property Name="ProdutoGradeId" Type="integer" Nullable="false" />
+    <Property Name="Quantidade" Type="decimal" Precision="53" Scale="0" />
+    <Property Name="QuantidadeRetorno" Type="decimal" Precision="53" Scale="0" />
+  </EntityType>
+  <EntityType Name="Categoria">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descricao" Type="nvarchar" MaxLength="2147483647" />
+  </EntityType>
+  <EntityType Name="Fornecedor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NomeFantasia" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="RazaoSocial" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Endereco" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Complemento" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Bairro" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Cidade" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="UF" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Cep" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Telefone" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="TelefoneComercial" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Celular" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Email" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Website" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="TipoPessoa" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="CpfCnpj" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="RGInscricao" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="DataCadastro" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Status" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Observacao" Type="nvarchar" MaxLength="2147483647" />
+  </EntityType>
+  <EntityType Name="Praca">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descricao" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Produto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descricao" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+    <Property Name="CategoriaId" Type="int" />
+    <Property Name="FornecedorId" Type="int" Nullable="false" />
+    <Property Name="Unidade" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="CodigoBarras" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Digito" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Quantidade" Type="decimal" Precision="53" Scale="0" />
+    <Property Name="Status" Type="nvarchar" MaxLength="2147483647" />
+  </EntityType>
+  <EntityType Name="ProdutoGrade">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProdutoId" Type="integer" />
+    <Property Name="Tamanho" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Cor" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="ValorSaida" Type="decimal" Precision="53" Scale="0" />
+    <Property Name="DataInicial" Type="datetime" />
+    <Property Name="DataFinal" Type="datetime" />
+    <Property Name="PesoLiquido" Type="decimal" Precision="53" Scale="0" />
+    <Property Name="PesoBruto" Type="decimal" Precision="53" Scale="0" />
+    <Property Name="CodigoBarras" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Digito" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="ValorCusto" Type="decimal" Precision="53" Scale="0" />
+    <Property Name="Quantidade" Type="decimal" Precision="53" Scale="0" />
+    <Property Name="Status" Type="nvarchar" MaxLength="2147483647" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+    <Property Name="Login" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+    <Property Name="Senha" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+    <Property Name="TipoModulo" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Endereco" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Complemento" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Bairro" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Cidade" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="UF" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Cep" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="TipoPessoa" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="CpfCnpj" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="RGInscricao" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Telefone" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="TelefoneComercial" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Celular" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="Email" Type="nvarchar" MaxLength="2147483647" />
+    <Property Name="DataInicial" Type="datetime" />
+    <Property Name="DataFinal" Type="datetime" />
+    <Property Name="Comissao" Type="decimal" Precision="53" Scale="0" />
+    <Property Name="Observacao" Type="nvarchar" MaxLength="2147483647" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'main.Representante' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Representante">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Nome" />
+    </Key>
+    <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="ModelContextStoreContainer">
+    <EntitySet Name="Carga" EntityType="Self.Carga" store:Type="Tables" />
+    <EntitySet Name="CargaProduto" EntityType="Self.CargaProduto" store:Type="Tables" />
+    <EntitySet Name="Categoria" EntityType="Self.Categoria" store:Type="Tables" />
+    <EntitySet Name="Fornecedor" EntityType="Self.Fornecedor" store:Type="Tables" />
+    <EntitySet Name="Praca" EntityType="Self.Praca" store:Type="Tables" />
+    <EntitySet Name="Produto" EntityType="Self.Produto" store:Type="Tables" />
+    <EntitySet Name="ProdutoGrade" EntityType="Self.ProdutoGrade" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" store:Type="Tables" />
+    <EntitySet Name="Representante" EntityType="Self.Representante" store:Type="Views">
+      <DefiningQuery>SELECT 
+[Representante].[Id] AS [Id], 
+[Representante].[Nome] AS [Nome]
+FROM [Representante] AS [Representante]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

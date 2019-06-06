@@ -1,0 +1,375 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelRepresentanteStoreContainer" CdmEntityContainer="RepresentanteDBEntities">
+    <EntitySetMapping Name="RepCarga">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepCarga">
+        <MappingFragment StoreEntitySet="RepCarga">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PracaId" ColumnName="PracaId" />
+          <ScalarProperty Name="RepresentanteId" ColumnName="RepresentanteId" />
+          <ScalarProperty Name="Ano" ColumnName="Ano" />
+          <ScalarProperty Name="Mes" ColumnName="Mes" />
+          <ScalarProperty Name="DataAbertura" ColumnName="DataAbertura" />
+          <ScalarProperty Name="DataExportacao" ColumnName="DataExportacao" />
+          <ScalarProperty Name="DataRetorno" ColumnName="DataRetorno" />
+          <ScalarProperty Name="DataConferencia" ColumnName="DataConferencia" />
+          <ScalarProperty Name="DataFinalizacao" ColumnName="DataFinalizacao" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepCargaProduto">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepCargaProduto">
+        <MappingFragment StoreEntitySet="RepCargaProduto">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CargaId" ColumnName="CargaId" />
+          <ScalarProperty Name="ProdutoGradeId" ColumnName="ProdutoGradeId" />
+          <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+          <ScalarProperty Name="QuantidadeRetorno" ColumnName="QuantidadeRetorno" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepCategoria">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepCategoria">
+        <MappingFragment StoreEntitySet="RepCategoria">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepFornecedor">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepFornecedor">
+        <MappingFragment StoreEntitySet="RepFornecedor">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NomeFantasia" ColumnName="NomeFantasia" />
+          <ScalarProperty Name="RazaoSocial" ColumnName="RazaoSocial" />
+          <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+          <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+          <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+          <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+          <ScalarProperty Name="UF" ColumnName="UF" />
+          <ScalarProperty Name="Cep" ColumnName="Cep" />
+          <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+          <ScalarProperty Name="TelefoneComercial" ColumnName="TelefoneComercial" />
+          <ScalarProperty Name="Celular" ColumnName="Celular" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="TipoPessoa" ColumnName="TipoPessoa" />
+          <ScalarProperty Name="CpfCnpj" ColumnName="CpfCnpj" />
+          <ScalarProperty Name="RGInscricao" ColumnName="RGInscricao" />
+          <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepPraca">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepPraca">
+        <MappingFragment StoreEntitySet="RepPraca">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepProduto">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepProduto">
+        <MappingFragment StoreEntitySet="RepProduto">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="CategoriaId" ColumnName="CategoriaId" />
+          <ScalarProperty Name="FornecedorId" ColumnName="FornecedorId" />
+          <ScalarProperty Name="Unidade" ColumnName="Unidade" />
+          <ScalarProperty Name="CodigoBarras" ColumnName="CodigoBarras" />
+          <ScalarProperty Name="Digito" ColumnName="Digito" />
+          <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepProdutoGrade">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepProdutoGrade">
+        <MappingFragment StoreEntitySet="RepProdutoGrade">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProdutoId" ColumnName="ProdutoId" />
+          <ScalarProperty Name="Tamanho" ColumnName="Tamanho" />
+          <ScalarProperty Name="Cor" ColumnName="Cor" />
+          <ScalarProperty Name="ValorSaida" ColumnName="ValorSaida" />
+          <ScalarProperty Name="DataInicial" ColumnName="DataInicial" />
+          <ScalarProperty Name="DataFinal" ColumnName="DataFinal" />
+          <ScalarProperty Name="PesoLiquido" ColumnName="PesoLiquido" />
+          <ScalarProperty Name="PesoBruto" ColumnName="PesoBruto" />
+          <ScalarProperty Name="CodigoBarras" ColumnName="CodigoBarras" />
+          <ScalarProperty Name="Digito" ColumnName="Digito" />
+          <ScalarProperty Name="ValorCusto" ColumnName="ValorCusto" />
+          <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepUsuario">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepUsuario">
+        <MappingFragment StoreEntitySet="RepUsuario">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Senha" ColumnName="Senha" />
+          <ScalarProperty Name="TipoModulo" ColumnName="TipoModulo" />
+          <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+          <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+          <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+          <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+          <ScalarProperty Name="UF" ColumnName="UF" />
+          <ScalarProperty Name="Cep" ColumnName="Cep" />
+          <ScalarProperty Name="TipoPessoa" ColumnName="TipoPessoa" />
+          <ScalarProperty Name="CpfCnpj" ColumnName="CpfCnpj" />
+          <ScalarProperty Name="RGInscricao" ColumnName="RGInscricao" />
+          <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+          <ScalarProperty Name="TelefoneComercial" ColumnName="TelefoneComercial" />
+          <ScalarProperty Name="Celular" ColumnName="Celular" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DataInicial" ColumnName="DataInicial" />
+          <ScalarProperty Name="DataFinal" ColumnName="DataFinal" />
+          <ScalarProperty Name="Comissao" ColumnName="Comissao" />
+          <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepRepresentante">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepRepresentante">
+        <MappingFragment StoreEntitySet="RepRepresentante">
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepCargaAnterior">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepCargaAnterior">
+        <MappingFragment StoreEntitySet="RepCargaAnterior">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DataFinalizacao" ColumnName="DataFinalizacao" />
+          <ScalarProperty Name="DataConferencia" ColumnName="DataConferencia" />
+          <ScalarProperty Name="DataRetorno" ColumnName="DataRetorno" />
+          <ScalarProperty Name="DataExportacao" ColumnName="DataExportacao" />
+          <ScalarProperty Name="DataAbertura" ColumnName="DataAbertura" />
+          <ScalarProperty Name="Mes" ColumnName="Mes" />
+          <ScalarProperty Name="Ano" ColumnName="Ano" />
+          <ScalarProperty Name="RepresentanteId" ColumnName="RepresentanteId" />
+          <ScalarProperty Name="PracaId" ColumnName="PracaId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepCargaConferencia">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepCargaConferencia">
+        <MappingFragment StoreEntitySet="RepCargaConferencia">
+          <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+          <ScalarProperty Name="ProdutoGradeId" ColumnName="ProdutoGradeId" />
+          <ScalarProperty Name="CargaId" ColumnName="CargaId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepCidade">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepCidade">
+        <MappingFragment StoreEntitySet="RepCidade">
+          <ScalarProperty Name="EstadoId" ColumnName="EstadoId" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepEstado">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepEstado">
+        <MappingFragment StoreEntitySet="RepEstado">
+          <ScalarProperty Name="PaisId" ColumnName="PaisId" />
+          <ScalarProperty Name="Sigla" ColumnName="Sigla" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepPais">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepPais">
+        <MappingFragment StoreEntitySet="RepPais">
+          <ScalarProperty Name="Sigla" ColumnName="Sigla" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepPedido">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepPedido">
+        <MappingFragment StoreEntitySet="RepPedido">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ValorAcerto" ColumnName="ValorAcerto" />
+          <ScalarProperty Name="TotalAPagar" ColumnName="TotalAPagar" />
+          <ScalarProperty Name="ReceitaAnterior" ColumnName="ReceitaAnterior" />
+          <ScalarProperty Name="ValorLiquido" ColumnName="ValorLiquido" />
+          <ScalarProperty Name="ValorComissao" ColumnName="ValorComissao" />
+          <ScalarProperty Name="PercentualComissao" ColumnName="PercentualComissao" />
+          <ScalarProperty Name="ValorCompra" ColumnName="ValorCompra" />
+          <ScalarProperty Name="ValorTotal" ColumnName="ValorTotal" />
+          <ScalarProperty Name="DataRetorno" ColumnName="DataRetorno" />
+          <ScalarProperty Name="DataPrevisaoRetorno" ColumnName="DataPrevisaoRetorno" />
+          <ScalarProperty Name="DataLancamento" ColumnName="DataLancamento" />
+          <ScalarProperty Name="CodigoPedido" ColumnName="CodigoPedido" />
+          <ScalarProperty Name="CargaId" ColumnName="CargaId" />
+          <ScalarProperty Name="VendedorId" ColumnName="VendedorId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepPedidoItem">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepPedidoItem">
+        <MappingFragment StoreEntitySet="RepPedidoItem">
+          <ScalarProperty Name="Preco" ColumnName="Preco" />
+          <ScalarProperty Name="Retorno" ColumnName="Retorno" />
+          <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+          <ScalarProperty Name="ProdutoGradeId" ColumnName="ProdutoGradeId" />
+          <ScalarProperty Name="PedidoId" ColumnName="PedidoId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepVendedor">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepVendedor">
+        <MappingFragment StoreEntitySet="RepVendedor">
+          <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="LimiteCredito" ColumnName="LimiteCredito" />
+          <ScalarProperty Name="LimitePedido" ColumnName="LimitePedido" />
+          <ScalarProperty Name="DataFinal" ColumnName="DataFinal" />
+          <ScalarProperty Name="DataInicial" ColumnName="DataInicial" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Celular" ColumnName="Celular" />
+          <ScalarProperty Name="TelefoneComercial" ColumnName="TelefoneComercial" />
+          <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+          <ScalarProperty Name="DataNascimento" ColumnName="DataNascimento" />
+          <ScalarProperty Name="RGInscricao" ColumnName="RGInscricao" />
+          <ScalarProperty Name="CpfCnpj" ColumnName="CpfCnpj" />
+          <ScalarProperty Name="TipoPessoa" ColumnName="TipoPessoa" />
+          <ScalarProperty Name="Cep" ColumnName="Cep" />
+          <ScalarProperty Name="UF" ColumnName="UF" />
+          <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+          <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+          <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+          <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+          <ScalarProperty Name="RazaoSocial" ColumnName="RazaoSocial" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepVendedorBase">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepVendedorBase">
+        <MappingFragment StoreEntitySet="RepVendedorBase">
+          <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="LimiteCredito" ColumnName="LimiteCredito" />
+          <ScalarProperty Name="LimitePedido" ColumnName="LimitePedido" />
+          <ScalarProperty Name="DataFinal" ColumnName="DataFinal" />
+          <ScalarProperty Name="DataInicial" ColumnName="DataInicial" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Celular" ColumnName="Celular" />
+          <ScalarProperty Name="TelefoneComercial" ColumnName="TelefoneComercial" />
+          <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+          <ScalarProperty Name="DataNascimento" ColumnName="DataNascimento" />
+          <ScalarProperty Name="RGInscricao" ColumnName="RGInscricao" />
+          <ScalarProperty Name="CpfCnpj" ColumnName="CpfCnpj" />
+          <ScalarProperty Name="TipoPessoa" ColumnName="TipoPessoa" />
+          <ScalarProperty Name="Cep" ColumnName="Cep" />
+          <ScalarProperty Name="UF" ColumnName="UF" />
+          <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+          <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+          <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+          <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+          <ScalarProperty Name="RazaoSocial" ColumnName="RazaoSocial" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepProdutosConferencia">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepProdutosConferencia">
+        <MappingFragment StoreEntitySet="RepProdutosConferencia">
+          <ScalarProperty Name="CargaId" ColumnName="CargaId" />
+          <ScalarProperty Name="ProdutoGradeId" ColumnName="ProdutoGradeId" />
+          <ScalarProperty Name="CargaProdutoId" ColumnName="CargaProdutoId" />
+          <ScalarProperty Name="ProdutoId" ColumnName="ProdutoId" />
+          <ScalarProperty Name="Diferenca" ColumnName="Diferenca" />
+          <ScalarProperty Name="QuantidadeInformada" ColumnName="QuantidadeInformada" />
+          <ScalarProperty Name="QuantidadeCarga" ColumnName="QuantidadeCarga" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="CodigoBarras" ColumnName="CodigoBarras" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepReceber">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepReceber">
+        <MappingFragment StoreEntitySet="RepReceber">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Observacoes" ColumnName="Observacoes" />
+          <ScalarProperty Name="DataPagamento" ColumnName="DataPagamento" />
+          <ScalarProperty Name="DataVencimento" ColumnName="DataVencimento" />
+          <ScalarProperty Name="DataLancamento" ColumnName="DataLancamento" />
+          <ScalarProperty Name="DataEmissao" ColumnName="DataEmissao" />
+          <ScalarProperty Name="ValorDesconto" ColumnName="ValorDesconto" />
+          <ScalarProperty Name="ValorJuros" ColumnName="ValorJuros" />
+          <ScalarProperty Name="ValorAReceber" ColumnName="ValorAReceber" />
+          <ScalarProperty Name="ValorDuplicata" ColumnName="ValorDuplicata" />
+          <ScalarProperty Name="ValorNF" ColumnName="ValorNF" />
+          <ScalarProperty Name="Serie" ColumnName="Serie" />
+          <ScalarProperty Name="Documento" ColumnName="Documento" />
+          <ScalarProperty Name="CargaId" ColumnName="CargaId" />
+          <ScalarProperty Name="VendedorId" ColumnName="VendedorId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepReceberBaixa">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepReceberBaixa">
+        <MappingFragment StoreEntitySet="RepReceberBaixa">
+          <ScalarProperty Name="Desconto" ColumnName="Desconto" />
+          <ScalarProperty Name="Juros" ColumnName="Juros" />
+          <ScalarProperty Name="DataBaixa" ColumnName="DataBaixa" />
+          <ScalarProperty Name="DataPagamento" ColumnName="DataPagamento" />
+          <ScalarProperty Name="Valor" ColumnName="Valor" />
+          <ScalarProperty Name="CargaId" ColumnName="CargaId" />
+          <ScalarProperty Name="ReceberId" ColumnName="ReceberId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepSuplementoProduto">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepSuplementoProduto">
+        <MappingFragment StoreEntitySet="RepSuplementoProduto">
+          <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+          <ScalarProperty Name="ProdutoGradeId" ColumnName="ProdutoGradeId" />
+          <ScalarProperty Name="SuplementoId" ColumnName="SuplementoId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepSuplemento">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepSuplemento">
+        <MappingFragment StoreEntitySet="RepSuplemento">
+          <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+          <ScalarProperty Name="Situacao" ColumnName="Situacao" />
+          <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RepPosicaoFinanceiras">
+      <EntityTypeMapping TypeName="ModelRepresentante.RepPosicaoFinanceira">
+        <MappingFragment StoreEntitySet="RepPosicaoFinanceira">
+          <ScalarProperty Name="ValorAberto" ColumnName="ValorAberto" />
+          <ScalarProperty Name="ValorRecebido" ColumnName="ValorRecebido" />
+          <ScalarProperty Name="ValorAReceber" ColumnName="ValorAReceber" />
+          <ScalarProperty Name="VendedorId" ColumnName="VendedorId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

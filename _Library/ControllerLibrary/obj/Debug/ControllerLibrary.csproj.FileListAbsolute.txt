@@ -1,0 +1,16 @@
+C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\consignado_operacao\ConsignadoOperacao\ControllerLibrary\bin\Debug\ControllerLibrary.dll
+C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\consignado_operacao\ConsignadoOperacao\ControllerLibrary\bin\Debug\ControllerLibrary.pdb
+C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\consignado_operacao\ConsignadoOperacao\ControllerLibrary\obj\Debug\ControllerLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\consignado_operacao\ConsignadoOperacao\ControllerLibrary\obj\Debug\ControllerLibrary.dll
+C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\consignado_operacao\ConsignadoOperacao\ControllerLibrary\obj\Debug\ControllerLibrary.pdb
+C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\consignado_operacao\ConsignadoOperacao\ControllerLibrary\obj\Debug\ControllerLibrary.csprojAssemblyReference.cache
+C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\consignado_representante\ControllerLibrary\bin\Debug\ControllerLibrary.dll
+C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\consignado_representante\ControllerLibrary\bin\Debug\ControllerLibrary.pdb
+C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\consignado_representante\ControllerLibrary\obj\Debug\ControllerLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\consignado_representante\ControllerLibrary\obj\Debug\ControllerLibrary.dll
+C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\consignado_representante\ControllerLibrary\obj\Debug\ControllerLibrary.pdb
+C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\RederConsignado\_Library\ControllerLibrary\bin\Debug\ControllerLibrary.dll
+C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\RederConsignado\_Library\ControllerLibrary\bin\Debug\ControllerLibrary.pdb
+C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\RederConsignado\_Library\ControllerLibrary\obj\Debug\ControllerLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\RederConsignado\_Library\ControllerLibrary\obj\Debug\ControllerLibrary.dll
+C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\RederConsignado\_Library\ControllerLibrary\obj\Debug\ControllerLibrary.pdb

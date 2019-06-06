@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ModelContext" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Carga">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PracaId" Type="Int64" />
+    <Property Name="RepresentanteId" Type="Int64" />
+    <Property Name="Ano" Type="Int64" />
+    <Property Name="Mes" Type="Int64" />
+    <Property Name="DataAbertura" Type="DateTime" />
+    <Property Name="DataExportacao" Type="DateTime" />
+    <Property Name="DataRetorno" Type="DateTime" />
+    <Property Name="DataConferencia" Type="DateTime" />
+    <Property Name="DataFinalizacao" Type="DateTime" />
+    <Property Name="Status" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Praca">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descricao" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Login" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Senha" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TipoModulo" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Endereco" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Complemento" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Bairro" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Cidade" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="UF" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Cep" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="TipoPessoa" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="CpfCnpj" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="RGInscricao" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Telefone" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="TelefoneComercial" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Celular" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="DataInicial" Type="DateTime" />
+    <Property Name="DataFinal" Type="DateTime" />
+    <Property Name="Comissao" Type="Decimal" Precision="53" Scale="0" />
+    <Property Name="Observacao" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Representante">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Nome" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="RederConsignadoDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Carga" EntityType="Self.Carga" />
+    <EntitySet Name="Praca" EntityType="Self.Praca" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <EntitySet Name="Representante" EntityType="Self.Representante" />
+    <EntitySet Name="CargaProduto" EntityType="ModelContext.CargaProduto" />
+    <EntitySet Name="Categoria" EntityType="ModelContext.Categoria" />
+    <EntitySet Name="Fornecedor" EntityType="ModelContext.Fornecedor" />
+    <EntitySet Name="Produto" EntityType="ModelContext.Produto" />
+    <EntitySet Name="ProdutoGrade" EntityType="ModelContext.ProdutoGrade" />
+  </EntityContainer>
+  <EntityType Name="CargaProduto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CargaId" Type="Int64" />
+    <Property Name="ProdutoGradeId" Type="Int64" Nullable="false" />
+    <Property Name="Quantidade" Type="Decimal" Precision="53" Scale="0" />
+    <Property Name="QuantidadeRetorno" Type="Decimal" Precision="53" Scale="0" />
+  </EntityType>
+  <EntityType Name="Categoria">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descricao" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Fornecedor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NomeFantasia" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="RazaoSocial" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Endereco" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Complemento" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Bairro" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Cidade" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="UF" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Cep" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Telefone" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="TelefoneComercial" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Celular" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Website" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="TipoPessoa" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="CpfCnpj" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="RGInscricao" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="DataCadastro" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Observacao" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Produto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descricao" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="CategoriaId" Type="Int32" />
+    <Property Name="FornecedorId" Type="Int32" Nullable="false" />
+    <Property Name="Unidade" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="CodigoBarras" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Digito" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Quantidade" Type="Decimal" Precision="53" Scale="0" />
+    <Property Name="Status" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ProdutoGrade">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProdutoId" Type="Int64" />
+    <Property Name="Tamanho" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Cor" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="ValorSaida" Type="Decimal" Precision="53" Scale="0" />
+    <Property Name="DataInicial" Type="DateTime" />
+    <Property Name="DataFinal" Type="DateTime" />
+    <Property Name="PesoLiquido" Type="Decimal" Precision="53" Scale="0" />
+    <Property Name="PesoBruto" Type="Decimal" Precision="53" Scale="0" />
+    <Property Name="CodigoBarras" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="Digito" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="ValorCusto" Type="Decimal" Precision="53" Scale="0" />
+    <Property Name="Quantidade" Type="Decimal" Precision="53" Scale="0" />
+    <Property Name="Status" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

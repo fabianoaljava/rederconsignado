@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a2744c2c7ff7423e9d1f367333d3062f" Name="Diagram1">
+        <EntityTypeShape EntityType="ModelRepresentante.RepCarga" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepCargaProduto" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepCategoria" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepFornecedor" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepPraca" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepProduto" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepProdutoGrade" Width="2.25" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepUsuario" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepRepresentante" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepCargaAnterior" Width="2.125" PointX="12.75" PointY="9.625" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepCargaConferencia" Width="2.375" PointX="7.375" PointY="9.75" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepCidade" Width="1.5" PointX="8.625" PointY="7.5" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepEstado" Width="1.5" PointX="10.25" PointY="7.5" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepPais" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepPedidoItem" Width="1.5" PointX="2.75" PointY="11.75" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepVendedor" Width="1.5" PointX="12.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepVendedorBase" Width="2" PointX="7.375" PointY="12.75" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepReceber" Width="1.5" PointX="10.5" PointY="13.875" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepReceberBaixa" Width="2.375" PointX="14.625" PointY="6.625" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepSuplementoProduto" Width="2.25" PointX="14.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepSuplemento" Width="1.5" PointX="3.375" PointY="14.75" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepPosicaoFinanceira" Width="1.5" PointX="9.375" PointY="3.75" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepProdutosConferencia" Width="1.5" PointX="13.375" PointY="13.75" />
+        <EntityTypeShape EntityType="ModelRepresentante.RepPedido" Width="1.5" PointX="0.75" PointY="14.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
