@@ -434,14 +434,57 @@ namespace ConsignadoRepresentante
             cImportar.ConferenciaProdutoLimpar();
         }
 
-        private void btnExportar_Click(object sender, EventArgs e)
+        private  void btnExportar_Click(object sender, EventArgs e)
         {
 
 
-            cExportar.ExportarDados(cCargaId);
+            //Task.Run(() => cExportar.AcionarThread()).Wait();
+
+            cExportar.ExportarDados();
 
 
         }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+
+
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            Console.WriteLine("Progresso Mudou...");
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Console.WriteLine("Processo Completo");
+        }
+
+        private void bgwExportar_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+            Cursor.Current = Cursors.WaitCursor;
+            foreach (DataGridViewRow row in grdExportacao.Rows)
+            {
+                Console.WriteLine(row.Cells["Rotina"].Value.ToString() + " em row:" + row.Index.ToString());
+                cExportar.ProcessarExportacao(row.Cells["Rotina"].Value.ToString(), row.Index);
+            }
+        }
+
+        private void bgwExportar_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            //Console.WriteLine(bgwExportar.WorkerReportsProgress);
+        }
+
+        private void bgwExportar_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            btnExportar.Text = "Exportação Realizada.";
+            Cursor.Current = Cursors.Default;
+        }
+
+
 
 
         ////////////////////////////////////////

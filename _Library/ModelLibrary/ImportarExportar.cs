@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Transactions;
 using System.Windows.Forms;
+
 
 namespace ModelLibrary
 {
@@ -783,6 +785,21 @@ namespace ModelLibrary
 
         }
 
+
+
+
+
+        public static Boolean ProcessarRotina(string pRotina)
+        {
+
+            Type vTipo = Type.GetType("ModelLibrary.ImportarExportar");
+                MethodInfo vMetodo = vTipo.GetMethod(pRotina);
+                Boolean result = (Boolean) vMetodo.Invoke(null, null);
+
+            return result;
+        
+        }
+
         public static void ExcluirImportacao()
         {
 
@@ -945,13 +962,6 @@ namespace ModelLibrary
 
                 result.Add(vTable);
 
-
-
-
-
-
-
-
                 return result.ToList<ListaExportacao>();
 
             }
@@ -965,10 +975,16 @@ namespace ModelLibrary
         // Atualizar Tabela Carga: Data Exportação / Status
         public static Boolean ExportarAtualizarCarga()
         {
-
-            ModelLibrary.MetodosDeposito.AlterarrStatusCarga(cCargaId, "E");
-            ModelLibrary.MetodosRepresentante.AlterarrStatusCarga(cCargaId, "E");
-            return true;
+            try
+            {
+                ModelLibrary.MetodosDeposito.AlterarrStatusCarga(cCargaId, "E");
+                ModelLibrary.MetodosRepresentante.AlterarrStatusCarga(cCargaId, "E");
+                return true;
+            } catch
+            {
+                return false;
+            }
+            
 
         }
 
@@ -977,7 +993,8 @@ namespace ModelLibrary
         public static Boolean ExportarAtualizarPedido()
         {
 
-            return true;
+            Thread.Sleep(1000);
+            return false;
 
         }
 
@@ -985,6 +1002,7 @@ namespace ModelLibrary
         public static Boolean ExportarAtualizarPedidoItem()
         {
 
+            Thread.Sleep(5000);
             return true;
 
         }
@@ -992,40 +1010,40 @@ namespace ModelLibrary
         // Inserir Novos Registros em Pedido
         public static Boolean ExportarInserirPedido()
         {
-
-            return true;
+            Thread.Sleep(1000);
+            return false ;
 
         }
 
         // Inserir Registros em PedidoItem
         public static Boolean ExportarInserirPedidoItem()
         {
-
-            return true;
+            Thread.Sleep(1000);
+            return false;
 
         }
 
         // Atualizar Receber - DataPagamento / Status
         public static Boolean ExportarAtualizarReceber()
         {
-
-            return true;
+            Thread.Sleep(1000);
+            return false;
 
         }
 
         // Atualizar ReceberBaixa / DataPagamento
         public static Boolean ExportarAtualizarReceberBaixa()
         {
-
-            return true;
+            Thread.Sleep(1000);
+            return false;
 
         }
 
         // Inserir novos registros de ReceberBaixa
         public static Boolean ExportarInserirReceberBaixa()
         {
-
-            return true;
+            Thread.Sleep(1000);
+            return false;
 
         }
 
@@ -1033,7 +1051,7 @@ namespace ModelLibrary
         // Atualizar ReceberBaixa / DataPagamento
         public static Boolean ExportarAtualizarVendedor()
         {
-
+            Thread.Sleep(1000);
             return true;
 
         }

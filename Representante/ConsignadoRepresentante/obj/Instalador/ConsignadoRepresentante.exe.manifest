@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ConsignadoRepresentante.exe" size="837592">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ConsignadoRepresentante.exe" size="839128">
       <assemblyIdentity name="ConsignadoRepresentante" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ALSuChCjn6R3N3QpbKtHKbGWoCxOcK10L3WkgEGsrd0=</dsig:DigestValue>
+        <dsig:DigestValue>M5Z3/SF39WpbkzEqXtSXMpXVP6IY/HGjqtHjSOfSlwQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -146,7 +146,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>NconCA+EaF6cDk3Yf769fvxcy3e75pm4QA4vb7XbhAM=</dsig:DigestValue>
+        <dsig:DigestValue>acX/A9FDTMGq5IlTvGeyAKYcR97ko89xZH3kiEz0/S0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
