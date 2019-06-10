@@ -434,7 +434,14 @@ namespace ConsignadoRepresentante
             cImportar.ConferenciaProdutoLimpar();
         }
 
-        private  void btnExportar_Click(object sender, EventArgs e)
+
+        ////////////////////////////////////////
+        /// ORGANIZAR DAQUI PRA BAIXO
+        ////////////////////////////////////////
+        ///
+
+
+        private void btnExportar_Click(object sender, EventArgs e)
         {
 
 
@@ -445,22 +452,13 @@ namespace ConsignadoRepresentante
 
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        private void btnExportarAnalizar_Click(object sender, EventArgs e)
         {
 
-
+            cExportar.ExportarAnalisar();
 
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            Console.WriteLine("Progresso Mudou...");
-        }
-
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            Console.WriteLine("Processo Completo");
-        }
 
         private void bgwExportar_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -480,6 +478,7 @@ namespace ConsignadoRepresentante
 
         private void bgwExportar_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            grdExportacao.Rows[grdExportacao.Rows.Count-1].DefaultCellStyle.ForeColor = Color.Green;
             btnExportar.Text = "Exportação Realizada.";
             Cursor.Current = Cursors.Default;
         }
@@ -487,9 +486,9 @@ namespace ConsignadoRepresentante
 
 
 
-        ////////////////////////////////////////
-        /// ORGANIZAR DAQUI PRA BAIXO
-        ////////////////////////////////////////
+
+
+
 
 
 

@@ -25,6 +25,41 @@ namespace ConsignadoRepresentante
             localDeposito = formDeposito;
 
         }
+
+
+        public void ExportarAnalisar()
+        {
+
+            if (ModelLibrary.MetodosDeposito.VerificarServidor())
+            {
+
+
+                localDeposito.btnExportarAnalizar.Text = "Obtendo Análise...";
+                localDeposito.btnExportarAnalizar.Enabled = false;
+                localDeposito.grdExportacao.DataSource = ModelLibrary.ImportarExportar.ObterListaExportacao(localDeposito.cCargaId);
+
+
+                localDeposito.grdExportacao.ClearSelection();
+
+
+                localDeposito.btnExportarAnalizar.Text = "Analizar";
+                localDeposito.btnExportarAnalizar.Enabled = true;
+
+
+
+            }
+            else
+            {
+
+                if (MessageBox.Show("O servidor <<NOMEDOSERVIDOR>> não foi alcançado, verifique a sua conexão e tente novamente.", "Exportação de Carga", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Retry)
+                {
+                    ExportarAnalisar();
+                }
+
+            }
+
+        }
+
         public void ExportarDados()
         {
 
@@ -50,7 +85,7 @@ namespace ConsignadoRepresentante
                 localDeposito.bgwExportar.RunWorkerAsync();
 
 
-        }
+            }
             else
             {
 
@@ -87,14 +122,13 @@ namespace ConsignadoRepresentante
             {
 
                 localDeposito.grdExportacao.Rows[row].Cells["Status"].Value = "Exportado";
-                localDeposito.grdExportacao.Rows[row].DefaultCellStyle.ForeColor = Color.Green;
+                localDeposito.grdExportacao.Rows[row].DefaultCellStyle.ForeColor = Color.Green;                
 
             } else
             {
 
                 localDeposito.grdExportacao.Rows[row].Cells["Status"].Value = "Erro";
-                localDeposito.grdExportacao.Rows[row].DefaultCellStyle.ForeColor = Color.Red;
-
+                localDeposito.grdExportacao.Rows[row].DefaultCellStyle.ForeColor = Color.Red;            
             }
 
             return Task.CompletedTask;

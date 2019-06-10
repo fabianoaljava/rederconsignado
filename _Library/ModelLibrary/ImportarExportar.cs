@@ -15,6 +15,7 @@ namespace ModelLibrary
     {
         public static string cResult;
         public static long cCargaId;
+        public static long cPracaId;
 
 
 
@@ -558,7 +559,7 @@ namespace ModelLibrary
                 Console.WriteLine(cResult);
                 var newPedido = new List<RepPedido>();
 
-                int vPedidoId;
+                //int vPedidoId;
 
                 count = 0;
                 using (DepositoDBEntities deposito = new DepositoDBEntities())
@@ -566,9 +567,7 @@ namespace ModelLibrary
 
 
 
-                    var pedido = deposito.Pedido.FirstOrDefault(pd => pd.CargaId == vCargaId);
 
-                    if (pedido != null) vPedidoId = pedido.Id; else vPedidoId = 0;
 
                     foreach (var row in deposito.Pedido.Join(deposito.Carga, pd => pd.CargaId, cg => cg.Id, (pd, cg) => new { Pedido = pd, Carga = cg }).Where(pd => pd.Carga.PracaId == pPracaId))
                     {
@@ -576,7 +575,7 @@ namespace ModelLibrary
                         {
                             Id = row.Pedido.Id,
                             VendedorId = row.Pedido.VendedorId,
-                            CargaId = row.Pedido.CargaId,
+                            CargaId = vCargaId,
                             CodigoPedido = row.Pedido.CodigoPedido,
                             DataLancamento = row.Pedido.DataLancamento,
                             DataPrevisaoRetorno = row.Pedido.DataPrevisaoRetorno,
@@ -608,8 +607,8 @@ namespace ModelLibrary
                 }
 
 
-                cResult += count.ToString() + " pedido(s) importado(s).";
-                Console.WriteLine(count.ToString() + " pedido(s) importado(s).");
+                cResult = count.ToString() + " pedido(s) importado(s).";
+                Console.WriteLine(cResult);
 
                 //RepPedidoItem
                 cResult = "Importando item(s) do(s) pedido(s) ...<br>";
@@ -644,8 +643,8 @@ namespace ModelLibrary
                 }
 
 
-                cResult += count.ToString() + " item(s) do(s) pedido(s) importado(s).";
-                Console.WriteLine(count.ToString() + " item(s) do(s) pedido(s) importado(s).");
+                cResult = count.ToString() + " item(s) do(s) pedido(s) importado(s).";
+                Console.WriteLine(cResult);
 
 
 
@@ -686,7 +685,8 @@ namespace ModelLibrary
                             DataLancamento = row.DataLancamento,
                             DataPagamento = row.DataPagamento,
                             DataVencimento = row.DataVencimento,
-                            Observacoes = row.Observacoes
+                            Observacoes = row.Observacoes,
+                            Status = row.Status
 
                         };
 
@@ -703,8 +703,8 @@ namespace ModelLibrary
                 }
 
 
-                cResult += count.ToString() + " pagamento(s) a receber importado(s).";
-                Console.WriteLine(count.ToString() + " pagamento(s) a receber importado(s).");
+                cResult = count.ToString() + " pagamento(s) a receber importado(s).";
+                Console.WriteLine(cResult);
 
 
                 //ReceberBaixa
@@ -755,8 +755,8 @@ namespace ModelLibrary
                 }
 
 
-                cResult += count.ToString() + " baixa(s) de pagamento a receber importado(s).";
-                Console.WriteLine(count.ToString() + " baixa(s) pagamento a receber importado(s).");
+                cResult = count.ToString() + " baixa(s) de pagamento a receber importado(s).";
+                Console.WriteLine(cResult);
 
 
 
@@ -847,12 +847,23 @@ namespace ModelLibrary
 
                 var vTable = new ListaExportacao();
 
+                int count = 0;
 
-                int count = 1;
+                vTable.Tabela = "Todas";
+                vTable.Acao = "Preparar Exportacao";
+                vTable.Rotina = "ExportarPreparar";
+                vTable.TotalLinhas = count;
+                vTable.Status = "Preparando...";
+
+                result.Add(vTable);
+
+                count = 1;
+
+                vTable = new ListaExportacao();
 
                 vTable.Tabela = "Carga";
-                vTable.Acao = "Atualizar Carga";
-                vTable.Rotina = "ExportarAtualizarCarga";
+                vTable.Acao = "Exportar Carga";
+                vTable.Rotina = "ExportarCarga";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";                
 
@@ -864,8 +875,8 @@ namespace ModelLibrary
                 count = representante.RepPedido.Where(rp => rp.CargaId != pCargaId).Count();
 
                 vTable.Tabela = "Pedido";
-                vTable.Acao = "Atualizar Pedido(s)";
-                vTable.Rotina = "ExportarAtualizarPedido";
+                vTable.Acao = "Exportar Pedido(s)";
+                vTable.Rotina = "ExportarPedido";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
 
@@ -878,36 +889,12 @@ namespace ModelLibrary
 
                 vTable.Tabela = "PedidoItem";
                 vTable.Acao = "Atualizar Item(s) do(s) Pedido(s)";
-                vTable.Rotina = "ExportarAtualizarPedidoItem";
+                vTable.Rotina = "ExportarPedidoItem";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
 
                 result.Add(vTable);
 
-                vTable = new ListaExportacao();
-
-                count = representante.RepPedido.Where(rp => rp.CargaId == pCargaId).Count();
-
-                vTable.Tabela = "Pedido";
-                vTable.Acao = "Inserir Pedido(s)";
-                vTable.Rotina = "ExportarInserirPedido";
-                vTable.TotalLinhas = count;
-                vTable.Status = "Preparando...";
-
-                result.Add(vTable);
-
-                vTable = new ListaExportacao();
-
-
-                count = representante.RepPedidoItem.Join(representante.RepPedido, pi => pi.PedidoId, pd => pd.Id, (pi, pd) => new { RepPedidoItem = pi, RepPedido = pd }).Where(pd => pd.RepPedido.CargaId == pCargaId).Count();
-
-                vTable.Tabela = "PedidoItem";
-                vTable.Acao = "Inserir Item(s) do(s) Pedido(s)";
-                vTable.Rotina = "ExportarInserirPedidoItem";
-                vTable.TotalLinhas = count;
-                vTable.Status = "Preparando...";
-
-                result.Add(vTable);
 
                 vTable = new ListaExportacao();
 
@@ -915,8 +902,8 @@ namespace ModelLibrary
                 count = representante.RepReceber.Count();
 
                 vTable.Tabela = "Receber";
-                vTable.Acao = "Atualizar Contas a Receber";
-                vTable.Rotina = "ExportarAtualizarReceber";
+                vTable.Acao = "Exportar Contas a Receber";
+                vTable.Rotina = "ExportarReceber";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
 
@@ -927,8 +914,8 @@ namespace ModelLibrary
                 count = representante.RepReceberBaixa.Where(rb => rb.CargaId != pCargaId).Count();
 
                 vTable.Tabela = "ReceberBaixa";
-                vTable.Acao = "Atualizar Baixa de Contas a Receber";
-                vTable.Rotina = "ExportarAtualizarReceberBaixa";
+                vTable.Acao = "Exportar Baixa de Contas a Receber";
+                vTable.Rotina = "ExportarReceberBaixa";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
 
@@ -938,25 +925,25 @@ namespace ModelLibrary
                 vTable = new ListaExportacao();
 
 
-
-                count = representante.RepReceberBaixa.Where(rb => rb.CargaId == pCargaId).Count();
-
-                vTable.Tabela = "ReceberBaixa";
-                vTable.Acao = "Inserir Baixa de Contas a Receber";
-                vTable.Rotina = "ExportarInserirReceberBaixa";
-                vTable.TotalLinhas = count;
-                vTable.Status = "Preparando...";
-
-                result.Add(vTable);
-
-                vTable = new ListaExportacao();
-
-
-                count = representante.RepVendedor.Where(vd => vd.Status == "N").Count();
+                count = representante.RepVendedor.Where(vd => vd.Status == "*").Count();
 
                 vTable.Tabela = "Vendedor";
-                vTable.Acao = "Atualizar Vendedor...";
-                vTable.Rotina = "ExportarAtualizarVendedor";
+                vTable.Acao = "Exportar Vendedor...";
+                vTable.Rotina = "ExportarVendedor";
+                vTable.TotalLinhas = count;
+                vTable.Status = "Preparando...";
+
+                result.Add(vTable);
+
+
+                vTable = new ListaExportacao();
+
+
+                count = 0;
+
+                vTable.Tabela = "Todas";
+                vTable.Acao = "Finalizar Exportacao...";
+                vTable.Rotina = "ExportarFinalizar";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
 
@@ -972,11 +959,22 @@ namespace ModelLibrary
 
         }
 
+
+
         // Atualizar Tabela Carga: Data Exportação / Status
-        public static Boolean ExportarAtualizarCarga()
+        public static Boolean ExportarPreparar()
+        {
+
+            Thread.Sleep(1000);
+            return true;
+        }
+
+        // Atualizar Tabela Carga: Data Exportação / Status
+        public static Boolean ExportarCarga()
         {
             try
             {
+                Console.WriteLine("Carga Alterada: " + cCargaId);
                 ModelLibrary.MetodosDeposito.AlterarrStatusCarga(cCargaId, "E");
                 ModelLibrary.MetodosRepresentante.AlterarrStatusCarga(cCargaId, "E");
                 return true;
@@ -990,72 +988,475 @@ namespace ModelLibrary
 
 
         // Atualizar Pedido QuantidadeRetorno / Remarcado / Status
-        public static Boolean ExportarAtualizarPedido()
+        public static Boolean ExportarPedido()
         {
 
-            Thread.Sleep(1000);
-            return false;
+
+            try
+            {
+                cResult = "Exportando pedido(s) da carga: " + cCargaId;
+                Console.WriteLine(cResult);
+
+
+                int count = 0;
+                using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+                {
+
+
+                    foreach (var row in representante.RepPedido.Join(representante.RepCarga, pd => pd.CargaId, cg => cg.Id, (pd, cg) => new { RepPedido = pd, RepCarga = cg }).Where(pd => pd.RepCarga.Id == cCargaId))
+                    {
+
+
+                        var regPedido = new Pedido
+                        {
+                            Id = Convert.ToInt32(row.RepPedido.Id),
+                            VendedorId = Convert.ToInt32(row.RepPedido.VendedorId),
+                            CargaId = Convert.ToInt32(row.RepPedido.CargaId),
+                            CodigoPedido = row.RepPedido.CodigoPedido,
+                            DataLancamento = row.RepPedido.DataLancamento,
+                            DataPrevisaoRetorno = row.RepPedido.DataPrevisaoRetorno,
+                            DataRetorno = row.RepPedido.DataRetorno,
+                            ValorPedido = Convert.ToDouble(row.RepPedido.ValorPedido),
+                            ValorCompra = Convert.ToDouble(row.RepPedido.ValorCompra),
+                            PercentualCompra = Convert.ToDouble(row.RepPedido.PercentualCompra),
+                            FaixaComissao = Convert.ToDouble(row.RepPedido.FaixaComissao),
+                            PercentualFaixa = Convert.ToDouble(row.RepPedido.PercentualFaixa),
+                            ValorComissao = Convert.ToDouble(row.RepPedido.ValorComissao),
+                            ValorLiquido = Convert.ToDouble(row.RepPedido.ValorLiquido),
+                            RecebidoAnterior = Convert.ToDouble(row.RepPedido.RecebidoAnterior),
+                            ValorAcerto = Convert.ToDouble(row.RepPedido.ValorAcerto),
+                            QuantidadeRetorno = Convert.ToInt32(row.RepPedido.QuantidadeRetorno),
+                            Remarcado = Convert.ToInt32(row.RepPedido.Remarcado),
+                            Status = row.RepPedido.Status
+                        };
+
+                       
+                        PedidoAtualizarInserir(regPedido);
+                        count++;
+                    }
+
+                }
+
+
+                cResult = count.ToString() + " pedido(s) exportado(s).";
+                Console.WriteLine(cResult);
+
+
+                return true;
+            } catch
+            {
+                return false;
+            }
+
+            
+
+        }
+
+        public static void PedidoAtualizarInserir(Pedido pPedido)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                var vPedido = deposito.Pedido.FirstOrDefault(pd => pd.CodigoPedido == pPedido.CodigoPedido);
+
+                if (vPedido != null)
+                {
+
+                    Console.WriteLine("Atualizando pedido id: " + pPedido.Id.ToString() + " codigo: " + pPedido.CodigoPedido);
+                    vPedido.CargaId = pPedido.CargaId;
+                    vPedido.DataRetorno = pPedido.DataRetorno;
+                    vPedido.ValorPedido = pPedido.ValorPedido;
+                    vPedido.ValorCompra = pPedido.ValorCompra;
+                    vPedido.PercentualCompra = pPedido.PercentualCompra;
+                    vPedido.FaixaComissao = pPedido.FaixaComissao;
+                    vPedido.PercentualFaixa = pPedido.PercentualFaixa;
+                    vPedido.ValorComissao = pPedido.ValorComissao;
+                    vPedido.ValorLiquido = pPedido.ValorLiquido;
+                    vPedido.RecebidoAnterior = pPedido.RecebidoAnterior;
+                    vPedido.QuantidadeRetorno = pPedido.QuantidadeRetorno;
+                    vPedido.Remarcado = pPedido.Remarcado;
+
+                    deposito.SaveChanges();
+
+                } else
+                {
+
+                    Console.WriteLine("Inserindo pedido id: " + pPedido.Id.ToString() + " codigo: " + pPedido.CodigoPedido);
+                    deposito.Pedido.Add(pPedido);
+                    deposito.SaveChanges();
+                }
+
+            }
 
         }
 
         // Atualizar PedidoItem / Retorno / Preço
-        public static Boolean ExportarAtualizarPedidoItem()
+        public static Boolean ExportarPedidoItem()
         {
 
-            Thread.Sleep(5000);
-            return true;
+            try
+            {
+                cResult = "Exportando item(ns) do(s) pedido(s) ...<br>";
+                Console.WriteLine(cResult);
+
+
+                int count = 0;
+                using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+                {
+
+                    foreach (var row in representante.RepPedidoItem.Join(representante.RepPedido, pi => pi.PedidoId, pd => pd.Id, (pi, pd) => new { RepPedidoItem = pi, RepPedido = pd }).Where(pd => pd.RepPedido.CargaId != cCargaId))
+                    {
+
+
+                        var regPedidoItem = new PedidoItem
+                        {
+                            Id = Convert.ToInt32(row.RepPedidoItem.Id),
+                            PedidoId = Convert.ToInt32(row.RepPedidoItem.PedidoId),
+                            ProdutoGradeId = Convert.ToInt32(row.RepPedidoItem.ProdutoGradeId),
+                            Quantidade = Convert.ToDouble(row.RepPedidoItem.Quantidade),
+                            Retorno = Convert.ToDouble(row.RepPedidoItem.Retorno),
+                            Preco = Convert.ToDouble(row.RepPedidoItem.Preco)
+                        };
+
+                        PedidoItemAtualizarInserir(regPedidoItem);
+                        count++;
+                    }
+
+                }
+
+
+                cResult = count.ToString() + " item(s) do (s) pedido(s) exportado(s).";
+                Console.WriteLine(cResult);
+
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
 
         }
 
-        // Inserir Novos Registros em Pedido
-        public static Boolean ExportarInserirPedido()
+
+        public static void PedidoItemAtualizarInserir(PedidoItem pPedidoItem)
         {
-            Thread.Sleep(1000);
-            return false ;
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                var vPedidoItem = deposito.PedidoItem.FirstOrDefault(pi => pi.Id == pPedidoItem.Id);
+
+                if (vPedidoItem != null)
+                {
+
+                    Console.WriteLine("Atualizando pedidoItem id: " + pPedidoItem.Id.ToString());
+                    vPedidoItem.Retorno = pPedidoItem.Retorno;
+                    vPedidoItem.Preco = pPedidoItem.Preco;
+
+
+                    deposito.SaveChanges();
+
+                }
+                else
+                {
+                    Console.WriteLine("Inserindo pedidoItem id: " + pPedidoItem.Id.ToString());
+                    deposito.PedidoItem.Add(pPedidoItem);
+                    deposito.SaveChanges();
+                }
+
+            }
 
         }
 
-        // Inserir Registros em PedidoItem
-        public static Boolean ExportarInserirPedidoItem()
-        {
-            Thread.Sleep(1000);
-            return false;
 
-        }
 
         // Atualizar Receber - DataPagamento / Status
-        public static Boolean ExportarAtualizarReceber()
+        public static Boolean ExportarReceber()
         {
-            Thread.Sleep(1000);
-            return false;
+            try
+            {
+                cResult = "Exportando Conta(s) a Receber ...<br>";
+                Console.WriteLine(cResult);
+
+
+                int count = 0;
+                using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+                {
+
+                    foreach (var row in representante.RepReceber)
+                    {
+
+
+                        var regReceber = new Receber
+                        {
+                            Id = Convert.ToInt32(row.Id),
+                            VendedorId = Convert.ToInt32(row.VendedorId),
+                            CargaId = Convert.ToInt32(row.CargaId),
+                            Documento = Convert.ToInt32(row.Documento),
+                            Serie = row.Serie,
+                            ValorNF = Convert.ToDouble(row.ValorNF),
+                            ValorDuplicata = Convert.ToDouble(row.ValorDuplicata),
+                            ValorAReceber = Convert.ToDouble(row.ValorAReceber),
+                            ValorJuros = Convert.ToDouble(row.ValorJuros),
+                            ValorDesconto = Convert.ToDouble(row.ValorDesconto),
+                            DataEmissao = row.DataEmissao,
+                            DataLancamento = row.DataLancamento,
+                            DataPagamento = row.DataPagamento,
+                            DataVencimento = row.DataVencimento,
+                            Observacoes = row.Observacoes
+                        };
+
+                        ReceberAtualizarInserir(regReceber);
+                        count++;
+                    }
+
+                }
+
+
+                cResult = count.ToString() + " Conta(s) a receber exportado(s).";
+                Console.WriteLine(cResult);
+
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
+
+        public static void ReceberAtualizarInserir(Receber pReceber)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                var vReceber = deposito.Receber.FirstOrDefault(rc => rc.Id == pReceber.Id);
+
+                if (vReceber != null)
+                {
+
+                    Console.WriteLine("Atualizando Conta a Receber id: " + pReceber.Id.ToString());
+                    vReceber.DataPagamento = pReceber.DataPagamento;
+                    //vReceber.Status = pReceber.Status;
+
+                    deposito.SaveChanges();
+
+                }
+                else
+                {
+                    Console.WriteLine("Inserindo Conta a Receber id: " + pReceber.Id.ToString());
+                    deposito.Receber.Add(pReceber);
+                    deposito.SaveChanges();
+                }
+
+            }
 
         }
 
         // Atualizar ReceberBaixa / DataPagamento
-        public static Boolean ExportarAtualizarReceberBaixa()
+        public static Boolean ExportarReceberBaixa()
         {
-            Thread.Sleep(1000);
-            return false;
+            try
+            {
+                cResult = "Exportando baixa(s) de conta a receber...<br>";
+                Console.WriteLine(cResult);
+
+
+                int count = 0;
+                using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+                {
+
+                    foreach (var row in representante.RepReceberBaixa.Where(rb => rb.CargaId == cCargaId))
+                    {
+
+
+                        var regReceberBaixa = new ReceberBaixa
+                        {
+                            Id = Convert.ToInt32(row.Id),
+                            ReceberId = Convert.ToInt32(row.ReceberId),
+                            CargaId = Convert.ToInt32(row.CargaId),
+                            Valor = Convert.ToDouble(row.Valor),
+                            DataPagamento = row.DataPagamento,
+                            DataBaixa = row.DataBaixa,
+                            Juros = Convert.ToDouble(row.Juros),
+                            Desconto = Convert.ToDouble(row.Desconto)
+                        };
+
+                        ReceberBaixaAtualizarInserir(regReceberBaixa);
+                        count++;
+                    }
+
+                }
+
+
+                cResult = count.ToString() + " baixa(s) de contat a receber exportado(s).";
+                Console.WriteLine(cResult);
+
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
 
         }
 
-        // Inserir novos registros de ReceberBaixa
-        public static Boolean ExportarInserirReceberBaixa()
+
+        public static void ReceberBaixaAtualizarInserir(ReceberBaixa pReceberBaixa)
         {
-            Thread.Sleep(1000);
-            return false;
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                var vReceberBaixa = deposito.ReceberBaixa.FirstOrDefault(rc => rc.Id == pReceberBaixa.Id);
+
+                if (vReceberBaixa != null)
+                {
+
+                    Console.WriteLine("Atualizando Baixa de Conta a Receber id: " + pReceberBaixa.Id.ToString());
+                    vReceberBaixa.DataPagamento = pReceberBaixa.DataPagamento;
+
+                    deposito.SaveChanges();
+
+                }
+                else
+                {
+                    Console.WriteLine("Inserindo Baixa de Conta a Receber id: " + pReceberBaixa.Id.ToString());
+                    deposito.ReceberBaixa.Add(pReceberBaixa);
+                    deposito.SaveChanges();
+                }
+
+            }
 
         }
 
-        // Atualizar Vendedor - Negativado
-        // Atualizar ReceberBaixa / DataPagamento
-        public static Boolean ExportarAtualizarVendedor()
+
+        public static Boolean ExportarVendedor()
         {
+            try
+            {
+                cResult = "Exportando vendedor(es) ...<br>";
+                Console.WriteLine(cResult);
+
+
+                int count = 0;
+                using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+                {
+
+                    foreach (var row in representante.RepVendedor.Where(vd => vd.Status == "*"))
+                    {
+
+
+                        var regVendedor = new Vendedor
+                        {
+                            Id = Convert.ToInt32(row.Id),
+                            Nome = row.Nome,
+                            RazaoSocial = row.RazaoSocial,
+                            Endereco = row.Endereco,
+                            Complemento = row.Complemento,
+                            Bairro = row.Bairro,
+                            Cidade = row.Cidade,
+                            UF = row.UF,
+                            Cep = row.Cep,
+                            TipoPessoa = row.TipoPessoa,
+                            CpfCnpj = row.CpfCnpj,
+                            RGInscricao = row.RGInscricao,
+                            DataNascimento = row.DataNascimento,
+                            Telefone = row.Telefone,
+                            TelefoneComercial = row.TelefoneComercial,
+                            Celular = row.Celular,
+                            Email = row.Email,
+                            DataInicial = row.DataInicial,
+                            DataFinal = row.DataFinal,
+                            LimitePedido = Convert.ToDouble(row.LimitePedido),
+                            LimiteCredito = Convert.ToDouble(row.LimiteCredito),
+                            Status = row.Status,
+                            Observacao = row.Observacao
+                        };
+
+                        VendedorAtualizarInserir(regVendedor);
+                        count++;
+                    }
+
+                }
+
+
+                cResult = count.ToString() + " vendedor(es) exportado(s).";
+                Console.WriteLine(cResult);
+
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
+        public static void VendedorAtualizarInserir(Vendedor pVendedor)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                var vVendedor = deposito.Vendedor.FirstOrDefault(rc => rc.Id == pVendedor.Id);
+
+                if (vVendedor != null)
+                {
+
+                    Console.WriteLine("Atualizando Vendedor id: " + pVendedor.Id.ToString());
+                    
+                    vVendedor.Nome = pVendedor.Nome;
+                    vVendedor.RazaoSocial = pVendedor.RazaoSocial;
+                    vVendedor.Endereco = pVendedor.Endereco;
+                    vVendedor.Complemento = pVendedor.Complemento;
+                    vVendedor.Bairro = pVendedor.Bairro;
+                    vVendedor.Cidade = pVendedor.Cidade;
+                    vVendedor.UF = pVendedor.UF;
+                    vVendedor.Cep = pVendedor.Cep;
+                    vVendedor.TipoPessoa = pVendedor.TipoPessoa;
+                    vVendedor.CpfCnpj = pVendedor.CpfCnpj;
+                    vVendedor.RGInscricao = pVendedor.RGInscricao;
+                    vVendedor.DataNascimento = pVendedor.DataNascimento;
+                    vVendedor.Telefone = pVendedor.Telefone;
+                    vVendedor.TelefoneComercial = pVendedor.TelefoneComercial;
+                    vVendedor.Celular = pVendedor.Celular;
+                    vVendedor.Email = pVendedor.Email;
+                    vVendedor.DataInicial = pVendedor.DataInicial;
+                    vVendedor.DataFinal = pVendedor.DataFinal;
+                    vVendedor.LimitePedido = Convert.ToDouble(pVendedor.LimitePedido);
+                    vVendedor.LimiteCredito = Convert.ToDouble(pVendedor.LimiteCredito);
+                    vVendedor.Status = "0";
+                    vVendedor.Observacao = pVendedor.Observacao;
+
+                    deposito.SaveChanges();
+
+                }
+                else
+                {
+                    Console.WriteLine("Inserindo Vendedor id: " + pVendedor.Id.ToString());
+                    deposito.Vendedor.Add(pVendedor);
+                    deposito.SaveChanges();
+                }
+
+            }
+
+        }
+
+
+        public static Boolean ExportarFinalizar()
+        {
+
             Thread.Sleep(1000);
             return true;
-
         }
-
 
         //Tratar a tabela Suplemento - aguardando definição no Trello.
 
