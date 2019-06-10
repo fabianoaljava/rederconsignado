@@ -1,0 +1,27 @@
+DROP TABLE USUARIO;
+
+CREATE TABLE [dbo].[Usuario] (
+    [Id]                INT            NOT NULL,
+    [Nome]              NCHAR (55)     NULL,
+    [Login]             NCHAR (20)     NOT NULL,
+    [Senha]             NVARCHAR (MAX) NOT NULL,
+    [TipoModulo]        NCHAR (2)      NULL,
+    [Endereco]          NCHAR (155)    NULL,
+    [Complemento]       NCHAR (30)     NULL,
+    [Bairro]            NCHAR (45)     NULL,
+    [Cidade]            NCHAR (65)     NULL,
+    [UF]                NCHAR (2)      NULL,
+    [Cep]               NCHAR (9)      NULL,
+    [TipoPessoa]        NCHAR (2)      NULL,
+    [CpfCnpj]           NCHAR (18)     NULL,
+    [RGInscricao]       NCHAR (45)     NULL,
+    [Telefone]          NCHAR (15)     NULL,
+    [TelefoneComercial] NCHAR (15)     NULL,
+    [Celular]           NCHAR (15)     NULL,
+    [Email]             NCHAR (60)     NULL,
+    [DataInicial]       DATE           NULL,
+    [DataFinal]         DATE           NULL,
+    [Comissao]          FLOAT (53)     NULL,
+    [Observacao]        TEXT           NULL,	
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
