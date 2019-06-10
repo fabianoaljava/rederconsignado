@@ -1,7 +1,0 @@
-C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\RederConsignado\_Library\ControllerLibrary\bin\Instalador\ControllerLibrary.dll
-C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\RederConsignado\_Library\ControllerLibrary\bin\Instalador\Correios.dll
-C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\RederConsignado\_Library\ControllerLibrary\bin\Instalador\Correios.pdb
-C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\RederConsignado\_Library\ControllerLibrary\obj\Instalador\ControllerLibrary.csproj.CoreCompileInputs.cache
-C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\RederConsignado\_Library\ControllerLibrary\obj\Instalador\ControllerLibrary.csproj.CopyComplete
-C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\RederConsignado\_Library\ControllerLibrary\obj\Instalador\ControllerLibrary.dll
-C:\Users\Fabiano\OneDrive\_Aljava\Clientes\Reder\sistema_consignado\RederConsignado\_Library\ControllerLibrary\obj\Instalador\ControllerLibrary.csprojAssemblyReference.cache
