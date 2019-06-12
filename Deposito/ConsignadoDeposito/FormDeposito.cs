@@ -79,6 +79,8 @@ namespace ConsignadoDeposito
         {
             cCarga.CarregarListaCarga();
             cCarga.CarregarListaRepresentante();
+            cRetorno.CarregarListaRetorno();
+            cRetorno.CarregarListaRepresentante();
             tabHome.Focus();
         }
 
@@ -95,7 +97,10 @@ namespace ConsignadoDeposito
         private void FormDeposito_Load(object sender, EventArgs e)
         {
 
+            Cursor.Current = Cursors.WaitCursor;
             CarregarDeposito();
+            tbcPrincipal.SelectedTab = tabHome;
+            Cursor.Current = Cursors.Default;
 
         }
 
@@ -308,16 +313,6 @@ namespace ConsignadoDeposito
 
 
 
-        
-
-
-        
-
-
-
-
-
-
         private void txtCargaCodigoBarras_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter)
@@ -402,6 +397,266 @@ namespace ConsignadoDeposito
         ////////////////////////////////////////
         /// Aba Retorno
         ////////////////////////////////////////
+        ///
+
+
+
+        private void txtRetornoCodPraca_ButtonClick(object sender, EventArgs e)
+        {
+            cRetorno.ResetarVariaveis();
+            cRetorno.LimparGradeRetornoProduto();
+
+            Console.WriteLine("RetornoButtonClick");
+
+            int i = -1;
+            try
+            {
+                i = Convert.ToInt32(txtRetornoCodPraca.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Código Inválido");
+            }
+
+
+            var praca = ModelLibrary.MetodosDeposito.ObterPraca(i);
+
+            if (praca != null)
+            {
+                cbbRetornoPraca.SelectedIndex = cbbRetornoPraca.FindString(praca.Descricao);
+            }
+            else
+            {
+                cbbRetornoPraca.SelectedIndex = -1;
+            }
+
+
+
+        }
+
+
+        private void cbbRetornoPraca_SelectedValueChanged(object sender, EventArgs e)
+        {
+
+            try
+            {
+                ModelLibrary.Praca praca = (ModelLibrary.Praca)cbbRetornoPraca.SelectedItem;
+                txtRetornoCodPraca.Text = praca.Id.ToString();
+                //txtRetornoCodRepresentante.Focus();
+            }
+            catch
+            {
+                txtRetornoCodPraca.Text = "";
+            }
+
+        }
+
+        private void txtRetornoCodPraca_Leave(object sender, EventArgs e)
+        {
+            if (txtRetornoCodPraca.Text != "") txtRetornoCodPraca_ButtonClick(sender, e);
+        }
+
+
+
+
+        private void txtRetornoCodRepresentante_ButtonClick(object sender, EventArgs e)
+        {
+
+            cRetorno.ResetarVariaveis();
+            cRetorno.LimparGradeRetornoProduto();
+
+            Console.WriteLine("RepresentanteButtonClick");
+
+            int i = -1;
+            try
+            {
+                i = Convert.ToInt32(txtRetornoCodRepresentante.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Código Inválido");
+            }
+
+
+            var representante = ModelLibrary.MetodosDeposito.ObterRepresentante(i);
+
+            if (representante != null)
+            {
+                cbbRetornoRepresentante.SelectedIndex = cbbRetornoRepresentante.FindString(representante.Nome);
+
+            }
+            else
+            {
+                cbbRetornoRepresentante.SelectedIndex = -1;
+            }
+
+
+        }
+
+        private void cbbRetornoRepresentante_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ModelLibrary.Representante representante = (ModelLibrary.Representante)cbbRetornoRepresentante.SelectedItem;
+                txtRetornoCodRepresentante.Text = representante.Id.ToString();
+                //cbbRetornoMesAno.Focus();
+            }
+            catch
+            {
+                txtRetornoCodRepresentante.Text = "";
+            }
+        }
+
+        private void txtRetornoCodRepresentante_Leave(object sender, EventArgs e)
+        {
+            if (txtRetornoCodRepresentante.Text != "") txtRetornoCodRepresentante_ButtonClick(sender, e);
+        }
+
+
+
+        private void RetornoKeyEnter(object sender, KeyEventArgs e)
+        {
+            string objname = ((MetroFramework.Controls.MetroTextBox)sender).Name;
+
+
+            if ((e.KeyCode == Keys.Enter) || (e.KeyCode == Keys.Return))
+            {
+                if (objname == "txtRetornoCodRepresentante")
+                {
+                    txtRetornoCodRepresentante_ButtonClick(sender, e);
+                    cbbRetornoMesAno.Focus();
+                }
+                else if (objname == "txtRetornoCodPraca")
+                {
+                    txtRetornoCodPraca_ButtonClick(sender, e);
+                    txtRetornoCodRepresentante.Focus();
+                }
+                else
+                {
+                    SendKeys.Send("{TAB}");
+                }
+
+                e.Handled = true;//set to false if you need that textbox gets enter key
+            }
+        }
+
+        private void cbbRetornoMesAno_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Return)
+            {
+                e.SuppressKeyPress = true;
+                btnRetornoOK.Focus();
+
+            }
+        }
+
+        private void bntRetornoOK_Click(object sender, EventArgs e)
+        {
+
+            cRetorno.PesquisarCarga();
+
+        }
+
+        private void bntRetornoOK_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                bntRetornoOK_Click(sender, e);
+            }
+        }
+
+        private void btnRetornoPesquisar_Click(object sender, EventArgs e)
+        {
+            ///Abre Janela de Pesquisa de Retorno com opção para Alterar / Excluir - se tiver permissão
+        }
+
+        private void btnRetornoLimpar_Click(object sender, EventArgs e)
+        {
+            cRetorno.LimparRetorno();
+        }
+
+
+
+        private void txtRetornoCodigoBarras_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                cRetorno.PesquisarRetornoProduto(txtRetornoCodigoBarras.Text);
+
+            }
+        }
+
+        private void txtRetornoCodigoBarras_Leave(object sender, EventArgs e)
+        {
+            if (txtRetornoCodigoBarras.Text != "")
+            {
+                cRetorno.PesquisarRetornoProduto(txtRetornoCodigoBarras.Text);
+            }
+        }
+
+        private void chkRetornoQuantidade_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cRetorno.cRetornoProdutoGradeId != 0)
+            {
+                chkRetornoQuantidade.Checked = true;
+                txtRetornoQuantidade.Enabled = true;
+            }
+            else
+            {
+                txtRetornoQuantidade.Text = "";
+                txtRetornoQuantidade.Enabled = chkRetornoQuantidade.Checked;
+            }
+
+        }
+
+        private void bntRetornoConfirmar_Click(object sender, EventArgs e)
+        {
+
+            cRetorno.ConfirmarRetornoProdutoGrade();
+
+        }
+
+        private void btnRetornoCancelar_Click(object sender, EventArgs e)
+        {
+            cRetorno.LimparRetornoProduto();
+        }
+
+
+
+        private void grdRetornoProduto_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cRetorno.ExibirRetornoProdutoGrade();
+        }
+
+        private void grdRetornoProduto_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Delete)
+            {
+
+                MessageBox.Show("Opção não disponível.");
+            }
+
+        }
+
+
+
+
+
+        private void alterarRetornoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cRetorno.ExibirRetornoProdutoGrade();
+        }
+
+
+
+        private void excluirRetornoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Opção não disponível.");
+        }
+
+
 
         ////////////////////////////////////////
         /// Aba Acerto

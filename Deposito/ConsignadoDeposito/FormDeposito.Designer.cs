@@ -45,6 +45,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             this.notifyIconDeposito = new System.Windows.Forms.NotifyIcon(this.components);
             this.panelHeader = new System.Windows.Forms.Panel();
             this.lblSair = new System.Windows.Forms.Label();
@@ -75,10 +79,6 @@
             this.txtCargaCodigoBarras = new MetroFramework.Controls.MetroTextBox();
             this.pnlCargaPesquisa = new MetroFramework.Controls.MetroPanel();
             this.cbbCargaMesAno = new System.Windows.Forms.DateTimePicker();
-            this.lblTotalProdutos = new MetroFramework.Controls.MetroLabel();
-            this.dlbTotalProdutos = new MetroFramework.Controls.MetroLabel();
-            this.lblQtdProdutos = new MetroFramework.Controls.MetroLabel();
-            this.dlbQtdProdutos = new MetroFramework.Controls.MetroLabel();
             this.txtCargaCodRepresentante = new MetroFramework.Controls.MetroTextBox();
             this.txtCargaCodPraca = new MetroFramework.Controls.MetroTextBox();
             this.btnCargaOK = new MetroFramework.Controls.MetroButton();
@@ -94,6 +94,10 @@
             this.lblCargaVADataConferencia = new MetroFramework.Controls.MetroLabel();
             this.lblCargaVADataFinalizacao = new MetroFramework.Controls.MetroLabel();
             this.grpCargaData = new System.Windows.Forms.GroupBox();
+            this.lblCargaTotalProdutos = new MetroFramework.Controls.MetroLabel();
+            this.dlbCargaTotalProdutos = new MetroFramework.Controls.MetroLabel();
+            this.lblCargaQtdProdutos = new MetroFramework.Controls.MetroLabel();
+            this.dlbCargaQtdProdutos = new MetroFramework.Controls.MetroLabel();
             this.dlbCargaDataFinalizacao = new MetroFramework.Controls.MetroLabel();
             this.dlbCargaDataConferencia = new MetroFramework.Controls.MetroLabel();
             this.dlbCargaDataRetorno = new MetroFramework.Controls.MetroLabel();
@@ -113,43 +117,68 @@
             this.lblCargaPraca = new MetroFramework.Controls.MetroLabel();
             this.tabRetorno = new System.Windows.Forms.TabPage();
             this.tbcRetorno = new MetroFramework.Controls.MetroTabControl();
+            this.tabRetornoResumo = new System.Windows.Forms.TabPage();
             this.tabRetornoProdutos = new System.Windows.Forms.TabPage();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.grdProdutos = new MetroFramework.Controls.MetroGrid();
-            this.pnlPesquisaProdutos = new MetroFramework.Controls.MetroPanel();
-            this.btnProdutoConfirmar = new MetroFramework.Controls.MetroButton();
-            this.txtProdutoQuantidade = new MetroFramework.Controls.MetroTextBox();
-            this.txtProdutoNome = new MetroFramework.Controls.MetroTextBox();
-            this.txtProdutoCodigoBarras = new MetroFramework.Controls.MetroTextBox();
+            this.pnlRetornoProdutoMain = new MetroFramework.Controls.MetroPanel();
+            this.grdRetornoProduto = new MetroFramework.Controls.MetroGrid();
+            this.pnlRetornoProduto = new MetroFramework.Controls.MetroPanel();
+            this.lblRetornarProduto = new MetroFramework.Controls.MetroLabel();
+            this.btnRetornoCancelar = new MetroFramework.Controls.MetroButton();
+            this.chkRetornoQuantidade = new MetroFramework.Controls.MetroCheckBox();
+            this.btnRetornoConfirmar = new MetroFramework.Controls.MetroButton();
+            this.txtRetornoQuantidade = new MetroFramework.Controls.MetroTextBox();
+            this.txtRetornoProduto = new MetroFramework.Controls.MetroTextBox();
+            this.txtRetornoCodigoBarras = new MetroFramework.Controls.MetroTextBox();
             this.tabRetornoPedidos = new System.Windows.Forms.TabPage();
             this.pnlPedidos = new MetroFramework.Controls.MetroPanel();
-            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.grdPedidos = new MetroFramework.Controls.MetroGrid();
             this.tabRetornoContasAReceber = new System.Windows.Forms.TabPage();
             this.pnlContasAReceber = new MetroFramework.Controls.MetroPanel();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.grdContasAReceber = new MetroFramework.Controls.MetroGrid();
+            this.tabRetornoAcerto = new System.Windows.Forms.TabPage();
             this.pnlRetornoPesquisa = new MetroFramework.Controls.MetroPanel();
+            this.grpRetornoCargaAnterior = new System.Windows.Forms.GroupBox();
+            this.grpRetornoDadosCarga = new System.Windows.Forms.GroupBox();
+            this.lblRetornoTotalProdutos = new MetroFramework.Controls.MetroLabel();
+            this.dlbRetornoTotalProdutos = new MetroFramework.Controls.MetroLabel();
+            this.lblRetornoQtdProdutos = new MetroFramework.Controls.MetroLabel();
+            this.dlbRetornoQtdProdutos = new MetroFramework.Controls.MetroLabel();
+            this.dlbRetornoDataFinalizacao = new MetroFramework.Controls.MetroLabel();
+            this.dlbRetornoDataConferencia = new MetroFramework.Controls.MetroLabel();
+            this.dlbRetornoDataRetorno = new MetroFramework.Controls.MetroLabel();
+            this.dlbRetornoDataExportacao = new MetroFramework.Controls.MetroLabel();
+            this.dlbRetornoDataAbertura = new MetroFramework.Controls.MetroLabel();
+            this.lblRetornoDataFinalizacao = new MetroFramework.Controls.MetroLabel();
+            this.lblRetornoDataConferencia = new MetroFramework.Controls.MetroLabel();
+            this.lblRetornoDataRetorno = new MetroFramework.Controls.MetroLabel();
+            this.lblRetornoDataExportacao = new MetroFramework.Controls.MetroLabel();
+            this.lblRetornoDataAbertura = new MetroFramework.Controls.MetroLabel();
+            this.cbbRetornoMesAno = new System.Windows.Forms.DateTimePicker();
+            this.txtRetornoCodRepresentante = new MetroFramework.Controls.MetroTextBox();
+            this.txtRetornoCodPraca = new MetroFramework.Controls.MetroTextBox();
             this.btnRetornoOK = new MetroFramework.Controls.MetroButton();
-            this.grpRetornoViagemAnterior = new System.Windows.Forms.GroupBox();
-            this.grpRetornoDataViagem = new System.Windows.Forms.GroupBox();
             this.btnRetornoLimpar = new MetroFramework.Controls.MetroButton();
             this.btnRetornoPesquisar = new MetroFramework.Controls.MetroButton();
-            this.cbbRetornoMesAno = new MetroFramework.Controls.MetroDateTime();
             this.cbbRetornoRepresentante = new MetroFramework.Controls.MetroComboBox();
             this.cbbRetornoPraca = new MetroFramework.Controls.MetroComboBox();
             this.lblRetornoMesAno = new MetroFramework.Controls.MetroLabel();
             this.lblRetornoRepresentante = new MetroFramework.Controls.MetroLabel();
             this.lblRetornoPraca = new MetroFramework.Controls.MetroLabel();
-            this.tabFinanceiro = new System.Windows.Forms.TabPage();
-            this.pnlFinanceiroPesquisa = new MetroFramework.Controls.MetroPanel();
-            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
+            this.tabEstoque = new System.Windows.Forms.TabPage();
             this.tabRelatorios = new System.Windows.Forms.TabPage();
-            this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
+            this.pnlRelatorio = new MetroFramework.Controls.MetroPanel();
             this.metroLabel9 = new MetroFramework.Controls.MetroLabel();
+            this.tabConfiguracoes = new System.Windows.Forms.TabPage();
             this.tabAjuda = new System.Windows.Forms.TabPage();
-            this.tabAcerto = new System.Windows.Forms.TabPage();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.ctmRetornoProduto = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabConfProduto = new System.Windows.Forms.TabPage();
+            this.tabConfPedido = new System.Windows.Forms.TabPage();
+            this.pnlRetornoConfProdutos = new MetroFramework.Controls.MetroPanel();
+            this.grdRetornoConfProdutos = new MetroFramework.Controls.MetroGrid();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
@@ -170,8 +199,9 @@
             this.tabRetorno.SuspendLayout();
             this.tbcRetorno.SuspendLayout();
             this.tabRetornoProdutos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdProdutos)).BeginInit();
-            this.pnlPesquisaProdutos.SuspendLayout();
+            this.pnlRetornoProdutoMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdRetornoProduto)).BeginInit();
+            this.pnlRetornoProduto.SuspendLayout();
             this.tabRetornoPedidos.SuspendLayout();
             this.pnlPedidos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdPedidos)).BeginInit();
@@ -179,10 +209,13 @@
             this.pnlContasAReceber.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdContasAReceber)).BeginInit();
             this.pnlRetornoPesquisa.SuspendLayout();
-            this.tabFinanceiro.SuspendLayout();
-            this.pnlFinanceiroPesquisa.SuspendLayout();
+            this.grpRetornoDadosCarga.SuspendLayout();
             this.tabRelatorios.SuspendLayout();
-            this.metroPanel2.SuspendLayout();
+            this.pnlRelatorio.SuspendLayout();
+            this.ctmRetornoProduto.SuspendLayout();
+            this.tabConfProduto.SuspendLayout();
+            this.pnlRetornoConfProdutos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdRetornoConfProdutos)).BeginInit();
             this.SuspendLayout();
             // 
             // notifyIconDeposito
@@ -272,14 +305,14 @@
             this.tbcPrincipal.Controls.Add(this.tabHome);
             this.tbcPrincipal.Controls.Add(this.tabCarga);
             this.tbcPrincipal.Controls.Add(this.tabRetorno);
-            this.tbcPrincipal.Controls.Add(this.tabFinanceiro);
+            this.tbcPrincipal.Controls.Add(this.tabEstoque);
             this.tbcPrincipal.Controls.Add(this.tabRelatorios);
+            this.tbcPrincipal.Controls.Add(this.tabConfiguracoes);
             this.tbcPrincipal.Controls.Add(this.tabAjuda);
-            this.tbcPrincipal.Controls.Add(this.tabAcerto);
             this.tbcPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tbcPrincipal.Name = "tbcPrincipal";
-            this.tbcPrincipal.SelectedIndex = 1;
+            this.tbcPrincipal.SelectedIndex = 2;
             this.tbcPrincipal.Size = new System.Drawing.Size(860, 645);
             this.tbcPrincipal.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tbcPrincipal.TabIndex = 0;
@@ -616,10 +649,6 @@
             // pnlCargaPesquisa
             // 
             this.pnlCargaPesquisa.Controls.Add(this.cbbCargaMesAno);
-            this.pnlCargaPesquisa.Controls.Add(this.lblTotalProdutos);
-            this.pnlCargaPesquisa.Controls.Add(this.dlbTotalProdutos);
-            this.pnlCargaPesquisa.Controls.Add(this.lblQtdProdutos);
-            this.pnlCargaPesquisa.Controls.Add(this.dlbQtdProdutos);
             this.pnlCargaPesquisa.Controls.Add(this.txtCargaCodRepresentante);
             this.pnlCargaPesquisa.Controls.Add(this.txtCargaCodPraca);
             this.pnlCargaPesquisa.Controls.Add(this.btnCargaOK);
@@ -658,50 +687,6 @@
             this.cbbCargaMesAno.TabIndex = 4;
             this.cbbCargaMesAno.Value = new System.DateTime(2019, 5, 1, 0, 0, 0, 0);
             this.cbbCargaMesAno.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cbbCargaMesAno_KeyUp);
-            // 
-            // lblTotalProdutos
-            // 
-            this.lblTotalProdutos.AutoSize = true;
-            this.lblTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblTotalProdutos.Location = new System.Drawing.Point(759, 67);
-            this.lblTotalProdutos.Name = "lblTotalProdutos";
-            this.lblTotalProdutos.Size = new System.Drawing.Size(83, 15);
-            this.lblTotalProdutos.TabIndex = 21;
-            this.lblTotalProdutos.Text = "Total Produtos:";
-            this.lblTotalProdutos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // dlbTotalProdutos
-            // 
-            this.dlbTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.dlbTotalProdutos.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.dlbTotalProdutos.Location = new System.Drawing.Point(742, 81);
-            this.dlbTotalProdutos.Name = "dlbTotalProdutos";
-            this.dlbTotalProdutos.Size = new System.Drawing.Size(100, 25);
-            this.dlbTotalProdutos.TabIndex = 22;
-            this.dlbTotalProdutos.Text = "0.00";
-            this.dlbTotalProdutos.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // lblQtdProdutos
-            // 
-            this.lblQtdProdutos.AutoSize = true;
-            this.lblQtdProdutos.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblQtdProdutos.Location = new System.Drawing.Point(759, 10);
-            this.lblQtdProdutos.Name = "lblQtdProdutos";
-            this.lblQtdProdutos.Size = new System.Drawing.Size(80, 15);
-            this.lblQtdProdutos.TabIndex = 20;
-            this.lblQtdProdutos.Text = "Qtd Produtos:";
-            this.lblQtdProdutos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // dlbQtdProdutos
-            // 
-            this.dlbQtdProdutos.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.dlbQtdProdutos.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.dlbQtdProdutos.Location = new System.Drawing.Point(740, 25);
-            this.dlbQtdProdutos.Name = "dlbQtdProdutos";
-            this.dlbQtdProdutos.Size = new System.Drawing.Size(99, 25);
-            this.dlbQtdProdutos.TabIndex = 20;
-            this.dlbQtdProdutos.Text = "0";
-            this.dlbQtdProdutos.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // txtCargaCodRepresentante
             // 
@@ -806,7 +791,7 @@
             this.grpCargaAnterior.Controls.Add(this.dlbCargaVADataAbertura);
             this.grpCargaAnterior.Controls.Add(this.lblCargaVADataConferencia);
             this.grpCargaAnterior.Controls.Add(this.lblCargaVADataFinalizacao);
-            this.grpCargaAnterior.Location = new System.Drawing.Point(599, 3);
+            this.grpCargaAnterior.Location = new System.Drawing.Point(705, 10);
             this.grpCargaAnterior.Name = "grpCargaAnterior";
             this.grpCargaAnterior.Size = new System.Drawing.Size(139, 113);
             this.grpCargaAnterior.TabIndex = 11;
@@ -926,6 +911,10 @@
             // grpCargaData
             // 
             this.grpCargaData.BackColor = System.Drawing.Color.White;
+            this.grpCargaData.Controls.Add(this.lblCargaTotalProdutos);
+            this.grpCargaData.Controls.Add(this.dlbCargaTotalProdutos);
+            this.grpCargaData.Controls.Add(this.lblCargaQtdProdutos);
+            this.grpCargaData.Controls.Add(this.dlbCargaQtdProdutos);
             this.grpCargaData.Controls.Add(this.dlbCargaDataFinalizacao);
             this.grpCargaData.Controls.Add(this.dlbCargaDataConferencia);
             this.grpCargaData.Controls.Add(this.dlbCargaDataRetorno);
@@ -936,12 +925,56 @@
             this.grpCargaData.Controls.Add(this.lblCargaDataRetorno);
             this.grpCargaData.Controls.Add(this.lblCargaDataExportacao);
             this.grpCargaData.Controls.Add(this.lblCargaDataAbertura);
-            this.grpCargaData.Location = new System.Drawing.Point(455, 3);
+            this.grpCargaData.Location = new System.Drawing.Point(455, 10);
             this.grpCargaData.Name = "grpCargaData";
-            this.grpCargaData.Size = new System.Drawing.Size(138, 112);
+            this.grpCargaData.Size = new System.Drawing.Size(248, 112);
             this.grpCargaData.TabIndex = 10;
             this.grpCargaData.TabStop = false;
-            this.grpCargaData.Text = "Datas da Carga";
+            this.grpCargaData.Text = "Dados da Carga";
+            // 
+            // lblCargaTotalProdutos
+            // 
+            this.lblCargaTotalProdutos.AutoSize = true;
+            this.lblCargaTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblCargaTotalProdutos.Location = new System.Drawing.Point(155, 61);
+            this.lblCargaTotalProdutos.Name = "lblCargaTotalProdutos";
+            this.lblCargaTotalProdutos.Size = new System.Drawing.Size(83, 15);
+            this.lblCargaTotalProdutos.TabIndex = 25;
+            this.lblCargaTotalProdutos.Text = "Total Produtos:";
+            this.lblCargaTotalProdutos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dlbCargaTotalProdutos
+            // 
+            this.dlbCargaTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.dlbCargaTotalProdutos.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.dlbCargaTotalProdutos.Location = new System.Drawing.Point(138, 75);
+            this.dlbCargaTotalProdutos.Name = "dlbCargaTotalProdutos";
+            this.dlbCargaTotalProdutos.Size = new System.Drawing.Size(100, 25);
+            this.dlbCargaTotalProdutos.TabIndex = 26;
+            this.dlbCargaTotalProdutos.Text = "0.00";
+            this.dlbCargaTotalProdutos.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // lblCargaQtdProdutos
+            // 
+            this.lblCargaQtdProdutos.AutoSize = true;
+            this.lblCargaQtdProdutos.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblCargaQtdProdutos.Location = new System.Drawing.Point(155, 16);
+            this.lblCargaQtdProdutos.Name = "lblCargaQtdProdutos";
+            this.lblCargaQtdProdutos.Size = new System.Drawing.Size(80, 15);
+            this.lblCargaQtdProdutos.TabIndex = 23;
+            this.lblCargaQtdProdutos.Text = "Qtd Produtos:";
+            this.lblCargaQtdProdutos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dlbCargaQtdProdutos
+            // 
+            this.dlbCargaQtdProdutos.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.dlbCargaQtdProdutos.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.dlbCargaQtdProdutos.Location = new System.Drawing.Point(136, 31);
+            this.dlbCargaQtdProdutos.Name = "dlbCargaQtdProdutos";
+            this.dlbCargaQtdProdutos.Size = new System.Drawing.Size(99, 25);
+            this.dlbCargaQtdProdutos.TabIndex = 24;
+            this.dlbCargaQtdProdutos.Text = "0";
+            this.dlbCargaQtdProdutos.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // dlbCargaDataFinalizacao
             // 
@@ -1140,9 +1173,13 @@
             // 
             // tbcRetorno
             // 
+            this.tbcRetorno.Controls.Add(this.tabRetornoResumo);
             this.tbcRetorno.Controls.Add(this.tabRetornoProdutos);
             this.tbcRetorno.Controls.Add(this.tabRetornoPedidos);
             this.tbcRetorno.Controls.Add(this.tabRetornoContasAReceber);
+            this.tbcRetorno.Controls.Add(this.tabConfProduto);
+            this.tbcRetorno.Controls.Add(this.tabConfPedido);
+            this.tbcRetorno.Controls.Add(this.tabRetornoAcerto);
             this.tbcRetorno.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcRetorno.Location = new System.Drawing.Point(0, 131);
             this.tbcRetorno.Name = "tbcRetorno";
@@ -1150,193 +1187,264 @@
             this.tbcRetorno.Size = new System.Drawing.Size(852, 472);
             this.tbcRetorno.TabIndex = 2;
             this.tbcRetorno.UseSelectable = true;
+            this.tbcRetorno.Visible = false;
+            // 
+            // tabRetornoResumo
+            // 
+            this.tabRetornoResumo.Location = new System.Drawing.Point(4, 38);
+            this.tabRetornoResumo.Name = "tabRetornoResumo";
+            this.tabRetornoResumo.Size = new System.Drawing.Size(844, 430);
+            this.tabRetornoResumo.TabIndex = 4;
+            this.tabRetornoResumo.Text = "Resumo";
             // 
             // tabRetornoProdutos
             // 
-            this.tabRetornoProdutos.Controls.Add(this.metroLabel2);
-            this.tabRetornoProdutos.Controls.Add(this.grdProdutos);
-            this.tabRetornoProdutos.Controls.Add(this.pnlPesquisaProdutos);
+            this.tabRetornoProdutos.Controls.Add(this.pnlRetornoProdutoMain);
+            this.tabRetornoProdutos.Controls.Add(this.pnlRetornoProduto);
             this.tabRetornoProdutos.Location = new System.Drawing.Point(4, 38);
             this.tabRetornoProdutos.Name = "tabRetornoProdutos";
             this.tabRetornoProdutos.Size = new System.Drawing.Size(844, 430);
             this.tabRetornoProdutos.TabIndex = 3;
             this.tabRetornoProdutos.Text = "Produtos";
             // 
-            // metroLabel2
+            // pnlRetornoProdutoMain
             // 
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(274, 252);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(245, 19);
-            this.metroLabel2.TabIndex = 4;
-            this.metroLabel2.Text = "Grade de Produtos da Carga Retornada";
+            this.pnlRetornoProdutoMain.Controls.Add(this.grdRetornoProduto);
+            this.pnlRetornoProdutoMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlRetornoProdutoMain.HorizontalScrollbarBarColor = true;
+            this.pnlRetornoProdutoMain.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlRetornoProdutoMain.HorizontalScrollbarSize = 10;
+            this.pnlRetornoProdutoMain.Location = new System.Drawing.Point(0, 67);
+            this.pnlRetornoProdutoMain.Name = "pnlRetornoProdutoMain";
+            this.pnlRetornoProdutoMain.Size = new System.Drawing.Size(844, 363);
+            this.pnlRetornoProdutoMain.TabIndex = 2;
+            this.pnlRetornoProdutoMain.VerticalScrollbarBarColor = true;
+            this.pnlRetornoProdutoMain.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlRetornoProdutoMain.VerticalScrollbarSize = 10;
             // 
-            // grdProdutos
+            // grdRetornoProduto
             // 
-            this.grdProdutos.AllowUserToResizeRows = false;
-            this.grdProdutos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.grdProdutos.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.grdProdutos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.grdProdutos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdProdutos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.grdProdutos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdRetornoProduto.AllowUserToAddRows = false;
+            this.grdRetornoProduto.AllowUserToDeleteRows = false;
+            this.grdRetornoProduto.AllowUserToOrderColumns = true;
+            this.grdRetornoProduto.AllowUserToResizeRows = false;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.grdRetornoProduto.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.grdRetornoProduto.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.grdRetornoProduto.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdRetornoProduto.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.grdRetornoProduto.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.grdRetornoProduto.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdProdutos.DefaultCellStyle = dataGridViewCellStyle6;
-            this.grdProdutos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdProdutos.EnableHeadersVisualStyles = false;
-            this.grdProdutos.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.grdProdutos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.grdProdutos.Location = new System.Drawing.Point(0, 57);
-            this.grdProdutos.Name = "grdProdutos";
-            this.grdProdutos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdRetornoProduto.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.grdRetornoProduto.ColumnHeadersHeight = 22;
+            this.grdRetornoProduto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
             dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
             dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdProdutos.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            this.grdProdutos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.grdProdutos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdProdutos.Size = new System.Drawing.Size(844, 373);
-            this.grdProdutos.TabIndex = 3;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grdRetornoProduto.DefaultCellStyle = dataGridViewCellStyle7;
+            this.grdRetornoProduto.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdRetornoProduto.EnableHeadersVisualStyles = false;
+            this.grdRetornoProduto.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.grdRetornoProduto.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdRetornoProduto.Location = new System.Drawing.Point(0, 0);
+            this.grdRetornoProduto.MultiSelect = false;
+            this.grdRetornoProduto.Name = "grdRetornoProduto";
+            this.grdRetornoProduto.ReadOnly = true;
+            this.grdRetornoProduto.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdRetornoProduto.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            this.grdRetornoProduto.RowHeadersVisible = false;
+            this.grdRetornoProduto.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.grdRetornoProduto.RowTemplate.ContextMenuStrip = this.ctmRetornoProduto;
+            this.grdRetornoProduto.RowTemplate.ReadOnly = true;
+            this.grdRetornoProduto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.grdRetornoProduto.ShowEditingIcon = false;
+            this.grdRetornoProduto.Size = new System.Drawing.Size(844, 363);
+            this.grdRetornoProduto.StandardTab = true;
+            this.grdRetornoProduto.TabIndex = 3;
+            this.grdRetornoProduto.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdRetornoProduto_CellDoubleClick);
             // 
-            // pnlPesquisaProdutos
+            // pnlRetornoProduto
             // 
-            this.pnlPesquisaProdutos.Controls.Add(this.btnProdutoConfirmar);
-            this.pnlPesquisaProdutos.Controls.Add(this.txtProdutoQuantidade);
-            this.pnlPesquisaProdutos.Controls.Add(this.txtProdutoNome);
-            this.pnlPesquisaProdutos.Controls.Add(this.txtProdutoCodigoBarras);
-            this.pnlPesquisaProdutos.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlPesquisaProdutos.HorizontalScrollbarBarColor = true;
-            this.pnlPesquisaProdutos.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlPesquisaProdutos.HorizontalScrollbarSize = 10;
-            this.pnlPesquisaProdutos.Location = new System.Drawing.Point(0, 0);
-            this.pnlPesquisaProdutos.Name = "pnlPesquisaProdutos";
-            this.pnlPesquisaProdutos.Size = new System.Drawing.Size(844, 57);
-            this.pnlPesquisaProdutos.TabIndex = 1;
-            this.pnlPesquisaProdutos.VerticalScrollbarBarColor = true;
-            this.pnlPesquisaProdutos.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlPesquisaProdutos.VerticalScrollbarSize = 10;
+            this.pnlRetornoProduto.Controls.Add(this.lblRetornarProduto);
+            this.pnlRetornoProduto.Controls.Add(this.btnRetornoCancelar);
+            this.pnlRetornoProduto.Controls.Add(this.chkRetornoQuantidade);
+            this.pnlRetornoProduto.Controls.Add(this.btnRetornoConfirmar);
+            this.pnlRetornoProduto.Controls.Add(this.txtRetornoQuantidade);
+            this.pnlRetornoProduto.Controls.Add(this.txtRetornoProduto);
+            this.pnlRetornoProduto.Controls.Add(this.txtRetornoCodigoBarras);
+            this.pnlRetornoProduto.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlRetornoProduto.HorizontalScrollbarBarColor = true;
+            this.pnlRetornoProduto.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlRetornoProduto.HorizontalScrollbarSize = 10;
+            this.pnlRetornoProduto.Location = new System.Drawing.Point(0, 0);
+            this.pnlRetornoProduto.Name = "pnlRetornoProduto";
+            this.pnlRetornoProduto.Size = new System.Drawing.Size(844, 67);
+            this.pnlRetornoProduto.TabIndex = 1;
+            this.pnlRetornoProduto.VerticalScrollbarBarColor = true;
+            this.pnlRetornoProduto.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlRetornoProduto.VerticalScrollbarSize = 10;
             // 
-            // btnProdutoConfirmar
+            // lblRetornarProduto
             // 
-            this.btnProdutoConfirmar.Location = new System.Drawing.Point(659, 16);
-            this.btnProdutoConfirmar.Name = "btnProdutoConfirmar";
-            this.btnProdutoConfirmar.Size = new System.Drawing.Size(75, 23);
-            this.btnProdutoConfirmar.TabIndex = 6;
-            this.btnProdutoConfirmar.Text = "Confirmar";
-            this.btnProdutoConfirmar.UseSelectable = true;
+            this.lblRetornarProduto.AutoSize = true;
+            this.lblRetornarProduto.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.lblRetornarProduto.Location = new System.Drawing.Point(4, 5);
+            this.lblRetornarProduto.Name = "lblRetornarProduto";
+            this.lblRetornarProduto.Size = new System.Drawing.Size(127, 19);
+            this.lblRetornarProduto.TabIndex = 11;
+            this.lblRetornarProduto.Text = "Retornar Produto";
             // 
-            // txtProdutoQuantidade
+            // btnRetornoCancelar
             // 
+            this.btnRetornoCancelar.Enabled = false;
+            this.btnRetornoCancelar.Location = new System.Drawing.Point(667, 29);
+            this.btnRetornoCancelar.Name = "btnRetornoCancelar";
+            this.btnRetornoCancelar.Size = new System.Drawing.Size(67, 23);
+            this.btnRetornoCancelar.TabIndex = 10;
+            this.btnRetornoCancelar.Text = "Cancelar";
+            this.btnRetornoCancelar.UseSelectable = true;
+            this.btnRetornoCancelar.Click += new System.EventHandler(this.btnRetornoCancelar_Click);
             // 
+            // chkRetornoQuantidade
             // 
+            this.chkRetornoQuantidade.AutoSize = true;
+            this.chkRetornoQuantidade.Checked = true;
+            this.chkRetornoQuantidade.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkRetornoQuantidade.Location = new System.Drawing.Point(490, 10);
+            this.chkRetornoQuantidade.Name = "chkRetornoQuantidade";
+            this.chkRetornoQuantidade.Size = new System.Drawing.Size(97, 15);
+            this.chkRetornoQuantidade.TabIndex = 9;
+            this.chkRetornoQuantidade.Text = "Informar Qtd?";
+            this.chkRetornoQuantidade.UseSelectable = true;
+            this.chkRetornoQuantidade.CheckedChanged += new System.EventHandler(this.chkRetornoQuantidade_CheckedChanged);
             // 
-            this.txtProdutoQuantidade.CustomButton.Image = null;
-            this.txtProdutoQuantidade.CustomButton.Location = new System.Drawing.Point(77, 1);
-            this.txtProdutoQuantidade.CustomButton.Name = "";
-            this.txtProdutoQuantidade.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtProdutoQuantidade.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtProdutoQuantidade.CustomButton.TabIndex = 1;
-            this.txtProdutoQuantidade.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtProdutoQuantidade.CustomButton.UseSelectable = true;
-            this.txtProdutoQuantidade.CustomButton.Visible = false;
-            this.txtProdutoQuantidade.Lines = new string[0];
-            this.txtProdutoQuantidade.Location = new System.Drawing.Point(554, 16);
-            this.txtProdutoQuantidade.MaxLength = 32767;
-            this.txtProdutoQuantidade.Name = "txtProdutoQuantidade";
-            this.txtProdutoQuantidade.PasswordChar = '\0';
-            this.txtProdutoQuantidade.PromptText = "Quantidade";
-            this.txtProdutoQuantidade.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtProdutoQuantidade.SelectedText = "";
-            this.txtProdutoQuantidade.SelectionLength = 0;
-            this.txtProdutoQuantidade.SelectionStart = 0;
-            this.txtProdutoQuantidade.ShortcutsEnabled = true;
-            this.txtProdutoQuantidade.Size = new System.Drawing.Size(99, 23);
-            this.txtProdutoQuantidade.TabIndex = 5;
-            this.txtProdutoQuantidade.UseSelectable = true;
-            this.txtProdutoQuantidade.WaterMark = "Quantidade";
-            this.txtProdutoQuantidade.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtProdutoQuantidade.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // btnRetornoConfirmar
             // 
-            // txtProdutoNome
+            this.btnRetornoConfirmar.Enabled = false;
+            this.btnRetornoConfirmar.Location = new System.Drawing.Point(595, 29);
+            this.btnRetornoConfirmar.Name = "btnRetornoConfirmar";
+            this.btnRetornoConfirmar.Size = new System.Drawing.Size(66, 23);
+            this.btnRetornoConfirmar.TabIndex = 6;
+            this.btnRetornoConfirmar.Text = "Confirmar";
+            this.btnRetornoConfirmar.UseSelectable = true;
+            this.btnRetornoConfirmar.Click += new System.EventHandler(this.bntRetornoConfirmar_Click);
             // 
-            // 
-            // 
-            // 
-            this.txtProdutoNome.CustomButton.Image = null;
-            this.txtProdutoNome.CustomButton.Location = new System.Drawing.Point(394, 1);
-            this.txtProdutoNome.CustomButton.Name = "";
-            this.txtProdutoNome.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtProdutoNome.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtProdutoNome.CustomButton.TabIndex = 1;
-            this.txtProdutoNome.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtProdutoNome.CustomButton.UseSelectable = true;
-            this.txtProdutoNome.CustomButton.Visible = false;
-            this.txtProdutoNome.Lines = new string[0];
-            this.txtProdutoNome.Location = new System.Drawing.Point(132, 16);
-            this.txtProdutoNome.MaxLength = 32767;
-            this.txtProdutoNome.Name = "txtProdutoNome";
-            this.txtProdutoNome.PasswordChar = '\0';
-            this.txtProdutoNome.PromptText = "Nome do Produto";
-            this.txtProdutoNome.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtProdutoNome.SelectedText = "";
-            this.txtProdutoNome.SelectionLength = 0;
-            this.txtProdutoNome.SelectionStart = 0;
-            this.txtProdutoNome.ShortcutsEnabled = true;
-            this.txtProdutoNome.Size = new System.Drawing.Size(416, 23);
-            this.txtProdutoNome.TabIndex = 4;
-            this.txtProdutoNome.UseSelectable = true;
-            this.txtProdutoNome.WaterMark = "Nome do Produto";
-            this.txtProdutoNome.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtProdutoNome.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // txtProdutoCodigoBarras
+            // txtRetornoQuantidade
             // 
             // 
             // 
             // 
-            this.txtProdutoCodigoBarras.CustomButton.Image = null;
-            this.txtProdutoCodigoBarras.CustomButton.Location = new System.Drawing.Point(91, 1);
-            this.txtProdutoCodigoBarras.CustomButton.Name = "";
-            this.txtProdutoCodigoBarras.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtProdutoCodigoBarras.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtProdutoCodigoBarras.CustomButton.TabIndex = 1;
-            this.txtProdutoCodigoBarras.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtProdutoCodigoBarras.CustomButton.UseSelectable = true;
-            this.txtProdutoCodigoBarras.CustomButton.Visible = false;
-            this.txtProdutoCodigoBarras.Lines = new string[0];
-            this.txtProdutoCodigoBarras.Location = new System.Drawing.Point(13, 16);
-            this.txtProdutoCodigoBarras.MaxLength = 32767;
-            this.txtProdutoCodigoBarras.Name = "txtProdutoCodigoBarras";
-            this.txtProdutoCodigoBarras.PasswordChar = '\0';
-            this.txtProdutoCodigoBarras.PromptText = "Código de Barras";
-            this.txtProdutoCodigoBarras.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtProdutoCodigoBarras.SelectedText = "";
-            this.txtProdutoCodigoBarras.SelectionLength = 0;
-            this.txtProdutoCodigoBarras.SelectionStart = 0;
-            this.txtProdutoCodigoBarras.ShortcutsEnabled = true;
-            this.txtProdutoCodigoBarras.Size = new System.Drawing.Size(113, 23);
-            this.txtProdutoCodigoBarras.TabIndex = 3;
-            this.txtProdutoCodigoBarras.UseSelectable = true;
-            this.txtProdutoCodigoBarras.WaterMark = "Código de Barras";
-            this.txtProdutoCodigoBarras.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtProdutoCodigoBarras.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtRetornoQuantidade.CustomButton.Image = null;
+            this.txtRetornoQuantidade.CustomButton.Location = new System.Drawing.Point(77, 1);
+            this.txtRetornoQuantidade.CustomButton.Name = "";
+            this.txtRetornoQuantidade.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtRetornoQuantidade.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtRetornoQuantidade.CustomButton.TabIndex = 1;
+            this.txtRetornoQuantidade.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtRetornoQuantidade.CustomButton.UseSelectable = true;
+            this.txtRetornoQuantidade.CustomButton.Visible = false;
+            this.txtRetornoQuantidade.Lines = new string[0];
+            this.txtRetornoQuantidade.Location = new System.Drawing.Point(490, 29);
+            this.txtRetornoQuantidade.MaxLength = 32767;
+            this.txtRetornoQuantidade.Name = "txtRetornoQuantidade";
+            this.txtRetornoQuantidade.PasswordChar = '\0';
+            this.txtRetornoQuantidade.PromptText = "Quantidade";
+            this.txtRetornoQuantidade.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtRetornoQuantidade.SelectedText = "";
+            this.txtRetornoQuantidade.SelectionLength = 0;
+            this.txtRetornoQuantidade.SelectionStart = 0;
+            this.txtRetornoQuantidade.ShortcutsEnabled = true;
+            this.txtRetornoQuantidade.Size = new System.Drawing.Size(99, 23);
+            this.txtRetornoQuantidade.TabIndex = 8;
+            this.txtRetornoQuantidade.UseSelectable = true;
+            this.txtRetornoQuantidade.WaterMark = "Quantidade";
+            this.txtRetornoQuantidade.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtRetornoQuantidade.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // txtRetornoProduto
+            // 
+            // 
+            // 
+            // 
+            this.txtRetornoProduto.CustomButton.Image = null;
+            this.txtRetornoProduto.CustomButton.Location = new System.Drawing.Point(350, 1);
+            this.txtRetornoProduto.CustomButton.Name = "";
+            this.txtRetornoProduto.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtRetornoProduto.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtRetornoProduto.CustomButton.TabIndex = 1;
+            this.txtRetornoProduto.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtRetornoProduto.CustomButton.UseSelectable = true;
+            this.txtRetornoProduto.CustomButton.Visible = false;
+            this.txtRetornoProduto.Lines = new string[0];
+            this.txtRetornoProduto.Location = new System.Drawing.Point(112, 29);
+            this.txtRetornoProduto.MaxLength = 32767;
+            this.txtRetornoProduto.Name = "txtRetornoProduto";
+            this.txtRetornoProduto.PasswordChar = '\0';
+            this.txtRetornoProduto.PromptText = "Nome do Produto";
+            this.txtRetornoProduto.ReadOnly = true;
+            this.txtRetornoProduto.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtRetornoProduto.SelectedText = "";
+            this.txtRetornoProduto.SelectionLength = 0;
+            this.txtRetornoProduto.SelectionStart = 0;
+            this.txtRetornoProduto.ShortcutsEnabled = true;
+            this.txtRetornoProduto.Size = new System.Drawing.Size(372, 23);
+            this.txtRetornoProduto.TabIndex = 7;
+            this.txtRetornoProduto.UseSelectable = true;
+            this.txtRetornoProduto.WaterMark = "Nome do Produto";
+            this.txtRetornoProduto.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtRetornoProduto.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // txtRetornoCodigoBarras
+            // 
+            // 
+            // 
+            // 
+            this.txtRetornoCodigoBarras.CustomButton.Image = null;
+            this.txtRetornoCodigoBarras.CustomButton.Location = new System.Drawing.Point(70, 1);
+            this.txtRetornoCodigoBarras.CustomButton.Name = "";
+            this.txtRetornoCodigoBarras.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtRetornoCodigoBarras.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtRetornoCodigoBarras.CustomButton.TabIndex = 1;
+            this.txtRetornoCodigoBarras.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtRetornoCodigoBarras.CustomButton.UseSelectable = true;
+            this.txtRetornoCodigoBarras.CustomButton.Visible = false;
+            this.txtRetornoCodigoBarras.Lines = new string[0];
+            this.txtRetornoCodigoBarras.Location = new System.Drawing.Point(14, 29);
+            this.txtRetornoCodigoBarras.MaxLength = 32767;
+            this.txtRetornoCodigoBarras.Name = "txtRetornoCodigoBarras";
+            this.txtRetornoCodigoBarras.PasswordChar = '\0';
+            this.txtRetornoCodigoBarras.PromptText = "Código de Barras";
+            this.txtRetornoCodigoBarras.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtRetornoCodigoBarras.SelectedText = "";
+            this.txtRetornoCodigoBarras.SelectionLength = 0;
+            this.txtRetornoCodigoBarras.SelectionStart = 0;
+            this.txtRetornoCodigoBarras.ShortcutsEnabled = true;
+            this.txtRetornoCodigoBarras.Size = new System.Drawing.Size(92, 23);
+            this.txtRetornoCodigoBarras.TabIndex = 6;
+            this.txtRetornoCodigoBarras.UseSelectable = true;
+            this.txtRetornoCodigoBarras.WaterMark = "Código de Barras";
+            this.txtRetornoCodigoBarras.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtRetornoCodigoBarras.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtRetornoCodigoBarras.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtRetornoCodigoBarras_KeyUp);
+            this.txtRetornoCodigoBarras.Leave += new System.EventHandler(this.txtRetornoCodigoBarras_Leave);
             // 
             // tabRetornoPedidos
             // 
@@ -1349,7 +1457,6 @@
             // 
             // pnlPedidos
             // 
-            this.pnlPedidos.Controls.Add(this.metroLabel3);
             this.pnlPedidos.Controls.Add(this.grdPedidos);
             this.pnlPedidos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPedidos.HorizontalScrollbarBarColor = true;
@@ -1363,15 +1470,6 @@
             this.pnlPedidos.VerticalScrollbarHighlightOnWheel = false;
             this.pnlPedidos.VerticalScrollbarSize = 10;
             // 
-            // metroLabel3
-            // 
-            this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(162, 93);
-            this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(390, 19);
-            this.metroLabel3.TabIndex = 4;
-            this.metroLabel3.Text = "Grade dos Pedidos com Link para tela de Lançamento de Pedido";
-            // 
             // grdPedidos
             // 
             this.grdPedidos.AllowUserToResizeRows = false;
@@ -1379,23 +1477,23 @@
             this.grdPedidos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.grdPedidos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.grdPedidos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdPedidos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
-            this.grdPedidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdPedidos.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdPedidos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.grdPedidos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grdPedidos.DefaultCellStyle = dataGridViewCellStyle10;
             this.grdPedidos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdPedidos.EnableHeadersVisualStyles = false;
             this.grdPedidos.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -1403,14 +1501,14 @@
             this.grdPedidos.Location = new System.Drawing.Point(0, 0);
             this.grdPedidos.Name = "grdPedidos";
             this.grdPedidos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdPedidos.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdPedidos.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.grdPedidos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grdPedidos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdPedidos.Size = new System.Drawing.Size(844, 430);
@@ -1423,7 +1521,7 @@
             this.tabRetornoContasAReceber.Name = "tabRetornoContasAReceber";
             this.tabRetornoContasAReceber.Size = new System.Drawing.Size(844, 430);
             this.tabRetornoContasAReceber.TabIndex = 2;
-            this.tabRetornoContasAReceber.Text = "Contas a receber";
+            this.tabRetornoContasAReceber.Text = "Contas a Receber";
             // 
             // pnlContasAReceber
             // 
@@ -1457,23 +1555,23 @@
             this.grdContasAReceber.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.grdContasAReceber.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.grdContasAReceber.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdContasAReceber.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
-            this.grdContasAReceber.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
             dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdContasAReceber.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdContasAReceber.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            this.grdContasAReceber.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grdContasAReceber.DefaultCellStyle = dataGridViewCellStyle13;
             this.grdContasAReceber.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdContasAReceber.EnableHeadersVisualStyles = false;
             this.grdContasAReceber.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -1481,27 +1579,37 @@
             this.grdContasAReceber.Location = new System.Drawing.Point(0, 0);
             this.grdContasAReceber.Name = "grdContasAReceber";
             this.grdContasAReceber.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdContasAReceber.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdContasAReceber.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
             this.grdContasAReceber.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grdContasAReceber.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdContasAReceber.Size = new System.Drawing.Size(844, 430);
             this.grdContasAReceber.TabIndex = 2;
             // 
+            // tabRetornoAcerto
+            // 
+            this.tabRetornoAcerto.Location = new System.Drawing.Point(4, 38);
+            this.tabRetornoAcerto.Name = "tabRetornoAcerto";
+            this.tabRetornoAcerto.Size = new System.Drawing.Size(844, 430);
+            this.tabRetornoAcerto.TabIndex = 5;
+            this.tabRetornoAcerto.Text = "Acerto";
+            // 
             // pnlRetornoPesquisa
             // 
+            this.pnlRetornoPesquisa.Controls.Add(this.grpRetornoCargaAnterior);
+            this.pnlRetornoPesquisa.Controls.Add(this.grpRetornoDadosCarga);
+            this.pnlRetornoPesquisa.Controls.Add(this.cbbRetornoMesAno);
+            this.pnlRetornoPesquisa.Controls.Add(this.txtRetornoCodRepresentante);
+            this.pnlRetornoPesquisa.Controls.Add(this.txtRetornoCodPraca);
             this.pnlRetornoPesquisa.Controls.Add(this.btnRetornoOK);
-            this.pnlRetornoPesquisa.Controls.Add(this.grpRetornoViagemAnterior);
-            this.pnlRetornoPesquisa.Controls.Add(this.grpRetornoDataViagem);
             this.pnlRetornoPesquisa.Controls.Add(this.btnRetornoLimpar);
             this.pnlRetornoPesquisa.Controls.Add(this.btnRetornoPesquisar);
-            this.pnlRetornoPesquisa.Controls.Add(this.cbbRetornoMesAno);
             this.pnlRetornoPesquisa.Controls.Add(this.cbbRetornoRepresentante);
             this.pnlRetornoPesquisa.Controls.Add(this.cbbRetornoPraca);
             this.pnlRetornoPesquisa.Controls.Add(this.lblRetornoMesAno);
@@ -1519,89 +1627,344 @@
             this.pnlRetornoPesquisa.VerticalScrollbarHighlightOnWheel = false;
             this.pnlRetornoPesquisa.VerticalScrollbarSize = 10;
             // 
+            // grpRetornoCargaAnterior
+            // 
+            this.grpRetornoCargaAnterior.BackColor = System.Drawing.Color.White;
+            this.grpRetornoCargaAnterior.Location = new System.Drawing.Point(705, 10);
+            this.grpRetornoCargaAnterior.Name = "grpRetornoCargaAnterior";
+            this.grpRetornoCargaAnterior.Size = new System.Drawing.Size(139, 112);
+            this.grpRetornoCargaAnterior.TabIndex = 24;
+            this.grpRetornoCargaAnterior.TabStop = false;
+            this.grpRetornoCargaAnterior.Text = "Carga Anterior";
+            // 
+            // grpRetornoDadosCarga
+            // 
+            this.grpRetornoDadosCarga.BackColor = System.Drawing.Color.White;
+            this.grpRetornoDadosCarga.Controls.Add(this.lblRetornoTotalProdutos);
+            this.grpRetornoDadosCarga.Controls.Add(this.dlbRetornoTotalProdutos);
+            this.grpRetornoDadosCarga.Controls.Add(this.lblRetornoQtdProdutos);
+            this.grpRetornoDadosCarga.Controls.Add(this.dlbRetornoQtdProdutos);
+            this.grpRetornoDadosCarga.Controls.Add(this.dlbRetornoDataFinalizacao);
+            this.grpRetornoDadosCarga.Controls.Add(this.dlbRetornoDataConferencia);
+            this.grpRetornoDadosCarga.Controls.Add(this.dlbRetornoDataRetorno);
+            this.grpRetornoDadosCarga.Controls.Add(this.dlbRetornoDataExportacao);
+            this.grpRetornoDadosCarga.Controls.Add(this.dlbRetornoDataAbertura);
+            this.grpRetornoDadosCarga.Controls.Add(this.lblRetornoDataFinalizacao);
+            this.grpRetornoDadosCarga.Controls.Add(this.lblRetornoDataConferencia);
+            this.grpRetornoDadosCarga.Controls.Add(this.lblRetornoDataRetorno);
+            this.grpRetornoDadosCarga.Controls.Add(this.lblRetornoDataExportacao);
+            this.grpRetornoDadosCarga.Controls.Add(this.lblRetornoDataAbertura);
+            this.grpRetornoDadosCarga.Location = new System.Drawing.Point(455, 10);
+            this.grpRetornoDadosCarga.Name = "grpRetornoDadosCarga";
+            this.grpRetornoDadosCarga.Size = new System.Drawing.Size(246, 112);
+            this.grpRetornoDadosCarga.TabIndex = 23;
+            this.grpRetornoDadosCarga.TabStop = false;
+            this.grpRetornoDadosCarga.Text = "Dados da Carga";
+            // 
+            // lblRetornoTotalProdutos
+            // 
+            this.lblRetornoTotalProdutos.AutoSize = true;
+            this.lblRetornoTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblRetornoTotalProdutos.Location = new System.Drawing.Point(155, 61);
+            this.lblRetornoTotalProdutos.Name = "lblRetornoTotalProdutos";
+            this.lblRetornoTotalProdutos.Size = new System.Drawing.Size(83, 15);
+            this.lblRetornoTotalProdutos.TabIndex = 31;
+            this.lblRetornoTotalProdutos.Text = "Total Produtos:";
+            this.lblRetornoTotalProdutos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dlbRetornoTotalProdutos
+            // 
+            this.dlbRetornoTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.dlbRetornoTotalProdutos.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.dlbRetornoTotalProdutos.Location = new System.Drawing.Point(138, 75);
+            this.dlbRetornoTotalProdutos.Name = "dlbRetornoTotalProdutos";
+            this.dlbRetornoTotalProdutos.Size = new System.Drawing.Size(100, 25);
+            this.dlbRetornoTotalProdutos.TabIndex = 32;
+            this.dlbRetornoTotalProdutos.Text = "0.00";
+            this.dlbRetornoTotalProdutos.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // lblRetornoQtdProdutos
+            // 
+            this.lblRetornoQtdProdutos.AutoSize = true;
+            this.lblRetornoQtdProdutos.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblRetornoQtdProdutos.Location = new System.Drawing.Point(155, 16);
+            this.lblRetornoQtdProdutos.Name = "lblRetornoQtdProdutos";
+            this.lblRetornoQtdProdutos.Size = new System.Drawing.Size(80, 15);
+            this.lblRetornoQtdProdutos.TabIndex = 29;
+            this.lblRetornoQtdProdutos.Text = "Qtd Produtos:";
+            this.lblRetornoQtdProdutos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dlbRetornoQtdProdutos
+            // 
+            this.dlbRetornoQtdProdutos.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.dlbRetornoQtdProdutos.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.dlbRetornoQtdProdutos.Location = new System.Drawing.Point(136, 31);
+            this.dlbRetornoQtdProdutos.Name = "dlbRetornoQtdProdutos";
+            this.dlbRetornoQtdProdutos.Size = new System.Drawing.Size(99, 25);
+            this.dlbRetornoQtdProdutos.TabIndex = 30;
+            this.dlbRetornoQtdProdutos.Text = "0";
+            this.dlbRetornoQtdProdutos.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // dlbRetornoDataFinalizacao
+            // 
+            this.dlbRetornoDataFinalizacao.AutoSize = true;
+            this.dlbRetornoDataFinalizacao.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.dlbRetornoDataFinalizacao.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.dlbRetornoDataFinalizacao.Location = new System.Drawing.Point(71, 88);
+            this.dlbRetornoDataFinalizacao.Name = "dlbRetornoDataFinalizacao";
+            this.dlbRetornoDataFinalizacao.Size = new System.Drawing.Size(63, 15);
+            this.dlbRetornoDataFinalizacao.TabIndex = 9;
+            this.dlbRetornoDataFinalizacao.Text = "<<Data>>";
+            this.dlbRetornoDataFinalizacao.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // dlbRetornoDataConferencia
+            // 
+            this.dlbRetornoDataConferencia.AutoSize = true;
+            this.dlbRetornoDataConferencia.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.dlbRetornoDataConferencia.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.dlbRetornoDataConferencia.Location = new System.Drawing.Point(71, 71);
+            this.dlbRetornoDataConferencia.Name = "dlbRetornoDataConferencia";
+            this.dlbRetornoDataConferencia.Size = new System.Drawing.Size(63, 15);
+            this.dlbRetornoDataConferencia.TabIndex = 8;
+            this.dlbRetornoDataConferencia.Text = "<<Data>>";
+            this.dlbRetornoDataConferencia.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // dlbRetornoDataRetorno
+            // 
+            this.dlbRetornoDataRetorno.AutoSize = true;
+            this.dlbRetornoDataRetorno.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.dlbRetornoDataRetorno.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.dlbRetornoDataRetorno.Location = new System.Drawing.Point(71, 54);
+            this.dlbRetornoDataRetorno.Name = "dlbRetornoDataRetorno";
+            this.dlbRetornoDataRetorno.Size = new System.Drawing.Size(63, 15);
+            this.dlbRetornoDataRetorno.TabIndex = 7;
+            this.dlbRetornoDataRetorno.Text = "<<Data>>";
+            this.dlbRetornoDataRetorno.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // dlbRetornoDataExportacao
+            // 
+            this.dlbRetornoDataExportacao.AutoSize = true;
+            this.dlbRetornoDataExportacao.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.dlbRetornoDataExportacao.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.dlbRetornoDataExportacao.Location = new System.Drawing.Point(71, 37);
+            this.dlbRetornoDataExportacao.Name = "dlbRetornoDataExportacao";
+            this.dlbRetornoDataExportacao.Size = new System.Drawing.Size(63, 15);
+            this.dlbRetornoDataExportacao.TabIndex = 6;
+            this.dlbRetornoDataExportacao.Text = "<<Data>>";
+            this.dlbRetornoDataExportacao.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // dlbRetornoDataAbertura
+            // 
+            this.dlbRetornoDataAbertura.AutoSize = true;
+            this.dlbRetornoDataAbertura.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.dlbRetornoDataAbertura.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.dlbRetornoDataAbertura.Location = new System.Drawing.Point(71, 20);
+            this.dlbRetornoDataAbertura.Name = "dlbRetornoDataAbertura";
+            this.dlbRetornoDataAbertura.Size = new System.Drawing.Size(63, 15);
+            this.dlbRetornoDataAbertura.TabIndex = 5;
+            this.dlbRetornoDataAbertura.Text = "<<Data>>";
+            this.dlbRetornoDataAbertura.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lblRetornoDataFinalizacao
+            // 
+            this.lblRetornoDataFinalizacao.AutoSize = true;
+            this.lblRetornoDataFinalizacao.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblRetornoDataFinalizacao.Location = new System.Drawing.Point(3, 88);
+            this.lblRetornoDataFinalizacao.Name = "lblRetornoDataFinalizacao";
+            this.lblRetornoDataFinalizacao.Size = new System.Drawing.Size(64, 15);
+            this.lblRetornoDataFinalizacao.TabIndex = 4;
+            this.lblRetornoDataFinalizacao.Text = "Finalização:";
+            // 
+            // lblRetornoDataConferencia
+            // 
+            this.lblRetornoDataConferencia.AutoSize = true;
+            this.lblRetornoDataConferencia.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblRetornoDataConferencia.Location = new System.Drawing.Point(3, 71);
+            this.lblRetornoDataConferencia.Name = "lblRetornoDataConferencia";
+            this.lblRetornoDataConferencia.Size = new System.Drawing.Size(68, 15);
+            this.lblRetornoDataConferencia.TabIndex = 3;
+            this.lblRetornoDataConferencia.Text = "Conferencia:";
+            // 
+            // lblRetornoDataRetorno
+            // 
+            this.lblRetornoDataRetorno.AutoSize = true;
+            this.lblRetornoDataRetorno.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblRetornoDataRetorno.Location = new System.Drawing.Point(3, 54);
+            this.lblRetornoDataRetorno.Name = "lblRetornoDataRetorno";
+            this.lblRetornoDataRetorno.Size = new System.Drawing.Size(51, 15);
+            this.lblRetornoDataRetorno.TabIndex = 2;
+            this.lblRetornoDataRetorno.Text = "Retorno:";
+            // 
+            // lblRetornoDataExportacao
+            // 
+            this.lblRetornoDataExportacao.AutoSize = true;
+            this.lblRetornoDataExportacao.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblRetornoDataExportacao.Location = new System.Drawing.Point(3, 37);
+            this.lblRetornoDataExportacao.Name = "lblRetornoDataExportacao";
+            this.lblRetornoDataExportacao.Size = new System.Drawing.Size(68, 15);
+            this.lblRetornoDataExportacao.TabIndex = 1;
+            this.lblRetornoDataExportacao.Text = "Exportação:";
+            // 
+            // lblRetornoDataAbertura
+            // 
+            this.lblRetornoDataAbertura.AutoSize = true;
+            this.lblRetornoDataAbertura.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblRetornoDataAbertura.Location = new System.Drawing.Point(3, 20);
+            this.lblRetornoDataAbertura.Name = "lblRetornoDataAbertura";
+            this.lblRetornoDataAbertura.Size = new System.Drawing.Size(56, 15);
+            this.lblRetornoDataAbertura.TabIndex = 0;
+            this.lblRetornoDataAbertura.Text = "Abertura:";
+            // 
+            // cbbRetornoMesAno
+            // 
+            this.cbbRetornoMesAno.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbRetornoMesAno.CustomFormat = "MM/yyyy";
+            this.cbbRetornoMesAno.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbRetornoMesAno.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.cbbRetornoMesAno.Location = new System.Drawing.Point(127, 88);
+            this.cbbRetornoMesAno.Margin = new System.Windows.Forms.Padding(5);
+            this.cbbRetornoMesAno.Name = "cbbRetornoMesAno";
+            this.cbbRetornoMesAno.ShowUpDown = true;
+            this.cbbRetornoMesAno.Size = new System.Drawing.Size(97, 26);
+            this.cbbRetornoMesAno.TabIndex = 15;
+            this.cbbRetornoMesAno.Value = new System.DateTime(2019, 5, 1, 0, 0, 0, 0);
+            this.cbbRetornoMesAno.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cbbRetornoMesAno_KeyUp);
+            // 
+            // txtRetornoCodRepresentante
+            // 
+            // 
+            // 
+            // 
+            this.txtRetornoCodRepresentante.CustomButton.Image = global::ConsignadoDeposito.Properties.Resources.darkmagnify1;
+            this.txtRetornoCodRepresentante.CustomButton.Location = new System.Drawing.Point(39, 1);
+            this.txtRetornoCodRepresentante.CustomButton.Name = "";
+            this.txtRetornoCodRepresentante.CustomButton.Size = new System.Drawing.Size(27, 27);
+            this.txtRetornoCodRepresentante.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtRetornoCodRepresentante.CustomButton.TabIndex = 1;
+            this.txtRetornoCodRepresentante.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtRetornoCodRepresentante.CustomButton.UseSelectable = true;
+            this.txtRetornoCodRepresentante.DisplayIcon = true;
+            this.txtRetornoCodRepresentante.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.txtRetornoCodRepresentante.IconRight = true;
+            this.txtRetornoCodRepresentante.Lines = new string[0];
+            this.txtRetornoCodRepresentante.Location = new System.Drawing.Point(127, 51);
+            this.txtRetornoCodRepresentante.Margin = new System.Windows.Forms.Padding(5);
+            this.txtRetornoCodRepresentante.MaxLength = 32767;
+            this.txtRetornoCodRepresentante.Name = "txtRetornoCodRepresentante";
+            this.txtRetornoCodRepresentante.PasswordChar = '\0';
+            this.txtRetornoCodRepresentante.PromptText = "Cod";
+            this.txtRetornoCodRepresentante.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtRetornoCodRepresentante.SelectedText = "";
+            this.txtRetornoCodRepresentante.SelectionLength = 0;
+            this.txtRetornoCodRepresentante.SelectionStart = 0;
+            this.txtRetornoCodRepresentante.ShortcutsEnabled = true;
+            this.txtRetornoCodRepresentante.ShowButton = true;
+            this.txtRetornoCodRepresentante.Size = new System.Drawing.Size(67, 29);
+            this.txtRetornoCodRepresentante.TabIndex = 14;
+            this.txtRetornoCodRepresentante.UseSelectable = true;
+            this.txtRetornoCodRepresentante.WaterMark = "Cod";
+            this.txtRetornoCodRepresentante.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtRetornoCodRepresentante.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtRetornoCodRepresentante.ButtonClick += new MetroFramework.Controls.MetroTextBox.ButClick(this.txtRetornoCodRepresentante_ButtonClick);
+            this.txtRetornoCodRepresentante.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RetornoKeyEnter);
+            this.txtRetornoCodRepresentante.Leave += new System.EventHandler(this.txtRetornoCodRepresentante_Leave);
+            // 
+            // txtRetornoCodPraca
+            // 
+            // 
+            // 
+            // 
+            this.txtRetornoCodPraca.CustomButton.Image = global::ConsignadoDeposito.Properties.Resources.darkmagnify1;
+            this.txtRetornoCodPraca.CustomButton.Location = new System.Drawing.Point(39, 1);
+            this.txtRetornoCodPraca.CustomButton.Name = "";
+            this.txtRetornoCodPraca.CustomButton.Size = new System.Drawing.Size(27, 27);
+            this.txtRetornoCodPraca.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtRetornoCodPraca.CustomButton.TabIndex = 1;
+            this.txtRetornoCodPraca.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtRetornoCodPraca.CustomButton.UseSelectable = true;
+            this.txtRetornoCodPraca.DisplayIcon = true;
+            this.txtRetornoCodPraca.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.txtRetornoCodPraca.IconRight = true;
+            this.txtRetornoCodPraca.Lines = new string[0];
+            this.txtRetornoCodPraca.Location = new System.Drawing.Point(127, 16);
+            this.txtRetornoCodPraca.Margin = new System.Windows.Forms.Padding(5);
+            this.txtRetornoCodPraca.MaxLength = 32767;
+            this.txtRetornoCodPraca.Name = "txtRetornoCodPraca";
+            this.txtRetornoCodPraca.PasswordChar = '\0';
+            this.txtRetornoCodPraca.PromptText = "Cod";
+            this.txtRetornoCodPraca.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtRetornoCodPraca.SelectedText = "";
+            this.txtRetornoCodPraca.SelectionLength = 0;
+            this.txtRetornoCodPraca.SelectionStart = 0;
+            this.txtRetornoCodPraca.ShortcutsEnabled = true;
+            this.txtRetornoCodPraca.ShowButton = true;
+            this.txtRetornoCodPraca.Size = new System.Drawing.Size(67, 29);
+            this.txtRetornoCodPraca.TabIndex = 13;
+            this.txtRetornoCodPraca.UseSelectable = true;
+            this.txtRetornoCodPraca.WaterMark = "Cod";
+            this.txtRetornoCodPraca.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtRetornoCodPraca.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtRetornoCodPraca.ButtonClick += new MetroFramework.Controls.MetroTextBox.ButClick(this.txtRetornoCodPraca_ButtonClick);
+            this.txtRetornoCodPraca.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RetornoKeyEnter);
+            this.txtRetornoCodPraca.Leave += new System.EventHandler(this.txtRetornoCodPraca_Leave);
+            // 
             // btnRetornoOK
             // 
             this.btnRetornoOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnRetornoOK.Location = new System.Drawing.Point(226, 86);
+            this.btnRetornoOK.Location = new System.Drawing.Point(232, 86);
             this.btnRetornoOK.Name = "btnRetornoOK";
             this.btnRetornoOK.Size = new System.Drawing.Size(30, 29);
             this.btnRetornoOK.TabIndex = 12;
             this.btnRetornoOK.Text = "OK";
             this.btnRetornoOK.UseSelectable = true;
-            // 
-            // grpRetornoViagemAnterior
-            // 
-            this.grpRetornoViagemAnterior.BackColor = System.Drawing.Color.White;
-            this.grpRetornoViagemAnterior.Location = new System.Drawing.Point(589, 16);
-            this.grpRetornoViagemAnterior.Name = "grpRetornoViagemAnterior";
-            this.grpRetornoViagemAnterior.Size = new System.Drawing.Size(139, 100);
-            this.grpRetornoViagemAnterior.TabIndex = 11;
-            this.grpRetornoViagemAnterior.TabStop = false;
-            this.grpRetornoViagemAnterior.Text = "Viagem Anterior";
-            // 
-            // grpRetornoDataViagem
-            // 
-            this.grpRetornoDataViagem.BackColor = System.Drawing.Color.White;
-            this.grpRetornoDataViagem.Location = new System.Drawing.Point(436, 16);
-            this.grpRetornoDataViagem.Name = "grpRetornoDataViagem";
-            this.grpRetornoDataViagem.Size = new System.Drawing.Size(139, 100);
-            this.grpRetornoDataViagem.TabIndex = 10;
-            this.grpRetornoDataViagem.TabStop = false;
-            this.grpRetornoDataViagem.Text = "Datas da Viagem";
+            this.btnRetornoOK.Click += new System.EventHandler(this.bntRetornoOK_Click);
             // 
             // btnRetornoLimpar
             // 
             this.btnRetornoLimpar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnRetornoLimpar.Location = new System.Drawing.Point(346, 86);
+            this.btnRetornoLimpar.Location = new System.Drawing.Point(374, 86);
             this.btnRetornoLimpar.Name = "btnRetornoLimpar";
             this.btnRetornoLimpar.Size = new System.Drawing.Size(75, 29);
             this.btnRetornoLimpar.TabIndex = 9;
             this.btnRetornoLimpar.Text = "Limpar";
             this.btnRetornoLimpar.UseSelectable = true;
+            this.btnRetornoLimpar.Click += new System.EventHandler(this.btnRetornoLimpar_Click);
             // 
             // btnRetornoPesquisar
             // 
             this.btnRetornoPesquisar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnRetornoPesquisar.Location = new System.Drawing.Point(262, 86);
+            this.btnRetornoPesquisar.Location = new System.Drawing.Point(268, 86);
             this.btnRetornoPesquisar.Name = "btnRetornoPesquisar";
-            this.btnRetornoPesquisar.Size = new System.Drawing.Size(78, 29);
+            this.btnRetornoPesquisar.Size = new System.Drawing.Size(100, 29);
             this.btnRetornoPesquisar.TabIndex = 8;
             this.btnRetornoPesquisar.Text = "Pesquisar";
             this.btnRetornoPesquisar.UseSelectable = true;
-            // 
-            // cbbRetornoMesAno
-            // 
-            this.cbbRetornoMesAno.CustomFormat = "MM/yyyy";
-            this.cbbRetornoMesAno.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.cbbRetornoMesAno.Location = new System.Drawing.Point(127, 86);
-            this.cbbRetornoMesAno.MinimumSize = new System.Drawing.Size(4, 29);
-            this.cbbRetornoMesAno.Name = "cbbRetornoMesAno";
-            this.cbbRetornoMesAno.Size = new System.Drawing.Size(93, 29);
-            this.cbbRetornoMesAno.TabIndex = 7;
             // 
             // cbbRetornoRepresentante
             // 
             this.cbbRetornoRepresentante.FormattingEnabled = true;
             this.cbbRetornoRepresentante.ItemHeight = 23;
-            this.cbbRetornoRepresentante.Location = new System.Drawing.Point(127, 51);
+            this.cbbRetornoRepresentante.Location = new System.Drawing.Point(202, 51);
             this.cbbRetornoRepresentante.Name = "cbbRetornoRepresentante";
             this.cbbRetornoRepresentante.PromptText = "Selecione o Representante";
-            this.cbbRetornoRepresentante.Size = new System.Drawing.Size(294, 29);
+            this.cbbRetornoRepresentante.Size = new System.Drawing.Size(247, 29);
             this.cbbRetornoRepresentante.Sorted = true;
             this.cbbRetornoRepresentante.TabIndex = 6;
             this.cbbRetornoRepresentante.UseSelectable = true;
+            this.cbbRetornoRepresentante.SelectedIndexChanged += new System.EventHandler(this.cbbRetornoRepresentante_SelectedIndexChanged);
             // 
             // cbbRetornoPraca
             // 
             this.cbbRetornoPraca.FormattingEnabled = true;
             this.cbbRetornoPraca.ItemHeight = 23;
-            this.cbbRetornoPraca.Location = new System.Drawing.Point(127, 16);
+            this.cbbRetornoPraca.Location = new System.Drawing.Point(202, 16);
             this.cbbRetornoPraca.Name = "cbbRetornoPraca";
             this.cbbRetornoPraca.PromptText = "Selecione a Praça";
-            this.cbbRetornoPraca.Size = new System.Drawing.Size(294, 29);
+            this.cbbRetornoPraca.Size = new System.Drawing.Size(247, 29);
             this.cbbRetornoPraca.Sorted = true;
             this.cbbRetornoPraca.TabIndex = 5;
             this.cbbRetornoPraca.UseSelectable = true;
+            this.cbbRetornoPraca.SelectedValueChanged += new System.EventHandler(this.cbbRetornoPraca_SelectedValueChanged);
             // 
             // lblRetornoMesAno
             // 
@@ -1630,63 +1993,37 @@
             this.lblRetornoPraca.TabIndex = 2;
             this.lblRetornoPraca.Text = "Praça";
             // 
-            // tabFinanceiro
+            // tabEstoque
             // 
-            this.tabFinanceiro.Controls.Add(this.pnlFinanceiroPesquisa);
-            this.tabFinanceiro.Location = new System.Drawing.Point(4, 38);
-            this.tabFinanceiro.Name = "tabFinanceiro";
-            this.tabFinanceiro.Size = new System.Drawing.Size(852, 603);
-            this.tabFinanceiro.TabIndex = 4;
-            this.tabFinanceiro.Text = "FINANCEIRO";
-            // 
-            // pnlFinanceiroPesquisa
-            // 
-            this.pnlFinanceiroPesquisa.Controls.Add(this.metroLabel5);
-            this.pnlFinanceiroPesquisa.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlFinanceiroPesquisa.HorizontalScrollbarBarColor = true;
-            this.pnlFinanceiroPesquisa.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlFinanceiroPesquisa.HorizontalScrollbarSize = 10;
-            this.pnlFinanceiroPesquisa.Location = new System.Drawing.Point(0, 0);
-            this.pnlFinanceiroPesquisa.Name = "pnlFinanceiroPesquisa";
-            this.pnlFinanceiroPesquisa.Size = new System.Drawing.Size(852, 61);
-            this.pnlFinanceiroPesquisa.TabIndex = 0;
-            this.pnlFinanceiroPesquisa.VerticalScrollbarBarColor = true;
-            this.pnlFinanceiroPesquisa.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlFinanceiroPesquisa.VerticalScrollbarSize = 10;
-            // 
-            // metroLabel5
-            // 
-            this.metroLabel5.AutoSize = true;
-            this.metroLabel5.Location = new System.Drawing.Point(117, 19);
-            this.metroLabel5.Name = "metroLabel5";
-            this.metroLabel5.Size = new System.Drawing.Size(526, 19);
-            this.metroLabel5.TabIndex = 5;
-            this.metroLabel5.Text = "Inclusão Manual de Contas a Receber - Grade de Contas a Receber com Link para Bai" +
-    "xa";
+            this.tabEstoque.Location = new System.Drawing.Point(4, 38);
+            this.tabEstoque.Name = "tabEstoque";
+            this.tabEstoque.Size = new System.Drawing.Size(852, 603);
+            this.tabEstoque.TabIndex = 9;
+            this.tabEstoque.Text = "ESTOQUE";
             // 
             // tabRelatorios
             // 
-            this.tabRelatorios.Controls.Add(this.metroPanel2);
+            this.tabRelatorios.Controls.Add(this.pnlRelatorio);
             this.tabRelatorios.Location = new System.Drawing.Point(4, 38);
             this.tabRelatorios.Name = "tabRelatorios";
             this.tabRelatorios.Size = new System.Drawing.Size(852, 603);
             this.tabRelatorios.TabIndex = 6;
             this.tabRelatorios.Text = "RELATÓRIOS";
             // 
-            // metroPanel2
+            // pnlRelatorio
             // 
-            this.metroPanel2.Controls.Add(this.metroLabel9);
-            this.metroPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.metroPanel2.HorizontalScrollbarBarColor = true;
-            this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel2.HorizontalScrollbarSize = 10;
-            this.metroPanel2.Location = new System.Drawing.Point(0, 0);
-            this.metroPanel2.Name = "metroPanel2";
-            this.metroPanel2.Size = new System.Drawing.Size(852, 603);
-            this.metroPanel2.TabIndex = 0;
-            this.metroPanel2.VerticalScrollbarBarColor = true;
-            this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel2.VerticalScrollbarSize = 10;
+            this.pnlRelatorio.Controls.Add(this.metroLabel9);
+            this.pnlRelatorio.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlRelatorio.HorizontalScrollbarBarColor = true;
+            this.pnlRelatorio.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlRelatorio.HorizontalScrollbarSize = 10;
+            this.pnlRelatorio.Location = new System.Drawing.Point(0, 0);
+            this.pnlRelatorio.Name = "pnlRelatorio";
+            this.pnlRelatorio.Size = new System.Drawing.Size(852, 603);
+            this.pnlRelatorio.TabIndex = 0;
+            this.pnlRelatorio.VerticalScrollbarBarColor = true;
+            this.pnlRelatorio.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlRelatorio.VerticalScrollbarSize = 10;
             // 
             // metroLabel9
             // 
@@ -1697,6 +2034,14 @@
             this.metroLabel9.TabIndex = 7;
             this.metroLabel9.Text = "Botões para os Principais Relatórios";
             // 
+            // tabConfiguracoes
+            // 
+            this.tabConfiguracoes.Location = new System.Drawing.Point(4, 38);
+            this.tabConfiguracoes.Name = "tabConfiguracoes";
+            this.tabConfiguracoes.Size = new System.Drawing.Size(852, 603);
+            this.tabConfiguracoes.TabIndex = 10;
+            this.tabConfiguracoes.Text = "CONFIGURAÇÕES";
+            // 
             // tabAjuda
             // 
             this.tabAjuda.Location = new System.Drawing.Point(4, 38);
@@ -1705,13 +2050,103 @@
             this.tabAjuda.TabIndex = 8;
             this.tabAjuda.Text = "AJUDA";
             // 
-            // tabAcerto
+            // ctmRetornoProduto
             // 
-            this.tabAcerto.Location = new System.Drawing.Point(4, 38);
-            this.tabAcerto.Name = "tabAcerto";
-            this.tabAcerto.Size = new System.Drawing.Size(852, 603);
-            this.tabAcerto.TabIndex = 7;
-            this.tabAcerto.Text = "ACERTO";
+            this.ctmRetornoProduto.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.toolStripMenuItem2});
+            this.ctmRetornoProduto.Name = "ctmCargaProduto";
+            this.ctmRetornoProduto.Size = new System.Drawing.Size(110, 48);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(109, 22);
+            this.toolStripMenuItem1.Text = "&Alterar";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.alterarRetornoToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(109, 22);
+            this.toolStripMenuItem2.Text = "&Excluir";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.excluirRetornoToolStripMenuItem_Click);
+            // 
+            // tabConfProduto
+            // 
+            this.tabConfProduto.Controls.Add(this.pnlRetornoConfProdutos);
+            this.tabConfProduto.Location = new System.Drawing.Point(4, 38);
+            this.tabConfProduto.Name = "tabConfProduto";
+            this.tabConfProduto.Size = new System.Drawing.Size(844, 430);
+            this.tabConfProduto.TabIndex = 6;
+            this.tabConfProduto.Text = "Conferência de Produtos";
+            // 
+            // tabConfPedido
+            // 
+            this.tabConfPedido.Location = new System.Drawing.Point(4, 38);
+            this.tabConfPedido.Name = "tabConfPedido";
+            this.tabConfPedido.Size = new System.Drawing.Size(844, 430);
+            this.tabConfPedido.TabIndex = 7;
+            this.tabConfPedido.Text = "Conferência de Pedidos";
+            // 
+            // pnlRetornoConfProdutos
+            // 
+            this.pnlRetornoConfProdutos.Controls.Add(this.grdRetornoConfProdutos);
+            this.pnlRetornoConfProdutos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlRetornoConfProdutos.HorizontalScrollbarBarColor = true;
+            this.pnlRetornoConfProdutos.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlRetornoConfProdutos.HorizontalScrollbarSize = 10;
+            this.pnlRetornoConfProdutos.Location = new System.Drawing.Point(0, 0);
+            this.pnlRetornoConfProdutos.Name = "pnlRetornoConfProdutos";
+            this.pnlRetornoConfProdutos.Size = new System.Drawing.Size(844, 430);
+            this.pnlRetornoConfProdutos.TabIndex = 0;
+            this.pnlRetornoConfProdutos.VerticalScrollbarBarColor = true;
+            this.pnlRetornoConfProdutos.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlRetornoConfProdutos.VerticalScrollbarSize = 10;
+            // 
+            // grdRetornoConfProdutos
+            // 
+            this.grdRetornoConfProdutos.AllowUserToResizeRows = false;
+            this.grdRetornoConfProdutos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdRetornoConfProdutos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.grdRetornoConfProdutos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.grdRetornoConfProdutos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdRetornoConfProdutos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            this.grdRetornoConfProdutos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grdRetornoConfProdutos.DefaultCellStyle = dataGridViewCellStyle16;
+            this.grdRetornoConfProdutos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdRetornoConfProdutos.EnableHeadersVisualStyles = false;
+            this.grdRetornoConfProdutos.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.grdRetornoConfProdutos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdRetornoConfProdutos.Location = new System.Drawing.Point(0, 0);
+            this.grdRetornoConfProdutos.Name = "grdRetornoConfProdutos";
+            this.grdRetornoConfProdutos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdRetornoConfProdutos.RowHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            this.grdRetornoConfProdutos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.grdRetornoConfProdutos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.grdRetornoConfProdutos.Size = new System.Drawing.Size(844, 430);
+            this.grdRetornoConfProdutos.TabIndex = 2;
             // 
             // FormDeposito
             // 
@@ -1752,12 +2187,12 @@
             this.tabRetorno.ResumeLayout(false);
             this.tbcRetorno.ResumeLayout(false);
             this.tabRetornoProdutos.ResumeLayout(false);
-            this.tabRetornoProdutos.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdProdutos)).EndInit();
-            this.pnlPesquisaProdutos.ResumeLayout(false);
+            this.pnlRetornoProdutoMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grdRetornoProduto)).EndInit();
+            this.pnlRetornoProduto.ResumeLayout(false);
+            this.pnlRetornoProduto.PerformLayout();
             this.tabRetornoPedidos.ResumeLayout(false);
             this.pnlPedidos.ResumeLayout(false);
-            this.pnlPedidos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdPedidos)).EndInit();
             this.tabRetornoContasAReceber.ResumeLayout(false);
             this.pnlContasAReceber.ResumeLayout(false);
@@ -1765,12 +2200,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdContasAReceber)).EndInit();
             this.pnlRetornoPesquisa.ResumeLayout(false);
             this.pnlRetornoPesquisa.PerformLayout();
-            this.tabFinanceiro.ResumeLayout(false);
-            this.pnlFinanceiroPesquisa.ResumeLayout(false);
-            this.pnlFinanceiroPesquisa.PerformLayout();
+            this.grpRetornoDadosCarga.ResumeLayout(false);
+            this.grpRetornoDadosCarga.PerformLayout();
             this.tabRelatorios.ResumeLayout(false);
-            this.metroPanel2.ResumeLayout(false);
-            this.metroPanel2.PerformLayout();
+            this.pnlRelatorio.ResumeLayout(false);
+            this.pnlRelatorio.PerformLayout();
+            this.ctmRetornoProduto.ResumeLayout(false);
+            this.tabConfProduto.ResumeLayout(false);
+            this.pnlRetornoConfProdutos.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grdRetornoConfProdutos)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1788,7 +2226,6 @@
         private System.Windows.Forms.TabPage tabHome;
         private System.Windows.Forms.TabPage tabCarga;
         private System.Windows.Forms.TabPage tabRetorno;
-        private System.Windows.Forms.TabPage tabFinanceiro;
         private System.Windows.Forms.TabPage tabRelatorios;
         public MetroFramework.Controls.MetroTabControl tbcCarga;
         private System.Windows.Forms.TabPage tabCargaComposicao;
@@ -1812,41 +2249,27 @@
         public MetroFramework.Controls.MetroTextBox txtCargaProduto;
         public MetroFramework.Controls.MetroTextBox txtCargaCodigoBarras;
         public MetroFramework.Controls.MetroButton btnCargaOK;
-        private MetroFramework.Controls.MetroTabControl tbcRetorno;
+        public MetroFramework.Controls.MetroTabControl tbcRetorno;
         private System.Windows.Forms.TabPage tabRetornoProdutos;
         private System.Windows.Forms.TabPage tabRetornoPedidos;
         private System.Windows.Forms.TabPage tabRetornoContasAReceber;
         private MetroFramework.Controls.MetroPanel pnlRetornoPesquisa;
         private MetroFramework.Controls.MetroButton btnRetornoOK;
-        private System.Windows.Forms.GroupBox grpRetornoViagemAnterior;
-        private System.Windows.Forms.GroupBox grpRetornoDataViagem;
         private MetroFramework.Controls.MetroButton btnRetornoLimpar;
         private MetroFramework.Controls.MetroButton btnRetornoPesquisar;
-        public MetroFramework.Controls.MetroDateTime cbbRetornoMesAno;
         public MetroFramework.Controls.MetroComboBox cbbRetornoRepresentante;
         public MetroFramework.Controls.MetroComboBox cbbRetornoPraca;
         private MetroFramework.Controls.MetroLabel lblRetornoMesAno;
         private MetroFramework.Controls.MetroLabel lblRetornoRepresentante;
         private MetroFramework.Controls.MetroLabel lblRetornoPraca;
-        public MetroFramework.Controls.MetroGrid grdProdutos;
-        private MetroFramework.Controls.MetroPanel pnlPesquisaProdutos;
-        public MetroFramework.Controls.MetroButton btnProdutoConfirmar;
-        public MetroFramework.Controls.MetroTextBox txtProdutoQuantidade;
-        public MetroFramework.Controls.MetroTextBox txtProdutoNome;
-        public MetroFramework.Controls.MetroTextBox txtProdutoCodigoBarras;
         private MetroFramework.Controls.MetroPanel pnlPedidos;
         private MetroFramework.Controls.MetroGrid grdPedidos;
         private MetroFramework.Controls.MetroPanel pnlContasAReceber;
         public MetroFramework.Controls.MetroGrid grdContasAReceber;
-        private MetroFramework.Controls.MetroLabel metroLabel2;
-        private MetroFramework.Controls.MetroLabel metroLabel3;
         private MetroFramework.Controls.MetroLabel metroLabel4;
-        private MetroFramework.Controls.MetroPanel pnlFinanceiroPesquisa;
-        private MetroFramework.Controls.MetroLabel metroLabel5;
-        private MetroFramework.Controls.MetroPanel metroPanel2;
+        private MetroFramework.Controls.MetroPanel pnlRelatorio;
         private MetroFramework.Controls.MetroLabel metroLabel9;
         public MetroFramework.Controls.MetroTextBox txtCargaCodPraca;
-        private System.Windows.Forms.TabPage tabAcerto;
         public MetroFramework.Controls.MetroTextBox txtCargaCodRepresentante;
         private System.Windows.Forms.ColorDialog colorDialog1;
         public MetroFramework.Controls.MetroLabel dlbCargaDataFinalizacao;
@@ -1871,10 +2294,6 @@
         private MetroFramework.Controls.MetroLabel lblCargaVADataFinalizacao;
         public MetroFramework.Controls.MetroCheckBox chkCargaQuantidade;
         public MetroFramework.Controls.MetroButton btnCargaCancelar;
-        private MetroFramework.Controls.MetroLabel lblTotalProdutos;
-        public MetroFramework.Controls.MetroLabel dlbTotalProdutos;
-        private MetroFramework.Controls.MetroLabel lblQtdProdutos;
-        public MetroFramework.Controls.MetroLabel dlbQtdProdutos;
         public MetroFramework.Controls.MetroContextMenu ctmCargaProduto;
         private System.Windows.Forms.ToolStripMenuItem alterarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem excluirToolStripMenuItem;
@@ -1882,6 +2301,50 @@
         private MetroFramework.Controls.MetroLabel lblCargaAdicionarProdutos;
         public System.Windows.Forms.DateTimePicker cbbCargaMesAno;
         private System.Windows.Forms.TabPage tabAjuda;
+        private System.Windows.Forms.TabPage tabRetornoResumo;
+        public System.Windows.Forms.DateTimePicker cbbRetornoMesAno;
+        public MetroFramework.Controls.MetroTextBox txtRetornoCodRepresentante;
+        public MetroFramework.Controls.MetroTextBox txtRetornoCodPraca;
+        private MetroFramework.Controls.MetroLabel lblCargaTotalProdutos;
+        public MetroFramework.Controls.MetroLabel dlbCargaTotalProdutos;
+        private MetroFramework.Controls.MetroLabel lblCargaQtdProdutos;
+        public MetroFramework.Controls.MetroLabel dlbCargaQtdProdutos;
+        private System.Windows.Forms.GroupBox grpRetornoCargaAnterior;
+        private System.Windows.Forms.GroupBox grpRetornoDadosCarga;
+        private MetroFramework.Controls.MetroLabel lblRetornoTotalProdutos;
+        public MetroFramework.Controls.MetroLabel dlbRetornoTotalProdutos;
+        private MetroFramework.Controls.MetroLabel lblRetornoQtdProdutos;
+        public MetroFramework.Controls.MetroLabel dlbRetornoQtdProdutos;
+        public MetroFramework.Controls.MetroLabel dlbRetornoDataFinalizacao;
+        public MetroFramework.Controls.MetroLabel dlbRetornoDataConferencia;
+        public MetroFramework.Controls.MetroLabel dlbRetornoDataRetorno;
+        public MetroFramework.Controls.MetroLabel dlbRetornoDataExportacao;
+        public MetroFramework.Controls.MetroLabel dlbRetornoDataAbertura;
+        private MetroFramework.Controls.MetroLabel lblRetornoDataFinalizacao;
+        private MetroFramework.Controls.MetroLabel lblRetornoDataConferencia;
+        private MetroFramework.Controls.MetroLabel lblRetornoDataRetorno;
+        private MetroFramework.Controls.MetroLabel lblRetornoDataExportacao;
+        private MetroFramework.Controls.MetroLabel lblRetornoDataAbertura;
+        private System.Windows.Forms.TabPage tabRetornoAcerto;
+        private MetroFramework.Controls.MetroPanel pnlRetornoProdutoMain;
+        public MetroFramework.Controls.MetroGrid grdRetornoProduto;
+        private MetroFramework.Controls.MetroPanel pnlRetornoProduto;
+        private MetroFramework.Controls.MetroLabel lblRetornarProduto;
+        public MetroFramework.Controls.MetroButton btnRetornoCancelar;
+        public MetroFramework.Controls.MetroCheckBox chkRetornoQuantidade;
+        public MetroFramework.Controls.MetroButton btnRetornoConfirmar;
+        public MetroFramework.Controls.MetroTextBox txtRetornoQuantidade;
+        public MetroFramework.Controls.MetroTextBox txtRetornoProduto;
+        public MetroFramework.Controls.MetroTextBox txtRetornoCodigoBarras;
+        private System.Windows.Forms.TabPage tabEstoque;
+        private System.Windows.Forms.TabPage tabConfiguracoes;
+        public MetroFramework.Controls.MetroContextMenu ctmRetornoProduto;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.TabPage tabConfProduto;
+        private System.Windows.Forms.TabPage tabConfPedido;
+        private MetroFramework.Controls.MetroPanel pnlRetornoConfProdutos;
+        public MetroFramework.Controls.MetroGrid grdRetornoConfProdutos;
     }
 }
 

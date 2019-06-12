@@ -110,6 +110,7 @@ namespace ConsignadoRepresentante
             localDeposito.btnConferenciaConfirmar.Enabled = false;
 
             localDeposito.pnlImportarPesquisa.Enabled = true;
+            localDeposito.pnlExportacaoMain.Enabled = true;
         }
 
 

@@ -286,6 +286,34 @@ namespace ModelLibrary
         }
 
 
+        public static List<ListaProdutoConferencia> ObterProdutoConferencia(long pCargaId)
+        {
+
+            using (DepositoDBEntities context = new DepositoDBEntities())
+            {
+
+
+                string query = @"SELECT ProdutoGrade.CodigoBarras, Produto.Descricao, 
+                                    sum(PedidoItem.Quantidade-PedidoItem.Retorno) Vendido, sum(CargaProduto.Quantidade) Viagem, 
+                                    sum(CargaProduto.QuantidadeRetorno) Retorno, sum(PedidoItem.Quantidade) Consignado, 
+                                    sum(CargaProduto.Quantidade-CargaProduto.QuantidadeRetorno-PedidoItem.Quantidade) SaldoCarro   
+                                FROM CargaProduto 
+	                                INNER JOIN ProdutoGrade ON CargaProduto.ProdutoGradeId = ProdutoGrade.Id
+	                                INNER JOIN Produto ON ProdutoGrade.ProdutoId = Produto.Id
+	                                LEFT JOIN Pedido ON Pedido.CargaId = CargaProduto.CargaId
+	                                LEFT JOIN PedidoItem ON CargaProduto.ProdutoGradeId = PedidoItem.ProdutoGradeId AND PedidoId = Pedido.Id
+                                WHERE CargaProduto.CargaId = @p0
+                                GROUP BY ProdutoGrade.CodigoBarras, Produto.Descricao";
+
+                var result = context.Database.SqlQuery<ListaProdutoConferencia>(query, pCargaId);
+
+                return result.ToList<ListaProdutoConferencia>();
+
+            }
+
+        }
+
+
         public static void InserirCargaProduto(int pCargaId, int pProdutoGradeId, double pQuantidade)
         {
 
@@ -366,6 +394,28 @@ namespace ModelLibrary
                 //context.CargaProduto.Remove(cargaproduto);
                 //context.SaveChanges();
             }
+        }
+
+
+        public static void AlterarRetornoProduto(int pCargaId, int pRetornoProdutoGradeId, double pQuantidade)
+        {
+
+
+            ///alterar com base no 
+            using (DepositoDBEntities context = new DepositoDBEntities())
+            {
+                var result = context.CargaProduto.SingleOrDefault(cp => cp.CargaId == pCargaId && cp.ProdutoGradeId == pRetornoProdutoGradeId);
+                if (result != null)
+                {
+                    Console.WriteLine("Alterando Retorno Produto - CargaId: " + pCargaId.ToString() + " ProdutoId: " + pRetornoProdutoGradeId.ToString());
+                    result.QuantidadeRetorno = pQuantidade;
+                    context.SaveChanges();
+                }
+            }
+
+
+
+
         }
 
         public static decimal[] ObterTotalizadores(int pCargaId)

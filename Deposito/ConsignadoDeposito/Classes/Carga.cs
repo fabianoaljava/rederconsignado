@@ -114,8 +114,8 @@ namespace ConsignadoDeposito
 
                     var totalizadores = ModelLibrary.MetodosDeposito.ObterTotalizadores(cCargaId);
 
-                    localDepositoForm.dlbQtdProdutos.Text = totalizadores[0].ToString();
-                    localDepositoForm.dlbTotalProdutos.Text = totalizadores[1].ToString("C");
+                    localDepositoForm.dlbCargaQtdProdutos.Text = totalizadores[0].ToString();
+                    localDepositoForm.dlbCargaTotalProdutos.Text = totalizadores[1].ToString("C");
 
 
 
@@ -173,7 +173,7 @@ namespace ConsignadoDeposito
             }
             catch (IOException vE)
             {
-                MessageBox.Show("Ocorreu um erro ao processar a sua consulta. Verifique os dados digitados e tente novamente. Se o erro persisitr, contate o administrador.");
+                MessageBox.Show("Ocorreu um erro ao processar a sua consulta. Verifique os dados digitados e tente novamente. Se o erro persisitr, contate o administrador.", "ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(vE.Message);
             }
         }

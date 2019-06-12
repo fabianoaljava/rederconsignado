@@ -81,6 +81,7 @@
     </Compile>
     <Compile Include="ImportarExportar.cs" />
     <Compile Include="ListaExportacao.cs" />
+    <Compile Include="ListaProdutoConferencia.cs" />
     <Compile Include="ListaRecebimentos.cs" />
     <Compile Include="ListaRepPosicaoFInanceira.cs" />
     <Compile Include="ListaRepProdutosCarga.cs" />
