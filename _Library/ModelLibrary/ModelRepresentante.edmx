@@ -120,6 +120,8 @@
           <Property Name="Id" Type="integer" Nullable="false" />
           <Property Name="VendedorId" Type="integer" Nullable="false" />
           <Property Name="CargaId" Type="integer" Nullable="false" />
+          <Property Name="CargaAtual" Type="integer" />
+          <Property Name="RepresentanteId" Type="integer" />
           <Property Name="CodigoPedido" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="DataLancamento" Type="datetime" />
           <Property Name="DataPrevisaoRetorno" Type="datetime" />
@@ -131,7 +133,7 @@
           <Property Name="PercentualFaixa" Type="decimal" Precision="53" Scale="0" />
           <Property Name="ValorComissao" Type="decimal" Precision="53" Scale="0" />
           <Property Name="ValorLiquido" Type="decimal" Precision="53" Scale="0" />
-          <Property Name="RecebidoAnterior" Type="decimal" Precision="53" Scale="0" />
+          <Property Name="ValorAReceber" Type="decimal" Precision="53" Scale="0" />
           <Property Name="ValorAcerto" Type="decimal" Precision="53" Scale="0" />
           <Property Name="QuantidadeRetorno" Type="integer" />
           <Property Name="Remarcado" Type="integer" />
@@ -324,6 +326,9 @@
           <Property Name="Observacao" Type="nvarchar" MaxLength="2147483647" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6005: The data type '' is currently not supported for the target Entity Framework version; the column 'ValorAReceber' in the table 'main.RepPosicaoFinanceira' was excluded.
+warning 6005: The data type '' is currently not supported for the target Entity Framework version; the column 'ValorRecebido' in the table 'main.RepPosicaoFinanceira' was excluded.
+warning 6005: The data type '' is currently not supported for the target Entity Framework version; the column 'ValorAberto' in the table 'main.RepPosicaoFinanceira' was excluded.
 warning 6002: The table/view 'main.RepPosicaoFinanceira' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="RepPosicaoFinanceira">
           <Key>
@@ -331,11 +336,10 @@ warning 6002: The table/view 'main.RepPosicaoFinanceira' does not have a primary
           </Key>
           <Property Name="Id" Type="integer" Nullable="false" />
           <Property Name="VendedorId" Type="integer" />
-          <Property Name="ValorAReceber" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="ValorRecebido" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="ValorAberto" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6005: The data type '' is currently not supported for the target Entity Framework version; the column 'CodigoBarras' in the table 'main.RepProdutosConferencia' was excluded.
+warning 6005: The data type '' is currently not supported for the target Entity Framework version; the column 'Diferenca' in the table 'main.RepProdutosConferencia' was excluded.
 warning 6002: The table/view 'main.RepProdutosConferencia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="RepProdutosConferencia">
           <Key>
@@ -345,11 +349,9 @@ warning 6002: The table/view 'main.RepProdutosConferencia' does not have a prima
             <PropertyRef Name="ProdutoGradeId" />
             <PropertyRef Name="CargaId" />
           </Key>
-          <Property Name="CodigoBarras" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Descricao" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
           <Property Name="QuantidadeCarga" Type="decimal" Precision="18" Scale="0" />
           <Property Name="QuantidadeInformada" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Diferenca" Type="decimal" Precision="18" Scale="0" />
           <Property Name="ProdutoId" Type="integer" Nullable="false" />
           <Property Name="CargaProdutoId" Type="integer" Nullable="false" />
           <Property Name="ProdutoGradeId" Type="integer" Nullable="false" />
@@ -390,19 +392,14 @@ warning 6002: The table/view 'main.RepRepresentante' does not have a primary key
           <EntitySet Name="RepPosicaoFinanceira" EntityType="Self.RepPosicaoFinanceira" store:Type="Views">
             <DefiningQuery>SELECT 
 [RepPosicaoFinanceira].[Id] AS [Id], 
-[RepPosicaoFinanceira].[VendedorId] AS [VendedorId], 
-[RepPosicaoFinanceira].[ValorAReceber] AS [ValorAReceber], 
-[RepPosicaoFinanceira].[ValorRecebido] AS [ValorRecebido], 
-[RepPosicaoFinanceira].[ValorAberto] AS [ValorAberto]
+[RepPosicaoFinanceira].[VendedorId] AS [VendedorId]
 FROM [RepPosicaoFinanceira] AS [RepPosicaoFinanceira]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="RepProdutosConferencia" EntityType="Self.RepProdutosConferencia" store:Type="Views">
             <DefiningQuery>SELECT 
-[RepProdutosConferencia].[CodigoBarras] AS [CodigoBarras], 
 [RepProdutosConferencia].[Descricao] AS [Descricao], 
 [RepProdutosConferencia].[QuantidadeCarga] AS [QuantidadeCarga], 
 [RepProdutosConferencia].[QuantidadeInformada] AS [QuantidadeInformada], 
-[RepProdutosConferencia].[Diferenca] AS [Diferenca], 
 [RepProdutosConferencia].[ProdutoId] AS [ProdutoId], 
 [RepProdutosConferencia].[CargaProdutoId] AS [CargaProdutoId], 
 [RepProdutosConferencia].[ProdutoGradeId] AS [ProdutoGradeId], 
@@ -794,11 +791,13 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <Property Name="PercentualFaixa" Type="Decimal" Precision="53" Scale="0" />
           <Property Name="ValorComissao" Type="Decimal" Precision="53" Scale="0" />
           <Property Name="ValorLiquido" Type="Decimal" Precision="53" Scale="0" />
-          <Property Name="RecebidoAnterior" Type="Decimal" Precision="53" Scale="0" />
           <Property Name="ValorAcerto" Type="Decimal" Precision="53" Scale="0" />
           <Property Name="QuantidadeRetorno" Type="Int64" />
           <Property Name="Remarcado" Type="Int64" />
           <Property Name="Status" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="CargaAtual" Type="Int64" />
+          <Property Name="RepresentanteId" Type="Int64" />
+          <Property Name="ValorAReceber" Type="Decimal" Precision="53" Scale="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1131,9 +1130,6 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <EntitySetMapping Name="RepPosicaoFinanceiras">
             <EntityTypeMapping TypeName="ModelRepresentante.RepPosicaoFinanceira">
               <MappingFragment StoreEntitySet="RepPosicaoFinanceira">
-                <ScalarProperty Name="ValorAberto" ColumnName="ValorAberto" />
-                <ScalarProperty Name="ValorRecebido" ColumnName="ValorRecebido" />
-                <ScalarProperty Name="ValorAReceber" ColumnName="ValorAReceber" />
                 <ScalarProperty Name="VendedorId" ColumnName="VendedorId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -1146,22 +1142,22 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
                 <ScalarProperty Name="ProdutoGradeId" ColumnName="ProdutoGradeId" />
                 <ScalarProperty Name="CargaProdutoId" ColumnName="CargaProdutoId" />
                 <ScalarProperty Name="ProdutoId" ColumnName="ProdutoId" />
-                <ScalarProperty Name="Diferenca" ColumnName="Diferenca" />
                 <ScalarProperty Name="QuantidadeInformada" ColumnName="QuantidadeInformada" />
                 <ScalarProperty Name="QuantidadeCarga" ColumnName="QuantidadeCarga" />
                 <ScalarProperty Name="Descricao" ColumnName="Descricao" />
-                <ScalarProperty Name="CodigoBarras" ColumnName="CodigoBarras" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RepPedidoes">
             <EntityTypeMapping TypeName="ModelRepresentante.RepPedido">
               <MappingFragment StoreEntitySet="RepPedido">
+                <ScalarProperty Name="ValorAReceber" ColumnName="ValorAReceber" />
+                <ScalarProperty Name="RepresentanteId" ColumnName="RepresentanteId" />
+                <ScalarProperty Name="CargaAtual" ColumnName="CargaAtual" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Remarcado" ColumnName="Remarcado" />
                 <ScalarProperty Name="QuantidadeRetorno" ColumnName="QuantidadeRetorno" />
                 <ScalarProperty Name="ValorAcerto" ColumnName="ValorAcerto" />
-                <ScalarProperty Name="RecebidoAnterior" ColumnName="RecebidoAnterior" />
                 <ScalarProperty Name="ValorLiquido" ColumnName="ValorLiquido" />
                 <ScalarProperty Name="ValorComissao" ColumnName="ValorComissao" />
                 <ScalarProperty Name="PercentualFaixa" ColumnName="PercentualFaixa" />

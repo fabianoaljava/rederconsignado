@@ -28,10 +28,12 @@ namespace ModelLibrary
         public Nullable<decimal> PercentualFaixa { get; set; }
         public Nullable<decimal> ValorComissao { get; set; }
         public Nullable<decimal> ValorLiquido { get; set; }
-        public Nullable<decimal> RecebidoAnterior { get; set; }
         public Nullable<decimal> ValorAcerto { get; set; }
         public Nullable<long> QuantidadeRetorno { get; set; }
         public Nullable<long> Remarcado { get; set; }
         public string Status { get; set; }
+        public Nullable<long> CargaAtual { get; set; }
+        public Nullable<long> RepresentanteId { get; set; }
+        public Nullable<decimal> ValorAReceber { get; set; }
     }
 }

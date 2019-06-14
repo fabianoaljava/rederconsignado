@@ -572,6 +572,8 @@ namespace ModelLibrary
                             Id = row.Pedido.Id,
                             VendedorId = row.Pedido.VendedorId,
                             CargaId = vCargaId,
+                            CargaAtual = row.Pedido.CargaAtual,
+                            RepresentanteId = row.Pedido.RepresentanteId,
                             CodigoPedido = row.Pedido.CodigoPedido,
                             DataLancamento = row.Pedido.DataLancamento,
                             DataPrevisaoRetorno = row.Pedido.DataPrevisaoRetorno,
@@ -583,7 +585,7 @@ namespace ModelLibrary
                             PercentualFaixa = Convert.ToDecimal(row.Pedido.PercentualFaixa),
                             ValorComissao = Convert.ToDecimal(row.Pedido.ValorComissao),
                             ValorLiquido = Convert.ToDecimal(row.Pedido.ValorLiquido),
-                            RecebidoAnterior = Convert.ToDecimal(row.Pedido.RecebidoAnterior),
+                            ValorAReceber = Convert.ToDecimal(row.Pedido.ValorAReceber),
                             ValorAcerto = Convert.ToDecimal(row.Pedido.ValorAcerto),
                             QuantidadeRetorno = row.Pedido.QuantidadeRetorno,
                             Remarcado = row.Pedido.Remarcado,
@@ -1008,6 +1010,8 @@ namespace ModelLibrary
                             Id = Convert.ToInt32(row.RepPedido.Id),
                             VendedorId = Convert.ToInt32(row.RepPedido.VendedorId),
                             CargaId = Convert.ToInt32(row.RepPedido.CargaId),
+                            CargaAtual = Convert.ToInt32(row.RepPedido.CargaAtual),
+                            RepresentanteId = Convert.ToInt32(row.RepPedido.RepresentanteId),
                             CodigoPedido = row.RepPedido.CodigoPedido,
                             DataLancamento = row.RepPedido.DataLancamento,
                             DataPrevisaoRetorno = row.RepPedido.DataPrevisaoRetorno,
@@ -1019,7 +1023,7 @@ namespace ModelLibrary
                             PercentualFaixa = Convert.ToDouble(row.RepPedido.PercentualFaixa),
                             ValorComissao = Convert.ToDouble(row.RepPedido.ValorComissao),
                             ValorLiquido = Convert.ToDouble(row.RepPedido.ValorLiquido),
-                            RecebidoAnterior = Convert.ToDouble(row.RepPedido.RecebidoAnterior),
+                            ValorAReceber = Convert.ToDouble(row.RepPedido.ValorAReceber),
                             ValorAcerto = Convert.ToDouble(row.RepPedido.ValorAcerto),
                             QuantidadeRetorno = Convert.ToInt32(row.RepPedido.QuantidadeRetorno),
                             Remarcado = Convert.ToInt32(row.RepPedido.Remarcado),
@@ -1061,6 +1065,8 @@ namespace ModelLibrary
 
                     Console.WriteLine("Atualizando pedido id: " + pPedido.Id.ToString() + " codigo: " + pPedido.CodigoPedido);
                     vPedido.CargaId = pPedido.CargaId;
+                    vPedido.CargaAtual = pPedido.CargaAtual;
+                    vPedido.RepresentanteId = pPedido.RepresentanteId;
                     vPedido.DataRetorno = pPedido.DataRetorno;
                     vPedido.ValorPedido = pPedido.ValorPedido;
                     vPedido.ValorCompra = pPedido.ValorCompra;
@@ -1069,7 +1075,7 @@ namespace ModelLibrary
                     vPedido.PercentualFaixa = pPedido.PercentualFaixa;
                     vPedido.ValorComissao = pPedido.ValorComissao;
                     vPedido.ValorLiquido = pPedido.ValorLiquido;
-                    vPedido.RecebidoAnterior = pPedido.RecebidoAnterior;
+                    vPedido.ValorAReceber = pPedido.ValorAReceber;
                     vPedido.QuantidadeRetorno = pPedido.QuantidadeRetorno;
                     vPedido.Remarcado = pPedido.Remarcado;
 

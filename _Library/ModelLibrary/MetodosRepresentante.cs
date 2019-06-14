@@ -666,7 +666,7 @@ namespace ModelLibrary
                     PercentualFaixa = 0,
                     ValorComissao = 0,
                     ValorLiquido = 0,
-                    RecebidoAnterior = 0,
+                    ValorAReceber = 0,
                     ValorAcerto = 0,
                     QuantidadeRetorno = 0,
                     Remarcado = 0,
