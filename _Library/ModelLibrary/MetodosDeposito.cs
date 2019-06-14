@@ -294,16 +294,21 @@ namespace ModelLibrary
 
 
                 string query = @"SELECT ProdutoGrade.CodigoBarras, Produto.Descricao, 
-                                    sum(PedidoItem.Quantidade-PedidoItem.Retorno) Vendido, sum(CargaProduto.Quantidade) Viagem, 
-                                    sum(CargaProduto.QuantidadeRetorno) Retorno, sum(PedidoItem.Quantidade) Consignado, 
-                                    sum(CargaProduto.Quantidade-CargaProduto.QuantidadeRetorno-PedidoItem.Quantidade) SaldoCarro   
+                                sum(ISNULL(PedidoFechadoItem.Quantidade,0)-ISNULL(PedidoFechadoItem.Retorno,0)) Vendido, 
+                                sum(CargaProduto.Quantidade) Carga, 
+                                sum(ISNULL(PedidoAbertoItem.Retorno,0) + ISNULL(PedidoFechadoItem.Retorno,0)) Retorno, 
+                                sum(PedidoAbertoItem.Quantidade) Consignado, 
+                                sum(ISNULL(CargaProduto.Quantidade,0)+ISNULL(PedidoAbertoItem.Retorno,0) + ISNULL(PedidoFechadoItem.Retorno,0)-ISNULL(PedidoAbertoItem.Quantidade,0)) SaldoCarro,
+                                sum(CargaProduto.QuantidadeRetorno) ContagemCarro   
                                 FROM CargaProduto 
 	                                INNER JOIN ProdutoGrade ON CargaProduto.ProdutoGradeId = ProdutoGrade.Id
 	                                INNER JOIN Produto ON ProdutoGrade.ProdutoId = Produto.Id
-	                                LEFT JOIN Pedido ON Pedido.CargaId = CargaProduto.CargaId
-	                                LEFT JOIN PedidoItem ON CargaProduto.ProdutoGradeId = PedidoItem.ProdutoGradeId AND PedidoId = Pedido.Id
+	                                LEFT JOIN Pedido PedidoAberto ON PedidoAberto.CargaId = CargaProduto.CargaId AND PedidoAberto.ValorAcerto = 0
+	                                LEFT JOIN PedidoItem PedidoAbertoItem ON CargaProduto.ProdutoGradeId = PedidoAbertoItem.ProdutoGradeId AND PedidoAberto.Id = PedidoAbertoItem.PedidoId
+	                                LEFT JOIN Pedido PedidoFechado ON PedidoFechado.CargaId = CargaProduto.CargaId AND PedidoFechado.ValorAcerto > 0
+	                                LEFT JOIN PedidoItem PedidoFechadoItem ON CargaProduto.ProdutoGradeId = PedidoFechadoItem.ProdutoGradeId AND PedidoFechado.Id = PedidoFechadoItem.PedidoId
                                 WHERE CargaProduto.CargaId = @p0
-                                GROUP BY ProdutoGrade.CodigoBarras, Produto.Descricao";
+                                GROUP BY ProdutoGrade.CodigoBarras, Produto.Descricao;";
 
                 var result = context.Database.SqlQuery<ListaProdutoConferencia>(query, pCargaId);
 
