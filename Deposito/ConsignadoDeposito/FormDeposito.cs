@@ -656,6 +656,67 @@ namespace ConsignadoDeposito
             MessageBox.Show("Opção não disponível.");
         }
 
+        private void btnRetornoPedidoAtual_Click(object sender, EventArgs e)
+        {
+            cRetorno.CarregarPedidos();
+
+        }
+
+        private void btnRetornoPedidoAnterior_Click(object sender, EventArgs e)
+        {
+            cRetorno.CarregarPedidos(false);
+        }
+
+        private void grdContasAReceber_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cRetorno.ExibirAReceber();
+        }
+
+        private void btnRetornoRecConfirmar_Click(object sender, EventArgs e)
+        {
+            cRetorno.ConfirmarAReceber();
+        }
+
+        private void btnRetornoRecCancelar_Click(object sender, EventArgs e)
+        {
+            cRetorno.LimparAReceber();
+        }
+
+        private void txtRetornoRecDocumento_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                txtRetornoRecSerie.Focus();
+
+            }
+        }
+
+        private void txtRetornoRecSerie_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                txtRetornoRecSerie_Leave(sender, e);
+            }
+        }
+
+        private void txtRetornoRecSerie_Leave(object sender, EventArgs e)
+        {
+            if (txtRetornoRecDocumento.Text != "")
+            {
+                cRetorno.PesquisarAReceber(txtRetornoRecDocumento.Text, txtRetornoRecSerie.Text);
+                txtRetornoRecValor.Focus();
+            } else
+            {
+                MessageBox.Show("Informe o Número do Documento");
+                txtRetornoRecDocumento.Focus();
+            }
+
+        }
+
+
+
 
 
         ////////////////////////////////////////

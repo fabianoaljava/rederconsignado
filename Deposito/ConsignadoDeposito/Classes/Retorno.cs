@@ -20,6 +20,9 @@ namespace ConsignadoDeposito
         public Int32 cRetornoProdutoGradeId;
         public string cModoRetornoProduto;
         public Int32 cRetornoId;
+        public Int32 cRetornoReceberId;
+        public Int32 cRetornoReceberBaixaId;
+        public string cModoRetornoReceber;
 
         public FormDeposito localDepositoForm = null;
 
@@ -107,19 +110,12 @@ namespace ConsignadoDeposito
                     /* Carrega Grid com Produtos */
                     localDepositoForm.tbcRetorno.Visible = true;
 
-                    cCargaId = carga.Id;
-
-                    CarregarGradeRetornoProduto(carga.Id);
-
+                    cCargaId = carga.Id;                    
 
                     var totalizadores = ModelLibrary.MetodosDeposito.ObterTotalizadores(cCargaId);
 
                     localDepositoForm.dlbRetornoQtdProdutos.Text = totalizadores[0].ToString();
                     localDepositoForm.dlbRetornoTotalProdutos.Text = totalizadores[1].ToString("C");
-
-
-
-
                     
                     localDepositoForm.dlbRetornoDataAbertura.Text = carga.DataAbertura.HasValue ? carga.DataAbertura.Value.ToShortDateString() : "-";
                     localDepositoForm.dlbRetornoDataExportacao.Text = carga.DataExportacao.HasValue ? carga.DataExportacao.Value.ToShortDateString() : "-";
@@ -149,10 +145,7 @@ namespace ConsignadoDeposito
                     }
 
 
-
-                    localDepositoForm.grdRetornoConfProdutos.DataSource = ModelLibrary.MetodosDeposito.ObterProdutoConferencia(cCargaId);
-
-
+                    CarregarFormulario();
 
 
 
@@ -172,10 +165,37 @@ namespace ConsignadoDeposito
         }
 
 
+        public void CarregarFormulario()
+        {
+
+            Cursor.Current = Cursors.WaitCursor;
+            CarregarResumo();
+            CarregarGradeRetornoProduto(cCargaId);
+            CarregarProdutosConsignados();
+            CarregarPedidos();
+            CarregarContasAReceber();
+            CarregarConferenciaProdutos();
+            CarregarAcerto();
+            Cursor.Current = Cursors.Default;
+
+
+
+        }
+
+        ////////////////////////////////////////////
+        /// Carregar Resumo
+        ////////////////////////////////////////////
+        
+
+        public void CarregarResumo()
+        {
+
+
+        }
+
         ////////////////////////////////////////////
         /// Carregar Pesquisa de Produtos do Retorno
         ////////////////////////////////////////////
-
 
 
         public void LimparRetornoProduto()
@@ -364,7 +384,199 @@ namespace ConsignadoDeposito
 
 
 
+        ////////////////////////////////////////////
+        /// Produtos Consignados
+        ////////////////////////////////////////////
+        
+        public void CarregarProdutosConsignados()
+        {
 
+            localDepositoForm.grdRetornoProdConsig.DataSource = ModelLibrary.MetodosDeposito.ObterListaProdutosConsignados(cCargaId);
+
+        }
+
+        ////////////////////////////////////////////
+        /// Pedidos
+        ////////////////////////////////////////////
+        
+        public void CarregarPedidos(Boolean pAtual = true)
+        {
+
+            localDepositoForm.grdRetornoPedido.DataSource = ModelLibrary.MetodosDeposito.ObterListaPedidosRetorno(cCargaId, pAtual);
+
+            if (pAtual)
+            {
+
+                localDepositoForm.btnRetornoPedidoAtual.Enabled = false;
+                localDepositoForm.btnRetornoPedidoAnterior.Enabled = true;
+
+            } else
+            {
+                localDepositoForm.btnRetornoPedidoAtual.Enabled = true;
+                localDepositoForm.btnRetornoPedidoAnterior.Enabled = false;
+
+            }
+            localDepositoForm.grdRetornoPedido.Refresh();
+
+            
+
+
+        }
+
+        ////////////////////////////////////////////
+        /// Lançamento de Pedidos
+        ////////////////////////////////////////////
+        ///
+
+        ////////////////////////////////////////////
+        /// Contas a Receber
+        ////////////////////////////////////////////
+        
+        public void CarregarContasAReceber()
+        {
+            localDepositoForm.grdContasAReceber.DataSource = ModelLibrary.MetodosDeposito.ObterListaAReceber(cCargaId);
+        }
+
+
+        public void LimparAReceber()
+        {
+            localDepositoForm.txtRetornoRecDocumento.Text = "";
+            localDepositoForm.txtRetornoRecDocumento.ReadOnly = false;
+            localDepositoForm.txtRetornoRecSerie.Text = "";
+            localDepositoForm.txtRetornoRecSerie.ReadOnly = false;
+
+
+            localDepositoForm.txtRetornoRecNome.Text = "";
+            localDepositoForm.txtRetornoRecValor.Text = "";
+            localDepositoForm.txtRetornoRecData.Text = DateTime.Now.ToString();
+
+
+            cModoRetornoReceber = null;
+            cRetornoReceberBaixaId = 0;
+
+            localDepositoForm.btnRetornoRecConfirmar.Enabled = false;
+            localDepositoForm.btnRetornoRecCancelar.Enabled = false;
+
+        }
+
+
+        public void PesquisarAReceber(string pDocumento, string pSerie) 
+        {
+
+
+            int rowIndex = -1;
+
+            DataGridViewRow receber = localDepositoForm.grdContasAReceber.Rows
+                .Cast<DataGridViewRow>()
+                .Where(r => r.Cells["Documento"].Value.ToString().Equals(pDocumento) && r.Cells["Serie"].Value.ToString().Equals(pSerie))
+                .FirstOrDefault();
+
+
+
+
+            if (receber != null)
+            {
+
+                rowIndex = receber.Index;
+
+                ExibirAReceber(rowIndex);
+            }
+            else
+            {
+
+                MessageBox.Show("Documento ou série não encontrados. Por favor, verifique os dados digitados");
+
+                cRetornoProdutoGradeId = 0;
+                localDepositoForm.txtRetornoRecDocumento.Focus();
+                localDepositoForm.btnRetornoRecConfirmar.Enabled = false;
+                localDepositoForm.btnRetornoRecCancelar.Enabled = false;
+
+
+            }
+
+
+        }
+
+        public void ExibirAReceber(int rowindex = -1)
+        {
+
+            
+            if (rowindex == -1)
+            {
+                rowindex = localDepositoForm.grdContasAReceber.CurrentRow.Index;
+            }
+
+
+            cRetornoReceberId = Convert.ToInt32(localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["Id"].Value);
+
+            localDepositoForm.txtRetornoRecDocumento.Text = localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["Documento"].Value.ToString();
+            localDepositoForm.txtRetornoRecDocumento.ReadOnly = true;
+
+            localDepositoForm.txtRetornoRecSerie.Text = localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["Serie"].Value.ToString();
+            localDepositoForm.txtRetornoRecSerie.ReadOnly = true;
+
+
+            localDepositoForm.txtRetornoRecNome.Text = localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["Nome"].Value.ToString();
+
+            if (localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["ValorPago"].Value == null) {
+
+                localDepositoForm.txtRetornoRecValor.Text = localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["ValorAReceber"].Value.ToString();
+                localDepositoForm.txtRetornoRecData.Text = DateTime.Now.ToString();
+
+                cRetornoReceberBaixaId = 0;
+
+                cModoRetornoReceber = "Insert";
+
+            } else
+            {
+
+                localDepositoForm.txtRetornoRecValor.Text = localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["ValorPago"].Value.ToString();
+                localDepositoForm.txtRetornoRecData.Text = localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["DataPagamento"].Value.ToString();
+                cRetornoReceberBaixaId = Convert.ToInt32(localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["ReceberBaixaId"].Value);
+                cModoRetornoReceber = "Edit";
+
+            }
+            
+
+            localDepositoForm.btnRetornoRecConfirmar.Enabled = true;
+            localDepositoForm.btnRetornoRecCancelar.Enabled = true;
+
+
+        }
+
+
+        public void ConfirmarAReceber()
+        {
+
+            ModelLibrary.MetodosDeposito.SalvarAReceber(cRetornoReceberId, cRetornoReceberBaixaId, Convert.ToDouble(localDepositoForm.txtRetornoRecValor.Text), localDepositoForm.txtRetornoRecData.Text);
+
+            CarregarContasAReceber();
+
+            LimparAReceber();
+
+        }
+
+
+
+        ////////////////////////////////////////////
+        /// Produtos Conferencia
+        ////////////////////////////////////////////
+
+
+        public void CarregarConferenciaProdutos()
+        {
+            localDepositoForm.grdRetornoConfProdutos.DataSource = ModelLibrary.MetodosDeposito.ObterListaProdutoConferencia(cCargaId);
+        }
+        
+
+        ////////////////////////////////////////////
+        /// Acerto
+        ////////////////////////////////////////////
+        
+        public void CarregarAcerto()
+        {
+
+        }
 
     }
 }

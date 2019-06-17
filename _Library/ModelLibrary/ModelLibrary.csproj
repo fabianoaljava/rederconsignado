@@ -80,8 +80,11 @@
       <DependentUpon>ModelDeposito.tt</DependentUpon>
     </Compile>
     <Compile Include="ImportarExportar.cs" />
+    <Compile Include="ListaAReceber.cs" />
     <Compile Include="ListaExportacao.cs" />
+    <Compile Include="ListaPedidosRetorno.cs" />
     <Compile Include="ListaProdutoConferencia.cs" />
+    <Compile Include="ListaProdutosConsignados.cs" />
     <Compile Include="ListaRecebimentos.cs" />
     <Compile Include="ListaRepPosicaoFInanceira.cs" />
     <Compile Include="ListaRepProdutosCarga.cs" />

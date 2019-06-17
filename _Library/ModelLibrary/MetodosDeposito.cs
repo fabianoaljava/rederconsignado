@@ -286,33 +286,74 @@ namespace ModelLibrary
         }
 
 
-        public static List<ListaProdutoConferencia> ObterProdutoConferencia(long pCargaId)
+        public static List<ListaProdutoConferencia> ObterListaProdutoConferencia(long pCargaId)
         {
 
             using (DepositoDBEntities context = new DepositoDBEntities())
             {
 
 
-                string query = @"SELECT ProdutoGrade.CodigoBarras, Produto.Descricao, 
-                                sum(ISNULL(PedidoFechadoItem.Quantidade,0)-ISNULL(PedidoFechadoItem.Retorno,0)) Vendido, 
-                                sum(CargaProduto.Quantidade) Carga, 
-                                sum(ISNULL(PedidoAbertoItem.Retorno,0) + ISNULL(PedidoFechadoItem.Retorno,0)) Retorno, 
-                                sum(PedidoAbertoItem.Quantidade) Consignado, 
-                                sum(ISNULL(CargaProduto.Quantidade,0)+ISNULL(PedidoAbertoItem.Retorno,0) + ISNULL(PedidoFechadoItem.Retorno,0)-ISNULL(PedidoAbertoItem.Quantidade,0)) SaldoCarro,
-                                sum(CargaProduto.QuantidadeRetorno) ContagemCarro   
-                                FROM CargaProduto 
-	                                INNER JOIN ProdutoGrade ON CargaProduto.ProdutoGradeId = ProdutoGrade.Id
-	                                INNER JOIN Produto ON ProdutoGrade.ProdutoId = Produto.Id
-	                                LEFT JOIN Pedido PedidoAberto ON PedidoAberto.CargaId = CargaProduto.CargaId AND PedidoAberto.ValorAcerto = 0
-	                                LEFT JOIN PedidoItem PedidoAbertoItem ON CargaProduto.ProdutoGradeId = PedidoAbertoItem.ProdutoGradeId AND PedidoAberto.Id = PedidoAbertoItem.PedidoId
-	                                LEFT JOIN Pedido PedidoFechado ON PedidoFechado.CargaId = CargaProduto.CargaId AND PedidoFechado.ValorAcerto > 0
-	                                LEFT JOIN PedidoItem PedidoFechadoItem ON CargaProduto.ProdutoGradeId = PedidoFechadoItem.ProdutoGradeId AND PedidoFechado.Id = PedidoFechadoItem.PedidoId
-                                WHERE CargaProduto.CargaId = @p0
-                                GROUP BY ProdutoGrade.CodigoBarras, Produto.Descricao;";
+                var carga = context.Carga.FirstOrDefault(c => c.Id == pCargaId);
 
-                var result = context.Database.SqlQuery<ListaProdutoConferencia>(query, pCargaId);
+                var cargaanterior = context.Carga.Where(c => c.PracaId == carga.PracaId && c.Id < pCargaId).OrderByDescending(i => i.Id).FirstOrDefault();
+
+                
+
+                string query = @"SELECT Produto.CodigoBarras + '' + Produto.Digito as CodigoBarras, Produto.Descricao + ' ' + Produto.Tamanho Descricao, ISNULL(Vendido.Vendido,0) Vendido, isnull(Carga.ViagemPlus,0) Carga, ISNULL(Vendido.RetornoPlus,0) Retorno, ISNULL(Consignado.Consignado,0) Consignado, (ISNULL(Carga.ViagemPlus,0) + ISNULL(Vendido.RetornoPlus,0) - ISNULL(Consignado.Consignado,0)) SaldoCarro, ISNULL(Carga.ContagemCarro,0) ContagemCarro, ISNULL(Carga.ContagemCarro,0)-(ISNULL(Carga.ViagemPlus,0) + ISNULL(Vendido.RetornoPlus,0) - ISNULL(Consignado.Consignado,0)) Falta, (ISNULL(Carga.ContagemCarro,0)-(ISNULL(Carga.ViagemPlus,0) + ISNULL(Vendido.RetornoPlus,0) - ISNULL(Consignado.Consignado,0))) * ISNULL(Carga.Preco,0) VrDiferenca 
+                                FROM
+                                    (SELECT Produto.Id Id, ProdutoGrade.Id ProdutoGradeId, Produto.CodigoBarras, ProdutoGrade.Digito, Produto.Descricao, ProdutoGrade.Tamanho 
+                                        FROM Produto 
+                                        INNER JOIN ProdutoGrade ON ProdutoGrade.ProdutoId = Produto.Id) AS Produto
+                                LEFT JOIN 
+                                    (SELECT ProdutoGrade.Id ProdutoGradeId, ProdutoGrade.ValorSaida Preco, CargaProduto.Quantidade ViagemPlus, CargaProduto.QuantidadeRetorno ContagemCarro 
+                                        FROM CargaProduto 
+                                        INNER JOIN ProdutoGrade ON ProdutoGrade.Id = CargaProduto.ProdutoGradeId
+                                    WHERE CargaProduto.CargaId = 1449) AS Carga ON Produto.ProdutoGradeId = Carga.ProdutoGradeId
+                                LEFT JOIN 
+                                    (SELECT ProdutoGradeId, SUM(PedidoItem.Quantidade) Consignado 
+                                        FROM Pedido
+                                        INNER JOIN PedidoItem ON PedidoItem.PedidoId = Pedido.Id
+                                        WHERE  Pedido.CargaAtual = @p0
+                                        GROUP BY ProdutoGradeId) AS Consignado ON Produto.ProdutoGradeId = Consignado.ProdutoGradeId
+                                LEFT JOIN 
+                                    (SELECT ProdutoGradeId, SUM(PedidoItem.Quantidade - PedidoItem.Retorno) Vendido, SUM(PedidoItem.Retorno) RetornoPlus  
+                                        FROM Pedido
+                                        INNER JOIN PedidoItem ON PedidoItem.PedidoId = Pedido.Id
+                                        WHERE (Pedido.CargaId = @p1)
+                                            AND Pedido.ValorAcerto > 0
+                                        GROUP BY ProdutoGradeId) AS Vendido ON Produto.ProdutoGradeId = Vendido.ProdutoGradeId
+                                WHERE Vendido IS NOT NULL
+                                ORDER BY Descricao";
+
+                var result = context.Database.SqlQuery<ListaProdutoConferencia>(query, carga.Id, cargaanterior.Id);
 
                 return result.ToList<ListaProdutoConferencia>();
+
+            }
+
+        }
+
+
+        public static List<ListaProdutosConsignados> ObterListaProdutosConsignados(long pCargaId)
+        {
+
+
+            using (DepositoDBEntities context = new DepositoDBEntities())
+            {
+
+                
+
+                string query = @"SELECT Produto.CodigoBarras + '' + ProdutoGrade.Digito as CodigoBarras, Produto.Descricao as Nome, sum(PedidoItem.Quantidade - PedidoItem.Retorno) as Quantidade
+                                FROM Pedido 
+                                 INNER JOIN PedidoItem ON Pedido.Id = PedidoItem.PedidoId
+                                 INNER JOIN ProdutoGrade ON PedidoItem.ProdutoGradeId= ProdutoGrade.Id
+                                 INNER JOIN Produto ON ProdutoGrade.ProdutoId = Produto.Id 
+                                WHERE Pedido.CargaId = @p0
+                                GROUP BY Produto.CodigoBarras, ProdutoGrade.Digito, Produto.Descricao";
+
+                var result = context.Database.SqlQuery<ListaProdutosConsignados>(query, pCargaId);
+
+                return result.ToList<ListaProdutosConsignados>();
 
             }
 
@@ -524,13 +565,138 @@ namespace ModelLibrary
 
                
 
-    */
+                */
 
                 return ret;
 
 
             }
             
+        }
+
+        public static List<ListaPedidosRetorno> ObterListaPedidosRetorno(long pCargaId, bool pAtual = true)
+        {
+
+            using (DepositoDBEntities context = new DepositoDBEntities())
+            {
+
+                long vCargaId;
+
+                if (pAtual)
+                {
+                    vCargaId = pCargaId;
+
+                } else
+                {
+
+                    var carga = context.Carga.FirstOrDefault(c => c.Id == pCargaId);
+
+                    var cargaanterior = context.Carga.Where(c => c.PracaId == carga.PracaId && c.Id < pCargaId).OrderByDescending(i => i.Id).FirstOrDefault();
+
+                    vCargaId = cargaanterior.Id;
+                }
+
+                string query = @"SELECT CodigoPedido, Nome, ValorPedido, ValorCompra, ValorLiquido, ValorAReceber, ValorAcerto, ValorLiquido+ValorAReceber-ValorAcerto as ValorAberto, DataLancamento  
+	                                FROM Pedido 
+	                                INNER JOIN Vendedor ON Pedido.VendedorId = Vendedor.Id
+                                WHERE CargaId = @p0";
+
+                var result = context.Database.SqlQuery<ListaPedidosRetorno>(query, vCargaId);
+
+                return result.ToList<ListaPedidosRetorno>();
+
+            }
+
+        }
+
+
+        public static List<ListaAReceber> ObterListaAReceber(long pCargaId)
+        {
+
+
+            using (DepositoDBEntities context = new DepositoDBEntities())
+            {
+
+
+
+                string query = @"SELECT Receber.Id, ReceberBaixa.Id as ReceberBaixaId, Documento, Serie, Nome, ValorAReceber, ReceberBaixa.Valor as ValorPago, ReceberBaixa.DataPagamento 
+	                                FROM Receber 
+		                                INNER JOIN Vendedor ON Receber.VendedorId = Vendedor.Id
+		                                LEFT JOIN ReceberBaixa ON Receber.Id = ReceberBaixa.ReceberId
+		                                WHERE (Receber.CargaId = @p0 
+		                                or VendedorId 
+                                            IN(
+	                                            SELECT Distinct VendedorId
+                                                FROM Pedido
+                                                WHERE CargaId in(SELECT Id FROM Carga WHERE Id <=@p0 and PracaId = 34)
+                                            )) 
+			                                AND Receber.DataPagamento IS NULL 
+			                                AND ValorNF > 0 
+			                                AND Receber.CargaId <= @p0
+                                ORDER BY Nome";
+
+                var result = context.Database.SqlQuery<ListaAReceber>(query, pCargaId);
+
+                return result.ToList<ListaAReceber>();
+
+            }
+
+        }
+
+        public static void SalvarAReceber(int pReceberId, int pReceberBaixaId, double pValor, string pData)
+        {
+
+
+            
+            using (DepositoDBEntities context = new DepositoDBEntities())
+            {
+                if (pReceberBaixaId == 0)
+                {
+
+                    var maxReceberBaixa = context.ReceberBaixa.OrderByDescending(i => i.Id).FirstOrDefault();
+
+
+
+                    int newId = maxReceberBaixa == null ? 1 : maxReceberBaixa.Id + 1;
+
+                    Console.WriteLine("Inserindo Baixa A Receber - ReceberId: " + pReceberId.ToString());
+
+                    //insert
+                    var receberbaixa = new ReceberBaixa
+                    {
+                        Id = newId,
+                        ReceberId = Convert.ToInt32(pReceberId),
+                        CargaId = null,
+                        Valor = pValor,
+                        DataPagamento = Convert.ToDateTime(pData),
+                        DataBaixa = DateTime.Now
+
+                    };
+
+                    context.ReceberBaixa.Add(receberbaixa);
+                    context.SaveChanges();
+
+
+
+                } else
+                {
+
+                    var result = context.ReceberBaixa.SingleOrDefault(rb => rb.Id == pReceberBaixaId);
+                    if (result != null)
+                    {
+                        Console.WriteLine("Alterando Baixa A Receber - Id: " + pReceberBaixaId.ToString());
+                        result.Valor = pValor;
+                        result.DataPagamento = Convert.ToDateTime(pData);
+                        context.SaveChanges();
+                    }
+
+                }
+                
+            }
+
+
+
+
         }
 
     }
