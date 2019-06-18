@@ -954,11 +954,11 @@ namespace ConsignadoRepresentante
                 localRepresentanteForm.dlbPercentualComissao.Text = string.Format("{0}%", pedido.PercentualFaixa);
                 localRepresentanteForm.dlbValorComissao.Text = string.Format("{0:C2}", pedido.ValorComissao);
                 localRepresentanteForm.dlbValorLiquido.Text = string.Format("{0:C2}", pedido.ValorLiquido);
-                localRepresentanteForm.dlbRecebimentoAnterior.Text = string.Format("{0:C2}", pedido.RecebidoAnterior);
+                localRepresentanteForm.dlbRecebimentoAnterior.Text = string.Format("{0:C2}", pedido.ValorAReceber);
 
-                localRepresentanteForm.dlbTotalAPagar.Text = string.Format("{0:C2}", pedido.ValorLiquido + pedido.RecebidoAnterior);
+                localRepresentanteForm.dlbTotalAPagar.Text = string.Format("{0:C2}", pedido.ValorLiquido + pedido.ValorAReceber);
 
-                cValorTotalAPagar = Convert.ToDecimal(pedido.ValorLiquido + pedido.RecebidoAnterior);
+                cValorTotalAPagar = Convert.ToDecimal(pedido.ValorLiquido + pedido.ValorAReceber);
                 cValorRecebido = Convert.ToDecimal(pedido.ValorAcerto);
 
 

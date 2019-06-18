@@ -973,7 +973,7 @@ namespace ModelLibrary
             try
             {
                 Console.WriteLine("Carga Alterada: " + cCargaId);
-                ModelLibrary.MetodosDeposito.AlterarrStatusCarga(cCargaId, "E");
+                ModelLibrary.MetodosDeposito.AlterarStatusCarga(cCargaId, "E");
                 ModelLibrary.MetodosRepresentante.AlterarrStatusCarga(cCargaId, "E");
                 return true;
             } catch

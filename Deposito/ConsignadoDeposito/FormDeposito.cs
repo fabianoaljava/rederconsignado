@@ -715,6 +715,59 @@ namespace ConsignadoDeposito
 
         }
 
+        private void txtLancPedCodigoBarras_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                txtLancPedCodigoBarras_Leave(sender, e);
+
+            }
+        }
+
+        private void txtLancPedCodigoBarras_Leave(object sender, EventArgs e)
+        {
+            if (txtLancPedCodigoBarras.Text != "")
+            {
+                cRetorno.LancamentoPedidoPesquisar(txtLancPedCodigoBarras.Text);
+
+            } else
+            {
+                MessageBox.Show("Informe o Código de Barras do Produto");
+            }
+            
+        }
+
+        private void btnLancPedConfirmar_Click(object sender, EventArgs e)
+        {
+            cRetorno.SalvarLancamentoPedido();
+        }
+
+        private void btnLancPedCancelar_Click(object sender, EventArgs e)
+        {
+            cRetorno.LancamentoPedidoItemLimpar();
+        }
+
+        private void btnPesqVendedorOK_Click(object sender, EventArgs e)
+        {
+            cRetorno.VendedorPesquisar();
+        }
+
+        private void btnPesqVendedorLimpar_Click(object sender, EventArgs e)
+        {
+            cRetorno.VendedorLimpar();
+        }
+
+        private void grdLancPedido_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cRetorno.LancamentoPedidoPesquisar(grdLancPedido.CurrentRow.Cells[1].Value.ToString());
+        }
+
+        private void btnFinalizarAcerto_Click(object sender, EventArgs e)
+        {
+            cRetorno.FinalizarAcerto();
+        }
+
 
 
 

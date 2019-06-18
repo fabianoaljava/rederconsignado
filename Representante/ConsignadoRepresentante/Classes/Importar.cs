@@ -157,7 +157,7 @@ namespace ConsignadoRepresentante
 
                     //- alterar status da carga no servidor informando a exportacao para o modulo representante (importacao)
 
-                    ModelLibrary.MetodosDeposito.AlterarrStatusCarga(carga.Id, "E");
+                    ModelLibrary.MetodosDeposito.AlterarStatusCarga(carga.Id, "E");
 
                 } else
                 {

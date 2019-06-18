@@ -184,7 +184,7 @@ namespace ModelLibrary
         }
 
 
-        public static void AlterarrStatusCarga(long pCargaId, string pStatus)
+        public static void AlterarStatusCarga(long pCargaId, string pStatus)
         {
 
 
@@ -610,6 +610,79 @@ namespace ModelLibrary
         }
 
 
+
+        public static List<ListaPedidoItem> ObterListaPedidoItem(long pPedidoId)
+        {
+
+            using (DepositoDBEntities context = new DepositoDBEntities())
+            {
+
+                string query = @"SELECT PedidoItem.Id as PedidoItemId, Produto.CodigoBarras + '' + ProdutoGrade.Digito as CodigoBarras, Produto.Descricao NomeProduto, PedidoItem.Quantidade, PedidoItem.Retorno, PedidoItem.Preco
+	                            FROM PedidoItem 
+		                            INNER JOIN ProdutoGrade ON PedidoItem.ProdutoGradeId = ProdutoGrade.Id
+		                            INNER JOIN Produto ON ProdutoGrade.ProdutoId = Produto.Id
+                            WHERE PedidoItem.PedidoId = @p0";
+
+                Console.WriteLine("Exibindo lista de itens do pedido # " + pPedidoId.ToString());
+
+                var result = context.Database.SqlQuery<ListaPedidoItem>(query, pPedidoId);
+
+                return result.ToList<ListaPedidoItem>();
+            }
+
+        }
+
+
+
+        public static void AlterarPedidoItem(int pPedidoItemId, double pQuantidade, double pQtdRetorno, double pPreco)
+        {
+            ///alterar com base no 
+            using (DepositoDBEntities context = new DepositoDBEntities())
+            {
+                var result = context.PedidoItem.SingleOrDefault(pi => pi.Id == pPedidoItemId);
+                if (result != null)
+                {
+                    result.Quantidade = pQuantidade;
+                    result.Retorno = pQtdRetorno;
+                    result.Preco = pPreco;
+                    context.SaveChanges();
+                }
+            }
+
+        }
+
+        public static void InserirPedidoItem(int pPedidoId, int pProdutoGradeId, double pQuantidade, double pQtdRetorno, double pPreco)
+        {
+
+
+            using (DepositoDBEntities context = new DepositoDBEntities())
+            {
+
+
+                DateTime dataabertura = DateTime.Now;
+
+                var maxPedidoItem = context.PedidoItem.OrderByDescending(i => i.Id).FirstOrDefault();
+
+                int newId = maxPedidoItem == null ? 1 : maxPedidoItem.Id + 1;
+
+                var novopedidoitem = new PedidoItem
+                {
+                    Id = newId,
+                    PedidoId = pPedidoId,
+                    ProdutoGradeId = pProdutoGradeId,
+                    Quantidade = pQuantidade,
+                    Retorno = pQtdRetorno,
+                    Preco = pPreco
+                };
+
+                context.PedidoItem.Add(novopedidoitem);
+                context.SaveChanges();                
+
+
+            }
+
+        }
+
         public static List<ListaAReceber> ObterListaAReceber(long pCargaId)
         {
 
@@ -696,6 +769,100 @@ namespace ModelLibrary
 
 
 
+
+        }
+
+
+        public static List<Vendedor> ObterListaVendedor(long pCargaId = 0)
+        {
+            using (DepositoDBEntities context = new DepositoDBEntities())
+            {
+
+                List<Vendedor> result;
+
+                if (pCargaId == 0) {
+
+                    result = context.Vendedor.ToList<Vendedor>();
+
+                } else
+                {
+
+
+                    var carga = context.Carga.Where(c => c.Id == pCargaId).FirstOrDefault();
+
+                    if (carga != null)
+                    {
+
+
+                        string query = @"SELECT * 
+                                    FROM Vendedor 
+                                    WHERE 
+                                    /* Com pedido anterior */
+                                    Id IN(
+                                    SELECT Distinct VendedorId 
+                                    FROM Pedido 
+                                    WHERE CargaId in(SELECT Id FROM Carga WHERE RepresentanteId = @p0 and PracaId = @p1 and FORMAT(DataAbertura, 'yyyyMM') <= @p2)
+                                    ) 
+                                    /* Sem pedido atual */
+                                    OR  Id IN (
+                                    SELECT Distinct VendedorId 
+                                    FROM Receber 
+                                    INNER JOIN Carga ON Receber.CargaId = Carga.Id
+                                    WHERE PracaId = @p1
+                                    )";
+
+
+                        result = context.Database.SqlQuery<Vendedor>(query, carga.RepresentanteId, carga.PracaId, carga.Mes.ToString() + carga.Ano.ToString()).ToList<Vendedor>();
+
+                    } else
+                    {
+
+                        result = null;
+                    }
+
+                                       
+
+
+                }
+
+
+                return result;
+            }
+        }
+
+
+        public static Vendedor ObterVendedor(long pVendedorId)
+        {
+            using (DepositoDBEntities context = new DepositoDBEntities())
+            {
+
+                var vendedor = context.Vendedor.Where(vd => vd.Id == pVendedorId).FirstOrDefault();
+
+                return vendedor;
+
+            }
+        }
+
+        public static Vendedor PesquisarVendedor(string pCPFCnpj = "")
+        {
+            using (DepositoDBEntities context = new DepositoDBEntities())
+            {
+
+                var vendedor = context.Vendedor.Where(vd => vd.CpfCnpj.Trim() == pCPFCnpj).FirstOrDefault();
+
+                return vendedor;
+
+            }
+        }
+
+
+        public static Pedido ObterVendedorPedido(long pVendedorId, long pCargaId)
+        {
+            using (DepositoDBEntities context = new DepositoDBEntities())
+            {
+                var pedido = context.Pedido.OrderByDescending(i => i.Id).FirstOrDefault(p => p.VendedorId == pVendedorId && p.CargaId == pCargaId);
+                return pedido;
+            }
 
         }
 

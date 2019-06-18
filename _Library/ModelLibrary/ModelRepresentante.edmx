@@ -326,9 +326,6 @@
           <Property Name="Observacao" Type="nvarchar" MaxLength="2147483647" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6005: The data type '' is currently not supported for the target Entity Framework version; the column 'ValorAReceber' in the table 'main.RepPosicaoFinanceira' was excluded.
-warning 6005: The data type '' is currently not supported for the target Entity Framework version; the column 'ValorRecebido' in the table 'main.RepPosicaoFinanceira' was excluded.
-warning 6005: The data type '' is currently not supported for the target Entity Framework version; the column 'ValorAberto' in the table 'main.RepPosicaoFinanceira' was excluded.
 warning 6002: The table/view 'main.RepPosicaoFinanceira' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="RepPosicaoFinanceira">
           <Key>
@@ -336,10 +333,11 @@ warning 6002: The table/view 'main.RepPosicaoFinanceira' does not have a primary
           </Key>
           <Property Name="Id" Type="integer" Nullable="false" />
           <Property Name="VendedorId" Type="integer" />
+          <Property Name="ValorAReceber" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ValorRecebido" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ValorAberto" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6005: The data type '' is currently not supported for the target Entity Framework version; the column 'CodigoBarras' in the table 'main.RepProdutosConferencia' was excluded.
-warning 6005: The data type '' is currently not supported for the target Entity Framework version; the column 'Diferenca' in the table 'main.RepProdutosConferencia' was excluded.
 warning 6002: The table/view 'main.RepProdutosConferencia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="RepProdutosConferencia">
           <Key>
@@ -349,9 +347,11 @@ warning 6002: The table/view 'main.RepProdutosConferencia' does not have a prima
             <PropertyRef Name="ProdutoGradeId" />
             <PropertyRef Name="CargaId" />
           </Key>
+          <Property Name="CodigoBarras" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Descricao" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
           <Property Name="QuantidadeCarga" Type="decimal" Precision="18" Scale="0" />
           <Property Name="QuantidadeInformada" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Diferenca" Type="decimal" Precision="18" Scale="0" />
           <Property Name="ProdutoId" Type="integer" Nullable="false" />
           <Property Name="CargaProdutoId" Type="integer" Nullable="false" />
           <Property Name="ProdutoGradeId" Type="integer" Nullable="false" />
@@ -392,14 +392,19 @@ warning 6002: The table/view 'main.RepRepresentante' does not have a primary key
           <EntitySet Name="RepPosicaoFinanceira" EntityType="Self.RepPosicaoFinanceira" store:Type="Views">
             <DefiningQuery>SELECT 
 [RepPosicaoFinanceira].[Id] AS [Id], 
-[RepPosicaoFinanceira].[VendedorId] AS [VendedorId]
+[RepPosicaoFinanceira].[VendedorId] AS [VendedorId], 
+[RepPosicaoFinanceira].[ValorAReceber] AS [ValorAReceber], 
+[RepPosicaoFinanceira].[ValorRecebido] AS [ValorRecebido], 
+[RepPosicaoFinanceira].[ValorAberto] AS [ValorAberto]
 FROM [RepPosicaoFinanceira] AS [RepPosicaoFinanceira]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="RepProdutosConferencia" EntityType="Self.RepProdutosConferencia" store:Type="Views">
             <DefiningQuery>SELECT 
+[RepProdutosConferencia].[CodigoBarras] AS [CodigoBarras], 
 [RepProdutosConferencia].[Descricao] AS [Descricao], 
 [RepProdutosConferencia].[QuantidadeCarga] AS [QuantidadeCarga], 
 [RepProdutosConferencia].[QuantidadeInformada] AS [QuantidadeInformada], 
+[RepProdutosConferencia].[Diferenca] AS [Diferenca], 
 [RepProdutosConferencia].[ProdutoId] AS [ProdutoId], 
 [RepProdutosConferencia].[CargaProdutoId] AS [CargaProdutoId], 
 [RepProdutosConferencia].[ProdutoGradeId] AS [ProdutoGradeId], 
@@ -564,9 +569,9 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <EntitySet Name="RepReceberBaixa" EntityType="ModelRepresentante.RepReceberBaixa" />
           <EntitySet Name="RepSuplementoProduto" EntityType="ModelRepresentante.RepSuplementoProduto" />
           <EntitySet Name="RepSuplemento" EntityType="ModelRepresentante.RepSuplemento" />
+          <EntitySet Name="RepPedidoes" EntityType="ModelRepresentante.RepPedido" />
           <EntitySet Name="RepPosicaoFinanceiras" EntityType="ModelRepresentante.RepPosicaoFinanceira" />
           <EntitySet Name="RepProdutosConferencias" EntityType="ModelRepresentante.RepProdutosConferencia" />
-          <EntitySet Name="RepPedidoes" EntityType="ModelRepresentante.RepPedido" />
         </EntityContainer>
         <EntityType Name="RepRepresentante">
           <Key>
@@ -745,6 +750,32 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <Property Name="Situacao" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="Observacao" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="RepPedido">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="VendedorId" Type="Int64" Nullable="false" />
+          <Property Name="CargaId" Type="Int64" Nullable="false" />
+          <Property Name="CodigoPedido" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="DataLancamento" Type="DateTime" />
+          <Property Name="DataPrevisaoRetorno" Type="DateTime" />
+          <Property Name="DataRetorno" Type="DateTime" />
+          <Property Name="ValorPedido" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="ValorCompra" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="PercentualCompra" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="FaixaComissao" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="PercentualFaixa" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="ValorComissao" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="ValorLiquido" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="ValorAcerto" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="QuantidadeRetorno" Type="Int64" />
+          <Property Name="Remarcado" Type="Int64" />
+          <Property Name="Status" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="CargaAtual" Type="Int64" />
+          <Property Name="RepresentanteId" Type="Int64" />
+          <Property Name="ValorAReceber" Type="Decimal" Precision="53" Scale="0" />
+        </EntityType>
         <EntityType Name="RepPosicaoFinanceira">
           <Key>
             <PropertyRef Name="Id" />
@@ -772,32 +803,6 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <Property Name="CargaProdutoId" Type="Int64" Nullable="false" />
           <Property Name="ProdutoGradeId" Type="Int64" Nullable="false" />
           <Property Name="CargaId" Type="Int64" Nullable="false" />
-        </EntityType>
-        <EntityType Name="RepPedido">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" />
-          <Property Name="VendedorId" Type="Int64" Nullable="false" />
-          <Property Name="CargaId" Type="Int64" Nullable="false" />
-          <Property Name="CodigoPedido" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="DataLancamento" Type="DateTime" />
-          <Property Name="DataPrevisaoRetorno" Type="DateTime" />
-          <Property Name="DataRetorno" Type="DateTime" />
-          <Property Name="ValorPedido" Type="Decimal" Precision="53" Scale="0" />
-          <Property Name="ValorCompra" Type="Decimal" Precision="53" Scale="0" />
-          <Property Name="PercentualCompra" Type="Decimal" Precision="53" Scale="0" />
-          <Property Name="FaixaComissao" Type="Decimal" Precision="53" Scale="0" />
-          <Property Name="PercentualFaixa" Type="Decimal" Precision="53" Scale="0" />
-          <Property Name="ValorComissao" Type="Decimal" Precision="53" Scale="0" />
-          <Property Name="ValorLiquido" Type="Decimal" Precision="53" Scale="0" />
-          <Property Name="ValorAcerto" Type="Decimal" Precision="53" Scale="0" />
-          <Property Name="QuantidadeRetorno" Type="Int64" />
-          <Property Name="Remarcado" Type="Int64" />
-          <Property Name="Status" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="CargaAtual" Type="Int64" />
-          <Property Name="RepresentanteId" Type="Int64" />
-          <Property Name="ValorAReceber" Type="Decimal" Precision="53" Scale="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1127,27 +1132,6 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RepPosicaoFinanceiras">
-            <EntityTypeMapping TypeName="ModelRepresentante.RepPosicaoFinanceira">
-              <MappingFragment StoreEntitySet="RepPosicaoFinanceira">
-                <ScalarProperty Name="VendedorId" ColumnName="VendedorId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RepProdutosConferencias">
-            <EntityTypeMapping TypeName="ModelRepresentante.RepProdutosConferencia">
-              <MappingFragment StoreEntitySet="RepProdutosConferencia">
-                <ScalarProperty Name="CargaId" ColumnName="CargaId" />
-                <ScalarProperty Name="ProdutoGradeId" ColumnName="ProdutoGradeId" />
-                <ScalarProperty Name="CargaProdutoId" ColumnName="CargaProdutoId" />
-                <ScalarProperty Name="ProdutoId" ColumnName="ProdutoId" />
-                <ScalarProperty Name="QuantidadeInformada" ColumnName="QuantidadeInformada" />
-                <ScalarProperty Name="QuantidadeCarga" ColumnName="QuantidadeCarga" />
-                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="RepPedidoes">
             <EntityTypeMapping TypeName="ModelRepresentante.RepPedido">
               <MappingFragment StoreEntitySet="RepPedido">
@@ -1172,6 +1156,32 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
                 <ScalarProperty Name="CargaId" ColumnName="CargaId" />
                 <ScalarProperty Name="VendedorId" ColumnName="VendedorId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RepPosicaoFinanceiras">
+            <EntityTypeMapping TypeName="ModelRepresentante.RepPosicaoFinanceira">
+              <MappingFragment StoreEntitySet="RepPosicaoFinanceira">
+                <ScalarProperty Name="ValorAberto" ColumnName="ValorAberto" />
+                <ScalarProperty Name="ValorRecebido" ColumnName="ValorRecebido" />
+                <ScalarProperty Name="ValorAReceber" ColumnName="ValorAReceber" />
+                <ScalarProperty Name="VendedorId" ColumnName="VendedorId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RepProdutosConferencias">
+            <EntityTypeMapping TypeName="ModelRepresentante.RepProdutosConferencia">
+              <MappingFragment StoreEntitySet="RepProdutosConferencia">
+                <ScalarProperty Name="CargaId" ColumnName="CargaId" />
+                <ScalarProperty Name="ProdutoGradeId" ColumnName="ProdutoGradeId" />
+                <ScalarProperty Name="CargaProdutoId" ColumnName="CargaProdutoId" />
+                <ScalarProperty Name="ProdutoId" ColumnName="ProdutoId" />
+                <ScalarProperty Name="Diferenca" ColumnName="Diferenca" />
+                <ScalarProperty Name="QuantidadeInformada" ColumnName="QuantidadeInformada" />
+                <ScalarProperty Name="QuantidadeCarga" ColumnName="QuantidadeCarga" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="CodigoBarras" ColumnName="CodigoBarras" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

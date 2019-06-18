@@ -2147,6 +2147,24 @@
         ABhNG1J2/mKrAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="lblHome.Text" xml:space="preserve">
+    <value>Gráficos, Relatórios, Destaques
+
+Sugestão:
+
+Cargas Abertas / Em Andamento / Conferidas / Fechadas 
+Total de Produtos Consignados
+Total de Produtos a Retornar
+Total de Produtos Retornados
+Total de Produtos Vendidos
+Total de Pedidos em Aberto
+Total de Pedidos Fechados
+Vendedores não encontrados
+Valor Total Consignado
+Total a Receber
+Total Recebido
+</value>
+  </data>
   <metadata name="ctmCargaProduto.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>293, 17</value>
   </metadata>
@@ -2156,6 +2174,21 @@
   <metadata name="colorDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>172, 17</value>
   </metadata>
+  <data name="lblRetornoResumoSugestao.Text" xml:space="preserve">
+    <value>Sugestão:
+
+Status da Carga
+Total de Produtos Consignados
+Total de Produtos a Retornar
+Total de Produtos Retornados
+Total de Produtos Vendidos
+Total de Pedidos em Aberto
+Total de Pedidos Fechados
+Vendedores não encontrados
+Valor Total Consignado
+Total a Receber da Carga
+Total Recebido</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAACMuAAAjLgAAAAAAAAAA
