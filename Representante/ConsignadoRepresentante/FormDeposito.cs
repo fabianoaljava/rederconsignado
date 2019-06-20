@@ -537,6 +537,7 @@ namespace ConsignadoRepresentante
         private void bgwImportar_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             grdImportacao.Rows[grdImportacao.Rows.Count - 1].DefaultCellStyle.ForeColor = Color.Green;
+            grdImportacao.Rows[grdImportacao.Rows.Count - 1].Cells["Status"].Value = "Importado";
             btnImportar.Text = "Importação Realizada.";
             Cursor.Current = Cursors.Default;
 

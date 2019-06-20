@@ -103,7 +103,9 @@ namespace ConsignadoRepresentante
             localDeposito.cbbImportarPraca.SelectedIndex = -1;
             localDeposito.cbbImportarRepresentante.SelectedIndex = -1;
             localDeposito.txtImportarCodPraca.Text = "";
+            localDeposito.txtImportarCodPraca.WaterMark = "Cod. Praça";
             localDeposito.txtImportarCodRepresentante.Text = "";
+            localDeposito.txtImportarCodRepresentante.WaterMark = "Cod. Representante";
             localDeposito.cbbImportarMesAno.ResetText();
             localDeposito.tbcImportarConferencia.Visible = false;
             localDeposito.txtConfCodigoBarras.Text = "";
@@ -273,8 +275,7 @@ namespace ConsignadoRepresentante
         public void ExibirImportacao()
         {
 
-            //obtem dados da carga (local) com tudo bloqueado
-            localDeposito.pnlImportarPesquisa.Enabled = false;
+
 
             var carga = ModelLibrary.MetodosRepresentante.ObterCargaAtual();
 
@@ -286,8 +287,10 @@ namespace ConsignadoRepresentante
             int pracaId = Convert.ToInt32(carga.PracaId);
 
 
+            localDeposito.txtImportarCodPraca.WaterMark = carga.PracaId.ToString();
             localDeposito.txtImportarCodPraca.Text = carga.PracaId.ToString();
-            localDeposito.txtImportarCodRepresentante.Text = carga.RepresentanteId.ToString();
+            localDeposito.txtImportarCodRepresentante.WaterMark = carga.RepresentanteId.ToString();
+            localDeposito.txtImportarCodPraca.Text = carga.RepresentanteId.ToString();
 
             localDeposito.cbbImportarMesAno.Text = carga.Mes.ToString() + "/" + carga.Ano.ToString();
 
@@ -302,6 +305,11 @@ namespace ConsignadoRepresentante
             localDeposito.btnImportar.Visible = true;            
             localDeposito.btnImportarLimpar.Visible = true;
 
+
+            var totalizadores = ModelLibrary.MetodosRepresentante.ObterTotalizadores(cargaId);
+
+            localDeposito.dlbQtdProdutos.Text = totalizadores.QtdProdutos.ToString();
+            localDeposito.dlbTotalProdutos.Text = String.Format("{0:C2}", totalizadores.TotalProdutos.ToString());
 
 
             localDeposito.dlbImportarDataAbertura.Text = carga.DataAbertura.HasValue ? carga.DataAbertura.Value.ToShortDateString() : "-";
@@ -335,9 +343,16 @@ namespace ConsignadoRepresentante
             }
             
 
+
+
+
             //Exibir opção para Re-importar
             localDeposito.btnExcluirImportacao.Visible = true;
             localDeposito.btnExcluirImportacao.Enabled = true;
+
+
+            //obtem dados da carga (local) com tudo bloqueado
+            localDeposito.pnlImportarPesquisa.Enabled = false;
 
 
             //se a carga já foi exportada

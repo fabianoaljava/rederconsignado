@@ -470,115 +470,7 @@ namespace ModelLibrary
 
         }
 
-        public static decimal[] ObterTotalizadores(int pCargaId)
-        {
-
-            
-            var ret = new decimal[4];
-
-
-            using (DepositoDBEntities context = new DepositoDBEntities())
-            {
-
-
-
-                var result = (from tt in context.Totalizadores
-                              where tt.Id == pCargaId
-                              select tt).FirstOrDefault<Totalizadores>();
-
-
-                ret[0] = Convert.ToDecimal(result.QtdProdutos);
-                ret[1] = Convert.ToDecimal(result.TotalProdutos);
-
-                /*
-
-                
-
-                ret[0] = Convert.ToDouble(quantidade.FirstOrDefault().QtdProdutos);
-                //ret = context.Database.ExecuteSqlCommand("SELECT ");;
-
-                ret[1] = 111;
-
-                */
-                /*var cargaproduto = (from cp in context.CargaProduto
-                                    join pg in context.ProdutoGrade on cp.ProdutoGradeId equals pg.Id
-                                    where cp.CargaId == pCargaId
-                                    select new { cp.Id, cp.Quantidade, pg.ValorSaida } into x
-                                    group x by x.Id into grupo
-                                    select new
-                                    {
-                                        QtdProdutos = grupo.Sum(g => g.Quantidade),
-                                        TotalProdutos = grupo.Sum(g => g.ValorSaida)
-                                    });*/
-
-                /*
-
-                var cargaproduto = (from cp in context.CargaProduto
-                                    join pg in context.ProdutoGrade on cp.ProdutoGradeId equals pg.Id
-                                    where cp.CargaId == pCargaId
-                                    select new { cp.Quantidade, pg.ValorSaida }
-                                    );
-
-
-                var result = cargaproduto.Select(tt => new Totalizadores()
-                {
-                    QtdProdutos = Convert.ToDouble(tt.Quantidade),
-                    TotalProdutos = Convert.ToDouble(tt.ValorSaida)
-                }
-                ).ToList<Totalizadores>();
-
-                ret[0] = Convert.ToDouble(result["QtdProdutos"].Sum()) ;
-
-
-
-
-
-                var cargaproduto = (from cp in context.CargaProduto
-                                join pg in context.ProdutoGrade on cp.ProdutoGradeId equals pg.Id into subs
-                                from sub in subs.DefaultIfEmpty()
-                                group sub by new { cp.Id } into gr
-                                select new
-                                {
-                                    QtdProdutos = 0,
-                                    TotalProdutos = gr.Sum(g => g.ValorSaida)                                    
-                                }).ToList();
-
-
-
-
-
-
-                var result = context.CargaProduto
-                           .Where(cp => cp.CargaId == pCargaId)
-                           .Join(context.ProdutoGrade on cp.ProdutoGradeId equals pg.Id)
-                           .Select(pg => new ListaProdutosCarga()
-                           {
-                               CodigoBarras = pg.CodigoBarras,
-                               Descricao = pg.Descricao,
-                               Cor = pg.Cor,
-                               Tamanho = pg.Tamanho,
-                               Quantidade = pg.Quantidade,
-                               QuantidadeRetorno = pg.QuantidadeRetorno,
-                               ValorSaida = pg.ValorSaida,
-                               ValorCusto = pg.ValorCusto,
-                               ProdutoGradeId = pg.ProdutoGradeId
-                           });
-
-                Console.WriteLine(cargaproduto.);
-
-                ret[0] = 0; //Convert.ToDouble(cargaproduto.FirstOrDefault().QtdProdutos);
-                ret[1] = Convert.ToDouble(cargaproduto.FirstOrDefault().TotalProdutos);
-
-               
-
-                */
-
-                return ret;
-
-
-            }
-            
-        }
+        
 
         public static List<ListaPedidosRetorno> ObterListaPedidosRetorno(long pCargaId, bool pAtual = true)
         {
@@ -868,6 +760,38 @@ namespace ModelLibrary
             {
                 var pedido = context.Pedido.OrderByDescending(i => i.Id).FirstOrDefault(p => p.VendedorId == pVendedorId && p.CargaId == pCargaId);
                 return pedido;
+            }
+
+        }
+
+
+
+
+
+        public static decimal[] ObterTotalizadores(int pCargaId)
+        {
+
+
+            var ret = new decimal[4];
+
+
+            using (DepositoDBEntities context = new DepositoDBEntities())
+            {
+
+
+
+                var result = (from tt in context.Totalizadores
+                              where tt.Id == pCargaId
+                              select tt).FirstOrDefault<Totalizadores>();
+
+
+                ret[0] = Convert.ToDecimal(result.QtdProdutos);
+                ret[1] = Convert.ToDecimal(result.TotalProdutos);
+
+                
+                return ret;
+
+
             }
 
         }

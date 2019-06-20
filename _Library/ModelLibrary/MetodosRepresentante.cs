@@ -356,35 +356,7 @@ namespace ModelLibrary
 
             }
         }
-
-        public static decimal[] ObterTotalizadores(int pCargaId)
-        {
-
-
-            var ret = new decimal[4];
-
-
-            using (DepositoDBEntities context = new DepositoDBEntities())
-            {
-
-
-
-                var result = (from tt in context.Totalizadores
-                              where tt.Id == pCargaId
-                              select tt).FirstOrDefault<Totalizadores>();
-
-
-                ret[0] = Convert.ToDecimal(result.QtdProdutos);
-                ret[1] = Convert.ToDecimal(result.TotalProdutos);
-
-
-
-                return ret;
-
-
-            }
-
-        }
+     
 
         public static List<RepVendedor> ObterListaVendedor()
         {
@@ -1040,6 +1012,39 @@ namespace ModelLibrary
             }
 
 
+        }
+
+        public static ListaTotalizadores ObterTotalizadores(int pCargaId)
+        {
+
+
+            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            {
+
+
+
+                ListaTotalizadores vTotalizador = new ListaTotalizadores();
+
+
+
+                string query = @"SELECT RepCarga.Id, sum(RepCargaProduto.Quantidade) QtdProdutos, sum(ValorSaida) TotalProdutos 
+                                    FROM RepCarga 
+                                    INNER JOIN RepCargaProduto On RepCargaProduto.CargaId = RepCarga.Id 
+                                    INNER JOIN RepProdutoGrade ON ProdutoGradeId = RepProdutoGrade.Id
+                                WHERE RepCarga.Id = @p0
+                                GROUP BY RepCarga.Id";
+
+
+
+
+                var totalizador = context.Database.SqlQuery<ListaTotalizadores>(query, pCargaId).FirstOrDefault();
+
+                vTotalizador.QtdProdutos = totalizador.QtdProdutos;
+                vTotalizador.TotalProdutos = totalizador.TotalProdutos;
+
+                return vTotalizador;
+
+            }
         }
 
 
