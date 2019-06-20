@@ -34,16 +34,16 @@ namespace ConsignadoRepresentante
             {
 
 
-                localDeposito.btnExportarAnalizar.Text = "Obtendo Análise...";
-                localDeposito.btnExportarAnalizar.Enabled = false;
+                localDeposito.btnExportarAnalisar.Text = "Obtendo Análise...";
+                localDeposito.btnExportarAnalisar.Enabled = false;
                 localDeposito.grdExportacao.DataSource = ModelLibrary.ImportarExportar.ObterListaExportacao(localDeposito.cCargaId);
 
 
                 localDeposito.grdExportacao.ClearSelection();
 
 
-                localDeposito.btnExportarAnalizar.Text = "Analizar";
-                localDeposito.btnExportarAnalizar.Enabled = true;
+                localDeposito.btnExportarAnalisar.Text = "Analisar";
+                localDeposito.btnExportarAnalisar.Enabled = true;
 
 
 
@@ -133,6 +133,13 @@ namespace ConsignadoRepresentante
 
             return Task.CompletedTask;
 
+
+
+        }
+
+
+        public void ExibirExportacao()
+        {
 
 
         }

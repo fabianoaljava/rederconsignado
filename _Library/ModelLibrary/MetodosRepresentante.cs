@@ -147,7 +147,20 @@ namespace ModelLibrary
         }
 
 
-        public static void AlterarrStatusCarga(long pCargaId, string pStatus)
+        public static RepCargaAnterior ObterCargaAnterior()
+        {
+            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            {
+
+                var carganterior = context.RepCargaAnterior.OrderByDescending(c => c.Id).FirstOrDefault();
+
+                return carganterior;
+
+            }
+        }
+
+
+        public static void AlterarStatusCarga(long pCargaId, string pStatus)
         {
 
 

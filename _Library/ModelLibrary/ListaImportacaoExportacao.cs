@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ModelLibrary
 {
-    public class ListaExportacao
+    public class ListaImportacaoExportacao
     {
         public string Tabela { get; set; }
         public string Acao { get; set; }

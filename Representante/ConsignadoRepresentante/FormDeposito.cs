@@ -26,6 +26,7 @@ namespace ConsignadoRepresentante
 
         public DepositoHome cHome;
         public Importar cImportar;
+        public ConferirProdutos cConferirProdutos;
         public Exportar cExportar;
         public Suplemento cSuplemento;
         public Relatorio cRelatorio;
@@ -56,6 +57,7 @@ namespace ConsignadoRepresentante
 
             cHome = new DepositoHome(this);
             cImportar = new Importar(this);
+            cConferirProdutos = new ConferirProdutos(this);
             cExportar = new Exportar(this);
             cSuplemento = new Suplemento(this);
             cRelatorio = new Relatorio(this);
@@ -98,6 +100,7 @@ namespace ConsignadoRepresentante
                     lblCarga.Text = "Carga Obtida.";
                     cImportar.CarregarFormularioLocal(); //obter praça e representante local
                     cImportar.ExibirImportacao();
+                    cConferirProdutos.ExibirConferenciaProduto(cCargaId);
                 }
                 else
                 {
@@ -116,7 +119,7 @@ namespace ConsignadoRepresentante
                     lblCarga.Text = "Carga Obtida.";
                     cImportar.CarregarFormularioLocal(); //obter praça e representante local
                     cImportar.ExibirImportacao();
-
+                    cConferirProdutos.ExibirConferenciaProduto(cCargaId);
                 }
                 else
                 {
@@ -289,7 +292,7 @@ namespace ConsignadoRepresentante
             if (e.KeyData == Keys.Enter || e.KeyData == Keys.Return)
             {
                 e.SuppressKeyPress = true;
-                btnImportar.Focus();
+                btnImportarAnalisar.Focus();
 
             }
         }
@@ -322,10 +325,15 @@ namespace ConsignadoRepresentante
         }
 
 
+        private void btnImportarAnalisar_Click(object sender, EventArgs e)
+        {
+            cImportar.ImportarCarga(true);
+        }
+
+
         private void btnImportar_Click(object sender, EventArgs e)
         {
-
-            cImportar.ImportarCarga();
+            cImportar.ImportarCarga(false);
         }
 
         private void btnCargaPesquisar_Click(object sender, EventArgs e)
@@ -341,14 +349,36 @@ namespace ConsignadoRepresentante
 
         private void btnExcluirImportacao_Click(object sender, EventArgs e)
         {
+
+
             if (MessageBox.Show("ATENÇÃO: TODOS OS DADOS SERÃO APAGADOS. Deseja realmente excluir a importação?", "ATENÇÃO!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
-                cImportar.ExcluirImportacao();
+
+                if (ModelLibrary.MetodosDeposito.VerificarServidor())
+                {
+
+                    if (MessageBox.Show("O servidor foi encontrado Online, deseja reverter o status da Carga de \"Exportado\" para \"Aberto\"? \n \n ATENÇAO: Caso contrário NÃO será permitida a importação desta carga novamente. ", "Reverter Carga!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                    {
+                        cImportar.ExcluirImportacao(true);
+                    } else
+                    {
+                        cImportar.ExcluirImportacao(false);
+                    }
+                }
+                else
+                {
+                    if (MessageBox.Show("ATENÇAO: NÃO será permitida a importação desta carga novamente. Deseja realmente continuar?", "Impossível Reverter Carga!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                    {
+                        cImportar.ExcluirImportacao(false);
+                    }
+
+                }
+
             }
         }
 
         ////////////////////////////////////////
-        /// IMPORTAR - CONFERIR PRODUTOS
+        /// CONFERIR PRODUTOS
         ////////////////////////////////////////
 
         private void txtConfCodigoBarras_KeyUp(object sender, KeyEventArgs e)
@@ -356,7 +386,7 @@ namespace ConsignadoRepresentante
             if (e.KeyData == Keys.Enter)
             {
                 e.SuppressKeyPress = true;
-                cImportar.PesquisarConferenciaProduto(txtConfCodigoBarras.Text);
+                cConferirProdutos.PesquisarConferenciaProduto(txtConfCodigoBarras.Text);
 
             }
         }
@@ -365,7 +395,7 @@ namespace ConsignadoRepresentante
         {
             if (txtConfCodigoBarras.Text != "")
             {
-                cImportar.PesquisarConferenciaProduto(txtConfCodigoBarras.Text);
+                cConferirProdutos.PesquisarConferenciaProduto(txtConfCodigoBarras.Text);
             }
         }
 
@@ -373,7 +403,7 @@ namespace ConsignadoRepresentante
         private void btnConferenciaConfirmar_Click(object sender, EventArgs e)
         {
 
-            cImportar.ConfirmarCargaProdutoConferencia();
+            cConferirProdutos.ConfirmarCargaProdutoConferencia();
 
         }
 
@@ -392,18 +422,34 @@ namespace ConsignadoRepresentante
 
         }
 
-        private void grdConfProduto_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+
+        private void txtConfQuantidade_KeyUp(object sender, KeyEventArgs e)
         {
-            cImportar.EditarConferenciaProduto();
+            if (e.KeyData == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                btnConferenciaConfirmar_Click(sender, e);
+
+            }
         }
 
+
+        private void btnConfCancelar_Click(object sender, EventArgs e)
+        {
+            cConferirProdutos.ConferenciaProdutoLimpar();
+        }
+
+        private void grdConfProduto_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cConferirProdutos.EditarConferenciaProduto();
+        }
 
         private void grdConfProduto_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Delete)
             {
 
-                cImportar.ExcluirCargaProdutoConferencia();
+                cConferirProdutos.ExcluirCargaProdutoConferencia();
             }
 
         }
@@ -429,10 +475,7 @@ namespace ConsignadoRepresentante
             
         }
 
-        private void btnConfCancelar_Click(object sender, EventArgs e)
-        {
-            cImportar.ConferenciaProdutoLimpar();
-        }
+       
 
 
         ////////////////////////////////////////
@@ -452,7 +495,7 @@ namespace ConsignadoRepresentante
 
         }
 
-        private void btnExportarAnalizar_Click(object sender, EventArgs e)
+        private void btnExportarAnalisar_Click(object sender, EventArgs e)
         {
 
             cExportar.ExportarAnalisar();
@@ -471,28 +514,35 @@ namespace ConsignadoRepresentante
             }
         }
 
-        private void bgwExportar_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            //Console.WriteLine(bgwExportar.WorkerReportsProgress);
-        }
 
         private void bgwExportar_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             grdExportacao.Rows[grdExportacao.Rows.Count-1].DefaultCellStyle.ForeColor = Color.Green;
             btnExportar.Text = "Exportação Realizada.";
             Cursor.Current = Cursors.Default;
+
+            cExportar.ExibirExportacao();
         }
 
+        private void bgwImportar_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            foreach (DataGridViewRow row in grdImportacao.Rows)
+            {
+                Console.WriteLine(row.Cells["Rotina"].Value.ToString() + " em row:" + row.Index.ToString());
+                cImportar.ProcessarImportacao(row.Cells["Rotina"].Value.ToString(), row.Index);
+            }
+        }
 
+        private void bgwImportar_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            grdImportacao.Rows[grdImportacao.Rows.Count - 1].DefaultCellStyle.ForeColor = Color.Green;
+            btnImportar.Text = "Importação Realizada.";
+            Cursor.Current = Cursors.Default;
 
+            CarregarRepresentante();
 
-
-
-
-
-
-
-
-
+            cImportar.ExibirImportacao();
+        }
     }
 }

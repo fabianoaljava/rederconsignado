@@ -111,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Ajuda.cs" />
+    <Compile Include="Classes\ConferirProdutos.cs" />
     <Compile Include="Classes\Configuracao.cs" />
     <Compile Include="Classes\DepositoHome.cs" />
     <Compile Include="Classes\Estoque.cs" />

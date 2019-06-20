@@ -200,6 +200,12 @@ namespace ModelLibrary
 
                     switch (pStatus)
                     {
+                        case "A": /* Revertendo status */
+                            result.DataExportacao = null;
+                            result.DataRetorno = null;
+                            result.DataConferencia = null;
+                            result.DataFinalizacao = null;
+                            break;
                         case "E":
                             result.DataExportacao = DateTime.Now;
                             break;

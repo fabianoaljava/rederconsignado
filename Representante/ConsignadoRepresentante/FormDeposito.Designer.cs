@@ -31,13 +31,16 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDeposito));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelHeader = new System.Windows.Forms.Panel();
             this.btnExcluirImportacao = new MetroFramework.Controls.MetroLink();
             this.lblCarga = new MetroFramework.Controls.MetroLabel();
@@ -53,36 +56,27 @@
             this.panelHome = new MetroFramework.Controls.MetroPanel();
             this.lblHome = new MetroFramework.Controls.MetroLabel();
             this.tabImportar = new System.Windows.Forms.TabPage();
-            this.tbcImportarConferencia = new MetroFramework.Controls.MetroTabControl();
-            this.tabConfProduto = new System.Windows.Forms.TabPage();
-            this.pnlConferirProdutos = new MetroFramework.Controls.MetroPanel();
-            this.grdConfProduto = new MetroFramework.Controls.MetroGrid();
-            this.pnlComposicao = new MetroFramework.Controls.MetroPanel();
-            this.lblImportarConferirProduto = new MetroFramework.Controls.MetroLabel();
-            this.btnConfCancelar = new MetroFramework.Controls.MetroButton();
-            this.chkConfQuantidade = new MetroFramework.Controls.MetroCheckBox();
-            this.btnConferenciaConfirmar = new MetroFramework.Controls.MetroButton();
-            this.txtConfQuantidade = new MetroFramework.Controls.MetroTextBox();
-            this.txtConfProduto = new MetroFramework.Controls.MetroTextBox();
-            this.txtConfCodigoBarras = new MetroFramework.Controls.MetroTextBox();
+            this.pnlImportacaoGrid = new MetroFramework.Controls.MetroPanel();
+            this.grdImportacao = new MetroFramework.Controls.MetroGrid();
             this.pnlImportarPesquisa = new MetroFramework.Controls.MetroPanel();
+            this.btnImportarAnalisar = new MetroFramework.Controls.MetroButton();
             this.cbbImportarMesAno = new System.Windows.Forms.DateTimePicker();
             this.lblTotalProdutos = new MetroFramework.Controls.MetroLabel();
             this.dblTotalProdutos = new MetroFramework.Controls.MetroLabel();
             this.lblQtdProdutos = new MetroFramework.Controls.MetroLabel();
             this.dblQtdProdutos = new MetroFramework.Controls.MetroLabel();
-            this.grpImportarViagemAnterior = new System.Windows.Forms.GroupBox();
-            this.dlbCargaVADataFinalizacao = new MetroFramework.Controls.MetroLabel();
-            this.dlbCargaVADataRetorno = new MetroFramework.Controls.MetroLabel();
-            this.dlbCargaVADataConferencia = new MetroFramework.Controls.MetroLabel();
-            this.lblCargaVADataAbertura = new MetroFramework.Controls.MetroLabel();
-            this.lblCargaVADataExportacao = new MetroFramework.Controls.MetroLabel();
-            this.dlbCargaVADataExportacao = new MetroFramework.Controls.MetroLabel();
-            this.lblCargaVADataRetorno = new MetroFramework.Controls.MetroLabel();
-            this.dlbCargaVADataAbertura = new MetroFramework.Controls.MetroLabel();
-            this.lblCargaVADataConferencia = new MetroFramework.Controls.MetroLabel();
-            this.lblCargaVADataFinalizacao = new MetroFramework.Controls.MetroLabel();
-            this.grpCargaDataViagem = new System.Windows.Forms.GroupBox();
+            this.grpCargaAnterior = new System.Windows.Forms.GroupBox();
+            this.dlbCargaAnteriorDataFinalizacao = new MetroFramework.Controls.MetroLabel();
+            this.dlbCargaAnteriorDataRetorno = new MetroFramework.Controls.MetroLabel();
+            this.dlbCargaAnteriorDataConferencia = new MetroFramework.Controls.MetroLabel();
+            this.lblCargaAnteriorDataAbertura = new MetroFramework.Controls.MetroLabel();
+            this.lblCargaAnteriorDataExportacao = new MetroFramework.Controls.MetroLabel();
+            this.dlbCargaAnteriorDataExportacao = new MetroFramework.Controls.MetroLabel();
+            this.lblCargaAnteriorDataRetorno = new MetroFramework.Controls.MetroLabel();
+            this.dlbCargaAnteriorDataAbertura = new MetroFramework.Controls.MetroLabel();
+            this.lblCargaAnteriorDataConferencia = new MetroFramework.Controls.MetroLabel();
+            this.lblCargaAnteriorDataFinalizacao = new MetroFramework.Controls.MetroLabel();
+            this.grpCargaData = new System.Windows.Forms.GroupBox();
             this.dlbImportarDataFinalizacao = new MetroFramework.Controls.MetroLabel();
             this.dlbImportarDataConferencia = new MetroFramework.Controls.MetroLabel();
             this.dlbImportarDataRetorno = new MetroFramework.Controls.MetroLabel();
@@ -97,17 +91,29 @@
             this.txtImportarCodPraca = new MetroFramework.Controls.MetroTextBox();
             this.btnImportar = new MetroFramework.Controls.MetroButton();
             this.btnImportarLimpar = new MetroFramework.Controls.MetroButton();
-            this.btnImportarPesquisar = new MetroFramework.Controls.MetroButton();
             this.cbbImportarRepresentante = new MetroFramework.Controls.MetroComboBox();
             this.cbbImportarPraca = new MetroFramework.Controls.MetroComboBox();
             this.lblImportarMesAno = new MetroFramework.Controls.MetroLabel();
             this.lblImportarRepresentante = new MetroFramework.Controls.MetroLabel();
             this.lblImportarPraca = new MetroFramework.Controls.MetroLabel();
-            this.tabConferenciaProdutos = new System.Windows.Forms.TabPage();
+            this.tabConferirProdutos = new System.Windows.Forms.TabPage();
+            this.tbcImportarConferencia = new MetroFramework.Controls.MetroTabControl();
+            this.tabConfProduto = new System.Windows.Forms.TabPage();
+            this.pnlConferirProdutos = new MetroFramework.Controls.MetroPanel();
+            this.grdConfProduto = new MetroFramework.Controls.MetroGrid();
+            this.pnlComposicao = new MetroFramework.Controls.MetroPanel();
+            this.lblImportarConferirProduto = new MetroFramework.Controls.MetroLabel();
+            this.btnConfCancelar = new MetroFramework.Controls.MetroButton();
+            this.chkConfQuantidade = new MetroFramework.Controls.MetroCheckBox();
+            this.btnConferenciaConfirmar = new MetroFramework.Controls.MetroButton();
+            this.txtConfQuantidade = new MetroFramework.Controls.MetroTextBox();
+            this.txtConfProduto = new MetroFramework.Controls.MetroTextBox();
+            this.txtConfCodigoBarras = new MetroFramework.Controls.MetroTextBox();
             this.tabExportar = new System.Windows.Forms.TabPage();
             this.pnlExportacaoGrid = new MetroFramework.Controls.MetroPanel();
             this.grdExportacao = new MetroFramework.Controls.MetroGrid();
             this.pnlExportacaoMain = new MetroFramework.Controls.MetroPanel();
+            this.btnExportarAnalisar = new MetroFramework.Controls.MetroButton();
             this.lblExportacaoAlerta = new MetroFramework.Controls.MetroLabel();
             this.btnExportar = new MetroFramework.Controls.MetroButton();
             this.tabRelatorios = new System.Windows.Forms.TabPage();
@@ -118,7 +124,7 @@
             this.tabSuplemento = new System.Windows.Forms.TabPage();
             this.tabAjuda = new System.Windows.Forms.TabPage();
             this.bgwExportar = new System.ComponentModel.BackgroundWorker();
-            this.btnExportarAnalizar = new MetroFramework.Controls.MetroButton();
+            this.bgwImportar = new System.ComponentModel.BackgroundWorker();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
@@ -127,14 +133,17 @@
             this.tabHome.SuspendLayout();
             this.panelHome.SuspendLayout();
             this.tabImportar.SuspendLayout();
+            this.pnlImportacaoGrid.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdImportacao)).BeginInit();
+            this.pnlImportarPesquisa.SuspendLayout();
+            this.grpCargaAnterior.SuspendLayout();
+            this.grpCargaData.SuspendLayout();
+            this.tabConferirProdutos.SuspendLayout();
             this.tbcImportarConferencia.SuspendLayout();
             this.tabConfProduto.SuspendLayout();
             this.pnlConferirProdutos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdConfProduto)).BeginInit();
             this.pnlComposicao.SuspendLayout();
-            this.pnlImportarPesquisa.SuspendLayout();
-            this.grpImportarViagemAnterior.SuspendLayout();
-            this.grpCargaDataViagem.SuspendLayout();
             this.tabExportar.SuspendLayout();
             this.pnlExportacaoGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdExportacao)).BeginInit();
@@ -266,7 +275,7 @@
             // 
             this.tbcPrincipal.Controls.Add(this.tabHome);
             this.tbcPrincipal.Controls.Add(this.tabImportar);
-            this.tbcPrincipal.Controls.Add(this.tabConferenciaProdutos);
+            this.tbcPrincipal.Controls.Add(this.tabConferirProdutos);
             this.tbcPrincipal.Controls.Add(this.tabExportar);
             this.tbcPrincipal.Controls.Add(this.tabRelatorios);
             this.tbcPrincipal.Controls.Add(this.tabConfiguracoes);
@@ -275,7 +284,7 @@
             this.tbcPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tbcPrincipal.Name = "tbcPrincipal";
-            this.tbcPrincipal.SelectedIndex = 3;
+            this.tbcPrincipal.SelectedIndex = 1;
             this.tbcPrincipal.Size = new System.Drawing.Size(860, 645);
             this.tbcPrincipal.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tbcPrincipal.TabIndex = 11;
@@ -316,7 +325,7 @@
             // 
             // tabImportar
             // 
-            this.tabImportar.Controls.Add(this.tbcImportarConferencia);
+            this.tabImportar.Controls.Add(this.pnlImportacaoGrid);
             this.tabImportar.Controls.Add(this.pnlImportarPesquisa);
             this.tabImportar.Location = new System.Drawing.Point(4, 38);
             this.tabImportar.Name = "tabImportar";
@@ -324,288 +333,85 @@
             this.tabImportar.TabIndex = 1;
             this.tabImportar.Text = "IMPORTAR";
             // 
-            // tbcImportarConferencia
+            // pnlImportacaoGrid
             // 
-            this.tbcImportarConferencia.Controls.Add(this.tabConfProduto);
-            this.tbcImportarConferencia.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbcImportarConferencia.Location = new System.Drawing.Point(0, 131);
-            this.tbcImportarConferencia.Name = "tbcImportarConferencia";
-            this.tbcImportarConferencia.SelectedIndex = 0;
-            this.tbcImportarConferencia.Size = new System.Drawing.Size(852, 472);
-            this.tbcImportarConferencia.TabIndex = 1;
-            this.tbcImportarConferencia.UseSelectable = true;
-            this.tbcImportarConferencia.Visible = false;
+            this.pnlImportacaoGrid.Controls.Add(this.grdImportacao);
+            this.pnlImportacaoGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlImportacaoGrid.HorizontalScrollbarBarColor = true;
+            this.pnlImportacaoGrid.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlImportacaoGrid.HorizontalScrollbarSize = 10;
+            this.pnlImportacaoGrid.Location = new System.Drawing.Point(0, 133);
+            this.pnlImportacaoGrid.Name = "pnlImportacaoGrid";
+            this.pnlImportacaoGrid.Size = new System.Drawing.Size(852, 470);
+            this.pnlImportacaoGrid.TabIndex = 2;
+            this.pnlImportacaoGrid.VerticalScrollbarBarColor = true;
+            this.pnlImportacaoGrid.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlImportacaoGrid.VerticalScrollbarSize = 10;
             // 
-            // tabConfProduto
+            // grdImportacao
             // 
-            this.tabConfProduto.Controls.Add(this.pnlConferirProdutos);
-            this.tabConfProduto.Controls.Add(this.pnlComposicao);
-            this.tabConfProduto.Location = new System.Drawing.Point(4, 38);
-            this.tabConfProduto.Name = "tabConfProduto";
-            this.tabConfProduto.Size = new System.Drawing.Size(844, 430);
-            this.tabConfProduto.TabIndex = 0;
-            this.tabConfProduto.Text = "Conferência de Produtos";
-            // 
-            // pnlConferirProdutos
-            // 
-            this.pnlConferirProdutos.AutoScroll = true;
-            this.pnlConferirProdutos.Controls.Add(this.grdConfProduto);
-            this.pnlConferirProdutos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlConferirProdutos.HorizontalScrollbar = true;
-            this.pnlConferirProdutos.HorizontalScrollbarBarColor = true;
-            this.pnlConferirProdutos.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlConferirProdutos.HorizontalScrollbarSize = 10;
-            this.pnlConferirProdutos.Location = new System.Drawing.Point(0, 57);
-            this.pnlConferirProdutos.Name = "pnlConferirProdutos";
-            this.pnlConferirProdutos.Size = new System.Drawing.Size(844, 373);
-            this.pnlConferirProdutos.TabIndex = 1;
-            this.pnlConferirProdutos.VerticalScrollbar = true;
-            this.pnlConferirProdutos.VerticalScrollbarBarColor = true;
-            this.pnlConferirProdutos.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlConferirProdutos.VerticalScrollbarSize = 10;
-            // 
-            // grdConfProduto
-            // 
-            this.grdConfProduto.AllowUserToAddRows = false;
-            this.grdConfProduto.AllowUserToDeleteRows = false;
-            this.grdConfProduto.AllowUserToOrderColumns = true;
-            this.grdConfProduto.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.grdConfProduto.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.grdConfProduto.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.grdConfProduto.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.grdConfProduto.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.grdConfProduto.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.grdConfProduto.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdConfProduto.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.grdConfProduto.ColumnHeadersHeight = 22;
-            this.grdConfProduto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdConfProduto.DefaultCellStyle = dataGridViewCellStyle3;
-            this.grdConfProduto.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdConfProduto.EnableHeadersVisualStyles = false;
-            this.grdConfProduto.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.grdConfProduto.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.grdConfProduto.Location = new System.Drawing.Point(0, 0);
-            this.grdConfProduto.MultiSelect = false;
-            this.grdConfProduto.Name = "grdConfProduto";
-            this.grdConfProduto.ReadOnly = true;
-            this.grdConfProduto.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdConfProduto.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.grdConfProduto.RowHeadersVisible = false;
-            this.grdConfProduto.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.grdConfProduto.RowTemplate.ReadOnly = true;
-            this.grdConfProduto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.grdConfProduto.ShowEditingIcon = false;
-            this.grdConfProduto.Size = new System.Drawing.Size(844, 373);
-            this.grdConfProduto.StandardTab = true;
-            this.grdConfProduto.TabIndex = 3;
-            this.grdConfProduto.UseCustomBackColor = true;
-            this.grdConfProduto.UseCustomForeColor = true;
-            this.grdConfProduto.UseStyleColors = true;
-            this.grdConfProduto.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdConfProduto_CellDoubleClick);
-            this.grdConfProduto.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.grdConfProduto_RowPostPaint);
-            this.grdConfProduto.KeyUp += new System.Windows.Forms.KeyEventHandler(this.grdConfProduto_KeyUp);
-            // 
-            // pnlComposicao
-            // 
-            this.pnlComposicao.Controls.Add(this.lblImportarConferirProduto);
-            this.pnlComposicao.Controls.Add(this.btnConfCancelar);
-            this.pnlComposicao.Controls.Add(this.chkConfQuantidade);
-            this.pnlComposicao.Controls.Add(this.btnConferenciaConfirmar);
-            this.pnlComposicao.Controls.Add(this.txtConfQuantidade);
-            this.pnlComposicao.Controls.Add(this.txtConfProduto);
-            this.pnlComposicao.Controls.Add(this.txtConfCodigoBarras);
-            this.pnlComposicao.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlComposicao.HorizontalScrollbarBarColor = true;
-            this.pnlComposicao.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlComposicao.HorizontalScrollbarSize = 10;
-            this.pnlComposicao.Location = new System.Drawing.Point(0, 0);
-            this.pnlComposicao.Name = "pnlComposicao";
-            this.pnlComposicao.Size = new System.Drawing.Size(844, 57);
-            this.pnlComposicao.TabIndex = 0;
-            this.pnlComposicao.VerticalScrollbarBarColor = true;
-            this.pnlComposicao.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlComposicao.VerticalScrollbarSize = 10;
-            // 
-            // lblImportarConferirProduto
-            // 
-            this.lblImportarConferirProduto.AutoSize = true;
-            this.lblImportarConferirProduto.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.lblImportarConferirProduto.Location = new System.Drawing.Point(4, 4);
-            this.lblImportarConferirProduto.Name = "lblImportarConferirProduto";
-            this.lblImportarConferirProduto.Size = new System.Drawing.Size(123, 19);
-            this.lblImportarConferirProduto.TabIndex = 18;
-            this.lblImportarConferirProduto.Text = "Conferir Produto";
-            // 
-            // btnConfCancelar
-            // 
-            this.btnConfCancelar.Enabled = false;
-            this.btnConfCancelar.Location = new System.Drawing.Point(667, 28);
-            this.btnConfCancelar.Name = "btnConfCancelar";
-            this.btnConfCancelar.Size = new System.Drawing.Size(67, 23);
-            this.btnConfCancelar.TabIndex = 10;
-            this.btnConfCancelar.Text = "Cancelar";
-            this.btnConfCancelar.UseSelectable = true;
-            this.btnConfCancelar.Click += new System.EventHandler(this.btnConfCancelar_Click);
-            // 
-            // chkConfQuantidade
-            // 
-            this.chkConfQuantidade.AutoSize = true;
-            this.chkConfQuantidade.Checked = true;
-            this.chkConfQuantidade.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkConfQuantidade.Location = new System.Drawing.Point(490, 9);
-            this.chkConfQuantidade.Name = "chkConfQuantidade";
-            this.chkConfQuantidade.Size = new System.Drawing.Size(97, 15);
-            this.chkConfQuantidade.TabIndex = 13;
-            this.chkConfQuantidade.TabStop = false;
-            this.chkConfQuantidade.Text = "Informar Qtd?";
-            this.chkConfQuantidade.UseSelectable = true;
-            // 
-            // btnConferenciaConfirmar
-            // 
-            this.btnConferenciaConfirmar.Enabled = false;
-            this.btnConferenciaConfirmar.Location = new System.Drawing.Point(595, 28);
-            this.btnConferenciaConfirmar.Name = "btnConferenciaConfirmar";
-            this.btnConferenciaConfirmar.Size = new System.Drawing.Size(66, 23);
-            this.btnConferenciaConfirmar.TabIndex = 9;
-            this.btnConferenciaConfirmar.Text = "Confirmar";
-            this.btnConferenciaConfirmar.UseSelectable = true;
-            this.btnConferenciaConfirmar.Click += new System.EventHandler(this.btnConferenciaConfirmar_Click);
-            // 
-            // txtConfQuantidade
-            // 
-            // 
-            // 
-            // 
-            this.txtConfQuantidade.CustomButton.Image = null;
-            this.txtConfQuantidade.CustomButton.Location = new System.Drawing.Point(77, 1);
-            this.txtConfQuantidade.CustomButton.Name = "";
-            this.txtConfQuantidade.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtConfQuantidade.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtConfQuantidade.CustomButton.TabIndex = 1;
-            this.txtConfQuantidade.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtConfQuantidade.CustomButton.UseSelectable = true;
-            this.txtConfQuantidade.CustomButton.Visible = false;
-            this.txtConfQuantidade.Lines = new string[0];
-            this.txtConfQuantidade.Location = new System.Drawing.Point(490, 28);
-            this.txtConfQuantidade.MaxLength = 32767;
-            this.txtConfQuantidade.Name = "txtConfQuantidade";
-            this.txtConfQuantidade.PasswordChar = '\0';
-            this.txtConfQuantidade.PromptText = "Quantidade";
-            this.txtConfQuantidade.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtConfQuantidade.SelectedText = "";
-            this.txtConfQuantidade.SelectionLength = 0;
-            this.txtConfQuantidade.SelectionStart = 0;
-            this.txtConfQuantidade.ShortcutsEnabled = true;
-            this.txtConfQuantidade.Size = new System.Drawing.Size(99, 23);
-            this.txtConfQuantidade.TabIndex = 8;
-            this.txtConfQuantidade.UseSelectable = true;
-            this.txtConfQuantidade.WaterMark = "Quantidade";
-            this.txtConfQuantidade.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtConfQuantidade.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // txtConfProduto
-            // 
-            // 
-            // 
-            // 
-            this.txtConfProduto.CustomButton.Image = null;
-            this.txtConfProduto.CustomButton.Location = new System.Drawing.Point(350, 1);
-            this.txtConfProduto.CustomButton.Name = "";
-            this.txtConfProduto.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtConfProduto.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtConfProduto.CustomButton.TabIndex = 1;
-            this.txtConfProduto.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtConfProduto.CustomButton.UseSelectable = true;
-            this.txtConfProduto.CustomButton.Visible = false;
-            this.txtConfProduto.Lines = new string[0];
-            this.txtConfProduto.Location = new System.Drawing.Point(112, 28);
-            this.txtConfProduto.MaxLength = 32767;
-            this.txtConfProduto.Name = "txtConfProduto";
-            this.txtConfProduto.PasswordChar = '\0';
-            this.txtConfProduto.PromptText = "Nome do Produto";
-            this.txtConfProduto.ReadOnly = true;
-            this.txtConfProduto.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtConfProduto.SelectedText = "";
-            this.txtConfProduto.SelectionLength = 0;
-            this.txtConfProduto.SelectionStart = 0;
-            this.txtConfProduto.ShortcutsEnabled = true;
-            this.txtConfProduto.Size = new System.Drawing.Size(372, 23);
-            this.txtConfProduto.TabIndex = 7;
-            this.txtConfProduto.UseSelectable = true;
-            this.txtConfProduto.WaterMark = "Nome do Produto";
-            this.txtConfProduto.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtConfProduto.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // txtConfCodigoBarras
-            // 
-            // 
-            // 
-            // 
-            this.txtConfCodigoBarras.CustomButton.Image = null;
-            this.txtConfCodigoBarras.CustomButton.Location = new System.Drawing.Point(70, 1);
-            this.txtConfCodigoBarras.CustomButton.Name = "";
-            this.txtConfCodigoBarras.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtConfCodigoBarras.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtConfCodigoBarras.CustomButton.TabIndex = 1;
-            this.txtConfCodigoBarras.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtConfCodigoBarras.CustomButton.UseSelectable = true;
-            this.txtConfCodigoBarras.CustomButton.Visible = false;
-            this.txtConfCodigoBarras.Lines = new string[0];
-            this.txtConfCodigoBarras.Location = new System.Drawing.Point(14, 28);
-            this.txtConfCodigoBarras.MaxLength = 32767;
-            this.txtConfCodigoBarras.Name = "txtConfCodigoBarras";
-            this.txtConfCodigoBarras.PasswordChar = '\0';
-            this.txtConfCodigoBarras.PromptText = "Código de Barras";
-            this.txtConfCodigoBarras.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtConfCodigoBarras.SelectedText = "";
-            this.txtConfCodigoBarras.SelectionLength = 0;
-            this.txtConfCodigoBarras.SelectionStart = 0;
-            this.txtConfCodigoBarras.ShortcutsEnabled = true;
-            this.txtConfCodigoBarras.Size = new System.Drawing.Size(92, 23);
-            this.txtConfCodigoBarras.TabIndex = 6;
-            this.txtConfCodigoBarras.UseSelectable = true;
-            this.txtConfCodigoBarras.WaterMark = "Código de Barras";
-            this.txtConfCodigoBarras.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtConfCodigoBarras.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            this.txtConfCodigoBarras.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtConfCodigoBarras_KeyUp);
-            this.txtConfCodigoBarras.Leave += new System.EventHandler(this.txtConfCodigoBarras_Leave);
+            this.grdImportacao.AllowUserToResizeRows = false;
+            this.grdImportacao.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.grdImportacao.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.grdImportacao.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdImportacao.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.grdImportacao.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.grdImportacao.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdImportacao.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle21;
+            this.grdImportacao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grdImportacao.DefaultCellStyle = dataGridViewCellStyle22;
+            this.grdImportacao.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdImportacao.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.grdImportacao.EnableHeadersVisualStyles = false;
+            this.grdImportacao.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.grdImportacao.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdImportacao.Location = new System.Drawing.Point(0, 0);
+            this.grdImportacao.Name = "grdImportacao";
+            this.grdImportacao.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdImportacao.RowHeadersDefaultCellStyle = dataGridViewCellStyle23;
+            this.grdImportacao.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.grdImportacao.RowTemplate.DividerHeight = 1;
+            this.grdImportacao.RowTemplate.Height = 35;
+            this.grdImportacao.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.grdImportacao.ShowEditingIcon = false;
+            this.grdImportacao.Size = new System.Drawing.Size(852, 470);
+            this.grdImportacao.TabIndex = 2;
             // 
             // pnlImportarPesquisa
             // 
+            this.pnlImportarPesquisa.Controls.Add(this.btnImportarAnalisar);
             this.pnlImportarPesquisa.Controls.Add(this.cbbImportarMesAno);
             this.pnlImportarPesquisa.Controls.Add(this.lblTotalProdutos);
             this.pnlImportarPesquisa.Controls.Add(this.dblTotalProdutos);
             this.pnlImportarPesquisa.Controls.Add(this.lblQtdProdutos);
             this.pnlImportarPesquisa.Controls.Add(this.dblQtdProdutos);
-            this.pnlImportarPesquisa.Controls.Add(this.grpImportarViagemAnterior);
-            this.pnlImportarPesquisa.Controls.Add(this.grpCargaDataViagem);
+            this.pnlImportarPesquisa.Controls.Add(this.grpCargaAnterior);
+            this.pnlImportarPesquisa.Controls.Add(this.grpCargaData);
             this.pnlImportarPesquisa.Controls.Add(this.txtImportarCodRepresentante);
             this.pnlImportarPesquisa.Controls.Add(this.txtImportarCodPraca);
             this.pnlImportarPesquisa.Controls.Add(this.btnImportar);
             this.pnlImportarPesquisa.Controls.Add(this.btnImportarLimpar);
-            this.pnlImportarPesquisa.Controls.Add(this.btnImportarPesquisar);
             this.pnlImportarPesquisa.Controls.Add(this.cbbImportarRepresentante);
             this.pnlImportarPesquisa.Controls.Add(this.cbbImportarPraca);
             this.pnlImportarPesquisa.Controls.Add(this.lblImportarMesAno);
@@ -617,11 +423,21 @@
             this.pnlImportarPesquisa.HorizontalScrollbarSize = 10;
             this.pnlImportarPesquisa.Location = new System.Drawing.Point(0, 0);
             this.pnlImportarPesquisa.Name = "pnlImportarPesquisa";
-            this.pnlImportarPesquisa.Size = new System.Drawing.Size(852, 131);
+            this.pnlImportarPesquisa.Size = new System.Drawing.Size(852, 133);
             this.pnlImportarPesquisa.TabIndex = 0;
             this.pnlImportarPesquisa.VerticalScrollbarBarColor = true;
             this.pnlImportarPesquisa.VerticalScrollbarHighlightOnWheel = false;
             this.pnlImportarPesquisa.VerticalScrollbarSize = 10;
+            // 
+            // btnImportarAnalisar
+            // 
+            this.btnImportarAnalisar.Location = new System.Drawing.Point(217, 88);
+            this.btnImportarAnalisar.Name = "btnImportarAnalisar";
+            this.btnImportarAnalisar.Size = new System.Drawing.Size(78, 26);
+            this.btnImportarAnalisar.TabIndex = 3;
+            this.btnImportarAnalisar.Text = "Analisar";
+            this.btnImportarAnalisar.UseSelectable = true;
+            this.btnImportarAnalisar.Click += new System.EventHandler(this.btnImportarAnalisar_Click);
             // 
             // cbbImportarMesAno
             // 
@@ -633,7 +449,7 @@
             this.cbbImportarMesAno.Margin = new System.Windows.Forms.Padding(5);
             this.cbbImportarMesAno.Name = "cbbImportarMesAno";
             this.cbbImportarMesAno.ShowUpDown = true;
-            this.cbbImportarMesAno.Size = new System.Drawing.Size(97, 26);
+            this.cbbImportarMesAno.Size = new System.Drawing.Size(85, 26);
             this.cbbImportarMesAno.TabIndex = 2;
             this.cbbImportarMesAno.Value = new System.DateTime(2019, 5, 1, 0, 0, 0, 0);
             this.cbbImportarMesAno.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cbbCargaMesAno_KeyUp);
@@ -684,155 +500,155 @@
             this.dblQtdProdutos.Text = "0.00";
             this.dblQtdProdutos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // grpImportarViagemAnterior
+            // grpCargaAnterior
             // 
-            this.grpImportarViagemAnterior.BackColor = System.Drawing.Color.White;
-            this.grpImportarViagemAnterior.Controls.Add(this.dlbCargaVADataFinalizacao);
-            this.grpImportarViagemAnterior.Controls.Add(this.dlbCargaVADataRetorno);
-            this.grpImportarViagemAnterior.Controls.Add(this.dlbCargaVADataConferencia);
-            this.grpImportarViagemAnterior.Controls.Add(this.lblCargaVADataAbertura);
-            this.grpImportarViagemAnterior.Controls.Add(this.lblCargaVADataExportacao);
-            this.grpImportarViagemAnterior.Controls.Add(this.dlbCargaVADataExportacao);
-            this.grpImportarViagemAnterior.Controls.Add(this.lblCargaVADataRetorno);
-            this.grpImportarViagemAnterior.Controls.Add(this.dlbCargaVADataAbertura);
-            this.grpImportarViagemAnterior.Controls.Add(this.lblCargaVADataConferencia);
-            this.grpImportarViagemAnterior.Controls.Add(this.lblCargaVADataFinalizacao);
-            this.grpImportarViagemAnterior.Location = new System.Drawing.Point(599, 7);
-            this.grpImportarViagemAnterior.Name = "grpImportarViagemAnterior";
-            this.grpImportarViagemAnterior.Size = new System.Drawing.Size(139, 113);
-            this.grpImportarViagemAnterior.TabIndex = 24;
-            this.grpImportarViagemAnterior.TabStop = false;
-            this.grpImportarViagemAnterior.Text = "Viagem Anterior";
+            this.grpCargaAnterior.BackColor = System.Drawing.Color.White;
+            this.grpCargaAnterior.Controls.Add(this.dlbCargaAnteriorDataFinalizacao);
+            this.grpCargaAnterior.Controls.Add(this.dlbCargaAnteriorDataRetorno);
+            this.grpCargaAnterior.Controls.Add(this.dlbCargaAnteriorDataConferencia);
+            this.grpCargaAnterior.Controls.Add(this.lblCargaAnteriorDataAbertura);
+            this.grpCargaAnterior.Controls.Add(this.lblCargaAnteriorDataExportacao);
+            this.grpCargaAnterior.Controls.Add(this.dlbCargaAnteriorDataExportacao);
+            this.grpCargaAnterior.Controls.Add(this.lblCargaAnteriorDataRetorno);
+            this.grpCargaAnterior.Controls.Add(this.dlbCargaAnteriorDataAbertura);
+            this.grpCargaAnterior.Controls.Add(this.lblCargaAnteriorDataConferencia);
+            this.grpCargaAnterior.Controls.Add(this.lblCargaAnteriorDataFinalizacao);
+            this.grpCargaAnterior.Location = new System.Drawing.Point(599, 7);
+            this.grpCargaAnterior.Name = "grpCargaAnterior";
+            this.grpCargaAnterior.Size = new System.Drawing.Size(139, 113);
+            this.grpCargaAnterior.TabIndex = 24;
+            this.grpCargaAnterior.TabStop = false;
+            this.grpCargaAnterior.Text = "Carga Anterior";
             // 
-            // dlbCargaVADataFinalizacao
+            // dlbCargaAnteriorDataFinalizacao
             // 
-            this.dlbCargaVADataFinalizacao.AutoSize = true;
-            this.dlbCargaVADataFinalizacao.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.dlbCargaVADataFinalizacao.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.dlbCargaVADataFinalizacao.Location = new System.Drawing.Point(72, 88);
-            this.dlbCargaVADataFinalizacao.Name = "dlbCargaVADataFinalizacao";
-            this.dlbCargaVADataFinalizacao.Size = new System.Drawing.Size(63, 15);
-            this.dlbCargaVADataFinalizacao.TabIndex = 19;
-            this.dlbCargaVADataFinalizacao.Text = "<<Data>>";
-            this.dlbCargaVADataFinalizacao.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.dlbCargaAnteriorDataFinalizacao.AutoSize = true;
+            this.dlbCargaAnteriorDataFinalizacao.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.dlbCargaAnteriorDataFinalizacao.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.dlbCargaAnteriorDataFinalizacao.Location = new System.Drawing.Point(72, 88);
+            this.dlbCargaAnteriorDataFinalizacao.Name = "dlbCargaAnteriorDataFinalizacao";
+            this.dlbCargaAnteriorDataFinalizacao.Size = new System.Drawing.Size(63, 15);
+            this.dlbCargaAnteriorDataFinalizacao.TabIndex = 19;
+            this.dlbCargaAnteriorDataFinalizacao.Text = "<<Data>>";
+            this.dlbCargaAnteriorDataFinalizacao.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // dlbCargaVADataRetorno
+            // dlbCargaAnteriorDataRetorno
             // 
-            this.dlbCargaVADataRetorno.AutoSize = true;
-            this.dlbCargaVADataRetorno.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.dlbCargaVADataRetorno.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.dlbCargaVADataRetorno.Location = new System.Drawing.Point(72, 54);
-            this.dlbCargaVADataRetorno.Name = "dlbCargaVADataRetorno";
-            this.dlbCargaVADataRetorno.Size = new System.Drawing.Size(63, 15);
-            this.dlbCargaVADataRetorno.TabIndex = 17;
-            this.dlbCargaVADataRetorno.Text = "<<Data>>";
-            this.dlbCargaVADataRetorno.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.dlbCargaAnteriorDataRetorno.AutoSize = true;
+            this.dlbCargaAnteriorDataRetorno.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.dlbCargaAnteriorDataRetorno.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.dlbCargaAnteriorDataRetorno.Location = new System.Drawing.Point(72, 54);
+            this.dlbCargaAnteriorDataRetorno.Name = "dlbCargaAnteriorDataRetorno";
+            this.dlbCargaAnteriorDataRetorno.Size = new System.Drawing.Size(63, 15);
+            this.dlbCargaAnteriorDataRetorno.TabIndex = 17;
+            this.dlbCargaAnteriorDataRetorno.Text = "<<Data>>";
+            this.dlbCargaAnteriorDataRetorno.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // dlbCargaVADataConferencia
+            // dlbCargaAnteriorDataConferencia
             // 
-            this.dlbCargaVADataConferencia.AutoSize = true;
-            this.dlbCargaVADataConferencia.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.dlbCargaVADataConferencia.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.dlbCargaVADataConferencia.Location = new System.Drawing.Point(72, 71);
-            this.dlbCargaVADataConferencia.Name = "dlbCargaVADataConferencia";
-            this.dlbCargaVADataConferencia.Size = new System.Drawing.Size(63, 15);
-            this.dlbCargaVADataConferencia.TabIndex = 18;
-            this.dlbCargaVADataConferencia.Text = "<<Data>>";
-            this.dlbCargaVADataConferencia.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.dlbCargaAnteriorDataConferencia.AutoSize = true;
+            this.dlbCargaAnteriorDataConferencia.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.dlbCargaAnteriorDataConferencia.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.dlbCargaAnteriorDataConferencia.Location = new System.Drawing.Point(72, 71);
+            this.dlbCargaAnteriorDataConferencia.Name = "dlbCargaAnteriorDataConferencia";
+            this.dlbCargaAnteriorDataConferencia.Size = new System.Drawing.Size(63, 15);
+            this.dlbCargaAnteriorDataConferencia.TabIndex = 18;
+            this.dlbCargaAnteriorDataConferencia.Text = "<<Data>>";
+            this.dlbCargaAnteriorDataConferencia.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // lblCargaVADataAbertura
+            // lblCargaAnteriorDataAbertura
             // 
-            this.lblCargaVADataAbertura.AutoSize = true;
-            this.lblCargaVADataAbertura.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblCargaVADataAbertura.Location = new System.Drawing.Point(4, 20);
-            this.lblCargaVADataAbertura.Name = "lblCargaVADataAbertura";
-            this.lblCargaVADataAbertura.Size = new System.Drawing.Size(56, 15);
-            this.lblCargaVADataAbertura.TabIndex = 10;
-            this.lblCargaVADataAbertura.Text = "Abertura:";
+            this.lblCargaAnteriorDataAbertura.AutoSize = true;
+            this.lblCargaAnteriorDataAbertura.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblCargaAnteriorDataAbertura.Location = new System.Drawing.Point(4, 20);
+            this.lblCargaAnteriorDataAbertura.Name = "lblCargaAnteriorDataAbertura";
+            this.lblCargaAnteriorDataAbertura.Size = new System.Drawing.Size(56, 15);
+            this.lblCargaAnteriorDataAbertura.TabIndex = 10;
+            this.lblCargaAnteriorDataAbertura.Text = "Abertura:";
             // 
-            // lblCargaVADataExportacao
+            // lblCargaAnteriorDataExportacao
             // 
-            this.lblCargaVADataExportacao.AutoSize = true;
-            this.lblCargaVADataExportacao.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblCargaVADataExportacao.Location = new System.Drawing.Point(4, 37);
-            this.lblCargaVADataExportacao.Name = "lblCargaVADataExportacao";
-            this.lblCargaVADataExportacao.Size = new System.Drawing.Size(68, 15);
-            this.lblCargaVADataExportacao.TabIndex = 11;
-            this.lblCargaVADataExportacao.Text = "Exportação:";
+            this.lblCargaAnteriorDataExportacao.AutoSize = true;
+            this.lblCargaAnteriorDataExportacao.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblCargaAnteriorDataExportacao.Location = new System.Drawing.Point(4, 37);
+            this.lblCargaAnteriorDataExportacao.Name = "lblCargaAnteriorDataExportacao";
+            this.lblCargaAnteriorDataExportacao.Size = new System.Drawing.Size(68, 15);
+            this.lblCargaAnteriorDataExportacao.TabIndex = 11;
+            this.lblCargaAnteriorDataExportacao.Text = "Exportação:";
             // 
-            // dlbCargaVADataExportacao
+            // dlbCargaAnteriorDataExportacao
             // 
-            this.dlbCargaVADataExportacao.AutoSize = true;
-            this.dlbCargaVADataExportacao.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.dlbCargaVADataExportacao.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.dlbCargaVADataExportacao.Location = new System.Drawing.Point(72, 37);
-            this.dlbCargaVADataExportacao.Name = "dlbCargaVADataExportacao";
-            this.dlbCargaVADataExportacao.Size = new System.Drawing.Size(63, 15);
-            this.dlbCargaVADataExportacao.TabIndex = 16;
-            this.dlbCargaVADataExportacao.Text = "<<Data>>";
-            this.dlbCargaVADataExportacao.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.dlbCargaAnteriorDataExportacao.AutoSize = true;
+            this.dlbCargaAnteriorDataExportacao.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.dlbCargaAnteriorDataExportacao.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.dlbCargaAnteriorDataExportacao.Location = new System.Drawing.Point(72, 37);
+            this.dlbCargaAnteriorDataExportacao.Name = "dlbCargaAnteriorDataExportacao";
+            this.dlbCargaAnteriorDataExportacao.Size = new System.Drawing.Size(63, 15);
+            this.dlbCargaAnteriorDataExportacao.TabIndex = 16;
+            this.dlbCargaAnteriorDataExportacao.Text = "<<Data>>";
+            this.dlbCargaAnteriorDataExportacao.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // lblCargaVADataRetorno
+            // lblCargaAnteriorDataRetorno
             // 
-            this.lblCargaVADataRetorno.AutoSize = true;
-            this.lblCargaVADataRetorno.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblCargaVADataRetorno.Location = new System.Drawing.Point(4, 54);
-            this.lblCargaVADataRetorno.Name = "lblCargaVADataRetorno";
-            this.lblCargaVADataRetorno.Size = new System.Drawing.Size(51, 15);
-            this.lblCargaVADataRetorno.TabIndex = 12;
-            this.lblCargaVADataRetorno.Text = "Retorno:";
+            this.lblCargaAnteriorDataRetorno.AutoSize = true;
+            this.lblCargaAnteriorDataRetorno.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblCargaAnteriorDataRetorno.Location = new System.Drawing.Point(4, 54);
+            this.lblCargaAnteriorDataRetorno.Name = "lblCargaAnteriorDataRetorno";
+            this.lblCargaAnteriorDataRetorno.Size = new System.Drawing.Size(51, 15);
+            this.lblCargaAnteriorDataRetorno.TabIndex = 12;
+            this.lblCargaAnteriorDataRetorno.Text = "Retorno:";
             // 
-            // dlbCargaVADataAbertura
+            // dlbCargaAnteriorDataAbertura
             // 
-            this.dlbCargaVADataAbertura.AutoSize = true;
-            this.dlbCargaVADataAbertura.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.dlbCargaVADataAbertura.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.dlbCargaVADataAbertura.Location = new System.Drawing.Point(72, 20);
-            this.dlbCargaVADataAbertura.Name = "dlbCargaVADataAbertura";
-            this.dlbCargaVADataAbertura.Size = new System.Drawing.Size(63, 15);
-            this.dlbCargaVADataAbertura.TabIndex = 15;
-            this.dlbCargaVADataAbertura.Text = "<<Data>>";
-            this.dlbCargaVADataAbertura.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.dlbCargaAnteriorDataAbertura.AutoSize = true;
+            this.dlbCargaAnteriorDataAbertura.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.dlbCargaAnteriorDataAbertura.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.dlbCargaAnteriorDataAbertura.Location = new System.Drawing.Point(72, 20);
+            this.dlbCargaAnteriorDataAbertura.Name = "dlbCargaAnteriorDataAbertura";
+            this.dlbCargaAnteriorDataAbertura.Size = new System.Drawing.Size(63, 15);
+            this.dlbCargaAnteriorDataAbertura.TabIndex = 15;
+            this.dlbCargaAnteriorDataAbertura.Text = "<<Data>>";
+            this.dlbCargaAnteriorDataAbertura.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // lblCargaVADataConferencia
+            // lblCargaAnteriorDataConferencia
             // 
-            this.lblCargaVADataConferencia.AutoSize = true;
-            this.lblCargaVADataConferencia.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblCargaVADataConferencia.Location = new System.Drawing.Point(4, 71);
-            this.lblCargaVADataConferencia.Name = "lblCargaVADataConferencia";
-            this.lblCargaVADataConferencia.Size = new System.Drawing.Size(68, 15);
-            this.lblCargaVADataConferencia.TabIndex = 13;
-            this.lblCargaVADataConferencia.Text = "Conferencia:";
+            this.lblCargaAnteriorDataConferencia.AutoSize = true;
+            this.lblCargaAnteriorDataConferencia.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblCargaAnteriorDataConferencia.Location = new System.Drawing.Point(4, 71);
+            this.lblCargaAnteriorDataConferencia.Name = "lblCargaAnteriorDataConferencia";
+            this.lblCargaAnteriorDataConferencia.Size = new System.Drawing.Size(68, 15);
+            this.lblCargaAnteriorDataConferencia.TabIndex = 13;
+            this.lblCargaAnteriorDataConferencia.Text = "Conferencia:";
             // 
-            // lblCargaVADataFinalizacao
+            // lblCargaAnteriorDataFinalizacao
             // 
-            this.lblCargaVADataFinalizacao.AutoSize = true;
-            this.lblCargaVADataFinalizacao.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblCargaVADataFinalizacao.Location = new System.Drawing.Point(4, 88);
-            this.lblCargaVADataFinalizacao.Name = "lblCargaVADataFinalizacao";
-            this.lblCargaVADataFinalizacao.Size = new System.Drawing.Size(64, 15);
-            this.lblCargaVADataFinalizacao.TabIndex = 14;
-            this.lblCargaVADataFinalizacao.Text = "Finalização:";
+            this.lblCargaAnteriorDataFinalizacao.AutoSize = true;
+            this.lblCargaAnteriorDataFinalizacao.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblCargaAnteriorDataFinalizacao.Location = new System.Drawing.Point(4, 88);
+            this.lblCargaAnteriorDataFinalizacao.Name = "lblCargaAnteriorDataFinalizacao";
+            this.lblCargaAnteriorDataFinalizacao.Size = new System.Drawing.Size(64, 15);
+            this.lblCargaAnteriorDataFinalizacao.TabIndex = 14;
+            this.lblCargaAnteriorDataFinalizacao.Text = "Finalização:";
             // 
-            // grpCargaDataViagem
+            // grpCargaData
             // 
-            this.grpCargaDataViagem.BackColor = System.Drawing.Color.White;
-            this.grpCargaDataViagem.Controls.Add(this.dlbImportarDataFinalizacao);
-            this.grpCargaDataViagem.Controls.Add(this.dlbImportarDataConferencia);
-            this.grpCargaDataViagem.Controls.Add(this.dlbImportarDataRetorno);
-            this.grpCargaDataViagem.Controls.Add(this.dlbCargaDataExportacao);
-            this.grpCargaDataViagem.Controls.Add(this.dlbImportarDataAbertura);
-            this.grpCargaDataViagem.Controls.Add(this.lblImportarDataFinalizacao);
-            this.grpCargaDataViagem.Controls.Add(this.lblImportarDataConferencia);
-            this.grpCargaDataViagem.Controls.Add(this.lblImportarDataRetorno);
-            this.grpCargaDataViagem.Controls.Add(this.lblImportarDataExportacao);
-            this.grpCargaDataViagem.Controls.Add(this.lblImportarDataAbertura);
-            this.grpCargaDataViagem.Location = new System.Drawing.Point(455, 7);
-            this.grpCargaDataViagem.Name = "grpCargaDataViagem";
-            this.grpCargaDataViagem.Size = new System.Drawing.Size(138, 112);
-            this.grpCargaDataViagem.TabIndex = 23;
-            this.grpCargaDataViagem.TabStop = false;
-            this.grpCargaDataViagem.Text = "Datas da Viagem";
+            this.grpCargaData.BackColor = System.Drawing.Color.White;
+            this.grpCargaData.Controls.Add(this.dlbImportarDataFinalizacao);
+            this.grpCargaData.Controls.Add(this.dlbImportarDataConferencia);
+            this.grpCargaData.Controls.Add(this.dlbImportarDataRetorno);
+            this.grpCargaData.Controls.Add(this.dlbCargaDataExportacao);
+            this.grpCargaData.Controls.Add(this.dlbImportarDataAbertura);
+            this.grpCargaData.Controls.Add(this.lblImportarDataFinalizacao);
+            this.grpCargaData.Controls.Add(this.lblImportarDataConferencia);
+            this.grpCargaData.Controls.Add(this.lblImportarDataRetorno);
+            this.grpCargaData.Controls.Add(this.lblImportarDataExportacao);
+            this.grpCargaData.Controls.Add(this.lblImportarDataAbertura);
+            this.grpCargaData.Location = new System.Drawing.Point(455, 7);
+            this.grpCargaData.Name = "grpCargaData";
+            this.grpCargaData.Size = new System.Drawing.Size(138, 112);
+            this.grpCargaData.TabIndex = 23;
+            this.grpCargaData.TabStop = false;
+            this.grpCargaData.Text = "Datas da Carga";
             // 
             // dlbImportarDataFinalizacao
             // 
@@ -1025,10 +841,10 @@
             // btnImportar
             // 
             this.btnImportar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnImportar.Location = new System.Drawing.Point(232, 86);
+            this.btnImportar.Location = new System.Drawing.Point(301, 88);
             this.btnImportar.Name = "btnImportar";
-            this.btnImportar.Size = new System.Drawing.Size(76, 29);
-            this.btnImportar.TabIndex = 3;
+            this.btnImportar.Size = new System.Drawing.Size(78, 26);
+            this.btnImportar.TabIndex = 4;
             this.btnImportar.Text = "Importar";
             this.btnImportar.UseSelectable = true;
             this.btnImportar.Click += new System.EventHandler(this.btnImportar_Click);
@@ -1036,24 +852,13 @@
             // btnImportarLimpar
             // 
             this.btnImportarLimpar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnImportarLimpar.Location = new System.Drawing.Point(388, 86);
+            this.btnImportarLimpar.Location = new System.Drawing.Point(384, 88);
             this.btnImportarLimpar.Name = "btnImportarLimpar";
-            this.btnImportarLimpar.Size = new System.Drawing.Size(61, 29);
+            this.btnImportarLimpar.Size = new System.Drawing.Size(65, 26);
             this.btnImportarLimpar.TabIndex = 5;
             this.btnImportarLimpar.Text = "Limpar";
             this.btnImportarLimpar.UseSelectable = true;
             this.btnImportarLimpar.Click += new System.EventHandler(this.btnImportarLimpar_Click);
-            // 
-            // btnImportarPesquisar
-            // 
-            this.btnImportarPesquisar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnImportarPesquisar.Location = new System.Drawing.Point(313, 86);
-            this.btnImportarPesquisar.Name = "btnImportarPesquisar";
-            this.btnImportarPesquisar.Size = new System.Drawing.Size(71, 29);
-            this.btnImportarPesquisar.TabIndex = 4;
-            this.btnImportarPesquisar.Text = "Pesquisar";
-            this.btnImportarPesquisar.UseSelectable = true;
-            this.btnImportarPesquisar.Click += new System.EventHandler(this.btnCargaPesquisar_Click);
             // 
             // cbbImportarRepresentante
             // 
@@ -1110,13 +915,284 @@
             this.lblImportarPraca.TabIndex = 2;
             this.lblImportarPraca.Text = "Praça";
             // 
-            // tabConferenciaProdutos
+            // tabConferirProdutos
             // 
-            this.tabConferenciaProdutos.Location = new System.Drawing.Point(4, 38);
-            this.tabConferenciaProdutos.Name = "tabConferenciaProdutos";
-            this.tabConferenciaProdutos.Size = new System.Drawing.Size(852, 603);
-            this.tabConferenciaProdutos.TabIndex = 10;
-            this.tabConferenciaProdutos.Text = "CONFERÊNCIA";
+            this.tabConferirProdutos.Controls.Add(this.tbcImportarConferencia);
+            this.tabConferirProdutos.Location = new System.Drawing.Point(4, 38);
+            this.tabConferirProdutos.Name = "tabConferirProdutos";
+            this.tabConferirProdutos.Size = new System.Drawing.Size(852, 603);
+            this.tabConferirProdutos.TabIndex = 10;
+            this.tabConferirProdutos.Text = "CONFERIR PRODUTOS";
+            // 
+            // tbcImportarConferencia
+            // 
+            this.tbcImportarConferencia.Controls.Add(this.tabConfProduto);
+            this.tbcImportarConferencia.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbcImportarConferencia.Location = new System.Drawing.Point(0, 0);
+            this.tbcImportarConferencia.Name = "tbcImportarConferencia";
+            this.tbcImportarConferencia.SelectedIndex = 0;
+            this.tbcImportarConferencia.Size = new System.Drawing.Size(852, 603);
+            this.tbcImportarConferencia.TabIndex = 2;
+            this.tbcImportarConferencia.UseSelectable = true;
+            this.tbcImportarConferencia.Visible = false;
+            // 
+            // tabConfProduto
+            // 
+            this.tabConfProduto.Controls.Add(this.pnlConferirProdutos);
+            this.tabConfProduto.Controls.Add(this.pnlComposicao);
+            this.tabConfProduto.Location = new System.Drawing.Point(4, 38);
+            this.tabConfProduto.Name = "tabConfProduto";
+            this.tabConfProduto.Size = new System.Drawing.Size(844, 561);
+            this.tabConfProduto.TabIndex = 0;
+            this.tabConfProduto.Text = "Conferência de Produtos";
+            // 
+            // pnlConferirProdutos
+            // 
+            this.pnlConferirProdutos.AutoScroll = true;
+            this.pnlConferirProdutos.Controls.Add(this.grdConfProduto);
+            this.pnlConferirProdutos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlConferirProdutos.HorizontalScrollbar = true;
+            this.pnlConferirProdutos.HorizontalScrollbarBarColor = true;
+            this.pnlConferirProdutos.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlConferirProdutos.HorizontalScrollbarSize = 10;
+            this.pnlConferirProdutos.Location = new System.Drawing.Point(0, 57);
+            this.pnlConferirProdutos.Name = "pnlConferirProdutos";
+            this.pnlConferirProdutos.Size = new System.Drawing.Size(844, 504);
+            this.pnlConferirProdutos.TabIndex = 1;
+            this.pnlConferirProdutos.VerticalScrollbar = true;
+            this.pnlConferirProdutos.VerticalScrollbarBarColor = true;
+            this.pnlConferirProdutos.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlConferirProdutos.VerticalScrollbarSize = 10;
+            // 
+            // grdConfProduto
+            // 
+            this.grdConfProduto.AllowUserToAddRows = false;
+            this.grdConfProduto.AllowUserToDeleteRows = false;
+            this.grdConfProduto.AllowUserToOrderColumns = true;
+            this.grdConfProduto.AllowUserToResizeRows = false;
+            dataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.grdConfProduto.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle24;
+            this.grdConfProduto.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.grdConfProduto.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdConfProduto.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.grdConfProduto.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.grdConfProduto.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle25.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdConfProduto.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle25;
+            this.grdConfProduto.ColumnHeadersHeight = 22;
+            this.grdConfProduto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle26.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grdConfProduto.DefaultCellStyle = dataGridViewCellStyle26;
+            this.grdConfProduto.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdConfProduto.EnableHeadersVisualStyles = false;
+            this.grdConfProduto.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.grdConfProduto.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdConfProduto.Location = new System.Drawing.Point(0, 0);
+            this.grdConfProduto.MultiSelect = false;
+            this.grdConfProduto.Name = "grdConfProduto";
+            this.grdConfProduto.ReadOnly = true;
+            this.grdConfProduto.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle27.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle27.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdConfProduto.RowHeadersDefaultCellStyle = dataGridViewCellStyle27;
+            this.grdConfProduto.RowHeadersVisible = false;
+            this.grdConfProduto.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.grdConfProduto.RowTemplate.ReadOnly = true;
+            this.grdConfProduto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.grdConfProduto.ShowEditingIcon = false;
+            this.grdConfProduto.Size = new System.Drawing.Size(844, 504);
+            this.grdConfProduto.StandardTab = true;
+            this.grdConfProduto.TabIndex = 3;
+            this.grdConfProduto.UseCustomBackColor = true;
+            this.grdConfProduto.UseCustomForeColor = true;
+            this.grdConfProduto.UseStyleColors = true;
+            this.grdConfProduto.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdConfProduto_CellDoubleClick);
+            this.grdConfProduto.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.grdConfProduto_RowPostPaint);
+            this.grdConfProduto.KeyUp += new System.Windows.Forms.KeyEventHandler(this.grdConfProduto_KeyUp);
+            // 
+            // pnlComposicao
+            // 
+            this.pnlComposicao.Controls.Add(this.lblImportarConferirProduto);
+            this.pnlComposicao.Controls.Add(this.btnConfCancelar);
+            this.pnlComposicao.Controls.Add(this.chkConfQuantidade);
+            this.pnlComposicao.Controls.Add(this.btnConferenciaConfirmar);
+            this.pnlComposicao.Controls.Add(this.txtConfQuantidade);
+            this.pnlComposicao.Controls.Add(this.txtConfProduto);
+            this.pnlComposicao.Controls.Add(this.txtConfCodigoBarras);
+            this.pnlComposicao.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlComposicao.HorizontalScrollbarBarColor = true;
+            this.pnlComposicao.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlComposicao.HorizontalScrollbarSize = 10;
+            this.pnlComposicao.Location = new System.Drawing.Point(0, 0);
+            this.pnlComposicao.Name = "pnlComposicao";
+            this.pnlComposicao.Size = new System.Drawing.Size(844, 57);
+            this.pnlComposicao.TabIndex = 0;
+            this.pnlComposicao.VerticalScrollbarBarColor = true;
+            this.pnlComposicao.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlComposicao.VerticalScrollbarSize = 10;
+            // 
+            // lblImportarConferirProduto
+            // 
+            this.lblImportarConferirProduto.AutoSize = true;
+            this.lblImportarConferirProduto.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.lblImportarConferirProduto.Location = new System.Drawing.Point(4, 4);
+            this.lblImportarConferirProduto.Name = "lblImportarConferirProduto";
+            this.lblImportarConferirProduto.Size = new System.Drawing.Size(123, 19);
+            this.lblImportarConferirProduto.TabIndex = 18;
+            this.lblImportarConferirProduto.Text = "Conferir Produto";
+            // 
+            // btnConfCancelar
+            // 
+            this.btnConfCancelar.Enabled = false;
+            this.btnConfCancelar.Location = new System.Drawing.Point(667, 28);
+            this.btnConfCancelar.Name = "btnConfCancelar";
+            this.btnConfCancelar.Size = new System.Drawing.Size(67, 23);
+            this.btnConfCancelar.TabIndex = 10;
+            this.btnConfCancelar.Text = "Cancelar";
+            this.btnConfCancelar.UseSelectable = true;
+            this.btnConfCancelar.Click += new System.EventHandler(this.btnConfCancelar_Click);
+            // 
+            // chkConfQuantidade
+            // 
+            this.chkConfQuantidade.AutoSize = true;
+            this.chkConfQuantidade.Checked = true;
+            this.chkConfQuantidade.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkConfQuantidade.Location = new System.Drawing.Point(490, 9);
+            this.chkConfQuantidade.Name = "chkConfQuantidade";
+            this.chkConfQuantidade.Size = new System.Drawing.Size(97, 15);
+            this.chkConfQuantidade.TabIndex = 13;
+            this.chkConfQuantidade.TabStop = false;
+            this.chkConfQuantidade.Text = "Informar Qtd?";
+            this.chkConfQuantidade.UseSelectable = true;
+            this.chkConfQuantidade.CheckedChanged += new System.EventHandler(this.chkCargaQuantidade_CheckedChanged);
+            // 
+            // btnConferenciaConfirmar
+            // 
+            this.btnConferenciaConfirmar.Enabled = false;
+            this.btnConferenciaConfirmar.Location = new System.Drawing.Point(595, 28);
+            this.btnConferenciaConfirmar.Name = "btnConferenciaConfirmar";
+            this.btnConferenciaConfirmar.Size = new System.Drawing.Size(66, 23);
+            this.btnConferenciaConfirmar.TabIndex = 9;
+            this.btnConferenciaConfirmar.Text = "Confirmar";
+            this.btnConferenciaConfirmar.UseSelectable = true;
+            this.btnConferenciaConfirmar.Click += new System.EventHandler(this.btnConferenciaConfirmar_Click);
+            // 
+            // txtConfQuantidade
+            // 
+            // 
+            // 
+            // 
+            this.txtConfQuantidade.CustomButton.Image = null;
+            this.txtConfQuantidade.CustomButton.Location = new System.Drawing.Point(77, 1);
+            this.txtConfQuantidade.CustomButton.Name = "";
+            this.txtConfQuantidade.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtConfQuantidade.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtConfQuantidade.CustomButton.TabIndex = 1;
+            this.txtConfQuantidade.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtConfQuantidade.CustomButton.UseSelectable = true;
+            this.txtConfQuantidade.CustomButton.Visible = false;
+            this.txtConfQuantidade.Lines = new string[0];
+            this.txtConfQuantidade.Location = new System.Drawing.Point(490, 28);
+            this.txtConfQuantidade.MaxLength = 32767;
+            this.txtConfQuantidade.Name = "txtConfQuantidade";
+            this.txtConfQuantidade.PasswordChar = '\0';
+            this.txtConfQuantidade.PromptText = "Quantidade";
+            this.txtConfQuantidade.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtConfQuantidade.SelectedText = "";
+            this.txtConfQuantidade.SelectionLength = 0;
+            this.txtConfQuantidade.SelectionStart = 0;
+            this.txtConfQuantidade.ShortcutsEnabled = true;
+            this.txtConfQuantidade.Size = new System.Drawing.Size(99, 23);
+            this.txtConfQuantidade.TabIndex = 8;
+            this.txtConfQuantidade.UseSelectable = true;
+            this.txtConfQuantidade.WaterMark = "Quantidade";
+            this.txtConfQuantidade.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtConfQuantidade.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtConfQuantidade.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtConfQuantidade_KeyUp);
+            // 
+            // txtConfProduto
+            // 
+            // 
+            // 
+            // 
+            this.txtConfProduto.CustomButton.Image = null;
+            this.txtConfProduto.CustomButton.Location = new System.Drawing.Point(350, 1);
+            this.txtConfProduto.CustomButton.Name = "";
+            this.txtConfProduto.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtConfProduto.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtConfProduto.CustomButton.TabIndex = 1;
+            this.txtConfProduto.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtConfProduto.CustomButton.UseSelectable = true;
+            this.txtConfProduto.CustomButton.Visible = false;
+            this.txtConfProduto.Lines = new string[0];
+            this.txtConfProduto.Location = new System.Drawing.Point(112, 28);
+            this.txtConfProduto.MaxLength = 32767;
+            this.txtConfProduto.Name = "txtConfProduto";
+            this.txtConfProduto.PasswordChar = '\0';
+            this.txtConfProduto.PromptText = "Nome do Produto";
+            this.txtConfProduto.ReadOnly = true;
+            this.txtConfProduto.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtConfProduto.SelectedText = "";
+            this.txtConfProduto.SelectionLength = 0;
+            this.txtConfProduto.SelectionStart = 0;
+            this.txtConfProduto.ShortcutsEnabled = true;
+            this.txtConfProduto.Size = new System.Drawing.Size(372, 23);
+            this.txtConfProduto.TabIndex = 7;
+            this.txtConfProduto.UseSelectable = true;
+            this.txtConfProduto.WaterMark = "Nome do Produto";
+            this.txtConfProduto.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtConfProduto.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // txtConfCodigoBarras
+            // 
+            // 
+            // 
+            // 
+            this.txtConfCodigoBarras.CustomButton.Image = null;
+            this.txtConfCodigoBarras.CustomButton.Location = new System.Drawing.Point(70, 1);
+            this.txtConfCodigoBarras.CustomButton.Name = "";
+            this.txtConfCodigoBarras.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtConfCodigoBarras.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtConfCodigoBarras.CustomButton.TabIndex = 1;
+            this.txtConfCodigoBarras.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtConfCodigoBarras.CustomButton.UseSelectable = true;
+            this.txtConfCodigoBarras.CustomButton.Visible = false;
+            this.txtConfCodigoBarras.Lines = new string[0];
+            this.txtConfCodigoBarras.Location = new System.Drawing.Point(14, 28);
+            this.txtConfCodigoBarras.MaxLength = 32767;
+            this.txtConfCodigoBarras.Name = "txtConfCodigoBarras";
+            this.txtConfCodigoBarras.PasswordChar = '\0';
+            this.txtConfCodigoBarras.PromptText = "Código de Barras";
+            this.txtConfCodigoBarras.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtConfCodigoBarras.SelectedText = "";
+            this.txtConfCodigoBarras.SelectionLength = 0;
+            this.txtConfCodigoBarras.SelectionStart = 0;
+            this.txtConfCodigoBarras.ShortcutsEnabled = true;
+            this.txtConfCodigoBarras.Size = new System.Drawing.Size(92, 23);
+            this.txtConfCodigoBarras.TabIndex = 6;
+            this.txtConfCodigoBarras.UseSelectable = true;
+            this.txtConfCodigoBarras.WaterMark = "Código de Barras";
+            this.txtConfCodigoBarras.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtConfCodigoBarras.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtConfCodigoBarras.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtConfCodigoBarras_KeyUp);
+            this.txtConfCodigoBarras.Leave += new System.EventHandler(this.txtConfCodigoBarras_Leave);
             // 
             // tabExportar
             // 
@@ -1152,23 +1228,23 @@
             this.grdExportacao.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.grdExportacao.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.grdExportacao.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdExportacao.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle28.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle28.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle28.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdExportacao.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle28;
             this.grdExportacao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdExportacao.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle29.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle29.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle29.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grdExportacao.DefaultCellStyle = dataGridViewCellStyle29;
             this.grdExportacao.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdExportacao.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.grdExportacao.EnableHeadersVisualStyles = false;
@@ -1177,14 +1253,14 @@
             this.grdExportacao.Location = new System.Drawing.Point(0, 0);
             this.grdExportacao.Name = "grdExportacao";
             this.grdExportacao.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdExportacao.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle30.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdExportacao.RowHeadersDefaultCellStyle = dataGridViewCellStyle30;
             this.grdExportacao.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grdExportacao.RowTemplate.DividerHeight = 1;
             this.grdExportacao.RowTemplate.Height = 35;
@@ -1195,7 +1271,7 @@
             // 
             // pnlExportacaoMain
             // 
-            this.pnlExportacaoMain.Controls.Add(this.btnExportarAnalizar);
+            this.pnlExportacaoMain.Controls.Add(this.btnExportarAnalisar);
             this.pnlExportacaoMain.Controls.Add(this.lblExportacaoAlerta);
             this.pnlExportacaoMain.Controls.Add(this.btnExportar);
             this.pnlExportacaoMain.Dock = System.Windows.Forms.DockStyle.Top;
@@ -1209,6 +1285,16 @@
             this.pnlExportacaoMain.VerticalScrollbarBarColor = true;
             this.pnlExportacaoMain.VerticalScrollbarHighlightOnWheel = false;
             this.pnlExportacaoMain.VerticalScrollbarSize = 10;
+            // 
+            // btnExportarAnalisar
+            // 
+            this.btnExportarAnalisar.Location = new System.Drawing.Point(30, 69);
+            this.btnExportarAnalisar.Name = "btnExportarAnalisar";
+            this.btnExportarAnalisar.Size = new System.Drawing.Size(122, 48);
+            this.btnExportarAnalisar.TabIndex = 4;
+            this.btnExportarAnalisar.Text = "Analisar";
+            this.btnExportarAnalisar.UseSelectable = true;
+            this.btnExportarAnalisar.Click += new System.EventHandler(this.btnExportarAnalisar_Click);
             // 
             // lblExportacaoAlerta
             // 
@@ -1310,18 +1396,12 @@
             // 
             this.bgwExportar.WorkerReportsProgress = true;
             this.bgwExportar.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwExportar_DoWork);
-            this.bgwExportar.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwExportar_ProgressChanged);
             this.bgwExportar.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwExportar_RunWorkerCompleted);
             // 
-            // btnExportarAnalizar
+            // bgwImportar
             // 
-            this.btnExportarAnalizar.Location = new System.Drawing.Point(30, 69);
-            this.btnExportarAnalizar.Name = "btnExportarAnalizar";
-            this.btnExportarAnalizar.Size = new System.Drawing.Size(122, 48);
-            this.btnExportarAnalizar.TabIndex = 4;
-            this.btnExportarAnalizar.Text = "Analizar";
-            this.btnExportarAnalizar.UseSelectable = true;
-            this.btnExportarAnalizar.Click += new System.EventHandler(this.btnExportarAnalizar_Click);
+            this.bgwImportar.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwImportar_DoWork);
+            this.bgwImportar.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwImportar_RunWorkerCompleted);
             // 
             // FormDeposito
             // 
@@ -1347,18 +1427,21 @@
             this.panelHome.ResumeLayout(false);
             this.panelHome.PerformLayout();
             this.tabImportar.ResumeLayout(false);
+            this.pnlImportacaoGrid.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grdImportacao)).EndInit();
+            this.pnlImportarPesquisa.ResumeLayout(false);
+            this.pnlImportarPesquisa.PerformLayout();
+            this.grpCargaAnterior.ResumeLayout(false);
+            this.grpCargaAnterior.PerformLayout();
+            this.grpCargaData.ResumeLayout(false);
+            this.grpCargaData.PerformLayout();
+            this.tabConferirProdutos.ResumeLayout(false);
             this.tbcImportarConferencia.ResumeLayout(false);
             this.tabConfProduto.ResumeLayout(false);
             this.pnlConferirProdutos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdConfProduto)).EndInit();
             this.pnlComposicao.ResumeLayout(false);
             this.pnlComposicao.PerformLayout();
-            this.pnlImportarPesquisa.ResumeLayout(false);
-            this.pnlImportarPesquisa.PerformLayout();
-            this.grpImportarViagemAnterior.ResumeLayout(false);
-            this.grpImportarViagemAnterior.PerformLayout();
-            this.grpCargaDataViagem.ResumeLayout(false);
-            this.grpCargaDataViagem.PerformLayout();
             this.tabExportar.ResumeLayout(false);
             this.pnlExportacaoGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdExportacao)).EndInit();
@@ -1388,26 +1471,23 @@
         private System.Windows.Forms.Label lblSair;
         private MetroFramework.Controls.MetroPanel pnlRetorno;
         private MetroFramework.Controls.MetroLabel lblRelatorios;
-        public MetroFramework.Controls.MetroTabControl tbcImportarConferencia;
-        private System.Windows.Forms.TabPage tabConfProduto;
-        private MetroFramework.Controls.MetroPanel pnlComposicao;
         public MetroFramework.Controls.MetroPanel pnlImportarPesquisa;
         private MetroFramework.Controls.MetroLabel lblTotalProdutos;
         private MetroFramework.Controls.MetroLabel dblTotalProdutos;
         private MetroFramework.Controls.MetroLabel lblQtdProdutos;
         private MetroFramework.Controls.MetroLabel dblQtdProdutos;
-        private System.Windows.Forms.GroupBox grpImportarViagemAnterior;
-        public MetroFramework.Controls.MetroLabel dlbCargaVADataFinalizacao;
-        public MetroFramework.Controls.MetroLabel dlbCargaVADataRetorno;
-        public MetroFramework.Controls.MetroLabel dlbCargaVADataConferencia;
-        private MetroFramework.Controls.MetroLabel lblCargaVADataAbertura;
-        private MetroFramework.Controls.MetroLabel lblCargaVADataExportacao;
-        public MetroFramework.Controls.MetroLabel dlbCargaVADataExportacao;
-        private MetroFramework.Controls.MetroLabel lblCargaVADataRetorno;
-        public MetroFramework.Controls.MetroLabel dlbCargaVADataAbertura;
-        private MetroFramework.Controls.MetroLabel lblCargaVADataConferencia;
-        private MetroFramework.Controls.MetroLabel lblCargaVADataFinalizacao;
-        private System.Windows.Forms.GroupBox grpCargaDataViagem;
+        private System.Windows.Forms.GroupBox grpCargaAnterior;
+        public MetroFramework.Controls.MetroLabel dlbCargaAnteriorDataFinalizacao;
+        public MetroFramework.Controls.MetroLabel dlbCargaAnteriorDataRetorno;
+        public MetroFramework.Controls.MetroLabel dlbCargaAnteriorDataConferencia;
+        private MetroFramework.Controls.MetroLabel lblCargaAnteriorDataAbertura;
+        private MetroFramework.Controls.MetroLabel lblCargaAnteriorDataExportacao;
+        public MetroFramework.Controls.MetroLabel dlbCargaAnteriorDataExportacao;
+        private MetroFramework.Controls.MetroLabel lblCargaAnteriorDataRetorno;
+        public MetroFramework.Controls.MetroLabel dlbCargaAnteriorDataAbertura;
+        private MetroFramework.Controls.MetroLabel lblCargaAnteriorDataConferencia;
+        private MetroFramework.Controls.MetroLabel lblCargaAnteriorDataFinalizacao;
+        private System.Windows.Forms.GroupBox grpCargaData;
         public MetroFramework.Controls.MetroLabel dlbImportarDataFinalizacao;
         public MetroFramework.Controls.MetroLabel dlbImportarDataConferencia;
         public MetroFramework.Controls.MetroLabel dlbImportarDataRetorno;
@@ -1422,19 +1502,11 @@
         public MetroFramework.Controls.MetroTextBox txtImportarCodPraca;
         public MetroFramework.Controls.MetroButton btnImportar;
         public MetroFramework.Controls.MetroButton btnImportarLimpar;
-        public MetroFramework.Controls.MetroButton btnImportarPesquisar;
         public MetroFramework.Controls.MetroComboBox cbbImportarRepresentante;
         public MetroFramework.Controls.MetroComboBox cbbImportarPraca;
         private MetroFramework.Controls.MetroLabel lblImportarMesAno;
         private MetroFramework.Controls.MetroLabel lblImportarRepresentante;
         private MetroFramework.Controls.MetroLabel lblImportarPraca;
-        private MetroFramework.Controls.MetroLabel lblImportarConferirProduto;
-        public MetroFramework.Controls.MetroButton btnConfCancelar;
-        public MetroFramework.Controls.MetroCheckBox chkConfQuantidade;
-        public MetroFramework.Controls.MetroButton btnConferenciaConfirmar;
-        public MetroFramework.Controls.MetroTextBox txtConfQuantidade;
-        public MetroFramework.Controls.MetroTextBox txtConfProduto;
-        public MetroFramework.Controls.MetroTextBox txtConfCodigoBarras;
         private MetroFramework.Controls.MetroLabel lblServerStatus;
         public MetroFramework.Controls.MetroLabel lblCarga;
         private System.Windows.Forms.TabPage tabConfiguracoes;
@@ -1443,16 +1515,30 @@
         public MetroFramework.Controls.MetroLink btnExcluirImportacao;
         private System.Windows.Forms.TabPage tabSuplemento;
         public System.Windows.Forms.DateTimePicker cbbImportarMesAno;
-        private MetroFramework.Controls.MetroPanel pnlConferirProdutos;
-        public MetroFramework.Controls.MetroGrid grdConfProduto;
-        public System.Windows.Forms.TabPage tabConferenciaProdutos;
+        public System.Windows.Forms.TabPage tabConferirProdutos;
         public MetroFramework.Controls.MetroPanel pnlExportacaoMain;
         private MetroFramework.Controls.MetroPanel pnlExportacaoGrid;
         public MetroFramework.Controls.MetroGrid grdExportacao;
         public MetroFramework.Controls.MetroLabel lblExportacaoAlerta;
         public MetroFramework.Controls.MetroButton btnExportar;
         public System.ComponentModel.BackgroundWorker bgwExportar;
-        public MetroFramework.Controls.MetroButton btnExportarAnalizar;
+        public MetroFramework.Controls.MetroButton btnExportarAnalisar;
+        public MetroFramework.Controls.MetroTabControl tbcImportarConferencia;
+        private System.Windows.Forms.TabPage tabConfProduto;
+        private MetroFramework.Controls.MetroPanel pnlConferirProdutos;
+        public MetroFramework.Controls.MetroGrid grdConfProduto;
+        private MetroFramework.Controls.MetroPanel pnlComposicao;
+        private MetroFramework.Controls.MetroLabel lblImportarConferirProduto;
+        public MetroFramework.Controls.MetroButton btnConfCancelar;
+        public MetroFramework.Controls.MetroCheckBox chkConfQuantidade;
+        public MetroFramework.Controls.MetroButton btnConferenciaConfirmar;
+        public MetroFramework.Controls.MetroTextBox txtConfQuantidade;
+        public MetroFramework.Controls.MetroTextBox txtConfProduto;
+        public MetroFramework.Controls.MetroTextBox txtConfCodigoBarras;
+        private MetroFramework.Controls.MetroPanel pnlImportacaoGrid;
+        public MetroFramework.Controls.MetroGrid grdImportacao;
+        public MetroFramework.Controls.MetroButton btnImportarAnalisar;
+        public System.ComponentModel.BackgroundWorker bgwImportar;
     }
 }
 

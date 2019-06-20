@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ConsignadoRepresentante;
@@ -115,63 +117,156 @@ namespace ConsignadoRepresentante
 
 
 
-        public void ImportarCarga()
+
+
+
+        public void ImportarCarga(Boolean pAnalisarFirst = false)
         {
-            /* Obter os Campos Selecionados */
 
-
-            ModelLibrary.Representante representante = (ModelLibrary.Representante)localDeposito.cbbImportarRepresentante.SelectedItem;
-            var representanteId = representante.Id;
-            ModelLibrary.Praca praca = (ModelLibrary.Praca)localDeposito.cbbImportarPraca.SelectedItem;
-            var pracaId = praca.Id;
-            int mes = localDeposito.cbbImportarMesAno.Value.Month;
-            int ano = localDeposito.cbbImportarMesAno.Value.Year;
-
-            /* Procurar Carga no BD com os dados selecionados */
-            var carga = ModelLibrary.MetodosDeposito.ObterCarga(representanteId, pracaId, mes, ano);
-
-            if (carga != null) /* Se existir Carga */
+            if (ModelLibrary.MetodosDeposito.VerificarServidor())
             {
-                //verificar status da carga e aplicar regras de negócio // Colocar código no motor de regras.
-                if (ControllerLibrary.Regras.PermiteImportacaoCarga(carga.Status))
+                /* Obter os Campos Selecionados */
+
+
+                ModelLibrary.Representante representante = (ModelLibrary.Representante)localDeposito.cbbImportarRepresentante.SelectedItem;
+                var representanteId = representante.Id;
+                ModelLibrary.Praca praca = (ModelLibrary.Praca)localDeposito.cbbImportarPraca.SelectedItem;
+                var pracaId = praca.Id;
+                int mes = localDeposito.cbbImportarMesAno.Value.Month;
+                int ano = localDeposito.cbbImportarMesAno.Value.Year;
+
+                /* Procurar Carga no BD com os dados selecionados */
+                var carga = ModelLibrary.MetodosDeposito.ObterCarga(representanteId, pracaId, mes, ano);
+
+                if (carga != null) /* Se existir Carga */
                 {
-
-                    // realizar importação 
-
-                    Cursor.Current = Cursors.WaitCursor;
-
-                    localDeposito.btnImportar.Text = "Importando...";
-                    localDeposito.pnlImportarPesquisa.Enabled = false;
+                    
 
 
-
-                    if (ModelLibrary.ImportarExportar.Importar(representanteId, pracaId, mes, ano))
+                    //verificar status da carga e aplicar regras de negócio // Colocar código no motor de regras.
+                    if (ControllerLibrary.Regras.PermiteImportacaoCarga(carga.Status))
                     {
 
-                        MessageBox.Show("Carga Importada com sucesso");
-                        localDeposito.CarregarRepresentante();
+
+
+                        Console.WriteLine("Importação da carga" + carga.Id);
+
+                        Cursor.Current = Cursors.WaitCursor;
+
+                        if (pAnalisarFirst)
+                        {
+
+                            localDeposito.btnImportarAnalisar.Text = "Obtendo Análise...";
+                            localDeposito.btnImportarAnalisar.Enabled = false;
+                            
+
+
+                            localDeposito.grdImportacao.DataSource = ModelLibrary.ImportarExportar.ObterListaImportacao(carga.Id);
+
+
+                            localDeposito.grdImportacao.ClearSelection();
+
+
+                            localDeposito.btnImportarAnalisar.Text = "Analisar";
+                            localDeposito.btnImportarAnalisar.Enabled = true;
+                        }
+                        else
+                        {
+
+                            // realizar importação 
+
+                            localDeposito.btnImportar.Text = "Importando...";
+                            localDeposito.pnlImportarPesquisa.Enabled = false;
+
+
+                            //if (ModelLibrary.ImportarExportar.ImportarOldStyle(representanteId, pracaId, mes, ano))
+                            //{
+
+                            //    MessageBox.Show("Carga Importada com sucesso");
+                            //    localDeposito.CarregarRepresentante();
+
+                            //}
+
+                            localDeposito.grdImportacao.DataSource = ModelLibrary.ImportarExportar.ObterListaImportacao(carga.Id);
+
+                            localDeposito.grdImportacao.ClearSelection();
+
+
+                            /////criar ProgressBar com base na quantidade de linhas das tabelas e etapas realizadas com timer
+                            ///
+
+
+                            localDeposito.bgwImportar.RunWorkerAsync();
+
+
+
+
+
+                        }
+
+
+                        Cursor.Current = Cursors.Default;
+
+
+
 
                     }
+                    else
+                    {
+                        MessageBox.Show("A carga informada não pode ser importada, pois não está em aberto. Status: " + carga.Status, "Importação de Carga Não Permitida.", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    }
 
-                    Cursor.Current = Cursors.Default;
-
-                    //- alterar status da carga no servidor informando a exportacao para o modulo representante (importacao)
-
-                    ModelLibrary.MetodosDeposito.AlterarStatusCarga(carga.Id, "E");
-
-                } else
+                }
+                else /* Se não existir */
                 {
-                    MessageBox.Show("A carga informada não pode ser importada, pois não está em aberto. Status: " + carga.Status, "Importação de Carga Não Permitida.", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show("Não foi encontrada nenhuma carga com os dados informados.", "Não encontrado!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-
-
-
             }
-            else /* Se não existir */
+            else
             {
-                MessageBox.Show("Não foi encontrada nenhuma carga com os dados informados.", "Não encontrado!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                if (MessageBox.Show("O servidor <<NOMEDOSERVIDOR>> não foi alcançado, verifique a sua conexão e tente novamente.", "Importação de Carga", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Retry)
+                {
+                    ImportarCarga(pAnalisarFirst);
+                }
+
             }
+        }
+
+
+        public Task ProcessarImportacao(string pRotina, int row)
+        {
+
+
+
+            localDeposito.grdImportacao.Rows[row].Cells["Status"].Value = "...";
+            //localDeposito.grdImportacao.Rows[row].DefaultCellStyle.ForeColor = Color.Orange;
+
+            Console.WriteLine("Index row = " + row.ToString());
+
+
+            Boolean result = ModelLibrary.ImportarExportar.ProcessarRotina(pRotina);
+
+
+            if (result == true)
+            {
+
+                localDeposito.grdImportacao.Rows[row].Cells["Status"].Value = "Importado";
+                localDeposito.grdImportacao.Rows[row].DefaultCellStyle.ForeColor = Color.Green;
+
+            }
+            else
+            {
+
+                localDeposito.grdImportacao.Rows[row].Cells["Status"].Value = "Erro";
+                localDeposito.grdImportacao.Rows[row].DefaultCellStyle.ForeColor = Color.Red;
+            }
+
+            return Task.CompletedTask;
+
+
+
         }
 
 
@@ -204,16 +299,9 @@ namespace ConsignadoRepresentante
             localDeposito.lblCarga.Text += " " + praca.Descricao.Trim() + " | " + representante.Nome.Trim() + " | " + carga.Mes.ToString() + "/" + carga.Ano.ToString();
 
             localDeposito.btnImportar.Text = "Importar";
-            localDeposito.btnImportar.Visible = true;
-            localDeposito.btnImportarPesquisar.Visible = true;
+            localDeposito.btnImportar.Visible = true;            
             localDeposito.btnImportarLimpar.Visible = true;
 
-
-
-            localDeposito.tbcImportarConferencia.Visible = true;
-
-
-            ExibirConferenciaProduto(cargaId);
 
 
             localDeposito.dlbImportarDataAbertura.Text = carga.DataAbertura.HasValue ? carga.DataAbertura.Value.ToShortDateString() : "-";
@@ -222,30 +310,30 @@ namespace ConsignadoRepresentante
             localDeposito.dlbImportarDataConferencia.Text = carga.DataConferencia.HasValue ? carga.DataConferencia.Value.ToShortDateString() : "-";
             localDeposito.dlbImportarDataFinalizacao.Text = carga.DataFinalizacao.HasValue ? carga.DataFinalizacao.Value.ToShortDateString() : "-";
 
-            /*
-             * var viagemanterior = ModelLibrary.MetodosRepresentante.ObterViagemAnterior(representanteId, pracaId, carga.DataAbertura.Value);
+            
+            var cargaanterior = ModelLibrary.MetodosRepresentante.ObterCargaAnterior();
 
-            if (viagemanterior != null)
+            if (cargaanterior != null)
             {
 
-                dlbCargaVADataAbertura.Text = viagemanterior.DataAbertura.HasValue ? viagemanterior.DataAbertura.Value.ToShortDateString() : "-";
-                dlbCargaVADataExportacao.Text = viagemanterior.DataExportacao.HasValue ? viagemanterior.DataExportacao.Value.ToShortDateString() : "-";
-                dlbCargaVADataRetorno.Text = viagemanterior.DataRetorno.HasValue ? viagemanterior.DataRetorno.Value.ToShortDateString() : "-";
-                dlbCargaVADataConferencia.Text = viagemanterior.DataConferencia.HasValue ? viagemanterior.DataConferencia.Value.ToShortDateString() : "-";
-                dlbCargaVADataFinalizacao.Text = viagemanterior.DataFinalizacao.HasValue ? viagemanterior.DataFinalizacao.Value.ToShortDateString() : "-";
+                localDeposito.dlbCargaAnteriorDataAbertura.Text = cargaanterior.DataAbertura.HasValue ? cargaanterior.DataAbertura.Value.ToShortDateString() : "-";
+                localDeposito.dlbCargaAnteriorDataExportacao.Text = cargaanterior.DataExportacao.HasValue ? cargaanterior.DataExportacao.Value.ToShortDateString() : "-";
+                localDeposito.dlbCargaAnteriorDataRetorno.Text = cargaanterior.DataRetorno.HasValue ? cargaanterior.DataRetorno.Value.ToShortDateString() : "-";
+                localDeposito.dlbCargaAnteriorDataConferencia.Text = cargaanterior.DataConferencia.HasValue ? cargaanterior.DataConferencia.Value.ToShortDateString() : "-";
+                localDeposito.dlbCargaAnteriorDataFinalizacao.Text = cargaanterior.DataFinalizacao.HasValue ? cargaanterior.DataFinalizacao.Value.ToShortDateString() : "-";
 
             }
             else
             {
 
-                dlbCargaVADataAbertura.Text = "ND";
-                dlbCargaVADataExportacao.Text = "ND";
-                dlbCargaVADataRetorno.Text = "ND";
-                dlbCargaVADataConferencia.Text = "ND";
-                dlbCargaVADataFinalizacao.Text = "ND";
+                localDeposito.dlbCargaAnteriorDataAbertura.Text = "ND";
+                localDeposito.dlbCargaAnteriorDataExportacao.Text = "ND";
+                localDeposito.dlbCargaAnteriorDataRetorno.Text = "ND";
+                localDeposito.dlbCargaAnteriorDataConferencia.Text = "ND";
+                localDeposito.dlbCargaAnteriorDataFinalizacao.Text = "ND";
 
             }
-            */
+            
 
             //Exibir opção para Re-importar
             localDeposito.btnExcluirImportacao.Visible = true;
@@ -270,12 +358,24 @@ namespace ConsignadoRepresentante
         }
 
 
-        public void ExcluirImportacao()
+        public void ExcluirImportacao(Boolean pReverteCarga = true)
         {
+
+
+
             localDeposito.btnExcluirImportacao.Text = "Excluindo...";
             localDeposito.btnExcluirImportacao.Enabled = false;
             Cursor.Current = Cursors.WaitCursor;
             ModelLibrary.ImportarExportar.ExcluirImportacao();
+
+
+
+            if (pReverteCarga)
+            {
+                ModelLibrary.MetodosDeposito.AlterarStatusCarga(localDeposito.cCargaId, "A");
+
+            }
+
             MessageBox.Show("Importação excluída com sucesso!");
             localDeposito.btnExcluirImportacao.Text = "Exclur \n Importação";
             ImportarLimpar();
@@ -283,260 +383,11 @@ namespace ConsignadoRepresentante
             localDeposito.btnExcluirImportacao.Text = "Excluir";
             localDeposito.btnExcluirImportacao.Visible = false;
             Cursor.Current = Cursors.Default;
-        }
-
-
-        ////////////////////////////////////////
-        /// Conferencia de Produtos
-        ////////////////////////////////////////
-
-
-        public void ConferenciaProdutoLimpar()
-        {
-            localDeposito.txtConfCodigoBarras.Text = "";
-            localDeposito.txtConfProduto.Text = "";
-            localDeposito.txtConfQuantidade.Text = "";
-            localDeposito.btnConferenciaConfirmar.Enabled = false;
-            localDeposito.btnConfCancelar.Enabled = false;
-            localDeposito.txtConfCodigoBarras.ReadOnly = false;
-            cImportarProdutoId = 0;
-            cModoConferenciaProduto = "Insert";
-        }
-
-
-        public void PesquisarConferenciaProduto(string pCodigo)
-        {
-
-
-
-            var produtograde = ModelLibrary.MetodosRepresentante.ObterProdutoGrade(pCodigo);
-
-            if (produtograde != null)
-            {
-
-                var produto = ModelLibrary.MetodosRepresentante.ObterProduto(produtograde.CodigoBarras);
-
-                localDeposito.txtConfProduto.Text = produto.Descricao;
-
-                if (localDeposito.txtConfCodigoBarras.Text != produtograde.CodigoBarras + produtograde.Digito)
-                {
-                    localDeposito.txtConfCodigoBarras.Text = produtograde.CodigoBarras + produtograde.Digito;
-                    if (localDeposito.chkConfQuantidade.Checked == false)
-                    {
-                        localDeposito.chkConfQuantidade.Checked = true;
-                        localDeposito.txtConfQuantidade.Enabled = true;
-                    }
-                }
-
-
-
-                cImportarProdutoId = produtograde.Id;
-
-                localDeposito.btnConferenciaConfirmar.Enabled = true;
-                localDeposito.btnConfCancelar.Enabled = true;
-
-                if (localDeposito.chkConfQuantidade.Checked)
-                {
-                    localDeposito.txtConfQuantidade.Focus();
-
-                }
-                else
-                {
-                    //inserir direto qtd=1
-                    InserirCargaProdutoConferencia();
-                }
-
-            }
-            else
-            {
-
-                MessageBox.Show("Dígito verificador inválido. Não foi possível encontrar a grade deste produto.");
-
-                cImportarProdutoId = 0;
-                localDeposito.txtConfCodigoBarras.Focus();
-                localDeposito.btnConferenciaConfirmar.Enabled = false;
-                localDeposito.btnConfCancelar.Enabled = false;
-
-
-            }
-        }
-
-        public void ExibirConferenciaProduto(long pCargaId)
-        {
-
-            ModelLibrary.RepRepresentante representante = (ModelLibrary.RepRepresentante)localDeposito.cbbImportarRepresentante.SelectedItem;
-            var representanteId = representante.Id;
-            ModelLibrary.RepPraca praca = (ModelLibrary.RepPraca)localDeposito.cbbImportarPraca.SelectedItem;
-            var pracaId = praca.Id;
-            int mes = localDeposito.cbbImportarMesAno.Value.Month;
-            int ano = localDeposito.cbbImportarMesAno.Value.Year;
-
-            localDeposito.grdConfProduto.DataSource = ModelLibrary.MetodosRepresentante.ObterProdutosConferencia(pCargaId);
-
-            /// Ocultar coluna CargaProdutoId
-            localDeposito.grdConfProduto.Columns[5].Visible = false;
-            localDeposito.grdConfProduto.Columns[6].Visible = false;
-            localDeposito.grdConfProduto.Columns[7].Visible = false;
-            localDeposito.grdConfProduto.Columns[8].Visible = false;
-
-
-            /// Alterar Título da Coluna
-            localDeposito.grdConfProduto.Columns[2].HeaderText = "Quantidade Carga";
-            localDeposito.grdConfProduto.Columns[3].HeaderText = "Quantidade Informada";
-            localDeposito.grdConfProduto.Columns[4].HeaderText = "Diferença";
-
-
-
-
-        }
-
-        public void InserirCargaProdutoConferencia()
-        {
-            try
-            {
-                decimal vQuantidade;
-
-                if (localDeposito.chkConfQuantidade.Checked)
-                {
-
-                    if (localDeposito.txtConfQuantidade.Text != "")
-                    {
-                        vQuantidade = Convert.ToDecimal(localDeposito.txtConfQuantidade.Text);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Por favor, informe uma quantidade.");
-                        vQuantidade = 0;
-                    }
-
-                }
-                else
-                {
-
-                    vQuantidade = 1;
-
-                }
-
-                if (vQuantidade > 0)
-                {
-                    ModelLibrary.MetodosRepresentante.InserirProdutoConferencia(localDeposito.cCargaId, cImportarProdutoId, vQuantidade);
-                    ExibirConferenciaProduto(localDeposito.cCargaId);
-                    ConferenciaProdutoLimpar();
-                }
-
-
-            }
-            catch (IOException vE)
-            {
-                MessageBox.Show("Ocorreu um erro ao Inserir o produto. Verifique os dados digitados e tente novamente. Se o erro persisitr, contate o administrador.");
-                Console.WriteLine(vE.Message);
-            }
-
 
         }
 
 
-
-
-        public void EditarConferenciaProduto()
-        {
-
-            //ClearCargaProduto();
-
-
-            cModoConferenciaProduto = "Edit";
-            cImportarProdutoId = Convert.ToInt32(localDeposito.grdConfProduto.CurrentRow.Cells[8].Value);
-
-            localDeposito.txtConfCodigoBarras.Text = localDeposito.grdConfProduto.CurrentRow.Cells[0].Value.ToString();
-            localDeposito.txtConfCodigoBarras.ReadOnly = true;
-
-
-            if (localDeposito.chkConfQuantidade.Checked == false)
-            {
-                localDeposito.chkConfQuantidade.Checked = true;
-                localDeposito.txtConfQuantidade.Enabled = true;
-            }
-
-            if (localDeposito.grdConfProduto.CurrentRow.Cells[3].Value is null)
-            {
-                cModoConferenciaProduto = "Insert";
-                localDeposito.txtConfQuantidade.Text = "";
-                localDeposito.txtConfQuantidade.Focus();
-            }
-            else
-            {
-                localDeposito.txtConfQuantidade.Text = localDeposito.grdConfProduto.CurrentRow.Cells[3].Value.ToString();
-                localDeposito.txtConfQuantidade.Focus();
-            }
-
-
-            localDeposito.txtConfProduto.Text = localDeposito.grdConfProduto.CurrentRow.Cells[1].Value.ToString();
-
-
-            localDeposito.btnConferenciaConfirmar.Enabled = true;
-            localDeposito.btnConfCancelar.Enabled = true;
-
-
-        }
-
-
-
-
-        public void AlterarCargaProdutoConferencia()
-        {
-
-            /*try
-            {*/
-
-            ModelLibrary.MetodosRepresentante.AlterarProdutoConferencia(localDeposito.cCargaId, cImportarProdutoId, Convert.ToDecimal(localDeposito.txtConfQuantidade.Text));
-
-            ExibirConferenciaProduto(localDeposito.cCargaId);
-
-            ConferenciaProdutoLimpar();
-
-            /*} catch
-            {
-
-                MessageBox.Show("Não foi possível alterar o produto. Por favor, verifique os dados digitados e tente novamente");
-
-            }*/
-
-
-        }
-
-
-        public void ConfirmarCargaProdutoConferencia()
-        {
-
-            if (cModoConferenciaProduto == "Edit")
-            {
-                AlterarCargaProdutoConferencia();
-            }
-            else
-            {
-                InserirCargaProdutoConferencia();
-            }
-
-        }
-
-        public void ExcluirCargaProdutoConferencia()
-        {
-
-
-
-            if (MessageBox.Show("Deseja realmente excluir o lançamento selecionado?", "ATENÇÃO! Exclusão de Produto", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-            {
-                ConferenciaProdutoLimpar();
-                cImportarProdutoId = Convert.ToInt32(localDeposito.grdConfProduto.CurrentRow.Cells[8].Value);
-
-
-                ModelLibrary.MetodosRepresentante.ExcluirProdutoConferencia(localDeposito.cCargaId, cImportarProdutoId);
-
-                ExibirConferenciaProduto(localDeposito.cCargaId);
-            }
-
-
-        }
+        
 
 
     }
