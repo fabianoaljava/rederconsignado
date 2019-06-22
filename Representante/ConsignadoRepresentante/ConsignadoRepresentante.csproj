@@ -159,6 +159,7 @@
     </EmbeddedResource>
     <None Include="ConsignadoRepresentante_TemporaryKey.pfx" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\ModelLibrary.ListaRepVendedorHome.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -4,8 +4,10 @@ using System.Linq;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 using System.Data.SqlClient;
 using System.Data.SQLite;
+
 
 namespace ModelLibrary
 {
@@ -408,10 +410,8 @@ namespace ModelLibrary
 
 
 
-        public static List<ListaRepVendedorHome> ObterListaVendedorHome(long pCargaId)
+        public static List<ListaRepVendedorHome> ObterListaVendedorHome(long pCargaId, string pFiltro = "")
         {
-
-            var vVendedorPedido = new List<ListaRepVendedorHome>();
 
             using (RepresentanteDBEntities context = new RepresentanteDBEntities())
             {
@@ -441,6 +441,8 @@ namespace ModelLibrary
                                     LEFT JOIN (SELECT DISTINCT RepPedido.VendedorId FROM RepPedido 	INNER JOIN RepPosicaoFinanceira ON RepPedido.VendedorId = RepPosicaoFinanceira.VendedorId WHERE RepPedido.CargaId < @p0 ) AS PedidoAnterior ON RepVendedor.Id = PedidoAnterior.VendedorId
                                     LEFT JOIN RepPosicaoFinanceira ON RepVendedor.Id = RepPosicaoFinanceira.VendedorId";
 
+                if (pFiltro != "") query += " WHERE " + pFiltro;
+
                 var result = context.Database.SqlQuery<ListaRepVendedorHome>(query, pCargaId);
 
                 return result.ToList<ListaRepVendedorHome>();
@@ -448,7 +450,6 @@ namespace ModelLibrary
         }
 
 
-        
 
 
 

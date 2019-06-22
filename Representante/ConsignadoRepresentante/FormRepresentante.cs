@@ -475,5 +475,25 @@ namespace ConsignadoRepresentante
         {
             cVendedor.DuplicataLimpar();
         }
+
+        private void chkVendedorListaFiltrar(object sender, EventArgs e)
+        {
+            
+            cHome.FiltrarListaVendedores();
+        }
+
+        private void chkVendedorSemPedidoAtual_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkVendedorSemPedidoAtual.Checked) chkVendedorComPedidoAtual.Checked = !chkVendedorSemPedidoAtual.Checked;
+            cHome.FiltrarListaVendedores();
+
+        }
+
+        private void chkVendedorComPedidoAtual_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkVendedorComPedidoAtual.Checked) chkVendedorSemPedidoAtual.Checked = !chkVendedorComPedidoAtual.Checked;
+            cHome.FiltrarListaVendedores();
+
+        }
     }
 }

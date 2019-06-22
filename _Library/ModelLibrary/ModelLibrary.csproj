@@ -327,6 +327,7 @@
     <None Include="packages\System.Data.SQLite.Linq.1.0.110.0\content\net46\app.config.transform" />
     <None Include="packages\System.Data.SQLite.Linq.1.0.110.0\content\net46\web.config.transform" />
     <None Include="packages\System.Data.SQLite.Linq.1.0.110.0\System.Data.SQLite.Linq.1.0.110.0.nupkg" />
+    <None Include="Properties\DataSources\ListaRepVendedorHome.datasource" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
