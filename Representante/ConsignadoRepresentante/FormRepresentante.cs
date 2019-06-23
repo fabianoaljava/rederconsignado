@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.Entity;
 using ConsignadoRepresentante;
+
 
 namespace ConsignadoRepresentante
 {
@@ -25,7 +27,6 @@ namespace ConsignadoRepresentante
         public Produto cProduto;
         public Estoque cEstoque;
         public Ajuda cAjuda;
-
 
 
 
@@ -136,7 +137,8 @@ namespace ConsignadoRepresentante
             cHome.CarregarFormulario();
             cVendedor.CarregarFormulario();
             cFinanceiro.CarregarFormulario();
-            
+
+
         }
 
         /// <summary>
@@ -495,5 +497,14 @@ namespace ConsignadoRepresentante
             cHome.FiltrarListaVendedores();
 
         }
+
+        private void grdHome_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cVendedor.VendedorExibir(Convert.ToInt32(grdHome.CurrentRow.Cells[0].Value));
+            tbcPrincipal.SelectedTab = tabVendedores;
+            tbcVendedor.SelectedTab = tabVendedorCadastro;
+        }
+
+
     }
 }

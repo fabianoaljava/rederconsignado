@@ -5,9 +5,10 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Data.SQLite;
-
+using System.ComponentModel;
 
 namespace ModelLibrary
 {
@@ -444,6 +445,7 @@ namespace ModelLibrary
                 if (pFiltro != "") query += " WHERE " + pFiltro;
 
                 var result = context.Database.SqlQuery<ListaRepVendedorHome>(query, pCargaId);
+
 
                 return result.ToList<ListaRepVendedorHome>();
             }

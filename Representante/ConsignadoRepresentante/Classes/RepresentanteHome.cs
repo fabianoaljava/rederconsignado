@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ConsignadoRepresentante;
 using System.Windows.Forms;
 using System.Data;
+using Equin.ApplicationFramework;
 
 namespace ConsignadoRepresentante
 {
@@ -18,7 +19,6 @@ namespace ConsignadoRepresentante
 
         public FormRepresentante localRepresentanteForm = null;
 
-
         public RepresentanteHome(FormRepresentante formRepresentante)
         {
 
@@ -30,7 +30,13 @@ namespace ConsignadoRepresentante
         {
 
 
-            localRepresentanteForm.grdHome.DataSource = ModelLibrary.MetodosRepresentante.ObterListaVendedorHome(localRepresentanteForm.cCargaId);
+
+            List<ModelLibrary.ListaRepVendedorHome> vendedores = ModelLibrary.MetodosRepresentante.ObterListaVendedorHome(localRepresentanteForm.cCargaId);
+
+            BindingListView<ModelLibrary.ListaRepVendedorHome> view = new BindingListView<ModelLibrary.ListaRepVendedorHome>(vendedores);
+            localRepresentanteForm.grdHome.DataSource = view;
+
+
 
             localRepresentanteForm.grdHome.Columns[0].Width = 40;
             localRepresentanteForm.grdHome.Columns[0].HeaderText = "Cód.";
@@ -44,7 +50,7 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.grdHome.Columns[10].Width = 70;
             localRepresentanteForm.grdHome.Columns[11].Width = 80;
             localRepresentanteForm.grdHome.Columns[12].Width = 70;
-
+            
 
             localRepresentanteForm.grdHome.ClearSelection();
 
