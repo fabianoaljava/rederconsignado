@@ -424,8 +424,8 @@ namespace ModelLibrary
                                             END AS PedidoAnterior,
                                     CASE 
 	                                    WHEN ValorAberto  = 0 THEN 'Total'
-	                                    WHEN ValorAberto >0 THEN 'Parcial'
-	                                    ELSE NULL
+	                                    WHEN ValorAberto >0  THEN 'Parcial ' || Recebido
+	                                    ELSE 'Não ' || Recebido
 	                                    END AS Recebido,	   
                                     CASE WHEN PedidoAtual.VendedorId IS NOT NULL
                                             THEN true
@@ -439,8 +439,13 @@ namespace ModelLibrary
 	                                    END AS Receber    
                                     FROM RepVendedor
                                     LEFT JOIN (SELECT VendedorId, CodigoPedido  FROM RepPedido WHERE CargaId = @p0) AS PedidoAtual ON RepVendedor.Id = PedidoAtual.VendedorId
-                                    LEFT JOIN (SELECT DISTINCT RepPedido.VendedorId FROM RepPedido 	INNER JOIN RepPosicaoFinanceira ON RepPedido.VendedorId = RepPosicaoFinanceira.VendedorId WHERE RepPedido.CargaId < @p0 ) AS PedidoAnterior ON RepVendedor.Id = PedidoAnterior.VendedorId
+                                    LEFT JOIN (SELECT VendedorId, count(RepCargaAnterior.Id) Recebido
+													FROM RepPedido 
+														INNER JOIN RepCargaAnterior ON RepPedido.CargaId = RepCargaAnterior.Id 
+														WHERE CargaId != @p0 and ValorAcerto = 0
+														GROUP BY VendedorId) AS PedidoAnterior ON RepVendedor.Id = PedidoAnterior.VendedorId
                                     LEFT JOIN RepPosicaoFinanceira ON RepVendedor.Id = RepPosicaoFinanceira.VendedorId";
+
 
                 if (pFiltro != "") query += " WHERE " + pFiltro;
 

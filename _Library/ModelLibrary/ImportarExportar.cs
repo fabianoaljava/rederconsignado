@@ -175,7 +175,7 @@ namespace ModelLibrary
 
                 vTable = new ListaImportacaoExportacao();
 
-                count = deposito.Carga.Where(cg => cg.Id != cargaatual.Id && cg.RepresentanteId == cargaatual.RepresentanteId && cg.PracaId == cargaatual.PracaId).Count();
+                count = deposito.Carga.Where(cg => cg.Id != cargaatual.Id && cg.PracaId == cargaatual.PracaId).Count();
 
                 vTable.Tabela = "Carga";
                 vTable.Acao = "Importar Carga Anterior";
@@ -246,7 +246,22 @@ namespace ModelLibrary
                 vTable = new ListaImportacaoExportacao();
 
 
-                count = deposito.Pedido.Join(deposito.Carga, pd => pd.CargaId, cg => cg.Id, (pd, cg) => new { Pedido = pd, Carga = cg }).Where(pd => pd.Carga.PracaId == cPracaId && pd.Pedido.DataRetorno == null).Count();
+                query = @"SELECT *
+                            FROM Pedido 
+                            WHERE CargaId = @p0 
+                                  OR CargaAtual = @p0
+                                  OR Id IN
+                                    (SELECT DISTINCT Pedido.Id 
+                                        FROM Carga
+                                           INNER JOIN Pedido ON Carga.Id = Pedido.CargaId
+                                        WHERE Pedido.Id is not null
+                                        AND Carga.Id != @p0 AND PracaId = @p1 AND ValorAcerto = 0)";
+
+
+                count = deposito.Pedido.SqlQuery(query, cCargaId, cPracaId).Count();
+
+
+                //count = deposito.Pedido.Join(deposito.Carga, pd => pd.CargaId, cg => cg.Id, (pd, cg) => new { Pedido = pd, Carga = cg }).Where(pd => pd.Carga.PracaId == cPracaId && pd.Pedido.DataRetorno == null).Count();
 
                 vTable.Tabela = "Pedido";
                 vTable.Acao = "Importar Pedidos";
@@ -258,8 +273,21 @@ namespace ModelLibrary
 
                 vTable = new ListaImportacaoExportacao();
 
+                query = @"SELECT *
+                            FROM PedidoItem
+                            INNER JOIN Pedido ON PedidoItem.PedidoId = Pedido.Id
+                            WHERE 
+                                Pedido.CargaId = @p0 
+                                OR Pedido.CargaAtual = @p0
+                                OR Pedido.Id IN 
+                            (SELECT DISTINCT Pedido.Id FROM Carga 
+                            INNER JOIN Pedido ON Carga.Id = Pedido.CargaId
+                            WHERE Pedido.Id is not null
+                            AND Carga.Id != @p0 AND PracaId = @p1 AND ValorAcerto = 0)";
 
-                count = deposito.PedidoItem.Join(deposito.Pedido, pi => pi.PedidoId, pd => pd.Id, (pi, pd) => new { RepPedidoItem = pi, RepPedido = pd }).Where(pi => pi.RepPedido.CargaId == cCargaId).Count();
+
+                //count = deposito.PedidoItem.Join(deposito.Pedido, pi => pi.PedidoId, pd => pd.Id, (pi, pd) => new { RepPedidoItem = pi, RepPedido = pd }).Where(pi => pi.RepPedido.CargaId == cCargaId).Count();
+                count = deposito.PedidoItem.SqlQuery(query, cCargaId, cPracaId).Count();
 
                 vTable.Tabela = "PedidoItem";
                 vTable.Acao = "Importar Itens do Pedidos";
@@ -798,7 +826,7 @@ namespace ModelLibrary
                 using (DepositoDBEntities deposito = new DepositoDBEntities())
                 {
 
-                    foreach (var row in deposito.Carga.Where(cg => cg.Id != cCargaId && cg.RepresentanteId == cRepresentanteId && cg.PracaId == cPracaId))
+                    foreach (var row in deposito.Carga.Where(cg => cg.Id != cCargaId && cg.PracaId == cPracaId))
                     {
                         var newReg = new RepCargaAnterior
                         {
@@ -1080,31 +1108,45 @@ namespace ModelLibrary
                 using (DepositoDBEntities deposito = new DepositoDBEntities())
                 {
 
-                    foreach (var row in deposito.Pedido.Join(deposito.Carga, pd => pd.CargaId, cg => cg.Id, (pd, cg) => new { Pedido = pd, Carga = cg }).Where(pd => pd.Carga.PracaId == cPracaId && pd.Pedido.DataRetorno == null))
+
+                    string query = @"SELECT *
+                            FROM Pedido 
+                            WHERE CargaId = @p0 
+                                  OR CargaAtual = @p0
+                                  OR Id IN
+                                    (SELECT DISTINCT Pedido.Id 
+                                        FROM Carga
+                                           INNER JOIN Pedido ON Carga.Id = Pedido.CargaId
+                                        WHERE Pedido.Id is not null
+                                        AND Carga.Id != @p0 AND PracaId = @p1 AND ValorAcerto = 0)";
+
+
+                    
+                    foreach (var row in deposito.Pedido.SqlQuery(query, cCargaId, cPracaId))
                     {
                         var newReg = new RepPedido
                         {
-                            Id = row.Pedido.Id,
-                            VendedorId = row.Pedido.VendedorId,
-                            CargaId = cCargaId,
-                            CargaAtual = row.Pedido.CargaAtual,
-                            RepresentanteId = row.Pedido.RepresentanteId,
-                            CodigoPedido = row.Pedido.CodigoPedido,
-                            DataLancamento = row.Pedido.DataLancamento,
-                            DataPrevisaoRetorno = row.Pedido.DataPrevisaoRetorno,
-                            DataRetorno = row.Pedido.DataRetorno,
-                            ValorPedido = Convert.ToDecimal(row.Pedido.ValorPedido),
-                            ValorCompra = Convert.ToDecimal(row.Pedido.ValorCompra),
-                            PercentualCompra = Convert.ToDecimal(row.Pedido.PercentualCompra),
-                            FaixaComissao = Convert.ToDecimal(row.Pedido.FaixaComissao),
-                            PercentualFaixa = Convert.ToDecimal(row.Pedido.PercentualFaixa),
-                            ValorComissao = Convert.ToDecimal(row.Pedido.ValorComissao),
-                            ValorLiquido = Convert.ToDecimal(row.Pedido.ValorLiquido),
-                            ValorAReceber = Convert.ToDecimal(row.Pedido.ValorAReceber),
-                            ValorAcerto = Convert.ToDecimal(row.Pedido.ValorAcerto),
-                            QuantidadeRetorno = row.Pedido.QuantidadeRetorno,
-                            Remarcado = row.Pedido.Remarcado,
-                            Status = row.Pedido.Status
+                            Id = row.Id,
+                            VendedorId = row.VendedorId,
+                            CargaId = row.CargaId,
+                            CargaAtual = row.CargaAtual,
+                            RepresentanteId = row.RepresentanteId,
+                            CodigoPedido = row.CodigoPedido,
+                            DataLancamento = row.DataLancamento,
+                            DataPrevisaoRetorno = row.DataPrevisaoRetorno,
+                            DataRetorno = row.DataRetorno,
+                            ValorPedido = Convert.ToDecimal(row.ValorPedido),
+                            ValorCompra = Convert.ToDecimal(row.ValorCompra),
+                            PercentualCompra = Convert.ToDecimal(row.PercentualCompra),
+                            FaixaComissao = Convert.ToDecimal(row.FaixaComissao),
+                            PercentualFaixa = Convert.ToDecimal(row.PercentualFaixa),
+                            ValorComissao = Convert.ToDecimal(row.ValorComissao),
+                            ValorLiquido = Convert.ToDecimal(row.ValorLiquido),
+                            ValorAReceber = Convert.ToDecimal(row.ValorAReceber),
+                            ValorAcerto = Convert.ToDecimal(row.ValorAcerto),
+                            QuantidadeRetorno = row.QuantidadeRetorno,
+                            Remarcado = row.Remarcado,
+                            Status = row.Status
                         };
 
                         newPedido.Add(newReg);
@@ -1150,16 +1192,29 @@ namespace ModelLibrary
                 using (DepositoDBEntities deposito = new DepositoDBEntities())
                 {
 
-                    foreach (var row in deposito.PedidoItem.Join(deposito.Pedido, pi => pi.PedidoId, pd => pd.Id, (pi, pd) => new { RepPedidoItem = pi, RepPedido = pd }).Where(pi => pi.RepPedido.CargaId == cCargaId))
+                    string query = @"SELECT *
+                                        FROM PedidoItem
+                                        INNER JOIN Pedido ON PedidoItem.PedidoId = Pedido.Id
+                                        WHERE 
+                                            Pedido.CargaId = @p0 
+                                            OR Pedido.CargaAtual = @p0
+                                            OR Pedido.Id IN 
+                                        (SELECT DISTINCT Pedido.Id FROM Carga 
+                                        INNER JOIN Pedido ON Carga.Id = Pedido.CargaId
+                                        WHERE Pedido.Id is not null
+                                        AND Carga.Id != @p0 AND PracaId = @p1 AND ValorAcerto = 0)";
+
+                    //foreach (var row in deposito.PedidoItem.Join(deposito.Pedido, pi => pi.PedidoId, pd => pd.Id, (pi, pd) => new { RepPedidoItem = pi, RepPedido = pd }).Where(pi => pi.RepPedido.CargaId == cCargaId))
+                    foreach (var row in deposito.PedidoItem.SqlQuery(query, cCargaId, cPracaId))
                     {
                         var newReg = new RepPedidoItem
                         {
-                            Id = row.RepPedidoItem.Id,
-                            PedidoId = row.RepPedidoItem.PedidoId,
-                            ProdutoGradeId = row.RepPedidoItem.ProdutoGradeId,
-                            Quantidade = Convert.ToDecimal(row.RepPedidoItem.Quantidade),
-                            Retorno = Convert.ToDecimal(row.RepPedidoItem.Retorno),
-                            Preco = Convert.ToDecimal(row.RepPedidoItem.Preco)
+                            Id = row.Id,
+                            PedidoId = row.PedidoId,
+                            ProdutoGradeId = row.ProdutoGradeId,
+                            Quantidade = Convert.ToDecimal(row.Quantidade),
+                            Retorno = Convert.ToDecimal(row.Retorno),
+                            Preco = Convert.ToDecimal(row.Preco)
                         };
 
                         newPedidoItem.Add(newReg);
