@@ -270,16 +270,24 @@ namespace ModelLibrary
 
             using (RepresentanteDBEntities context = new RepresentanteDBEntities())
             {
-                string vCodigoSemDigito = pCodigo.Substring(0, pCodigo.Length - 1);
-                string vDigito = pCodigo.Substring(pCodigo.Length - 1);
+                if (pCodigo != "")
+                {
+                    string vCodigoSemDigito = pCodigo.Substring(0, pCodigo.Length - 1);
+                    string vDigito = pCodigo.Substring(pCodigo.Length - 1);
 
-                Console.WriteLine(vCodigoSemDigito + ':' + vDigito);
+                    Console.WriteLine(vCodigoSemDigito + ':' + vDigito);
 
-                var produtograde = (from pg in context.RepProdutoGrade
-                                    where (pg.CodigoBarras == vCodigoSemDigito && pg.Digito == vDigito) || pg.Id.ToString() == pCodigo
-                                    select pg).FirstOrDefault<RepProdutoGrade>();
+                    var produtograde = (from pg in context.RepProdutoGrade
+                                        where (pg.CodigoBarras == vCodigoSemDigito && pg.Digito == vDigito) || pg.Id.ToString() == pCodigo
+                                        select pg).FirstOrDefault<RepProdutoGrade>();
 
-                return produtograde;
+                    return produtograde;
+                } else
+                {
+                    return null;
+                }
+
+                
             }
 
         }
@@ -606,14 +614,15 @@ namespace ModelLibrary
                                Id = ls.RepProdutoGrade.RepPedidoItem.RepPedidoItem.Id,
                                PedidoId = ls.RepProdutoGrade.RepPedidoItem.RepPedido.Id,
                                ProdutoGradeId = ls.RepProdutoGrade.RepProdutoGrade.Id,
-                               CodigoBarras = ls.RepProdutoGrade.RepProdutoGrade.CodigoBarras,
+                               CodigoBarras = ls.RepProdutoGrade.RepProdutoGrade.CodigoBarras + ls.RepProdutoGrade.RepProdutoGrade.Digito,
                                Descricao = ls.RepProduto.Descricao,
                                Cor = ls.RepProdutoGrade.RepProdutoGrade.Tamanho,
                                Tamanho = ls.RepProdutoGrade.RepProdutoGrade.Cor,
                                Quantidade = ls.RepProdutoGrade.RepPedidoItem.RepPedidoItem.Quantidade,
                                Retorno = ls.RepProdutoGrade.RepPedidoItem.RepPedidoItem.Retorno,
                                Preco = ls.RepProdutoGrade.RepPedidoItem.RepPedidoItem.Preco
-                           });
+                           })
+                           .OrderBy(pd => pd.CodigoBarras) ;
 
                 return result.ToList<ListaRepVendedorPedido>();
 

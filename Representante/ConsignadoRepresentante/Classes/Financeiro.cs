@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ConsignadoRepresentante;
 using System.Windows.Forms;
+using Equin.ApplicationFramework;
 
 namespace ConsignadoRepresentante
 {
@@ -38,15 +39,22 @@ namespace ConsignadoRepresentante
         public void ExibirPosicaoFinancera()
         {
 
-            localRepresentanteForm.grdPosicaoFinanceira.DataSource = ModelLibrary.MetodosRepresentante.ObterPosicaoFinanceira();
+
+            List<ModelLibrary.ListaRepPosicaoFinanceira> financeiro = ModelLibrary.MetodosRepresentante.ObterPosicaoFinanceira();
+
+            BindingListView<ModelLibrary.ListaRepPosicaoFinanceira> view = new BindingListView<ModelLibrary.ListaRepPosicaoFinanceira>(financeiro);
+
+
+            localRepresentanteForm.grdPosicaoFinanceira.DataSource = view;
             localRepresentanteForm.grdPosicaoFinanceira.Columns[0].Width = 100;
             localRepresentanteForm.grdPosicaoFinanceira.Columns[1].Width = 300;
-            localRepresentanteForm.grdPosicaoFinanceira.Columns[2].DefaultCellStyle.Format = "c";
-            localRepresentanteForm.grdPosicaoFinanceira.Columns[3].DefaultCellStyle.Format = "c";
-            localRepresentanteForm.grdPosicaoFinanceira.Columns[4].DefaultCellStyle.Format = "c";
+            localRepresentanteForm.grdPosicaoFinanceira.Columns[2].DefaultCellStyle.Format = "n";
+            localRepresentanteForm.grdPosicaoFinanceira.Columns[3].DefaultCellStyle.Format = "n";
+            localRepresentanteForm.grdPosicaoFinanceira.Columns[4].DefaultCellStyle.Format = "n";
 
 
 
         }
+
     }
 }

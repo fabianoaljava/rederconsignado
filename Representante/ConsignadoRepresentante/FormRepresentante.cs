@@ -363,15 +363,18 @@ namespace ConsignadoRepresentante
         {
             cVendedor.VendedorExibir(Convert.ToInt32(grdHome.CurrentRow.Cells[0].Value));
             tbcPrincipal.SelectedTab = tabVendedores;
-            tbcVendedor.SelectedTab = tabVendedorCadastro;
+            tbcVendedor.SelectedTab = tabVendedorInicio;
         }
 
         private void txtPedidoCodigoBarras_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter)
             {
-                e.SuppressKeyPress = true;
-                cVendedor.PedidoPesquisar(txtPedidoCodigoBarras.Text);
+                if (txtPedidoCodigoBarras.Text != "")
+                {
+                    e.SuppressKeyPress = true;
+                    cVendedor.PedidoPesquisar(txtPedidoCodigoBarras.Text);
+                }
 
             }
         }
@@ -414,8 +417,11 @@ namespace ConsignadoRepresentante
         {
             if (e.KeyData == Keys.Enter)
             {
-                e.SuppressKeyPress = true;
-                cVendedor.RetornoProdutoPesquisar(txtRetornoCodigoBarras.Text);
+                if (txtRetornoCodigoBarras.Text != "")
+                {
+                    e.SuppressKeyPress = true;
+                    cVendedor.RetornoProdutoPesquisar(txtRetornoCodigoBarras.Text);
+                }
 
             }
         }
@@ -502,9 +508,43 @@ namespace ConsignadoRepresentante
         {
             cVendedor.VendedorExibir(Convert.ToInt32(grdHome.CurrentRow.Cells[0].Value));
             tbcPrincipal.SelectedTab = tabVendedores;
-            tbcVendedor.SelectedTab = tabVendedorCadastro;
+            tbcVendedor.SelectedTab = tabVendedorInicio;
+        }
+
+        private void grdPosicaoFinanceira_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+
+            
+
+
+            try
+            {
+
+                if (Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells[4].Value.ToString()) == 0)
+                {
+                    grdPosicaoFinanceira.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Green;
+                }
+
+                if (Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells[4].Value.ToString()) > 0)
+                {
+                    grdPosicaoFinanceira.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.DeepSkyBlue;
+                }
+            }
+            catch
+            {
+                /// escrever no log
+            }
+
         }
 
 
+
+        private void grdPosicaoFinanceira_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cVendedor.VendedorExibir(Convert.ToInt32(grdPosicaoFinanceira.CurrentRow.Cells[0].Value));
+
+            tbcPrincipal.SelectedTab = tabVendedores;
+            tbcVendedor.SelectedTab = tabVendedorInicio;
+        }
     }
 }

@@ -305,12 +305,19 @@ namespace ConsignadoRepresentante
 
             PedidoLimpar();
             RetornoProdutoLimpar();
+            DuplicataLimpar();
+
         }
 
 
 
         public void VendedorExibir(long pVendedorId)
         {
+
+            PedidoLimpar();
+            RetornoProdutoLimpar();
+            DuplicataLimpar();
+
             var vendedor = ModelLibrary.MetodosRepresentante.ObterVendedor(pVendedorId);
 
 
@@ -352,8 +359,8 @@ namespace ConsignadoRepresentante
                 localRepresentanteForm.txtTelefoneComercial.Text = vendedor.TelefoneComercial.Trim();
                 localRepresentanteForm.txtCelular.Text = vendedor.Celular.Trim();
                 localRepresentanteForm.txtEmail.Text = vendedor.Email.Trim();
-                localRepresentanteForm.txtLimitePedido.Text = String.Format("{0:0.00}", vendedor.LimitePedido.ToString());
-                localRepresentanteForm.txtLimiteCredito.Text = String.Format("{0:0.00}", vendedor.LimiteCredito.ToString());
+                localRepresentanteForm.txtLimitePedido.Text = String.Format("{0:N}", vendedor.LimitePedido);
+                localRepresentanteForm.txtLimiteCredito.Text = String.Format("{0:N}", vendedor.LimiteCredito);
                 localRepresentanteForm.txtObservacao.Text = vendedor.Observacao.Trim();
 
                 cVendedorModo = "Edit";
@@ -364,11 +371,22 @@ namespace ConsignadoRepresentante
                 localRepresentanteForm.txtVendedorPesqCpfCnpj.Text = vendedor.CpfCnpj.ToString();
 
 
+                ///// Labels da aba Inicial
+                ///
+
+                localRepresentanteForm.dlbVendedorNome.Text = vendedor.Nome;
+                localRepresentanteForm.dlbVendedorCPF.Text = vendedor.CpfCnpj;
+                localRepresentanteForm.dlbVendedorEndereco.Text = vendedor.Endereco + " - " + vendedor.Complemento + " - " + vendedor.Bairro;
+                localRepresentanteForm.dlbVendedorTelefone.Text = vendedor.Telefone + " / " + vendedor.Celular;
+
 
                 ExibirPedido(cVendedorId);
                 ExibirRetornoProduto(cVendedorId);
-                ExibirAcerto();
+                //ExibirAcerto(); //--> Inserido em ExibirPedido
                 ExibirRecebimentos();
+
+
+                localRepresentanteForm.tbcVendedor.SelectedTab = localRepresentanteForm.tabVendedorInicio;
 
 
             }
@@ -513,8 +531,8 @@ namespace ConsignadoRepresentante
                 localRepresentanteForm.txtTelefoneComercial.Text = vendedor.TelefoneComercial.Trim();
                 localRepresentanteForm.txtCelular.Text = vendedor.Celular.Trim();
                 localRepresentanteForm.txtEmail.Text = vendedor.Email.Trim();
-                localRepresentanteForm.txtLimitePedido.Text = vendedor.LimitePedido.ToString();
-                localRepresentanteForm.txtLimiteCredito.Text = vendedor.LimiteCredito.ToString();
+                localRepresentanteForm.txtLimitePedido.Text = String.Format("{0:N}", vendedor.LimitePedido);
+                localRepresentanteForm.txtLimiteCredito.Text = String.Format("{0:N}", vendedor.LimiteCredito);
                 localRepresentanteForm.txtObservacao.Text = vendedor.Observacao.Trim();
 
                 cVendedorModo = "Create";
@@ -600,7 +618,7 @@ namespace ConsignadoRepresentante
                 else
                 {
                     //inserir direto qtd=1
-                    PedidoAdicionar();
+                    PedidoIncluir();
                 }
 
             }
@@ -610,6 +628,7 @@ namespace ConsignadoRepresentante
                 MessageBox.Show("Dígito verificador inválido. Não foi possível encontrar a grade deste produto.");
 
                 //cImportarProdutoId = 0;
+                localRepresentanteForm.txtPedidoCodigoBarras.Text = "";
                 localRepresentanteForm.txtPedidoCodigoBarras.Focus();
                 localRepresentanteForm.btnPedidoConfirmar.Enabled = false;
                 localRepresentanteForm.btnPedidoCancelar.Enabled = false;
@@ -637,6 +656,21 @@ namespace ConsignadoRepresentante
 
             localRepresentanteForm.grdVendedorPedido.ClearSelection();
 
+            if (localRepresentanteForm.grdVendedorPedido.RowCount <= 0)
+            {
+                localRepresentanteForm.grpFinanceiroCalculo.Visible = false;
+                localRepresentanteForm.grpRecebimento.Visible = false;
+                localRepresentanteForm.lblAcertoInfo.Visible = true;
+
+
+            } else
+            {
+                localRepresentanteForm.grpFinanceiroCalculo.Visible = true;
+                localRepresentanteForm.grpRecebimento.Visible = true;
+                localRepresentanteForm.lblAcertoInfo.Visible = false;
+                ExibirAcerto();
+            }
+
 
 
 
@@ -651,14 +685,14 @@ namespace ConsignadoRepresentante
             }
             else
             {
-                PedidoAdicionar();
+                PedidoIncluir();
             }
 
         }
 
-        // PedidoAdicionar
+        // PedidoIncluir
 
-        public void PedidoAdicionar()
+        public void PedidoIncluir()
         {
 
             try
@@ -694,6 +728,12 @@ namespace ConsignadoRepresentante
 
                     ModelLibrary.MetodosRepresentante.InserirPedidoItem(localRepresentanteForm.cCargaId, cVendedorId, vProdutoGradeId, vQuantidade, vPreco);
                     ExibirPedido(cVendedorId);
+
+
+                    if (localRepresentanteForm.grdVendedorPedido.RowCount > 0) localRepresentanteForm.grdVendedorPedido.Rows[localRepresentanteForm.grdVendedorPedido.RowCount - 1].Selected = true;
+
+                    GridSelecionar(localRepresentanteForm.grdVendedorPedido, localRepresentanteForm.txtPedidoCodigoBarras.Text);
+
                     PedidoLimpar();
                 }
 
@@ -748,6 +788,8 @@ namespace ConsignadoRepresentante
 
             ExibirPedido(cVendedorId);
 
+            GridSelecionar(localRepresentanteForm.grdVendedorPedido, localRepresentanteForm.txtPedidoCodigoBarras.Text);
+
             PedidoLimpar();
         }
 
@@ -781,6 +823,9 @@ namespace ConsignadoRepresentante
         }
 
 
+
+
+
         //////////////////////////////////////////////////////
         /// RETORNO DE PRODUTOS
         //////////////////////////////////////////////////////
@@ -811,59 +856,72 @@ namespace ConsignadoRepresentante
 
 
 
-
-            int rowIndex = -1;
-
-            DataGridViewRow row = localRepresentanteForm.grdVendedorRetorno.Rows
-                .Cast<DataGridViewRow>()
-                .Where(r => r.Cells["CodigoBarras"].Value.ToString().Equals(pCodigo))
-                .First();
-
-            rowIndex = row.Index;
-
-            if (rowIndex != -1)
+            try
             {
+                int rowIndex = -1;
 
-                localRepresentanteForm.txtRetornoCodigoBarras.Text = localRepresentanteForm.grdVendedorRetorno.CurrentRow.Cells["CodigoBarras"].Value.ToString();
-                localRepresentanteForm.txtRetornoProdutoGradeId.Text = localRepresentanteForm.grdVendedorRetorno.CurrentRow.Cells["ProdutoGradeId"].Value.ToString();
-                localRepresentanteForm.txtRetornoProduto.Text = localRepresentanteForm.grdVendedorRetorno.CurrentRow.Cells["Descricao"].Value.ToString();
+                DataGridViewRow row = localRepresentanteForm.grdVendedorRetorno.Rows
+                    .Cast<DataGridViewRow>()
+                    .Where(r => r.Cells["CodigoBarras"].Value.ToString().Equals(pCodigo))
+                    .First();
 
-                if (localRepresentanteForm.chkRetornoQuantidade.Checked == false)
+                rowIndex = row.Index;
+
+                if (rowIndex != -1)
                 {
-                    localRepresentanteForm.chkRetornoQuantidade.Checked = true;
-                    localRepresentanteForm.chkRetornoQuantidade.Enabled = true;
-                }
 
-                localRepresentanteForm.btnRetornoConfirmar.Enabled = true;
-                localRepresentanteForm.btnRetornoCancelar.Enabled = true;
+                    localRepresentanteForm.txtRetornoCodigoBarras.Text = localRepresentanteForm.grdVendedorRetorno.CurrentRow.Cells["CodigoBarras"].Value.ToString();
+                    localRepresentanteForm.txtRetornoProdutoGradeId.Text = localRepresentanteForm.grdVendedorRetorno.CurrentRow.Cells["ProdutoGradeId"].Value.ToString();
+                    localRepresentanteForm.txtRetornoProduto.Text = localRepresentanteForm.grdVendedorRetorno.CurrentRow.Cells["Descricao"].Value.ToString();
 
-                if (localRepresentanteForm.chkRetornoQuantidade.Checked)
-                {
-                    localRepresentanteForm.txtRetornoQuantidade.Focus();
+                    if (localRepresentanteForm.chkRetornoQuantidade.Checked == false)
+                    {
+                        localRepresentanteForm.chkRetornoQuantidade.Checked = true;
+                        localRepresentanteForm.chkRetornoQuantidade.Enabled = true;
+                    }
+
+                    localRepresentanteForm.btnRetornoConfirmar.Enabled = true;
+                    localRepresentanteForm.btnRetornoCancelar.Enabled = true;
+
+                    if (localRepresentanteForm.chkRetornoQuantidade.Checked)
+                    {
+                        localRepresentanteForm.txtRetornoQuantidade.Focus();
+
+                    }
+                    else
+                    {
+                        //inserir direto qtd=1
+                        ConfirmarRetornoProduto();
+                    }
+
+
+                    localRepresentanteForm.grdVendedorRetorno.Rows[rowIndex].Selected = true;
 
                 }
                 else
                 {
-                    //inserir direto qtd=1
-                    ConfirmarRetornoProduto();
+
+                    MessageBox.Show("Código inválido. Não foi possível encontrar este produto no pedido.");
+
+                    //cImportarProdutoId = 0;
+                    localRepresentanteForm.txtRetornoCodigoBarras.Text = "";
+                    localRepresentanteForm.txtRetornoCodigoBarras.Focus();
+                    localRepresentanteForm.btnRetornoConfirmar.Enabled = false;
+                    localRepresentanteForm.btnRetornoCancelar.Enabled = false;
+
+
                 }
-
-
-                localRepresentanteForm.grdVendedorRetorno.Rows[rowIndex].Selected = true;
-
-            }
-            else
+            } catch
             {
-
                 MessageBox.Show("Código inválido. Não foi possível encontrar este produto no pedido.");
 
                 //cImportarProdutoId = 0;
+                localRepresentanteForm.txtRetornoCodigoBarras.Text = "";
                 localRepresentanteForm.txtRetornoCodigoBarras.Focus();
                 localRepresentanteForm.btnRetornoConfirmar.Enabled = false;
                 localRepresentanteForm.btnRetornoCancelar.Enabled = false;
-
-
             }
+            
 
             
         }
@@ -892,6 +950,8 @@ namespace ConsignadoRepresentante
             ModelLibrary.MetodosRepresentante.RetornarPedidoItem(cPedidoId, Convert.ToInt64(localRepresentanteForm.txtRetornoProdutoGradeId.Text), Convert.ToDecimal(localRepresentanteForm.txtRetornoQuantidade.Text));
 
             ExibirRetornoProduto(cVendedorId);
+
+            GridSelecionar(localRepresentanteForm.grdVendedorRetorno, localRepresentanteForm.txtRetornoCodigoBarras.Text);
 
             RetornoProdutoLimpar();
 
@@ -989,6 +1049,14 @@ namespace ConsignadoRepresentante
 
             localRepresentanteForm.grdFinanceiroRecebimentos.Columns[0].Visible = false;
             localRepresentanteForm.grdFinanceiroRecebimentos.Columns[1].Visible = false;
+            localRepresentanteForm.grdFinanceiroRecebimentos.Columns[2].Width = 90;
+            localRepresentanteForm.grdFinanceiroRecebimentos.Columns[3].Width = 40;
+            localRepresentanteForm.grdFinanceiroRecebimentos.Columns[4].DefaultCellStyle.Format = "c";
+            localRepresentanteForm.grdFinanceiroRecebimentos.Columns[5].DefaultCellStyle.Format = "c";
+            localRepresentanteForm.grdFinanceiroRecebimentos.Columns[6].Width = 100;
+            localRepresentanteForm.grdFinanceiroRecebimentos.Columns[7].Width = 100;
+            localRepresentanteForm.grdFinanceiroRecebimentos.Columns[8].Width = 100;
+            localRepresentanteForm.grdFinanceiroRecebimentos.Columns[9].Width = 220;
 
 
         }
@@ -1057,6 +1125,29 @@ namespace ConsignadoRepresentante
 
             
 
+        }
+
+        //////
+        //////
+        ////// Rotinas comuns
+        //////
+        //////
+
+        public void GridSelecionar(DataGridView datagrid, string pCodigoBarras)
+        {
+            try
+            {
+                datagrid.ClearSelection();
+                foreach (DataGridViewRow row in datagrid.Rows)
+                {
+                    if (row.Cells["CodigoBarras"].Value.ToString() == pCodigoBarras)
+                        row.Selected = true;
+                }
+                datagrid.FirstDisplayedScrollingRowIndex = datagrid.SelectedRows[0].Index;
+            } catch
+            {
+                ///escrever no log.
+            }
         }
 
 
