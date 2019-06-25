@@ -36,7 +36,7 @@ namespace ModelLibrary
             using (RepresentanteDBEntities context = new RepresentanteDBEntities())
             {
 
-                var usuario = context.RepUsuario.FirstOrDefault(u => u.Login == pLogin);
+                var usuario = context.RepUsuario.FirstOrDefault(u => u.Login.ToLower() == pLogin.ToLower());
 
                 if (usuario != null)
                 {

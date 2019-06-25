@@ -27,7 +27,7 @@ namespace ModelLibrary
             using (DepositoDBEntities context = new DepositoDBEntities())
             {
 
-                var usuario = context.Usuario.FirstOrDefault(u => u.Login == pLogin);
+                var usuario = context.Usuario.FirstOrDefault(u => u.Login.ToLower() == pLogin.ToLower());
 
                 if (usuario != null)
                 {

@@ -352,8 +352,8 @@ namespace ConsignadoRepresentante
                 localRepresentanteForm.txtTelefoneComercial.Text = vendedor.TelefoneComercial.Trim();
                 localRepresentanteForm.txtCelular.Text = vendedor.Celular.Trim();
                 localRepresentanteForm.txtEmail.Text = vendedor.Email.Trim();
-                localRepresentanteForm.txtLimitePedido.Text = vendedor.LimitePedido.ToString();
-                localRepresentanteForm.txtLimiteCredito.Text = vendedor.LimiteCredito.ToString();
+                localRepresentanteForm.txtLimitePedido.Text = String.Format("{0:0.00}", vendedor.LimitePedido.ToString());
+                localRepresentanteForm.txtLimiteCredito.Text = String.Format("{0:0.00}", vendedor.LimiteCredito.ToString());
                 localRepresentanteForm.txtObservacao.Text = vendedor.Observacao.Trim();
 
                 cVendedorModo = "Edit";
@@ -634,6 +634,8 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.grdVendedorPedido.Columns[8].Visible = false;
             localRepresentanteForm.grdVendedorPedido.Columns[9].DefaultCellStyle.Format = "c";
             localRepresentanteForm.grdVendedorPedido.Columns[4].Width = 300;
+
+            localRepresentanteForm.grdVendedorPedido.ClearSelection();
 
 
 
