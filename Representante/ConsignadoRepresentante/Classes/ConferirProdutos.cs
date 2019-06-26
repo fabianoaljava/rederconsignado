@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ConsignadoRepresentante;
+using Equin.ApplicationFramework;
 
 namespace ConsignadoRepresentante
 {
@@ -113,7 +114,11 @@ namespace ConsignadoRepresentante
             localDeposito.tbcImportarConferencia.Visible = true;
 
 
-            localDeposito.grdConfProduto.DataSource = ModelLibrary.MetodosRepresentante.ObterProdutosConferencia(pCargaId);
+            List<ModelLibrary.ListaRepProdutosConferencia> prodconferencia = ModelLibrary.MetodosRepresentante.ObterProdutosConferencia(pCargaId);
+
+            BindingListView<ModelLibrary.ListaRepProdutosConferencia> view = new BindingListView<ModelLibrary.ListaRepProdutosConferencia>(prodconferencia);
+
+            localDeposito.grdConfProduto.DataSource = view;
 
             /// Ocultar coluna CargaProdutoId
             localDeposito.grdConfProduto.Columns[5].Visible = false;

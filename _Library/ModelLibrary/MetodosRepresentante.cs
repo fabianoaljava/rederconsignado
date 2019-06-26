@@ -1013,6 +1013,42 @@ namespace ModelLibrary
             using (RepresentanteDBEntities context = new RepresentanteDBEntities())
             {
 
+
+                string query = @"SELECT RepVendedor.Id, RepVendedor.Nome,
+		                            CASE WHEN Receber.ValorAReceber IS NULL
+		                               THEN (Pedido.ValorAReceber)
+		                               ELSE (Receber.ValorAReceber)
+		                               END AS Receber,
+		                            CASE WHEN Receber.ValorRecebido IS NULL
+		                               THEN (Pedido.ValorRecebido)
+		                               ELSE (Receber.ValorRecebido)
+		                               END AS Recebido,
+		                            CASE WHEN Receber.ValorAReceber IS NULL
+		                               THEN (IFNULL(Pedido.ValorAReceber,0)-IFNULL(Pedido.ValorRecebido,0))
+		                               ELSE (IFNULL(Receber.ValorAReceber,0)-IFNULL(Receber.ValorRecebido,0))
+		                               END AS Aberto,
+		                            Pedido.Quantidade Quantidade, Pedido.Retorno Retorno
+                                FROM RepVendedor 
+                                INNER JOIN
+                                (SELECT VendedorId, SUM(ValorAReceber) AS ValorAReceber, Sum(ValorAcerto) AS ValorRecebido, Sum(ValorAReceber-ValorAcerto) AS ValorAberto, Sum(Quantidade) AS Quantidade, Sum(Retorno) AS Retorno 
+                                FROM RepPedido 
+                                LEFT JOIN RepPedidoItem ON RepPedido.Id = RepPedidoItem.PedidoId
+                                GROUP BY VendedorId) AS Pedido ON RepVendedor.Id = Pedido.VendedorId
+                                LEFT JOIN (
+                                SELECT VendedorId, SUM(ValorNF) AS ValorAReceber, Sum(Valor) AS ValorRecebido, Sum(ValorNF-Valor) AS ValorAberto 
+                                FROM RepReceber 
+                                LEFT JOIN RepReceberBaixa ON RepReceber.Id = RepReceberBaixa.ReceberId
+                                GROUP BY VendedorId
+                                ) AS Receber ON RepVendedor.Id = Receber.VendedorId";
+
+
+                var result = context.Database.SqlQuery<ListaRepPosicaoFinanceira>(query);
+
+
+                return result.ToList<ListaRepPosicaoFinanceira>();
+
+
+                /*
                 var result = context.RepPosicaoFinanceira
                            .Join(context.RepVendedor, pf => pf.VendedorId, vd => vd.Id, (pf, vd) => new { RepPosicaoFinanceira = pf, RepVendedor = vd })
                            .Select(ls => new ListaRepPosicaoFinanceira()
@@ -1023,9 +1059,9 @@ namespace ModelLibrary
                                Recebido = ls.RepPosicaoFinanceira.ValorRecebido,
                                Aberto = ls.RepPosicaoFinanceira.ValorAberto
                            });
+               */
 
 
-                return result.ToList<ListaRepPosicaoFinanceira>();
             }
 
 

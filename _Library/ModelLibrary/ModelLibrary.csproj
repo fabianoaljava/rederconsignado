@@ -186,9 +186,6 @@
     <Compile Include="RepPedidoItem.cs">
       <DependentUpon>ModelRepresentante.tt</DependentUpon>
     </Compile>
-    <Compile Include="RepPosicaoFinanceira.cs">
-      <DependentUpon>ModelRepresentante.tt</DependentUpon>
-    </Compile>
     <Compile Include="RepPraca.cs">
       <DependentUpon>ModelRepresentante.tt</DependentUpon>
     </Compile>

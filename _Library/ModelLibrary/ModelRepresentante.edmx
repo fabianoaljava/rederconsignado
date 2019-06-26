@@ -327,16 +327,6 @@
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'main.RepPosicaoFinanceira' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="RepPosicaoFinanceira">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="integer" Nullable="false" />
-          <Property Name="VendedorId" Type="integer" />
-          <Property Name="ValorAReceber" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="ValorRecebido" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="ValorAberto" Type="decimal" Precision="18" Scale="0" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'main.RepProdutosConferencia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="RepProdutosConferencia">
@@ -389,15 +379,6 @@ warning 6002: The table/view 'main.RepRepresentante' does not have a primary key
           <EntitySet Name="RepUsuario" EntityType="Self.RepUsuario" store:Type="Tables" />
           <EntitySet Name="RepVendedor" EntityType="Self.RepVendedor" store:Type="Tables" />
           <EntitySet Name="RepVendedorBase" EntityType="Self.RepVendedorBase" store:Type="Tables" />
-          <EntitySet Name="RepPosicaoFinanceira" EntityType="Self.RepPosicaoFinanceira" store:Type="Views">
-            <DefiningQuery>SELECT 
-[RepPosicaoFinanceira].[Id] AS [Id], 
-[RepPosicaoFinanceira].[VendedorId] AS [VendedorId], 
-[RepPosicaoFinanceira].[ValorAReceber] AS [ValorAReceber], 
-[RepPosicaoFinanceira].[ValorRecebido] AS [ValorRecebido], 
-[RepPosicaoFinanceira].[ValorAberto] AS [ValorAberto]
-FROM [RepPosicaoFinanceira] AS [RepPosicaoFinanceira]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="RepProdutosConferencia" EntityType="Self.RepProdutosConferencia" store:Type="Views">
             <DefiningQuery>SELECT 
 [RepProdutosConferencia].[CodigoBarras] AS [CodigoBarras], 
@@ -570,7 +551,6 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <EntitySet Name="RepSuplementoProduto" EntityType="ModelRepresentante.RepSuplementoProduto" />
           <EntitySet Name="RepSuplemento" EntityType="ModelRepresentante.RepSuplemento" />
           <EntitySet Name="RepPedidoes" EntityType="ModelRepresentante.RepPedido" />
-          <EntitySet Name="RepPosicaoFinanceiras" EntityType="ModelRepresentante.RepPosicaoFinanceira" />
           <EntitySet Name="RepProdutosConferencias" EntityType="ModelRepresentante.RepProdutosConferencia" />
         </EntityContainer>
         <EntityType Name="RepRepresentante">
@@ -775,16 +755,6 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <Property Name="CargaAtual" Type="Int64" />
           <Property Name="RepresentanteId" Type="Int64" />
           <Property Name="ValorAReceber" Type="Decimal" Precision="53" Scale="0" />
-        </EntityType>
-        <EntityType Name="RepPosicaoFinanceira">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" />
-          <Property Name="VendedorId" Type="Int64" />
-          <Property Name="ValorAReceber" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="ValorRecebido" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="ValorAberto" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="RepProdutosConferencia">
           <Key>
@@ -1154,17 +1124,6 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
                 <ScalarProperty Name="DataLancamento" ColumnName="DataLancamento" />
                 <ScalarProperty Name="CodigoPedido" ColumnName="CodigoPedido" />
                 <ScalarProperty Name="CargaId" ColumnName="CargaId" />
-                <ScalarProperty Name="VendedorId" ColumnName="VendedorId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RepPosicaoFinanceiras">
-            <EntityTypeMapping TypeName="ModelRepresentante.RepPosicaoFinanceira">
-              <MappingFragment StoreEntitySet="RepPosicaoFinanceira">
-                <ScalarProperty Name="ValorAberto" ColumnName="ValorAberto" />
-                <ScalarProperty Name="ValorRecebido" ColumnName="ValorRecebido" />
-                <ScalarProperty Name="ValorAReceber" ColumnName="ValorAReceber" />
                 <ScalarProperty Name="VendedorId" ColumnName="VendedorId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

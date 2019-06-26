@@ -396,7 +396,7 @@
             this.tbcPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tbcPrincipal.Name = "tbcPrincipal";
-            this.tbcPrincipal.SelectedIndex = 0;
+            this.tbcPrincipal.SelectedIndex = 1;
             this.tbcPrincipal.Size = new System.Drawing.Size(968, 546);
             this.tbcPrincipal.TabIndex = 0;
             this.tbcPrincipal.UseSelectable = true;
@@ -682,7 +682,7 @@
             this.tbcVendedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcVendedor.Location = new System.Drawing.Point(0, 0);
             this.tbcVendedor.Name = "tbcVendedor";
-            this.tbcVendedor.SelectedIndex = 0;
+            this.tbcVendedor.SelectedIndex = 4;
             this.tbcVendedor.Size = new System.Drawing.Size(960, 370);
             this.tbcVendedor.TabIndex = 2;
             this.tbcVendedor.UseSelectable = true;
@@ -1228,6 +1228,7 @@
             this.txtLimiteCredito.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtLimiteCredito.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.txtLimiteCredito.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ControlOnlyNumbers);
+            this.txtLimiteCredito.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // txtLimitePedido
             // 
@@ -1262,12 +1263,13 @@
             this.txtLimitePedido.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtLimitePedido.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.txtLimitePedido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ControlOnlyNumbers);
+            this.txtLimitePedido.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // txtDataFinal
             // 
             this.txtDataFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txtDataFinal.Location = new System.Drawing.Point(659, 23);
-            this.txtDataFinal.MinimumSize = new System.Drawing.Size(4, 29);
+            this.txtDataFinal.MinimumSize = new System.Drawing.Size(0, 29);
             this.txtDataFinal.Name = "txtDataFinal";
             this.txtDataFinal.Size = new System.Drawing.Size(111, 29);
             this.txtDataFinal.TabIndex = 28;
@@ -1277,7 +1279,7 @@
             // 
             this.txtDataInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txtDataInicial.Location = new System.Drawing.Point(540, 23);
-            this.txtDataInicial.MinimumSize = new System.Drawing.Size(4, 29);
+            this.txtDataInicial.MinimumSize = new System.Drawing.Size(0, 29);
             this.txtDataInicial.Name = "txtDataInicial";
             this.txtDataInicial.Size = new System.Drawing.Size(111, 29);
             this.txtDataInicial.TabIndex = 27;
@@ -1315,6 +1317,7 @@
             this.txtEmail.WaterMark = "Email";
             this.txtEmail.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtEmail.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtEmail.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // txtCelular
             // 
@@ -1348,6 +1351,7 @@
             this.txtCelular.WaterMark = "Celular";
             this.txtCelular.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtCelular.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtCelular.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // txtTelefoneComercial
             // 
@@ -1381,6 +1385,7 @@
             this.txtTelefoneComercial.WaterMark = "Telefone Comercial";
             this.txtTelefoneComercial.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtTelefoneComercial.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtTelefoneComercial.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // txtTelefone
             // 
@@ -1414,15 +1419,17 @@
             this.txtTelefone.WaterMark = "Telefone";
             this.txtTelefone.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtTelefone.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtTelefone.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // cbbDataNasc
             // 
             this.cbbDataNasc.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.cbbDataNasc.Location = new System.Drawing.Point(810, 76);
-            this.cbbDataNasc.MinimumSize = new System.Drawing.Size(4, 29);
+            this.cbbDataNasc.MinimumSize = new System.Drawing.Size(0, 29);
             this.cbbDataNasc.Name = "cbbDataNasc";
             this.cbbDataNasc.Size = new System.Drawing.Size(111, 29);
             this.cbbDataNasc.TabIndex = 11;
+            this.cbbDataNasc.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // lblVendedorNome
             // 
@@ -1458,6 +1465,7 @@
             this.cbbTipoPessoa.TabIndex = 6;
             this.cbbTipoPessoa.UseSelectable = true;
             this.cbbTipoPessoa.SelectedValueChanged += new System.EventHandler(this.cbbTipoPessoa_SelectedValueChanged);
+            this.cbbTipoPessoa.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // lblCPFCNPJ
             // 
@@ -1479,6 +1487,7 @@
             this.cbbUF.Size = new System.Drawing.Size(51, 29);
             this.cbbUF.TabIndex = 16;
             this.cbbUF.UseSelectable = true;
+            this.cbbUF.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // txtCep
             // 
@@ -1513,6 +1522,7 @@
             this.txtCep.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtCep.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.txtCep.ButtonClick += new MetroFramework.Controls.MetroTextBox.ButClick(this.txtCep_ButtonClick);
+            this.txtCep.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // txtBairro
             // 
@@ -1546,6 +1556,7 @@
             this.txtBairro.WaterMark = "Bairro";
             this.txtBairro.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtBairro.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtBairro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // cbbCidade
             // 
@@ -1557,6 +1568,7 @@
             this.cbbCidade.Size = new System.Drawing.Size(171, 29);
             this.cbbCidade.TabIndex = 17;
             this.cbbCidade.UseSelectable = true;
+            this.cbbCidade.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // txtComplemento
             // 
@@ -1590,6 +1602,7 @@
             this.txtComplemento.WaterMark = "Complemento";
             this.txtComplemento.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtComplemento.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtComplemento.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // txtEndereco
             // 
@@ -1623,6 +1636,7 @@
             this.txtEndereco.WaterMark = "Endereço";
             this.txtEndereco.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtEndereco.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtEndereco.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // txtCPFCnpj
             // 
@@ -1657,7 +1671,9 @@
             this.txtCPFCnpj.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtCPFCnpj.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.txtCPFCnpj.Enter += new System.EventHandler(this.txtCPFCnpj_Enter);
+            this.txtCPFCnpj.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             this.txtCPFCnpj.Leave += new System.EventHandler(this.txtCPFCnpj_Leave);
+            this.txtCPFCnpj.Validating += new System.ComponentModel.CancelEventHandler(this.txtCPFCnpj_Validating);
             // 
             // txtRGInscricao
             // 
@@ -1691,6 +1707,7 @@
             this.txtRGInscricao.WaterMark = "Rg/Insc. Estadual";
             this.txtRGInscricao.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtRGInscricao.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtRGInscricao.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // txtRazaoSocial
             // 
@@ -1724,6 +1741,7 @@
             this.txtRazaoSocial.WaterMark = "Razão Social";
             this.txtRazaoSocial.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtRazaoSocial.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtRazaoSocial.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // txtNome
             // 
@@ -1757,6 +1775,7 @@
             this.txtNome.WaterMark = "Nome";
             this.txtNome.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtNome.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtNome.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // tabVendedorPedidos
             // 
@@ -1919,6 +1938,7 @@
             this.txtPedidoProdutoGradeId.ShortcutsEnabled = true;
             this.txtPedidoProdutoGradeId.Size = new System.Drawing.Size(99, 23);
             this.txtPedidoProdutoGradeId.TabIndex = 27;
+            this.txtPedidoProdutoGradeId.TabStop = false;
             this.txtPedidoProdutoGradeId.UseSelectable = true;
             this.txtPedidoProdutoGradeId.Visible = false;
             this.txtPedidoProdutoGradeId.WaterMark = "ProdudoGradeId";
@@ -1957,6 +1977,7 @@
             this.txtPedidoPrecoUnit.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtPedidoPrecoUnit.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.txtPedidoPrecoUnit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ControlOnlyNumbers);
+            this.txtPedidoPrecoUnit.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // lblVendedorMontarPedido
             // 
@@ -2035,6 +2056,7 @@
             this.txtPedidoQuantidade.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtPedidoQuantidade.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.txtPedidoQuantidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ControlOnlyInt);
+            this.txtPedidoQuantidade.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // txtPedidoProduto
             // 
@@ -2264,6 +2286,7 @@
             this.txtRetornoProdutoGradeId.ShortcutsEnabled = true;
             this.txtRetornoProdutoGradeId.Size = new System.Drawing.Size(99, 23);
             this.txtRetornoProdutoGradeId.TabIndex = 33;
+            this.txtRetornoProdutoGradeId.TabStop = false;
             this.txtRetornoProdutoGradeId.UseSelectable = true;
             this.txtRetornoProdutoGradeId.Visible = false;
             this.txtRetornoProdutoGradeId.WaterMark = "ProdudoGradeId";
@@ -2347,6 +2370,7 @@
             this.txtRetornoQuantidade.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtRetornoQuantidade.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.txtRetornoQuantidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ControlOnlyInt);
+            this.txtRetornoQuantidade.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // txtRetornoProduto
             // 
@@ -2531,6 +2555,7 @@
             this.txtDuplicataReceber.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtDuplicataReceber.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.txtDuplicataReceber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ControlOnlyNumbers);
+            this.txtDuplicataReceber.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // lblDuplicataReceber
             // 
@@ -2570,11 +2595,13 @@
             dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.grdFinanceiroRecebimentos.DefaultCellStyle = dataGridViewCellStyle15;
+            this.grdFinanceiroRecebimentos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.grdFinanceiroRecebimentos.EnableHeadersVisualStyles = false;
             this.grdFinanceiroRecebimentos.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.grdFinanceiroRecebimentos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.grdFinanceiroRecebimentos.Location = new System.Drawing.Point(17, 50);
             this.grdFinanceiroRecebimentos.Name = "grdFinanceiroRecebimentos";
+            this.grdFinanceiroRecebimentos.ReadOnly = true;
             this.grdFinanceiroRecebimentos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
@@ -2673,7 +2700,7 @@
             this.btnAcertoCancelar.Location = new System.Drawing.Point(307, 25);
             this.btnAcertoCancelar.Name = "btnAcertoCancelar";
             this.btnAcertoCancelar.Size = new System.Drawing.Size(67, 23);
-            this.btnAcertoCancelar.TabIndex = 29;
+            this.btnAcertoCancelar.TabIndex = 34;
             this.btnAcertoCancelar.Text = "Cancelar";
             this.btnAcertoCancelar.UseSelectable = true;
             this.btnAcertoCancelar.Click += new System.EventHandler(this.btnAcertoCancelar_Click);
@@ -2683,7 +2710,7 @@
             this.btnAcertoConfirmar.Location = new System.Drawing.Point(235, 25);
             this.btnAcertoConfirmar.Name = "btnAcertoConfirmar";
             this.btnAcertoConfirmar.Size = new System.Drawing.Size(66, 23);
-            this.btnAcertoConfirmar.TabIndex = 28;
+            this.btnAcertoConfirmar.TabIndex = 33;
             this.btnAcertoConfirmar.Text = "Confirmar";
             this.btnAcertoConfirmar.UseSelectable = true;
             this.btnAcertoConfirmar.Click += new System.EventHandler(this.btnAcertoConfirmar_Click);
@@ -2713,11 +2740,12 @@
             this.txtValorRecebido.SelectionStart = 0;
             this.txtValorRecebido.ShortcutsEnabled = true;
             this.txtValorRecebido.Size = new System.Drawing.Size(104, 23);
-            this.txtValorRecebido.TabIndex = 27;
+            this.txtValorRecebido.TabIndex = 32;
             this.txtValorRecebido.UseSelectable = true;
             this.txtValorRecebido.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtValorRecebido.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.txtValorRecebido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ControlOnlyNumbers);
+            this.txtValorRecebido.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             this.txtValorRecebido.Leave += new System.EventHandler(this.txtValorRecebido_Leave);
             // 
             // lblAcertoValorRecebido
@@ -2985,7 +3013,8 @@
             this.txtVendedorPesqCpfCnpj.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtVendedorPesqCpfCnpj.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.txtVendedorPesqCpfCnpj.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ControlOnlyInt);
-            this.txtVendedorPesqCpfCnpj.Leave += new System.EventHandler(this.txtVendedorPesqCpfCnpj_Leave);
+            this.txtVendedorPesqCpfCnpj.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
+            this.txtVendedorPesqCpfCnpj.Validating += new System.ComponentModel.CancelEventHandler(this.txtVendedorPesqCpfCnpj_Validating);
             this.txtVendedorPesqCpfCnpj.Validated += new System.EventHandler(this.txtVendedorPesqCpfCnpj_Validated);
             // 
             // lblVendedorCpfCnpj
@@ -3030,6 +3059,7 @@
             this.txtVendedorPesqCodigo.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtVendedorPesqCodigo.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.txtVendedorPesqCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ControlOnlyInt);
+            this.txtVendedorPesqCodigo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // lblVendedorCodigo
             // 
@@ -3082,6 +3112,7 @@
             this.cbbPesqVendedor.Sorted = true;
             this.cbbPesqVendedor.TabIndex = 0;
             this.cbbPesqVendedor.UseSelectable = true;
+            this.cbbPesqVendedor.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // lblNomeVendedor
             // 
@@ -3152,6 +3183,7 @@
             this.grdPosicaoFinanceira.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.grdPosicaoFinanceira.Location = new System.Drawing.Point(0, 0);
             this.grdPosicaoFinanceira.Name = "grdPosicaoFinanceira";
+            this.grdPosicaoFinanceira.ReadOnly = true;
             this.grdPosicaoFinanceira.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));

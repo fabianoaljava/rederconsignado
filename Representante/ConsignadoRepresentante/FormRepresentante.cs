@@ -284,9 +284,10 @@ namespace ConsignadoRepresentante
             txtVendedorPesqCpfCnpj.Text = MascaraCnpjCpf(txtVendedorPesqCpfCnpj.Text);
         }
 
-        private void txtVendedorPesqCpfCnpj_Leave(object sender, EventArgs e)
+
+        private void txtVendedorPesqCpfCnpj_Validating(object sender, CancelEventArgs e)
         {
-            cVendedor.ValidarCPFCnpj(txtVendedorPesqCpfCnpj.Text);
+            cVendedor.ValidarCPFCnpj(txtVendedorPesqCpfCnpj.Text, sender, e);
         }
 
         private void btnVendedorPesquisar_Click(object sender, EventArgs e)
@@ -315,11 +316,13 @@ namespace ConsignadoRepresentante
 
             txtCPFCnpj.Text = MascaraCnpjCpf(txtCPFCnpj.Text);
 
-            cVendedor.ValidarCPFCnpj(txtCPFCnpj.Text);
-
             if (cVendedor.cVendedorModo == "Create") cVendedor.VerificarCPFCnpjExistente(txtCPFCnpj.Text);
         }
 
+        private void txtCPFCnpj_Validating(object sender, CancelEventArgs e)
+        {
+            cVendedor.ValidarCPFCnpj(txtCPFCnpj.Text, sender, e);
+        }
 
         private void txtCep_ButtonClick(object sender, EventArgs e)
         {
@@ -354,6 +357,16 @@ namespace ConsignadoRepresentante
             cVendedor.VendedorSalvar();
         }
 
+
+
+        private void Control_KeyUp(object sender, KeyEventArgs e)
+        {
+            if ((e.KeyCode == Keys.Enter) || (e.KeyCode == Keys.Return))
+            {
+                SendKeys.Send("{TAB}");
+                e.Handled = true;//set to false if you need that textbox gets enter key
+            }
+        }
         ////////////////////////////////////////
         /// ORGANIZAR DAQUI PRA BAIXO
         ////////////////////////////////////////
@@ -520,15 +533,7 @@ namespace ConsignadoRepresentante
             try
             {
 
-                if (Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells[4].Value.ToString()) == 0)
-                {
-                    grdPosicaoFinanceira.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Green;
-                }
 
-                if (Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells[4].Value.ToString()) > 0)
-                {
-                    grdPosicaoFinanceira.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.DeepSkyBlue;
-                }
             }
             catch
             {
@@ -546,5 +551,7 @@ namespace ConsignadoRepresentante
             tbcPrincipal.SelectedTab = tabVendedores;
             tbcVendedor.SelectedTab = tabVendedorInicio;
         }
+
+
     }
 }

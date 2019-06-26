@@ -47,7 +47,6 @@ namespace ModelLibrary
         public virtual DbSet<RepSuplementoProduto> RepSuplementoProduto { get; set; }
         public virtual DbSet<RepSuplemento> RepSuplemento { get; set; }
         public virtual DbSet<RepPedido> RepPedido { get; set; }
-        public virtual DbSet<RepPosicaoFinanceira> RepPosicaoFinanceira { get; set; }
         public virtual DbSet<RepProdutosConferencia> RepProdutosConferencia { get; set; }
     }
 }

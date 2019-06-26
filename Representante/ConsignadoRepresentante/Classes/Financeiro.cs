@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ConsignadoRepresentante;
 using System.Windows.Forms;
 using Equin.ApplicationFramework;
+using System.Drawing;
 
 namespace ConsignadoRepresentante
 {
@@ -51,6 +52,47 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.grdPosicaoFinanceira.Columns[2].DefaultCellStyle.Format = "n";
             localRepresentanteForm.grdPosicaoFinanceira.Columns[3].DefaultCellStyle.Format = "n";
             localRepresentanteForm.grdPosicaoFinanceira.Columns[4].DefaultCellStyle.Format = "n";
+
+
+            foreach (DataGridViewRow row in localRepresentanteForm.grdPosicaoFinanceira.Rows)
+            {
+
+
+
+                if (Convert.ToDecimal(localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].Cells[4].Value.ToString()) == 0)
+                {
+                    localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].DefaultCellStyle.ForeColor = Color.Green;
+                }
+
+                if (Convert.ToDecimal(localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].Cells[4].Value.ToString()) > 0)
+                {
+                    localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].DefaultCellStyle.ForeColor = Color.DeepSkyBlue;
+                }
+
+                if (localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].Cells[5].Value.ToString() == localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].Cells[6].Value.ToString())
+                {
+                    localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].DefaultCellStyle.ForeColor = Color.DarkOrange;
+                }
+
+
+
+                //if (Convert.ToInt32(localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].Cells[6].Value.ToString()) == 0)
+                //{
+                //    localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].DefaultCellStyle.ForeColor = Color.Red;
+                //}
+
+                //if (Convert.ToInt32(localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].Cells[6].Value.ToString()) == 0 && Convert.ToDecimal(localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].Cells[3].Value.ToString()) == 0)
+                //{
+                //    localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].DefaultCellStyle.ForeColor = Color.Purple;
+                //}
+            }
+
+
+            localRepresentanteForm.grdPosicaoFinanceira.Columns[5].Visible = false;
+            localRepresentanteForm.grdPosicaoFinanceira.Columns[6].Visible = false;
+
+
+
 
 
 

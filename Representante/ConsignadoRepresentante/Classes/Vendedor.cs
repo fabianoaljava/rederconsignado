@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ConsignadoRepresentante;
 using System.Windows.Forms;
+using Equin.ApplicationFramework;
 
 namespace ConsignadoRepresentante
 {
@@ -182,14 +183,15 @@ namespace ConsignadoRepresentante
         ///////////////////////////////////////////////
 
 
-        public void ValidarCPFCnpj(string pCPFCnpj)
+        public void ValidarCPFCnpj(string pCPFCnpj, object sender, System.ComponentModel.CancelEventArgs e)
         {
             //verificar se o CPF/CNPJ é valido
-
-
-            //se estivar cadastrando um novo, verificar se não existe na base
-
-            //se for alteração não permitir alteração
+            if (!ControllerLibrary.Funcoes.CpfCnpjUtils.IsValid(pCPFCnpj))
+            {
+                MessageBox.Show("CPF/CNPJ Inválido!");
+                e.Cancel = true;
+                               
+            }
 
         }
 
@@ -641,7 +643,14 @@ namespace ConsignadoRepresentante
         public void ExibirPedido(long pVendedorId)
         {
 
-            localRepresentanteForm.grdVendedorPedido.DataSource = ModelLibrary.MetodosRepresentante.ObterVendedorPedidoItem(pVendedorId, localRepresentanteForm.cCargaId);
+
+
+            List<ModelLibrary.ListaRepVendedorPedido> listapedido = ModelLibrary.MetodosRepresentante.ObterVendedorPedidoItem(pVendedorId, localRepresentanteForm.cCargaId);
+
+            BindingListView<ModelLibrary.ListaRepVendedorPedido> view = new BindingListView<ModelLibrary.ListaRepVendedorPedido>(listapedido);
+
+
+            localRepresentanteForm.grdVendedorPedido.DataSource = view;
 
             var pedido = ModelLibrary.MetodosRepresentante.ObterVendedorPedido(pVendedorId, localRepresentanteForm.cCargaId);
             cPedidoId = pedido != null ? pedido.Id : 0;
@@ -930,7 +939,12 @@ namespace ConsignadoRepresentante
         public void ExibirRetornoProduto(long pVendedorId)
         {
 
-            localRepresentanteForm.grdVendedorRetorno.DataSource = ModelLibrary.MetodosRepresentante.ObterVendedorPedidoItem(pVendedorId, localRepresentanteForm.cCargaId);
+
+            List<ModelLibrary.ListaRepVendedorPedido> listaretorno = ModelLibrary.MetodosRepresentante.ObterVendedorPedidoItem(pVendedorId, localRepresentanteForm.cCargaId);
+
+            BindingListView<ModelLibrary.ListaRepVendedorPedido> view = new BindingListView<ModelLibrary.ListaRepVendedorPedido>(listaretorno);
+
+            localRepresentanteForm.grdVendedorRetorno.DataSource = view;
 
             localRepresentanteForm.grdVendedorRetorno.Columns[0].Visible = false;
             localRepresentanteForm.grdVendedorRetorno.Columns[1].Visible = false;
@@ -980,10 +994,7 @@ namespace ConsignadoRepresentante
 
         }
 
-
-
-
-
+                     
 
         // RetornoProdutoTotalizador
         public void RetornoProdutoTotalizador()
@@ -1044,8 +1055,12 @@ namespace ConsignadoRepresentante
         {
             //carregar grid de recebimentos
 
-            
-            localRepresentanteForm.grdFinanceiroRecebimentos.DataSource = ModelLibrary.MetodosRepresentante.ObterListaRecebimentos(cVendedorId, localRepresentanteForm.cCargaId);
+            List<ModelLibrary.ListaRecebimentos> recebimentos = ModelLibrary.MetodosRepresentante.ObterListaRecebimentos(cVendedorId, localRepresentanteForm.cCargaId);
+
+            BindingListView<ModelLibrary.ListaRecebimentos> view = new BindingListView<ModelLibrary.ListaRecebimentos>(recebimentos);
+
+
+            localRepresentanteForm.grdFinanceiroRecebimentos.DataSource = view;
 
             localRepresentanteForm.grdFinanceiroRecebimentos.Columns[0].Visible = false;
             localRepresentanteForm.grdFinanceiroRecebimentos.Columns[1].Visible = false;
