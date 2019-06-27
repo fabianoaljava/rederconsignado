@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ConsignadoDeposito;
 using System.Windows.Forms;
+using Equin.ApplicationFramework;
 
 namespace ConsignadoDeposito
 {
@@ -209,7 +210,13 @@ namespace ConsignadoDeposito
             int mes = localDepositoForm.cbbCargaMesAno.Value.Month;
             int ano = localDepositoForm.cbbCargaMesAno.Value.Year;
 
-            localDepositoForm.grdCargaProduto.DataSource = ModelLibrary.MetodosDeposito.ObterProdutosCarga(pCargaId);
+
+
+            List<ModelLibrary.ListaProdutosCarga> produtos = ModelLibrary.MetodosDeposito.ObterProdutosCarga(pCargaId);
+
+            BindingListView<ModelLibrary.ListaProdutosCarga> view = new BindingListView<ModelLibrary.ListaProdutosCarga>(produtos);
+
+            localDepositoForm.grdCargaProduto.DataSource = view;
 
             /// Ocultar colunas CargaId e cCargaProdutoGradeId
             localDepositoForm.grdCargaProduto.Columns[8].Visible = false;
@@ -361,6 +368,9 @@ namespace ConsignadoDeposito
                 {
                     ModelLibrary.MetodosDeposito.InserirCargaProduto(cCargaId, cCargaProdutoGradeId, vQuantidade);
                     CarregarGradeCargaProduto(cCargaId);
+
+                    GridSelecionar(localDepositoForm.grdCargaProduto, localDepositoForm.txtCargaCodigoBarras.Text);
+
                     LimparCargaProduto();
                 }
 
@@ -432,6 +442,31 @@ namespace ConsignadoDeposito
 
 
         }
+
+        //////
+        //////
+        ////// Rotinas comuns
+        //////
+        //////
+
+        public void GridSelecionar(DataGridView datagrid, string pCodigoBarras)
+        {
+            try
+            {
+                datagrid.ClearSelection();
+                foreach (DataGridViewRow row in datagrid.Rows)
+                {
+                    if (row.Cells["CodigoBarras"].Value.ToString() == pCodigoBarras)
+                        row.Selected = true;
+                }
+                datagrid.FirstDisplayedScrollingRowIndex = datagrid.SelectedRows[0].Index;
+            }
+            catch
+            {
+                ///escrever no log.
+            }
+        }
+
 
 
 

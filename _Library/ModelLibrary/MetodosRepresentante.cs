@@ -206,19 +206,38 @@ namespace ModelLibrary
         {
             using (RepresentanteDBEntities context = new RepresentanteDBEntities())
             {
-                var result = context.RepProdutosConferencia
-                           .Where(pg => pg.CargaId == pCargaId)
-                           .Select(pg => new ListaRepProdutosConferencia()
-                           {
-                               CodigoBarras = pg.CodigoBarras.ToString(),
-                               Descricao = pg.Descricao,
-                               QuantidadeCarga = pg.QuantidadeCarga,
-                               QuantidadeInformada = pg.QuantidadeInformada,
-                               Diferenca = pg.Diferenca,
-                               CargaId = pg.CargaId,
-                               ProdutoGradeId = pg.ProdutoGradeId,
-                               ProdutoId = pg.ProdutoId                              
-                           });
+
+
+                string query = @"SELECT RepProduto.CodigoBarras || RepProdutoGrade.Digito as CodigoBarras,
+	                                RepProduto.Descricao,
+	                                RepCargaProduto.Quantidade as QuantidadeCarga,
+	                                RepCargaConferencia.Quantidade as QuantidadeInformada,
+	                                RepCargaProduto.Quantidade - IFNULL(RepCargaConferencia.Quantidade, 0) as Diferenca,
+	                                RepProduto.Id as ProdutoId,
+	                                RepCargaProduto.Id as CargaProdutoId,
+	                                RepProdutoGrade.Id as ProdutoGradeId,
+	                                RepCarga.Id as CargaId
+	                                FROM RepCarga 
+                                INNER JOIN RepCargaProduto ON RepCarga.Id = RepCargaProduto.CargaId
+                                INNER JOIN RepProdutoGrade ON RepCargaProduto.ProdutoGradeId = RepProdutoGrade.Id
+                                INNER JOIN RepProduto ON RepProdutoGrade.ProdutoId = RepProduto.Id
+                                LEFT JOIN RepCargaConferencia ON RepCargaConferencia.CargaId = RepCarga.Id AND RepCargaConferencia.ProdutoGradeId = RepProdutoGrade.Id";
+
+                var result = context.Database.SqlQuery<ListaRepProdutosConferencia>(query);
+
+                //var result = context.RepProdutosConferencia
+                //           .Where(pg => pg.CargaId == pCargaId)
+                //           .Select(pg => new ListaRepProdutosConferencia()
+                //           {
+                //               CodigoBarras = pg.CodigoBarras.ToString(),
+                //               Descricao = pg.Descricao,
+                //               QuantidadeCarga = pg.QuantidadeCarga,
+                //               QuantidadeInformada = pg.QuantidadeInformada,
+                //               Diferenca = pg.Diferenca,
+                //               CargaId = pg.CargaId,
+                //               ProdutoGradeId = pg.ProdutoGradeId,
+                //               ProdutoId = pg.ProdutoId                              
+                //           });
 
                 return result.ToList<ListaRepProdutosConferencia>();
 
@@ -226,28 +245,7 @@ namespace ModelLibrary
         }
 
 
-        public static void NovaCarga(long pRepresentanteId, long pPracaId, int pMes, int pAno)
-        {
 
-            DateTime dataabertura = DateTime.Now;
-
-
-            var novacarga = new RepCarga
-            {
-                RepresentanteId = pRepresentanteId,
-                PracaId = pPracaId,
-                Mes = pMes,
-                Ano = pAno,                
-                DataAbertura = dataabertura
-            };
-
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
-            {
-                context.RepCarga.Add(novacarga);
-                context.SaveChanges();
-            }
-
-        }
 
 
         public static RepProduto ObterProduto(string pCodigo)
@@ -643,7 +641,7 @@ namespace ModelLibrary
 
                 long newId = maxPedido == null ? 1 : maxPedido.Id + 1;
 
-
+                var carga = context.RepCarga.FirstOrDefault();
 
                 /***********
                  * 
@@ -653,12 +651,24 @@ namespace ModelLibrary
                  * 
                 */
 
+                string vCodigoPedido = "";
+
+                //vCodigoPedido += carga.PracaId.ToString().PadLeft(3, '0');
+                //vCodigoPedido += carga.RepresentanteId.ToString().PadLeft(3, '0');
+                //vCodigoPedido += carga.Mes.ToString().PadLeft(2, '0');
+                //vCodigoPedido += carga.Ano.ToString();
+                vCodigoPedido += pVendedorId.ToString().PadLeft(5, '0');
+                vCodigoPedido += newId.ToString().PadLeft(7,'0');
+
+
                 var novopedido = new RepPedido
                 {
                     Id = newId,
-                    VendedorId = pVendedorId,
+                    VendedorId = pVendedorId,                    
                     CargaId = pCargaId,
-                    CodigoPedido = "",
+                    CargaAtual = pCargaId,
+                    RepresentanteId = carga.RepresentanteId,
+                    CodigoPedido = vCodigoPedido,
                     DataLancamento = DateTime.Now,
                     DataPrevisaoRetorno = DateTime.Now.AddDays(50),
                     ValorPedido = 0,
@@ -672,7 +682,7 @@ namespace ModelLibrary
                     ValorAcerto = 0,
                     QuantidadeRetorno = 0,
                     Remarcado = 0,
-                    Status = ""
+                    Status = "0"
                 };
 
                 context.RepPedido.Add(novopedido);
@@ -804,6 +814,7 @@ namespace ModelLibrary
                         PedidoId = vPedidoId,
                         ProdutoGradeId = pProdutoGradeId,
                         Quantidade = pQuantidade,
+                        Retorno = 0,
                         Preco = pPreco
                     };
 

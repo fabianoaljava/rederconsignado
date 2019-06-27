@@ -59,20 +59,20 @@ namespace ConsignadoRepresentante
 
 
 
-                if (Convert.ToDecimal(localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].Cells[4].Value.ToString()) == 0)
-                {
-                    localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].DefaultCellStyle.ForeColor = Color.Green;
-                }
+                //if (Convert.ToDecimal(localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].Cells[4].Value.ToString()) == 0)
+                //{
+                //    localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].DefaultCellStyle.ForeColor = Color.Green;
+                //}
 
-                if (Convert.ToDecimal(localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].Cells[4].Value.ToString()) > 0)
-                {
-                    localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].DefaultCellStyle.ForeColor = Color.DeepSkyBlue;
-                }
+                //if (Convert.ToDecimal(localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].Cells[4].Value.ToString()) > 0)
+                //{
+                //    localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].DefaultCellStyle.ForeColor = Color.DeepSkyBlue;
+                //}
 
-                if (localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].Cells[5].Value.ToString() == localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].Cells[6].Value.ToString())
-                {
-                    localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].DefaultCellStyle.ForeColor = Color.DarkOrange;
-                }
+                //if (localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].Cells[5].Value.ToString() == localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].Cells[6].Value.ToString())
+                //{
+                //    localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].DefaultCellStyle.ForeColor = Color.DarkOrange;
+                //}
 
 
 

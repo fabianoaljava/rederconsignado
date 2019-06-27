@@ -326,27 +326,9 @@
           <Property Name="Observacao" Type="nvarchar" MaxLength="2147483647" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'main.RepPosicaoFinanceira' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
+warning 6005: The data type '' is currently not supported for the target Entity Framework version; the column 'CodigoBarras' in the table 'main.RepProdutosConferencia' was excluded.
+warning 6005: The data type '' is currently not supported for the target Entity Framework version; the column 'Diferenca' in the table 'main.RepProdutosConferencia' was excluded.
 warning 6002: The table/view 'main.RepProdutosConferencia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="RepProdutosConferencia">
-          <Key>
-            <PropertyRef Name="Descricao" />
-            <PropertyRef Name="ProdutoId" />
-            <PropertyRef Name="CargaProdutoId" />
-            <PropertyRef Name="ProdutoGradeId" />
-            <PropertyRef Name="CargaId" />
-          </Key>
-          <Property Name="CodigoBarras" Type="nvarchar" MaxLength="2147483647" />
-          <Property Name="Descricao" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
-          <Property Name="QuantidadeCarga" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="QuantidadeInformada" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Diferenca" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="ProdutoId" Type="integer" Nullable="false" />
-          <Property Name="CargaProdutoId" Type="integer" Nullable="false" />
-          <Property Name="ProdutoGradeId" Type="integer" Nullable="false" />
-          <Property Name="CargaId" Type="integer" Nullable="false" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'main.RepRepresentante' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="RepRepresentante">
@@ -379,19 +361,6 @@ warning 6002: The table/view 'main.RepRepresentante' does not have a primary key
           <EntitySet Name="RepUsuario" EntityType="Self.RepUsuario" store:Type="Tables" />
           <EntitySet Name="RepVendedor" EntityType="Self.RepVendedor" store:Type="Tables" />
           <EntitySet Name="RepVendedorBase" EntityType="Self.RepVendedorBase" store:Type="Tables" />
-          <EntitySet Name="RepProdutosConferencia" EntityType="Self.RepProdutosConferencia" store:Type="Views">
-            <DefiningQuery>SELECT 
-[RepProdutosConferencia].[CodigoBarras] AS [CodigoBarras], 
-[RepProdutosConferencia].[Descricao] AS [Descricao], 
-[RepProdutosConferencia].[QuantidadeCarga] AS [QuantidadeCarga], 
-[RepProdutosConferencia].[QuantidadeInformada] AS [QuantidadeInformada], 
-[RepProdutosConferencia].[Diferenca] AS [Diferenca], 
-[RepProdutosConferencia].[ProdutoId] AS [ProdutoId], 
-[RepProdutosConferencia].[CargaProdutoId] AS [CargaProdutoId], 
-[RepProdutosConferencia].[ProdutoGradeId] AS [ProdutoGradeId], 
-[RepProdutosConferencia].[CargaId] AS [CargaId]
-FROM [RepProdutosConferencia] AS [RepProdutosConferencia]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="RepRepresentante" EntityType="Self.RepRepresentante" store:Type="Views">
             <DefiningQuery>SELECT 
 [RepRepresentante].[Id] AS [Id], 
@@ -551,7 +520,6 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <EntitySet Name="RepSuplementoProduto" EntityType="ModelRepresentante.RepSuplementoProduto" />
           <EntitySet Name="RepSuplemento" EntityType="ModelRepresentante.RepSuplemento" />
           <EntitySet Name="RepPedidoes" EntityType="ModelRepresentante.RepPedido" />
-          <EntitySet Name="RepProdutosConferencias" EntityType="ModelRepresentante.RepProdutosConferencia" />
         </EntityContainer>
         <EntityType Name="RepRepresentante">
           <Key>
@@ -755,24 +723,6 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <Property Name="CargaAtual" Type="Int64" />
           <Property Name="RepresentanteId" Type="Int64" />
           <Property Name="ValorAReceber" Type="Decimal" Precision="53" Scale="0" />
-        </EntityType>
-        <EntityType Name="RepProdutosConferencia">
-          <Key>
-            <PropertyRef Name="Descricao" />
-            <PropertyRef Name="ProdutoId" />
-            <PropertyRef Name="CargaProdutoId" />
-            <PropertyRef Name="ProdutoGradeId" />
-            <PropertyRef Name="CargaId" />
-          </Key>
-          <Property Name="CodigoBarras" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="QuantidadeCarga" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="QuantidadeInformada" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Diferenca" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="ProdutoId" Type="Int64" Nullable="false" />
-          <Property Name="CargaProdutoId" Type="Int64" Nullable="false" />
-          <Property Name="ProdutoGradeId" Type="Int64" Nullable="false" />
-          <Property Name="CargaId" Type="Int64" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1126,21 +1076,6 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
                 <ScalarProperty Name="CargaId" ColumnName="CargaId" />
                 <ScalarProperty Name="VendedorId" ColumnName="VendedorId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RepProdutosConferencias">
-            <EntityTypeMapping TypeName="ModelRepresentante.RepProdutosConferencia">
-              <MappingFragment StoreEntitySet="RepProdutosConferencia">
-                <ScalarProperty Name="CargaId" ColumnName="CargaId" />
-                <ScalarProperty Name="ProdutoGradeId" ColumnName="ProdutoGradeId" />
-                <ScalarProperty Name="CargaProdutoId" ColumnName="CargaProdutoId" />
-                <ScalarProperty Name="ProdutoId" ColumnName="ProdutoId" />
-                <ScalarProperty Name="Diferenca" ColumnName="Diferenca" />
-                <ScalarProperty Name="QuantidadeInformada" ColumnName="QuantidadeInformada" />
-                <ScalarProperty Name="QuantidadeCarga" ColumnName="QuantidadeCarga" />
-                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
-                <ScalarProperty Name="CodigoBarras" ColumnName="CodigoBarras" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ConsignadoDeposito;
 using System.Windows.Forms;
+using Equin.ApplicationFramework;
 
 namespace ConsignadoDeposito
 {
@@ -174,7 +175,6 @@ namespace ConsignadoDeposito
             Cursor.Current = Cursors.WaitCursor;
             CarregarResumo();
             CarregarGradeRetornoProduto(cRetornoId);
-            CarregarProdutosConsignados();
             CarregarPedidos();
             CarregarListaPesquisaVendedor();
             CarregarContasAReceber();
@@ -227,7 +227,11 @@ namespace ConsignadoDeposito
             int mes = localDepositoForm.cbbRetornoMesAno.Value.Month;
             int ano = localDepositoForm.cbbRetornoMesAno.Value.Year;
 
-            localDepositoForm.grdRetornoProduto.DataSource = ModelLibrary.MetodosDeposito.ObterProdutosCarga(pCargaId);
+            List<ModelLibrary.ListaProdutosCarga> produtos = ModelLibrary.MetodosDeposito.ObterProdutosCarga(pCargaId);
+
+            BindingListView<ModelLibrary.ListaProdutosCarga> view = new BindingListView<ModelLibrary.ListaProdutosCarga>(produtos);
+
+            localDepositoForm.grdRetornoProduto.DataSource = view;
 
             /// Ocultar colunas CargaId e cRetornoProdutoGradeId
             localDepositoForm.grdRetornoProduto.Columns[8].Visible = false;
@@ -388,20 +392,7 @@ namespace ConsignadoDeposito
         }
 
 
-
-        ////////////////////////////////////////////
-        /// Produtos Consignados
-        ////////////////////////////////////////////
         
-        public void CarregarProdutosConsignados()
-        {
-
-            localDepositoForm.grdRetornoProdConsig.DataSource = ModelLibrary.MetodosDeposito.ObterListaProdutosConsignados(cRetornoId);
-
-            localDepositoForm.grdRetornoProdConsig.Columns[1].Width = 250;
-
-
-        }
 
         ////////////////////////////////////////////
         /// Pedidos
@@ -410,7 +401,13 @@ namespace ConsignadoDeposito
         public void CarregarPedidos(Boolean pAtual = true)
         {
 
-            localDepositoForm.grdRetornoPedido.DataSource = ModelLibrary.MetodosDeposito.ObterListaPedidosRetorno(cRetornoId, pAtual);
+
+
+            List<ModelLibrary.ListaPedidosRetorno> pedidos = ModelLibrary.MetodosDeposito.ObterListaPedidosRetorno(cRetornoId, pAtual);
+
+            BindingListView<ModelLibrary.ListaPedidosRetorno> view = new BindingListView<ModelLibrary.ListaPedidosRetorno>(pedidos);
+
+            localDepositoForm.grdRetornoPedido.DataSource = view;
 
             if (pAtual)
             {
@@ -591,10 +588,15 @@ namespace ConsignadoDeposito
         public void CarregarListaLancamentoPedido()
         {
 
-            localDepositoForm.grdLancPedido.DataSource = ModelLibrary.MetodosDeposito.ObterListaPedidoItem(cRetornoPedidoId);
+
+            List<ModelLibrary.ListaPedidoItem> pedidos = ModelLibrary.MetodosDeposito.ObterListaPedidoItem(cRetornoPedidoId);
+
+            BindingListView<ModelLibrary.ListaPedidoItem> view = new BindingListView<ModelLibrary.ListaPedidoItem>(pedidos);
+
+            localDepositoForm.grdLancPedido.DataSource = view;
 
             localDepositoForm.grdLancPedido.Columns[0].Visible = false;
-            localDepositoForm.grdLancPedido.Columns[1].Width = 250;
+            localDepositoForm.grdLancPedido.Columns[2].Width = 450;
 
         }
 
@@ -724,7 +726,13 @@ namespace ConsignadoDeposito
         
         public void CarregarContasAReceber()
         {
-            localDepositoForm.grdContasAReceber.DataSource = ModelLibrary.MetodosDeposito.ObterListaAReceber(cRetornoId);
+
+            List<ModelLibrary.ListaAReceber> pedidos = ModelLibrary.MetodosDeposito.ObterListaAReceber(cRetornoId);
+
+            BindingListView<ModelLibrary.ListaAReceber> view = new BindingListView<ModelLibrary.ListaAReceber>(pedidos);
+
+
+            localDepositoForm.grdContasAReceber.DataSource = view;
 
             localDepositoForm.grdContasAReceber.Columns[0].Visible = false;
             localDepositoForm.grdContasAReceber.Columns[1].Visible = false;
@@ -863,7 +871,12 @@ namespace ConsignadoDeposito
 
         public void CarregarConferenciaProdutos()
         {
-            localDepositoForm.grdRetornoConfProdutos.DataSource = ModelLibrary.MetodosDeposito.ObterListaProdutoConferencia(cRetornoId);
+
+            List<ModelLibrary.ListaProdutoConferencia> pedidos = ModelLibrary.MetodosDeposito.ObterListaProdutoConferencia(cRetornoId);
+
+            BindingListView<ModelLibrary.ListaProdutoConferencia> view = new BindingListView<ModelLibrary.ListaProdutoConferencia>(pedidos);
+
+            localDepositoForm.grdRetornoConfProdutos.DataSource = view;
 
             localDepositoForm.grdRetornoConfProdutos.Columns[1].Width = 250;
         }
