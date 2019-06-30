@@ -1269,7 +1269,7 @@
             // 
             this.txtDataFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txtDataFinal.Location = new System.Drawing.Point(659, 23);
-            this.txtDataFinal.MinimumSize = new System.Drawing.Size(0, 29);
+            this.txtDataFinal.MinimumSize = new System.Drawing.Size(4, 29);
             this.txtDataFinal.Name = "txtDataFinal";
             this.txtDataFinal.Size = new System.Drawing.Size(111, 29);
             this.txtDataFinal.TabIndex = 28;
@@ -1279,7 +1279,7 @@
             // 
             this.txtDataInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txtDataInicial.Location = new System.Drawing.Point(540, 23);
-            this.txtDataInicial.MinimumSize = new System.Drawing.Size(0, 29);
+            this.txtDataInicial.MinimumSize = new System.Drawing.Size(4, 29);
             this.txtDataInicial.Name = "txtDataInicial";
             this.txtDataInicial.Size = new System.Drawing.Size(111, 29);
             this.txtDataInicial.TabIndex = 27;
@@ -1425,7 +1425,7 @@
             // 
             this.cbbDataNasc.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.cbbDataNasc.Location = new System.Drawing.Point(810, 76);
-            this.cbbDataNasc.MinimumSize = new System.Drawing.Size(0, 29);
+            this.cbbDataNasc.MinimumSize = new System.Drawing.Size(4, 29);
             this.cbbDataNasc.Name = "cbbDataNasc";
             this.cbbDataNasc.Size = new System.Drawing.Size(111, 29);
             this.cbbDataNasc.TabIndex = 11;

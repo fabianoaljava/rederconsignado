@@ -18,8 +18,8 @@ namespace ModelLibrary
         public Nullable<int> CargaId { get; set; }
         public int ProdutoGradeId { get; set; }
         public Nullable<double> Quantidade { get; set; }
-        public Nullable<double> QuantidadeRetorno { get; set; }
         public Nullable<int> temp_old_id { get; set; }
+        public Nullable<double> Retorno { get; set; }
     
         public virtual Carga Carga { get; set; }
         public virtual ProdutoGrade ProdutoGrade { get; set; }

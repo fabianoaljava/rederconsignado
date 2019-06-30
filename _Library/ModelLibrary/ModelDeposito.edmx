@@ -30,7 +30,7 @@
           <Property Name="CargaId" Type="int" />
           <Property Name="ProdutoGradeId" Type="int" Nullable="false" />
           <Property Name="Quantidade" Type="float" />
-          <Property Name="QuantidadeRetorno" Type="float" />
+          <Property Name="Retorno" Type="float" />
           <Property Name="temp_old_id" Type="int" />
         </EntityType>
         <EntityType Name="Categoria">
@@ -118,9 +118,9 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VendedorId" Type="int" Nullable="false" />
           <Property Name="CargaId" Type="int" Nullable="false" />
-          <Property Name="CargaAtual" Type="int" />
+          <Property Name="CargaOriginal" Type="int" />
           <Property Name="RepresentanteId" Type="int" />
-          <Property Name="CodigoPedido" Type="nvarchar" MaxLength="12" />
+          <Property Name="CodigoPedido" Type="nvarchar" MaxLength="24" />
           <Property Name="DataLancamento" Type="date" />
           <Property Name="DataPrevisaoRetorno" Type="date" />
           <Property Name="DataRetorno" Type="date" />
@@ -133,7 +133,7 @@
           <Property Name="ValorLiquido" Type="float" />
           <Property Name="ValorAReceber" Type="float" />
           <Property Name="ValorAcerto" Type="float" />
-          <Property Name="QuantidadeRetorno" Type="int" />
+          <Property Name="QuantidadeRemarcado" Type="int" />
           <Property Name="Remarcado" Type="int" />
           <Property Name="Status" Type="nvarchar" MaxLength="10" />
           <Property Name="temp_old_id" Type="int" />
@@ -206,12 +206,11 @@
           <Property Name="ValorNF" Type="float" />
           <Property Name="ValorDuplicata" Type="float" />
           <Property Name="ValorAReceber" Type="float" />
-          <Property Name="ValorJuros" Type="float" />
-          <Property Name="ValorDesconto" Type="float" />
           <Property Name="DataEmissao" Type="date" />
           <Property Name="DataLancamento" Type="date" />
           <Property Name="DataVencimento" Type="date" />
           <Property Name="DataPagamento" Type="date" />
+          <Property Name="QuantidadeRemarcado" Type="int" />
           <Property Name="Observacoes" Type="ntext" />
           <Property Name="Status" Type="nvarchar" MaxLength="1" />
           <Property Name="temp_old_id" Type="int" />
@@ -226,8 +225,6 @@
           <Property Name="Valor" Type="float" />
           <Property Name="DataPagamento" Type="date" />
           <Property Name="DataBaixa" Type="date" />
-          <Property Name="Juros" Type="float" />
-          <Property Name="Desconto" Type="float" />
           <Property Name="temp_old_id" Type="int" />
         </EntityType>
         <EntityType Name="Suplemento">
@@ -330,7 +327,7 @@ warning 6002: The table/view 'RederConsignado.dbo.ProdutosCarga' does not have a
           <Property Name="Cor" Type="nvarchar" MaxLength="3" />
           <Property Name="Tamanho" Type="nvarchar" MaxLength="3" />
           <Property Name="Quantidade" Type="float" />
-          <Property Name="QuantidadeRetorno" Type="float" />
+          <Property Name="Retorno" Type="float" />
           <Property Name="ValorSaida" Type="float" />
           <Property Name="ValorCusto" Type="float" />
           <Property Name="ProdutoId" Type="int" Nullable="false" />
@@ -576,18 +573,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ReceberBaixa_Carga">
-          <End Role="Carga" Type="Self.Carga" Multiplicity="0..1" />
-          <End Role="ReceberBaixa" Type="Self.ReceberBaixa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Carga">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ReceberBaixa">
-              <PropertyRef Name="CargaId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ReceberBaixa_Receber">
           <End Role="Receber" Type="Self.Receber" Multiplicity="0..1" />
           <End Role="ReceberBaixa" Type="Self.ReceberBaixa" Multiplicity="*" />
@@ -656,7 +641,7 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
     [ProdutosCarga].[Cor] AS [Cor], 
     [ProdutosCarga].[Tamanho] AS [Tamanho], 
     [ProdutosCarga].[Quantidade] AS [Quantidade], 
-    [ProdutosCarga].[QuantidadeRetorno] AS [QuantidadeRetorno], 
+    [ProdutosCarga].[Retorno] AS [Retorno], 
     [ProdutosCarga].[ValorSaida] AS [ValorSaida], 
     [ProdutosCarga].[ValorCusto] AS [ValorCusto], 
     [ProdutosCarga].[ProdutoId] AS [ProdutoId], 
@@ -767,10 +752,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
             <End Role="Vendedor" EntitySet="Vendedor" />
             <End Role="Receber" EntitySet="Receber" />
           </AssociationSet>
-          <AssociationSet Name="FK_ReceberBaixa_Carga" Association="Self.FK_ReceberBaixa_Carga">
-            <End Role="Carga" EntitySet="Carga" />
-            <End Role="ReceberBaixa" EntitySet="ReceberBaixa" />
-          </AssociationSet>
           <AssociationSet Name="FK_ReceberBaixa_Receber" Association="Self.FK_ReceberBaixa_Receber">
             <End Role="Receber" EntitySet="Receber" />
             <End Role="ReceberBaixa" EntitySet="ReceberBaixa" />
@@ -819,10 +800,10 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <Property Name="CargaId" Type="Int32" />
           <Property Name="ProdutoGradeId" Type="Int32" Nullable="false" />
           <Property Name="Quantidade" Type="Double" />
-          <Property Name="QuantidadeRetorno" Type="Double" />
           <Property Name="temp_old_id" Type="Int32" />
           <NavigationProperty Name="Carga" Relationship="Self.FK_CargaProduto_Carga" FromRole="CargaProduto" ToRole="Carga" />
           <NavigationProperty Name="ProdutoGrade" Relationship="Self.FK_CargaProduto_ProdutoGrade" FromRole="CargaProduto" ToRole="ProdutoGrade" />
+          <Property Name="Retorno" Type="Double" />
         </EntityType>
         <EntityType Name="Categoria">
           <Key>
@@ -955,7 +936,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <Property Name="Cor" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
           <Property Name="Tamanho" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
           <Property Name="Quantidade" Type="Double" />
-          <Property Name="QuantidadeRetorno" Type="Double" />
           <Property Name="ValorSaida" Type="Double" />
           <Property Name="ValorCusto" Type="Double" />
           <Property Name="ProdutoId" Type="Int32" Nullable="false" />
@@ -966,6 +946,7 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <Property Name="Ano" Type="Int32" />
           <Property Name="Mes" Type="Int32" />
           <Property Name="CargaProdutoId" Type="Int32" Nullable="false" />
+          <Property Name="Retorno" Type="Double" />
         </EntityType>
         <EntityType Name="Representante">
           <Key>
@@ -1251,7 +1232,7 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="VendedorId" Type="Int32" Nullable="false" />
           <Property Name="CargaId" Type="Int32" Nullable="false" />
-          <Property Name="CodigoPedido" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="CodigoPedido" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
           <Property Name="DataLancamento" Type="DateTime" Precision="0" />
           <Property Name="DataPrevisaoRetorno" Type="DateTime" Precision="0" />
           <Property Name="DataRetorno" Type="DateTime" Precision="0" />
@@ -1264,15 +1245,15 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <NavigationProperty Name="Carga" Relationship="ModelDeposito.FK_Pedido_Carga" FromRole="Pedido" ToRole="Carga" />
           <NavigationProperty Name="Vendedor" Relationship="ModelDeposito.FK_Pedido_Vendedor" FromRole="Pedido" ToRole="Vendedor" />
           <NavigationProperty Name="PedidoItem" Relationship="ModelDeposito.FK_PedidoItem_Pedido" FromRole="Pedido" ToRole="PedidoItem" />
-          <Property Name="QuantidadeRetorno" Type="Int32" />
           <Property Name="Remarcado" Type="Int32" />
           <Property Name="ValorPedido" Type="Double" />
           <Property Name="PercentualCompra" Type="Double" />
           <Property Name="FaixaComissao" Type="Double" />
           <Property Name="PercentualFaixa" Type="Double" />
-          <Property Name="CargaAtual" Type="Int32" />
           <Property Name="RepresentanteId" Type="Int32" />
           <Property Name="ValorAReceber" Type="Double" />
+          <Property Name="CargaOriginal" Type="Int32" />
+          <Property Name="QuantidadeRemarcado" Type="Int32" />
         </EntityType>
         <EntityType Name="PedidoItem">
           <Key>
@@ -1300,8 +1281,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <Property Name="ValorNF" Type="Double" />
           <Property Name="ValorDuplicata" Type="Double" />
           <Property Name="ValorAReceber" Type="Double" />
-          <Property Name="ValorJuros" Type="Double" />
-          <Property Name="ValorDesconto" Type="Double" />
           <Property Name="DataEmissao" Type="DateTime" Precision="0" />
           <Property Name="DataLancamento" Type="DateTime" Precision="0" />
           <Property Name="DataVencimento" Type="DateTime" Precision="0" />
@@ -1312,6 +1291,7 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <NavigationProperty Name="Carga" Relationship="ModelDeposito.FK_Receber_Carga" FromRole="Receber" ToRole="Carga" />
           <NavigationProperty Name="Vendedor" Relationship="ModelDeposito.FK_Receber_Vendedor" FromRole="Receber" ToRole="Vendedor" />
           <NavigationProperty Name="ReceberBaixa" Relationship="ModelDeposito.FK_ReceberBaixa_Receber" FromRole="Receber" ToRole="ReceberBaixa" />
+          <Property Name="QuantidadeRemarcado" Type="Int32" />
         </EntityType>
         <EntityType Name="ReceberBaixa">
           <Key>
@@ -1323,8 +1303,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <Property Name="Valor" Type="Double" />
           <Property Name="DataPagamento" Type="DateTime" Precision="0" />
           <Property Name="DataBaixa" Type="DateTime" Precision="0" />
-          <Property Name="Juros" Type="Double" />
-          <Property Name="Desconto" Type="Double" />
           <Property Name="temp_old_id" Type="Int32" />
           <NavigationProperty Name="Carga" Relationship="ModelDeposito.FK_ReceberBaixa_Carga" FromRole="ReceberBaixa" ToRole="Carga" />
           <NavigationProperty Name="Receber" Relationship="ModelDeposito.FK_ReceberBaixa_Receber" FromRole="ReceberBaixa" ToRole="Receber" />
@@ -1574,11 +1552,11 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <EntitySetMapping Name="CargaProduto">
             <EntityTypeMapping TypeName="ModelDeposito.CargaProduto">
               <MappingFragment StoreEntitySet="CargaProduto">
+                <ScalarProperty Name="Retorno" ColumnName="Retorno" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CargaId" ColumnName="CargaId" />
                 <ScalarProperty Name="ProdutoGradeId" ColumnName="ProdutoGradeId" />
                 <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
-                <ScalarProperty Name="QuantidadeRetorno" ColumnName="QuantidadeRetorno" />
                 <ScalarProperty Name="temp_old_id" ColumnName="temp_old_id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1698,13 +1676,13 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <EntitySetMapping Name="ProdutosCarga">
             <EntityTypeMapping TypeName="ModelDeposito.ProdutosCarga">
               <MappingFragment StoreEntitySet="ProdutosCarga">
+                <ScalarProperty Name="Retorno" ColumnName="Retorno" />
                 <ScalarProperty Name="CargaProdutoId" ColumnName="CargaProdutoId" />
                 <ScalarProperty Name="CodigoBarras" ColumnName="CodigoBarras" />
                 <ScalarProperty Name="Descricao" ColumnName="Descricao" />
                 <ScalarProperty Name="Cor" ColumnName="Cor" />
                 <ScalarProperty Name="Tamanho" ColumnName="Tamanho" />
                 <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
-                <ScalarProperty Name="QuantidadeRetorno" ColumnName="QuantidadeRetorno" />
                 <ScalarProperty Name="ValorSaida" ColumnName="ValorSaida" />
                 <ScalarProperty Name="ValorCusto" ColumnName="ValorCusto" />
                 <ScalarProperty Name="ProdutoId" ColumnName="ProdutoId" />
@@ -1807,15 +1785,15 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <EntitySetMapping Name="Pedido">
             <EntityTypeMapping TypeName="ModelDeposito.Pedido">
               <MappingFragment StoreEntitySet="Pedido">
+                <ScalarProperty Name="QuantidadeRemarcado" ColumnName="QuantidadeRemarcado" />
+                <ScalarProperty Name="CargaOriginal" ColumnName="CargaOriginal" />
                 <ScalarProperty Name="ValorAReceber" ColumnName="ValorAReceber" />
                 <ScalarProperty Name="RepresentanteId" ColumnName="RepresentanteId" />
-                <ScalarProperty Name="CargaAtual" ColumnName="CargaAtual" />
                 <ScalarProperty Name="PercentualFaixa" ColumnName="PercentualFaixa" />
                 <ScalarProperty Name="FaixaComissao" ColumnName="FaixaComissao" />
                 <ScalarProperty Name="PercentualCompra" ColumnName="PercentualCompra" />
                 <ScalarProperty Name="ValorPedido" ColumnName="ValorPedido" />
                 <ScalarProperty Name="Remarcado" ColumnName="Remarcado" />
-                <ScalarProperty Name="QuantidadeRetorno" ColumnName="QuantidadeRetorno" />
                 <ScalarProperty Name="temp_old_id" ColumnName="temp_old_id" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="ValorAcerto" ColumnName="ValorAcerto" />
@@ -1848,6 +1826,7 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <EntitySetMapping Name="Receber">
             <EntityTypeMapping TypeName="ModelDeposito.Receber">
               <MappingFragment StoreEntitySet="Receber">
+                <ScalarProperty Name="QuantidadeRemarcado" ColumnName="QuantidadeRemarcado" />
                 <ScalarProperty Name="temp_old_id" ColumnName="temp_old_id" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Observacoes" ColumnName="Observacoes" />
@@ -1855,8 +1834,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
                 <ScalarProperty Name="DataVencimento" ColumnName="DataVencimento" />
                 <ScalarProperty Name="DataLancamento" ColumnName="DataLancamento" />
                 <ScalarProperty Name="DataEmissao" ColumnName="DataEmissao" />
-                <ScalarProperty Name="ValorDesconto" ColumnName="ValorDesconto" />
-                <ScalarProperty Name="ValorJuros" ColumnName="ValorJuros" />
                 <ScalarProperty Name="ValorAReceber" ColumnName="ValorAReceber" />
                 <ScalarProperty Name="ValorDuplicata" ColumnName="ValorDuplicata" />
                 <ScalarProperty Name="ValorNF" ColumnName="ValorNF" />
@@ -1872,8 +1849,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
             <EntityTypeMapping TypeName="ModelDeposito.ReceberBaixa">
               <MappingFragment StoreEntitySet="ReceberBaixa">
                 <ScalarProperty Name="temp_old_id" ColumnName="temp_old_id" />
-                <ScalarProperty Name="Desconto" ColumnName="Desconto" />
-                <ScalarProperty Name="Juros" ColumnName="Juros" />
                 <ScalarProperty Name="DataBaixa" ColumnName="DataBaixa" />
                 <ScalarProperty Name="DataPagamento" ColumnName="DataPagamento" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />

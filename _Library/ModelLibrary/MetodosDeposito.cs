@@ -232,7 +232,7 @@ namespace ModelLibrary
 
 
 
-        public static List<ListaProdutosCarga> ObterProdutosCarga(int pCargaId)
+        public static List<ListaProdutosCarga> ObterProdutosCarga(int pCargaId, Boolean pRetorno = false)
         {
             using (DepositoDBEntities context = new DepositoDBEntities())
             {
@@ -245,17 +245,42 @@ namespace ModelLibrary
                                Cor = pg.Cor,
                                Tamanho = pg.Tamanho,
                                Quantidade = pg.Quantidade,
-                               QuantidadeRetorno = pg.QuantidadeRetorno,
+                               Retorno = pg.Retorno,
                                ValorSaida = pg.ValorSaida,
                                ValorCusto = pg.ValorCusto,
                                ProdutoGradeId = pg.ProdutoGradeId
                            });
+
+                if (pRetorno) result = result.Where(pg => pg.Retorno > 0);
 
                 return result.ToList<ListaProdutosCarga>();                
 
             }
         }
 
+        public static ListaProdutosCarga ObterProdutoCarga(int pCargaId, int pProdutoGradeId)
+        {
+            using (DepositoDBEntities context = new DepositoDBEntities())
+            {
+                var produtocarga = context.ProdutosCarga
+                           .Where(pg => pg.CargaId == pCargaId && pg.ProdutoGradeId == pProdutoGradeId)
+                           .Select(pg => new ListaProdutosCarga()
+                           {
+                               CodigoBarras = pg.CodigoBarras,
+                               Descricao = pg.Descricao,
+                               Cor = pg.Cor,
+                               Tamanho = pg.Tamanho,
+                               Quantidade = pg.Quantidade,
+                               Retorno = pg.Retorno,
+                               ValorSaida = pg.ValorSaida,
+                               ValorCusto = pg.ValorCusto,
+                               ProdutoGradeId = pg.ProdutoGradeId
+                           }).FirstOrDefault();
+
+                return produtocarga;
+
+            }
+        }
 
         public static Produto ObterProduto(string pCodigo)
         {
@@ -311,7 +336,7 @@ namespace ModelLibrary
                                         FROM Produto 
                                         INNER JOIN ProdutoGrade ON ProdutoGrade.ProdutoId = Produto.Id) AS Produto
                                 LEFT JOIN 
-                                    (SELECT ProdutoGrade.Id ProdutoGradeId, ProdutoGrade.ValorSaida Preco, CargaProduto.Quantidade ViagemPlus, CargaProduto.QuantidadeRetorno ContagemCarro 
+                                    (SELECT ProdutoGrade.Id ProdutoGradeId, ProdutoGrade.ValorSaida Preco, CargaProduto.Quantidade ViagemPlus, CargaProduto.Retorno ContagemCarro 
                                         FROM CargaProduto 
                                         INNER JOIN ProdutoGrade ON ProdutoGrade.Id = CargaProduto.ProdutoGradeId
                                     WHERE CargaProduto.CargaId = 1449) AS Carga ON Produto.ProdutoGradeId = Carga.ProdutoGradeId
@@ -319,7 +344,7 @@ namespace ModelLibrary
                                     (SELECT ProdutoGradeId, SUM(PedidoItem.Quantidade) Consignado 
                                         FROM Pedido
                                         INNER JOIN PedidoItem ON PedidoItem.PedidoId = Pedido.Id
-                                        WHERE  Pedido.CargaAtual = @p0
+                                        WHERE  Pedido.CargaOriginal = @p0
                                         GROUP BY ProdutoGradeId) AS Consignado ON Produto.ProdutoGradeId = Consignado.ProdutoGradeId
                                 LEFT JOIN 
                                     (SELECT ProdutoGradeId, SUM(PedidoItem.Quantidade - PedidoItem.Retorno) Vendido, SUM(PedidoItem.Retorno) RetornoPlus  
@@ -395,7 +420,7 @@ namespace ModelLibrary
                         CargaId = pCargaId,
                         ProdutoGradeId = pProdutoGradeId,
                         Quantidade = pQuantidade,
-                        QuantidadeRetorno = 0
+                        Retorno = 0
                     };
 
                     context.CargaProduto.Add(novacargaproduto);
@@ -460,7 +485,7 @@ namespace ModelLibrary
                 if (result != null)
                 {
                     Console.WriteLine("Alterando Retorno Produto - CargaId: " + pCargaId.ToString() + " ProdutoId: " + pRetornoProdutoGradeId.ToString());
-                    result.QuantidadeRetorno = pQuantidade;
+                    result.Retorno = pQuantidade;
                     context.SaveChanges();
                 }
             }
@@ -478,13 +503,35 @@ namespace ModelLibrary
             using (DepositoDBEntities context = new DepositoDBEntities())
             {
 
+
+
+                string query = @"SELECT CodigoPedido, VendedorId, Nome, ValorPedido, DataLancamento  
+	                                FROM Pedido 
+	                                INNER JOIN Vendedor ON Pedido.VendedorId = Vendedor.Id
+                                WHERE CargaId = @p0 AND CargaOriginal = @p0";
+
+                var result = context.Database.SqlQuery<ListaPedidosRetorno>(query, pCargaId);
+
+                return result.ToList<ListaPedidosRetorno>();
+
+            }
+
+        }
+
+        public static List<ListaPedidosFechados> ObterListaPedidosFechados(long pCargaId, bool pAtual = true)
+        {
+
+            using (DepositoDBEntities context = new DepositoDBEntities())
+            {
+
                 long vCargaId;
 
                 if (pAtual)
                 {
                     vCargaId = pCargaId;
 
-                } else
+                }
+                else
                 {
 
                     var carga = context.Carga.FirstOrDefault(c => c.Id == pCargaId);
@@ -497,11 +544,11 @@ namespace ModelLibrary
                 string query = @"SELECT CodigoPedido, Nome, ValorPedido, ValorCompra, ValorLiquido, ValorAReceber, ValorAcerto, ValorLiquido+ValorAReceber-ValorAcerto as ValorAberto, DataLancamento  
 	                                FROM Pedido 
 	                                INNER JOIN Vendedor ON Pedido.VendedorId = Vendedor.Id
-                                WHERE CargaId = @p0";
+                                WHERE (CargaId = @p0 OR CargaOriginal = @p0) AND DataRetorno IS NOT NULL";
 
-                var result = context.Database.SqlQuery<ListaPedidosRetorno>(query, vCargaId);
+                var result = context.Database.SqlQuery<ListaPedidosFechados>(query, vCargaId);
 
-                return result.ToList<ListaPedidosRetorno>();
+                return result.ToList<ListaPedidosFechados>();
 
             }
 
@@ -784,9 +831,16 @@ namespace ModelLibrary
                               where tt.Id == pCargaId
                               select tt).FirstOrDefault<Totalizadores>();
 
+                if (result != null)
+                {
+                    ret[0] = Convert.ToDecimal(result.QtdProdutos);
+                    ret[1] = Convert.ToDecimal(result.TotalProdutos);
+                } else
+                {
+                    ret[0] = 0;
+                    ret[1] = 0;
+                }
 
-                ret[0] = Convert.ToDecimal(result.QtdProdutos);
-                ret[1] = Convert.ToDecimal(result.TotalProdutos);
 
                 
                 return ret;

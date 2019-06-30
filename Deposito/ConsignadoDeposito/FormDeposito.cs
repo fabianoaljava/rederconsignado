@@ -317,9 +317,11 @@ namespace ConsignadoDeposito
         {
             if (e.KeyData == Keys.Enter)
             {
-                e.SuppressKeyPress = true;
-                cCarga.PesquisarCargaProduto(txtCargaCodigoBarras.Text);
-
+                if (txtCargaCodigoBarras.Text != "")
+                {
+                    e.SuppressKeyPress = true;
+                    cCarga.PesquisarCargaProduto(txtCargaCodigoBarras.Text);
+                }
             }
         }
 
@@ -582,9 +584,11 @@ namespace ConsignadoDeposito
         {
             if (e.KeyData == Keys.Enter)
             {
-                e.SuppressKeyPress = true;
-                cRetorno.PesquisarRetornoProduto(txtRetornoCodigoBarras.Text);
-
+                if (txtRetornoCodigoBarras.Text != "")
+                {
+                    e.SuppressKeyPress = true;
+                    cRetorno.PesquisarRetornoProduto(txtRetornoCodigoBarras.Text);
+                }
             }
         }
 
@@ -656,15 +660,15 @@ namespace ConsignadoDeposito
             MessageBox.Show("Opção não disponível.");
         }
 
-        private void btnRetornoPedidoAtual_Click(object sender, EventArgs e)
+        private void btnPedidoFechadoAtualAtual_Click(object sender, EventArgs e)
         {
-            cRetorno.CarregarPedidos();
+            cRetorno.CarregarPedidosFechados();
 
         }
 
-        private void btnRetornoPedidoAnterior_Click(object sender, EventArgs e)
+        private void btnPedidoFechadoAnterior_Click(object sender, EventArgs e)
         {
-            cRetorno.CarregarPedidos(false);
+            cRetorno.CarregarPedidosFechados(false);
         }
 
         private void grdContasAReceber_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -766,6 +770,35 @@ namespace ConsignadoDeposito
         private void btnFinalizarAcerto_Click(object sender, EventArgs e)
         {
             cRetorno.FinalizarAcerto();
+        }
+
+        private void btnConferenciaProdutos_Click(object sender, EventArgs e)
+        {
+            cRetorno.FinalizarRetorno();
+        }
+
+        private void Controls_KeyUp(object sender, KeyEventArgs e)
+        {
+          
+
+            if ((e.KeyCode == Keys.Enter) || (e.KeyCode == Keys.Return))
+            {
+                e.SuppressKeyPress = true;
+                SendKeys.Send("{TAB}");
+            }
+            
+        }
+
+        private void grdRetornoPedido_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cbbPesqVendedor.Text = grdRetornoPedido.CurrentRow.Cells["Nome"].Value.ToString();
+            tbcRetorno.SelectedTab = tabRetornoLancPedidos;
+            //cRetorno.VendedorExibir(Convert.ToInt64(grdRetornoPedido.CurrentRow.Cells["VendedorId"].Value));
+        }
+
+        private void lblRetornoResumoSugestao_Click(object sender, EventArgs e)
+        {
+
         }
 
 

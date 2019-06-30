@@ -249,7 +249,7 @@ namespace ModelLibrary
                 //query = @"SELECT *
                 //            FROM Pedido 
                 //            WHERE CargaId = @p0 
-                //                  OR CargaAtual = @p0
+                //                  OR CargaOriginal = @p0
                 //                  OR Id IN
                 //                    (SELECT DISTINCT Pedido.Id 
                 //                        FROM Carga
@@ -280,7 +280,7 @@ namespace ModelLibrary
                             INNER JOIN Pedido ON PedidoItem.PedidoId = Pedido.Id
                             WHERE 
                                 Pedido.CargaId = @p0 
-                                OR Pedido.CargaAtual = @p0
+                                OR Pedido.CargaOriginal = @p0
                                 OR Pedido.Id IN 
                             (SELECT DISTINCT Pedido.Id FROM Carga 
                             INNER JOIN Pedido ON Carga.Id = Pedido.CargaId
@@ -907,7 +907,7 @@ namespace ModelLibrary
                             CargaId = row.CargaId,
                             ProdutoGradeId = row.ProdutoGradeId,
                             Quantidade = Convert.ToDecimal(row.Quantidade),
-                            QuantidadeRetorno = Convert.ToDecimal(row.QuantidadeRetorno)
+                            Retorno = Convert.ToDecimal(row.Retorno)
                         };
 
                         newCargaProduto.Add(newReg);
@@ -1123,7 +1123,7 @@ namespace ModelLibrary
                     //string query = @"SELECT *
                     //        FROM Pedido 
                     //        WHERE CargaId = @p0 
-                    //              OR CargaAtual = @p0
+                    //              OR CargaOriginal = @p0
                     //              OR Id IN
                     //                (SELECT DISTINCT Pedido.Id 
                     //                    FROM Carga
@@ -1154,7 +1154,7 @@ namespace ModelLibrary
                             Id = row.Id,
                             VendedorId = row.VendedorId,
                             CargaId = row.CargaId,
-                            CargaAtual = row.CargaAtual,
+                            CargaOriginal = row.CargaOriginal,
                             RepresentanteId = row.RepresentanteId,
                             CodigoPedido = row.CodigoPedido,
                             DataLancamento = row.DataLancamento,
@@ -1169,7 +1169,7 @@ namespace ModelLibrary
                             ValorLiquido = Convert.ToDecimal(row.ValorLiquido),
                             ValorAReceber = Convert.ToDecimal(row.ValorAReceber),
                             ValorAcerto = Convert.ToDecimal(row.ValorAcerto),
-                            QuantidadeRetorno = row.QuantidadeRetorno,
+                            QuantidadeRemarcado = row.QuantidadeRemarcado,
                             Remarcado = row.Remarcado,
                             Status = row.Status
                         };
@@ -1222,7 +1222,7 @@ namespace ModelLibrary
                     //                    INNER JOIN Pedido ON PedidoItem.PedidoId = Pedido.Id
                     //                    WHERE 
                     //                        Pedido.CargaId = @p0 
-                    //                        OR Pedido.CargaAtual = @p0
+                    //                        OR Pedido.CargaOriginal = @p0
                     //                        OR Pedido.Id IN 
                     //                    (SELECT DISTINCT Pedido.Id FROM Carga 
                     //                    INNER JOIN Pedido ON Carga.Id = Pedido.CargaId
@@ -1312,8 +1312,6 @@ namespace ModelLibrary
                             ValorNF = Convert.ToDecimal(row.ValorNF),
                             ValorDuplicata = Convert.ToDecimal(row.ValorDuplicata),
                             ValorAReceber = Convert.ToDecimal(row.ValorAReceber),
-                            ValorJuros = Convert.ToDecimal(row.ValorJuros),
-                            ValorDesconto = Convert.ToDecimal(row.ValorDesconto),
                             DataEmissao = row.DataEmissao,
                             DataLancamento = row.DataLancamento,
                             DataPagamento = row.DataPagamento,
@@ -1391,9 +1389,7 @@ namespace ModelLibrary
                             CargaId = row.CargaId,
                             Valor = Convert.ToDecimal(row.Valor),
                             DataPagamento = row.DataPagamento,
-                            DataBaixa = row.DataBaixa,
-                            Juros = Convert.ToDecimal(row.Juros),
-                            Desconto = Convert.ToDecimal(row.Desconto)
+                            DataBaixa = row.DataBaixa
                         };
 
                         newReceberBaixa.Add(newReg);
@@ -1663,7 +1659,7 @@ namespace ModelLibrary
                             Id = Convert.ToInt32(row.Id),
                             VendedorId = Convert.ToInt32(row.VendedorId),
                             CargaId = Convert.ToInt32(row.CargaId),
-                            CargaAtual = Convert.ToInt32(row.CargaAtual),
+                            CargaOriginal = Convert.ToInt32(row.CargaOriginal),
                             RepresentanteId = Convert.ToInt32(row.RepresentanteId),
                             CodigoPedido = row.CodigoPedido,
                             DataLancamento = row.DataLancamento,
@@ -1678,7 +1674,7 @@ namespace ModelLibrary
                             ValorLiquido = Convert.ToDouble(row.ValorLiquido),
                             ValorAReceber = Convert.ToDouble(row.ValorAReceber),
                             ValorAcerto = Convert.ToDouble(row.ValorAcerto),
-                            QuantidadeRetorno = Convert.ToInt32(row.QuantidadeRetorno),
+                            QuantidadeRemarcado = Convert.ToInt32(row.QuantidadeRemarcado),
                             Remarcado = Convert.ToInt32(row.Remarcado),
                             Status = row.Status
                         };
@@ -1719,7 +1715,7 @@ namespace ModelLibrary
 
                     Console.WriteLine("Atualizando pedido id: " + pPedido.Id.ToString() + " codigo: " + pPedido.CodigoPedido);
                     vPedido.CargaId = pPedido.CargaId;
-                    vPedido.CargaAtual = pPedido.CargaAtual;
+                    vPedido.CargaOriginal = pPedido.CargaOriginal;
                     vPedido.RepresentanteId = pPedido.RepresentanteId;
                     vPedido.DataRetorno = pPedido.DataRetorno;
                     vPedido.ValorPedido = pPedido.ValorPedido;
@@ -1730,7 +1726,7 @@ namespace ModelLibrary
                     vPedido.ValorComissao = pPedido.ValorComissao;
                     vPedido.ValorLiquido = pPedido.ValorLiquido;
                     vPedido.ValorAReceber = pPedido.ValorAReceber;
-                    vPedido.QuantidadeRetorno = pPedido.QuantidadeRetorno;
+                    vPedido.QuantidadeRemarcado = pPedido.QuantidadeRemarcado;
                     vPedido.Remarcado = pPedido.Remarcado;
 
                     deposito.SaveChanges();
@@ -1871,8 +1867,6 @@ namespace ModelLibrary
                             ValorNF = Convert.ToDouble(row.ValorNF),
                             ValorDuplicata = Convert.ToDouble(row.ValorDuplicata),
                             ValorAReceber = Convert.ToDouble(row.ValorAReceber),
-                            ValorJuros = Convert.ToDouble(row.ValorJuros),
-                            ValorDesconto = Convert.ToDouble(row.ValorDesconto),
                             DataEmissao = row.DataEmissao,
                             DataLancamento = row.DataLancamento,
                             DataPagamento = row.DataPagamento,
@@ -1954,9 +1948,7 @@ namespace ModelLibrary
                             CargaId = Convert.ToInt32(row.CargaId),
                             Valor = Convert.ToDouble(row.Valor),
                             DataPagamento = row.DataPagamento,
-                            DataBaixa = row.DataBaixa,
-                            Juros = Convert.ToDouble(row.Juros),
-                            Desconto = Convert.ToDouble(row.Desconto)
+                            DataBaixa = row.DataBaixa
                         };
 
                         ReceberBaixaAtualizarInserir(regReceberBaixa);

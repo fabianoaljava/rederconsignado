@@ -18,6 +18,6 @@ namespace ModelLibrary
         public Nullable<long> CargaId { get; set; }
         public long ProdutoGradeId { get; set; }
         public Nullable<decimal> Quantidade { get; set; }
-        public Nullable<decimal> QuantidadeRetorno { get; set; }
+        public Nullable<decimal> Retorno { get; set; }
     }
 }

@@ -20,7 +20,5 @@ namespace ModelLibrary
         public Nullable<decimal> Valor { get; set; }
         public Nullable<System.DateTime> DataPagamento { get; set; }
         public Nullable<System.DateTime> DataBaixa { get; set; }
-        public Nullable<decimal> Juros { get; set; }
-        public Nullable<decimal> Desconto { get; set; }
     }
 }

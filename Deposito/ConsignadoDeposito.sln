@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelLibrary", "..\_Library
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControllerLibrary", "..\_Library\ControllerLibrary\ControllerLibrary.csproj", "{8C10915A-0466-45B2-99F5-B5963F4768BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsignadoDepositoTests", "ConsignadoDepositoTests\ConsignadoDepositoTests.csproj", "{DF894BF8-8AF9-436F-B2B5-A0C726788960}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,12 @@ Global
 		{8C10915A-0466-45B2-99F5-B5963F4768BA}.Instalador|Any CPU.Build.0 = Instalador|Any CPU
 		{8C10915A-0466-45B2-99F5-B5963F4768BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C10915A-0466-45B2-99F5-B5963F4768BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF894BF8-8AF9-436F-B2B5-A0C726788960}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF894BF8-8AF9-436F-B2B5-A0C726788960}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF894BF8-8AF9-436F-B2B5-A0C726788960}.Instalador|Any CPU.ActiveCfg = Release|Any CPU
+		{DF894BF8-8AF9-436F-B2B5-A0C726788960}.Instalador|Any CPU.Build.0 = Release|Any CPU
+		{DF894BF8-8AF9-436F-B2B5-A0C726788960}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF894BF8-8AF9-436F-B2B5-A0C726788960}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

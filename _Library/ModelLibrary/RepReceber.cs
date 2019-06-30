@@ -22,13 +22,12 @@ namespace ModelLibrary
         public Nullable<decimal> ValorNF { get; set; }
         public Nullable<decimal> ValorDuplicata { get; set; }
         public Nullable<decimal> ValorAReceber { get; set; }
-        public Nullable<decimal> ValorJuros { get; set; }
-        public Nullable<decimal> ValorDesconto { get; set; }
         public Nullable<System.DateTime> DataEmissao { get; set; }
         public Nullable<System.DateTime> DataLancamento { get; set; }
         public Nullable<System.DateTime> DataVencimento { get; set; }
         public Nullable<System.DateTime> DataPagamento { get; set; }
         public string Observacoes { get; set; }
         public string Status { get; set; }
+        public Nullable<long> QuantidadeRemarcado { get; set; }
     }
 }

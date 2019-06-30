@@ -54,7 +54,7 @@
           <Property Name="CargaId" Type="integer" />
           <Property Name="ProdutoGradeId" Type="integer" Nullable="false" />
           <Property Name="Quantidade" Type="decimal" Precision="53" Scale="0" />
-          <Property Name="QuantidadeRetorno" Type="decimal" Precision="53" Scale="0" />
+          <Property Name="Retorno" Type="decimal" Precision="53" Scale="0" />
         </EntityType>
         <EntityType Name="RepCategoria">
           <Key>
@@ -120,7 +120,7 @@
           <Property Name="Id" Type="integer" Nullable="false" />
           <Property Name="VendedorId" Type="integer" Nullable="false" />
           <Property Name="CargaId" Type="integer" Nullable="false" />
-          <Property Name="CargaAtual" Type="integer" />
+          <Property Name="CargaOriginal" Type="integer" />
           <Property Name="RepresentanteId" Type="integer" />
           <Property Name="CodigoPedido" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="DataLancamento" Type="datetime" />
@@ -135,7 +135,7 @@
           <Property Name="ValorLiquido" Type="decimal" Precision="53" Scale="0" />
           <Property Name="ValorAReceber" Type="decimal" Precision="53" Scale="0" />
           <Property Name="ValorAcerto" Type="decimal" Precision="53" Scale="0" />
-          <Property Name="QuantidadeRetorno" Type="integer" />
+          <Property Name="QuantidadeRemarcado" Type="integer" />
           <Property Name="Remarcado" Type="integer" />
           <Property Name="Status" Type="nvarchar" MaxLength="2147483647" />
         </EntityType>
@@ -202,12 +202,11 @@
           <Property Name="ValorNF" Type="decimal" Precision="53" Scale="0" />
           <Property Name="ValorDuplicata" Type="decimal" Precision="53" Scale="0" />
           <Property Name="ValorAReceber" Type="decimal" Precision="53" Scale="0" />
-          <Property Name="ValorJuros" Type="decimal" Precision="53" Scale="0" />
-          <Property Name="ValorDesconto" Type="decimal" Precision="53" Scale="0" />
           <Property Name="DataEmissao" Type="datetime" />
           <Property Name="DataLancamento" Type="datetime" />
           <Property Name="DataVencimento" Type="datetime" />
           <Property Name="DataPagamento" Type="datetime" />
+          <Property Name="QuantidadeRemarcado" Type="integer" />
           <Property Name="Observacoes" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Status" Type="nvarchar" MaxLength="2147483647" />
         </EntityType>
@@ -221,8 +220,6 @@
           <Property Name="Valor" Type="decimal" Precision="53" Scale="0" />
           <Property Name="DataPagamento" Type="datetime" />
           <Property Name="DataBaixa" Type="datetime" />
-          <Property Name="Juros" Type="decimal" Precision="53" Scale="0" />
-          <Property Name="Desconto" Type="decimal" Precision="53" Scale="0" />
         </EntityType>
         <EntityType Name="RepSuplemento">
           <Key>
@@ -326,10 +323,6 @@
           <Property Name="Observacao" Type="nvarchar" MaxLength="2147483647" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6005: The data type '' is currently not supported for the target Entity Framework version; the column 'CodigoBarras' in the table 'main.RepProdutosConferencia' was excluded.
-warning 6005: The data type '' is currently not supported for the target Entity Framework version; the column 'Diferenca' in the table 'main.RepProdutosConferencia' was excluded.
-warning 6002: The table/view 'main.RepProdutosConferencia' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
 warning 6002: The table/view 'main.RepRepresentante' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="RepRepresentante">
           <Key>
@@ -396,7 +389,7 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <Property Name="CargaId" Type="Int64" />
           <Property Name="ProdutoGradeId" Type="Int64" Nullable="false" />
           <Property Name="Quantidade" Type="Decimal" Precision="53" Scale="0" />
-          <Property Name="QuantidadeRetorno" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="Retorno" Type="Decimal" Precision="53" Scale="0" />
         </EntityType>
         <EntityType Name="RepCategoria">
           <Key>
@@ -658,14 +651,13 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <Property Name="ValorNF" Type="Decimal" Precision="53" Scale="0" />
           <Property Name="ValorDuplicata" Type="Decimal" Precision="53" Scale="0" />
           <Property Name="ValorAReceber" Type="Decimal" Precision="53" Scale="0" />
-          <Property Name="ValorJuros" Type="Decimal" Precision="53" Scale="0" />
-          <Property Name="ValorDesconto" Type="Decimal" Precision="53" Scale="0" />
           <Property Name="DataEmissao" Type="DateTime" />
           <Property Name="DataLancamento" Type="DateTime" />
           <Property Name="DataVencimento" Type="DateTime" />
           <Property Name="DataPagamento" Type="DateTime" />
           <Property Name="Observacoes" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="QuantidadeRemarcado" Type="Int64" />
         </EntityType>
         <EntityType Name="RepReceberBaixa">
           <Key>
@@ -677,8 +669,6 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <Property Name="Valor" Type="Decimal" Precision="53" Scale="0" />
           <Property Name="DataPagamento" Type="DateTime" />
           <Property Name="DataBaixa" Type="DateTime" />
-          <Property Name="Juros" Type="Decimal" Precision="53" Scale="0" />
-          <Property Name="Desconto" Type="Decimal" Precision="53" Scale="0" />
         </EntityType>
         <EntityType Name="RepSuplementoProduto">
           <Key>
@@ -717,12 +707,12 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <Property Name="ValorComissao" Type="Decimal" Precision="53" Scale="0" />
           <Property Name="ValorLiquido" Type="Decimal" Precision="53" Scale="0" />
           <Property Name="ValorAcerto" Type="Decimal" Precision="53" Scale="0" />
-          <Property Name="QuantidadeRetorno" Type="Int64" />
           <Property Name="Remarcado" Type="Int64" />
           <Property Name="Status" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
-          <Property Name="CargaAtual" Type="Int64" />
           <Property Name="RepresentanteId" Type="Int64" />
           <Property Name="ValorAReceber" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="CargaOriginal" Type="Int64" />
+          <Property Name="QuantidadeRemarcado" Type="Int64" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -750,11 +740,11 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <EntitySetMapping Name="RepCargaProduto">
             <EntityTypeMapping TypeName="ModelRepresentante.RepCargaProduto">
               <MappingFragment StoreEntitySet="RepCargaProduto">
+                <ScalarProperty Name="Retorno" ColumnName="Retorno" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CargaId" ColumnName="CargaId" />
                 <ScalarProperty Name="ProdutoGradeId" ColumnName="ProdutoGradeId" />
                 <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
-                <ScalarProperty Name="QuantidadeRetorno" ColumnName="QuantidadeRetorno" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -999,14 +989,13 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <EntitySetMapping Name="RepReceber">
             <EntityTypeMapping TypeName="ModelRepresentante.RepReceber">
               <MappingFragment StoreEntitySet="RepReceber">
+                <ScalarProperty Name="QuantidadeRemarcado" ColumnName="QuantidadeRemarcado" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Observacoes" ColumnName="Observacoes" />
                 <ScalarProperty Name="DataPagamento" ColumnName="DataPagamento" />
                 <ScalarProperty Name="DataVencimento" ColumnName="DataVencimento" />
                 <ScalarProperty Name="DataLancamento" ColumnName="DataLancamento" />
                 <ScalarProperty Name="DataEmissao" ColumnName="DataEmissao" />
-                <ScalarProperty Name="ValorDesconto" ColumnName="ValorDesconto" />
-                <ScalarProperty Name="ValorJuros" ColumnName="ValorJuros" />
                 <ScalarProperty Name="ValorAReceber" ColumnName="ValorAReceber" />
                 <ScalarProperty Name="ValorDuplicata" ColumnName="ValorDuplicata" />
                 <ScalarProperty Name="ValorNF" ColumnName="ValorNF" />
@@ -1021,8 +1010,6 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <EntitySetMapping Name="RepReceberBaixa">
             <EntityTypeMapping TypeName="ModelRepresentante.RepReceberBaixa">
               <MappingFragment StoreEntitySet="RepReceberBaixa">
-                <ScalarProperty Name="Desconto" ColumnName="Desconto" />
-                <ScalarProperty Name="Juros" ColumnName="Juros" />
                 <ScalarProperty Name="DataBaixa" ColumnName="DataBaixa" />
                 <ScalarProperty Name="DataPagamento" ColumnName="DataPagamento" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
@@ -1055,12 +1042,12 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <EntitySetMapping Name="RepPedidoes">
             <EntityTypeMapping TypeName="ModelRepresentante.RepPedido">
               <MappingFragment StoreEntitySet="RepPedido">
+                <ScalarProperty Name="QuantidadeRemarcado" ColumnName="QuantidadeRemarcado" />
+                <ScalarProperty Name="CargaOriginal" ColumnName="CargaOriginal" />
                 <ScalarProperty Name="ValorAReceber" ColumnName="ValorAReceber" />
                 <ScalarProperty Name="RepresentanteId" ColumnName="RepresentanteId" />
-                <ScalarProperty Name="CargaAtual" ColumnName="CargaAtual" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Remarcado" ColumnName="Remarcado" />
-                <ScalarProperty Name="QuantidadeRetorno" ColumnName="QuantidadeRetorno" />
                 <ScalarProperty Name="ValorAcerto" ColumnName="ValorAcerto" />
                 <ScalarProperty Name="ValorLiquido" ColumnName="ValorLiquido" />
                 <ScalarProperty Name="ValorComissao" ColumnName="ValorComissao" />

@@ -653,10 +653,10 @@ namespace ModelLibrary
 
                 string vCodigoPedido = "";
 
-                //vCodigoPedido += carga.PracaId.ToString().PadLeft(3, '0');
-                //vCodigoPedido += carga.RepresentanteId.ToString().PadLeft(3, '0');
-                //vCodigoPedido += carga.Mes.ToString().PadLeft(2, '0');
-                //vCodigoPedido += carga.Ano.ToString();
+                vCodigoPedido += carga.PracaId.ToString().PadLeft(3, '0');
+                vCodigoPedido += carga.RepresentanteId.ToString().PadLeft(3, '0');
+                vCodigoPedido += carga.Mes.ToString().PadLeft(2, '0');
+                vCodigoPedido += carga.Ano.ToString();
                 vCodigoPedido += pVendedorId.ToString().PadLeft(5, '0');
                 vCodigoPedido += newId.ToString().PadLeft(7,'0');
 
@@ -666,7 +666,7 @@ namespace ModelLibrary
                     Id = newId,
                     VendedorId = pVendedorId,                    
                     CargaId = pCargaId,
-                    CargaAtual = pCargaId,
+                    CargaOriginal = pCargaId,
                     RepresentanteId = carga.RepresentanteId,
                     CodigoPedido = vCodigoPedido,
                     DataLancamento = DateTime.Now,
@@ -680,7 +680,7 @@ namespace ModelLibrary
                     ValorLiquido = 0,
                     ValorAReceber = 0,
                     ValorAcerto = 0,
-                    QuantidadeRetorno = 0,
+                    QuantidadeRemarcado = 0,
                     Remarcado = 0,
                     Status = "0"
                 };
@@ -971,9 +971,7 @@ namespace ModelLibrary
                         CargaId = pCargaId,
                         Valor = pValor,
                         DataPagamento = DateTime.Now,
-                        DataBaixa = DateTime.Now,
-                        Juros = 0,
-                        Desconto = 0
+                        DataBaixa = DateTime.Now
                     };
 
                     context.RepReceberBaixa.Add(novoreceberbaixa);

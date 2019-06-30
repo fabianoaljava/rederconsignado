@@ -33,15 +33,15 @@ namespace ModelLibrary
         public Nullable<double> ValorAcerto { get; set; }
         public string Status { get; set; }
         public Nullable<int> temp_old_id { get; set; }
-        public Nullable<int> QuantidadeRetorno { get; set; }
         public Nullable<int> Remarcado { get; set; }
         public Nullable<double> ValorPedido { get; set; }
         public Nullable<double> PercentualCompra { get; set; }
         public Nullable<double> FaixaComissao { get; set; }
         public Nullable<double> PercentualFaixa { get; set; }
-        public Nullable<int> CargaAtual { get; set; }
         public Nullable<int> RepresentanteId { get; set; }
         public Nullable<double> ValorAReceber { get; set; }
+        public Nullable<int> CargaOriginal { get; set; }
+        public Nullable<int> QuantidadeRemarcado { get; set; }
     
         public virtual Carga Carga { get; set; }
         public virtual Vendedor Vendedor { get; set; }

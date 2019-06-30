@@ -83,6 +83,7 @@
     <Compile Include="ListaAReceber.cs" />
     <Compile Include="ListaImportacaoExportacao.cs" />
     <Compile Include="ListaPedidoItem.cs" />
+    <Compile Include="ListaPedidosFechados.cs" />
     <Compile Include="ListaPedidosRetorno.cs" />
     <Compile Include="ListaProdutoConferencia.cs" />
     <Compile Include="ListaProdutosConsignados.cs" />

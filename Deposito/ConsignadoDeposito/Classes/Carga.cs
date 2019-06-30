@@ -151,6 +151,8 @@ namespace ConsignadoDeposito
 
                     }
 
+                    localDepositoForm.txtCargaCodigoBarras.Focus();
+
 
 
 

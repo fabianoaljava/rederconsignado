@@ -31,6 +31,12 @@ namespace ConsignadoDeposito
             try
             {
 
+
+                btnLogin.Enabled = false;
+                btnLogin.Text = "Entrando...";
+                Cursor.Current = Cursors.WaitCursor;
+
+
                 string[] vAutenticacao = null;
 
                 vAutenticacao = ModelLibrary.MetodosDeposito.Autenticar(txtLogin.Text, txtSenha.Text);
@@ -48,6 +54,10 @@ namespace ConsignadoDeposito
                     {
 
                         MessageBox.Show("Você não tem acesso a este módulo.", "Reder Software", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        btnLogin.Enabled = true;
+                        btnLogin.Text = "Entrar";
+                        Cursor.Current = Cursors.Default;
                     }
 
                 }
@@ -55,6 +65,9 @@ namespace ConsignadoDeposito
                 {
 
                     MessageBox.Show(vAutenticacao[1]); /// ==> Colocar em label no form depois
+                    btnLogin.Enabled = true;
+                    btnLogin.Text = "Entrar";
+                    Cursor.Current = Cursors.Default;
 
                 }
 
@@ -62,7 +75,9 @@ namespace ConsignadoDeposito
             {
                 Console.WriteLine(vE.Message);
                 MessageBox.Show("Ocorreu um erro ao processar a autenticação do usuário. Caso o problema persista, entre em contato com o suporte técnico.", "Reder Software", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                
+                btnLogin.Enabled = true;
+                btnLogin.Text = "Entrar";
+                Cursor.Current = Cursors.Default;
 
             }
 

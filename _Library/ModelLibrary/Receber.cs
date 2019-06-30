@@ -28,8 +28,6 @@ namespace ModelLibrary
         public Nullable<double> ValorNF { get; set; }
         public Nullable<double> ValorDuplicata { get; set; }
         public Nullable<double> ValorAReceber { get; set; }
-        public Nullable<double> ValorJuros { get; set; }
-        public Nullable<double> ValorDesconto { get; set; }
         public Nullable<System.DateTime> DataEmissao { get; set; }
         public Nullable<System.DateTime> DataLancamento { get; set; }
         public Nullable<System.DateTime> DataVencimento { get; set; }
@@ -37,6 +35,7 @@ namespace ModelLibrary
         public string Observacoes { get; set; }
         public string Status { get; set; }
         public Nullable<int> temp_old_id { get; set; }
+        public Nullable<int> QuantidadeRemarcado { get; set; }
     
         public virtual Carga Carga { get; set; }
         public virtual Vendedor Vendedor { get; set; }

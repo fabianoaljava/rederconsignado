@@ -20,8 +20,6 @@ namespace ModelLibrary
         public Nullable<double> Valor { get; set; }
         public Nullable<System.DateTime> DataPagamento { get; set; }
         public Nullable<System.DateTime> DataBaixa { get; set; }
-        public Nullable<double> Juros { get; set; }
-        public Nullable<double> Desconto { get; set; }
         public Nullable<int> temp_old_id { get; set; }
     
         public virtual Carga Carga { get; set; }

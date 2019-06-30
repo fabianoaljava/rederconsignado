@@ -112,7 +112,7 @@ namespace ConsignadoDeposito
                 if (carga != null) /* Se existir Carga */
                 {
                     /* Carrega Grid com Produtos */
-                    localDepositoForm.tbcRetorno.Visible = true;
+
 
                     cRetornoId = carga.Id;                    
 
@@ -172,16 +172,21 @@ namespace ConsignadoDeposito
         public void CarregarFormulario()
         {
 
+            
+
             Cursor.Current = Cursors.WaitCursor;
+            localDepositoForm.tbcRetorno.SelectedTab = localDepositoForm.tabRetornoProdutos;
             CarregarResumo();
             CarregarGradeRetornoProduto(cRetornoId);
             CarregarPedidos();
             CarregarListaPesquisaVendedor();
+            CarregarPedidosFechados();            
             CarregarContasAReceber();
             CarregarConferenciaProdutos();
             CarregarAcerto();
-            localDepositoForm.tbcRetorno.SelectedTab = localDepositoForm.tabRetornoResumo;
             Cursor.Current = Cursors.Default;
+
+            localDepositoForm.tbcRetorno.Visible = true;
 
 
 
@@ -227,11 +232,13 @@ namespace ConsignadoDeposito
             int mes = localDepositoForm.cbbRetornoMesAno.Value.Month;
             int ano = localDepositoForm.cbbRetornoMesAno.Value.Year;
 
-            List<ModelLibrary.ListaProdutosCarga> produtos = ModelLibrary.MetodosDeposito.ObterProdutosCarga(pCargaId);
+            List<ModelLibrary.ListaProdutosCarga> produtos = ModelLibrary.MetodosDeposito.ObterProdutosCarga(pCargaId, true);
 
             BindingListView<ModelLibrary.ListaProdutosCarga> view = new BindingListView<ModelLibrary.ListaProdutosCarga>(produtos);
 
             localDepositoForm.grdRetornoProduto.DataSource = view;
+
+            localDepositoForm.grdRetornoProduto.Columns[2].Width = 250;
 
             /// Ocultar colunas CargaId e cRetornoProdutoGradeId
             localDepositoForm.grdRetornoProduto.Columns[8].Visible = false;
@@ -243,7 +250,12 @@ namespace ConsignadoDeposito
 
             /// Alterar Título da Coluna
             localDepositoForm.grdRetornoProduto.Columns[0].HeaderText = "Código de Barras";
+
+            //Ocultar coluna Quantidade
+            localDepositoForm.grdRetornoProduto.Columns[4].Visible = false;
+
             localDepositoForm.grdRetornoProduto.Columns[5].HeaderText = "Quantidade Retorno";
+
             localDepositoForm.grdRetornoProduto.Columns[6].HeaderText = "Valor Saída";
             localDepositoForm.grdRetornoProduto.Columns[7].HeaderText = "Valor Custo";
         }
@@ -260,28 +272,19 @@ namespace ConsignadoDeposito
         public void PesquisarRetornoProduto(string pCodigo)
         {
 
-            int rowIndex = -1;
 
-            DataGridViewRow produto = localDepositoForm.grdRetornoProduto.Rows
-                .Cast<DataGridViewRow>()
-                .Where(r => r.Cells["CodigoBarras"].Value.ToString().Equals(pCodigo))
-                .FirstOrDefault();
+            var produtograde = ModelLibrary.MetodosDeposito.ObterProdutoGrade(pCodigo);
 
-            
-
-
-            if (produto != null)
+            if (produtograde != null)
             {
 
-                rowIndex = produto.Index;
+                var produto = ModelLibrary.MetodosDeposito.ObterProduto(produtograde.CodigoBarras);
 
-                localDepositoForm.txtRetornoProduto.Text = localDepositoForm.grdRetornoProduto.Rows[rowIndex].Cells["Descricao"].Value.ToString();
-                localDepositoForm.txtRetornoQuantidade.Text = localDepositoForm.grdRetornoProduto.Rows[rowIndex].Cells["QuantidadeRetorno"].Value.ToString();
+                localDepositoForm.txtRetornoProduto.Text = produto.Descricao;
 
-
-                if (localDepositoForm.txtRetornoCodigoBarras.Text != localDepositoForm.grdRetornoProduto.Rows[rowIndex].Cells["CodigoBarras"].Value.ToString())
+                if (localDepositoForm.txtRetornoCodigoBarras.Text != produtograde.CodigoBarras + produtograde.Digito)
                 {
-                    localDepositoForm.txtRetornoCodigoBarras.Text = localDepositoForm.grdRetornoProduto.Rows[rowIndex].Cells["CodigoBarras"].Value.ToString();
+                    localDepositoForm.txtRetornoCodigoBarras.Text = produtograde.CodigoBarras + produtograde.Digito;
                     if (localDepositoForm.chkRetornoQuantidade.Checked == false)
                     {
                         localDepositoForm.chkRetornoQuantidade.Checked = true;
@@ -291,8 +294,8 @@ namespace ConsignadoDeposito
 
 
 
-                cRetornoProdutoGradeId = Convert.ToInt32(localDepositoForm.grdRetornoProduto.Rows[rowIndex].Cells["ProdutoGradeId"].Value.ToString());
-                Console.WriteLine("ProdutoGradeID: " + cRetornoProdutoGradeId.ToString());
+                cRetornoProdutoGradeId = produtograde.Id;
+
 
                 localDepositoForm.btnRetornoConfirmar.Enabled = true;
                 localDepositoForm.btnRetornoCancelar.Enabled = true;
@@ -305,10 +308,12 @@ namespace ConsignadoDeposito
                 else
                 {
                     //inserir direto qtd=1
+                    var cargaproduto = ModelLibrary.MetodosDeposito.ObterProdutoCarga(cRetornoId, cRetornoProdutoGradeId);
 
-                    int tempQtd = localDepositoForm.grdRetornoProduto.Rows[rowIndex].Cells["QuantidadeRetorno"].Value != null ? Convert.ToInt32(localDepositoForm.grdRetornoProduto.Rows[rowIndex].Cells["QuantidadeRetorno"].Value) : 0;
+                    double tempQtd = cargaproduto.Retorno.Value;
                     localDepositoForm.txtRetornoQuantidade.Text = (tempQtd + 1).ToString();
                     AlterarRetornoProdutoGrade();
+
                 }
 
             }
@@ -324,6 +329,7 @@ namespace ConsignadoDeposito
 
 
             }
+
         }
 
 
@@ -392,43 +398,34 @@ namespace ConsignadoDeposito
         }
 
 
-        
+        public void FinalizarRetorno()
+        {
+
+            ModelLibrary.MetodosDeposito.AlterarStatusCarga(cRetornoId, "C");
+        }
+
+
+
 
         ////////////////////////////////////////////
         /// Pedidos
         ////////////////////////////////////////////
-        
+
         public void CarregarPedidos(Boolean pAtual = true)
         {
 
 
 
-            List<ModelLibrary.ListaPedidosRetorno> pedidos = ModelLibrary.MetodosDeposito.ObterListaPedidosRetorno(cRetornoId, pAtual);
+            List<ModelLibrary.ListaPedidosRetorno> pedidos = ModelLibrary.MetodosDeposito.ObterListaPedidosRetorno(cRetornoId);
 
             BindingListView<ModelLibrary.ListaPedidosRetorno> view = new BindingListView<ModelLibrary.ListaPedidosRetorno>(pedidos);
 
             localDepositoForm.grdRetornoPedido.DataSource = view;
 
-            if (pAtual)
-            {
-
-                localDepositoForm.btnRetornoPedidoAtual.Enabled = false;
-                localDepositoForm.btnRetornoPedidoAnterior.Enabled = true;
-
-            } else
-            {
-                localDepositoForm.btnRetornoPedidoAtual.Enabled = true;
-                localDepositoForm.btnRetornoPedidoAnterior.Enabled = false;
-
-            }
-
-            localDepositoForm.grdRetornoPedido.Columns[1].Width = 250;
-            localDepositoForm.grdRetornoPedido.Columns[2].DefaultCellStyle.Format = "c";
+            localDepositoForm.grdRetornoPedido.Columns[1].Visible = false;
+            localDepositoForm.grdRetornoPedido.Columns[2].Width = 450;
             localDepositoForm.grdRetornoPedido.Columns[3].DefaultCellStyle.Format = "c";
-            localDepositoForm.grdRetornoPedido.Columns[4].DefaultCellStyle.Format = "c";
-            localDepositoForm.grdRetornoPedido.Columns[5].DefaultCellStyle.Format = "c";
-            localDepositoForm.grdRetornoPedido.Columns[6].DefaultCellStyle.Format = "c";
-            localDepositoForm.grdRetornoPedido.Columns[7].DefaultCellStyle.Format = "c";
+
 
             localDepositoForm.grdRetornoPedido.Refresh();
 
@@ -538,6 +535,7 @@ namespace ConsignadoDeposito
 
 
                     CarregarListaLancamentoPedido();
+
 
                 }
 
@@ -718,12 +716,41 @@ namespace ConsignadoDeposito
             LancamentoPedidoItemLimpar();
 
         }
-        
+
+        ////////////////////////////////////////////
+        /// Pedidos Fechados
+        ////////////////////////////////////////////
+
+        public void CarregarPedidosFechados(Boolean pAtual = true)
+        {
+
+
+
+            List<ModelLibrary.ListaPedidosFechados> pedidos = ModelLibrary.MetodosDeposito.ObterListaPedidosFechados(cRetornoId, pAtual);
+
+            BindingListView<ModelLibrary.ListaPedidosFechados> view = new BindingListView<ModelLibrary.ListaPedidosFechados>(pedidos);
+
+            localDepositoForm.grdPedidosFechado.DataSource = view;
+
+            localDepositoForm.grdPedidosFechado.Columns[1].Width = 250;
+            localDepositoForm.grdPedidosFechado.Columns[2].DefaultCellStyle.Format = "c";
+            localDepositoForm.grdPedidosFechado.Columns[3].DefaultCellStyle.Format = "c";
+            localDepositoForm.grdPedidosFechado.Columns[4].DefaultCellStyle.Format = "c";
+            localDepositoForm.grdPedidosFechado.Columns[5].DefaultCellStyle.Format = "c";
+            localDepositoForm.grdPedidosFechado.Columns[6].DefaultCellStyle.Format = "c";
+            localDepositoForm.grdPedidosFechado.Columns[7].DefaultCellStyle.Format = "c";
+
+            localDepositoForm.grdPedidosFechado.Refresh();
+
+
+
+
+        }
 
         ////////////////////////////////////////////
         /// Contas a Receber
         ////////////////////////////////////////////
-        
+
         public void CarregarContasAReceber()
         {
 
@@ -794,6 +821,7 @@ namespace ConsignadoDeposito
 
                 cRetornoProdutoGradeId = 0;
                 localDepositoForm.txtRetornoRecDocumento.Focus();
+
                 localDepositoForm.btnRetornoRecConfirmar.Enabled = false;
                 localDepositoForm.btnRetornoRecCancelar.Enabled = false;
 
@@ -880,12 +908,13 @@ namespace ConsignadoDeposito
 
             localDepositoForm.grdRetornoConfProdutos.Columns[1].Width = 250;
         }
-        
+
+
 
         ////////////////////////////////////////////
         /// Acerto
         ////////////////////////////////////////////
-        
+
         public void CarregarAcerto()
         {
 

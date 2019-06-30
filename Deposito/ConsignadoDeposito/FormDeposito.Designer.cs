@@ -56,6 +56,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             this.notifyIconDeposito = new System.Windows.Forms.NotifyIcon(this.components);
             this.panelHeader = new System.Windows.Forms.Panel();
             this.lblSair = new System.Windows.Forms.Label();
@@ -124,9 +128,6 @@
             this.lblCargaPraca = new MetroFramework.Controls.MetroLabel();
             this.tabRetorno = new System.Windows.Forms.TabPage();
             this.tbcRetorno = new MetroFramework.Controls.MetroTabControl();
-            this.tabRetornoResumo = new System.Windows.Forms.TabPage();
-            this.pnlRetornoResumo = new MetroFramework.Controls.MetroPanel();
-            this.lblRetornoResumoSugestao = new MetroFramework.Controls.MetroLabel();
             this.tabRetornoProdutos = new System.Windows.Forms.TabPage();
             this.pnlRetornoProdutoMain = new MetroFramework.Controls.MetroPanel();
             this.grdRetornoProduto = new MetroFramework.Controls.MetroGrid();
@@ -134,6 +135,7 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlRetornoProduto = new MetroFramework.Controls.MetroPanel();
+            this.btnConferenciaProdutos = new MetroFramework.Controls.MetroButton();
             this.lblRetornarProduto = new MetroFramework.Controls.MetroLabel();
             this.btnRetornoCancelar = new MetroFramework.Controls.MetroButton();
             this.chkRetornoQuantidade = new MetroFramework.Controls.MetroCheckBox();
@@ -141,19 +143,24 @@
             this.txtRetornoQuantidade = new MetroFramework.Controls.MetroTextBox();
             this.txtRetornoProduto = new MetroFramework.Controls.MetroTextBox();
             this.txtRetornoCodigoBarras = new MetroFramework.Controls.MetroTextBox();
+            this.tabRetornoConfProduto = new System.Windows.Forms.TabPage();
+            this.pnlRetornoConfProdutos = new MetroFramework.Controls.MetroPanel();
+            this.grdRetornoConfProdutos = new MetroFramework.Controls.MetroGrid();
             this.tabRetornoPedido = new System.Windows.Forms.TabPage();
             this.pnlRetornoPedidoSet = new MetroFramework.Controls.MetroPanel();
             this.pnlRetornoPedidoMain = new MetroFramework.Controls.MetroPanel();
             this.grdRetornoPedido = new MetroFramework.Controls.MetroGrid();
             this.pnlRetornoPedidoBottom = new MetroFramework.Controls.MetroPanel();
-            this.pnlRetornoPedidoTop = new MetroFramework.Controls.MetroPanel();
-            this.btnRetornoPedidoAnterior = new MetroFramework.Controls.MetroButton();
-            this.btnRetornoPedidoAtual = new MetroFramework.Controls.MetroButton();
             this.tabRetornoLancPedidos = new System.Windows.Forms.TabPage();
             this.pnlLancamentoPedidos = new MetroFramework.Controls.MetroPanel();
             this.pnlLancPedMain = new MetroFramework.Controls.MetroPanel();
             this.grdLancPedido = new MetroFramework.Controls.MetroGrid();
             this.pnlLancPedTop = new MetroFramework.Controls.MetroPanel();
+            this.lblLancPedPreco = new MetroFramework.Controls.MetroLabel();
+            this.lblLancCodQtdRet = new MetroFramework.Controls.MetroLabel();
+            this.lblLancPedQuantidade = new MetroFramework.Controls.MetroLabel();
+            this.lblLancPedProduto = new MetroFramework.Controls.MetroLabel();
+            this.lblLancPedCodBarras = new MetroFramework.Controls.MetroLabel();
             this.txtLancPedPreco = new MetroFramework.Controls.MetroTextBox();
             this.txtLancPedQtdRetorno = new MetroFramework.Controls.MetroTextBox();
             this.lblLancPedido = new MetroFramework.Controls.MetroLabel();
@@ -187,8 +194,17 @@
             this.txtPesqVendedorCpfCnpj = new MetroFramework.Controls.MetroTextBox();
             this.cbbPesqVendedor = new MetroFramework.Controls.MetroComboBox();
             this.lblLancPedPesquisaVendedor = new MetroFramework.Controls.MetroLabel();
-            this.tabRetornoContasAReceber = new System.Windows.Forms.TabPage();
+            this.tabPedidosFechados = new System.Windows.Forms.TabPage();
+            this.pnlPedidoAnteriorSet = new MetroFramework.Controls.MetroPanel();
+            this.pnlPedidoAnteriorMain = new MetroFramework.Controls.MetroPanel();
+            this.grdPedidosFechado = new MetroFramework.Controls.MetroGrid();
+            this.pnlPedidosAnterioresTop = new MetroFramework.Controls.MetroPanel();
+            this.btnPedidoAnterior = new MetroFramework.Controls.MetroButton();
+            this.btnPedidoAtual = new MetroFramework.Controls.MetroButton();
+            this.tabRetornoAcertos = new System.Windows.Forms.TabPage();
             this.pnlContasAReceber = new MetroFramework.Controls.MetroPanel();
+            this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
+            this.btnFinalizarAcerto = new MetroFramework.Controls.MetroButton();
             this.pnlContasAReceberMain = new MetroFramework.Controls.MetroPanel();
             this.grdContasAReceber = new MetroFramework.Controls.MetroGrid();
             this.pnlContasAReceberTop = new MetroFramework.Controls.MetroPanel();
@@ -200,12 +216,6 @@
             this.txtRetornoRecSerie = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.txtRetornoRecDocumento = new MetroFramework.Controls.MetroTextBox();
-            this.tabRetornoConfProduto = new System.Windows.Forms.TabPage();
-            this.pnlRetornoConfProdutos = new MetroFramework.Controls.MetroPanel();
-            this.grdRetornoConfProdutos = new MetroFramework.Controls.MetroGrid();
-            this.tabRetornoAcerto = new System.Windows.Forms.TabPage();
-            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.btnFinalizarAcerto = new MetroFramework.Controls.MetroButton();
             this.pnlRetornoPesquisa = new MetroFramework.Controls.MetroPanel();
             this.grpRetornoCargaAnterior = new System.Windows.Forms.GroupBox();
             this.grpRetornoDadosCarga = new System.Windows.Forms.GroupBox();
@@ -260,18 +270,18 @@
             this.grpCargaData.SuspendLayout();
             this.tabRetorno.SuspendLayout();
             this.tbcRetorno.SuspendLayout();
-            this.tabRetornoResumo.SuspendLayout();
-            this.pnlRetornoResumo.SuspendLayout();
             this.tabRetornoProdutos.SuspendLayout();
             this.pnlRetornoProdutoMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdRetornoProduto)).BeginInit();
             this.ctmRetornoProduto.SuspendLayout();
             this.pnlRetornoProduto.SuspendLayout();
+            this.tabRetornoConfProduto.SuspendLayout();
+            this.pnlRetornoConfProdutos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdRetornoConfProdutos)).BeginInit();
             this.tabRetornoPedido.SuspendLayout();
             this.pnlRetornoPedidoSet.SuspendLayout();
             this.pnlRetornoPedidoMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdRetornoPedido)).BeginInit();
-            this.pnlRetornoPedidoTop.SuspendLayout();
             this.tabRetornoLancPedidos.SuspendLayout();
             this.pnlLancamentoPedidos.SuspendLayout();
             this.pnlLancPedMain.SuspendLayout();
@@ -279,16 +289,17 @@
             this.pnlLancPedTop.SuspendLayout();
             this.pnlLancPedPesquisaVendedor.SuspendLayout();
             this.grpPesqVendedorPedido.SuspendLayout();
-            this.tabRetornoContasAReceber.SuspendLayout();
+            this.tabPedidosFechados.SuspendLayout();
+            this.pnlPedidoAnteriorSet.SuspendLayout();
+            this.pnlPedidoAnteriorMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdPedidosFechado)).BeginInit();
+            this.pnlPedidosAnterioresTop.SuspendLayout();
+            this.tabRetornoAcertos.SuspendLayout();
             this.pnlContasAReceber.SuspendLayout();
+            this.metroPanel2.SuspendLayout();
             this.pnlContasAReceberMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdContasAReceber)).BeginInit();
             this.pnlContasAReceberTop.SuspendLayout();
-            this.tabRetornoConfProduto.SuspendLayout();
-            this.pnlRetornoConfProdutos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdRetornoConfProdutos)).BeginInit();
-            this.tabRetornoAcerto.SuspendLayout();
-            this.metroPanel1.SuspendLayout();
             this.pnlRetornoPesquisa.SuspendLayout();
             this.grpRetornoDadosCarga.SuspendLayout();
             this.tabRelatorios.SuspendLayout();
@@ -389,7 +400,7 @@
             this.tbcPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tbcPrincipal.Name = "tbcPrincipal";
-            this.tbcPrincipal.SelectedIndex = 0;
+            this.tbcPrincipal.SelectedIndex = 2;
             this.tbcPrincipal.Size = new System.Drawing.Size(860, 645);
             this.tbcPrincipal.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tbcPrincipal.TabIndex = 0;
@@ -656,6 +667,7 @@
             this.txtCargaQuantidade.WaterMark = "Quantidade";
             this.txtCargaQuantidade.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtCargaQuantidade.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtCargaQuantidade.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyUp);
             // 
             // txtCargaProduto
             // 
@@ -1251,55 +1263,20 @@
             // 
             // tbcRetorno
             // 
-            this.tbcRetorno.Controls.Add(this.tabRetornoResumo);
             this.tbcRetorno.Controls.Add(this.tabRetornoProdutos);
+            this.tbcRetorno.Controls.Add(this.tabRetornoConfProduto);
             this.tbcRetorno.Controls.Add(this.tabRetornoPedido);
             this.tbcRetorno.Controls.Add(this.tabRetornoLancPedidos);
-            this.tbcRetorno.Controls.Add(this.tabRetornoContasAReceber);
-            this.tbcRetorno.Controls.Add(this.tabRetornoConfProduto);
-            this.tbcRetorno.Controls.Add(this.tabRetornoAcerto);
+            this.tbcRetorno.Controls.Add(this.tabPedidosFechados);
+            this.tbcRetorno.Controls.Add(this.tabRetornoAcertos);
             this.tbcRetorno.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcRetorno.Location = new System.Drawing.Point(0, 131);
             this.tbcRetorno.Name = "tbcRetorno";
-            this.tbcRetorno.SelectedIndex = 0;
+            this.tbcRetorno.SelectedIndex = 1;
             this.tbcRetorno.Size = new System.Drawing.Size(852, 472);
             this.tbcRetorno.TabIndex = 2;
             this.tbcRetorno.UseSelectable = true;
             this.tbcRetorno.Visible = false;
-            // 
-            // tabRetornoResumo
-            // 
-            this.tabRetornoResumo.Controls.Add(this.pnlRetornoResumo);
-            this.tabRetornoResumo.Location = new System.Drawing.Point(4, 38);
-            this.tabRetornoResumo.Name = "tabRetornoResumo";
-            this.tabRetornoResumo.Size = new System.Drawing.Size(844, 430);
-            this.tabRetornoResumo.TabIndex = 4;
-            this.tabRetornoResumo.Text = "Resumo";
-            // 
-            // pnlRetornoResumo
-            // 
-            this.pnlRetornoResumo.Controls.Add(this.lblRetornoResumoSugestao);
-            this.pnlRetornoResumo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlRetornoResumo.HorizontalScrollbarBarColor = true;
-            this.pnlRetornoResumo.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlRetornoResumo.HorizontalScrollbarSize = 10;
-            this.pnlRetornoResumo.Location = new System.Drawing.Point(0, 0);
-            this.pnlRetornoResumo.Name = "pnlRetornoResumo";
-            this.pnlRetornoResumo.Size = new System.Drawing.Size(844, 430);
-            this.pnlRetornoResumo.TabIndex = 0;
-            this.pnlRetornoResumo.VerticalScrollbarBarColor = true;
-            this.pnlRetornoResumo.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlRetornoResumo.VerticalScrollbarSize = 10;
-            // 
-            // lblRetornoResumoSugestao
-            // 
-            this.lblRetornoResumoSugestao.AutoSize = true;
-            this.lblRetornoResumoSugestao.Location = new System.Drawing.Point(42, 58);
-            this.lblRetornoResumoSugestao.Name = "lblRetornoResumoSugestao";
-            this.lblRetornoResumoSugestao.Size = new System.Drawing.Size(191, 247);
-            this.lblRetornoResumoSugestao.TabIndex = 2;
-            this.lblRetornoResumoSugestao.Text = resources.GetString("lblRetornoResumoSugestao.Text");
-            this.lblRetornoResumoSugestao.WrapToLine = true;
             // 
             // tabRetornoProdutos
             // 
@@ -1409,6 +1386,7 @@
             // 
             // pnlRetornoProduto
             // 
+            this.pnlRetornoProduto.Controls.Add(this.btnConferenciaProdutos);
             this.pnlRetornoProduto.Controls.Add(this.lblRetornarProduto);
             this.pnlRetornoProduto.Controls.Add(this.btnRetornoCancelar);
             this.pnlRetornoProduto.Controls.Add(this.chkRetornoQuantidade);
@@ -1428,6 +1406,16 @@
             this.pnlRetornoProduto.VerticalScrollbarHighlightOnWheel = false;
             this.pnlRetornoProduto.VerticalScrollbarSize = 10;
             // 
+            // btnConferenciaProdutos
+            // 
+            this.btnConferenciaProdutos.Location = new System.Drawing.Point(716, 10);
+            this.btnConferenciaProdutos.Name = "btnConferenciaProdutos";
+            this.btnConferenciaProdutos.Size = new System.Drawing.Size(114, 42);
+            this.btnConferenciaProdutos.TabIndex = 12;
+            this.btnConferenciaProdutos.Text = "Finalizar \r\nConferência \r\nde Produtos";
+            this.btnConferenciaProdutos.UseSelectable = true;
+            this.btnConferenciaProdutos.Click += new System.EventHandler(this.btnConferenciaProdutos_Click);
+            // 
             // lblRetornarProduto
             // 
             this.lblRetornarProduto.AutoSize = true;
@@ -1441,7 +1429,7 @@
             // btnRetornoCancelar
             // 
             this.btnRetornoCancelar.Enabled = false;
-            this.btnRetornoCancelar.Location = new System.Drawing.Point(667, 29);
+            this.btnRetornoCancelar.Location = new System.Drawing.Point(613, 29);
             this.btnRetornoCancelar.Name = "btnRetornoCancelar";
             this.btnRetornoCancelar.Size = new System.Drawing.Size(67, 23);
             this.btnRetornoCancelar.TabIndex = 10;
@@ -1454,7 +1442,7 @@
             this.chkRetornoQuantidade.AutoSize = true;
             this.chkRetornoQuantidade.Checked = true;
             this.chkRetornoQuantidade.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkRetornoQuantidade.Location = new System.Drawing.Point(490, 10);
+            this.chkRetornoQuantidade.Location = new System.Drawing.Point(436, 10);
             this.chkRetornoQuantidade.Name = "chkRetornoQuantidade";
             this.chkRetornoQuantidade.Size = new System.Drawing.Size(97, 15);
             this.chkRetornoQuantidade.TabIndex = 9;
@@ -1465,7 +1453,7 @@
             // btnRetornoConfirmar
             // 
             this.btnRetornoConfirmar.Enabled = false;
-            this.btnRetornoConfirmar.Location = new System.Drawing.Point(595, 29);
+            this.btnRetornoConfirmar.Location = new System.Drawing.Point(541, 29);
             this.btnRetornoConfirmar.Name = "btnRetornoConfirmar";
             this.btnRetornoConfirmar.Size = new System.Drawing.Size(66, 23);
             this.btnRetornoConfirmar.TabIndex = 6;
@@ -1488,7 +1476,7 @@
             this.txtRetornoQuantidade.CustomButton.UseSelectable = true;
             this.txtRetornoQuantidade.CustomButton.Visible = false;
             this.txtRetornoQuantidade.Lines = new string[0];
-            this.txtRetornoQuantidade.Location = new System.Drawing.Point(490, 29);
+            this.txtRetornoQuantidade.Location = new System.Drawing.Point(436, 29);
             this.txtRetornoQuantidade.MaxLength = 32767;
             this.txtRetornoQuantidade.Name = "txtRetornoQuantidade";
             this.txtRetornoQuantidade.PasswordChar = '\0';
@@ -1504,6 +1492,7 @@
             this.txtRetornoQuantidade.WaterMark = "Quantidade";
             this.txtRetornoQuantidade.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtRetornoQuantidade.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtRetornoQuantidade.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyUp);
             // 
             // txtRetornoProduto
             // 
@@ -1511,7 +1500,7 @@
             // 
             // 
             this.txtRetornoProduto.CustomButton.Image = null;
-            this.txtRetornoProduto.CustomButton.Location = new System.Drawing.Point(350, 1);
+            this.txtRetornoProduto.CustomButton.Location = new System.Drawing.Point(296, 1);
             this.txtRetornoProduto.CustomButton.Name = "";
             this.txtRetornoProduto.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.txtRetornoProduto.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -1531,7 +1520,7 @@
             this.txtRetornoProduto.SelectionLength = 0;
             this.txtRetornoProduto.SelectionStart = 0;
             this.txtRetornoProduto.ShortcutsEnabled = true;
-            this.txtRetornoProduto.Size = new System.Drawing.Size(372, 23);
+            this.txtRetornoProduto.Size = new System.Drawing.Size(318, 23);
             this.txtRetornoProduto.TabIndex = 7;
             this.txtRetornoProduto.UseSelectable = true;
             this.txtRetornoProduto.WaterMark = "Nome do Produto";
@@ -1572,6 +1561,77 @@
             this.txtRetornoCodigoBarras.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtRetornoCodigoBarras_KeyUp);
             this.txtRetornoCodigoBarras.Leave += new System.EventHandler(this.txtRetornoCodigoBarras_Leave);
             // 
+            // tabRetornoConfProduto
+            // 
+            this.tabRetornoConfProduto.Controls.Add(this.pnlRetornoConfProdutos);
+            this.tabRetornoConfProduto.Location = new System.Drawing.Point(4, 38);
+            this.tabRetornoConfProduto.Name = "tabRetornoConfProduto";
+            this.tabRetornoConfProduto.Size = new System.Drawing.Size(844, 430);
+            this.tabRetornoConfProduto.TabIndex = 6;
+            this.tabRetornoConfProduto.Text = "Conferência de Produtos";
+            // 
+            // pnlRetornoConfProdutos
+            // 
+            this.pnlRetornoConfProdutos.Controls.Add(this.grdRetornoConfProdutos);
+            this.pnlRetornoConfProdutos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlRetornoConfProdutos.HorizontalScrollbarBarColor = true;
+            this.pnlRetornoConfProdutos.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlRetornoConfProdutos.HorizontalScrollbarSize = 10;
+            this.pnlRetornoConfProdutos.Location = new System.Drawing.Point(0, 0);
+            this.pnlRetornoConfProdutos.Name = "pnlRetornoConfProdutos";
+            this.pnlRetornoConfProdutos.Size = new System.Drawing.Size(844, 430);
+            this.pnlRetornoConfProdutos.TabIndex = 0;
+            this.pnlRetornoConfProdutos.VerticalScrollbarBarColor = true;
+            this.pnlRetornoConfProdutos.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlRetornoConfProdutos.VerticalScrollbarSize = 10;
+            // 
+            // grdRetornoConfProdutos
+            // 
+            this.grdRetornoConfProdutos.AllowUserToResizeRows = false;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.grdRetornoConfProdutos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
+            this.grdRetornoConfProdutos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdRetornoConfProdutos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.grdRetornoConfProdutos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.grdRetornoConfProdutos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdRetornoConfProdutos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            this.grdRetornoConfProdutos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grdRetornoConfProdutos.DefaultCellStyle = dataGridViewCellStyle11;
+            this.grdRetornoConfProdutos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdRetornoConfProdutos.EnableHeadersVisualStyles = false;
+            this.grdRetornoConfProdutos.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.grdRetornoConfProdutos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdRetornoConfProdutos.Location = new System.Drawing.Point(0, 0);
+            this.grdRetornoConfProdutos.Name = "grdRetornoConfProdutos";
+            this.grdRetornoConfProdutos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdRetornoConfProdutos.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            this.grdRetornoConfProdutos.RowHeadersVisible = false;
+            this.grdRetornoConfProdutos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.grdRetornoConfProdutos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.grdRetornoConfProdutos.Size = new System.Drawing.Size(844, 430);
+            this.grdRetornoConfProdutos.TabIndex = 2;
+            // 
             // tabRetornoPedido
             // 
             this.tabRetornoPedido.Controls.Add(this.pnlRetornoPedidoSet);
@@ -1579,13 +1639,12 @@
             this.tabRetornoPedido.Name = "tabRetornoPedido";
             this.tabRetornoPedido.Size = new System.Drawing.Size(844, 430);
             this.tabRetornoPedido.TabIndex = 7;
-            this.tabRetornoPedido.Text = "Pedidos";
+            this.tabRetornoPedido.Text = "Pedidos Efetuados";
             // 
             // pnlRetornoPedidoSet
             // 
             this.pnlRetornoPedidoSet.Controls.Add(this.pnlRetornoPedidoMain);
             this.pnlRetornoPedidoSet.Controls.Add(this.pnlRetornoPedidoBottom);
-            this.pnlRetornoPedidoSet.Controls.Add(this.pnlRetornoPedidoTop);
             this.pnlRetornoPedidoSet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlRetornoPedidoSet.HorizontalScrollbarBarColor = true;
             this.pnlRetornoPedidoSet.HorizontalScrollbarHighlightOnWheel = false;
@@ -1605,9 +1664,9 @@
             this.pnlRetornoPedidoMain.HorizontalScrollbarBarColor = true;
             this.pnlRetornoPedidoMain.HorizontalScrollbarHighlightOnWheel = false;
             this.pnlRetornoPedidoMain.HorizontalScrollbarSize = 10;
-            this.pnlRetornoPedidoMain.Location = new System.Drawing.Point(0, 42);
+            this.pnlRetornoPedidoMain.Location = new System.Drawing.Point(0, 0);
             this.pnlRetornoPedidoMain.Name = "pnlRetornoPedidoMain";
-            this.pnlRetornoPedidoMain.Size = new System.Drawing.Size(844, 350);
+            this.pnlRetornoPedidoMain.Size = new System.Drawing.Size(844, 392);
             this.pnlRetornoPedidoMain.TabIndex = 5;
             this.pnlRetornoPedidoMain.VerticalScrollbarBarColor = true;
             this.pnlRetornoPedidoMain.VerticalScrollbarHighlightOnWheel = false;
@@ -1616,47 +1675,49 @@
             // grdRetornoPedido
             // 
             this.grdRetornoPedido.AllowUserToResizeRows = false;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.grdRetornoPedido.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.grdRetornoPedido.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
             this.grdRetornoPedido.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.grdRetornoPedido.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.grdRetornoPedido.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.grdRetornoPedido.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdRetornoPedido.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdRetornoPedido.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdRetornoPedido.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grdRetornoPedido.DefaultCellStyle = dataGridViewCellStyle15;
             this.grdRetornoPedido.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdRetornoPedido.EnableHeadersVisualStyles = false;
             this.grdRetornoPedido.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.grdRetornoPedido.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.grdRetornoPedido.Location = new System.Drawing.Point(0, 0);
             this.grdRetornoPedido.Name = "grdRetornoPedido";
             this.grdRetornoPedido.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdRetornoPedido.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdRetornoPedido.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.grdRetornoPedido.RowHeadersVisible = false;
             this.grdRetornoPedido.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grdRetornoPedido.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdRetornoPedido.Size = new System.Drawing.Size(844, 350);
+            this.grdRetornoPedido.Size = new System.Drawing.Size(844, 392);
             this.grdRetornoPedido.TabIndex = 2;
+            this.grdRetornoPedido.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdRetornoPedido_CellDoubleClick);
             // 
             // pnlRetornoPedidoBottom
             // 
@@ -1671,46 +1732,6 @@
             this.pnlRetornoPedidoBottom.VerticalScrollbarBarColor = true;
             this.pnlRetornoPedidoBottom.VerticalScrollbarHighlightOnWheel = false;
             this.pnlRetornoPedidoBottom.VerticalScrollbarSize = 10;
-            // 
-            // pnlRetornoPedidoTop
-            // 
-            this.pnlRetornoPedidoTop.Controls.Add(this.btnRetornoPedidoAnterior);
-            this.pnlRetornoPedidoTop.Controls.Add(this.btnRetornoPedidoAtual);
-            this.pnlRetornoPedidoTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlRetornoPedidoTop.HorizontalScrollbarBarColor = true;
-            this.pnlRetornoPedidoTop.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlRetornoPedidoTop.HorizontalScrollbarSize = 10;
-            this.pnlRetornoPedidoTop.Location = new System.Drawing.Point(0, 0);
-            this.pnlRetornoPedidoTop.Name = "pnlRetornoPedidoTop";
-            this.pnlRetornoPedidoTop.Size = new System.Drawing.Size(844, 42);
-            this.pnlRetornoPedidoTop.TabIndex = 2;
-            this.pnlRetornoPedidoTop.VerticalScrollbarBarColor = true;
-            this.pnlRetornoPedidoTop.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlRetornoPedidoTop.VerticalScrollbarSize = 10;
-            // 
-            // btnRetornoPedidoAnterior
-            // 
-            this.btnRetornoPedidoAnterior.Location = new System.Drawing.Point(120, 9);
-            this.btnRetornoPedidoAnterior.Name = "btnRetornoPedidoAnterior";
-            this.btnRetornoPedidoAnterior.Size = new System.Drawing.Size(100, 23);
-            this.btnRetornoPedidoAnterior.TabIndex = 3;
-            this.btnRetornoPedidoAnterior.Text = "Carga Anterior";
-            this.btnRetornoPedidoAnterior.UseCustomBackColor = true;
-            this.btnRetornoPedidoAnterior.UseCustomForeColor = true;
-            this.btnRetornoPedidoAnterior.UseSelectable = true;
-            this.btnRetornoPedidoAnterior.Click += new System.EventHandler(this.btnRetornoPedidoAnterior_Click);
-            // 
-            // btnRetornoPedidoAtual
-            // 
-            this.btnRetornoPedidoAtual.Location = new System.Drawing.Point(11, 9);
-            this.btnRetornoPedidoAtual.Name = "btnRetornoPedidoAtual";
-            this.btnRetornoPedidoAtual.Size = new System.Drawing.Size(100, 23);
-            this.btnRetornoPedidoAtual.TabIndex = 2;
-            this.btnRetornoPedidoAtual.Text = "Carga Atual";
-            this.btnRetornoPedidoAtual.UseCustomBackColor = true;
-            this.btnRetornoPedidoAtual.UseCustomForeColor = true;
-            this.btnRetornoPedidoAtual.UseSelectable = true;
-            this.btnRetornoPedidoAtual.Click += new System.EventHandler(this.btnRetornoPedidoAtual_Click);
             // 
             // tabRetornoLancPedidos
             // 
@@ -1745,9 +1766,9 @@
             this.pnlLancPedMain.HorizontalScrollbarBarColor = true;
             this.pnlLancPedMain.HorizontalScrollbarHighlightOnWheel = false;
             this.pnlLancPedMain.HorizontalScrollbarSize = 10;
-            this.pnlLancPedMain.Location = new System.Drawing.Point(0, 200);
+            this.pnlLancPedMain.Location = new System.Drawing.Point(0, 217);
             this.pnlLancPedMain.Name = "pnlLancPedMain";
-            this.pnlLancPedMain.Size = new System.Drawing.Size(844, 230);
+            this.pnlLancPedMain.Size = new System.Drawing.Size(844, 213);
             this.pnlLancPedMain.TabIndex = 6;
             this.pnlLancPedMain.VerticalScrollbar = true;
             this.pnlLancPedMain.VerticalScrollbarBarColor = true;
@@ -1761,31 +1782,30 @@
             this.grdLancPedido.AllowUserToDeleteRows = false;
             this.grdLancPedido.AllowUserToOrderColumns = true;
             this.grdLancPedido.AllowUserToResizeRows = false;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.grdLancPedido.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
-            this.grdLancPedido.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.grdLancPedido.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle17;
             this.grdLancPedido.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.grdLancPedido.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.grdLancPedido.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.grdLancPedido.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdLancPedido.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdLancPedido.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle18;
             this.grdLancPedido.ColumnHeadersHeight = 22;
-            this.grdLancPedido.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdLancPedido.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grdLancPedido.DefaultCellStyle = dataGridViewCellStyle19;
+            this.grdLancPedido.EnableHeadersVisualStyles = false;
             this.grdLancPedido.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.grdLancPedido.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.grdLancPedido.Location = new System.Drawing.Point(8, 65);
@@ -1793,14 +1813,14 @@
             this.grdLancPedido.Name = "grdLancPedido";
             this.grdLancPedido.ReadOnly = true;
             this.grdLancPedido.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdLancPedido.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdLancPedido.RowHeadersDefaultCellStyle = dataGridViewCellStyle20;
             this.grdLancPedido.RowHeadersVisible = false;
             this.grdLancPedido.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grdLancPedido.RowTemplate.ContextMenuStrip = this.ctmRetornoProduto;
@@ -1815,6 +1835,11 @@
             // pnlLancPedTop
             // 
             this.pnlLancPedTop.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pnlLancPedTop.Controls.Add(this.lblLancPedPreco);
+            this.pnlLancPedTop.Controls.Add(this.lblLancCodQtdRet);
+            this.pnlLancPedTop.Controls.Add(this.lblLancPedQuantidade);
+            this.pnlLancPedTop.Controls.Add(this.lblLancPedProduto);
+            this.pnlLancPedTop.Controls.Add(this.lblLancPedCodBarras);
             this.pnlLancPedTop.Controls.Add(this.txtLancPedPreco);
             this.pnlLancPedTop.Controls.Add(this.txtLancPedQtdRetorno);
             this.pnlLancPedTop.Controls.Add(this.lblLancPedido);
@@ -1830,7 +1855,7 @@
             this.pnlLancPedTop.HorizontalScrollbarSize = 10;
             this.pnlLancPedTop.Location = new System.Drawing.Point(0, 135);
             this.pnlLancPedTop.Name = "pnlLancPedTop";
-            this.pnlLancPedTop.Size = new System.Drawing.Size(844, 65);
+            this.pnlLancPedTop.Size = new System.Drawing.Size(844, 82);
             this.pnlLancPedTop.TabIndex = 5;
             this.pnlLancPedTop.UseCustomBackColor = true;
             this.pnlLancPedTop.UseCustomForeColor = true;
@@ -1838,6 +1863,61 @@
             this.pnlLancPedTop.VerticalScrollbarHighlightOnWheel = false;
             this.pnlLancPedTop.VerticalScrollbarSize = 10;
             this.pnlLancPedTop.Visible = false;
+            // 
+            // lblLancPedPreco
+            // 
+            this.lblLancPedPreco.AutoSize = true;
+            this.lblLancPedPreco.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblLancPedPreco.Location = new System.Drawing.Point(605, 25);
+            this.lblLancPedPreco.Name = "lblLancPedPreco";
+            this.lblLancPedPreco.Size = new System.Drawing.Size(36, 15);
+            this.lblLancPedPreco.TabIndex = 33;
+            this.lblLancPedPreco.Text = "Preço";
+            this.lblLancPedPreco.UseCustomBackColor = true;
+            // 
+            // lblLancCodQtdRet
+            // 
+            this.lblLancCodQtdRet.AutoSize = true;
+            this.lblLancCodQtdRet.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblLancCodQtdRet.Location = new System.Drawing.Point(522, 25);
+            this.lblLancCodQtdRet.Name = "lblLancCodQtdRet";
+            this.lblLancCodQtdRet.Size = new System.Drawing.Size(74, 15);
+            this.lblLancCodQtdRet.TabIndex = 32;
+            this.lblLancCodQtdRet.Text = "Qtd. Retorno";
+            this.lblLancCodQtdRet.UseCustomBackColor = true;
+            // 
+            // lblLancPedQuantidade
+            // 
+            this.lblLancPedQuantidade.AutoSize = true;
+            this.lblLancPedQuantidade.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblLancPedQuantidade.Location = new System.Drawing.Point(445, 25);
+            this.lblLancPedQuantidade.Name = "lblLancPedQuantidade";
+            this.lblLancPedQuantidade.Size = new System.Drawing.Size(66, 15);
+            this.lblLancPedQuantidade.TabIndex = 31;
+            this.lblLancPedQuantidade.Text = "Quantidade";
+            this.lblLancPedQuantidade.UseCustomBackColor = true;
+            // 
+            // lblLancPedProduto
+            // 
+            this.lblLancPedProduto.AutoSize = true;
+            this.lblLancPedProduto.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblLancPedProduto.Location = new System.Drawing.Point(113, 26);
+            this.lblLancPedProduto.Name = "lblLancPedProduto";
+            this.lblLancPedProduto.Size = new System.Drawing.Size(101, 15);
+            this.lblLancPedProduto.TabIndex = 30;
+            this.lblLancPedProduto.Text = "Nome do Produto";
+            this.lblLancPedProduto.UseCustomBackColor = true;
+            // 
+            // lblLancPedCodBarras
+            // 
+            this.lblLancPedCodBarras.AutoSize = true;
+            this.lblLancPedCodBarras.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblLancPedCodBarras.Location = new System.Drawing.Point(14, 26);
+            this.lblLancPedCodBarras.Name = "lblLancPedCodBarras";
+            this.lblLancPedCodBarras.Size = new System.Drawing.Size(79, 15);
+            this.lblLancPedCodBarras.TabIndex = 29;
+            this.lblLancPedCodBarras.Text = "Código Barras";
+            this.lblLancPedCodBarras.UseCustomBackColor = true;
             // 
             // txtLancPedPreco
             // 
@@ -1854,7 +1934,7 @@
             this.txtLancPedPreco.CustomButton.UseSelectable = true;
             this.txtLancPedPreco.CustomButton.Visible = false;
             this.txtLancPedPreco.Lines = new string[0];
-            this.txtLancPedPreco.Location = new System.Drawing.Point(608, 27);
+            this.txtLancPedPreco.Location = new System.Drawing.Point(605, 43);
             this.txtLancPedPreco.MaxLength = 32767;
             this.txtLancPedPreco.Name = "txtLancPedPreco";
             this.txtLancPedPreco.PasswordChar = '\0';
@@ -1870,6 +1950,7 @@
             this.txtLancPedPreco.WaterMark = "Preço";
             this.txtLancPedPreco.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtLancPedPreco.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtLancPedPreco.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyUp);
             // 
             // txtLancPedQtdRetorno
             // 
@@ -1886,7 +1967,7 @@
             this.txtLancPedQtdRetorno.CustomButton.UseSelectable = true;
             this.txtLancPedQtdRetorno.CustomButton.Visible = false;
             this.txtLancPedQtdRetorno.Lines = new string[0];
-            this.txtLancPedQtdRetorno.Location = new System.Drawing.Point(526, 27);
+            this.txtLancPedQtdRetorno.Location = new System.Drawing.Point(523, 43);
             this.txtLancPedQtdRetorno.MaxLength = 32767;
             this.txtLancPedQtdRetorno.Name = "txtLancPedQtdRetorno";
             this.txtLancPedQtdRetorno.PasswordChar = '\0';
@@ -1902,6 +1983,7 @@
             this.txtLancPedQtdRetorno.WaterMark = "Qtd. Retorno";
             this.txtLancPedQtdRetorno.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtLancPedQtdRetorno.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtLancPedQtdRetorno.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyUp);
             // 
             // lblLancPedido
             // 
@@ -1918,7 +2000,7 @@
             // btnLancPedCancelar
             // 
             this.btnLancPedCancelar.Enabled = false;
-            this.btnLancPedCancelar.Location = new System.Drawing.Point(762, 27);
+            this.btnLancPedCancelar.Location = new System.Drawing.Point(759, 43);
             this.btnLancPedCancelar.Name = "btnLancPedCancelar";
             this.btnLancPedCancelar.Size = new System.Drawing.Size(67, 23);
             this.btnLancPedCancelar.TabIndex = 28;
@@ -1942,7 +2024,7 @@
             // btnLancPedConfirmar
             // 
             this.btnLancPedConfirmar.Enabled = false;
-            this.btnLancPedConfirmar.Location = new System.Drawing.Point(690, 27);
+            this.btnLancPedConfirmar.Location = new System.Drawing.Point(687, 43);
             this.btnLancPedConfirmar.Name = "btnLancPedConfirmar";
             this.btnLancPedConfirmar.Size = new System.Drawing.Size(66, 23);
             this.btnLancPedConfirmar.TabIndex = 27;
@@ -1965,7 +2047,7 @@
             this.txtLancPedQuantidade.CustomButton.UseSelectable = true;
             this.txtLancPedQuantidade.CustomButton.Visible = false;
             this.txtLancPedQuantidade.Lines = new string[0];
-            this.txtLancPedQuantidade.Location = new System.Drawing.Point(448, 27);
+            this.txtLancPedQuantidade.Location = new System.Drawing.Point(445, 43);
             this.txtLancPedQuantidade.MaxLength = 32767;
             this.txtLancPedQuantidade.Name = "txtLancPedQuantidade";
             this.txtLancPedQuantidade.PasswordChar = '\0';
@@ -1981,6 +2063,7 @@
             this.txtLancPedQuantidade.WaterMark = "Quantidade";
             this.txtLancPedQuantidade.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtLancPedQuantidade.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtLancPedQuantidade.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyUp);
             // 
             // txtLancPedProduto
             // 
@@ -1997,7 +2080,7 @@
             this.txtLancPedProduto.CustomButton.UseSelectable = true;
             this.txtLancPedProduto.CustomButton.Visible = false;
             this.txtLancPedProduto.Lines = new string[0];
-            this.txtLancPedProduto.Location = new System.Drawing.Point(116, 27);
+            this.txtLancPedProduto.Location = new System.Drawing.Point(113, 43);
             this.txtLancPedProduto.MaxLength = 32767;
             this.txtLancPedProduto.Name = "txtLancPedProduto";
             this.txtLancPedProduto.PasswordChar = '\0';
@@ -2030,7 +2113,7 @@
             this.txtLancPedCodigoBarras.CustomButton.UseSelectable = true;
             this.txtLancPedCodigoBarras.CustomButton.Visible = false;
             this.txtLancPedCodigoBarras.Lines = new string[0];
-            this.txtLancPedCodigoBarras.Location = new System.Drawing.Point(18, 27);
+            this.txtLancPedCodigoBarras.Location = new System.Drawing.Point(15, 43);
             this.txtLancPedCodigoBarras.MaxLength = 32767;
             this.txtLancPedCodigoBarras.Name = "txtLancPedCodigoBarras";
             this.txtLancPedCodigoBarras.PasswordChar = '\0';
@@ -2358,17 +2441,144 @@
             this.lblLancPedPesquisaVendedor.TabIndex = 21;
             this.lblLancPedPesquisaVendedor.Text = "Pesquisa de Vendedor";
             // 
-            // tabRetornoContasAReceber
+            // tabPedidosFechados
             // 
-            this.tabRetornoContasAReceber.Controls.Add(this.pnlContasAReceber);
-            this.tabRetornoContasAReceber.Location = new System.Drawing.Point(4, 38);
-            this.tabRetornoContasAReceber.Name = "tabRetornoContasAReceber";
-            this.tabRetornoContasAReceber.Size = new System.Drawing.Size(844, 430);
-            this.tabRetornoContasAReceber.TabIndex = 2;
-            this.tabRetornoContasAReceber.Text = "Contas a Receber";
+            this.tabPedidosFechados.Controls.Add(this.pnlPedidoAnteriorSet);
+            this.tabPedidosFechados.Location = new System.Drawing.Point(4, 38);
+            this.tabPedidosFechados.Name = "tabPedidosFechados";
+            this.tabPedidosFechados.Size = new System.Drawing.Size(844, 430);
+            this.tabPedidosFechados.TabIndex = 8;
+            this.tabPedidosFechados.Text = "Pedidos Fechados";
+            // 
+            // pnlPedidoAnteriorSet
+            // 
+            this.pnlPedidoAnteriorSet.Controls.Add(this.pnlPedidoAnteriorMain);
+            this.pnlPedidoAnteriorSet.Controls.Add(this.pnlPedidosAnterioresTop);
+            this.pnlPedidoAnteriorSet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlPedidoAnteriorSet.HorizontalScrollbarBarColor = true;
+            this.pnlPedidoAnteriorSet.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlPedidoAnteriorSet.HorizontalScrollbarSize = 10;
+            this.pnlPedidoAnteriorSet.Location = new System.Drawing.Point(0, 0);
+            this.pnlPedidoAnteriorSet.Name = "pnlPedidoAnteriorSet";
+            this.pnlPedidoAnteriorSet.Size = new System.Drawing.Size(844, 430);
+            this.pnlPedidoAnteriorSet.TabIndex = 0;
+            this.pnlPedidoAnteriorSet.VerticalScrollbarBarColor = true;
+            this.pnlPedidoAnteriorSet.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlPedidoAnteriorSet.VerticalScrollbarSize = 10;
+            // 
+            // pnlPedidoAnteriorMain
+            // 
+            this.pnlPedidoAnteriorMain.Controls.Add(this.grdPedidosFechado);
+            this.pnlPedidoAnteriorMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlPedidoAnteriorMain.HorizontalScrollbarBarColor = true;
+            this.pnlPedidoAnteriorMain.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlPedidoAnteriorMain.HorizontalScrollbarSize = 10;
+            this.pnlPedidoAnteriorMain.Location = new System.Drawing.Point(0, 42);
+            this.pnlPedidoAnteriorMain.Name = "pnlPedidoAnteriorMain";
+            this.pnlPedidoAnteriorMain.Size = new System.Drawing.Size(844, 388);
+            this.pnlPedidoAnteriorMain.TabIndex = 4;
+            this.pnlPedidoAnteriorMain.VerticalScrollbarBarColor = true;
+            this.pnlPedidoAnteriorMain.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlPedidoAnteriorMain.VerticalScrollbarSize = 10;
+            // 
+            // grdPedidosFechado
+            // 
+            this.grdPedidosFechado.AllowUserToResizeRows = false;
+            dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.grdPedidosFechado.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle21;
+            this.grdPedidosFechado.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdPedidosFechado.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.grdPedidosFechado.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.grdPedidosFechado.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdPedidosFechado.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grdPedidosFechado.DefaultCellStyle = dataGridViewCellStyle23;
+            this.grdPedidosFechado.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdPedidosFechado.EnableHeadersVisualStyles = false;
+            this.grdPedidosFechado.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.grdPedidosFechado.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdPedidosFechado.Location = new System.Drawing.Point(0, 0);
+            this.grdPedidosFechado.Name = "grdPedidosFechado";
+            this.grdPedidosFechado.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdPedidosFechado.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
+            this.grdPedidosFechado.RowHeadersVisible = false;
+            this.grdPedidosFechado.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.grdPedidosFechado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.grdPedidosFechado.Size = new System.Drawing.Size(844, 388);
+            this.grdPedidosFechado.TabIndex = 3;
+            // 
+            // pnlPedidosAnterioresTop
+            // 
+            this.pnlPedidosAnterioresTop.Controls.Add(this.btnPedidoAnterior);
+            this.pnlPedidosAnterioresTop.Controls.Add(this.btnPedidoAtual);
+            this.pnlPedidosAnterioresTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPedidosAnterioresTop.HorizontalScrollbarBarColor = true;
+            this.pnlPedidosAnterioresTop.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlPedidosAnterioresTop.HorizontalScrollbarSize = 10;
+            this.pnlPedidosAnterioresTop.Location = new System.Drawing.Point(0, 0);
+            this.pnlPedidosAnterioresTop.Name = "pnlPedidosAnterioresTop";
+            this.pnlPedidosAnterioresTop.Size = new System.Drawing.Size(844, 42);
+            this.pnlPedidosAnterioresTop.TabIndex = 3;
+            this.pnlPedidosAnterioresTop.VerticalScrollbarBarColor = true;
+            this.pnlPedidosAnterioresTop.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlPedidosAnterioresTop.VerticalScrollbarSize = 10;
+            // 
+            // btnPedidoAnterior
+            // 
+            this.btnPedidoAnterior.Location = new System.Drawing.Point(120, 9);
+            this.btnPedidoAnterior.Name = "btnPedidoAnterior";
+            this.btnPedidoAnterior.Size = new System.Drawing.Size(100, 23);
+            this.btnPedidoAnterior.TabIndex = 3;
+            this.btnPedidoAnterior.Text = "Carga Anterior";
+            this.btnPedidoAnterior.UseCustomBackColor = true;
+            this.btnPedidoAnterior.UseCustomForeColor = true;
+            this.btnPedidoAnterior.UseSelectable = true;
+            this.btnPedidoAnterior.Click += new System.EventHandler(this.btnPedidoFechadoAnterior_Click);
+            // 
+            // btnPedidoAtual
+            // 
+            this.btnPedidoAtual.Location = new System.Drawing.Point(11, 9);
+            this.btnPedidoAtual.Name = "btnPedidoAtual";
+            this.btnPedidoAtual.Size = new System.Drawing.Size(100, 23);
+            this.btnPedidoAtual.TabIndex = 2;
+            this.btnPedidoAtual.Text = "Carga Atual";
+            this.btnPedidoAtual.UseCustomBackColor = true;
+            this.btnPedidoAtual.UseCustomForeColor = true;
+            this.btnPedidoAtual.UseSelectable = true;
+            this.btnPedidoAtual.Click += new System.EventHandler(this.btnPedidoFechadoAtualAtual_Click);
+            // 
+            // tabRetornoAcertos
+            // 
+            this.tabRetornoAcertos.Controls.Add(this.pnlContasAReceber);
+            this.tabRetornoAcertos.Location = new System.Drawing.Point(4, 38);
+            this.tabRetornoAcertos.Name = "tabRetornoAcertos";
+            this.tabRetornoAcertos.Size = new System.Drawing.Size(844, 430);
+            this.tabRetornoAcertos.TabIndex = 2;
+            this.tabRetornoAcertos.Text = "Acerto";
             // 
             // pnlContasAReceber
             // 
+            this.pnlContasAReceber.Controls.Add(this.metroPanel2);
             this.pnlContasAReceber.Controls.Add(this.pnlContasAReceberMain);
             this.pnlContasAReceber.Controls.Add(this.pnlContasAReceberTop);
             this.pnlContasAReceber.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -2383,16 +2593,40 @@
             this.pnlContasAReceber.VerticalScrollbarHighlightOnWheel = false;
             this.pnlContasAReceber.VerticalScrollbarSize = 10;
             // 
+            // metroPanel2
+            // 
+            this.metroPanel2.Controls.Add(this.btnFinalizarAcerto);
+            this.metroPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.metroPanel2.HorizontalScrollbarBarColor = true;
+            this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.HorizontalScrollbarSize = 10;
+            this.metroPanel2.Location = new System.Drawing.Point(0, 347);
+            this.metroPanel2.Name = "metroPanel2";
+            this.metroPanel2.Size = new System.Drawing.Size(844, 83);
+            this.metroPanel2.TabIndex = 4;
+            this.metroPanel2.VerticalScrollbarBarColor = true;
+            this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
+            this.metroPanel2.VerticalScrollbarSize = 10;
+            // 
+            // btnFinalizarAcerto
+            // 
+            this.btnFinalizarAcerto.Location = new System.Drawing.Point(315, 14);
+            this.btnFinalizarAcerto.Name = "btnFinalizarAcerto";
+            this.btnFinalizarAcerto.Size = new System.Drawing.Size(215, 54);
+            this.btnFinalizarAcerto.TabIndex = 3;
+            this.btnFinalizarAcerto.Text = "Finalizar Acerto";
+            this.btnFinalizarAcerto.UseSelectable = true;
+            // 
             // pnlContasAReceberMain
             // 
             this.pnlContasAReceberMain.Controls.Add(this.grdContasAReceber);
-            this.pnlContasAReceberMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContasAReceberMain.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlContasAReceberMain.HorizontalScrollbarBarColor = true;
             this.pnlContasAReceberMain.HorizontalScrollbarHighlightOnWheel = false;
             this.pnlContasAReceberMain.HorizontalScrollbarSize = 10;
             this.pnlContasAReceberMain.Location = new System.Drawing.Point(0, 64);
             this.pnlContasAReceberMain.Name = "pnlContasAReceberMain";
-            this.pnlContasAReceberMain.Size = new System.Drawing.Size(844, 366);
+            this.pnlContasAReceberMain.Size = new System.Drawing.Size(844, 258);
             this.pnlContasAReceberMain.TabIndex = 3;
             this.pnlContasAReceberMain.VerticalScrollbarBarColor = true;
             this.pnlContasAReceberMain.VerticalScrollbarHighlightOnWheel = false;
@@ -2401,29 +2635,29 @@
             // grdContasAReceber
             // 
             this.grdContasAReceber.AllowUserToResizeRows = false;
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.grdContasAReceber.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.grdContasAReceber.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle25;
             this.grdContasAReceber.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.grdContasAReceber.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.grdContasAReceber.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.grdContasAReceber.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdContasAReceber.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle26.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdContasAReceber.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle26;
             this.grdContasAReceber.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdContasAReceber.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle27.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle27.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grdContasAReceber.DefaultCellStyle = dataGridViewCellStyle27;
             this.grdContasAReceber.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdContasAReceber.EnableHeadersVisualStyles = false;
             this.grdContasAReceber.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -2431,18 +2665,18 @@
             this.grdContasAReceber.Location = new System.Drawing.Point(0, 0);
             this.grdContasAReceber.Name = "grdContasAReceber";
             this.grdContasAReceber.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdContasAReceber.RowHeadersDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle28.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle28.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle28.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdContasAReceber.RowHeadersDefaultCellStyle = dataGridViewCellStyle28;
             this.grdContasAReceber.RowHeadersVisible = false;
             this.grdContasAReceber.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grdContasAReceber.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdContasAReceber.Size = new System.Drawing.Size(844, 366);
+            this.grdContasAReceber.Size = new System.Drawing.Size(844, 258);
             this.grdContasAReceber.TabIndex = 3;
             this.grdContasAReceber.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdContasAReceber_CellDoubleClick);
             // 
@@ -2503,6 +2737,7 @@
             this.txtRetornoRecData.UseCustomBackColor = true;
             this.txtRetornoRecData.UseCustomForeColor = true;
             this.txtRetornoRecData.UseStyleColors = true;
+            this.txtRetornoRecData.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyUp);
             // 
             // txtRetornoRecValor
             // 
@@ -2535,6 +2770,7 @@
             this.txtRetornoRecValor.WaterMark = "Valor Baixa";
             this.txtRetornoRecValor.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtRetornoRecValor.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtRetornoRecValor.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyUp);
             // 
             // txtRetornoRecNome
             // 
@@ -2645,110 +2881,6 @@
             this.txtRetornoRecDocumento.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtRetornoRecDocumento.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.txtRetornoRecDocumento.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtRetornoRecDocumento_KeyUp);
-            // 
-            // tabRetornoConfProduto
-            // 
-            this.tabRetornoConfProduto.Controls.Add(this.pnlRetornoConfProdutos);
-            this.tabRetornoConfProduto.Location = new System.Drawing.Point(4, 38);
-            this.tabRetornoConfProduto.Name = "tabRetornoConfProduto";
-            this.tabRetornoConfProduto.Size = new System.Drawing.Size(844, 430);
-            this.tabRetornoConfProduto.TabIndex = 6;
-            this.tabRetornoConfProduto.Text = "Conferência de Produtos";
-            // 
-            // pnlRetornoConfProdutos
-            // 
-            this.pnlRetornoConfProdutos.Controls.Add(this.grdRetornoConfProdutos);
-            this.pnlRetornoConfProdutos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlRetornoConfProdutos.HorizontalScrollbarBarColor = true;
-            this.pnlRetornoConfProdutos.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlRetornoConfProdutos.HorizontalScrollbarSize = 10;
-            this.pnlRetornoConfProdutos.Location = new System.Drawing.Point(0, 0);
-            this.pnlRetornoConfProdutos.Name = "pnlRetornoConfProdutos";
-            this.pnlRetornoConfProdutos.Size = new System.Drawing.Size(844, 430);
-            this.pnlRetornoConfProdutos.TabIndex = 0;
-            this.pnlRetornoConfProdutos.VerticalScrollbarBarColor = true;
-            this.pnlRetornoConfProdutos.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlRetornoConfProdutos.VerticalScrollbarSize = 10;
-            // 
-            // grdRetornoConfProdutos
-            // 
-            this.grdRetornoConfProdutos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.grdRetornoConfProdutos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle21;
-            this.grdRetornoConfProdutos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.grdRetornoConfProdutos.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.grdRetornoConfProdutos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.grdRetornoConfProdutos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdRetornoConfProdutos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
-            this.grdRetornoConfProdutos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdRetornoConfProdutos.DefaultCellStyle = dataGridViewCellStyle23;
-            this.grdRetornoConfProdutos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdRetornoConfProdutos.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.grdRetornoConfProdutos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.grdRetornoConfProdutos.Location = new System.Drawing.Point(0, 0);
-            this.grdRetornoConfProdutos.Name = "grdRetornoConfProdutos";
-            this.grdRetornoConfProdutos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdRetornoConfProdutos.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
-            this.grdRetornoConfProdutos.RowHeadersVisible = false;
-            this.grdRetornoConfProdutos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.grdRetornoConfProdutos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdRetornoConfProdutos.Size = new System.Drawing.Size(844, 430);
-            this.grdRetornoConfProdutos.TabIndex = 2;
-            // 
-            // tabRetornoAcerto
-            // 
-            this.tabRetornoAcerto.Controls.Add(this.metroPanel1);
-            this.tabRetornoAcerto.Location = new System.Drawing.Point(4, 38);
-            this.tabRetornoAcerto.Name = "tabRetornoAcerto";
-            this.tabRetornoAcerto.Size = new System.Drawing.Size(844, 430);
-            this.tabRetornoAcerto.TabIndex = 5;
-            this.tabRetornoAcerto.Text = "Acerto";
-            // 
-            // metroPanel1
-            // 
-            this.metroPanel1.Controls.Add(this.btnFinalizarAcerto);
-            this.metroPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.metroPanel1.HorizontalScrollbarBarColor = true;
-            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(0, 0);
-            this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(844, 430);
-            this.metroPanel1.TabIndex = 0;
-            this.metroPanel1.VerticalScrollbarBarColor = true;
-            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.VerticalScrollbarSize = 10;
-            // 
-            // btnFinalizarAcerto
-            // 
-            this.btnFinalizarAcerto.Location = new System.Drawing.Point(307, 125);
-            this.btnFinalizarAcerto.Name = "btnFinalizarAcerto";
-            this.btnFinalizarAcerto.Size = new System.Drawing.Size(215, 54);
-            this.btnFinalizarAcerto.TabIndex = 2;
-            this.btnFinalizarAcerto.Text = "Finalizar Acerto";
-            this.btnFinalizarAcerto.UseSelectable = true;
-            this.btnFinalizarAcerto.Click += new System.EventHandler(this.btnFinalizarAcerto_Click);
             // 
             // pnlRetornoPesquisa
             // 
@@ -3238,20 +3370,19 @@
             this.grpCargaData.PerformLayout();
             this.tabRetorno.ResumeLayout(false);
             this.tbcRetorno.ResumeLayout(false);
-            this.tabRetornoResumo.ResumeLayout(false);
-            this.pnlRetornoResumo.ResumeLayout(false);
-            this.pnlRetornoResumo.PerformLayout();
             this.tabRetornoProdutos.ResumeLayout(false);
             this.pnlRetornoProdutoMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdRetornoProduto)).EndInit();
             this.ctmRetornoProduto.ResumeLayout(false);
             this.pnlRetornoProduto.ResumeLayout(false);
             this.pnlRetornoProduto.PerformLayout();
+            this.tabRetornoConfProduto.ResumeLayout(false);
+            this.pnlRetornoConfProdutos.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grdRetornoConfProdutos)).EndInit();
             this.tabRetornoPedido.ResumeLayout(false);
             this.pnlRetornoPedidoSet.ResumeLayout(false);
             this.pnlRetornoPedidoMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdRetornoPedido)).EndInit();
-            this.pnlRetornoPedidoTop.ResumeLayout(false);
             this.tabRetornoLancPedidos.ResumeLayout(false);
             this.pnlLancamentoPedidos.ResumeLayout(false);
             this.pnlLancPedMain.ResumeLayout(false);
@@ -3262,17 +3393,18 @@
             this.pnlLancPedPesquisaVendedor.PerformLayout();
             this.grpPesqVendedorPedido.ResumeLayout(false);
             this.grpPesqVendedorPedido.PerformLayout();
-            this.tabRetornoContasAReceber.ResumeLayout(false);
+            this.tabPedidosFechados.ResumeLayout(false);
+            this.pnlPedidoAnteriorSet.ResumeLayout(false);
+            this.pnlPedidoAnteriorMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grdPedidosFechado)).EndInit();
+            this.pnlPedidosAnterioresTop.ResumeLayout(false);
+            this.tabRetornoAcertos.ResumeLayout(false);
             this.pnlContasAReceber.ResumeLayout(false);
+            this.metroPanel2.ResumeLayout(false);
             this.pnlContasAReceberMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdContasAReceber)).EndInit();
             this.pnlContasAReceberTop.ResumeLayout(false);
             this.pnlContasAReceberTop.PerformLayout();
-            this.tabRetornoConfProduto.ResumeLayout(false);
-            this.pnlRetornoConfProdutos.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.grdRetornoConfProdutos)).EndInit();
-            this.tabRetornoAcerto.ResumeLayout(false);
-            this.metroPanel1.ResumeLayout(false);
             this.pnlRetornoPesquisa.ResumeLayout(false);
             this.pnlRetornoPesquisa.PerformLayout();
             this.grpRetornoDadosCarga.ResumeLayout(false);
@@ -3321,9 +3453,8 @@
         public MetroFramework.Controls.MetroTextBox txtCargaCodigoBarras;
         public MetroFramework.Controls.MetroButton btnCargaOK;
         public MetroFramework.Controls.MetroTabControl tbcRetorno;
-        private System.Windows.Forms.TabPage tabRetornoProdutos;
         private System.Windows.Forms.TabPage tabRetornoLancPedidos;
-        private System.Windows.Forms.TabPage tabRetornoContasAReceber;
+        private System.Windows.Forms.TabPage tabRetornoAcertos;
         private MetroFramework.Controls.MetroPanel pnlRetornoPesquisa;
         private MetroFramework.Controls.MetroButton btnRetornoOK;
         private MetroFramework.Controls.MetroButton btnRetornoLimpar;
@@ -3392,7 +3523,6 @@
         private MetroFramework.Controls.MetroLabel lblRetornoDataRetorno;
         private MetroFramework.Controls.MetroLabel lblRetornoDataExportacao;
         private MetroFramework.Controls.MetroLabel lblRetornoDataAbertura;
-        private System.Windows.Forms.TabPage tabRetornoAcerto;
         private MetroFramework.Controls.MetroPanel pnlRetornoProdutoMain;
         public MetroFramework.Controls.MetroGrid grdRetornoProduto;
         private MetroFramework.Controls.MetroPanel pnlRetornoProduto;
@@ -3415,10 +3545,7 @@
         private MetroFramework.Controls.MetroPanel pnlRetornoPedidoSet;
         private MetroFramework.Controls.MetroPanel pnlRetornoPedidoMain;
         private MetroFramework.Controls.MetroPanel pnlRetornoPedidoBottom;
-        private MetroFramework.Controls.MetroPanel pnlRetornoPedidoTop;
         public MetroFramework.Controls.MetroGrid grdRetornoPedido;
-        public MetroFramework.Controls.MetroButton btnRetornoPedidoAnterior;
-        public MetroFramework.Controls.MetroButton btnRetornoPedidoAtual;
         private MetroFramework.Controls.MetroPanel pnlContasAReceberMain;
         public MetroFramework.Controls.MetroGrid grdContasAReceber;
         private MetroFramework.Controls.MetroPanel pnlContasAReceberTop;
@@ -3453,8 +3580,6 @@
         public MetroFramework.Controls.MetroLabel dlbValorPedido;
         private MetroFramework.Controls.MetroLabel lblValorCompra;
         private MetroFramework.Controls.MetroLabel lblValorPedido;
-        private MetroFramework.Controls.MetroPanel pnlRetornoResumo;
-        private MetroFramework.Controls.MetroLabel lblRetornoResumoSugestao;
         public MetroFramework.Controls.MetroPanel pnlLancPedMain;
         public MetroFramework.Controls.MetroPanel pnlLancPedTop;
         public MetroFramework.Controls.MetroTextBox txtLancPedPreco;
@@ -3468,9 +3593,22 @@
         public MetroFramework.Controls.MetroTextBox txtLancPedCodigoBarras;
         public MetroFramework.Controls.MetroLabel lblPesqVendedor;
         public MetroFramework.Controls.MetroGrid grdLancPedido;
-        private MetroFramework.Controls.MetroPanel metroPanel1;
+        public MetroFramework.Controls.MetroButton btnConferenciaProdutos;
+        private System.Windows.Forms.TabPage tabPedidosFechados;
+        private MetroFramework.Controls.MetroPanel pnlPedidoAnteriorSet;
+        private MetroFramework.Controls.MetroPanel pnlPedidoAnteriorMain;
+        public MetroFramework.Controls.MetroGrid grdPedidosFechado;
+        private MetroFramework.Controls.MetroPanel pnlPedidosAnterioresTop;
+        public MetroFramework.Controls.MetroButton btnPedidoAnterior;
+        public MetroFramework.Controls.MetroButton btnPedidoAtual;
+        private MetroFramework.Controls.MetroPanel metroPanel2;
         private MetroFramework.Controls.MetroButton btnFinalizarAcerto;
-        public System.Windows.Forms.TabPage tabRetornoResumo;
+        private MetroFramework.Controls.MetroLabel lblLancPedPreco;
+        private MetroFramework.Controls.MetroLabel lblLancCodQtdRet;
+        private MetroFramework.Controls.MetroLabel lblLancPedQuantidade;
+        private MetroFramework.Controls.MetroLabel lblLancPedProduto;
+        private MetroFramework.Controls.MetroLabel lblLancPedCodBarras;
+        public System.Windows.Forms.TabPage tabRetornoProdutos;
     }
 }
 
