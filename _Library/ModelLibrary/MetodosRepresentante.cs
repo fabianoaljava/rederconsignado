@@ -291,7 +291,7 @@ namespace ModelLibrary
         }
 
 
-        public static void InserirProdutoConferencia(long pCargaId, long pProdutoGradeId, decimal pQuantidade)
+        public static Boolean InserirProdutoConferencia(long pCargaId, long pProdutoGradeId, decimal pQuantidade, Boolean pForce = true)
         {
 
 
@@ -299,35 +299,49 @@ namespace ModelLibrary
 
             using (RepresentanteDBEntities context = new RepresentanteDBEntities())
             {
-                var result = context.RepCargaConferencia.SingleOrDefault(cp => cp.ProdutoGradeId == pProdutoGradeId && cp.CargaId == pCargaId);
 
-                if (result != null)
+                var produto = context.RepCargaProduto.FirstOrDefault(pd => pd.ProdutoGradeId == pProdutoGradeId);
+
+                if (produto == null)
                 {
-                    Console.WriteLine("Inserindo Produto Conferencia");
-                    var tmpQtd = result.Quantidade;
+                    return false;
 
-                    Console.WriteLine("Valor:" + tmpQtd.ToString());
-                    result.Quantidade = (tmpQtd + pQuantidade);
-
-                }
-                else
+                } else
                 {
+                    var result = context.RepCargaConferencia.SingleOrDefault(cp => cp.ProdutoGradeId == pProdutoGradeId && cp.CargaId == pCargaId);
 
-
-                    Console.WriteLine("Atualizando Carga Produto");
-                    var novacargaproduto = new RepCargaConferencia
+                    if (result != null)
                     {
-                        CargaId = pCargaId,
-                        ProdutoGradeId = pProdutoGradeId,
-                        Quantidade = pQuantidade
-                    };
+                        Console.WriteLine("Inserindo Produto Conferencia");
+                        var tmpQtd = result.Quantidade;
 
-                    context.RepCargaConferencia.Add(novacargaproduto);
+                        Console.WriteLine("Valor:" + tmpQtd.ToString());
+                        result.Quantidade = (tmpQtd + pQuantidade);
 
+                    }
+                    else
+                    {
+
+
+                        Console.WriteLine("Atualizando Carga Produto");
+                        var novacargaproduto = new RepCargaConferencia
+                        {
+                            CargaId = pCargaId,
+                            ProdutoGradeId = pProdutoGradeId,
+                            Quantidade = pQuantidade
+                        };
+
+                        context.RepCargaConferencia.Add(novacargaproduto);
+
+                    }
+
+
+                    context.SaveChanges();
+
+                    return true;
                 }
 
-
-                context.SaveChanges();
+                
 
 
 
@@ -430,8 +444,8 @@ namespace ModelLibrary
                                             END AS PedidoAnterior,
                                     CASE 
 	                                    WHEN ValorAberto  = 0 THEN 'Total'
-	                                    WHEN ValorAberto >0  THEN 'Parcial ' || Recebido
-	                                    ELSE 'Não ' || Recebido
+	                                    WHEN ValorAberto >0  THEN 'Parcial ' || QuantidadeRemarcado
+	                                    ELSE 'Não ' || QuantidadeRemarcado
 	                                    END AS Recebido,	   
                                     CASE WHEN PedidoAtual.VendedorId IS NOT NULL
                                             THEN true
@@ -439,18 +453,17 @@ namespace ModelLibrary
                                             END AS PedidoAtual, 
                                     CodigoPedido,
                                     CASE 
-	                                    WHEN ValorAberto  = 0 THEN false
-	                                    WHEN ValorAberto >0 THEN true
+	                                    WHEN Receber IS NULL THEN false
 	                                    ELSE true
-	                                    END AS Receber    
+	                                    END AS Receber,                                    
+								    CASE WHEN 
+										RepVendedor.Status = 2 THEN true
+										ELSE false
+										END AS Negativado									
                                     FROM RepVendedor
-                                    LEFT JOIN (SELECT VendedorId, CodigoPedido  FROM RepPedido WHERE CargaId = @p0) AS PedidoAtual ON RepVendedor.Id = PedidoAtual.VendedorId
-                                    LEFT JOIN (SELECT VendedorId, count(RepCargaAnterior.Id) Recebido
-													FROM RepPedido 
-														INNER JOIN RepCargaAnterior ON RepPedido.CargaId = RepCargaAnterior.Id 
-														WHERE CargaId != @p0 and ValorAcerto = 0
-														GROUP BY VendedorId) AS PedidoAnterior ON RepVendedor.Id = PedidoAnterior.VendedorId
-                                    LEFT JOIN RepPosicaoFinanceira ON RepVendedor.Id = RepPosicaoFinanceira.VendedorId";
+                                    LEFT JOIN (SELECT VendedorId, CodigoPedido FROM RepPedido WHERE CargaId = CargaOriginal) AS PedidoAtual ON RepVendedor.Id = PedidoAtual.VendedorId
+                                    LEFT JOIN (SELECT VendedorId, SUM(QuantidadeRemarcado) QuantidadeRemarcado, SUM(ValorAReceber - ValorAcerto) ValorAberto FROM RepPedido WHERE CargaId != CargaOriginal GROUP BY VendedorId) AS PedidoAnterior ON RepVendedor.Id = PedidoAnterior.VendedorId
+                                    LEFT JOIN (SELECT DISTINCT VendedorId as Receber FROM RepReceber WHERE DataPagamento IS NULL) AS Receber ON RepVendedor.Id = Receber.Receber";
 
 
                 if (pFiltro != "") query += " WHERE " + pFiltro;
@@ -498,7 +511,7 @@ namespace ModelLibrary
                     {
                         var maxVendedor = context.RepVendedor.OrderByDescending(i => i.Id).FirstOrDefault();
 
-                        long newId = maxVendedor == null ? 1 : maxVendedor.Id + 1;
+                        long newId = maxVendedor == null ? 999001 : maxVendedor.Id + 1;
 
                         pVendedor.Id = newId;
                     }
@@ -651,12 +664,14 @@ namespace ModelLibrary
                  * 
                 */
 
+                
+
                 string vCodigoPedido = "";
 
                 vCodigoPedido += carga.PracaId.ToString().PadLeft(3, '0');
                 vCodigoPedido += carga.RepresentanteId.ToString().PadLeft(3, '0');
                 vCodigoPedido += carga.Mes.ToString().PadLeft(2, '0');
-                vCodigoPedido += carga.Ano.ToString();
+                vCodigoPedido += carga.Ano.ToString().Substring(2,2);
                 vCodigoPedido += pVendedorId.ToString().PadLeft(5, '0');
                 vCodigoPedido += newId.ToString().PadLeft(7,'0');
 
@@ -714,10 +729,30 @@ namespace ModelLibrary
                     Console.WriteLine("ValorTotal:" + tmpValor.ToString());
 
 
+
                     pedido.ValorPedido = (tmpValor + pValor);
+                    pedido.ValorCompra = (tmpValor + pValor);
+                    pedido.PercentualCompra = pedido.ValorCompra / pedido.ValorPedido;
+
+
+                    if (pedido.PercentualCompra < 35) // primeira faixa
+                    {
+                        pedido.FaixaComissao = 35;
+                        pedido.PercentualFaixa = 35;
+                    } else if (pedido.ValorPedido >= 35 && pedido.ValorPedido  < 80) // segunda faixa
+                    {
+                        pedido.FaixaComissao = 80;
+                        pedido.PercentualFaixa = 40;
+                    } else // terceira faixa
+                    {
+                        pedido.FaixaComissao = 100;
+                        pedido.PercentualFaixa = 45;                    
+                    }
+
+                    pedido.ValorComissao = pedido.ValorCompra * (pedido.PercentualFaixa/100);
+                    pedido.ValorLiquido = pedido.ValorCompra - pedido.ValorComissao;
 
                     context.SaveChanges();
-
                 }
 
 
@@ -745,6 +780,34 @@ namespace ModelLibrary
                         pedido.DataRetorno = DateTime.Now.Date;
                     }
 
+
+
+                    var tmpValor = pedido.ValorCompra;
+
+                    Console.WriteLine("ValorTotal:" + tmpValor.ToString());
+                    
+                    pedido.ValorCompra = (tmpValor - pValor);
+                    pedido.PercentualCompra = pedido.ValorCompra / pedido.ValorPedido;
+
+
+                    if (pedido.PercentualCompra < 35) // primeira faixa
+                    {
+                        pedido.FaixaComissao = 35;
+                        pedido.PercentualFaixa = 35;
+                    }
+                    else if (pedido.ValorPedido >= 35 && pedido.ValorPedido < 80) // segunda faixa
+                    {
+                        pedido.FaixaComissao = 80;
+                        pedido.PercentualFaixa = 40;
+                    }
+                    else // terceira faixa
+                    {
+                        pedido.FaixaComissao = 100;
+                        pedido.PercentualFaixa = 45;
+                    }
+
+                    pedido.ValorComissao = pedido.ValorCompra * (pedido.PercentualFaixa / 100);
+                    pedido.ValorLiquido = pedido.ValorCompra - pedido.ValorComissao;
 
                     context.SaveChanges();
 
@@ -889,8 +952,8 @@ namespace ModelLibrary
 
                 if (pedidoitem != null)
                 {
-                    //var vValor = pedidoitem.Quantidade * pedidoitem.Preco;
-                    RetornarPedido(pedidoitem.PedidoId, 0);
+                    decimal vValor = Convert.ToDecimal(pedidoitem.Retorno * pedidoitem.Preco);
+                    RetornarPedido(pedidoitem.PedidoId, vValor);
                     pedidoitem.Retorno = pQuantidade;                    
                     context.SaveChanges();
 

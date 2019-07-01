@@ -96,8 +96,9 @@ namespace ConsignadoRepresentante
             {
 
                 MessageBox.Show("Dígito verificador inválido. Não foi possível encontrar a grade deste produto.");
-
+                
                 cImportarProdutoId = 0;
+                localDeposito.txtConfCodigoBarras.Text = "";
                 localDeposito.txtConfCodigoBarras.Focus();
                 localDeposito.btnConferenciaConfirmar.Enabled = false;
                 localDeposito.btnConfCancelar.Enabled = false;
@@ -166,7 +167,12 @@ namespace ConsignadoRepresentante
 
                 if (vQuantidade > 0)
                 {
-                    ModelLibrary.MetodosRepresentante.InserirProdutoConferencia(localDeposito.cCargaId, cImportarProdutoId, vQuantidade);
+                    if (ModelLibrary.MetodosRepresentante.InserirProdutoConferencia(localDeposito.cCargaId, cImportarProdutoId, vQuantidade) == false)
+                    {
+                        MessageBox.Show("O produto informado não foi registrado na carga. Deseja incluílo como suplemento?");
+                        //Implementar suplemento posteriormente
+                    }
+
                     ExibirConferenciaProduto(localDeposito.cCargaId);
                     ConferenciaProdutoLimpar();
                 }

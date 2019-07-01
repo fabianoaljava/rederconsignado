@@ -258,13 +258,20 @@ namespace ConsignadoDeposito
             {
                 if (objname == "txtCargaCodRepresentante")
                 {
-                    txtCargaCodRepresentante_ButtonClick(sender, e);
-                    cbbCargaMesAno.Focus();
+                    if (txtCargaCodRepresentante.Text != "")
+                    {
+                        txtCargaCodRepresentante_ButtonClick(sender, e);
+                        cbbCargaMesAno.Focus();
+                    }
                 }
                 else if (objname == "txtCargaCodPraca")
                 {
-                    txtCargaCodPraca_ButtonClick(sender, e);
-                    txtCargaCodRepresentante.Focus();
+                    if (txtCargaCodPraca.Text != "")
+                    {
+                        txtCargaCodPraca_ButtonClick(sender, e);
+                        txtCargaCodRepresentante.Focus();
+                    }
+
                 }
                 else
                 {
@@ -287,9 +294,10 @@ namespace ConsignadoDeposito
 
         private void bntCargaOK_Click(object sender, EventArgs e)
         {
-
-            cCarga.PesquisarCarga();
-
+            if (txtCargaCodPraca.Text != "" && txtCargaCodRepresentante.Text != "")
+            {
+                cCarga.PesquisarCarga();
+            }
         }
 
         private void bntCargaOK_KeyUp(object sender, KeyEventArgs e)
@@ -554,8 +562,11 @@ namespace ConsignadoDeposito
 
         private void bntRetornoOK_Click(object sender, EventArgs e)
         {
-
-            cRetorno.PesquisarCarga();
+            if (txtRetornoCodPraca.Text != "" && txtRetornoCodRepresentante.Text != "")
+            {
+                cRetorno.PesquisarCarga();
+            }
+            
 
         }
 
@@ -769,12 +780,20 @@ namespace ConsignadoDeposito
 
         private void btnFinalizarAcerto_Click(object sender, EventArgs e)
         {
-            cRetorno.FinalizarAcerto();
+            if (MessageBox.Show("Deseja Realmente finalizar o Acerto? ATENÇÃO: Não será possível retornar produtos ou pedidos após confirmar essa ação.", "Finalizar Acerto", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                cRetorno.FinalizarAcerto();
+            }
         }
 
         private void btnConferenciaProdutos_Click(object sender, EventArgs e)
         {
-            cRetorno.FinalizarRetorno();
+
+            if (MessageBox.Show("Deseja Realmente finalizar a Conferência de Produtos? ATENÇÃO: Não será possível retornar produtos após confirmar essa ação.", "Finalizar Conferência de Produtos", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                cRetorno.FinalizarRetorno();
+            }
+            
         }
 
         private void Controls_KeyUp(object sender, KeyEventArgs e)

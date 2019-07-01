@@ -185,13 +185,18 @@ namespace ConsignadoRepresentante
 
         public void ValidarCPFCnpj(string pCPFCnpj, object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //verificar se o CPF/CNPJ é valido
-            if (!ControllerLibrary.Funcoes.CpfCnpjUtils.IsValid(pCPFCnpj))
+           
+            if (pCPFCnpj != "")
             {
-                MessageBox.Show("CPF/CNPJ Inválido!");
-                e.Cancel = true;
-                               
+                //verificar se o CPF/CNPJ é valido
+                if (!ControllerLibrary.Funcoes.CpfCnpjUtils.IsValid(pCPFCnpj))
+                {
+                    MessageBox.Show("CPF/CNPJ Inválido!");
+                    e.Cancel = true;
+
+                }
             }
+
 
         }
 
@@ -330,6 +335,10 @@ namespace ConsignadoRepresentante
                 localRepresentanteForm.tbcVendedor.Visible = true;
                 localRepresentanteForm.cbbTipoPessoa.Text = vendedor.TipoPessoa == "PF" ? "Pessoa Física" : "Pessoa Jurídica";
                 localRepresentanteForm.txtCPFCnpj.Text = vendedor.CpfCnpj.Trim();
+
+                localRepresentanteForm.txtVendedorPesqCodigo.Text = cVendedorId.ToString();
+                localRepresentanteForm.txtVendedorPesqCpfCnpj.Text = vendedor.CpfCnpj.Trim();
+
                 localRepresentanteForm.txtDataInicial.Text = vendedor.DataInicial.ToString();
                 localRepresentanteForm.txtDataFinal.Text = vendedor.DataFinal.ToString();
 
@@ -471,11 +480,18 @@ namespace ConsignadoRepresentante
                 cVendedorModo = "Edit";
                 CarregarFormulario();
 
+                localRepresentanteForm.txtVendedorPesqCpfCnpj.Text = localRepresentanteForm.txtCPFCnpj.Text;
+
             }
             else
             {
                 MessageBox.Show("Vendedor Alterado com Sucesso");
             }
+
+            VendedorPesquisar();
+
+            localRepresentanteForm.cHome.CarregarFormulario();
+
 
         }
 
@@ -677,7 +693,11 @@ namespace ConsignadoRepresentante
                 localRepresentanteForm.grpFinanceiroCalculo.Visible = true;
                 localRepresentanteForm.grpRecebimento.Visible = true;
                 localRepresentanteForm.lblAcertoInfo.Visible = false;
+
+                ExibirRetornoProduto(cVendedorId);
                 ExibirAcerto();
+
+                
             }
 
 
@@ -845,6 +865,7 @@ namespace ConsignadoRepresentante
         public void RetornoProdutoLimpar()
         {
             localRepresentanteForm.txtRetornoCodigoBarras.Text = "";
+            localRepresentanteForm.txtRetornoProdutoGradeId.Text = "";
             localRepresentanteForm.txtRetornoProduto.Text = "";
             localRepresentanteForm.txtRetornoQuantidade.Text = "";
 
@@ -878,16 +899,18 @@ namespace ConsignadoRepresentante
 
                 if (rowIndex != -1)
                 {
+                    
+                    
 
-                    localRepresentanteForm.txtRetornoCodigoBarras.Text = localRepresentanteForm.grdVendedorRetorno.CurrentRow.Cells["CodigoBarras"].Value.ToString();
-                    localRepresentanteForm.txtRetornoProdutoGradeId.Text = localRepresentanteForm.grdVendedorRetorno.CurrentRow.Cells["ProdutoGradeId"].Value.ToString();
-                    localRepresentanteForm.txtRetornoProduto.Text = localRepresentanteForm.grdVendedorRetorno.CurrentRow.Cells["Descricao"].Value.ToString();
+                    localRepresentanteForm.txtRetornoCodigoBarras.Text = localRepresentanteForm.grdVendedorRetorno.Rows[rowIndex].Cells["CodigoBarras"].Value.ToString();
+                    localRepresentanteForm.txtRetornoProdutoGradeId.Text = localRepresentanteForm.grdVendedorRetorno.Rows[rowIndex].Cells["ProdutoGradeId"].Value.ToString();
+                    localRepresentanteForm.txtRetornoProduto.Text = localRepresentanteForm.grdVendedorRetorno.Rows[rowIndex].Cells["Descricao"].Value.ToString();
 
-                    if (localRepresentanteForm.chkRetornoQuantidade.Checked == false)
+                    /*if (localRepresentanteForm.chkRetornoQuantidade.Checked == false)
                     {
                         localRepresentanteForm.chkRetornoQuantidade.Checked = true;
                         localRepresentanteForm.chkRetornoQuantidade.Enabled = true;
-                    }
+                    }*/
 
                     localRepresentanteForm.btnRetornoConfirmar.Enabled = true;
                     localRepresentanteForm.btnRetornoCancelar.Enabled = true;
@@ -900,11 +923,16 @@ namespace ConsignadoRepresentante
                     else
                     {
                         //inserir direto qtd=1
+                        string vQuantidade = localRepresentanteForm.grdVendedorRetorno.Rows[rowIndex].Cells["Retorno"].Value.ToString();
+
+                        int vIncQuantidade = vQuantidade != "" ? Convert.ToInt32(vQuantidade) : 0;
+
+                        localRepresentanteForm.txtRetornoQuantidade.Text = (vIncQuantidade + 1).ToString();
                         ConfirmarRetornoProduto();
                     }
 
-
                     localRepresentanteForm.grdVendedorRetorno.Rows[rowIndex].Selected = true;
+
 
                 }
                 else
@@ -914,6 +942,8 @@ namespace ConsignadoRepresentante
 
                     //cImportarProdutoId = 0;
                     localRepresentanteForm.txtRetornoCodigoBarras.Text = "";
+                    localRepresentanteForm.txtRetornoProduto.Text = "";
+                    localRepresentanteForm.txtRetornoProdutoGradeId.Text = "";
                     localRepresentanteForm.txtRetornoCodigoBarras.Focus();
                     localRepresentanteForm.btnRetornoConfirmar.Enabled = false;
                     localRepresentanteForm.btnRetornoCancelar.Enabled = false;
@@ -922,10 +952,12 @@ namespace ConsignadoRepresentante
                 }
             } catch
             {
-                MessageBox.Show("Código inválido. Não foi possível encontrar este produto no pedido.");
+                MessageBox.Show("Ocorreu um erro ao processar Pesquisa de Produto", "Pesquisa de Produto", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 //cImportarProdutoId = 0;
                 localRepresentanteForm.txtRetornoCodigoBarras.Text = "";
+                localRepresentanteForm.txtRetornoProduto.Text = "";
+                localRepresentanteForm.txtRetornoProdutoGradeId.Text = "";
                 localRepresentanteForm.txtRetornoCodigoBarras.Focus();
                 localRepresentanteForm.btnRetornoConfirmar.Enabled = false;
                 localRepresentanteForm.btnRetornoCancelar.Enabled = false;
@@ -976,7 +1008,8 @@ namespace ConsignadoRepresentante
 
         public void RetornoProdutoEditar()
         {
-
+            localRepresentanteForm.chkRetornoQuantidade.Checked = true;
+            localRepresentanteForm.chkRetornoQuantidade.Enabled = true;
 
             localRepresentanteForm.txtRetornoProdutoGradeId.Text = localRepresentanteForm.grdVendedorRetorno.CurrentRow.Cells["ProdutoGradeId"].Value.ToString();
             localRepresentanteForm.txtRetornoCodigoBarras.Text = localRepresentanteForm.grdVendedorRetorno.CurrentRow.Cells["CodigoBarras"].Value.ToString();

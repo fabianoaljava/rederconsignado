@@ -305,15 +305,23 @@ namespace ConsignadoRepresentante
 
             if ((e.KeyCode == Keys.Enter) || (e.KeyCode == Keys.Return))
             {
-                if (objname == "txtCargaCodRepresentante")
+                if (objname == "txtImportarCodRepresentante")
                 {
-                    txtImportarCodRepresentante_ButtonClick(sender, e);
-                    cbbImportarMesAno.Focus();
+                    if (txtImportarCodPraca.Text != "")
+                    {
+                        txtImportarCodRepresentante_ButtonClick(sender, e);
+                        cbbImportarMesAno.Focus();
+                    }
+
                 }
-                else if (objname == "txtCargaCodPraca")
+                else if (objname == "txtImportarCodPraca")
                 {
-                    txtImportarCodPraca_ButtonClick(sender, e);
-                    txtImportarCodRepresentante.Focus();
+                    if (txtImportarCodPraca.Text != "")
+                    {
+                        txtImportarCodPraca_ButtonClick(sender, e);
+                        txtImportarCodRepresentante.Focus();
+                    }
+
                 }
                 else
                 {
@@ -327,13 +335,21 @@ namespace ConsignadoRepresentante
 
         private void btnImportarAnalisar_Click(object sender, EventArgs e)
         {
-            cImportar.ImportarCarga(true);
+            if (txtImportarCodRepresentante.Text != "" && txtImportarCodPraca.Text != "")
+            {
+                cImportar.ImportarCarga(true);
+            }
+            
         }
 
 
         private void btnImportar_Click(object sender, EventArgs e)
         {
-            cImportar.ImportarCarga(false);
+            
+            if (txtImportarCodRepresentante.Text != "" && txtImportarCodPraca.Text != "")
+            {
+                cImportar.ImportarCarga(false);
+            }
         }
 
         private void btnCargaPesquisar_Click(object sender, EventArgs e)
@@ -385,9 +401,11 @@ namespace ConsignadoRepresentante
         {
             if (e.KeyData == Keys.Enter)
             {
-                e.SuppressKeyPress = true;
-                cConferirProdutos.PesquisarConferenciaProduto(txtConfCodigoBarras.Text);
-
+                if (txtConfCodigoBarras.Text != "")
+                {
+                    e.SuppressKeyPress = true;
+                    cConferirProdutos.PesquisarConferenciaProduto(txtConfCodigoBarras.Text);
+                }                    
             }
         }
 

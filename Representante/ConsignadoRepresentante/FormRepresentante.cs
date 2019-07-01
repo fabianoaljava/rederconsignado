@@ -74,6 +74,8 @@ namespace ConsignadoRepresentante
             Boolean vServerConectado;
 
             //se servidor estiver online 
+
+            /*
             if (ModelLibrary.MetodosDeposito.VerificarServidor())
             {
                 lblServerStatus.Text = "Servidor Online";
@@ -86,6 +88,13 @@ namespace ConsignadoRepresentante
                 lblServerStatus.ForeColor = Color.Red;
                 vServerConectado = false;
             }
+            */
+
+            /// Implementar de forma assincrona
+
+            lblServerStatus.Text = "Servidor Não Verificado";
+            lblServerStatus.ForeColor = Color.Green;
+            vServerConectado = true;
 
             //se estiver conectado ao servidor
             if (vServerConectado)
@@ -277,7 +286,10 @@ namespace ConsignadoRepresentante
         /// Aba Vendedor
         ////////////////////////////////////////
 
-
+        private void cbbPesqVendedor_SelectedValueChanged(object sender, EventArgs e)
+        {
+            cVendedor.PesquisaVendedor_Change(sender, e);
+        }
 
         private void txtVendedorPesqCpfCnpj_Validated(object sender, EventArgs e)
         {
@@ -313,10 +325,13 @@ namespace ConsignadoRepresentante
 
         private void txtCPFCnpj_Leave(object sender, EventArgs e)
         {
+            if (txtCPFCnpj.Text != "")
+            {
+                txtCPFCnpj.Text = MascaraCnpjCpf(txtCPFCnpj.Text);
 
-            txtCPFCnpj.Text = MascaraCnpjCpf(txtCPFCnpj.Text);
+                if (cVendedor.cVendedorModo == "Create") cVendedor.VerificarCPFCnpjExistente(txtCPFCnpj.Text);
+            }
 
-            if (cVendedor.cVendedorModo == "Create") cVendedor.VerificarCPFCnpjExistente(txtCPFCnpj.Text);
         }
 
         private void txtCPFCnpj_Validating(object sender, CancelEventArgs e)
@@ -552,6 +567,9 @@ namespace ConsignadoRepresentante
             tbcVendedor.SelectedTab = tabVendedorInicio;
         }
 
-
+        private void btnHomeAtualizar_Click(object sender, EventArgs e)
+        {
+            cHome.CarregarFormulario();
+        }
     }
 }

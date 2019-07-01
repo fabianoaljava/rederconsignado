@@ -88,13 +88,19 @@ namespace ConsignadoDeposito
             try
             {
 
+
+
+                LimparCargaProduto();
+                LimparGradeCargaProduto();
+
+
+
                 /* Obter os Campos Selecionados */
 
-
                 ModelLibrary.Representante representante = (ModelLibrary.Representante)localDepositoForm.cbbCargaRepresentante.SelectedItem;
-                var representanteId = representante.Id;
+                var representanteId = representante != null ? representante.Id : -1;
                 ModelLibrary.Praca praca = (ModelLibrary.Praca)localDepositoForm.cbbCargaPraca.SelectedItem;
-                var pracaId = praca.Id;
+                var pracaId = praca != null ? praca.Id : -1; 
                 int mes = localDepositoForm.cbbCargaMesAno.Value.Month;
                 int ano = localDepositoForm.cbbCargaMesAno.Value.Year;
 
@@ -151,7 +157,21 @@ namespace ConsignadoDeposito
 
                     }
 
-                    localDepositoForm.txtCargaCodigoBarras.Focus();
+
+
+                    /// se status da carga = A
+                    if (carga.Status != "A")
+                    {
+                        localDepositoForm.pnlCargaProduto.Enabled = false;
+                    } 
+                    else
+                    {
+                        localDepositoForm.pnlCargaProduto.Enabled = true;
+                        localDepositoForm.txtCargaCodigoBarras.Focus();
+                    }
+                    
+
+                    
 
 
 
@@ -161,10 +181,10 @@ namespace ConsignadoDeposito
                 }
                 else /* Se não existir */
                 {
+                    
                     if (MessageBox.Show("Não foi encontrada nenhuma carga com os dados informados. Deseja iniciar uma nova carga?", "Importante!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                     {
-                        cCargaId = ModelLibrary.MetodosDeposito.InserirCarga(representanteId, pracaId, mes, ano);
-                        localDepositoForm.tbcCarga.Visible = true;
+                        CargaInserir(representanteId, pracaId, mes, ano);
                         //PolulateGradeCargaProduto();
                     }
                     else
@@ -181,6 +201,22 @@ namespace ConsignadoDeposito
             }
         }
 
+
+        public void CargaInserir(int pRepresentanteId, int pPracaId, int pMes, int pAno)
+        {
+
+            // verificar se existe carga não finalizada
+            // verificar se existe carga mais recente ?
+
+
+            //Obter pedidos pendentes da praça e alterar o CargaId para nova Carga.
+            //Gerar os titulos a receber com base no "ValorAReceber" do Pedido
+
+
+            cCargaId = ModelLibrary.MetodosDeposito.InserirCarga(pRepresentanteId, pPracaId, pMes, pAno);
+            localDepositoForm.tbcCarga.Visible = true;
+            localDepositoForm.pnlCargaProduto.Enabled = true;
+        }
 
         ////////////////////////////////////////////
         /// Carregar Pesquisa de Produtos da Carga

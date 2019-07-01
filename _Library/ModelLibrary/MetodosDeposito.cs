@@ -149,9 +149,6 @@ namespace ModelLibrary
         public static int InserirCarga(int pRepresentanteId, int pPracaId, int pMes, int pAno)
         {
 
-            
-
-            
 
             using (DepositoDBEntities context = new DepositoDBEntities())
             {
@@ -328,7 +325,8 @@ namespace ModelLibrary
 
                 var cargaanterior = context.Carga.Where(c => c.PracaId == carga.PracaId && c.Id < pCargaId).OrderByDescending(i => i.Id).FirstOrDefault();
 
-                
+                int vCargaId = carga != null ? carga.Id : 0;
+                int vCargaanteriorId = cargaanterior != null ? cargaanterior.Id : 0;
 
                 string query = @"SELECT Produto.CodigoBarras + '' + Produto.Digito as CodigoBarras, Produto.Descricao + ' ' + Produto.Tamanho Descricao, ISNULL(Vendido.Vendido,0) Vendido, isnull(Carga.ViagemPlus,0) Carga, ISNULL(Vendido.RetornoPlus,0) Retorno, ISNULL(Consignado.Consignado,0) Consignado, (ISNULL(Carga.ViagemPlus,0) + ISNULL(Vendido.RetornoPlus,0) - ISNULL(Consignado.Consignado,0)) SaldoCarro, ISNULL(Carga.ContagemCarro,0) ContagemCarro, ISNULL(Carga.ContagemCarro,0)-(ISNULL(Carga.ViagemPlus,0) + ISNULL(Vendido.RetornoPlus,0) - ISNULL(Consignado.Consignado,0)) Falta, (ISNULL(Carga.ContagemCarro,0)-(ISNULL(Carga.ViagemPlus,0) + ISNULL(Vendido.RetornoPlus,0) - ISNULL(Consignado.Consignado,0))) * ISNULL(Carga.Preco,0) VrDiferenca 
                                 FROM
@@ -356,7 +354,7 @@ namespace ModelLibrary
                                 WHERE Vendido IS NOT NULL
                                 ORDER BY Descricao";
 
-                var result = context.Database.SqlQuery<ListaProdutoConferencia>(query, carga.Id, cargaanterior.Id);
+                var result = context.Database.SqlQuery<ListaProdutoConferencia>(query, vCargaId, vCargaanteriorId);
 
                 return result.ToList<ListaProdutoConferencia>();
 
@@ -538,7 +536,7 @@ namespace ModelLibrary
 
                     var cargaanterior = context.Carga.Where(c => c.PracaId == carga.PracaId && c.Id < pCargaId).OrderByDescending(i => i.Id).FirstOrDefault();
 
-                    vCargaId = cargaanterior.Id;
+                    vCargaId = cargaanterior != null ? cargaanterior.Id : 0;
                 }
 
                 string query = @"SELECT CodigoPedido, Nome, ValorPedido, ValorCompra, ValorLiquido, ValorAReceber, ValorAcerto, ValorLiquido+ValorAReceber-ValorAcerto as ValorAberto, DataLancamento  
@@ -635,7 +633,11 @@ namespace ModelLibrary
             using (DepositoDBEntities context = new DepositoDBEntities())
             {
 
+                var carga = context.Carga.FirstOrDefault(c => c.Id == pCargaId);
 
+                int vPracaId = 0;
+
+                vPracaId = carga != null ? Convert.ToInt32(carga.PracaId) : 0;
 
                 string query = @"SELECT Receber.Id, ReceberBaixa.Id as ReceberBaixaId, Documento, Serie, Nome, ValorAReceber, ReceberBaixa.Valor as ValorPago, ReceberBaixa.DataPagamento 
 	                                FROM Receber 
@@ -646,14 +648,16 @@ namespace ModelLibrary
                                             IN(
 	                                            SELECT Distinct VendedorId
                                                 FROM Pedido
-                                                WHERE CargaId in(SELECT Id FROM Carga WHERE Id <=@p0 and PracaId = 34)
+                                                WHERE CargaId in(SELECT Id FROM Carga WHERE Id <=@p0 and PracaId = @p1)
                                             )) 
 			                                AND Receber.DataPagamento IS NULL 
 			                                AND ValorNF > 0 
 			                                AND Receber.CargaId <= @p0
                                 ORDER BY Nome";
 
-                var result = context.Database.SqlQuery<ListaAReceber>(query, pCargaId);
+                Console.WriteLine("Obtendo Lista a Receber - CargaId: " + pCargaId.ToString());
+
+                var result = context.Database.SqlQuery<ListaAReceber>(query, pCargaId, vPracaId);
 
                 return result.ToList<ListaAReceber>();
 

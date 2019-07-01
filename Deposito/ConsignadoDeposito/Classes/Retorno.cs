@@ -152,6 +152,48 @@ namespace ConsignadoDeposito
                     CarregarFormulario();
 
 
+                    /// se status da carga = R
+                    if (carga.Status == "R")
+                    {
+                        /// Habilita Retorno de Produtos
+                        /// Habilita Finalizar Conferencia de Produtos
+                        /// Habilita Lançamento de Pedidos
+                        /// Habilita Acerto
+                        /// Habilita Finalizar Acerto
+                        localDepositoForm.pnlRetornoProduto.Enabled = true;
+                        localDepositoForm.btnConferenciaProdutos.Enabled = true;
+                        localDepositoForm.pnlLancPedTop.Enabled = true;
+                        localDepositoForm.pnlContasAReceberTop.Enabled = true;
+                        localDepositoForm.btnFinalizarAcerto.Enabled = true;
+                    }
+                    else if (carga.Status == "C") {
+                        /// Desabilita Retorno de Produtos
+                        /// Desabilita Finalizar Conferencia de Produtos
+                        /// Habilita Lançamento de Pedidos
+                        /// Habilita Acerto
+                        /// Habilita Finalizar Acerto
+                        localDepositoForm.pnlRetornoProduto.Enabled = false;
+                        localDepositoForm.btnConferenciaProdutos.Enabled = false;
+                        localDepositoForm.pnlLancPedTop.Enabled = true;
+                        localDepositoForm.pnlContasAReceberTop.Enabled = true;
+                        localDepositoForm.btnFinalizarAcerto.Enabled = true;
+                    }
+                    else
+                    {
+                        /// Desabilita Retorno de Produtos
+                        /// Desabilita FInalizar Conferencia de Produtos
+                        /// Desabilita Lançamento de Pedidos
+                        /// Desabilita Acerto
+                        /// Desabilita Finalizar Acerto
+                        localDepositoForm.pnlRetornoProduto.Enabled = false;
+                        localDepositoForm.btnConferenciaProdutos.Enabled = false;
+                        localDepositoForm.pnlLancPedTop.Enabled = false;
+                        localDepositoForm.pnlContasAReceberTop.Enabled = false;
+                        localDepositoForm.btnFinalizarAcerto.Enabled = false;
+                    }
+
+
+
 
 
                 }
@@ -224,6 +266,8 @@ namespace ConsignadoDeposito
 
         void CarregarGradeRetornoProduto(int pCargaId)
         {
+
+            
 
             ModelLibrary.Representante representante = (ModelLibrary.Representante)localDepositoForm.cbbRetornoRepresentante.SelectedItem;
             var representanteId = representante.Id;
@@ -400,8 +444,11 @@ namespace ConsignadoDeposito
 
         public void FinalizarRetorno()
         {
-
             ModelLibrary.MetodosDeposito.AlterarStatusCarga(cRetornoId, "C");
+
+            MessageBox.Show("Retorno de Produtos Finalizado com Sucesso!");
+
+            PesquisarCarga();
         }
 
 
@@ -926,6 +973,8 @@ namespace ConsignadoDeposito
         {
 
             ModelLibrary.MetodosDeposito.AlterarStatusCarga(cRetornoId, "F");
+
+            //Alterar Status dos Pedidos sem ValorAReceber = 1;
         }
 
     }

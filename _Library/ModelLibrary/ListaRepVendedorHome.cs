@@ -21,6 +21,7 @@ namespace ModelLibrary
         public bool PedidoAtual { get; set; }
         public string CodigoPedido { get; set; }
         public bool Receber { get; set; }
+        public bool Negativado { get; set; }
 
     }
 }
