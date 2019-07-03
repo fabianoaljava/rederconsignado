@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ConsignadoRepresentante;
 using System.Windows.Forms;
 using Equin.ApplicationFramework;
+using System.Drawing;
 
 namespace ConsignadoRepresentante
 {
@@ -80,7 +81,7 @@ namespace ConsignadoRepresentante
 
         public void PesquisaVendedor_Change(object sender, EventArgs e)
         {
-            if (localRepresentanteForm.cbbPesqVendedor.SelectedIndex > 0)
+            if (localRepresentanteForm.cbbPesqVendedor.SelectedIndex > -1)
             {
                 ModelLibrary.RepVendedor vendedor = (ModelLibrary.RepVendedor)localRepresentanteForm.cbbPesqVendedor.SelectedItem;
                 VendedorExibir(vendedor.Id);
@@ -286,9 +287,9 @@ namespace ConsignadoRepresentante
 
             localRepresentanteForm.cbbTipoPessoa.SelectedIndex = -1;
             localRepresentanteForm.txtCPFCnpj.Text = "";
-            localRepresentanteForm.txtDataInicial.ResetText();
-            localRepresentanteForm.txtDataFinal.ResetText();
-            localRepresentanteForm.cbbStatus.SelectedIndex = -1; //--- Ver quais os status apresentados
+            localRepresentanteForm.txtDataInicial.Text = "";
+            localRepresentanteForm.txtDataFinal.Text = "";
+            localRepresentanteForm.txtStatus.Text = "";
             localRepresentanteForm.txtNome.Text = "";
             localRepresentanteForm.txtRazaoSocial.Text = "";
             localRepresentanteForm.txtRGInscricao.Text = "";
@@ -303,8 +304,8 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.txtTelefoneComercial.Text = "";
             localRepresentanteForm.txtCelular.Text = "";
             localRepresentanteForm.txtEmail.Text = "";
-            localRepresentanteForm.txtLimitePedido.Text = "";
-            localRepresentanteForm.txtLimiteCredito.Text = "";
+            localRepresentanteForm.txtLimitePedido.Text = "0,00";
+            localRepresentanteForm.txtLimiteCredito.Text = "9999,00";
             localRepresentanteForm.txtObservacao.Text = "";
 
             cVendedorId = 0;
@@ -346,13 +347,16 @@ namespace ConsignadoRepresentante
                 switch (vendedor.Status)
                 {
                     case "2":
-                        localRepresentanteForm.cbbStatus.Text = "Negativado";
+                        localRepresentanteForm.txtStatus.Text = "Negativado";
+                        localRepresentanteForm.txtStatus.ForeColor = Color.Red;
                         break;
                     case "0":
-                        localRepresentanteForm.cbbStatus.Text = "Inativo";
+                        localRepresentanteForm.txtStatus.Text = "Inativo";
+                        localRepresentanteForm.txtStatus.ForeColor = Color.Orange;
                         break;
                     default:
-                        localRepresentanteForm.cbbStatus.Text = "Ativo";
+                        localRepresentanteForm.txtStatus.Text = "Ativo";
+                        localRepresentanteForm.txtStatus.ForeColor = Color.Green;
                         break;
                 }
                 //cbbStatus --- Ver quais os status apresentados
@@ -397,6 +401,8 @@ namespace ConsignadoRepresentante
                 ExibirRecebimentos();
 
 
+                
+
                 localRepresentanteForm.tbcVendedor.SelectedTab = localRepresentanteForm.tabVendedorInicio;
 
 
@@ -432,22 +438,7 @@ namespace ConsignadoRepresentante
 
             vendedor.TipoPessoa = localRepresentanteForm.cbbTipoPessoa.Text == "Pessoa Física" ? "PF" : "PJ";
             vendedor.CpfCnpj = localRepresentanteForm.txtCPFCnpj.Text;
-            vendedor.DataInicial = localRepresentanteForm.txtDataInicial.Value;
-            vendedor.DataFinal = localRepresentanteForm.txtDataFinal.Value;
-
-            switch (localRepresentanteForm.cbbStatus.Text)
-            {
-                case "Negativado":
-                    vendedor.Status = "2";
-                    break;
-                case "Inativo":
-                    vendedor.Status = "0";
-                    break;
-                default:
-                    vendedor.Status = "1";
-                    break;
-            }
-
+            vendedor.DataInicial = DateTime.Now.Date;
             vendedor.Nome = localRepresentanteForm.txtNome.Text;
             vendedor.RazaoSocial = localRepresentanteForm.txtRazaoSocial.Text;
             vendedor.RGInscricao = localRepresentanteForm.txtRGInscricao.Text;
@@ -488,9 +479,9 @@ namespace ConsignadoRepresentante
                 MessageBox.Show("Vendedor Alterado com Sucesso");
             }
 
-            VendedorPesquisar();
+            VendedorReload();
 
-            localRepresentanteForm.cHome.CarregarFormulario();
+            
 
 
         }
@@ -500,6 +491,17 @@ namespace ConsignadoRepresentante
 
         }
 
+
+        public void VendedorReload()
+        {
+            ExibirPedido(cVendedorId);
+            ExibirRetornoProduto(cVendedorId);
+            ExibirAcerto();
+            ExibirRecebimentos();
+            localRepresentanteForm.cHome.CarregarFormulario();
+            localRepresentanteForm.cFinanceiro.ExibirPosicaoFinancera();
+            localRepresentanteForm.tabPosicaoFinanceira.Refresh();
+        }
 
 
         //////////////////////////////////////////////////////
@@ -525,16 +527,20 @@ namespace ConsignadoRepresentante
                 switch (vendedor.Status)
                 {
                     case "2":
-                        localRepresentanteForm.cbbStatus.Text = "Negativado";
+                        localRepresentanteForm.txtStatus.Text = "Negativado";
+                        localRepresentanteForm.txtStatus.ForeColor = Color.Red;
                         break;
                     case "0":
-                        localRepresentanteForm.cbbStatus.Text = "Inativo";
+                        localRepresentanteForm.txtStatus.Text = "Inativo";
+                        localRepresentanteForm.txtStatus.ForeColor = Color.Orange;
                         break;
                     default:
-                        localRepresentanteForm.cbbStatus.Text = "Ativo";
+                        localRepresentanteForm.txtStatus.Text = "Ativo";
+                        localRepresentanteForm.txtStatus.ForeColor = Color.Green;
                         break;
                 }
-                //cbbStatus --- Ver quais os status apresentados
+                
+
                 localRepresentanteForm.txtNome.Text = vendedor.Nome.Trim();
                 localRepresentanteForm.txtRazaoSocial.Text = vendedor.RazaoSocial.Trim();
                 localRepresentanteForm.txtRGInscricao.Text = vendedor.RGInscricao.Trim();
@@ -700,6 +706,22 @@ namespace ConsignadoRepresentante
                 
             }
 
+            if (pedido != null)
+            {
+                if (pedido.DataRetorno != null)
+                {
+                    localRepresentanteForm.pnlVendedorPedidoMontar.Enabled = false;
+                }
+                else
+                {
+                    localRepresentanteForm.pnlVendedorPedidoMontar.Enabled = true;
+                }
+            }
+            else
+            {
+                localRepresentanteForm.pnlVendedorPedidoMontar.Enabled = true;
+            }
+
 
 
 
@@ -756,7 +778,9 @@ namespace ConsignadoRepresentante
                 {
 
                     ModelLibrary.MetodosRepresentante.InserirPedidoItem(localRepresentanteForm.cCargaId, cVendedorId, vProdutoGradeId, vQuantidade, vPreco);
-                    ExibirPedido(cVendedorId);
+
+                    //ExibirPedido(cVendedorId);
+                    VendedorReload();
 
 
                     if (localRepresentanteForm.grdVendedorPedido.RowCount > 0) localRepresentanteForm.grdVendedorPedido.Rows[localRepresentanteForm.grdVendedorPedido.RowCount - 1].Selected = true;
@@ -797,7 +821,7 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.txtPedidoQuantidade.Text = localRepresentanteForm.grdVendedorPedido.CurrentRow.Cells["Quantidade"].Value.ToString();
             localRepresentanteForm.txtPedidoQuantidade.Focus();
 
-            localRepresentanteForm.txtPedidoPrecoUnit.Text = string.Format("{0:C}", localRepresentanteForm.grdVendedorPedido.CurrentRow.Cells["Preco"].Value.ToString());
+            localRepresentanteForm.txtPedidoPrecoUnit.Text = string.Format("{0:N}", localRepresentanteForm.grdVendedorPedido.CurrentRow.Cells["Preco"].Value);
 
             
 
@@ -815,11 +839,15 @@ namespace ConsignadoRepresentante
 
             ModelLibrary.MetodosRepresentante.AtualizarPedidoItem(cPedidoId, Convert.ToInt64(localRepresentanteForm.txtPedidoProdutoGradeId.Text), Convert.ToDecimal(localRepresentanteForm.txtPedidoQuantidade.Text), Convert.ToDecimal(localRepresentanteForm.txtPedidoPrecoUnit.Text));
 
-            ExibirPedido(cVendedorId);
+            //ExibirPedido(cVendedorId);
+
+            VendedorReload();
 
             GridSelecionar(localRepresentanteForm.grdVendedorPedido, localRepresentanteForm.txtPedidoCodigoBarras.Text);
 
             PedidoLimpar();
+
+            
         }
 
         // PedidoExcluir
@@ -838,7 +866,9 @@ namespace ConsignadoRepresentante
 
                 ModelLibrary.MetodosRepresentante.ExcluirPedidoItem(vPedidoItemId, vPedidoId, vQuantidade, vPreco);
 
-                ExibirPedido(cVendedorId);
+                //ExibirPedido(cVendedorId);
+
+                VendedorReload();
             }
 
         }
@@ -934,6 +964,7 @@ namespace ConsignadoRepresentante
                     localRepresentanteForm.grdVendedorRetorno.Rows[rowIndex].Selected = true;
 
 
+
                 }
                 else
                 {
@@ -986,6 +1017,9 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.grdVendedorRetorno.Columns[4].Width = 300;
 
 
+
+
+
         }
 
         public void ConfirmarRetornoProduto()
@@ -995,7 +1029,10 @@ namespace ConsignadoRepresentante
 
             ModelLibrary.MetodosRepresentante.RetornarPedidoItem(cPedidoId, Convert.ToInt64(localRepresentanteForm.txtRetornoProdutoGradeId.Text), Convert.ToDecimal(localRepresentanteForm.txtRetornoQuantidade.Text));
 
-            ExibirRetornoProduto(cVendedorId);
+            //ExibirRetornoProduto(cVendedorId);
+
+            VendedorReload();
+
 
             GridSelecionar(localRepresentanteForm.grdVendedorRetorno, localRepresentanteForm.txtRetornoCodigoBarras.Text);
 
@@ -1067,11 +1104,19 @@ namespace ConsignadoRepresentante
                 cValorTotalAPagar = Convert.ToDecimal(pedido.ValorLiquido + pedido.ValorAReceber);
                 cValorRecebido = Convert.ToDecimal(pedido.ValorAcerto);
 
-
+                if (cValorRecebido > 0)
+                {
+                    localRepresentanteForm.pnlVendedorRetorno.Enabled = false;
+                } else
+                {
+                    localRepresentanteForm.pnlVendedorRetorno.Enabled = true;
+                }
+                
+                
                 localRepresentanteForm.dlbAcertoAberto.Text = string.Format("{0:C2}", cValorTotalAPagar - cValorRecebido);
 
 
-                localRepresentanteForm.txtValorRecebido.Text = string.Format("{0}", pedido.ValorAcerto);
+                localRepresentanteForm.txtValorRecebido.Text = string.Format("{0:N}", pedido.ValorAcerto);
             }
 
 
@@ -1117,6 +1162,8 @@ namespace ConsignadoRepresentante
             if (localRepresentanteForm.txtValorRecebido.Text != "")
             {
                 ModelLibrary.MetodosRepresentante.ReceberAcerto(cPedidoId, Convert.ToDecimal(localRepresentanteForm.txtValorRecebido.Text));
+
+                VendedorReload();
             } else
             {
                 MessageBox.Show("Informe o valor recebido!");
@@ -1164,7 +1211,8 @@ namespace ConsignadoRepresentante
             if (localRepresentanteForm.txtDuplicataReceber.Text != "")
             {
                 ModelLibrary.MetodosRepresentante.ReceberDuplicata(cDuplicataId, cDuplicataReceberId, localRepresentanteForm.cCargaId, Convert.ToDecimal(localRepresentanteForm.txtDuplicataReceber.Text));
-                ExibirRecebimentos();
+                //ExibirRecebimentos();
+                VendedorReload();
                 DuplicataLimpar();
             } else
             {

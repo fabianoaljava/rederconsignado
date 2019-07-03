@@ -14,6 +14,7 @@ namespace ModelLibrary
         public Nullable<decimal> QuantidadeCarga { get; set; }
         public Nullable<decimal> QuantidadeInformada { get; set; }
         public Nullable<decimal> Diferenca { get; set; }
+        public Nullable<decimal> ValorDiferenca { get; set; }
         public long CargaId { get; set; }
         public long ProdutoId { get; set; }
         public long CargaProdutoId { get; set; }

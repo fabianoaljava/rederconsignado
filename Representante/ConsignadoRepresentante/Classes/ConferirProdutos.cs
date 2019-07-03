@@ -122,17 +122,20 @@ namespace ConsignadoRepresentante
             localDeposito.grdConfProduto.DataSource = view;
 
             /// Ocultar coluna CargaProdutoId
-            localDeposito.grdConfProduto.Columns[5].Visible = false;
             localDeposito.grdConfProduto.Columns[6].Visible = false;
             localDeposito.grdConfProduto.Columns[7].Visible = false;
             localDeposito.grdConfProduto.Columns[8].Visible = false;
+            localDeposito.grdConfProduto.Columns[9].Visible = false;
 
+
+            localDeposito.grdConfProduto.Columns[5].DefaultCellStyle.Format = "c";
 
             /// Alterar Título da Coluna
             localDeposito.grdConfProduto.Columns[2].HeaderText = "Quantidade Carga";
             localDeposito.grdConfProduto.Columns[3].HeaderText = "Quantidade Informada";
             localDeposito.grdConfProduto.Columns[4].HeaderText = "Diferença";
-            
+            localDeposito.grdConfProduto.Columns[5].HeaderText = "Valor Diferença";
+
 
 
 

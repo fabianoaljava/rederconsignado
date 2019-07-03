@@ -90,6 +90,8 @@ namespace ConsignadoRepresentante
 
             localRepresentanteForm.grdPosicaoFinanceira.Columns[5].Visible = false;
             localRepresentanteForm.grdPosicaoFinanceira.Columns[6].Visible = false;
+            localRepresentanteForm.grdPosicaoFinanceira.Columns[7].Visible = false;
+            localRepresentanteForm.grdPosicaoFinanceira.Columns[8].Visible = false;
 
 
 

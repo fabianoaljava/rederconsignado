@@ -213,6 +213,7 @@ namespace ModelLibrary
 	                                RepCargaProduto.Quantidade as QuantidadeCarga,
 	                                RepCargaConferencia.Quantidade as QuantidadeInformada,
 	                                RepCargaProduto.Quantidade - IFNULL(RepCargaConferencia.Quantidade, 0) as Diferenca,
+									(RepCargaProduto.Quantidade - IFNULL(RepCargaConferencia.Quantidade, 0)) * RepProdutoGrade.ValorSaida as ValorDiferenca,
 	                                RepProduto.Id as ProdutoId,
 	                                RepCargaProduto.Id as CargaProdutoId,
 	                                RepProdutoGrade.Id as ProdutoGradeId,
@@ -453,22 +454,23 @@ namespace ModelLibrary
                                             END AS PedidoAtual, 
                                     CodigoPedido,
                                     CASE 
-	                                    WHEN Receber IS NULL THEN false
+	                                    WHEN Receber IS NULL AND DataRetorno IS NULL THEN false										
+										WHEN ValorAcerto IS NOT NULL THEN false
 	                                    ELSE true
-	                                    END AS Receber,                                    
+	                                    END AS Receber,
 								    CASE WHEN 
 										RepVendedor.Status = 2 THEN true
 										ELSE false
 										END AS Negativado									
                                     FROM RepVendedor
-                                    LEFT JOIN (SELECT VendedorId, CodigoPedido FROM RepPedido WHERE CargaId = CargaOriginal) AS PedidoAtual ON RepVendedor.Id = PedidoAtual.VendedorId
+                                    LEFT JOIN (SELECT VendedorId, CodigoPedido, DataRetorno, ValorAcerto FROM RepPedido WHERE CargaId = CargaOriginal) AS PedidoAtual ON RepVendedor.Id = PedidoAtual.VendedorId
                                     LEFT JOIN (SELECT VendedorId, SUM(QuantidadeRemarcado) QuantidadeRemarcado, SUM(ValorAReceber - ValorAcerto) ValorAberto FROM RepPedido WHERE CargaId != CargaOriginal GROUP BY VendedorId) AS PedidoAnterior ON RepVendedor.Id = PedidoAnterior.VendedorId
                                     LEFT JOIN (SELECT DISTINCT VendedorId as Receber FROM RepReceber WHERE DataPagamento IS NULL) AS Receber ON RepVendedor.Id = Receber.Receber";
 
 
                 if (pFiltro != "") query += " WHERE " + pFiltro;
 
-                var result = context.Database.SqlQuery<ListaRepVendedorHome>(query, pCargaId);
+                var result = context.Database.SqlQuery<ListaRepVendedorHome>(query);
 
 
                 return result.ToList<ListaRepVendedorHome>();
@@ -627,8 +629,8 @@ namespace ModelLibrary
                                ProdutoGradeId = ls.RepProdutoGrade.RepProdutoGrade.Id,
                                CodigoBarras = ls.RepProdutoGrade.RepProdutoGrade.CodigoBarras + ls.RepProdutoGrade.RepProdutoGrade.Digito,
                                Descricao = ls.RepProduto.Descricao,
-                               Cor = ls.RepProdutoGrade.RepProdutoGrade.Tamanho,
-                               Tamanho = ls.RepProdutoGrade.RepProdutoGrade.Cor,
+                               Cor = ls.RepProdutoGrade.RepProdutoGrade.Cor,
+                               Tamanho = ls.RepProdutoGrade.RepProdutoGrade.Tamanho,
                                Quantidade = ls.RepProdutoGrade.RepPedidoItem.RepPedidoItem.Quantidade,
                                Retorno = ls.RepProdutoGrade.RepPedidoItem.RepPedidoItem.Retorno,
                                Preco = ls.RepProdutoGrade.RepPedidoItem.RepPedidoItem.Preco
@@ -694,7 +696,7 @@ namespace ModelLibrary
                     ValorComissao = 0,
                     ValorLiquido = 0,
                     ValorAReceber = 0,
-                    ValorAcerto = 0,
+                    ValorAcerto = null,
                     QuantidadeRemarcado = 0,
                     Remarcado = 0,
                     Status = "0"
@@ -732,14 +734,14 @@ namespace ModelLibrary
 
                     pedido.ValorPedido = (tmpValor + pValor);
                     pedido.ValorCompra = (tmpValor + pValor);
-                    pedido.PercentualCompra = pedido.ValorCompra / pedido.ValorPedido;
+                    pedido.PercentualCompra = (pedido.ValorCompra / pedido.ValorPedido) * 100;
 
 
                     if (pedido.PercentualCompra < 35) // primeira faixa
                     {
                         pedido.FaixaComissao = 35;
                         pedido.PercentualFaixa = 35;
-                    } else if (pedido.ValorPedido >= 35 && pedido.ValorPedido  < 80) // segunda faixa
+                    } else if (pedido.PercentualCompra >= 35 && pedido.PercentualCompra < 80) // segunda faixa
                     {
                         pedido.FaixaComissao = 80;
                         pedido.PercentualFaixa = 40;
@@ -761,7 +763,7 @@ namespace ModelLibrary
 
         }
 
-        public static void RetornarPedido(long pPedidoId, decimal pValor)
+        public static void RetornarPedido(long pPedidoId, decimal pQuantidade, decimal pRetorno, decimal pPreco)
         {
 
             using (RepresentanteDBEntities context = new RepresentanteDBEntities())
@@ -782,12 +784,22 @@ namespace ModelLibrary
 
 
 
-                    var tmpValor = pedido.ValorCompra;
-
-                    Console.WriteLine("ValorTotal:" + tmpValor.ToString());
                     
-                    pedido.ValorCompra = (tmpValor - pValor);
-                    pedido.PercentualCompra = pedido.ValorCompra / pedido.ValorPedido;
+
+                   
+
+                    var pedidoitem = context.RepPedidoItem.GroupBy(pi => pi.PedidoId)
+                   .Select(g => new { pedidoid = g.Key, valortotal = g.Sum(i => ((i.Quantidade - i.Retorno) * i.Preco)) })
+                   .FirstOrDefault(pi => pi.pedidoid == pedido.Id);
+
+
+
+                    var tmpValor = pedidoitem.valortotal; // + (pQuantidade - pRetorno) * pPreco;
+                    
+                    Console.WriteLine("ValorTotal:" + tmpValor.ToString());
+
+                    pedido.ValorCompra = tmpValor;
+                    pedido.PercentualCompra = (pedido.ValorCompra / pedido.ValorPedido)*100;
 
 
                     if (pedido.PercentualCompra < 35) // primeira faixa
@@ -795,7 +807,7 @@ namespace ModelLibrary
                         pedido.FaixaComissao = 35;
                         pedido.PercentualFaixa = 35;
                     }
-                    else if (pedido.ValorPedido >= 35 && pedido.ValorPedido < 80) // segunda faixa
+                    else if (pedido.PercentualCompra >= 35 && pedido.PercentualCompra < 80) // segunda faixa
                     {
                         pedido.FaixaComissao = 80;
                         pedido.PercentualFaixa = 40;
@@ -952,10 +964,15 @@ namespace ModelLibrary
 
                 if (pedidoitem != null)
                 {
-                    decimal vValor = Convert.ToDecimal(pedidoitem.Retorno * pedidoitem.Preco);
-                    RetornarPedido(pedidoitem.PedidoId, vValor);
-                    pedidoitem.Retorno = pQuantidade;                    
+
+                    //= pQuantidade;
+
+                    //decimal vValor = Convert.ToDecimal((pedidoitem.Quantidade - pedidoitem.Retorno) * pedidoitem.Preco);
+                    pedidoitem.Retorno = pQuantidade;
                     context.SaveChanges();
+
+
+                    RetornarPedido(pedidoitem.PedidoId, Convert.ToDecimal(pedidoitem.Quantidade), pQuantidade, Convert.ToDecimal(pedidoitem.Preco));
 
                 }
             }
@@ -997,6 +1014,10 @@ namespace ModelLibrary
                 if (pedido != null)
                 {
 
+                    if (pedido.DataRetorno == null) {
+
+                        pedido.DataRetorno = DateTime.Now.Date;
+                    }
 
                     pedido.ValorAcerto = pValor;
 
@@ -1086,32 +1107,25 @@ namespace ModelLibrary
             {
 
 
-                string query = @"SELECT RepVendedor.Id, RepVendedor.Nome,
-		                            CASE WHEN Receber.ValorAReceber IS NULL
-		                               THEN (Pedido.ValorAReceber)
-		                               ELSE (Receber.ValorAReceber)
-		                               END AS Receber,
-		                            CASE WHEN Receber.ValorRecebido IS NULL
-		                               THEN (Pedido.ValorRecebido)
-		                               ELSE (Receber.ValorRecebido)
-		                               END AS Recebido,
-		                            CASE WHEN Receber.ValorAReceber IS NULL
-		                               THEN (IFNULL(Pedido.ValorAReceber,0)-IFNULL(Pedido.ValorRecebido,0))
-		                               ELSE (IFNULL(Receber.ValorAReceber,0)-IFNULL(Receber.ValorRecebido,0))
-		                               END AS Aberto,
-		                            Pedido.Quantidade Quantidade, Pedido.Retorno Retorno
-                                FROM RepVendedor 
-                                INNER JOIN
-                                (SELECT VendedorId, SUM(ValorAReceber) AS ValorAReceber, Sum(ValorAcerto) AS ValorRecebido, Sum(ValorAReceber-ValorAcerto) AS ValorAberto, Sum(Quantidade) AS Quantidade, Sum(Retorno) AS Retorno 
-                                FROM RepPedido 
-                                LEFT JOIN RepPedidoItem ON RepPedido.Id = RepPedidoItem.PedidoId
-                                GROUP BY VendedorId) AS Pedido ON RepVendedor.Id = Pedido.VendedorId
-                                LEFT JOIN (
-                                SELECT VendedorId, SUM(ValorNF) AS ValorAReceber, Sum(Valor) AS ValorRecebido, Sum(ValorNF-Valor) AS ValorAberto 
-                                FROM RepReceber 
-                                LEFT JOIN RepReceberBaixa ON RepReceber.Id = RepReceberBaixa.ReceberId
-                                GROUP BY VendedorId
-                                ) AS Receber ON RepVendedor.Id = Receber.VendedorId";
+                string query = @"SELECT RepVendedor.Id, RepVendedor.Nome, SUM(IFNULL(ValorAReceber,0)) Receber, SUM(IFNULL(ValorRecebido,0)) Recebido, SUM(IFNULL(ValorAReceber,0))-SUM(IFNULL(ValorRecebido,0)) Aberto, SUM(Quantidade) Quantidade, SUM(Retorno) Retorno, SUM(Remarcado) Remarcado,
+                                    CASE 
+                                      WHEN Receber.VendedorId IS NULL THEN FALSE
+                                      ELSE TRUE END as Visitado
+                                                                    FROM RepVendedor 
+                                                                    LEFT JOIN
+                                                                    (
+									                                    SELECT VendedorId, SUM(ValorLiquido + ValorAReceber) as ValorAReceber, SUM(ValorAcerto) as ValorRecebido, SUM(Quantidade) Quantidade, SUM(Retorno) Retorno, SUM(Remarcado) Remarcado
+										                                    FROM RepPedido 
+										                                    INNER JOIN (SELECT PedidoId, sum(Quantidade) Quantidade, sum(Retorno) Retorno FROM RepPedidoItem GROUP BY PedidoId) as RepPedidoItem ON RepPedidoItem.PedidoId = RepPedido.Id
+										                                    WHERE CargaId != CargaOriginal OR DataRetorno IS NOT NULL 
+									                                      GROUP BY VendedorId								
+									                                    UNION
+										                                    SELECT VendedorId, sum(ValorAReceber), sum(IFNULL(Valor, 0)) as ValorRecebido, 0 Quantidade, 0 Retorno, 1 Remarcado
+										                                    FROM RepReceber
+											                                    LEFT JOIN RepReceberBaixa on RepReceber.Id = RepReceberBaixa.ReceberId 
+											                                    GROUP BY VendedorId
+                                                                    ) AS Receber ON RepVendedor.Id = Receber.VendedorId
+                                    GROUP BY RepVendedor.Id, RepVendedor.Nome	";
 
 
                 var result = context.Database.SqlQuery<ListaRepPosicaoFinanceira>(query);

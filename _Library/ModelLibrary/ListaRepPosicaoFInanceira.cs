@@ -16,6 +16,8 @@ namespace ModelLibrary
         public Nullable<decimal> Aberto { get; set; }
         public Nullable<int> Quantidade { get; set; }
         public Nullable<int> Retorno { get; set; }
+        public Nullable<int> Remarcado { get; set; }
+        public Nullable<int> Visitado { get; set; }
 
 
     }

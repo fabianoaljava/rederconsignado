@@ -111,11 +111,8 @@
             this.lblDataInicial = new MetroFramework.Controls.MetroLabel();
             this.lblTelefone = new MetroFramework.Controls.MetroLabel();
             this.lblCep = new MetroFramework.Controls.MetroLabel();
-            this.cbbStatus = new MetroFramework.Controls.MetroComboBox();
             this.txtLimiteCredito = new MetroFramework.Controls.MetroTextBox();
             this.txtLimitePedido = new MetroFramework.Controls.MetroTextBox();
-            this.txtDataFinal = new MetroFramework.Controls.MetroDateTime();
-            this.txtDataInicial = new MetroFramework.Controls.MetroDateTime();
             this.txtEmail = new MetroFramework.Controls.MetroTextBox();
             this.txtCelular = new MetroFramework.Controls.MetroTextBox();
             this.txtTelefoneComercial = new MetroFramework.Controls.MetroTextBox();
@@ -227,6 +224,9 @@
             this.tabEstoque = new System.Windows.Forms.TabPage();
             this.tabAjuda = new System.Windows.Forms.TabPage();
             this.btnHomeAtualizar = new MetroFramework.Controls.MetroButton();
+            this.txtDataFinal = new MetroFramework.Controls.MetroLabel();
+            this.txtStatus = new MetroFramework.Controls.MetroLabel();
+            this.txtDataInicial = new MetroFramework.Controls.MetroLabel();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.documentoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -397,7 +397,7 @@
             this.tbcPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tbcPrincipal.Name = "tbcPrincipal";
-            this.tbcPrincipal.SelectedIndex = 0;
+            this.tbcPrincipal.SelectedIndex = 2;
             this.tbcPrincipal.Size = new System.Drawing.Size(968, 546);
             this.tbcPrincipal.TabIndex = 0;
             this.tbcPrincipal.UseSelectable = true;
@@ -602,7 +602,7 @@
             this.tbcVendedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcVendedor.Location = new System.Drawing.Point(0, 0);
             this.tbcVendedor.Name = "tbcVendedor";
-            this.tbcVendedor.SelectedIndex = 3;
+            this.tbcVendedor.SelectedIndex = 0;
             this.tbcVendedor.Size = new System.Drawing.Size(960, 370);
             this.tbcVendedor.TabIndex = 2;
             this.tbcVendedor.UseSelectable = true;
@@ -794,6 +794,9 @@
             // 
             // pnlVendedorDados
             // 
+            this.pnlVendedorDados.Controls.Add(this.txtDataInicial);
+            this.pnlVendedorDados.Controls.Add(this.txtStatus);
+            this.pnlVendedorDados.Controls.Add(this.txtDataFinal);
             this.pnlVendedorDados.Controls.Add(this.lblLimiteCredito);
             this.pnlVendedorDados.Controls.Add(this.lblLimitePedido);
             this.pnlVendedorDados.Controls.Add(this.lblEmail);
@@ -816,11 +819,8 @@
             this.pnlVendedorDados.Controls.Add(this.lblDataInicial);
             this.pnlVendedorDados.Controls.Add(this.lblTelefone);
             this.pnlVendedorDados.Controls.Add(this.lblCep);
-            this.pnlVendedorDados.Controls.Add(this.cbbStatus);
             this.pnlVendedorDados.Controls.Add(this.txtLimiteCredito);
             this.pnlVendedorDados.Controls.Add(this.txtLimitePedido);
-            this.pnlVendedorDados.Controls.Add(this.txtDataFinal);
-            this.pnlVendedorDados.Controls.Add(this.txtDataInicial);
             this.pnlVendedorDados.Controls.Add(this.txtEmail);
             this.pnlVendedorDados.Controls.Add(this.txtCelular);
             this.pnlVendedorDados.Controls.Add(this.txtTelefoneComercial);
@@ -1098,22 +1098,6 @@
             this.lblCep.TabIndex = 32;
             this.lblCep.Text = "CEP";
             // 
-            // cbbStatus
-            // 
-            this.cbbStatus.FormattingEnabled = true;
-            this.cbbStatus.ItemHeight = 23;
-            this.cbbStatus.Items.AddRange(new object[] {
-            "Ativo",
-            "Inativo",
-            "Negativado"});
-            this.cbbStatus.Location = new System.Drawing.Point(778, 23);
-            this.cbbStatus.Name = "cbbStatus";
-            this.cbbStatus.PromptText = "Status";
-            this.cbbStatus.Size = new System.Drawing.Size(142, 29);
-            this.cbbStatus.TabIndex = 29;
-            this.cbbStatus.TabStop = false;
-            this.cbbStatus.UseSelectable = true;
-            // 
             // txtLimiteCredito
             // 
             // 
@@ -1135,6 +1119,7 @@
             this.txtLimiteCredito.Name = "txtLimiteCredito";
             this.txtLimiteCredito.PasswordChar = '\0';
             this.txtLimiteCredito.PromptText = "Limite Credito";
+            this.txtLimiteCredito.ReadOnly = true;
             this.txtLimiteCredito.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtLimiteCredito.SelectedText = "";
             this.txtLimiteCredito.SelectionLength = 0;
@@ -1170,6 +1155,7 @@
             this.txtLimitePedido.Name = "txtLimitePedido";
             this.txtLimitePedido.PasswordChar = '\0';
             this.txtLimitePedido.PromptText = "Limite Pedido";
+            this.txtLimitePedido.ReadOnly = true;
             this.txtLimitePedido.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtLimitePedido.SelectedText = "";
             this.txtLimitePedido.SelectionLength = 0;
@@ -1183,26 +1169,6 @@
             this.txtLimitePedido.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.txtLimitePedido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ControlOnlyNumbers);
             this.txtLimitePedido.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            // 
-            // txtDataFinal
-            // 
-            this.txtDataFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txtDataFinal.Location = new System.Drawing.Point(659, 23);
-            this.txtDataFinal.MinimumSize = new System.Drawing.Size(4, 29);
-            this.txtDataFinal.Name = "txtDataFinal";
-            this.txtDataFinal.Size = new System.Drawing.Size(111, 29);
-            this.txtDataFinal.TabIndex = 28;
-            this.txtDataFinal.TabStop = false;
-            // 
-            // txtDataInicial
-            // 
-            this.txtDataInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txtDataInicial.Location = new System.Drawing.Point(540, 23);
-            this.txtDataInicial.MinimumSize = new System.Drawing.Size(4, 29);
-            this.txtDataInicial.Name = "txtDataInicial";
-            this.txtDataInicial.Size = new System.Drawing.Size(111, 29);
-            this.txtDataInicial.TabIndex = 27;
-            this.txtDataInicial.TabStop = false;
             // 
             // txtEmail
             // 
@@ -3124,6 +3090,7 @@
             this.grdPosicaoFinanceira.UseCustomForeColor = true;
             this.grdPosicaoFinanceira.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdPosicaoFinanceira_CellDoubleClick);
             this.grdPosicaoFinanceira.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.grdPosicaoFinanceira_RowPostPaint);
+            this.grdPosicaoFinanceira.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.grdPosicaoFinanceira_RowPrePaint);
             // 
             // pnlPosicaoFinanceiraLegenda
             // 
@@ -3253,6 +3220,33 @@
             this.btnHomeAtualizar.Text = "Atualizar \r\nLista";
             this.btnHomeAtualizar.UseSelectable = true;
             this.btnHomeAtualizar.Click += new System.EventHandler(this.btnHomeAtualizar_Click);
+            // 
+            // txtDataFinal
+            // 
+            this.txtDataFinal.AutoSize = true;
+            this.txtDataFinal.Location = new System.Drawing.Point(659, 23);
+            this.txtDataFinal.Name = "txtDataFinal";
+            this.txtDataFinal.Size = new System.Drawing.Size(67, 19);
+            this.txtDataFinal.TabIndex = 50;
+            this.txtDataFinal.Text = "Data Final";
+            // 
+            // txtStatus
+            // 
+            this.txtStatus.AutoSize = true;
+            this.txtStatus.Location = new System.Drawing.Point(778, 23);
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.Size = new System.Drawing.Size(79, 19);
+            this.txtStatus.TabIndex = 51;
+            this.txtStatus.Text = "<<Status>>";
+            // 
+            // txtDataInicial
+            // 
+            this.txtDataInicial.AutoSize = true;
+            this.txtDataInicial.Location = new System.Drawing.Point(540, 23);
+            this.txtDataInicial.Name = "txtDataInicial";
+            this.txtDataInicial.Size = new System.Drawing.Size(72, 19);
+            this.txtDataInicial.TabIndex = 52;
+            this.txtDataInicial.Text = "Data Inicial";
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -3479,11 +3473,8 @@
         private MetroFramework.Controls.MetroLabel lblDataInicial;
         private MetroFramework.Controls.MetroLabel lblTelefone;
         private MetroFramework.Controls.MetroLabel lblCep;
-        public MetroFramework.Controls.MetroComboBox cbbStatus;
         public MetroFramework.Controls.MetroTextBox txtLimiteCredito;
         public MetroFramework.Controls.MetroTextBox txtLimitePedido;
-        public MetroFramework.Controls.MetroDateTime txtDataFinal;
-        public MetroFramework.Controls.MetroDateTime txtDataInicial;
         public MetroFramework.Controls.MetroTextBox txtEmail;
         public MetroFramework.Controls.MetroTextBox txtCelular;
         public MetroFramework.Controls.MetroTextBox txtTelefoneComercial;
@@ -3493,7 +3484,6 @@
         public MetroFramework.Controls.MetroComboBox cbbTipoPessoa;
         public MetroFramework.Controls.MetroGrid grdHome;
         private MetroFramework.Controls.MetroPanel pnlVendedorPedidoMain;
-        private MetroFramework.Controls.MetroPanel pnlVendedorPedidoMontar;
         public MetroFramework.Controls.MetroTextBox txtPedidoPrecoUnit;
         private MetroFramework.Controls.MetroLabel lblVendedorMontarPedido;
         public MetroFramework.Controls.MetroButton btnPedidoCancelar;
@@ -3506,7 +3496,6 @@
         private MetroFramework.Controls.MetroPanel pnlVendedorRetornoMain;
         private MetroFramework.Controls.MetroPanel pnlVendedorRetornoLegenda;
         private MetroFramework.Controls.MetroPanel pnlVendedorRetornoGrid;
-        private MetroFramework.Controls.MetroPanel pnlVendedorRetorno;
         private MetroFramework.Controls.MetroLabel lblVendedorRetorno;
         public MetroFramework.Controls.MetroButton btnRetornoCancelar;
         public MetroFramework.Controls.MetroCheckBox chkRetornoQuantidade;
@@ -3599,5 +3588,10 @@
         public System.Windows.Forms.GroupBox grpRecebimento;
         public MetroFramework.Controls.MetroLabel lblAcertoInfo;
         private MetroFramework.Controls.MetroButton btnHomeAtualizar;
+        public MetroFramework.Controls.MetroPanel pnlVendedorPedidoMontar;
+        public MetroFramework.Controls.MetroPanel pnlVendedorRetorno;
+        public MetroFramework.Controls.MetroLabel txtDataInicial;
+        public MetroFramework.Controls.MetroLabel txtStatus;
+        public MetroFramework.Controls.MetroLabel txtDataFinal;
     }
 }

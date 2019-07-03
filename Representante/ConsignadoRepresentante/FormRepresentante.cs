@@ -465,7 +465,31 @@ namespace ConsignadoRepresentante
         private void btnProdRetConfirmar_Click(object sender, EventArgs e)
         {
 
-            cVendedor.ConfirmarRetornoProduto();
+            Boolean vAlerta;
+
+            int vTotal = 0;
+
+            for (int i = 0; i < grdVendedorRetorno.Rows.Count; i++)
+            {
+                if (grdVendedorRetorno.Rows[i].Cells[8] != null && grdVendedorRetorno.Rows[i].Cells[8].Value != null)
+                {
+                    vTotal += int.Parse(grdVendedorRetorno.Rows[i].Cells[8].Value.ToString());
+                }
+            }
+
+            if (vTotal <= 0)
+            {
+                vAlerta = MessageBox.Show("Deseja realmente retornar os produtos deste pedido? ATENÇÂO: Caso confirme essa ação, NÃO será possível adicionar produtos ao pedido novamente.", "Retornar Produtos", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes;
+            } else
+            {
+                vAlerta = true;
+            }
+
+            if (vAlerta)
+            {
+                cVendedor.ConfirmarRetornoProduto();
+            }
+            
 
         }
 
@@ -486,7 +510,22 @@ namespace ConsignadoRepresentante
 
         private void btnAcertoConfirmar_Click(object sender, EventArgs e)
         {
-            cVendedor.ReceberAcerto();
+
+            Boolean vAlerta;
+
+            if (pnlVendedorRetorno.Enabled == true)
+            {
+                vAlerta = MessageBox.Show("Deseja realmente realizar o acerto deste vendedor?  ATENÇÂO: Caso confirme essa ação, NÃO será possível adicionar produtos ao pedido ou efetuar o retorno dos produtos novamente.", "Retornar Produtos", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes;
+            } else
+            {
+                vAlerta = true;
+            }
+
+            if (vAlerta)
+            {
+                cVendedor.ReceberAcerto();
+            }
+            
         }
 
         private void btnAcertoCancelar_Click(object sender, EventArgs e)
@@ -547,7 +586,48 @@ namespace ConsignadoRepresentante
 
             try
             {
+                Color vColour = Color.Black;
 
+                
+                //Recebido Total
+                if (Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Recebido"].Value) >= Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Receber"].Value))
+                {
+                    vColour = Color.DarkGreen;
+                }
+
+                //Recebido Parcial
+                if (Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Recebido"].Value) < Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Receber"].Value) && Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Recebido"].Value) > 0)
+                {
+                    vColour = Color.DeepSkyBlue;
+                }
+
+                //Não Recebido / Visitado
+                if (Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Visitado"].Value) <= 0 || Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Recebido"].Value) <= 0)
+                {
+                    vColour = Color.Red;
+                }
+
+                //Devolução Total de Produtos
+                if (Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Retorno"].Value) >= Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Quantidade"].Value))
+                {
+                    vColour = Color.Orange;
+                }
+
+
+
+                //Remarcado
+                if (Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Remarcado"].Value) > 0)
+                {
+                    vColour = Color.Purple;
+                }
+
+
+                if (Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Quantidade"].Value) <= 0)
+                {
+                    vColour = Color.Black;
+                }
+
+                grdPosicaoFinanceira.Rows[e.RowIndex].DefaultCellStyle.ForeColor = vColour;
 
             }
             catch
@@ -569,7 +649,13 @@ namespace ConsignadoRepresentante
 
         private void btnHomeAtualizar_Click(object sender, EventArgs e)
         {
+            chkVendedorComPedidoAnterior.Checked = chkVendedorComPedidoAtual.Checked = chkVendedorSemPedidoAtual.Checked = false;
             cHome.CarregarFormulario();
+        }
+
+        private void grdPosicaoFinanceira_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            
         }
     }
 }
