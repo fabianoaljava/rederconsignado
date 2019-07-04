@@ -1852,9 +1852,13 @@ namespace ModelLibrary
 
                     Console.WriteLine("Inserindo pedido id: " + pPedido.Id.ToString() + " codigo: " + pPedido.CodigoPedido);
 
-                    var vendedor = deposito.Vendedor.Where(vd => vd.temp_old_id == pPedido.VendedorId).FirstOrDefault();
 
-                    pPedido.VendedorId = vendedor.Id;
+                    if (pPedido.VendedorId.ToString().Substring(0, 3) == "999")
+                    {
+                        var vendedor = deposito.Vendedor.Where(vd => vd.temp_old_id == pPedido.VendedorId).FirstOrDefault();
+                        pPedido.VendedorId = vendedor.Id;
+                    }
+
 
                     deposito.Pedido.Add(pPedido);
                     deposito.SaveChanges();

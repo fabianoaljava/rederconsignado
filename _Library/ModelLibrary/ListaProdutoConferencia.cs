@@ -17,6 +17,9 @@ namespace ModelLibrary
         public Nullable<double> Consignado { get; set; }
         public Nullable<double> SaldoCarro { get; set; }
         public Nullable<double> ContagemCarro { get; set; }
+        public Nullable<double> Falta { get; set; }
+        public Nullable<double> VrDiferenca { get; set; }
+
 
     }
 }

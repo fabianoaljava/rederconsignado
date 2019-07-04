@@ -84,6 +84,12 @@ namespace ConsignadoDeposito
         }
 
 
+        public void RetornoReload()
+        {
+            CarregarConferenciaProdutos();
+        }
+
+
         ////////////////////////////////////////
         /// Pesquisar Carga
         ////////////////////////////////////////
@@ -129,7 +135,7 @@ namespace ConsignadoDeposito
 
                     
 
-                    var viagemanterior = ModelLibrary.MetodosDeposito.ObterViagemAnterior(representanteId, pracaId, carga.DataAbertura.Value);
+                    var viagemanterior = ModelLibrary.MetodosDeposito.ObterCargaAnterior(representanteId, pracaId, carga.DataAbertura.Value);
 
                     if (viagemanterior != null)
                     {
@@ -423,6 +429,8 @@ namespace ConsignadoDeposito
 
             LimparRetornoProduto();
 
+            RetornoReload();
+
             /*} catch
             {
 
@@ -642,6 +650,7 @@ namespace ConsignadoDeposito
 
             localDepositoForm.grdLancPedido.Columns[0].Visible = false;
             localDepositoForm.grdLancPedido.Columns[2].Width = 450;
+            localDepositoForm.grdLancPedido.Columns[5].DefaultCellStyle.Format = "c";
 
         }
 
@@ -954,6 +963,8 @@ namespace ConsignadoDeposito
             localDepositoForm.grdRetornoConfProdutos.DataSource = view;
 
             localDepositoForm.grdRetornoConfProdutos.Columns[1].Width = 250;
+            localDepositoForm.grdRetornoConfProdutos.Columns[9].DefaultCellStyle.Format = "c";
+
         }
 
 
@@ -972,9 +983,9 @@ namespace ConsignadoDeposito
         public void FinalizarAcerto()
         {
 
-            ModelLibrary.MetodosDeposito.AlterarStatusCarga(cRetornoId, "F");
+            ModelLibrary.MetodosDeposito.AlterarStatusCarga(cRetornoId, "F");           
 
-            //Alterar Status dos Pedidos sem ValorAReceber = 1;
+            
         }
 
     }

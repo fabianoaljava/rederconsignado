@@ -134,7 +134,7 @@ namespace ConsignadoDeposito
                     localDepositoForm.dlbCargaDataConferencia.Text = carga.DataConferencia.HasValue ? carga.DataConferencia.Value.ToShortDateString() : "-";
                     localDepositoForm.dlbCargaDataFinalizacao.Text = carga.DataFinalizacao.HasValue ? carga.DataFinalizacao.Value.ToShortDateString() : "-";
 
-                    var viagemanterior = ModelLibrary.MetodosDeposito.ObterViagemAnterior(representanteId, pracaId, carga.DataAbertura.Value);
+                    var viagemanterior = ModelLibrary.MetodosDeposito.ObterCargaAnterior(representanteId, pracaId, carga.DataAbertura.Value);
 
                     if (viagemanterior != null)
                     {
@@ -205,17 +205,20 @@ namespace ConsignadoDeposito
         public void CargaInserir(int pRepresentanteId, int pPracaId, int pMes, int pAno)
         {
 
-            // verificar se existe carga não finalizada
-            // verificar se existe carga mais recente ?
+
+            string vValidaInserir = ModelLibrary.MetodosDeposito.ValidarInclusaoCarga(pRepresentanteId, pPracaId, pMes, pAno);
+
+            if (vValidaInserir == "OK")
+            {
+                cCargaId = ModelLibrary.MetodosDeposito.InserirCarga(pRepresentanteId, pPracaId, pMes, pAno);
+                localDepositoForm.tbcCarga.Visible = true;
+                localDepositoForm.pnlCargaProduto.Enabled = true;
+            } else
+            {
+                MessageBox.Show(vValidaInserir, "Reder Consignado", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
 
 
-            //Obter pedidos pendentes da praça e alterar o CargaId para nova Carga.
-            //Gerar os titulos a receber com base no "ValorAReceber" do Pedido
-
-
-            cCargaId = ModelLibrary.MetodosDeposito.InserirCarga(pRepresentanteId, pPracaId, pMes, pAno);
-            localDepositoForm.tbcCarga.Visible = true;
-            localDepositoForm.pnlCargaProduto.Enabled = true;
         }
 
         ////////////////////////////////////////////
