@@ -282,6 +282,7 @@ namespace ConsignadoRepresentante
             int cargaId = Convert.ToInt32(carga.Id);
 
             localDeposito.cCargaId = cargaId;
+            localDeposito.cStatus = carga.Status;
 
             int representanteId = Convert.ToInt32(carga.RepresentanteId);
             int pracaId = Convert.ToInt32(carga.PracaId);
@@ -361,9 +362,15 @@ namespace ConsignadoRepresentante
             {
                 localDeposito.lblExportacaoAlerta.Text = "A Carga foi exportada em " + carga.DataExportacao.ToString();
                 localDeposito.pnlExportacaoMain.Enabled = false;
-                
+
                 //Desativar aba conferencia de produtos 
+                localDeposito.pnlConferirProduto.Enabled = false;
+
                 //Desativar aba suplemento
+            } else
+            {
+                localDeposito.pnlExportacaoMain.Enabled = true;
+                localDeposito.pnlConferirProduto.Enabled = true;
             }
             
 

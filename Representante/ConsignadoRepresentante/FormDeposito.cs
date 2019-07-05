@@ -21,6 +21,7 @@ namespace ConsignadoRepresentante
         //////////////////////////////
 
         public long cCargaId;
+        public string cStatus;
 
 
 
@@ -372,14 +373,21 @@ namespace ConsignadoRepresentante
 
                 if (ModelLibrary.MetodosDeposito.VerificarServidor())
                 {
-
-                    if (MessageBox.Show("O servidor foi encontrado Online, deseja reverter o status da Carga de \"Exportado\" para \"Aberto\"? \n \n ATENÇAO: Caso contrário NÃO será permitida a importação desta carga novamente. ", "Reverter Carga!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                    if (cStatus == "E")
                     {
-                        cImportar.ExcluirImportacao(true);
+                        if (MessageBox.Show("O servidor foi encontrado Online, deseja reverter o status da Carga de \"Exportado\" para \"Aberto\"? \n \n ATENÇAO: Caso contrário NÃO será permitida a importação desta carga novamente. ", "Reverter Carga!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                        {
+                            cImportar.ExcluirImportacao(true);
+                        }
+                        else
+                        {
+                            cImportar.ExcluirImportacao(false);
+                        }
                     } else
                     {
                         cImportar.ExcluirImportacao(false);
                     }
+
                 }
                 else
                 {

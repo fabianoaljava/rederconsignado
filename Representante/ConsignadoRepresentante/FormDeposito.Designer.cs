@@ -103,7 +103,7 @@
             this.tabConfProduto = new System.Windows.Forms.TabPage();
             this.pnlConferirProdutos = new MetroFramework.Controls.MetroPanel();
             this.grdConfProduto = new MetroFramework.Controls.MetroGrid();
-            this.pnlComposicao = new MetroFramework.Controls.MetroPanel();
+            this.pnlConferirProduto = new MetroFramework.Controls.MetroPanel();
             this.lblImportarConferirProduto = new MetroFramework.Controls.MetroLabel();
             this.btnConfCancelar = new MetroFramework.Controls.MetroButton();
             this.chkConfQuantidade = new MetroFramework.Controls.MetroCheckBox();
@@ -145,7 +145,7 @@
             this.tabConfProduto.SuspendLayout();
             this.pnlConferirProdutos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdConfProduto)).BeginInit();
-            this.pnlComposicao.SuspendLayout();
+            this.pnlConferirProduto.SuspendLayout();
             this.tabExportar.SuspendLayout();
             this.pnlExportacaoGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdExportacao)).BeginInit();
@@ -946,7 +946,7 @@
             // tabConfProduto
             // 
             this.tabConfProduto.Controls.Add(this.pnlConferirProdutos);
-            this.tabConfProduto.Controls.Add(this.pnlComposicao);
+            this.tabConfProduto.Controls.Add(this.pnlConferirProduto);
             this.tabConfProduto.Location = new System.Drawing.Point(4, 38);
             this.tabConfProduto.Name = "tabConfProduto";
             this.tabConfProduto.Size = new System.Drawing.Size(844, 561);
@@ -1034,26 +1034,26 @@
             this.grdConfProduto.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.grdConfProduto_RowPostPaint);
             this.grdConfProduto.KeyUp += new System.Windows.Forms.KeyEventHandler(this.grdConfProduto_KeyUp);
             // 
-            // pnlComposicao
+            // pnlConferirProduto
             // 
-            this.pnlComposicao.Controls.Add(this.lblImportarConferirProduto);
-            this.pnlComposicao.Controls.Add(this.btnConfCancelar);
-            this.pnlComposicao.Controls.Add(this.chkConfQuantidade);
-            this.pnlComposicao.Controls.Add(this.btnConferenciaConfirmar);
-            this.pnlComposicao.Controls.Add(this.txtConfQuantidade);
-            this.pnlComposicao.Controls.Add(this.txtConfProduto);
-            this.pnlComposicao.Controls.Add(this.txtConfCodigoBarras);
-            this.pnlComposicao.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlComposicao.HorizontalScrollbarBarColor = true;
-            this.pnlComposicao.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlComposicao.HorizontalScrollbarSize = 10;
-            this.pnlComposicao.Location = new System.Drawing.Point(0, 0);
-            this.pnlComposicao.Name = "pnlComposicao";
-            this.pnlComposicao.Size = new System.Drawing.Size(844, 57);
-            this.pnlComposicao.TabIndex = 0;
-            this.pnlComposicao.VerticalScrollbarBarColor = true;
-            this.pnlComposicao.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlComposicao.VerticalScrollbarSize = 10;
+            this.pnlConferirProduto.Controls.Add(this.lblImportarConferirProduto);
+            this.pnlConferirProduto.Controls.Add(this.btnConfCancelar);
+            this.pnlConferirProduto.Controls.Add(this.chkConfQuantidade);
+            this.pnlConferirProduto.Controls.Add(this.btnConferenciaConfirmar);
+            this.pnlConferirProduto.Controls.Add(this.txtConfQuantidade);
+            this.pnlConferirProduto.Controls.Add(this.txtConfProduto);
+            this.pnlConferirProduto.Controls.Add(this.txtConfCodigoBarras);
+            this.pnlConferirProduto.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlConferirProduto.HorizontalScrollbarBarColor = true;
+            this.pnlConferirProduto.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlConferirProduto.HorizontalScrollbarSize = 10;
+            this.pnlConferirProduto.Location = new System.Drawing.Point(0, 0);
+            this.pnlConferirProduto.Name = "pnlConferirProduto";
+            this.pnlConferirProduto.Size = new System.Drawing.Size(844, 57);
+            this.pnlConferirProduto.TabIndex = 0;
+            this.pnlConferirProduto.VerticalScrollbarBarColor = true;
+            this.pnlConferirProduto.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlConferirProduto.VerticalScrollbarSize = 10;
             // 
             // lblImportarConferirProduto
             // 
@@ -1452,8 +1452,8 @@
             this.tabConfProduto.ResumeLayout(false);
             this.pnlConferirProdutos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdConfProduto)).EndInit();
-            this.pnlComposicao.ResumeLayout(false);
-            this.pnlComposicao.PerformLayout();
+            this.pnlConferirProduto.ResumeLayout(false);
+            this.pnlConferirProduto.PerformLayout();
             this.tabExportar.ResumeLayout(false);
             this.pnlExportacaoGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdExportacao)).EndInit();
@@ -1537,7 +1537,6 @@
         private System.Windows.Forms.TabPage tabConfProduto;
         private MetroFramework.Controls.MetroPanel pnlConferirProdutos;
         public MetroFramework.Controls.MetroGrid grdConfProduto;
-        private MetroFramework.Controls.MetroPanel pnlComposicao;
         private MetroFramework.Controls.MetroLabel lblImportarConferirProduto;
         public MetroFramework.Controls.MetroButton btnConfCancelar;
         public MetroFramework.Controls.MetroCheckBox chkConfQuantidade;
@@ -1551,6 +1550,7 @@
         public System.ComponentModel.BackgroundWorker bgwImportar;
         public MetroFramework.Controls.MetroLabel dlbTotalProdutos;
         public MetroFramework.Controls.MetroLabel dlbQtdProdutos;
+        public MetroFramework.Controls.MetroPanel pnlConferirProduto;
     }
 }
 

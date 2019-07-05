@@ -74,7 +74,14 @@ namespace ModelLibrary
 
                 string query = "";
 
+                count = deposito.Pedido
+                        .Join(deposito.Carga, pd => pd.CargaId, ca => ca.Id, (pd, ca) => new { Pedido = pd, Carga = ca })
+                        .Where(q => q.Pedido.Status == "1" && q.Carga.PracaId == cPracaId).Count();
 
+                count += deposito.Pedido
+                    .Join(deposito.Carga, pd => pd.CargaId, ca => ca.Id, (pd, ca) => new { Pedido = pd, Carga = ca })
+                    .Where(pd => pd.Pedido.ValorAcerto > 0 && pd.Carga.PracaId == cPracaId)
+                    .Select(pd => pd.Pedido).Count();
 
                 vTable.Tabela = "Todas";
                 vTable.Acao = "Preparar Importacao";
@@ -244,23 +251,11 @@ namespace ModelLibrary
                 result.Add(vTable);
 
                 vTable = new ListaImportacaoExportacao();
+                
+                count = deposito.Pedido
+                        .Join(deposito.Carga, pd => pd.CargaId, ca => ca.Id, (pd, ca) => new { Pedido = pd, Carga = ca })
+                        .Where(q => q.Pedido.Status == "1" && q.Carga.PracaId == cPracaId).Count();
 
-
-                //query = @"SELECT *
-                //            FROM Pedido 
-                //            WHERE CargaId = @p0 
-                //                  OR CargaOriginal = @p0
-                //                  OR Id IN
-                //                    (SELECT DISTINCT Pedido.Id 
-                //                        FROM Carga
-                //                           INNER JOIN Pedido ON Carga.Id = Pedido.CargaId
-                //                        WHERE Pedido.Id is not null
-                //                        AND Carga.Id != @p0 AND PracaId = @p1 AND ValorAcerto = 0)";
-
-
-                //count = deposito.Pedido.SqlQuery(query, cCargaId, cPracaId).Count();
-
-                count = deposito.Pedido.Where(pd => pd.CargaId == cCargaId).Count();
 
 
                 //count = deposito.Pedido.Join(deposito.Carga, pd => pd.CargaId, cg => cg.Id, (pd, cg) => new { Pedido = pd, Carga = cg }).Where(pd => pd.Carga.PracaId == cPracaId && pd.Pedido.DataRetorno == null).Count();
@@ -278,20 +273,16 @@ namespace ModelLibrary
                 query = @"SELECT *
                             FROM PedidoItem
                             INNER JOIN Pedido ON PedidoItem.PedidoId = Pedido.Id
+							INNER JOIN Carga ON Pedido.CargaId = Carga.Id
                             WHERE 
-                                Pedido.CargaId = @p0 
-                                OR Pedido.CargaOriginal = @p0
-                                OR Pedido.Id IN 
-                            (SELECT DISTINCT Pedido.Id FROM Carga 
-                            INNER JOIN Pedido ON Carga.Id = Pedido.CargaId
-                            WHERE Pedido.Id is not null
-                            AND Carga.Id != @p0 AND PracaId = @p1 AND ValorAcerto = 0)";
+                                (Pedido.Status = '1'
+                                OR Pedido.Status = '0')
+								AND PracaId = @p0";
 
+
+                count = deposito.PedidoItem.SqlQuery(query, cPracaId).Count();
 
                 //count = deposito.PedidoItem.Join(deposito.Pedido, pi => pi.PedidoId, pd => pd.Id, (pi, pd) => new { RepPedidoItem = pi, RepPedido = pd }).Where(pi => pi.RepPedido.CargaId == cCargaId).Count();
-                //count = deposito.PedidoItem.SqlQuery(query, cCargaId, cPracaId).Count();
-
-                count = deposito.PedidoItem.Join(deposito.Pedido, pi => pi.PedidoId, pd => pd.Id, (pi, pd) => new { RepPedidoItem = pi, RepPedido = pd }).Where(pi => pi.RepPedido.CargaId == cCargaId).Count();
 
                 vTable.Tabela = "PedidoItem";
                 vTable.Acao = "Importar Itens do Pedidos";
@@ -364,18 +355,33 @@ namespace ModelLibrary
 
                 result.Add(vTable);
 
+                if (cargaatual.Status != "A")
+                {
+                    result.Clear();
+                    vTable = new ListaImportacaoExportacao();
+                    vTable.Tabela = "Carga com status: " + cargaatual.Status;
+                    vTable.Acao = "A carga selecionada não pode ser importada pois já foi processada.";
+                    vTable.Rotina = "NA";
+                    vTable.TotalLinhas = 0;
+                    vTable.Status = "Processada.";
+
+                    result.Add(vTable);
+
+
+                }
 
                 return result.ToList<ListaImportacaoExportacao>();
+
 
             }
 
 
-
-
-
-
         }
 
+        public static void NA()
+        {
+            MessageBox.Show("A carga selecionada já foi procesada anteriormente e não pode ser importada.");
+        }
 
         // Atualizar Tabela Carga: Data Exportação / Status
         public static Boolean ImportarPreparar()
@@ -399,7 +405,7 @@ namespace ModelLibrary
 
                 var receber = deposito.Pedido
                     .Join(deposito.Carga, pd => pd.CargaId, ca => ca.Id, (pd, ca) => new { Pedido = pd, Carga = ca })
-                    .Where(pd => pd.Pedido.ValorAcerto > 0)
+                    .Where(pd => pd.Pedido.ValorAcerto > 0 && pd.Carga.PracaId == cPracaId)
                     .Select(pd => pd.Pedido);
 
 
@@ -987,21 +993,19 @@ namespace ModelLibrary
                 using (DepositoDBEntities deposito = new DepositoDBEntities())
                 {
                     string query = @"SELECT * 
-                                    FROM Vendedor 
-                                    WHERE 
-                                    /* Com pedido anterior */
-                                    Id IN(
-                                    SELECT Distinct VendedorId 
-                                    FROM Pedido 
-                                    WHERE CargaId in(SELECT Id FROM Carga WHERE RepresentanteId = @p0 and PracaId = @p1 and FORMAT(DataAbertura, 'yyyyMM') <= @p2)
-                                    ) 
-                                    /* Sem pedido atual */
-                                    OR  Id IN (
-                                    SELECT Distinct VendedorId 
-                                    FROM Receber 
-                                    INNER JOIN Carga ON Receber.CargaId = Carga.Id
-                                    WHERE PracaId = @p1
-                                    )";
+                                        FROM Vendedor 
+                                         WHERE                                  
+                                            Id IN(
+                                                SELECT Distinct VendedorId 
+                                                FROM Pedido 
+                                                WHERE CargaId in(SELECT Id FROM Carga WHERE RepresentanteId = @p0 and PracaId = @p1 and FORMAT(DataAbertura, 'yyyyMM') <= @p2)
+                                                ) 
+                                            OR  Id IN (
+                                                SELECT Distinct VendedorId 
+                                                FROM Receber 
+                                                INNER JOIN Carga ON Receber.CargaId = Carga.Id
+                                                WHERE PracaId = @p1
+                                            )";
 
 
                     foreach (var row in deposito.Vendedor.SqlQuery(query, cRepresentanteId, cPracaId, cMes.ToString() + cAno.ToString()))
@@ -1153,32 +1157,6 @@ namespace ModelLibrary
                 {
 
 
-                    //string query = @"SELECT *
-                    //        FROM Pedido 
-                    //        WHERE CargaId = @p0 
-                    //              OR CargaOriginal = @p0
-                    //              OR Id IN
-                    //                (SELECT DISTINCT Pedido.Id 
-                    //                    FROM Carga
-                    //                       INNER JOIN Pedido ON Carga.Id = Pedido.CargaId
-                    //                    WHERE Pedido.Id is not null
-                    //                    AND Carga.Id != @p0 AND PracaId = @p1 AND ValorAcerto = 0)";
-
-
-                    string query = @"UPDATE Pedido SET CargaId = 1521 WHERE Pedido.Id IN (
-                                        SELECT DISTINCT Pedido.Id
-                                        FROM Carga
-                                            INNER JOIN Pedido ON Carga.Id = Pedido.CargaId
-                                        WHERE Pedido.Id is not null
-                                        AND Carga.Id != @p0 AND PracaId = @p1 AND Pedido.DataRetorno is NULL)";
-
-
-                    Console.WriteLine("Executando Comando: " + query);
-
-                    deposito.Database.ExecuteSqlCommand(query, cCargaId, cPracaId);
-
-                    
-
                     foreach (var row in deposito.Pedido.Where(pd => pd.CargaId == cCargaId))
                     //foreach (var row in deposito.Pedido.SqlQuery(query, cCargaId, cPracaId))
                     {
@@ -1250,20 +1228,8 @@ namespace ModelLibrary
                 using (DepositoDBEntities deposito = new DepositoDBEntities())
                 {
 
-                    //string query = @"SELECT *
-                    //                    FROM PedidoItem
-                    //                    INNER JOIN Pedido ON PedidoItem.PedidoId = Pedido.Id
-                    //                    WHERE 
-                    //                        Pedido.CargaId = @p0 
-                    //                        OR Pedido.CargaOriginal = @p0
-                    //                        OR Pedido.Id IN 
-                    //                    (SELECT DISTINCT Pedido.Id FROM Carga 
-                    //                    INNER JOIN Pedido ON Carga.Id = Pedido.CargaId
-                    //                    WHERE Pedido.Id is not null
-                    //                    AND Carga.Id != @p0 AND PracaId = @p1 AND ValorAcerto = 0)";
 
                     foreach (var row in deposito.PedidoItem.Join(deposito.Pedido, pi => pi.PedidoId, pd => pd.Id, (pi, pd) => new { RepPedidoItem = pi, RepPedido = pd }).Where(pi => pi.RepPedido.CargaId == cCargaId))
-                    //foreach (var row in deposito.PedidoItem.SqlQuery(query, cCargaId, cPracaId))
                     {
                         var newReg = new RepPedidoItem
                         {

@@ -155,8 +155,7 @@ namespace ConsignadoRepresentante
         /// </summary>
         private void ExibirCarga()
         {
-
-            //obtem dados da carga (local) com tudo bloquead
+           
 
             var carga = ModelLibrary.MetodosRepresentante.ObterCargaAtual();
 
@@ -173,6 +172,16 @@ namespace ConsignadoRepresentante
             
             
             lblCarga.Text += " " + praca.Descricao.Trim() + " | " + representante.Nome.Trim() + " | " + carga.Mes.ToString() + "/" + carga.Ano.ToString() ;            
+
+
+            ///SE O STATUS DA CARGA != "A" or != 'E' Bloquuear Acesso
+            ///
+            if (carga.Status != "A" || carga.Status != "E")
+            {
+
+                MessageBox.Show("A carga atual já foi exportada e não pode mais ser executada por um representante. Se desejar, acesse o módulo novamente utilizando o administrador para importar uma nova carga ou obter mais informações.", "Carga já exportada para processo de retorno", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                Application.Exit();
+            }
 
 
         }
