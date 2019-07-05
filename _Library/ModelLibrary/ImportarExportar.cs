@@ -380,8 +380,41 @@ namespace ModelLibrary
         // Atualizar Tabela Carga: Data Exportação / Status
         public static Boolean ImportarPreparar()
         {
+
+
+
+            //Obter pedidos pendentes da praça e alterar o CargaId para nova Carga.
+
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+                var pedido = deposito.Pedido
+                        .Join(deposito.Carga, pd => pd.CargaId, ca => ca.Id, (pd, ca) => new { Pedido = pd, Carga = ca })
+                        .Where(q => q.Pedido.Status == "1" && q.Carga.PracaId == cPracaId).ToList();
+
+                pedido.ForEach(pd => pd.Pedido.CargaId = Convert.ToInt32(cCargaId));
+
+                deposito.SaveChanges();
+
+
+                var receber = deposito.Pedido
+                    .Join(deposito.Carga, pd => pd.CargaId, ca => ca.Id, (pd, ca) => new { Pedido = pd, Carga = ca })
+                    .Where(pd => pd.Pedido.ValorAcerto > 0)
+                    .Select(pd => pd.Pedido);
+
+
+                foreach (Pedido row in receber)
+                {
+                    if (row.ValorCompra - row.ValorAcerto > 0)
+                    {
+                        ModelLibrary.MetodosDeposito.IncluirReceber(Convert.ToInt32(cCargaId), Convert.ToInt32(row.VendedorId), Convert.ToDouble(row.ValorCompra - row.ValorAcerto), Convert.ToDateTime(row.DataPrevisaoRetorno));
+                    }
+                }
+            }
+
+            //Gerar os titulos a receber com base no "ValorAReceber" do Pedido
+
             Console.WriteLine("Importar Preparar Executado.");
-            Thread.Sleep(1000);
             return true;
         }
 
@@ -1424,8 +1457,7 @@ namespace ModelLibrary
             try
             {
                 ModelLibrary.MetodosDeposito.AlterarStatusCarga(cCargaId, "E");
-                ModelLibrary.MetodosRepresentante.AlterarStatusCarga(cCargaId, "E");
-                Thread.Sleep(1000);
+                ModelLibrary.MetodosRepresentante.AlterarStatusCarga(cCargaId, "E");                
                 return true;
             }
             catch
@@ -1737,9 +1769,38 @@ namespace ModelLibrary
         {
             try
             {
+                
+
+
+                using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+                {
+
+                    foreach (var row in representante.RepCarga)
+                    {
+
+
+                        var regCarga = new Carga
+                        {
+                            Id = Convert.ToInt32(row.Id),
+                            PracaId = Convert.ToInt32(row.PracaId),
+                            RepresentanteId = Convert.ToInt32(row.RepresentanteId),
+                            Mes = Convert.ToInt32(row.Mes),
+                            Ano = Convert.ToInt32(row.Ano),
+                            DataAbertura = row.DataAbertura,
+                            DataExportacao = row.DataExportacao,
+                            DataRetorno = row.DataRetorno,
+                            DataConferencia = row.DataConferencia,
+                            DataFinalizacao = row.DataFinalizacao,
+                            Status = row.Status
+                        };
+
+                        CargaAtualizar(regCarga);
+                        
+                    }
+
+                }
+
                 Console.WriteLine("Carga Alterada: " + cCargaId);
-                //ModelLibrary.MetodosDeposito.AlterarStatusCarga(cCargaId, "E");
-                //ModelLibrary.MetodosRepresentante.AlterarStatusCarga(cCargaId, "E");
                 return true;
             }
             catch
@@ -1748,6 +1809,28 @@ namespace ModelLibrary
             }
 
 
+        }
+
+        public static void CargaAtualizar(Carga pCarga)
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                var vCarga = deposito.Carga.FirstOrDefault(cg => cg.Id == pCarga.Id);
+
+                if (vCarga != null)
+                {
+
+                    Console.WriteLine("Atualizando Carga id: " + pCarga.Id.ToString());
+
+                    vCarga.DataExportacao = pCarga.DataExportacao;
+                    vCarga.Status = pCarga.Status;
+
+                    deposito.SaveChanges();
+
+                }
+
+            }
         }
 
 
@@ -2141,7 +2224,6 @@ namespace ModelLibrary
                 ModelLibrary.MetodosRepresentante.AlterarStatusCarga(cCargaId, "R");
 
                 ModelLibrary.MetodosDeposito.FinalizarExportacao();
-                Thread.Sleep(1000);
                 return true;
             } catch
             {

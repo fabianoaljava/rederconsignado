@@ -204,7 +204,7 @@ namespace ModelLibrary
 
         public static List<ListaRepProdutosConferencia> ObterProdutosConferencia(long pCargaId)
         {
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
 
@@ -224,9 +224,9 @@ namespace ModelLibrary
                                 INNER JOIN RepProduto ON RepProdutoGrade.ProdutoId = RepProduto.Id
                                 LEFT JOIN RepCargaConferencia ON RepCargaConferencia.CargaId = RepCarga.Id AND RepCargaConferencia.ProdutoGradeId = RepProdutoGrade.Id";
 
-                var result = context.Database.SqlQuery<ListaRepProdutosConferencia>(query);
+                var result = representante.Database.SqlQuery<ListaRepProdutosConferencia>(query);
 
-                //var result = context.RepProdutosConferencia
+                //var result = representante.RepProdutosConferencia
                 //           .Where(pg => pg.CargaId == pCargaId)
                 //           .Select(pg => new ListaRepProdutosConferencia()
                 //           {
@@ -1135,8 +1135,8 @@ namespace ModelLibrary
 
 
                 /*
-                var result = context.RepPosicaoFinanceira
-                           .Join(context.RepVendedor, pf => pf.VendedorId, vd => vd.Id, (pf, vd) => new { RepPosicaoFinanceira = pf, RepVendedor = vd })
+                var result = representante.RepPosicaoFinanceira
+                           .Join(representante.RepVendedor, pf => pf.VendedorId, vd => vd.Id, (pf, vd) => new { RepPosicaoFinanceira = pf, RepVendedor = vd })
                            .Select(ls => new ListaRepPosicaoFinanceira()
                            {
                                Id = ls.RepVendedor.Id,

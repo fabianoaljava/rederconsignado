@@ -145,13 +145,13 @@ namespace ModelLibrary
             }
         }
 
-        public static string ValidarInclusaoCarga(int pRepresentanteId, int pPracaId, int pMes, int pAno)
+        public static string ValidarInclusaoCarga(int pPracaId)
         {
 
             using (DepositoDBEntities context = new DepositoDBEntities())
             {
                 // verificar se existe carga não finalizada
-                var carga = context.Carga.FirstOrDefault(cg => cg.Status != "F");
+                var carga = context.Carga.FirstOrDefault(cg => cg.Status != "F" && cg.PracaId == pPracaId);
                 if (carga == null)
                 {
                     return "OK";
@@ -173,9 +173,7 @@ namespace ModelLibrary
 
                 DateTime dataabertura = DateTime.Now;
 
-                var maxCarga = context.Carga.OrderByDescending(i => i.Id).FirstOrDefault();
 
-                int newId = maxCarga == null ? 1 : maxCarga.Id + 1;
 
                 var novacarga = new Carga
                 {
@@ -190,21 +188,9 @@ namespace ModelLibrary
                 context.Carga.Add(novacarga);
                 context.SaveChanges();
 
+                var maxCarga = context.Carga.OrderByDescending(i => i.Id).FirstOrDefault();
 
-                //Obter pedidos pendentes da praça e alterar o CargaId para nova Carga.
-
-                var pedido = context.Pedido
-                            .Join(context.Carga, pd => pd.CargaId, ca => ca.Id, (pd, ca) => new { Pedido = pd, Carga = ca })
-                            .Where(q => q.Pedido.Status == "1" && q.Carga.PracaId == pPracaId).ToList();
-
-                pedido.ForEach(pd => pd.Pedido.CargaId = newId);
-
-                context.SaveChanges();
-                
-                
-                //Gerar os titulos a receber com base no "ValorAReceber" do Pedido
-
-
+                int newId = maxCarga == null ? 1 : maxCarga.Id;
 
                 return newId;
                 
@@ -218,37 +204,37 @@ namespace ModelLibrary
         {
 
 
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
 
-                var result = context.Carga.SingleOrDefault(cg => cg.Id == pCargaId);
-                if (result != null)
+                var carga = deposito.Carga.SingleOrDefault(cg => cg.Id == pCargaId);
+                if (carga != null)
                 {
-                    result.Status = pStatus;
+                    carga.Status = pStatus;
 
 
                     switch (pStatus)
                     {
                         case "A": /* Revertendo status */
-                            result.DataExportacao = null;
-                            result.DataRetorno = null;
-                            result.DataConferencia = null;
-                            result.DataFinalizacao = null;
+                            carga.DataExportacao = null;
+                            carga.DataRetorno = null;
+                            carga.DataConferencia = null;
+                            carga.DataFinalizacao = null;
                             break;
                         case "E":
-                            result.DataExportacao = DateTime.Now;
+                            carga.DataExportacao = DateTime.Now;
                             break;
                         case "R":
-                            result.DataRetorno = DateTime.Now;
+                            carga.DataRetorno = DateTime.Now;
                             break;
                         case "C":
-                            result.DataConferencia = DateTime.Now;
+                            carga.DataConferencia = DateTime.Now;
                             break;
                         case "F":
-                            result.DataFinalizacao = DateTime.Now;
+                            carga.DataFinalizacao = DateTime.Now;
                             //Alterar Status dos Pedidos sem ValorAReceber = 1;
-                            var pedido = context.Pedido.Where(pd => pd.CargaId == pCargaId && (pd.Status == "0" || pd.Status == "1"));
+                            var pedido = deposito.Pedido.Where(pd => pd.CargaId == pCargaId && (pd.Status == "0" || pd.Status == "1"));
                             foreach (Pedido row in pedido)
                             {
                                 if (row.Status == "0")
@@ -259,6 +245,8 @@ namespace ModelLibrary
                                     if (row.QuantidadeRemarcado >= 2)
                                     {
                                         pedido.SingleOrDefault(pd => pd.Id == row.Id).Status = "3";
+                                        NegativarVendedor(row.VendedorId);
+                                        // Negativar Vendedor
                                     } else
                                     {
                                         pedido.SingleOrDefault(pd => pd.Id == row.Id).Remarcado = 1;
@@ -267,11 +255,19 @@ namespace ModelLibrary
                                 }
                             };
 
-                            break;
+                            var receber = deposito.Receber
+                                    .Join(deposito.Carga, rc => rc.CargaId, ca => ca.Id, (rc, ca) => new { Receber = rc, Carga = ca })
+                                    .Where(q => q.Receber.Status == "0" && q.Carga.PracaId == carga.PracaId)
+                                    .Select(rc => rc.Receber);
+                            foreach (Receber row in receber)
+                            {
+                                receber.SingleOrDefault(rc => rc.Id == row.Id).QuantidadeRemarcado++;
+                            }
+                           break;
                     }
 
 
-                    context.SaveChanges();
+                    deposito.SaveChanges();
                 }
 
 
@@ -525,9 +521,9 @@ namespace ModelLibrary
                 context.Database.ExecuteSqlCommand("DELETE FROM CargaProduto WHERE CargaId = @pCargaId AND ProdutoGradeId = @pProdutoGradeId", new SqlParameter("@pCargaId", pCargaId), new SqlParameter("@pProdutoGradeId", pCargaProdutoGradeId));
 
                 //CargaProduto cargaproduto = new CargaProduto() { ProdutoGradeId = pCargaProdutoGradeId, CargaId = pCargaId};
-                //context.CargaProduto.Attach(cargaproduto);
-                //context.CargaProduto.Remove(cargaproduto);
-                //context.SaveChanges();
+                //deposito.CargaProduto.Attach(cargaproduto);
+                //deposito.CargaProduto.Remove(cargaproduto);
+                //deposito.SaveChanges();
             }
         }
 
@@ -738,7 +734,7 @@ namespace ModelLibrary
 
         }
 
-        public static void SalvarAReceber(int pReceberId, int pReceberBaixaId, double pValor, string pData)
+        public static void SalvarAReceberBaixa(int pReceberId, int pReceberBaixaId, double pValor, string pData)
         {
 
 
@@ -794,6 +790,45 @@ namespace ModelLibrary
 
         }
 
+
+        public static void IncluirReceber(int pCargaId, int pVendedorId, double pValor, DateTime pDataVencimento)
+        {
+            using (DepositoDBEntities context = new DepositoDBEntities())
+            {
+
+
+                var maxReceber = context.Receber.OrderByDescending(i => i.Id).FirstOrDefault();
+
+                int newId = maxReceber == null ? 1 : maxReceber.Id + 1;
+
+                Console.WriteLine("Inserindo A Receber - ReceberId: ");
+
+                //insert
+                var receber = new Receber
+                {
+                    Id = newId,
+                    VendedorId = pVendedorId,
+                    CargaId = pCargaId,
+                    Documento = pVendedorId,
+                    Serie = DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString(),
+                    ValorNF = pValor,
+                    ValorDuplicata = pValor,
+                    ValorAReceber = pValor,
+                    DataEmissao = DateTime.Now.Date,
+                    DataLancamento = DateTime.Now.Date,
+                    DataVencimento = pDataVencimento,
+                    DataPagamento = null,
+                    QuantidadeRemarcado = 0,
+                    Observacoes = "Título gerado automaticamente!",
+                    Status = "0"
+                };
+
+                context.Receber.Add(receber);
+                context.SaveChanges();
+
+
+            }
+        }
 
         public static List<Vendedor> ObterListaVendedor(long pCargaId = 0)
         {
@@ -884,6 +919,20 @@ namespace ModelLibrary
             {
                 var pedido = context.Pedido.OrderByDescending(i => i.Id).FirstOrDefault(p => p.VendedorId == pVendedorId && p.CargaId == pCargaId);
                 return pedido;
+            }
+
+        }
+
+        public static void NegativarVendedor(long pVendedorId)
+        {
+            using (DepositoDBEntities context = new DepositoDBEntities())
+            {
+                var vendedor = context.Vendedor.SingleOrDefault(vd => vd.Id == pVendedorId);
+                if (vendedor != null)
+                {
+                    vendedor.Status = "N";
+                    context.SaveChanges();
+                }
             }
 
         }

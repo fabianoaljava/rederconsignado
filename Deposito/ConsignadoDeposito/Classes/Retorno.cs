@@ -86,7 +86,17 @@ namespace ConsignadoDeposito
 
         public void RetornoReload()
         {
+            Cursor.Current = Cursors.WaitCursor;
+            PesquisarCarga();
+            CarregarResumo();
+            CarregarGradeRetornoProduto(cRetornoId);
+            CarregarPedidos();
+            CarregarListaPesquisaVendedor();
+            CarregarPedidosFechados();
+            CarregarContasAReceber();
             CarregarConferenciaProdutos();
+            CarregarAcerto();
+            Cursor.Current = Cursors.Default;
         }
 
 
@@ -938,7 +948,7 @@ namespace ConsignadoDeposito
         public void ConfirmarAReceber()
         {
 
-            ModelLibrary.MetodosDeposito.SalvarAReceber(cRetornoReceberId, cRetornoReceberBaixaId, Convert.ToDouble(localDepositoForm.txtRetornoRecValor.Text), localDepositoForm.txtRetornoRecData.Text);
+            ModelLibrary.MetodosDeposito.SalvarAReceberBaixa(cRetornoReceberId, cRetornoReceberBaixaId, Convert.ToDouble(localDepositoForm.txtRetornoRecValor.Text), localDepositoForm.txtRetornoRecData.Text);
 
             CarregarContasAReceber();
 
@@ -983,7 +993,8 @@ namespace ConsignadoDeposito
         public void FinalizarAcerto()
         {
 
-            ModelLibrary.MetodosDeposito.AlterarStatusCarga(cRetornoId, "F");           
+            ModelLibrary.MetodosDeposito.AlterarStatusCarga(cRetornoId, "F");
+            RetornoReload();
 
             
         }

@@ -119,13 +119,6 @@ namespace ConsignadoDeposito
                     CarregarGradeCargaProduto(carga.Id);
 
 
-                    var totalizadores = ModelLibrary.MetodosDeposito.ObterTotalizadores(cCargaId);
-
-                    localDepositoForm.dlbCargaQtdProdutos.Text = totalizadores[0].ToString();
-                    localDepositoForm.dlbCargaTotalProdutos.Text = totalizadores[1].ToString("C");
-
-
-
 
 
                     localDepositoForm.dlbCargaDataAbertura.Text = carga.DataAbertura.HasValue ? carga.DataAbertura.Value.ToShortDateString() : "-";
@@ -202,11 +195,12 @@ namespace ConsignadoDeposito
         }
 
 
+
         public void CargaInserir(int pRepresentanteId, int pPracaId, int pMes, int pAno)
         {
 
 
-            string vValidaInserir = ModelLibrary.MetodosDeposito.ValidarInclusaoCarga(pRepresentanteId, pPracaId, pMes, pAno);
+            string vValidaInserir = ModelLibrary.MetodosDeposito.ValidarInclusaoCarga(pPracaId);
 
             if (vValidaInserir == "OK")
             {
@@ -217,6 +211,18 @@ namespace ConsignadoDeposito
             {
                 MessageBox.Show(vValidaInserir, "Reder Consignado", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
+
+
+        }
+
+        public void CargaTotalizadores()
+        {
+
+
+            var totalizadores = ModelLibrary.MetodosDeposito.ObterTotalizadores(cCargaId);
+
+            localDepositoForm.dlbCargaQtdProdutos.Text = totalizadores[0].ToString();
+            localDepositoForm.dlbCargaTotalProdutos.Text = totalizadores[1].ToString("C");
 
 
         }
@@ -409,6 +415,7 @@ namespace ConsignadoDeposito
                 {
                     ModelLibrary.MetodosDeposito.InserirCargaProduto(cCargaId, cCargaProdutoGradeId, vQuantidade);
                     CarregarGradeCargaProduto(cCargaId);
+                    CargaTotalizadores();
 
                     GridSelecionar(localDepositoForm.grdCargaProduto, localDepositoForm.txtCargaCodigoBarras.Text);
 
@@ -437,6 +444,8 @@ namespace ConsignadoDeposito
             ModelLibrary.MetodosDeposito.AlterarCargaProduto(cCargaId, cCargaProdutoGradeId, Convert.ToDouble(localDepositoForm.txtCargaQuantidade.Text));
 
             CarregarGradeCargaProduto(cCargaId);
+
+            CargaTotalizadores();
 
             LimparCargaProduto();
 
