@@ -444,8 +444,9 @@ namespace ModelLibrary
                                             ELSE false
                                             END AS PedidoAnterior,
                                     CASE 
-	                                    WHEN ValorAberto  = 0 THEN 'Total'
-	                                    WHEN ValorAberto >0  THEN 'Parcial ' || QuantidadeRemarcado
+	                                    WHEN ValorAberto  <= 0 THEN 'Total'
+	                                    WHEN ValorAcerto >0  THEN 'Parcial '
+										WHEN ValorRecebido >0  THEN 'Parcial ' || QuantidadeRemarcado
 	                                    ELSE 'Não ' || QuantidadeRemarcado
 	                                    END AS Recebido,	   
                                     CASE WHEN PedidoAtual.VendedorId IS NOT NULL
@@ -463,7 +464,7 @@ namespace ModelLibrary
 										END AS Negativado									
                                     FROM RepVendedor
                                     LEFT JOIN (SELECT VendedorId, CodigoPedido, DataRetorno, ValorAcerto FROM RepPedido WHERE CargaId = CargaOriginal) AS PedidoAtual ON RepVendedor.Id = PedidoAtual.VendedorId
-                                    LEFT JOIN (SELECT VendedorId, SUM(QuantidadeRemarcado) QuantidadeRemarcado, SUM(ValorLiquido - ValorAcerto) ValorAberto, ValorAcerto as ValorRecebido FROM RepPedido WHERE CargaId != CargaOriginal GROUP BY VendedorId) AS PedidoAnterior ON RepVendedor.Id = PedidoAnterior.VendedorId
+                                    LEFT JOIN (SELECT VendedorId, SUM(QuantidadeRemarcado)-1 QuantidadeRemarcado, SUM(ValorLiquido - ValorAcerto) ValorAberto, ValorAcerto as ValorRecebido FROM RepPedido WHERE CargaId != CargaOriginal GROUP BY VendedorId) AS PedidoAnterior ON RepVendedor.Id = PedidoAnterior.VendedorId
                                     LEFT JOIN (SELECT DISTINCT VendedorId as Receber FROM RepReceber WHERE DataPagamento IS NULL) AS Receber ON RepVendedor.Id = Receber.Receber";
 
 
@@ -805,6 +806,7 @@ namespace ModelLibrary
                     if (tmpDataRetorno == null)
                     {
                         pedido.DataRetorno = DateTime.Now.Date;
+                        pedido.Status = "2";
                     }
 
 
@@ -1055,6 +1057,7 @@ namespace ModelLibrary
                     }
 
                     pedido.ValorAcerto = pValor;
+                    pedido.Status = "3";
 
                     context.SaveChanges();
 

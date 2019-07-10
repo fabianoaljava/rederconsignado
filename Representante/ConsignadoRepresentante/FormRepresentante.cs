@@ -625,10 +625,7 @@ namespace ConsignadoRepresentante
                 if (Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Retorno"].Value) >= Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Quantidade"].Value) && Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Quantidade"].Value) > 0)
                 {
                     vColour = Color.Orange;
-                }
-
-
-                if (Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Recebido"].Value) == 0 && Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["PedidoNovo"].Value) > 0)
+                } else if (Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Recebido"].Value) == 0 && Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["PedidoNovo"].Value) > 0)
                 {
                     vColour = Color.Black;
                 }

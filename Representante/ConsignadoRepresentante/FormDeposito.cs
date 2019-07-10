@@ -102,12 +102,14 @@ namespace ConsignadoRepresentante
                     cImportar.CarregarFormularioLocal(); //obter praça e representante local
                     cImportar.ExibirImportacao();
                     cConferirProdutos.ExibirConferenciaProduto(cCargaId);
+                    pnlExportacaoMain.Enabled = true;
                 }
                 else
                 {
                     //se importacao não foi realizada
                     lblCarga.Text = "Importação de Carga Pendente.";
                     cImportar.CarregarFormularioServer(); //obter praça e representante do servidor
+                    pnlExportacaoMain.Enabled = false;
 
                 }
             }
@@ -121,13 +123,14 @@ namespace ConsignadoRepresentante
                     cImportar.CarregarFormularioLocal(); //obter praça e representante local
                     cImportar.ExibirImportacao();
                     cConferirProdutos.ExibirConferenciaProduto(cCargaId);
+                    pnlExportacaoMain.Enabled = true;
                 }
                 else
                 {
                     //se importacao não foi realizada
                     lblCarga.Text = "Importação de Carga Pendente.";
                     /// Exibe mensagem se deseja conectar com o banco de dados até que a conexão seja efetuada / com opção para alterar informações de conexão ou pesquisar conexão (futuro)
-
+                    pnlExportacaoMain.Enabled = false;
 
                     if (MessageBox.Show("O servidor <<SERVER>> não foi localizado ou está desconectado. Deseja tentar novamente?", "Reder Consignado", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Retry)
                     {
@@ -336,9 +339,12 @@ namespace ConsignadoRepresentante
 
         private void btnImportarAnalisar_Click(object sender, EventArgs e)
         {
-            if (txtImportarCodRepresentante.Text != "" && txtImportarCodPraca.Text != "")
+            if (cbbImportarRepresentante.SelectedIndex != -1 && cbbImportarRepresentante.SelectedIndex != -1)
             {
                 cImportar.ImportarCarga(true);
+            } else
+            {
+                MessageBox.Show("Representante ou praça não encontrados");
             }
             
         }
@@ -346,10 +352,14 @@ namespace ConsignadoRepresentante
 
         private void btnImportar_Click(object sender, EventArgs e)
         {
-            
-            if (txtImportarCodRepresentante.Text != "" && txtImportarCodPraca.Text != "")
+
+            if (cbbImportarRepresentante.SelectedIndex != -1 && cbbImportarRepresentante.SelectedIndex != -1)
             {
                 cImportar.ImportarCarga(false);
+            }
+            else
+            {
+                MessageBox.Show("Representante ou praça não encontrados");
             }
         }
 

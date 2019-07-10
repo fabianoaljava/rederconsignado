@@ -347,6 +347,19 @@ namespace ModelLibrary
 
                 count = 0;
 
+                vTable.Tabela = "Carga";
+                vTable.Acao = "Atualizar Status Carga";
+                vTable.Rotina = "AlterarStatusCarga";
+                vTable.TotalLinhas = count;
+                vTable.Status = "Preparando...";
+
+                result.Add(vTable);
+
+                vTable = new ListaImportacaoExportacao();
+
+
+                count = 0;
+
                 vTable.Tabela = "Todas";
                 vTable.Acao = "Finalizar Importacao...";
                 vTable.Rotina = "ImportarFinalizar";
@@ -380,7 +393,7 @@ namespace ModelLibrary
 
         public static void NA()
         {
-            MessageBox.Show("A carga selecionada já foi procesada anteriormente e não pode ser importada.");
+            Thread.Sleep(1000);
         }
 
         // Atualizar Tabela Carga: Data Exportação / Status
@@ -405,7 +418,7 @@ namespace ModelLibrary
 
                 var receber = deposito.Pedido
                     .Join(deposito.Carga, pd => pd.CargaId, ca => ca.Id, (pd, ca) => new { Pedido = pd, Carga = ca })
-                    .Where(pd => pd.Pedido.ValorAcerto > 0 && pd.Carga.PracaId == cPracaId)
+                    .Where(pd => pd.Pedido.ValorAcerto > 0 && pd.Carga.PracaId == cPracaId && pd.Pedido.Status != "3" && pd.Pedido.Status != "4")
                     .Select(pd => pd.Pedido);
 
 
@@ -1418,7 +1431,7 @@ namespace ModelLibrary
         }
 
 
-        public static Boolean ImportarFinalizar()
+        public static Boolean AlterarStatusCarga()
         {
             try
             {
@@ -1430,6 +1443,11 @@ namespace ModelLibrary
             {
                 return false;
             }
+        }
+
+        public static void ImportarFinalizar()
+        {
+            Thread.Sleep(1000);
         }
 
 
@@ -1528,8 +1546,8 @@ namespace ModelLibrary
                 result.Add(vTable);
 
 
-                string query = "SELECT DISTINCT 0 Id, 0 PedidoId, ProdutoGradeId, 0 Quantidade, 0 Retorno, 0 Preco FROM RepPedidoItem WHERE ProdutoGradeId NOT IN (SELECT ProdutoGradeId FROM RepCargaProduto)";
-                count = representante.RepPedidoItem.SqlQuery(query).Count();
+                string query = "SELECT DISTINCT 0 Id, " + cCargaId.ToString() + " CargaId, ProdutoGradeId, 0 Quantidade, 0 Retorno FROM RepPedidoItem WHERE ProdutoGradeId NOT IN (SELECT ProdutoGradeId FROM RepCargaProduto)";
+                count = representante.Database.SqlQuery<RepCargaProduto>(query).Count();
 
                 vTable = new ListaImportacaoExportacao();
 
@@ -1830,8 +1848,9 @@ namespace ModelLibrary
                 using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
                 {
 
-                    string query = "SELECT DISTINCT 0 Id, 0 PedidoId, ProdutoGradeId, 0 Quantidade, 0 Retorno, 0 Preco FROM RepPedidoItem WHERE ProdutoGradeId NOT IN(SELECT ProdutoGradeId FROM RepCargaProduto)";
-                    foreach (var row in representante.RepPedidoItem.SqlQuery(query))
+                    string query = "SELECT DISTINCT 0 Id, " + cCargaId.ToString() + " CargaId, ProdutoGradeId, 0 Quantidade, 0 Retorno FROM RepPedidoItem WHERE ProdutoGradeId NOT IN (SELECT ProdutoGradeId FROM RepCargaProduto)";
+
+                    foreach (var row in representante.Database.SqlQuery<RepCargaProduto>(query))
                     {
 
 
@@ -1873,6 +1892,7 @@ namespace ModelLibrary
             {
 
                 Console.WriteLine("Inserindo Produto Extra id: " + pCargaProduto.ProdutoGradeId.ToString());
+
                 deposito.CargaProduto.Add(pCargaProduto);
                 deposito.SaveChanges();
 
@@ -1919,7 +1939,7 @@ namespace ModelLibrary
                             ValorComissao = Convert.ToDouble(row.ValorComissao),
                             ValorLiquido = Convert.ToDouble(row.ValorLiquido),
                             ValorAReceber = Convert.ToDouble(row.ValorAReceber),
-                            ValorAcerto = Convert.ToDouble(row.ValorAcerto),
+                            ValorAcerto = row.ValorAcerto == null ? 0 : Convert.ToDouble(row.ValorAcerto),
                             QuantidadeRemarcado = Convert.ToInt32(row.QuantidadeRemarcado),
                             Remarcado = Convert.ToInt32(row.Remarcado),
                             Status = row.Status
@@ -1938,7 +1958,7 @@ namespace ModelLibrary
 
 
                 return true;
-            }
+        }
             catch
             {
                 return false;
@@ -1970,8 +1990,10 @@ namespace ModelLibrary
                     vPedido.ValorComissao = pPedido.ValorComissao;
                     vPedido.ValorLiquido = pPedido.ValorLiquido;
                     vPedido.ValorAReceber = pPedido.ValorAReceber;
+                    vPedido.ValorAcerto = pPedido.ValorAcerto;
                     vPedido.QuantidadeRemarcado = pPedido.QuantidadeRemarcado;
                     vPedido.Remarcado = pPedido.Remarcado;
+                    vPedido.Status = pPedido.Status;
 
                     deposito.SaveChanges();
 
@@ -1982,7 +2004,11 @@ namespace ModelLibrary
                     Console.WriteLine("Inserindo pedido id: " + pPedido.Id.ToString() + " codigo: " + pPedido.CodigoPedido);
 
 
-                    if (pPedido.VendedorId.ToString().Substring(0, 3) == "999")
+                    string vendedorid = pPedido.VendedorId.ToString();
+                    vendedorid = vendedorid.PadLeft(6, '0');
+
+
+                    if (vendedorid.Substring(0, 3) == "999")
                     {
                         var vendedor = deposito.Vendedor.Where(vd => vd.temp_old_id == pPedido.VendedorId).FirstOrDefault();
                         pPedido.VendedorId = vendedor.Id;

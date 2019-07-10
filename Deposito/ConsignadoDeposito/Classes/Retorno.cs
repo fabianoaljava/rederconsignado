@@ -383,6 +383,7 @@ namespace ConsignadoDeposito
                 MessageBox.Show("Dígito verificador inválido. Não foi possível encontrar a grade deste produto.");
 
                 cRetornoProdutoGradeId = 0;
+                localDepositoForm.txtRetornoCodigoBarras.Text = "";
                 localDepositoForm.txtRetornoCodigoBarras.Focus();
                 localDepositoForm.btnRetornoConfirmar.Enabled = false;
                 localDepositoForm.btnRetornoCancelar.Enabled = false;

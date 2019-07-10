@@ -294,9 +294,12 @@ namespace ConsignadoDeposito
 
         private void bntCargaOK_Click(object sender, EventArgs e)
         {
-            if (txtCargaCodPraca.Text != "" && txtCargaCodRepresentante.Text != "")
+            if (cbbCargaPraca.SelectedIndex != -1 && cbbCargaRepresentante.SelectedIndex != -1)
             {
                 cCarga.PesquisarCarga();
+            } else
+            {
+                MessageBox.Show("Praça ou Representante não encontrados.");
             }
         }
 
@@ -562,9 +565,12 @@ namespace ConsignadoDeposito
 
         private void bntRetornoOK_Click(object sender, EventArgs e)
         {
-            if (txtRetornoCodPraca.Text != "" && txtRetornoCodRepresentante.Text != "")
+            if (cbbRetornoPraca.SelectedIndex != -1 && cbbRetornoRepresentante.SelectedIndex != -1)
             {
                 cRetorno.PesquisarCarga();
+            } else
+            {
+                MessageBox.Show("Praça ou Representante não encontrados.");
             }
             
 

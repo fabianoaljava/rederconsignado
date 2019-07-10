@@ -311,9 +311,15 @@ namespace ConsignadoRepresentante
             cVendedorId = 0;
 
 
+
             PedidoLimpar();
             RetornoProdutoLimpar();
             DuplicataLimpar();
+
+
+            localRepresentanteForm.grdVendedorPedido.DataSource = null;
+            localRepresentanteForm.grdVendedorRetorno.DataSource = null;
+            localRepresentanteForm.grdFinanceiroRecebimentos.DataSource = null;
 
         }
 
@@ -421,6 +427,12 @@ namespace ConsignadoRepresentante
             VendedorLimpar();
             localRepresentanteForm.tbcVendedor.Visible = true;
             localRepresentanteForm.tbcVendedor.SelectedTab = localRepresentanteForm.tabVendedorCadastro;
+            localRepresentanteForm.pnlVendedorPedidoMontar.Enabled = false;
+            localRepresentanteForm.pnlVendedorRetorno.Enabled = false;
+            localRepresentanteForm.grpFinanceiroCalculo.Visible = false;
+            localRepresentanteForm.grpRecebimento.Visible = false;
+            localRepresentanteForm.lblAcertoInfo.Visible = true;
+
             cVendedorModo = "Create";
 
         }
@@ -465,13 +477,18 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.btnVendedorSalvar.Text = "Salvar";
             localRepresentanteForm.btnVendedorSalvar.Enabled = true;
 
+
+
             if (cVendedorModo == "Create")
             {
                 MessageBox.Show("Vendedor Incluído com Sucesso");
                 cVendedorModo = "Edit";
+                string NovoCPF = localRepresentanteForm.txtCPFCnpj.Text;
                 CarregarFormulario();
+                VendedorLimpar();
 
-                localRepresentanteForm.txtVendedorPesqCpfCnpj.Text = localRepresentanteForm.txtCPFCnpj.Text;
+                localRepresentanteForm.txtVendedorPesqCpfCnpj.Text = NovoCPF;
+                VendedorPesquisar();
 
             }
             else
@@ -592,6 +609,8 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.btnPedidoConfirmar.Enabled = false;
             localRepresentanteForm.btnPedidoCancelar.Enabled = false;
             localRepresentanteForm.txtPedidoCodigoBarras.ReadOnly = false;
+
+
 
             cVendedorPedidoModo = "Insert";
 

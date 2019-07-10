@@ -234,25 +234,27 @@ namespace ModelLibrary
                         case "F":
                             carga.DataFinalizacao = DateTime.Now;
                             //Alterar Status dos Pedidos sem ValorAReceber = 1;
-                            var pedido = deposito.Pedido.Where(pd => pd.CargaId == pCargaId && (pd.Status == "0" || pd.Status == "1"));
+                            var pedido = deposito.Pedido.Where(pd => pd.CargaId == pCargaId && (pd.Status == "0" || pd.Status == "1" || pd.Status == "2"));
                             foreach (Pedido row in pedido)
                             {
-                                if (row.Status == "0")
+
+                                if (row.QuantidadeRemarcado >= 2)
                                 {
-                                    pedido.SingleOrDefault(pd => pd.Id == row.Id).Status = "1";
+                                    pedido.SingleOrDefault(pd => pd.Id == row.Id).Status = "3";
+                                    NegativarVendedor(row.VendedorId);
+                                    // Negativar Vendedor
                                 } else
                                 {
-                                    if (row.QuantidadeRemarcado >= 2)
+                                    if (row.ValorLiquido + row.ValorAReceber - row.ValorAcerto <= 0)
                                     {
-                                        pedido.SingleOrDefault(pd => pd.Id == row.Id).Status = "3";
-                                        NegativarVendedor(row.VendedorId);
-                                        // Negativar Vendedor
+                                        pedido.SingleOrDefault(pd => pd.Id == row.Id).Status = "4";
                                     } else
                                     {
-                                        pedido.SingleOrDefault(pd => pd.Id == row.Id).Remarcado = 1;
-                                        pedido.SingleOrDefault(pd => pd.Id == row.Id).QuantidadeRemarcado++;                                        
+                                        pedido.SingleOrDefault(pd => pd.Id == row.Id).Status = "1";
                                     }                                    
-                                }
+                                    pedido.SingleOrDefault(pd => pd.Id == row.Id).Remarcado = 1;
+                                    pedido.SingleOrDefault(pd => pd.Id == row.Id).QuantidadeRemarcado++;                                        
+                                }                                    
                             };
 
                             var receber = deposito.Receber
@@ -383,8 +385,8 @@ namespace ModelLibrary
                                     ISNULL(Consignado.Consignado,0) Consignado, 
                                     (ISNULL(Carga.ViagemPlus,0) - ISNULL(Vendido.Vendido,0) - ISNULL(Vendido.RetornoPlus,0) - ISNULL(Consignado.Consignado,0)) SaldoCarro, 
                                     ISNULL(Carga.ContagemCarro,0) ContagemCarro, 
-                                    -ISNULL(Carga.ContagemCarro,0)-(ISNULL(Carga.ViagemPlus,0) - ISNULL(Vendido.Vendido,0) - ISNULL(Vendido.RetornoPlus,0) - ISNULL(Consignado.Consignado,0)) Falta, 
-                                    -(ISNULL(Carga.ContagemCarro,0)-(ISNULL(Carga.ViagemPlus,0) - ISNULL(Vendido.Vendido,0) - ISNULL(Vendido.RetornoPlus,0) - ISNULL(Consignado.Consignado,0)) ) * ISNULL(Carga.Preco,0) VrDiferenca 
+                                    ISNULL(Carga.ContagemCarro,0)-(ISNULL(Carga.ViagemPlus,0) - ISNULL(Vendido.Vendido,0) - ISNULL(Vendido.RetornoPlus,0) - ISNULL(Consignado.Consignado,0)) Falta, 
+                                    (ISNULL(Carga.ContagemCarro,0)-(ISNULL(Carga.ViagemPlus,0) - ISNULL(Vendido.Vendido,0) - ISNULL(Vendido.RetornoPlus,0) - ISNULL(Consignado.Consignado,0)) ) * ISNULL(Carga.Preco,0) VrDiferenca 
                                     FROM
                                         (SELECT Produto.Id Id, ProdutoGrade.Id ProdutoGradeId, Produto.CodigoBarras, ProdutoGrade.Digito, Produto.Descricao, ProdutoGrade.Tamanho 
                                             FROM Produto 
@@ -398,14 +400,14 @@ namespace ModelLibrary
                                         (SELECT ProdutoGradeId, SUM(PedidoItem.Quantidade) Consignado 
                                             FROM Pedido
                                             INNER JOIN PedidoItem ON PedidoItem.PedidoId = Pedido.Id
-                                            WHERE  Pedido.CargaId = @p0 AND Pedido.Status = 0
+                                            WHERE  Pedido.CargaId = @p0 AND Pedido.ValorAcerto <= 0											
                                             GROUP BY ProdutoGradeId) AS Consignado ON Produto.ProdutoGradeId = Consignado.ProdutoGradeId
                                     LEFT JOIN 
                                         (SELECT ProdutoGradeId, SUM(PedidoItem.Quantidade - PedidoItem.Retorno) Vendido, SUM(PedidoItem.Retorno) RetornoPlus  
                                             FROM Pedido
                                             INNER JOIN PedidoItem ON PedidoItem.PedidoId = Pedido.Id
                                             WHERE (Pedido.CargaId = @p0)
-                                                AND Pedido.Status = 2
+                                                AND (Pedido.ValorAcerto > 0)
                                             GROUP BY ProdutoGradeId) AS Vendido ON Produto.ProdutoGradeId = Vendido.ProdutoGradeId
                                     WHERE  Carga.ProdutoGradeId IS NOT NULL
                                     ORDER BY Descricao";
