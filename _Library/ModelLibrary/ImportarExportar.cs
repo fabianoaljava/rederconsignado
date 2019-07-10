@@ -411,9 +411,9 @@ namespace ModelLibrary
 
                 foreach (Pedido row in receber)
                 {
-                    if (row.ValorCompra - row.ValorAcerto > 0)
+                    if (row.ValorLiquido - row.ValorAcerto > 0)
                     {
-                        ModelLibrary.MetodosDeposito.IncluirReceber(Convert.ToInt32(cCargaId), Convert.ToInt32(row.VendedorId), Convert.ToDouble(row.ValorCompra - row.ValorAcerto), Convert.ToDateTime(row.DataPrevisaoRetorno));
+                        ModelLibrary.MetodosDeposito.IncluirReceber(Convert.ToInt32(cCargaId), Convert.ToInt32(row.VendedorId), Convert.ToDouble(row.ValorLiquido - row.ValorAcerto), Convert.ToDateTime(row.DataPrevisaoRetorno));
                     }
                 }
             }
@@ -1528,6 +1528,20 @@ namespace ModelLibrary
                 result.Add(vTable);
 
 
+                string query = "SELECT DISTINCT 0 Id, 0 PedidoId, ProdutoGradeId, 0 Quantidade, 0 Retorno, 0 Preco FROM RepPedidoItem WHERE ProdutoGradeId NOT IN (SELECT ProdutoGradeId FROM RepCargaProduto)";
+                count = representante.RepPedidoItem.SqlQuery(query).Count();
+
+                vTable = new ListaImportacaoExportacao();
+
+                vTable.Tabela = "CargaProduto";
+                vTable.Acao = "Exportar Produtos que não estavam na carga.";
+                vTable.Rotina = "ExportarProdutoExtra";
+                vTable.TotalLinhas = count;
+                vTable.Status = "Preparando...";
+
+                result.Add(vTable);
+
+
                 vTable = new ListaImportacaoExportacao();
 
                 count = representante.RepPedido.Where(rp => rp.CargaId == pCargaId).Count();
@@ -1609,7 +1623,7 @@ namespace ModelLibrary
         // Atualizar Tabela Carga: Data Exportação / Status
         public static Boolean ExportarPreparar()
         {
-
+            ModelLibrary.MetodosRepresentante.LimparPedidoVazio();
             Thread.Sleep(1000);
             return true;
         }
@@ -1799,6 +1813,72 @@ namespace ModelLibrary
             }
         }
 
+
+
+        // Inerir na Carga Produtos que estão em PedidoItem porém não estão em CargaProduto
+        public static Boolean ExportarProdutoExtra()
+        {
+
+
+            try
+            {
+                cResult = "Inserindo na Carga Produtos que estão em PedidoItem porém não estão em CargaProduto Id: " + cCargaId;
+                Console.WriteLine(cResult);
+
+
+                int count = 0;
+                using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+                {
+
+                    string query = "SELECT DISTINCT 0 Id, 0 PedidoId, ProdutoGradeId, 0 Quantidade, 0 Retorno, 0 Preco FROM RepPedidoItem WHERE ProdutoGradeId NOT IN(SELECT ProdutoGradeId FROM RepCargaProduto)";
+                    foreach (var row in representante.RepPedidoItem.SqlQuery(query))
+                    {
+
+
+                        var regCargaProduto = new CargaProduto
+                        {
+                            CargaId = Convert.ToInt32(cCargaId),
+                            ProdutoGradeId = Convert.ToInt32(row.ProdutoGradeId),
+                            Quantidade = 0,
+                            Retorno = 0
+                        };
+
+
+                        CargaProdutoInserir(regCargaProduto);
+                        count++;
+                    }
+
+                }
+
+
+                cResult = count.ToString() + " produtos(s) exportado(s).";
+                Console.WriteLine(cResult);
+
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+
+
+        }
+
+        public static void CargaProdutoInserir(CargaProduto pCargaProduto)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                Console.WriteLine("Inserindo Produto Extra id: " + pCargaProduto.ProdutoGradeId.ToString());
+                deposito.CargaProduto.Add(pCargaProduto);
+                deposito.SaveChanges();
+
+            }
+
+        }
 
         // Atualizar Pedido QuantidadeRetorno / Remarcado / Status
         public static Boolean ExportarPedido()
@@ -2189,7 +2269,13 @@ namespace ModelLibrary
                 ModelLibrary.MetodosDeposito.AlterarStatusCarga(cCargaId, "R");
                 ModelLibrary.MetodosRepresentante.AlterarStatusCarga(cCargaId, "R");
 
-                ModelLibrary.MetodosDeposito.FinalizarExportacao();
+                
+                using (DepositoDBEntities deposito = new DepositoDBEntities())
+                {
+                    string query = @"UPDATE Vendedor Set temp_old_id = id WHERE left(temp_old_id,3) = '999' and len(temp_old_id) > 5";
+                    deposito.Database.ExecuteSqlCommand(query);
+                }
+
                 return true;
             } catch
             {

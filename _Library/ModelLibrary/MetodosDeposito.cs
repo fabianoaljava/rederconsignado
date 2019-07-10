@@ -976,22 +976,6 @@ namespace ModelLibrary
 
         }
 
-        public static void FinalizarExportacao()
-        {
-
-            using (DepositoDBEntities context = new DepositoDBEntities())
-            {
-
-                string query = "";
-
-
-                query = @"UPDATE Vendedor Set temp_old_id = id WHERE left(temp_old_id,3) = '999' and len(temp_old_id) > 5";
-
-                context.Database.ExecuteSqlCommand(query);
-            }
-
-
-        }
 
     }
 }

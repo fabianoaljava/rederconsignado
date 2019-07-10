@@ -18,6 +18,7 @@ namespace ModelLibrary
         public Nullable<int> Retorno { get; set; }
         public Nullable<int> Remarcado { get; set; }
         public Nullable<int> Visitado { get; set; }
+        public Nullable<int> PedidoNovo { get; set; }
 
 
     }

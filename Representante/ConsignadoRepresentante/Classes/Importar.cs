@@ -358,9 +358,9 @@ namespace ConsignadoRepresentante
 
             //se a carga já foi exportada
 
-            if (carga.Status != "A")
+            if (carga.Status != "E")
             {
-                localDeposito.lblExportacaoAlerta.Text = "A Carga foi exportada em " + carga.DataExportacao.ToString();
+                localDeposito.lblExportacaoAlerta.Text = "A Carga não disponível para exportação. Status: " + carga.Status;
                 localDeposito.pnlExportacaoMain.Enabled = false;
 
                 //Desativar aba conferencia de produtos 

@@ -176,10 +176,9 @@ namespace ConsignadoRepresentante
 
             ///SE O STATUS DA CARGA != "A" or != 'E' Bloquuear Acesso
             ///
-            if (carga.Status != "A" || carga.Status != "E")
+            if (carga.Status != "E")
             {
-
-                MessageBox.Show("A carga atual já foi exportada e não pode mais ser executada por um representante. Se desejar, acesse o módulo novamente utilizando o administrador para importar uma nova carga ou obter mais informações.", "Carga já exportada para processo de retorno", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("A carga atual já foi retornada e não pode mais ser executada por um representante. Se desejar, acesse o módulo novamente utilizando o administrador para importar uma nova carga ou obter mais informações.", "Carga já retornada", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 Application.Exit();
             }
 
@@ -597,7 +596,13 @@ namespace ConsignadoRepresentante
             {
                 Color vColour = Color.Black;
 
-                
+
+                //Remarcado
+                if (Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Remarcado"].Value) > 0)
+                {
+                    vColour = Color.Purple;
+                }
+
                 //Recebido Total
                 if (Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Recebido"].Value) >= Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Receber"].Value))
                 {
@@ -617,31 +622,27 @@ namespace ConsignadoRepresentante
                 }
 
                 //Devolução Total de Produtos
-                if (Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Retorno"].Value) >= Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Quantidade"].Value))
+                if (Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Retorno"].Value) >= Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Quantidade"].Value) && Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Quantidade"].Value) > 0)
                 {
                     vColour = Color.Orange;
                 }
 
 
-
-                //Remarcado
-                if (Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Remarcado"].Value) > 0)
-                {
-                    vColour = Color.Purple;
-                }
-
-
-                if (Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Quantidade"].Value) <= 0)
+                if (Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Recebido"].Value) == 0 && Convert.ToDecimal(grdPosicaoFinanceira.Rows[e.RowIndex].Cells["PedidoNovo"].Value) > 0)
                 {
                     vColour = Color.Black;
                 }
 
                 grdPosicaoFinanceira.Rows[e.RowIndex].DefaultCellStyle.ForeColor = vColour;
 
+                Console.WriteLine("Posição Financeira - Colorindo de " + vColour.ToString() + " o vendedor Id: " + grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Id"].Value.ToString());
+
             }
             catch
             {
                 /// escrever no log
+                /// 
+                Console.WriteLine("Posição Financeira. Erro ao colorir: " + grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Id"].Value.ToString());
             }
 
         }
@@ -665,6 +666,13 @@ namespace ConsignadoRepresentante
         private void grdPosicaoFinanceira_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             
+        }
+
+        private void btnNovoPedido_Click(object sender, EventArgs e)
+        {
+            tbcVendedor.SelectedTab = tabVendedorPedidos;
+            cVendedor.PedidoNovo();
+
         }
     }
 }

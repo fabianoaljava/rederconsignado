@@ -172,8 +172,11 @@ namespace ConsignadoRepresentante
                 {
                     if (ModelLibrary.MetodosRepresentante.InserirProdutoConferencia(localDeposito.cCargaId, cImportarProdutoId, vQuantidade) == false)
                     {
-                        MessageBox.Show("O produto informado não foi registrado na carga. Deseja incluílo como suplemento?");
-                        //Implementar suplemento posteriormente
+                        if (MessageBox.Show("O produto informado não foi registrado na carga. Deseja incluí-lo como suplemento?", "Produto não encontrado!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            //Implementar suplemento posteriormente
+                            MessageBox.Show("Desculpe! Opção Suplemento ainda não implementada no sistema.");
+                        }
                     }
 
                     ExibirConferenciaProduto(localDeposito.cCargaId);
@@ -201,7 +204,7 @@ namespace ConsignadoRepresentante
 
 
             cModoConferenciaProduto = "Edit";
-            cImportarProdutoId = Convert.ToInt32(localDeposito.grdConfProduto.CurrentRow.Cells[8].Value);
+            cImportarProdutoId = Convert.ToInt32(localDeposito.grdConfProduto.CurrentRow.Cells["ProdutoGradeId"].Value);
 
             localDeposito.txtConfCodigoBarras.Text = localDeposito.grdConfProduto.CurrentRow.Cells[0].Value.ToString();
             localDeposito.txtConfCodigoBarras.ReadOnly = true;
@@ -283,7 +286,7 @@ namespace ConsignadoRepresentante
             if (MessageBox.Show("Deseja realmente excluir o lançamento selecionado?", "ATENÇÃO! Exclusão de Produto", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
                 ConferenciaProdutoLimpar();
-                cImportarProdutoId = Convert.ToInt32(localDeposito.grdConfProduto.CurrentRow.Cells[8].Value);
+                cImportarProdutoId = Convert.ToInt32(localDeposito.grdConfProduto.CurrentRow.Cells["ProdutoGradeId"].Value);
 
 
                 ModelLibrary.MetodosRepresentante.ExcluirProdutoConferencia(localDeposito.cCargaId, cImportarProdutoId);

@@ -667,15 +667,16 @@ namespace ConsignadoRepresentante
 
 
 
-            List<ModelLibrary.ListaRepVendedorPedido> listapedido = ModelLibrary.MetodosRepresentante.ObterVendedorPedidoItem(pVendedorId, localRepresentanteForm.cCargaId);
 
-            BindingListView<ModelLibrary.ListaRepVendedorPedido> view = new BindingListView<ModelLibrary.ListaRepVendedorPedido>(listapedido);
-
-
-            localRepresentanteForm.grdVendedorPedido.DataSource = view;
 
             var pedido = ModelLibrary.MetodosRepresentante.ObterVendedorPedido(pVendedorId, localRepresentanteForm.cCargaId);
             cPedidoId = pedido != null ? pedido.Id : 0;
+
+            List<ModelLibrary.ListaRepVendedorPedido> listapedido = ModelLibrary.MetodosRepresentante.ObterVendedorPedidoItem(cPedidoId);
+
+            BindingListView<ModelLibrary.ListaRepVendedorPedido> view = new BindingListView<ModelLibrary.ListaRepVendedorPedido>(listapedido);
+
+            localRepresentanteForm.grdVendedorPedido.DataSource = view;
 
 
             localRepresentanteForm.grdVendedorPedido.Columns[0].Visible = false;
@@ -723,6 +724,16 @@ namespace ConsignadoRepresentante
             }
 
 
+            int countpedidos = ModelLibrary.MetodosRepresentante.ContarPedidos(pVendedorId);
+
+            if (localRepresentanteForm.txtValorRecebido.Text == "" || countpedidos > 1)
+            {
+                localRepresentanteForm.btnNovoPedido.Enabled = false;
+            } else {
+                localRepresentanteForm.btnNovoPedido.Enabled = true;
+            }
+
+
 
 
         }
@@ -741,10 +752,21 @@ namespace ConsignadoRepresentante
 
         }
 
+
+        // PedidoNovo 
+
+        public void PedidoNovo()
+        {
+
+            ModelLibrary.MetodosRepresentante.InserirPedido(cVendedorId, localRepresentanteForm.cCargaId);
+            VendedorReload();
+        }
         // PedidoIncluir
 
         public void PedidoIncluir()
         {
+
+
 
             try
             {
@@ -776,6 +798,8 @@ namespace ConsignadoRepresentante
 
                 if (vQuantidade > 0)
                 {
+
+                    //Inserir Regra de Limite Pedido / Limite Crédito
 
                     ModelLibrary.MetodosRepresentante.InserirPedidoItem(localRepresentanteForm.cCargaId, cVendedorId, vProdutoGradeId, vQuantidade, vPreco);
 
@@ -836,6 +860,8 @@ namespace ConsignadoRepresentante
         {
 
             Console.WriteLine("Editando Produtos do Pedido...");
+
+            //Inserir Regra de Limite Pedido / Limite Crédito
 
             ModelLibrary.MetodosRepresentante.AtualizarPedidoItem(cPedidoId, Convert.ToInt64(localRepresentanteForm.txtPedidoProdutoGradeId.Text), Convert.ToDecimal(localRepresentanteForm.txtPedidoQuantidade.Text), Convert.ToDecimal(localRepresentanteForm.txtPedidoPrecoUnit.Text));
 
@@ -1003,7 +1029,7 @@ namespace ConsignadoRepresentante
         {
 
 
-            List<ModelLibrary.ListaRepVendedorPedido> listaretorno = ModelLibrary.MetodosRepresentante.ObterVendedorPedidoItem(pVendedorId, localRepresentanteForm.cCargaId);
+            List<ModelLibrary.ListaRepVendedorPedido> listaretorno = ModelLibrary.MetodosRepresentante.ObterVendedorPedidoItem(cPedidoId);
 
             BindingListView<ModelLibrary.ListaRepVendedorPedido> view = new BindingListView<ModelLibrary.ListaRepVendedorPedido>(listaretorno);
 
@@ -1113,9 +1139,7 @@ namespace ConsignadoRepresentante
                 }
                 
                 
-                localRepresentanteForm.dlbAcertoAberto.Text = string.Format("{0:C2}", cValorTotalAPagar - cValorRecebido);
-
-
+                localRepresentanteForm.dlbAcertoAberto.Text = string.Format("{0:N}", cValorTotalAPagar - cValorRecebido);
                 localRepresentanteForm.txtValorRecebido.Text = string.Format("{0:N}", pedido.ValorAcerto);
             }
 
@@ -1133,7 +1157,7 @@ namespace ConsignadoRepresentante
         {
             //carregar grid de recebimentos
 
-            List<ModelLibrary.ListaRecebimentos> recebimentos = ModelLibrary.MetodosRepresentante.ObterListaRecebimentos(cVendedorId, localRepresentanteForm.cCargaId);
+            List<ModelLibrary.ListaRecebimentos> recebimentos = ModelLibrary.MetodosRepresentante.ObterListaRecebimentos(cVendedorId);
 
             BindingListView<ModelLibrary.ListaRecebimentos> view = new BindingListView<ModelLibrary.ListaRecebimentos>(recebimentos);
 
@@ -1178,7 +1202,7 @@ namespace ConsignadoRepresentante
         {
 
             cValorRecebido = localRepresentanteForm.txtValorRecebido.Text == "" ? 0 : Convert.ToDecimal(localRepresentanteForm.txtValorRecebido.Text);           
-            localRepresentanteForm.dlbAcertoAberto.Text = string.Format("{0:C2}", (cValorTotalAPagar - cValorRecebido));
+            localRepresentanteForm.dlbAcertoAberto.Text = string.Format("{0:N}", (cValorTotalAPagar - cValorRecebido));
             
         }
 
@@ -1189,6 +1213,8 @@ namespace ConsignadoRepresentante
             cDuplicataReceberId = 0;
             localRepresentanteForm.dlbDuplicataTotal.Text = "";
             localRepresentanteForm.grpReceberTitulo.Visible = false;
+            localRepresentanteForm.txtValorRecebido.Text = "";
+            localRepresentanteForm.txtDuplicataReceber.Text = "";
 
         }
 
@@ -1199,7 +1225,7 @@ namespace ConsignadoRepresentante
             cDuplicataId = localRepresentanteForm.grdFinanceiroRecebimentos.CurrentRow.Cells["Id"].Value == null ? 0 : Convert.ToInt64(localRepresentanteForm.grdFinanceiroRecebimentos.CurrentRow.Cells["Id"].Value);
             cDuplicataReceberId = Convert.ToInt64(localRepresentanteForm.grdFinanceiroRecebimentos.CurrentRow.Cells["ReceberId"].Value);
             localRepresentanteForm.txtDuplicataReceber.Text = localRepresentanteForm.grdFinanceiroRecebimentos.CurrentRow.Cells["ValorRecebido"].Value != null ? localRepresentanteForm.grdFinanceiroRecebimentos.CurrentRow.Cells["ValorRecebido"].Value.ToString() : "0";
-            localRepresentanteForm.dlbDuplicataTotal.Text = localRepresentanteForm.grdFinanceiroRecebimentos.CurrentRow.Cells["ValorDuplicata"].Value.ToString();
+            localRepresentanteForm.dlbDuplicataTotal.Text = string.Format("{0:C2}", localRepresentanteForm.grdFinanceiroRecebimentos.CurrentRow.Cells["ValorDuplicata"].Value);
             localRepresentanteForm.txtDuplicataReceber.Focus();
 
 

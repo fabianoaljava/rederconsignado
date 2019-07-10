@@ -1425,6 +1425,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(800, 480);
             this.Name = "FormDeposito";
+            this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "Reder Consignado | Módulo Representante";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormDeposito_FormClosed);

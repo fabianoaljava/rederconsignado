@@ -126,12 +126,25 @@ namespace ControllerLibrary
             {
 
                 var service = new CorreiosApi();
-                var dados = service.consultaCEP("24710480");
 
-                ret[0] = dados.uf;
-                ret[1] = dados.cidade;
-                ret[2] = dados.bairro;
-                ret[3] = dados.end;
+                try
+                {
+                    var dados = service.consultaCEP(pCep);
+
+                    ret[0] = dados.uf;
+                    ret[1] = dados.cidade;
+                    ret[2] = dados.bairro;
+                    ret[3] = dados.end;
+                } catch
+                {
+                    ret[0] = "";
+                    ret[1] = "";
+                    ret[2] = "";
+                    ret[3] = "";
+                }
+                
+
+
             } else
             {
 
