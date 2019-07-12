@@ -77,6 +77,8 @@ namespace ConsignadoDeposito
 
         public void CarregarDeposito()
         {
+            cbbCargaMesAno.Value = DateTime.Today;
+            cbbRetornoMesAno.Value = DateTime.Today;
             cCarga.CarregarListaCarga();
             cCarga.CarregarListaRepresentante();
             cRetorno.CarregarListaRetorno();
@@ -307,8 +309,11 @@ namespace ConsignadoDeposito
         {
             if (e.KeyData == Keys.Enter)
             {
-                e.SuppressKeyPress = true;
-                bntCargaOK_Click(sender, e);
+                if (cbbCargaPraca.SelectedIndex != -1 && cbbCargaRepresentante.SelectedIndex != -1)
+                {
+                    e.SuppressKeyPress = true;
+                    bntCargaOK_Click(sender, e);
+                }
             }
         }
 
@@ -580,8 +585,11 @@ namespace ConsignadoDeposito
         {
             if (e.KeyData == Keys.Enter)
             {
-                e.SuppressKeyPress = true;
-                bntRetornoOK_Click(sender, e);
+                if (cbbRetornoPraca.SelectedIndex != -1 && cbbRetornoRepresentante.SelectedIndex != -1)
+                {
+                    e.SuppressKeyPress = true;
+                    bntRetornoOK_Click(sender, e);
+                }
             }
         }
 

@@ -596,10 +596,35 @@ namespace ConsignadoDeposito
                     localDepositoForm.dlbValorComissao.Text = string.Format("{0:C2}", pedido.ValorComissao);
                     localDepositoForm.dlbValorLiquido.Text = string.Format("{0:C2}", pedido.ValorLiquido);
                     localDepositoForm.dlbRecebimentoAnterior.Text = string.Format("{0:C2}", pedido.ValorAReceber);
+                    localDepositoForm.dlbValorAcerto.Text = string.Format("{0:C2}", pedido.ValorAcerto);
+                    localDepositoForm.dlbValorRestante.Text = string.Format("{0:C2}", pedido.ValorLiquido + pedido.ValorAReceber - pedido.ValorAcerto);
 
                     localDepositoForm.dlbTotalAPagar.Text = string.Format("{0:C2}", pedido.ValorLiquido + pedido.ValorAReceber);
 
+                    string pedidostatus ="";
 
+                    switch (pedido.Status)
+                    {
+                        case "0":
+                            pedidostatus = "Aberto";
+                            break;
+                        case "1":
+                            pedidostatus = "Aguardando retorno";
+                            break;
+                        case "2":
+                            pedidostatus = "Retornado";
+                            break;
+                        case "3":
+                            pedidostatus = "Acerto realizado";
+                            break;
+                        case "4":
+                            pedidostatus = "Fechado";
+                            break;
+                    }
+                        
+
+
+                    localDepositoForm.dlbPedidoStatus.Text = pedidostatus;
                     CarregarListaLancamentoPedido();
 
 
