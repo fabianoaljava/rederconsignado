@@ -1039,6 +1039,25 @@ namespace ModelLibrary
         }
 
 
+        public static ListaRecebimentos ObterAReceberVendedor(long pVendedorId)
+        {
+            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            {
+
+                string query = @"SELECT MAX(RepReceberBaixa.Id) Id, MAX(RepReceber.Id) ReceberId, Max(Documento) Documento, Max(Serie) Serie, Sum(ValorNF) 
+                                as ValorDuplicata, Sum(Valor) as ValorRecebido, Max(DataEmissao) DataEmissao, Max(DataVencimento) DataVencimento, 
+                                Max(RepReceberBaixa.DataPagamento) DataPagamento, Max(Observacoes) Observacoes
+                                FROM RepReceber LEFT JOIN RepReceberBaixa ON RepReceber.Id = RepReceberBaixa.ReceberId 
+                                WHERE vendedorId = @p0";
+
+                ListaRecebimentos result = context.Database.SqlQuery<ListaRecebimentos>(query, pVendedorId).FirstOrDefault();
+
+                return result;
+
+            }
+        }
+
+
         public static void ReceberAcerto(long pPedidoId, decimal pValor)
         {
 

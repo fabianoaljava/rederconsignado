@@ -426,7 +426,7 @@ namespace ModelLibrary
                 {
                     if (row.ValorLiquido - row.ValorAcerto > 0)
                     {
-                        ModelLibrary.MetodosDeposito.IncluirReceber(Convert.ToInt32(cCargaId), Convert.ToInt32(row.VendedorId), Convert.ToDouble(row.ValorLiquido - row.ValorAcerto), Convert.ToDateTime(row.DataPrevisaoRetorno));
+                        ModelLibrary.MetodosDeposito.IncluirReceber(Convert.ToInt32(cCargaId), Convert.ToInt32(row.VendedorId), Convert.ToDouble(row.ValorLiquido + row.ValorAReceber - row.ValorAcerto), Convert.ToDateTime(row.DataPrevisaoRetorno));
                     }
                 }
             }

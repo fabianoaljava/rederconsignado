@@ -9,7 +9,7 @@ namespace ModelLibrary
     public class ListaRecebimentos
     {
         public Nullable<long> Id { get; set; }
-        public long ReceberId { get; set; }
+        public Nullable<long> ReceberId { get; set; }
         public Nullable<long> Documento { get; set; }
         public string Serie { get; set; }
         public Nullable<decimal> ValorDuplicata { get; set; }

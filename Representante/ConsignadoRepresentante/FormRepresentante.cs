@@ -671,5 +671,10 @@ namespace ConsignadoRepresentante
             cVendedor.PedidoNovo();
 
         }
+
+        private void txtEmail_Validating(object sender, CancelEventArgs e)
+        {
+            cVendedor.ValidarEmail(txtEmail.Text, sender, e);
+        }
     }
 }

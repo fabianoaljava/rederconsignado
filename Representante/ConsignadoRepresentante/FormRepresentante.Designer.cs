@@ -69,25 +69,19 @@
             this.chkVendedorComPedidoAnterior = new MetroFramework.Controls.MetroCheckBox();
             this.pnlHomeGrid = new MetroFramework.Controls.MetroPanel();
             this.grdHome = new MetroFramework.Controls.MetroGrid();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.documentoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.enderecoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.complementoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bairroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cidadeUFDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.telefonesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pedidoAnteriorDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.recebidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pedidoAtualDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.codigoPedidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.receberDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.listaRepVendedorHomeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabVendedores = new System.Windows.Forms.TabPage();
             this.pnlVendedorResultado = new MetroFramework.Controls.MetroPanel();
             this.tbcVendedor = new MetroFramework.Controls.MetroTabControl();
             this.tabVendedorInicio = new System.Windows.Forms.TabPage();
             this.pnlVendedorInicio = new MetroFramework.Controls.MetroPanel();
+            this.dlbLimiteCreditoUtilizado = new MetroFramework.Controls.MetroLabel();
+            this.lblInicioLimiteCredUtilizado = new MetroFramework.Controls.MetroLabel();
+            this.dlbLimiteCredito = new MetroFramework.Controls.MetroLabel();
+            this.lblInicioLimiteCredito = new MetroFramework.Controls.MetroLabel();
+            this.dlbLimitePedidoUtilizado = new MetroFramework.Controls.MetroLabel();
+            this.lblInicioLimitePedUtilizado = new MetroFramework.Controls.MetroLabel();
+            this.dlbLimitePedido = new MetroFramework.Controls.MetroLabel();
+            this.lblInicioLimitePedido = new MetroFramework.Controls.MetroLabel();
             this.lblInicioRemarcado = new MetroFramework.Controls.MetroLabel();
             this.lblInicioValorAReceber = new MetroFramework.Controls.MetroLabel();
             this.lblInicioValorAberto = new MetroFramework.Controls.MetroLabel();
@@ -242,6 +236,28 @@
             this.tabProdutos = new System.Windows.Forms.TabPage();
             this.tabEstoque = new System.Windows.Forms.TabPage();
             this.tabAjuda = new System.Windows.Forms.TabPage();
+            this.dlbPedidoTotal = new MetroFramework.Controls.MetroLabel();
+            this.lblPedidoTotal = new MetroFramework.Controls.MetroLabel();
+            this.lblRetornoTotalPedido = new MetroFramework.Controls.MetroLabel();
+            this.dlbRetornoTotalPedido = new MetroFramework.Controls.MetroLabel();
+            this.txtRetornoQtdPedido = new MetroFramework.Controls.MetroTextBox();
+            this.txtRetornoPreco = new MetroFramework.Controls.MetroTextBox();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.documentoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.enderecoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.complementoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bairroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cidadeUFDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.telefonesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pedidoAnteriorDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.recebidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pedidoAtualDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.codigoPedidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.receberDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.listaRepVendedorHomeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.txtPedidoPrecoOriginal = new MetroFramework.Controls.MetroTextBox();
+            this.txtPedidoQtdOriginal = new MetroFramework.Controls.MetroTextBox();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
@@ -252,7 +268,6 @@
             this.pnlHomeFiltros.SuspendLayout();
             this.pnlHomeGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdHome)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.listaRepVendedorHomeBindingSource)).BeginInit();
             this.tabVendedores.SuspendLayout();
             this.pnlVendedorResultado.SuspendLayout();
             this.tbcVendedor.SuspendLayout();
@@ -282,6 +297,7 @@
             this.pnlPosicaoFinanceiraMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdPosicaoFinanceira)).BeginInit();
             this.pnlPosicaoFinanceiraLegenda.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.listaRepVendedorHomeBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -579,88 +595,6 @@
             this.grdHome.VirtualMode = true;
             this.grdHome.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdHome_CellContentDoubleClick);
             // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            // 
-            // nomeDataGridViewTextBoxColumn
-            // 
-            this.nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
-            this.nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
-            this.nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
-            // 
-            // documentoDataGridViewTextBoxColumn
-            // 
-            this.documentoDataGridViewTextBoxColumn.DataPropertyName = "Documento";
-            this.documentoDataGridViewTextBoxColumn.HeaderText = "Documento";
-            this.documentoDataGridViewTextBoxColumn.Name = "documentoDataGridViewTextBoxColumn";
-            // 
-            // enderecoDataGridViewTextBoxColumn
-            // 
-            this.enderecoDataGridViewTextBoxColumn.DataPropertyName = "Endereco";
-            this.enderecoDataGridViewTextBoxColumn.HeaderText = "Endereco";
-            this.enderecoDataGridViewTextBoxColumn.Name = "enderecoDataGridViewTextBoxColumn";
-            // 
-            // complementoDataGridViewTextBoxColumn
-            // 
-            this.complementoDataGridViewTextBoxColumn.DataPropertyName = "Complemento";
-            this.complementoDataGridViewTextBoxColumn.HeaderText = "Complemento";
-            this.complementoDataGridViewTextBoxColumn.Name = "complementoDataGridViewTextBoxColumn";
-            // 
-            // bairroDataGridViewTextBoxColumn
-            // 
-            this.bairroDataGridViewTextBoxColumn.DataPropertyName = "Bairro";
-            this.bairroDataGridViewTextBoxColumn.HeaderText = "Bairro";
-            this.bairroDataGridViewTextBoxColumn.Name = "bairroDataGridViewTextBoxColumn";
-            // 
-            // cidadeUFDataGridViewTextBoxColumn
-            // 
-            this.cidadeUFDataGridViewTextBoxColumn.DataPropertyName = "CidadeUF";
-            this.cidadeUFDataGridViewTextBoxColumn.HeaderText = "CidadeUF";
-            this.cidadeUFDataGridViewTextBoxColumn.Name = "cidadeUFDataGridViewTextBoxColumn";
-            // 
-            // telefonesDataGridViewTextBoxColumn
-            // 
-            this.telefonesDataGridViewTextBoxColumn.DataPropertyName = "Telefones";
-            this.telefonesDataGridViewTextBoxColumn.HeaderText = "Telefones";
-            this.telefonesDataGridViewTextBoxColumn.Name = "telefonesDataGridViewTextBoxColumn";
-            // 
-            // pedidoAnteriorDataGridViewCheckBoxColumn
-            // 
-            this.pedidoAnteriorDataGridViewCheckBoxColumn.DataPropertyName = "PedidoAnterior";
-            this.pedidoAnteriorDataGridViewCheckBoxColumn.HeaderText = "PedidoAnterior";
-            this.pedidoAnteriorDataGridViewCheckBoxColumn.Name = "pedidoAnteriorDataGridViewCheckBoxColumn";
-            // 
-            // recebidoDataGridViewTextBoxColumn
-            // 
-            this.recebidoDataGridViewTextBoxColumn.DataPropertyName = "Recebido";
-            this.recebidoDataGridViewTextBoxColumn.HeaderText = "Recebido";
-            this.recebidoDataGridViewTextBoxColumn.Name = "recebidoDataGridViewTextBoxColumn";
-            // 
-            // pedidoAtualDataGridViewCheckBoxColumn
-            // 
-            this.pedidoAtualDataGridViewCheckBoxColumn.DataPropertyName = "PedidoAtual";
-            this.pedidoAtualDataGridViewCheckBoxColumn.HeaderText = "PedidoAtual";
-            this.pedidoAtualDataGridViewCheckBoxColumn.Name = "pedidoAtualDataGridViewCheckBoxColumn";
-            // 
-            // codigoPedidoDataGridViewTextBoxColumn
-            // 
-            this.codigoPedidoDataGridViewTextBoxColumn.DataPropertyName = "CodigoPedido";
-            this.codigoPedidoDataGridViewTextBoxColumn.HeaderText = "CodigoPedido";
-            this.codigoPedidoDataGridViewTextBoxColumn.Name = "codigoPedidoDataGridViewTextBoxColumn";
-            // 
-            // receberDataGridViewCheckBoxColumn
-            // 
-            this.receberDataGridViewCheckBoxColumn.DataPropertyName = "Receber";
-            this.receberDataGridViewCheckBoxColumn.HeaderText = "Receber";
-            this.receberDataGridViewCheckBoxColumn.Name = "receberDataGridViewCheckBoxColumn";
-            // 
-            // listaRepVendedorHomeBindingSource
-            // 
-            this.listaRepVendedorHomeBindingSource.DataSource = typeof(ModelLibrary.ListaRepVendedorHome);
-            // 
             // tabVendedores
             // 
             this.tabVendedores.Controls.Add(this.pnlVendedorResultado);
@@ -713,6 +647,14 @@
             // 
             // pnlVendedorInicio
             // 
+            this.pnlVendedorInicio.Controls.Add(this.dlbLimiteCreditoUtilizado);
+            this.pnlVendedorInicio.Controls.Add(this.lblInicioLimiteCredUtilizado);
+            this.pnlVendedorInicio.Controls.Add(this.dlbLimiteCredito);
+            this.pnlVendedorInicio.Controls.Add(this.lblInicioLimiteCredito);
+            this.pnlVendedorInicio.Controls.Add(this.dlbLimitePedidoUtilizado);
+            this.pnlVendedorInicio.Controls.Add(this.lblInicioLimitePedUtilizado);
+            this.pnlVendedorInicio.Controls.Add(this.dlbLimitePedido);
+            this.pnlVendedorInicio.Controls.Add(this.lblInicioLimitePedido);
             this.pnlVendedorInicio.Controls.Add(this.lblInicioRemarcado);
             this.pnlVendedorInicio.Controls.Add(this.lblInicioValorAReceber);
             this.pnlVendedorInicio.Controls.Add(this.lblInicioValorAberto);
@@ -738,10 +680,86 @@
             this.pnlVendedorInicio.VerticalScrollbarHighlightOnWheel = false;
             this.pnlVendedorInicio.VerticalScrollbarSize = 10;
             // 
+            // dlbLimiteCreditoUtilizado
+            // 
+            this.dlbLimiteCreditoUtilizado.AutoSize = true;
+            this.dlbLimiteCreditoUtilizado.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.dlbLimiteCreditoUtilizado.Location = new System.Drawing.Point(416, 107);
+            this.dlbLimiteCreditoUtilizado.Name = "dlbLimiteCreditoUtilizado";
+            this.dlbLimiteCreditoUtilizado.Size = new System.Drawing.Size(36, 19);
+            this.dlbLimiteCreditoUtilizado.TabIndex = 26;
+            this.dlbLimiteCreditoUtilizado.Text = "N/A";
+            // 
+            // lblInicioLimiteCredUtilizado
+            // 
+            this.lblInicioLimiteCredUtilizado.AutoSize = true;
+            this.lblInicioLimiteCredUtilizado.Location = new System.Drawing.Point(415, 88);
+            this.lblInicioLimiteCredUtilizado.Name = "lblInicioLimiteCredUtilizado";
+            this.lblInicioLimiteCredUtilizado.Size = new System.Drawing.Size(102, 19);
+            this.lblInicioLimiteCredUtilizado.TabIndex = 25;
+            this.lblInicioLimiteCredUtilizado.Text = "Limite Utilizado:";
+            // 
+            // dlbLimiteCredito
+            // 
+            this.dlbLimiteCredito.AutoSize = true;
+            this.dlbLimiteCredito.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.dlbLimiteCredito.Location = new System.Drawing.Point(275, 107);
+            this.dlbLimiteCredito.Name = "dlbLimiteCredito";
+            this.dlbLimiteCredito.Size = new System.Drawing.Size(36, 19);
+            this.dlbLimiteCredito.TabIndex = 24;
+            this.dlbLimiteCredito.Text = "N/A";
+            // 
+            // lblInicioLimiteCredito
+            // 
+            this.lblInicioLimiteCredito.AutoSize = true;
+            this.lblInicioLimiteCredito.Location = new System.Drawing.Point(274, 88);
+            this.lblInicioLimiteCredito.Name = "lblInicioLimiteCredito";
+            this.lblInicioLimiteCredito.Size = new System.Drawing.Size(114, 19);
+            this.lblInicioLimiteCredito.TabIndex = 23;
+            this.lblInicioLimiteCredito.Text = "Limite de Crédito:";
+            // 
+            // dlbLimitePedidoUtilizado
+            // 
+            this.dlbLimitePedidoUtilizado.AutoSize = true;
+            this.dlbLimitePedidoUtilizado.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.dlbLimitePedidoUtilizado.Location = new System.Drawing.Point(153, 107);
+            this.dlbLimitePedidoUtilizado.Name = "dlbLimitePedidoUtilizado";
+            this.dlbLimitePedidoUtilizado.Size = new System.Drawing.Size(36, 19);
+            this.dlbLimitePedidoUtilizado.TabIndex = 22;
+            this.dlbLimitePedidoUtilizado.Text = "N/A";
+            // 
+            // lblInicioLimitePedUtilizado
+            // 
+            this.lblInicioLimitePedUtilizado.AutoSize = true;
+            this.lblInicioLimitePedUtilizado.Location = new System.Drawing.Point(152, 88);
+            this.lblInicioLimitePedUtilizado.Name = "lblInicioLimitePedUtilizado";
+            this.lblInicioLimitePedUtilizado.Size = new System.Drawing.Size(102, 19);
+            this.lblInicioLimitePedUtilizado.TabIndex = 21;
+            this.lblInicioLimitePedUtilizado.Text = "Limite Utilizado:";
+            // 
+            // dlbLimitePedido
+            // 
+            this.dlbLimitePedido.AutoSize = true;
+            this.dlbLimitePedido.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.dlbLimitePedido.Location = new System.Drawing.Point(12, 107);
+            this.dlbLimitePedido.Name = "dlbLimitePedido";
+            this.dlbLimitePedido.Size = new System.Drawing.Size(36, 19);
+            this.dlbLimitePedido.TabIndex = 20;
+            this.dlbLimitePedido.Text = "N/A";
+            // 
+            // lblInicioLimitePedido
+            // 
+            this.lblInicioLimitePedido.AutoSize = true;
+            this.lblInicioLimitePedido.Location = new System.Drawing.Point(11, 88);
+            this.lblInicioLimitePedido.Name = "lblInicioLimitePedido";
+            this.lblInicioLimitePedido.Size = new System.Drawing.Size(111, 19);
+            this.lblInicioLimitePedido.TabIndex = 19;
+            this.lblInicioLimitePedido.Text = "Limite de Pedido:";
+            // 
             // lblInicioRemarcado
             // 
             this.lblInicioRemarcado.AutoSize = true;
-            this.lblInicioRemarcado.Location = new System.Drawing.Point(520, 148);
+            this.lblInicioRemarcado.Location = new System.Drawing.Point(517, 203);
             this.lblInicioRemarcado.Name = "lblInicioRemarcado";
             this.lblInicioRemarcado.Size = new System.Drawing.Size(83, 19);
             this.lblInicioRemarcado.TabIndex = 18;
@@ -751,7 +769,7 @@
             // lblInicioValorAReceber
             // 
             this.lblInicioValorAReceber.AutoSize = true;
-            this.lblInicioValorAReceber.Location = new System.Drawing.Point(11, 92);
+            this.lblInicioValorAReceber.Location = new System.Drawing.Point(10, 148);
             this.lblInicioValorAReceber.Name = "lblInicioValorAReceber";
             this.lblInicioValorAReceber.Size = new System.Drawing.Size(101, 19);
             this.lblInicioValorAReceber.TabIndex = 17;
@@ -761,7 +779,7 @@
             // lblInicioValorAberto
             // 
             this.lblInicioValorAberto.AutoSize = true;
-            this.lblInicioValorAberto.Location = new System.Drawing.Point(302, 92);
+            this.lblInicioValorAberto.Location = new System.Drawing.Point(301, 148);
             this.lblInicioValorAberto.Name = "lblInicioValorAberto";
             this.lblInicioValorAberto.Size = new System.Drawing.Size(84, 19);
             this.lblInicioValorAberto.TabIndex = 16;
@@ -771,7 +789,7 @@
             // lblInicioValorRecebido
             // 
             this.lblInicioValorRecebido.AutoSize = true;
-            this.lblInicioValorRecebido.Location = new System.Drawing.Point(160, 92);
+            this.lblInicioValorRecebido.Location = new System.Drawing.Point(152, 148);
             this.lblInicioValorRecebido.Name = "lblInicioValorRecebido";
             this.lblInicioValorRecebido.Size = new System.Drawing.Size(97, 19);
             this.lblInicioValorRecebido.TabIndex = 15;
@@ -790,7 +808,7 @@
             // lblInicioReceber
             // 
             this.lblInicioReceber.AutoSize = true;
-            this.lblInicioReceber.Location = new System.Drawing.Point(419, 148);
+            this.lblInicioReceber.Location = new System.Drawing.Point(416, 203);
             this.lblInicioReceber.Name = "lblInicioReceber";
             this.lblInicioReceber.Size = new System.Drawing.Size(63, 19);
             this.lblInicioReceber.TabIndex = 13;
@@ -800,7 +818,7 @@
             // lblInicioPedidoAtual
             // 
             this.lblInicioPedidoAtual.AutoSize = true;
-            this.lblInicioPedidoAtual.Location = new System.Drawing.Point(277, 148);
+            this.lblInicioPedidoAtual.Location = new System.Drawing.Point(274, 203);
             this.lblInicioPedidoAtual.Name = "lblInicioPedidoAtual";
             this.lblInicioPedidoAtual.Size = new System.Drawing.Size(90, 19);
             this.lblInicioPedidoAtual.TabIndex = 12;
@@ -810,7 +828,7 @@
             // lblInicioRecebido
             // 
             this.lblInicioRecebido.AutoSize = true;
-            this.lblInicioRecebido.Location = new System.Drawing.Point(158, 148);
+            this.lblInicioRecebido.Location = new System.Drawing.Point(155, 203);
             this.lblInicioRecebido.Name = "lblInicioRecebido";
             this.lblInicioRecebido.Size = new System.Drawing.Size(70, 19);
             this.lblInicioRecebido.TabIndex = 11;
@@ -820,7 +838,7 @@
             // lblInicioPedidoAnterior
             // 
             this.lblInicioPedidoAnterior.AutoSize = true;
-            this.lblInicioPedidoAnterior.Location = new System.Drawing.Point(16, 148);
+            this.lblInicioPedidoAnterior.Location = new System.Drawing.Point(13, 203);
             this.lblInicioPedidoAnterior.Name = "lblInicioPedidoAnterior";
             this.lblInicioPedidoAnterior.Size = new System.Drawing.Size(108, 19);
             this.lblInicioPedidoAnterior.TabIndex = 10;
@@ -1312,6 +1330,7 @@
             this.txtEmail.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtEmail.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.txtEmail.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
+            this.txtEmail.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmail_Validating);
             // 
             // txtCelular
             // 
@@ -1419,7 +1438,7 @@
             // 
             this.cbbDataNasc.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.cbbDataNasc.Location = new System.Drawing.Point(810, 76);
-            this.cbbDataNasc.MinimumSize = new System.Drawing.Size(4, 29);
+            this.cbbDataNasc.MinimumSize = new System.Drawing.Size(0, 29);
             this.cbbDataNasc.Name = "cbbDataNasc";
             this.cbbDataNasc.Size = new System.Drawing.Size(111, 29);
             this.cbbDataNasc.TabIndex = 11;
@@ -1884,6 +1903,10 @@
             // 
             // pnlVendedorPedidoMontar
             // 
+            this.pnlVendedorPedidoMontar.Controls.Add(this.txtPedidoPrecoOriginal);
+            this.pnlVendedorPedidoMontar.Controls.Add(this.txtPedidoQtdOriginal);
+            this.pnlVendedorPedidoMontar.Controls.Add(this.lblPedidoTotal);
+            this.pnlVendedorPedidoMontar.Controls.Add(this.dlbPedidoTotal);
             this.pnlVendedorPedidoMontar.Controls.Add(this.txtPedidoProdutoGradeId);
             this.pnlVendedorPedidoMontar.Controls.Add(this.txtPedidoPrecoUnit);
             this.pnlVendedorPedidoMontar.Controls.Add(this.lblVendedorMontarPedido);
@@ -1920,7 +1943,7 @@
             this.txtPedidoProdutoGradeId.CustomButton.UseSelectable = true;
             this.txtPedidoProdutoGradeId.CustomButton.Visible = false;
             this.txtPedidoProdutoGradeId.Lines = new string[0];
-            this.txtPedidoProdutoGradeId.Location = new System.Drawing.Point(839, 9);
+            this.txtPedidoProdutoGradeId.Location = new System.Drawing.Point(651, 7);
             this.txtPedidoProdutoGradeId.MaxLength = 32767;
             this.txtPedidoProdutoGradeId.Name = "txtPedidoProdutoGradeId";
             this.txtPedidoProdutoGradeId.PasswordChar = '\0';
@@ -2234,6 +2257,10 @@
             // 
             // pnlVendedorRetorno
             // 
+            this.pnlVendedorRetorno.Controls.Add(this.txtRetornoPreco);
+            this.pnlVendedorRetorno.Controls.Add(this.txtRetornoQtdPedido);
+            this.pnlVendedorRetorno.Controls.Add(this.lblRetornoTotalPedido);
+            this.pnlVendedorRetorno.Controls.Add(this.dlbRetornoTotalPedido);
             this.pnlVendedorRetorno.Controls.Add(this.txtRetornoProdutoGradeId);
             this.pnlVendedorRetorno.Controls.Add(this.lblVendedorRetorno);
             this.pnlVendedorRetorno.Controls.Add(this.btnRetornoCancelar);
@@ -2269,7 +2296,7 @@
             this.txtRetornoProdutoGradeId.CustomButton.UseSelectable = true;
             this.txtRetornoProdutoGradeId.CustomButton.Visible = false;
             this.txtRetornoProdutoGradeId.Lines = new string[0];
-            this.txtRetornoProdutoGradeId.Location = new System.Drawing.Point(849, 8);
+            this.txtRetornoProdutoGradeId.Location = new System.Drawing.Point(652, 6);
             this.txtRetornoProdutoGradeId.MaxLength = 32767;
             this.txtRetornoProdutoGradeId.Name = "txtRetornoProdutoGradeId";
             this.txtRetornoProdutoGradeId.PasswordChar = '\0';
@@ -2301,7 +2328,7 @@
             // btnRetornoCancelar
             // 
             this.btnRetornoCancelar.Enabled = false;
-            this.btnRetornoCancelar.Location = new System.Drawing.Point(748, 35);
+            this.btnRetornoCancelar.Location = new System.Drawing.Point(684, 35);
             this.btnRetornoCancelar.Name = "btnRetornoCancelar";
             this.btnRetornoCancelar.Size = new System.Drawing.Size(67, 23);
             this.btnRetornoCancelar.TabIndex = 30;
@@ -2314,7 +2341,7 @@
             this.chkRetornoQuantidade.AutoSize = true;
             this.chkRetornoQuantidade.Checked = true;
             this.chkRetornoQuantidade.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkRetornoQuantidade.Location = new System.Drawing.Point(530, 16);
+            this.chkRetornoQuantidade.Location = new System.Drawing.Point(465, 16);
             this.chkRetornoQuantidade.Name = "chkRetornoQuantidade";
             this.chkRetornoQuantidade.Size = new System.Drawing.Size(97, 15);
             this.chkRetornoQuantidade.TabIndex = 31;
@@ -2325,7 +2352,7 @@
             // btnRetornoConfirmar
             // 
             this.btnRetornoConfirmar.Enabled = false;
-            this.btnRetornoConfirmar.Location = new System.Drawing.Point(676, 35);
+            this.btnRetornoConfirmar.Location = new System.Drawing.Point(612, 35);
             this.btnRetornoConfirmar.Name = "btnRetornoConfirmar";
             this.btnRetornoConfirmar.Size = new System.Drawing.Size(66, 23);
             this.btnRetornoConfirmar.TabIndex = 29;
@@ -2348,7 +2375,7 @@
             this.txtRetornoQuantidade.CustomButton.UseSelectable = true;
             this.txtRetornoQuantidade.CustomButton.Visible = false;
             this.txtRetornoQuantidade.Lines = new string[0];
-            this.txtRetornoQuantidade.Location = new System.Drawing.Point(530, 35);
+            this.txtRetornoQuantidade.Location = new System.Drawing.Point(465, 35);
             this.txtRetornoQuantidade.MaxLength = 32767;
             this.txtRetornoQuantidade.Name = "txtRetornoQuantidade";
             this.txtRetornoQuantidade.PasswordChar = '\0';
@@ -2373,7 +2400,7 @@
             // 
             // 
             this.txtRetornoProduto.CustomButton.Image = null;
-            this.txtRetornoProduto.CustomButton.Location = new System.Drawing.Point(371, 1);
+            this.txtRetornoProduto.CustomButton.Location = new System.Drawing.Point(306, 1);
             this.txtRetornoProduto.CustomButton.Name = "";
             this.txtRetornoProduto.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.txtRetornoProduto.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -2393,7 +2420,7 @@
             this.txtRetornoProduto.SelectionLength = 0;
             this.txtRetornoProduto.SelectionStart = 0;
             this.txtRetornoProduto.ShortcutsEnabled = true;
-            this.txtRetornoProduto.Size = new System.Drawing.Size(393, 23);
+            this.txtRetornoProduto.Size = new System.Drawing.Size(328, 23);
             this.txtRetornoProduto.TabIndex = 27;
             this.txtRetornoProduto.UseSelectable = true;
             this.txtRetornoProduto.WaterMark = "Nome do Produto";
@@ -2647,13 +2674,12 @@
             // 
             this.lblAcertoInfo.AutoSize = true;
             this.lblAcertoInfo.ForeColor = System.Drawing.Color.DimGray;
-            this.lblAcertoInfo.Location = new System.Drawing.Point(17, 97);
+            this.lblAcertoInfo.Location = new System.Drawing.Point(17, 93);
             this.lblAcertoInfo.Name = "lblAcertoInfo";
             this.lblAcertoInfo.Size = new System.Drawing.Size(306, 19);
             this.lblAcertoInfo.TabIndex = 27;
             this.lblAcertoInfo.Text = "O vendedor não possui nehum pedido em aberto.";
             this.lblAcertoInfo.UseCustomForeColor = true;
-            this.lblAcertoInfo.Visible = false;
             // 
             // grpRecebimento
             // 
@@ -2773,7 +2799,7 @@
             this.grpFinanceiroCalculo.Controls.Add(this.dlbValorPedido);
             this.grpFinanceiroCalculo.Controls.Add(this.lblValorCompra);
             this.grpFinanceiroCalculo.Controls.Add(this.lblValorPedido);
-            this.grpFinanceiroCalculo.Location = new System.Drawing.Point(17, 15);
+            this.grpFinanceiroCalculo.Location = new System.Drawing.Point(17, 8);
             this.grpFinanceiroCalculo.Name = "grpFinanceiroCalculo";
             this.grpFinanceiroCalculo.Size = new System.Drawing.Size(912, 83);
             this.grpFinanceiroCalculo.TabIndex = 2;
@@ -3344,6 +3370,260 @@
             this.tabAjuda.TabIndex = 5;
             this.tabAjuda.Text = "AJUDA";
             // 
+            // dlbPedidoTotal
+            // 
+            this.dlbPedidoTotal.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.dlbPedidoTotal.Location = new System.Drawing.Point(760, 36);
+            this.dlbPedidoTotal.Name = "dlbPedidoTotal";
+            this.dlbPedidoTotal.Size = new System.Drawing.Size(170, 23);
+            this.dlbPedidoTotal.TabIndex = 28;
+            this.dlbPedidoTotal.Text = "N/A";
+            // 
+            // lblPedidoTotal
+            // 
+            this.lblPedidoTotal.AutoSize = true;
+            this.lblPedidoTotal.Location = new System.Drawing.Point(760, 13);
+            this.lblPedidoTotal.Name = "lblPedidoTotal";
+            this.lblPedidoTotal.Size = new System.Drawing.Size(84, 19);
+            this.lblPedidoTotal.TabIndex = 29;
+            this.lblPedidoTotal.Text = "Total Pedido:";
+            // 
+            // lblRetornoTotalPedido
+            // 
+            this.lblRetornoTotalPedido.AutoSize = true;
+            this.lblRetornoTotalPedido.Location = new System.Drawing.Point(757, 10);
+            this.lblRetornoTotalPedido.Name = "lblRetornoTotalPedido";
+            this.lblRetornoTotalPedido.Size = new System.Drawing.Size(84, 19);
+            this.lblRetornoTotalPedido.TabIndex = 35;
+            this.lblRetornoTotalPedido.Text = "Total Pedido:";
+            // 
+            // dlbRetornoTotalPedido
+            // 
+            this.dlbRetornoTotalPedido.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.dlbRetornoTotalPedido.Location = new System.Drawing.Point(757, 33);
+            this.dlbRetornoTotalPedido.Name = "dlbRetornoTotalPedido";
+            this.dlbRetornoTotalPedido.Size = new System.Drawing.Size(170, 23);
+            this.dlbRetornoTotalPedido.TabIndex = 34;
+            this.dlbRetornoTotalPedido.Text = "N/A";
+            // 
+            // txtRetornoQtdPedido
+            // 
+            // 
+            // 
+            // 
+            this.txtRetornoQtdPedido.CustomButton.Image = null;
+            this.txtRetornoQtdPedido.CustomButton.Location = new System.Drawing.Point(77, 1);
+            this.txtRetornoQtdPedido.CustomButton.Name = "";
+            this.txtRetornoQtdPedido.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtRetornoQtdPedido.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtRetornoQtdPedido.CustomButton.TabIndex = 1;
+            this.txtRetornoQtdPedido.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtRetornoQtdPedido.CustomButton.UseSelectable = true;
+            this.txtRetornoQtdPedido.CustomButton.Visible = false;
+            this.txtRetornoQtdPedido.Lines = new string[0];
+            this.txtRetornoQtdPedido.Location = new System.Drawing.Point(847, 6);
+            this.txtRetornoQtdPedido.MaxLength = 32767;
+            this.txtRetornoQtdPedido.Name = "txtRetornoQtdPedido";
+            this.txtRetornoQtdPedido.PasswordChar = '\0';
+            this.txtRetornoQtdPedido.PromptText = "Quantidade";
+            this.txtRetornoQtdPedido.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtRetornoQtdPedido.SelectedText = "";
+            this.txtRetornoQtdPedido.SelectionLength = 0;
+            this.txtRetornoQtdPedido.SelectionStart = 0;
+            this.txtRetornoQtdPedido.ShortcutsEnabled = true;
+            this.txtRetornoQtdPedido.Size = new System.Drawing.Size(99, 23);
+            this.txtRetornoQtdPedido.TabIndex = 36;
+            this.txtRetornoQtdPedido.TabStop = false;
+            this.txtRetornoQtdPedido.UseSelectable = true;
+            this.txtRetornoQtdPedido.Visible = false;
+            this.txtRetornoQtdPedido.WaterMark = "Quantidade";
+            this.txtRetornoQtdPedido.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtRetornoQtdPedido.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // txtRetornoPreco
+            // 
+            // 
+            // 
+            // 
+            this.txtRetornoPreco.CustomButton.Image = null;
+            this.txtRetornoPreco.CustomButton.Location = new System.Drawing.Point(77, 1);
+            this.txtRetornoPreco.CustomButton.Name = "";
+            this.txtRetornoPreco.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtRetornoPreco.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtRetornoPreco.CustomButton.TabIndex = 1;
+            this.txtRetornoPreco.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtRetornoPreco.CustomButton.UseSelectable = true;
+            this.txtRetornoPreco.CustomButton.Visible = false;
+            this.txtRetornoPreco.Lines = new string[0];
+            this.txtRetornoPreco.Location = new System.Drawing.Point(847, 35);
+            this.txtRetornoPreco.MaxLength = 32767;
+            this.txtRetornoPreco.Name = "txtRetornoPreco";
+            this.txtRetornoPreco.PasswordChar = '\0';
+            this.txtRetornoPreco.PromptText = "Preco";
+            this.txtRetornoPreco.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtRetornoPreco.SelectedText = "";
+            this.txtRetornoPreco.SelectionLength = 0;
+            this.txtRetornoPreco.SelectionStart = 0;
+            this.txtRetornoPreco.ShortcutsEnabled = true;
+            this.txtRetornoPreco.Size = new System.Drawing.Size(99, 23);
+            this.txtRetornoPreco.TabIndex = 37;
+            this.txtRetornoPreco.TabStop = false;
+            this.txtRetornoPreco.UseSelectable = true;
+            this.txtRetornoPreco.Visible = false;
+            this.txtRetornoPreco.WaterMark = "Preco";
+            this.txtRetornoPreco.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtRetornoPreco.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            // 
+            // nomeDataGridViewTextBoxColumn
+            // 
+            this.nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
+            this.nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
+            this.nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
+            // 
+            // documentoDataGridViewTextBoxColumn
+            // 
+            this.documentoDataGridViewTextBoxColumn.DataPropertyName = "Documento";
+            this.documentoDataGridViewTextBoxColumn.HeaderText = "Documento";
+            this.documentoDataGridViewTextBoxColumn.Name = "documentoDataGridViewTextBoxColumn";
+            // 
+            // enderecoDataGridViewTextBoxColumn
+            // 
+            this.enderecoDataGridViewTextBoxColumn.DataPropertyName = "Endereco";
+            this.enderecoDataGridViewTextBoxColumn.HeaderText = "Endereco";
+            this.enderecoDataGridViewTextBoxColumn.Name = "enderecoDataGridViewTextBoxColumn";
+            // 
+            // complementoDataGridViewTextBoxColumn
+            // 
+            this.complementoDataGridViewTextBoxColumn.DataPropertyName = "Complemento";
+            this.complementoDataGridViewTextBoxColumn.HeaderText = "Complemento";
+            this.complementoDataGridViewTextBoxColumn.Name = "complementoDataGridViewTextBoxColumn";
+            // 
+            // bairroDataGridViewTextBoxColumn
+            // 
+            this.bairroDataGridViewTextBoxColumn.DataPropertyName = "Bairro";
+            this.bairroDataGridViewTextBoxColumn.HeaderText = "Bairro";
+            this.bairroDataGridViewTextBoxColumn.Name = "bairroDataGridViewTextBoxColumn";
+            // 
+            // cidadeUFDataGridViewTextBoxColumn
+            // 
+            this.cidadeUFDataGridViewTextBoxColumn.DataPropertyName = "CidadeUF";
+            this.cidadeUFDataGridViewTextBoxColumn.HeaderText = "CidadeUF";
+            this.cidadeUFDataGridViewTextBoxColumn.Name = "cidadeUFDataGridViewTextBoxColumn";
+            // 
+            // telefonesDataGridViewTextBoxColumn
+            // 
+            this.telefonesDataGridViewTextBoxColumn.DataPropertyName = "Telefones";
+            this.telefonesDataGridViewTextBoxColumn.HeaderText = "Telefones";
+            this.telefonesDataGridViewTextBoxColumn.Name = "telefonesDataGridViewTextBoxColumn";
+            // 
+            // pedidoAnteriorDataGridViewCheckBoxColumn
+            // 
+            this.pedidoAnteriorDataGridViewCheckBoxColumn.DataPropertyName = "PedidoAnterior";
+            this.pedidoAnteriorDataGridViewCheckBoxColumn.HeaderText = "PedidoAnterior";
+            this.pedidoAnteriorDataGridViewCheckBoxColumn.Name = "pedidoAnteriorDataGridViewCheckBoxColumn";
+            // 
+            // recebidoDataGridViewTextBoxColumn
+            // 
+            this.recebidoDataGridViewTextBoxColumn.DataPropertyName = "Recebido";
+            this.recebidoDataGridViewTextBoxColumn.HeaderText = "Recebido";
+            this.recebidoDataGridViewTextBoxColumn.Name = "recebidoDataGridViewTextBoxColumn";
+            // 
+            // pedidoAtualDataGridViewCheckBoxColumn
+            // 
+            this.pedidoAtualDataGridViewCheckBoxColumn.DataPropertyName = "PedidoAtual";
+            this.pedidoAtualDataGridViewCheckBoxColumn.HeaderText = "PedidoAtual";
+            this.pedidoAtualDataGridViewCheckBoxColumn.Name = "pedidoAtualDataGridViewCheckBoxColumn";
+            // 
+            // codigoPedidoDataGridViewTextBoxColumn
+            // 
+            this.codigoPedidoDataGridViewTextBoxColumn.DataPropertyName = "CodigoPedido";
+            this.codigoPedidoDataGridViewTextBoxColumn.HeaderText = "CodigoPedido";
+            this.codigoPedidoDataGridViewTextBoxColumn.Name = "codigoPedidoDataGridViewTextBoxColumn";
+            // 
+            // receberDataGridViewCheckBoxColumn
+            // 
+            this.receberDataGridViewCheckBoxColumn.DataPropertyName = "Receber";
+            this.receberDataGridViewCheckBoxColumn.HeaderText = "Receber";
+            this.receberDataGridViewCheckBoxColumn.Name = "receberDataGridViewCheckBoxColumn";
+            // 
+            // listaRepVendedorHomeBindingSource
+            // 
+            this.listaRepVendedorHomeBindingSource.DataSource = typeof(ModelLibrary.ListaRepVendedorHome);
+            // 
+            // txtPedidoPrecoOriginal
+            // 
+            // 
+            // 
+            // 
+            this.txtPedidoPrecoOriginal.CustomButton.Image = null;
+            this.txtPedidoPrecoOriginal.CustomButton.Location = new System.Drawing.Point(77, 1);
+            this.txtPedidoPrecoOriginal.CustomButton.Name = "";
+            this.txtPedidoPrecoOriginal.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtPedidoPrecoOriginal.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtPedidoPrecoOriginal.CustomButton.TabIndex = 1;
+            this.txtPedidoPrecoOriginal.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtPedidoPrecoOriginal.CustomButton.UseSelectable = true;
+            this.txtPedidoPrecoOriginal.CustomButton.Visible = false;
+            this.txtPedidoPrecoOriginal.Lines = new string[0];
+            this.txtPedidoPrecoOriginal.Location = new System.Drawing.Point(840, 39);
+            this.txtPedidoPrecoOriginal.MaxLength = 32767;
+            this.txtPedidoPrecoOriginal.Name = "txtPedidoPrecoOriginal";
+            this.txtPedidoPrecoOriginal.PasswordChar = '\0';
+            this.txtPedidoPrecoOriginal.PromptText = "Preco";
+            this.txtPedidoPrecoOriginal.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtPedidoPrecoOriginal.SelectedText = "";
+            this.txtPedidoPrecoOriginal.SelectionLength = 0;
+            this.txtPedidoPrecoOriginal.SelectionStart = 0;
+            this.txtPedidoPrecoOriginal.ShortcutsEnabled = true;
+            this.txtPedidoPrecoOriginal.Size = new System.Drawing.Size(99, 23);
+            this.txtPedidoPrecoOriginal.TabIndex = 39;
+            this.txtPedidoPrecoOriginal.TabStop = false;
+            this.txtPedidoPrecoOriginal.UseSelectable = true;
+            this.txtPedidoPrecoOriginal.Visible = false;
+            this.txtPedidoPrecoOriginal.WaterMark = "Preco";
+            this.txtPedidoPrecoOriginal.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtPedidoPrecoOriginal.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // txtPedidoQtdOriginal
+            // 
+            // 
+            // 
+            // 
+            this.txtPedidoQtdOriginal.CustomButton.Image = null;
+            this.txtPedidoQtdOriginal.CustomButton.Location = new System.Drawing.Point(77, 1);
+            this.txtPedidoQtdOriginal.CustomButton.Name = "";
+            this.txtPedidoQtdOriginal.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtPedidoQtdOriginal.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtPedidoQtdOriginal.CustomButton.TabIndex = 1;
+            this.txtPedidoQtdOriginal.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtPedidoQtdOriginal.CustomButton.UseSelectable = true;
+            this.txtPedidoQtdOriginal.CustomButton.Visible = false;
+            this.txtPedidoQtdOriginal.Lines = new string[0];
+            this.txtPedidoQtdOriginal.Location = new System.Drawing.Point(840, 10);
+            this.txtPedidoQtdOriginal.MaxLength = 32767;
+            this.txtPedidoQtdOriginal.Name = "txtPedidoQtdOriginal";
+            this.txtPedidoQtdOriginal.PasswordChar = '\0';
+            this.txtPedidoQtdOriginal.PromptText = "Quantidade";
+            this.txtPedidoQtdOriginal.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtPedidoQtdOriginal.SelectedText = "";
+            this.txtPedidoQtdOriginal.SelectionLength = 0;
+            this.txtPedidoQtdOriginal.SelectionStart = 0;
+            this.txtPedidoQtdOriginal.ShortcutsEnabled = true;
+            this.txtPedidoQtdOriginal.Size = new System.Drawing.Size(99, 23);
+            this.txtPedidoQtdOriginal.TabIndex = 38;
+            this.txtPedidoQtdOriginal.TabStop = false;
+            this.txtPedidoQtdOriginal.UseSelectable = true;
+            this.txtPedidoQtdOriginal.Visible = false;
+            this.txtPedidoQtdOriginal.WaterMark = "Quantidade";
+            this.txtPedidoQtdOriginal.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtPedidoQtdOriginal.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
             // FormRepresentante
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3369,7 +3649,6 @@
             this.pnlHomeFiltros.PerformLayout();
             this.pnlHomeGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdHome)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.listaRepVendedorHomeBindingSource)).EndInit();
             this.tabVendedores.ResumeLayout(false);
             this.pnlVendedorResultado.ResumeLayout(false);
             this.tbcVendedor.ResumeLayout(false);
@@ -3410,6 +3689,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdPosicaoFinanceira)).EndInit();
             this.pnlPosicaoFinanceiraLegenda.ResumeLayout(false);
             this.pnlPosicaoFinanceiraLegenda.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.listaRepVendedorHomeBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -3608,5 +3888,21 @@
         public MetroFramework.Controls.MetroLabel txtStatus;
         public MetroFramework.Controls.MetroLabel txtDataFinal;
         public MetroFramework.Controls.MetroButton btnNovoPedido;
+        public MetroFramework.Controls.MetroLabel dlbLimiteCreditoUtilizado;
+        private MetroFramework.Controls.MetroLabel lblInicioLimiteCredUtilizado;
+        public MetroFramework.Controls.MetroLabel dlbLimiteCredito;
+        private MetroFramework.Controls.MetroLabel lblInicioLimiteCredito;
+        public MetroFramework.Controls.MetroLabel dlbLimitePedidoUtilizado;
+        private MetroFramework.Controls.MetroLabel lblInicioLimitePedUtilizado;
+        public MetroFramework.Controls.MetroLabel dlbLimitePedido;
+        private MetroFramework.Controls.MetroLabel lblInicioLimitePedido;
+        private MetroFramework.Controls.MetroLabel lblPedidoTotal;
+        public MetroFramework.Controls.MetroLabel dlbPedidoTotal;
+        private MetroFramework.Controls.MetroLabel lblRetornoTotalPedido;
+        public MetroFramework.Controls.MetroLabel dlbRetornoTotalPedido;
+        public MetroFramework.Controls.MetroTextBox txtRetornoPreco;
+        public MetroFramework.Controls.MetroTextBox txtRetornoQtdPedido;
+        public MetroFramework.Controls.MetroTextBox txtPedidoPrecoOriginal;
+        public MetroFramework.Controls.MetroTextBox txtPedidoQtdOriginal;
     }
 }
