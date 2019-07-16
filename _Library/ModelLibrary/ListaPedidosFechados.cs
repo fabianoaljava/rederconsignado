@@ -18,6 +18,7 @@ namespace ModelLibrary
         public Nullable<double> ValorAcerto { get; set; }
         public Nullable<double> ValorAberto { get; set; }
         public Nullable<DateTime> DataLancamento { get; set; }
+        public string Status { get; set; }
 
     }
 }

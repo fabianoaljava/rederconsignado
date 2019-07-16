@@ -24,10 +24,10 @@ namespace ModelLibrary
 
             var ret = new String[4];
 
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
-                var usuario = context.Usuario.FirstOrDefault(u => u.Login.ToLower() == pLogin.ToLower());
+                var usuario = deposito.Usuario.FirstOrDefault(u => u.Login.ToLower() == pLogin.ToLower());
 
                 if (usuario != null)
                 {
@@ -58,11 +58,11 @@ namespace ModelLibrary
 
         public static bool VerificarServidor()
         {
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
                 try
                 {
-                    context.Database.Connection.Open();
+                    deposito.Database.Connection.Open();
                     return true;
                 }
                 catch (SqlException)
@@ -75,17 +75,17 @@ namespace ModelLibrary
 
         public static List<Praca> ObterListaPracas()
         {
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
-                return context.Praca.ToList<Praca>();
+                return deposito.Praca.ToList<Praca>();
             }
         }
 
         public static Praca ObterPraca(int i)
         {
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
-                var praca = context.Praca.FirstOrDefault(p => p.Id == i);
+                var praca = deposito.Praca.FirstOrDefault(p => p.Id == i);
                 return praca;
             }
         }
@@ -93,18 +93,18 @@ namespace ModelLibrary
 
         public static List<Representante> ObterListaRepresentantes()
         {
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
-                return context.Representante.ToList<Representante>();
+                return deposito.Representante.ToList<Representante>();
             }
         }
 
 
         public static Representante ObterRepresentante(int i)
         {
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
-                var representante = context.Representante.FirstOrDefault(p => p.Id == i);
+                var representante = deposito.Representante.FirstOrDefault(p => p.Id == i);
                 return representante;
             }
         }
@@ -112,18 +112,18 @@ namespace ModelLibrary
 
         public static List<Carga> ObterListaCargas()
         {
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
-                return context.Carga.ToList<Carga>();
+                return deposito.Carga.ToList<Carga>();
             }
         }
 
         public static Carga ObterCarga(long pRepresentanteId, long pPracaId, int pMes, int pAno)
         {
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
-                var carga = context.Carga.FirstOrDefault(r => r.RepresentanteId == pRepresentanteId && r.PracaId == pPracaId && r.Mes == pMes && r.Ano == pAno);
+                var carga = deposito.Carga.FirstOrDefault(r => r.RepresentanteId == pRepresentanteId && r.PracaId == pPracaId && r.Mes == pMes && r.Ano == pAno);
 
                 return carga;
 
@@ -133,10 +133,10 @@ namespace ModelLibrary
 
         public static Carga ObterCargaAnterior(long pRepresentanteId, long pPracaId, DateTime pDataAbertura)
         {
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
-                var viagemanterior = (from c in context.Carga
+                var viagemanterior = (from c in deposito.Carga
                                       orderby c.DataAbertura descending
                                       where c.RepresentanteId == pRepresentanteId && c.PracaId == pPracaId && c.DataAbertura < pDataAbertura
                                       select c).FirstOrDefault<Carga>();
@@ -148,10 +148,10 @@ namespace ModelLibrary
         public static string ValidarInclusaoCarga(int pPracaId)
         {
 
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
                 // verificar se existe carga não finalizada
-                var carga = context.Carga.FirstOrDefault(cg => cg.Status != "F" && cg.PracaId == pPracaId);
+                var carga = deposito.Carga.FirstOrDefault(cg => cg.Status != "F" && cg.PracaId == pPracaId);
                 if (carga == null)
                 {
                     return "OK";
@@ -167,7 +167,7 @@ namespace ModelLibrary
         {
 
 
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
 
@@ -185,10 +185,10 @@ namespace ModelLibrary
                     Status = "A"
                 };
 
-                context.Carga.Add(novacarga);
-                context.SaveChanges();
+                deposito.Carga.Add(novacarga);
+                deposito.SaveChanges();
 
-                var maxCarga = context.Carga.OrderByDescending(i => i.Id).FirstOrDefault();
+                var maxCarga = deposito.Carga.OrderByDescending(i => i.Id).FirstOrDefault();
 
                 int newId = maxCarga == null ? 1 : maxCarga.Id;
 
@@ -282,9 +282,9 @@ namespace ModelLibrary
 
         public static List<ListaProdutosCarga> ObterProdutosCarga(int pCargaId, Boolean pRetorno = false)
         {
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
-                var result = context.ProdutosCarga
+                var result = deposito.ProdutosCarga
                            .Where(pg => pg.CargaId == pCargaId)
                            .Select(pg => new ListaProdutosCarga()
                            {
@@ -308,9 +308,9 @@ namespace ModelLibrary
 
         public static ListaProdutosCarga ObterProdutoCarga(int pCargaId, int pProdutoGradeId)
         {
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
-                var produtocarga = context.ProdutosCarga
+                var produtocarga = deposito.ProdutosCarga
                            .Where(pg => pg.CargaId == pCargaId && pg.ProdutoGradeId == pProdutoGradeId)
                            .Select(pg => new ListaProdutosCarga()
                            {
@@ -333,10 +333,10 @@ namespace ModelLibrary
         public static Produto ObterProduto(string pCodigo)
         {
 
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
-                var produto = (from p in context.Produto
+                var produto = (from p in deposito.Produto
                                     where (p.CodigoBarras == pCodigo || p.Id.ToString() == pCodigo)
                                     select p).FirstOrDefault<Produto>();
 
@@ -348,14 +348,14 @@ namespace ModelLibrary
         public static ProdutoGrade ObterProdutoGrade(string pCodigo)
         {
 
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
                 string vCodigoSemDigito = pCodigo.Substring(0, pCodigo.Length - 1);
                 string vDigito = pCodigo.Substring(pCodigo.Length - 1);
 
                 Console.WriteLine(vCodigoSemDigito + ':' + vDigito);
 
-                var produtograde = (from pg in context.ProdutoGrade
+                var produtograde = (from pg in deposito.ProdutoGrade
                                     where (pg.CodigoBarras == vCodigoSemDigito && pg.Digito == vDigito) || pg.Id.ToString() == pCodigo
                                     select pg).FirstOrDefault<ProdutoGrade>();
 
@@ -368,11 +368,11 @@ namespace ModelLibrary
         public static List<ListaProdutoConferencia> ObterListaProdutoConferencia(long pCargaId)
         {
 
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
 
-                var carga = context.Carga.FirstOrDefault(c => c.Id == pCargaId);
+                var carga = deposito.Carga.FirstOrDefault(c => c.Id == pCargaId);
 
 
                 int vCargaId = carga != null ? carga.Id : 0;
@@ -412,7 +412,7 @@ namespace ModelLibrary
                                     WHERE  Carga.ProdutoGradeId IS NOT NULL
                                     ORDER BY Descricao";
 
-                var result = context.Database.SqlQuery<ListaProdutoConferencia>(query, vCargaId);
+                var result = deposito.Database.SqlQuery<ListaProdutoConferencia>(query, vCargaId);
 
                 return result.ToList<ListaProdutoConferencia>();
 
@@ -425,7 +425,7 @@ namespace ModelLibrary
         {
 
 
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
                 
@@ -438,7 +438,7 @@ namespace ModelLibrary
                                 WHERE Pedido.CargaId = @p0
                                 GROUP BY Produto.CodigoBarras, ProdutoGrade.Digito, Produto.Descricao";
 
-                var result = context.Database.SqlQuery<ListaProdutosConsignados>(query, pCargaId);
+                var result = deposito.Database.SqlQuery<ListaProdutosConsignados>(query, pCargaId);
 
                 return result.ToList<ListaProdutosConsignados>();
 
@@ -455,9 +455,9 @@ namespace ModelLibrary
             /// 
             Console.WriteLine("InserirCargaProduto");
 
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
-                var result = context.CargaProduto.SingleOrDefault(cp => cp.ProdutoGradeId == pProdutoGradeId && cp.CargaId == pCargaId);
+                var result = deposito.CargaProduto.SingleOrDefault(cp => cp.ProdutoGradeId == pProdutoGradeId && cp.CargaId == pCargaId);
 
                 if (result != null)
                 {
@@ -479,12 +479,12 @@ namespace ModelLibrary
                         Retorno = 0
                     };
 
-                    context.CargaProduto.Add(novacargaproduto);
+                    deposito.CargaProduto.Add(novacargaproduto);
                     
                 }
 
 
-                context.SaveChanges();
+                deposito.SaveChanges();
 
 
 
@@ -499,13 +499,13 @@ namespace ModelLibrary
 
 
             ///alterar com base no 
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
-                var result = context.CargaProduto.SingleOrDefault(cp => cp.CargaId == pCargaId && cp.ProdutoGradeId == pCargaProdutoGradeId);
+                var result = deposito.CargaProduto.SingleOrDefault(cp => cp.CargaId == pCargaId && cp.ProdutoGradeId == pCargaProdutoGradeId);
                 if (result != null)
                 {
                     result.Quantidade = pQuantidade;
-                    context.SaveChanges();
+                    deposito.SaveChanges();
                 }
             }
 
@@ -517,10 +517,10 @@ namespace ModelLibrary
 
         public static void ExcluirCargaProduto(int pCargaId, int pCargaProdutoGradeId)
         {
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
-                context.Database.ExecuteSqlCommand("DELETE FROM CargaProduto WHERE CargaId = @pCargaId AND ProdutoGradeId = @pProdutoGradeId", new SqlParameter("@pCargaId", pCargaId), new SqlParameter("@pProdutoGradeId", pCargaProdutoGradeId));
+                deposito.Database.ExecuteSqlCommand("DELETE FROM CargaProduto WHERE CargaId = @pCargaId AND ProdutoGradeId = @pProdutoGradeId", new SqlParameter("@pCargaId", pCargaId), new SqlParameter("@pProdutoGradeId", pCargaProdutoGradeId));
 
                 //CargaProduto cargaproduto = new CargaProduto() { ProdutoGradeId = pCargaProdutoGradeId, CargaId = pCargaId};
                 //deposito.CargaProduto.Attach(cargaproduto);
@@ -535,14 +535,14 @@ namespace ModelLibrary
 
 
             ///alterar com base no 
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
-                var result = context.CargaProduto.SingleOrDefault(cp => cp.CargaId == pCargaId && cp.ProdutoGradeId == pRetornoProdutoGradeId);
+                var result = deposito.CargaProduto.SingleOrDefault(cp => cp.CargaId == pCargaId && cp.ProdutoGradeId == pRetornoProdutoGradeId);
                 if (result != null)
                 {
                     Console.WriteLine("Alterando Retorno Produto - CargaId: " + pCargaId.ToString() + " ProdutoId: " + pRetornoProdutoGradeId.ToString());
                     result.Retorno = pQuantidade;
-                    context.SaveChanges();
+                    deposito.SaveChanges();
                 } else
                 {
                     var novacargaproduto = new CargaProduto
@@ -553,8 +553,8 @@ namespace ModelLibrary
                         Retorno = pQuantidade
                     };
 
-                    context.CargaProduto.Add(novacargaproduto);
-                    context.SaveChanges();
+                    deposito.CargaProduto.Add(novacargaproduto);
+                    deposito.SaveChanges();
 
                 }
             }
@@ -564,12 +564,66 @@ namespace ModelLibrary
 
         }
 
-        
+
+
+        public static void AtualizarPedido(long pPedidoId)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+
+                var pedido = deposito.Pedido.SingleOrDefault(pd => pd.Id == pPedidoId);
+
+                if (pedido != null)
+                {
+
+
+
+                    var pedidoitem = deposito.PedidoItem.GroupBy(pi => pi.PedidoId)
+                   .Select(g => new { pedidoid = g.Key, valorcompra = g.Sum(i => ((i.Quantidade - i.Retorno) * i.Preco)), valorpedido = g.Sum(i => ((i.Quantidade) * i.Preco)) })
+                   .FirstOrDefault(pi => pi.pedidoid == pedido.Id);
+
+                    var vValorPedido = pedidoitem.valorpedido; // + (pQuantidade - pRetorno) * pPreco;
+                    var vValorCompra = pedidoitem.valorcompra; // + (pQuantidade - pRetorno) * pPreco;
+
+                    Console.WriteLine("ValorCompra:" + vValorCompra.ToString());
+                    Console.WriteLine("ValorPedido:" + vValorPedido.ToString());
+
+                    pedido.ValorPedido = vValorPedido;
+                    pedido.ValorCompra = vValorCompra;
+                    pedido.PercentualCompra = (pedido.ValorCompra / pedido.ValorPedido) * 100;
+
+
+                    if (pedido.PercentualCompra < 35) // primeira faixa
+                    {
+                        pedido.FaixaComissao = 35;
+                        pedido.PercentualFaixa = 35;
+                    }
+                    else if (pedido.PercentualCompra >= 35 && pedido.PercentualCompra < 80) // segunda faixa
+                    {
+                        pedido.FaixaComissao = 80;
+                        pedido.PercentualFaixa = 40;
+                    }
+                    else // terceira faixa
+                    {
+                        pedido.FaixaComissao = 100;
+                        pedido.PercentualFaixa = 45;
+                    }
+
+                    pedido.ValorComissao = pedido.ValorCompra * (pedido.PercentualFaixa / 100);
+                    pedido.ValorLiquido = pedido.ValorCompra - pedido.ValorComissao;
+
+                    deposito.SaveChanges();
+                }
+            }
+        }
+
 
         public static List<ListaPedidosRetorno> ObterListaPedidosRetorno(long pCargaId, bool pAtual = true)
         {
 
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
 
@@ -579,7 +633,7 @@ namespace ModelLibrary
 	                                INNER JOIN Vendedor ON Pedido.VendedorId = Vendedor.Id
                                 WHERE CargaId = @p0 AND CargaOriginal = @p0";
 
-                var result = context.Database.SqlQuery<ListaPedidosRetorno>(query, pCargaId);
+                var result = deposito.Database.SqlQuery<ListaPedidosRetorno>(query, pCargaId);
 
                 return result.ToList<ListaPedidosRetorno>();
 
@@ -590,7 +644,7 @@ namespace ModelLibrary
         public static List<ListaPedidosFechados> ObterListaPedidosFechados(long pCargaId, bool pAtual = true)
         {
 
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
                 long vCargaId;
@@ -603,19 +657,26 @@ namespace ModelLibrary
                 else
                 {
 
-                    var carga = context.Carga.FirstOrDefault(c => c.Id == pCargaId);
+                    var carga = deposito.Carga.FirstOrDefault(c => c.Id == pCargaId);
 
-                    var cargaanterior = context.Carga.Where(c => c.PracaId == carga.PracaId && c.Id < pCargaId).OrderByDescending(i => i.Id).FirstOrDefault();
+                    var cargaanterior = deposito.Carga.Where(c => c.PracaId == carga.PracaId && c.Id < pCargaId).OrderByDescending(i => i.Id).FirstOrDefault();
 
                     vCargaId = cargaanterior != null ? cargaanterior.Id : 0;
                 }
 
-                string query = @"SELECT CodigoPedido, Nome, ValorPedido, ValorCompra, ValorLiquido, ValorAReceber, ValorAcerto, ValorLiquido+ValorAReceber-ValorAcerto as ValorAberto, DataLancamento  
-	                                FROM Pedido 
-	                                INNER JOIN Vendedor ON Pedido.VendedorId = Vendedor.Id
+                string query = @"SELECT CodigoPedido, Nome, ValorPedido, ValorCompra, ValorLiquido, ValorAReceber, ValorAcerto, ValorLiquido+ValorAReceber-ValorAcerto as ValorAberto, DataLancamento, 
+	                            CASE Pedido.Status 
+	                                WHEN '0' THEN '0 - Aberto'
+	                                WHEN '1' THEN '1 - Retorno'
+	                                WHEN '2' THEN '2 - Retornado'
+	                                WHEN '3' THEN '3 - Fechado'
+	                                WHEN '4' THEN '4 - Recebido'
+	                                ELSE 'Indefinido' END as Status
+	                            FROM Pedido 
+	                            INNER JOIN Vendedor ON Pedido.VendedorId = Vendedor.Id
                                 WHERE (CargaId = @p0 OR CargaOriginal = @p0) AND DataRetorno IS NOT NULL";
 
-                var result = context.Database.SqlQuery<ListaPedidosFechados>(query, vCargaId);
+                var result = deposito.Database.SqlQuery<ListaPedidosFechados>(query, vCargaId);
 
                 return result.ToList<ListaPedidosFechados>();
 
@@ -628,7 +689,7 @@ namespace ModelLibrary
         public static List<ListaPedidoItem> ObterListaPedidoItem(long pPedidoId)
         {
 
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
                 string query = @"SELECT PedidoItem.Id as PedidoItemId, Produto.CodigoBarras + '' + ProdutoGrade.Digito as CodigoBarras, Produto.Descricao NomeProduto, PedidoItem.Quantidade, PedidoItem.Retorno, PedidoItem.Preco
@@ -639,7 +700,7 @@ namespace ModelLibrary
 
                 Console.WriteLine("Exibindo lista de itens do pedido # " + pPedidoId.ToString());
 
-                var result = context.Database.SqlQuery<ListaPedidoItem>(query, pPedidoId);
+                var result = deposito.Database.SqlQuery<ListaPedidoItem>(query, pPedidoId);
 
                 return result.ToList<ListaPedidoItem>();
             }
@@ -649,17 +710,22 @@ namespace ModelLibrary
 
 
         public static void AlterarPedidoItem(int pPedidoItemId, double pQuantidade, double pQtdRetorno, double pPreco)
-        {
-            ///alterar com base no 
-            using (DepositoDBEntities context = new DepositoDBEntities())
+        {            
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
-                var result = context.PedidoItem.SingleOrDefault(pi => pi.Id == pPedidoItemId);
-                if (result != null)
+                var pedidoitem = deposito.PedidoItem.SingleOrDefault(pi => pi.Id == pPedidoItemId);
+                if (pedidoitem != null)
                 {
-                    result.Quantidade = pQuantidade;
-                    result.Retorno = pQtdRetorno;
-                    result.Preco = pPreco;
-                    context.SaveChanges();
+
+                    
+                    pedidoitem.Quantidade = pQuantidade;
+                    pedidoitem.Retorno = pQtdRetorno;
+                    pedidoitem.Preco = pPreco;
+                    
+                    deposito.SaveChanges();
+
+
+                    AtualizarPedido(pedidoitem.PedidoId);
                 }
             }
 
@@ -669,13 +735,13 @@ namespace ModelLibrary
         {
 
 
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
 
                 DateTime dataabertura = DateTime.Now;
 
-                var maxPedidoItem = context.PedidoItem.OrderByDescending(i => i.Id).FirstOrDefault();
+                var maxPedidoItem = deposito.PedidoItem.OrderByDescending(i => i.Id).FirstOrDefault();
 
                 int newId = maxPedidoItem == null ? 1 : maxPedidoItem.Id + 1;
 
@@ -687,11 +753,28 @@ namespace ModelLibrary
                     Quantidade = pQuantidade,
                     Retorno = pQtdRetorno,
                     Preco = pPreco
-                };
+                };                
 
-                context.PedidoItem.Add(novopedidoitem);
-                context.SaveChanges();                
+                deposito.PedidoItem.Add(novopedidoitem);
+                deposito.SaveChanges();
 
+
+                AtualizarPedido(pPedidoId);
+
+
+            }
+
+        }
+
+        public static void ExcluirPedidoItem(long pPedidoItemId, long pPedidoId)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+                
+                deposito.Database.ExecuteSqlCommand("DELETE FROM PedidoItem WHERE Id = @pPedidoItemId", new SqlParameter("@pPedidoItemId", pPedidoItemId));
+
+                AtualizarPedido(pPedidoId);
 
             }
 
@@ -701,10 +784,10 @@ namespace ModelLibrary
         {
 
 
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
-                var carga = context.Carga.FirstOrDefault(c => c.Id == pCargaId);
+                var carga = deposito.Carga.FirstOrDefault(c => c.Id == pCargaId);
 
                 int vPracaId = 0;
 
@@ -728,7 +811,7 @@ namespace ModelLibrary
 
                 Console.WriteLine("Obtendo Lista a Receber - CargaId: " + pCargaId.ToString());
 
-                var result = context.Database.SqlQuery<ListaAReceber>(query, pCargaId, vPracaId);
+                var result = deposito.Database.SqlQuery<ListaAReceber>(query, pCargaId, vPracaId);
 
                 return result.ToList<ListaAReceber>();
 
@@ -743,12 +826,12 @@ namespace ModelLibrary
 
 
             
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
                 if (pReceberBaixaId == 0)
                 {
 
-                    var maxReceberBaixa = context.ReceberBaixa.OrderByDescending(i => i.Id).FirstOrDefault();
+                    var maxReceberBaixa = deposito.ReceberBaixa.OrderByDescending(i => i.Id).FirstOrDefault();
 
 
 
@@ -768,21 +851,21 @@ namespace ModelLibrary
 
                     };
 
-                    context.ReceberBaixa.Add(receberbaixa);
-                    context.SaveChanges();
+                    deposito.ReceberBaixa.Add(receberbaixa);
+                    deposito.SaveChanges();
 
 
 
                 } else
                 {
 
-                    var result = context.ReceberBaixa.SingleOrDefault(rb => rb.Id == pReceberBaixaId);
+                    var result = deposito.ReceberBaixa.SingleOrDefault(rb => rb.Id == pReceberBaixaId);
                     if (result != null)
                     {
                         Console.WriteLine("Alterando Baixa A Receber - Id: " + pReceberBaixaId.ToString());
                         result.Valor = pValor;
                         result.DataPagamento = Convert.ToDateTime(pData);
-                        context.SaveChanges();
+                        deposito.SaveChanges();
                     }
 
                 }
@@ -797,11 +880,11 @@ namespace ModelLibrary
 
         public static void IncluirReceber(int pCargaId, int pVendedorId, double pValor, DateTime pDataVencimento)
         {
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
 
-                var maxReceber = context.Receber.OrderByDescending(i => i.Id).FirstOrDefault();
+                var maxReceber = deposito.Receber.OrderByDescending(i => i.Id).FirstOrDefault();
 
                 int newId = maxReceber == null ? 1 : maxReceber.Id + 1;
 
@@ -827,8 +910,8 @@ namespace ModelLibrary
                     Status = "0"
                 };
 
-                context.Receber.Add(receber);
-                context.SaveChanges();
+                deposito.Receber.Add(receber);
+                deposito.SaveChanges();
 
 
             }
@@ -836,20 +919,20 @@ namespace ModelLibrary
 
         public static List<Vendedor> ObterListaVendedor(long pCargaId = 0)
         {
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
                 List<Vendedor> result;
 
                 if (pCargaId == 0) {
 
-                    result = context.Vendedor.ToList<Vendedor>();
+                    result = deposito.Vendedor.ToList<Vendedor>();
 
                 } else
                 {
 
 
-                    var carga = context.Carga.Where(c => c.Id == pCargaId).FirstOrDefault();
+                    var carga = deposito.Carga.Where(c => c.Id == pCargaId).FirstOrDefault();
 
                     if (carga != null)
                     {
@@ -873,7 +956,7 @@ namespace ModelLibrary
                                     )";
 
 
-                        result = context.Database.SqlQuery<Vendedor>(query, carga.RepresentanteId, carga.PracaId, carga.Mes.ToString() + carga.Ano.ToString()).ToList<Vendedor>();
+                        result = deposito.Database.SqlQuery<Vendedor>(query, carga.RepresentanteId, carga.PracaId, carga.Mes.ToString() + carga.Ano.ToString()).ToList<Vendedor>();
 
                     } else
                     {
@@ -894,10 +977,10 @@ namespace ModelLibrary
 
         public static Vendedor ObterVendedor(long pVendedorId)
         {
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
-                var vendedor = context.Vendedor.Where(vd => vd.Id == pVendedorId).FirstOrDefault();
+                var vendedor = deposito.Vendedor.Where(vd => vd.Id == pVendedorId).FirstOrDefault();
 
                 return vendedor;
 
@@ -906,10 +989,10 @@ namespace ModelLibrary
 
         public static Vendedor PesquisarVendedor(string pCPFCnpj = "")
         {
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
-                var vendedor = context.Vendedor.Where(vd => vd.CpfCnpj.Trim() == pCPFCnpj).FirstOrDefault();
+                var vendedor = deposito.Vendedor.Where(vd => vd.CpfCnpj.Trim() == pCPFCnpj).FirstOrDefault();
 
                 return vendedor;
 
@@ -919,9 +1002,9 @@ namespace ModelLibrary
 
         public static Pedido ObterVendedorPedido(long pVendedorId, long pCargaId)
         {
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
-                var pedido = context.Pedido.OrderByDescending(i => i.Id).FirstOrDefault(p => p.VendedorId == pVendedorId && p.CargaId == pCargaId);
+                var pedido = deposito.Pedido.OrderByDescending(i => i.Id).FirstOrDefault(p => p.VendedorId == pVendedorId && p.CargaId == pCargaId);
                 return pedido;
             }
 
@@ -929,13 +1012,13 @@ namespace ModelLibrary
 
         public static void NegativarVendedor(long pVendedorId)
         {
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
-                var vendedor = context.Vendedor.SingleOrDefault(vd => vd.Id == pVendedorId);
+                var vendedor = deposito.Vendedor.SingleOrDefault(vd => vd.Id == pVendedorId);
                 if (vendedor != null)
                 {
                     vendedor.Status = "N";
-                    context.SaveChanges();
+                    deposito.SaveChanges();
                 }
             }
 
@@ -952,12 +1035,12 @@ namespace ModelLibrary
             var ret = new decimal[4];
 
 
-            using (DepositoDBEntities context = new DepositoDBEntities())
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
 
 
-                var result = (from tt in context.Totalizadores
+                var result = (from tt in deposito.Totalizadores
                               where tt.Id == pCargaId
                               select tt).FirstOrDefault<Totalizadores>();
 

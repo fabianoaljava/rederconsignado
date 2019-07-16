@@ -20,6 +20,7 @@ namespace ConsignadoDeposito
         public Int32 cRetornoProdutoGradeId;
         public string cModoRetornoProduto;
         public Int32 cRetornoId;
+        public Int32 cRetornoVendedorId;
         public Int32 cRetornoPedidoId;
         public Int32 cRetornoPedidoItemId;
         public Int32 cRetornoPedidoProdutoGradeId;
@@ -526,17 +527,22 @@ namespace ConsignadoDeposito
             localDepositoForm.cbbPesqVendedor.SelectedIndex = -1;
             localDepositoForm.lblPesqVendedor.Visible = false;
 
+            cRetornoVendedorId = 0;
+
             LancamentoPedidoLimpar();
         }
 
         public void PesquisaVendedor_Change(object sender, EventArgs e)
         {
-            if (localDepositoForm.cbbPesqVendedor.SelectedIndex > 0)
+            if (localDepositoForm.cbbPesqVendedor.SelectedIndex >= 0)
             {
                 
                 ModelLibrary.Vendedor vendedor = (ModelLibrary.Vendedor)localDepositoForm.cbbPesqVendedor.SelectedItem;
 
                 localDepositoForm.txtPesqVendedorCpfCnpj.Text = vendedor.CpfCnpj;
+
+                cRetornoVendedorId = vendedor.Id;
+
                 VendedorExibir(vendedor.Id);
 
             }
@@ -551,8 +557,6 @@ namespace ConsignadoDeposito
             if (vendedor != null)
             {
                 localDepositoForm.cbbPesqVendedor.SelectedIndex = localDepositoForm.cbbPesqVendedor.FindString(vendedor.Nome);
-
-                
             }
             else
             {
@@ -654,12 +658,13 @@ namespace ConsignadoDeposito
             localDepositoForm.grpPesqVendedorPedido.Visible = false;
             localDepositoForm.pnlLancPedTop.Visible = false;
             localDepositoForm.pnlLancPedMain.Visible = false;
-
+            localDepositoForm.grdLancPedido.DataSource = null;
+            localDepositoForm.grdLancPedido.Refresh();
+            LancamentoPedidoItemLimpar();
         }
 
         public void LancamentoPedidoItemLimpar()
         {
-
             localDepositoForm.txtLancPedCodigoBarras.Text = "";
             localDepositoForm.txtLancPedProduto.Text = "";
             localDepositoForm.txtLancPedQuantidade.Text = "";
@@ -799,14 +804,33 @@ namespace ConsignadoDeposito
 
             } else
             {
-
+                if (localDepositoForm.txtLancPedQuantidade.Text == "") localDepositoForm.txtLancPedQuantidade.Text = "0";
+                if (localDepositoForm.txtLancPedQtdRetorno.Text == "") localDepositoForm.txtLancPedQtdRetorno.Text = "0";
                 ModelLibrary.MetodosDeposito.InserirPedidoItem(cRetornoPedidoId, cRetornoPedidoProdutoGradeId, Convert.ToDouble(localDepositoForm.txtLancPedQuantidade.Text), Convert.ToDouble(localDepositoForm.txtLancPedQtdRetorno.Text), Convert.ToDouble(localDepositoForm.txtLancPedPreco.Text));
 
             }
 
             CarregarListaLancamentoPedido();
             LancamentoPedidoItemLimpar();
+            LancamentoPedidoReload();
 
+        }
+
+
+        public void ExcluirLancamentoPedido(int pPedidoItemId)
+        {
+
+            ModelLibrary.MetodosDeposito.ExcluirPedidoItem(pPedidoItemId, cRetornoPedidoId);
+
+            CarregarListaLancamentoPedido();
+            LancamentoPedidoItemLimpar();
+            LancamentoPedidoReload();
+        }
+
+        public void LancamentoPedidoReload()
+        {
+            CarregarPedidos();
+            VendedorExibir(cRetornoVendedorId);            
         }
 
         ////////////////////////////////////////////

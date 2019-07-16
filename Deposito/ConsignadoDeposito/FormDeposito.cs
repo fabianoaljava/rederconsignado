@@ -834,6 +834,16 @@ namespace ConsignadoDeposito
 
         }
 
+        private void cbbPesqVendedor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cRetorno.PesquisaVendedor_Change(sender, e);
+        }
+
+        private void grdLancPedido_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
 
 
 
