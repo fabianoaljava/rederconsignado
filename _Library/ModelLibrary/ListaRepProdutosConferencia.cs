@@ -19,6 +19,7 @@ namespace ModelLibrary
         public long ProdutoId { get; set; }
         public long CargaProdutoId { get; set; }
         public long ProdutoGradeId { get; set; }
+        public string Acao { get; set; }
 
     }
 }

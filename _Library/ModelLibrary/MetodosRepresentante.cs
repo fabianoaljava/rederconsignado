@@ -33,10 +33,10 @@ namespace ModelLibrary
 
             var ret = new String[4];
 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                var usuario = context.RepUsuario.FirstOrDefault(u => u.Login.ToLower() == pLogin.ToLower());
+                var usuario = representante.RepUsuario.FirstOrDefault(u => u.Login.ToLower() == pLogin.ToLower());
 
                 if (usuario != null)
                 {
@@ -66,9 +66,9 @@ namespace ModelLibrary
 
         public static Boolean VerificarImportacao()
         {
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
-                var count = context.RepUsuario.Count();
+                var count = representante.RepUsuario.Count();
 
                 if (count > 0) return true; else return false;  
 
@@ -82,17 +82,17 @@ namespace ModelLibrary
 
         public static List<RepPraca> ObterListaPracas()
         {
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
-                return context.RepPraca.ToList<RepPraca>();
+                return representante.RepPraca.ToList<RepPraca>();
             }
         }
 
         public static RepPraca ObterPraca(int i)
         {
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
-                var praca = context.RepPraca.FirstOrDefault(p => p.Id == i);
+                var praca = representante.RepPraca.FirstOrDefault(p => p.Id == i);
                 return praca;
             }
         }
@@ -100,37 +100,37 @@ namespace ModelLibrary
 
         public static List<RepRepresentante> ObterListaRepresentantes()
         {
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
-                return context.RepRepresentante.ToList<RepRepresentante>();
+                return representante.RepRepresentante.ToList<RepRepresentante>();
             }
         }
 
 
         public static RepRepresentante ObterRepresentante(int i)
         {
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
-                var representante = context.RepRepresentante.FirstOrDefault(p => p.Id == i);
-                return representante;
+                var orepresentante = representante.RepRepresentante.FirstOrDefault(p => p.Id == i);
+                return orepresentante;
             }
         }
 
 
         public static List<RepCarga> ObterListaCargas()
         {
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
-                return context.RepCarga.ToList<RepCarga>();
+                return representante.RepCarga.ToList<RepCarga>();
             }
         }
 
         public static RepCarga ObterCarga(long pRepresentanteId, long pPracaId, int pMes, int pAno)
         {
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                var carga = context.RepCarga.FirstOrDefault(r => r.RepresentanteId == pRepresentanteId && r.PracaId == pPracaId && r.Mes == pMes && r.Ano == pAno);
+                var carga = representante.RepCarga.FirstOrDefault(r => r.RepresentanteId == pRepresentanteId && r.PracaId == pPracaId && r.Mes == pMes && r.Ano == pAno);
 
                 return carga;
 
@@ -139,10 +139,10 @@ namespace ModelLibrary
 
         public static RepCarga ObterCargaAtual()
         {
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                var carga = context.RepCarga.FirstOrDefault();
+                var carga = representante.RepCarga.FirstOrDefault();
 
                 return carga;
 
@@ -152,10 +152,10 @@ namespace ModelLibrary
 
         public static RepCargaAnterior ObterCargaAnterior()
         {
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                var carganterior = context.RepCargaAnterior.OrderByDescending(c => c.Id).FirstOrDefault();
+                var carganterior = representante.RepCargaAnterior.OrderByDescending(c => c.Id).FirstOrDefault();
 
                 return carganterior;
 
@@ -167,11 +167,11 @@ namespace ModelLibrary
         {
 
 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
 
-                var result = context.RepCarga.SingleOrDefault(cg => cg.Id == pCargaId);
+                var result = representante.RepCarga.SingleOrDefault(cg => cg.Id == pCargaId);
                 if (result != null)
                 {
                     result.Status = pStatus;
@@ -194,7 +194,7 @@ namespace ModelLibrary
                     }
 
 
-                    context.SaveChanges();
+                    representante.SaveChanges();
                 }
 
 
@@ -217,7 +217,8 @@ namespace ModelLibrary
 	                                RepProduto.Id as ProdutoId,
 	                                RepCargaProduto.Id as CargaProdutoId,
 	                                RepProdutoGrade.Id as ProdutoGradeId,
-	                                RepCarga.Id as CargaId
+	                                RepCarga.Id as CargaId,
+                                    '' as Acao
 	                                FROM RepCarga 
                                 INNER JOIN RepCargaProduto ON RepCarga.Id = RepCargaProduto.CargaId
                                 INNER JOIN RepProdutoGrade ON RepCargaProduto.ProdutoGradeId = RepProdutoGrade.Id
@@ -252,10 +253,10 @@ namespace ModelLibrary
         public static RepProduto ObterProduto(string pCodigo)
         {
 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                var produto = (from p in context.RepProduto
+                var produto = (from p in representante.RepProduto
                                where (p.CodigoBarras == pCodigo || p.Id.ToString() == pCodigo)
                                select p).FirstOrDefault<RepProduto>();
 
@@ -267,7 +268,7 @@ namespace ModelLibrary
         public static RepProdutoGrade ObterProdutoGrade(string pCodigo)
         {
 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
                 if (pCodigo != "")
                 {
@@ -276,7 +277,7 @@ namespace ModelLibrary
 
                     Console.WriteLine(vCodigoSemDigito + ':' + vDigito);
 
-                    var produtograde = (from pg in context.RepProdutoGrade
+                    var produtograde = (from pg in representante.RepProdutoGrade
                                         where (pg.CodigoBarras == vCodigoSemDigito && pg.Digito == vDigito) || pg.Id.ToString() == pCodigo
                                         select pg).FirstOrDefault<RepProdutoGrade>();
 
@@ -298,10 +299,10 @@ namespace ModelLibrary
 
             Console.WriteLine("InserirProdutoConferencia");
 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                var produto = context.RepCargaProduto.FirstOrDefault(pd => pd.ProdutoGradeId == pProdutoGradeId);
+                var produto = representante.RepCargaProduto.FirstOrDefault(pd => pd.ProdutoGradeId == pProdutoGradeId);
 
                 if (produto == null)
                 {
@@ -309,7 +310,7 @@ namespace ModelLibrary
 
                 } else
                 {
-                    var result = context.RepCargaConferencia.SingleOrDefault(cp => cp.ProdutoGradeId == pProdutoGradeId && cp.CargaId == pCargaId);
+                    var result = representante.RepCargaConferencia.SingleOrDefault(cp => cp.ProdutoGradeId == pProdutoGradeId && cp.CargaId == pCargaId);
 
                     if (result != null)
                     {
@@ -332,12 +333,12 @@ namespace ModelLibrary
                             Quantidade = pQuantidade
                         };
 
-                        context.RepCargaConferencia.Add(novacargaproduto);
+                        representante.RepCargaConferencia.Add(novacargaproduto);
 
                     }
 
 
-                    context.SaveChanges();
+                    representante.SaveChanges();
 
                     return true;
                 }
@@ -358,13 +359,13 @@ namespace ModelLibrary
             Console.WriteLine("Alterando Produto Conferencia - CargaId: " + pCargaId.ToString() + " CargaProdutoGradeId >" + pCargaProdutoGradeId.ToString() + " Quantidade>" + pQuantidade.ToString());
 
             ///alterar com base no 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
-                var result = context.RepCargaConferencia.SingleOrDefault(cp => cp.CargaId == pCargaId && cp.ProdutoGradeId == pCargaProdutoGradeId);
+                var result = representante.RepCargaConferencia.SingleOrDefault(cp => cp.CargaId == pCargaId && cp.ProdutoGradeId == pCargaProdutoGradeId);
                 if (result != null)
                 {
                     result.Quantidade = pQuantidade;
-                    context.SaveChanges();
+                    representante.SaveChanges();
                 }
             }
 
@@ -373,20 +374,43 @@ namespace ModelLibrary
 
         public static void ExcluirProdutoConferencia(long pCargaId, long pCargaProdutoGradeId)
         {
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                context.Database.ExecuteSqlCommand("DELETE FROM RepCargaConferencia WHERE CargaId = @pCargaId AND ProdutoGradeId = @pProdutoGradeId", new SQLiteParameter("@pCargaId", pCargaId), new SQLiteParameter("@pProdutoGradeId", pCargaProdutoGradeId));
+                representante.Database.ExecuteSqlCommand("DELETE FROM RepCargaConferencia WHERE CargaId = @pCargaId AND ProdutoGradeId = @pProdutoGradeId", new SQLiteParameter("@pCargaId", pCargaId), new SQLiteParameter("@pProdutoGradeId", pCargaProdutoGradeId));
 
             }
         }
-     
+
+        public static void ResolverConflitoProdutoConferencia(long pCargaId, long pCargaProdutoGradeId, decimal pQuantidade)
+        {
+
+            Console.WriteLine("Alterando Produto Conferencia - CargaId: " + pCargaId.ToString() + " CargaProdutoGradeId >" + pCargaProdutoGradeId.ToString() + " Quantidade>" + pQuantidade.ToString());
+           
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+                var cargaconferencia = representante.RepCargaConferencia.SingleOrDefault(cp => cp.CargaId == pCargaId && cp.ProdutoGradeId == pCargaProdutoGradeId);
+                if (cargaconferencia != null)
+                {
+                    cargaconferencia.Quantidade = pQuantidade;
+                }
+
+                var cargaproduto = representante.RepCargaProduto.SingleOrDefault(cp => cp.CargaId == pCargaId && cp.ProdutoGradeId == pCargaProdutoGradeId);
+                if (cargaproduto != null)
+                {
+                    cargaproduto.Quantidade = pQuantidade;                    
+                }
+
+                representante.SaveChanges();
+            }
+
+        }
 
         public static List<RepVendedor> ObterListaVendedor()
         {
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
-                return context.RepVendedor.ToList<RepVendedor>();
+                return representante.RepVendedor.ToList<RepVendedor>();
             }
         }
 
@@ -394,14 +418,14 @@ namespace ModelLibrary
         {
             
 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
                 if (pEstadoId == 0)
                 {
-                    return context.RepCidade.ToList<RepCidade>();
+                    return representante.RepCidade.ToList<RepCidade>();
                 } else
                 {
-                    return context.RepCidade.Where(cid => cid.EstadoId == pEstadoId).ToList<RepCidade>();
+                    return representante.RepCidade.Where(cid => cid.EstadoId == pEstadoId).ToList<RepCidade>();
                 }                
             }
 
@@ -409,19 +433,19 @@ namespace ModelLibrary
 
         public static List<RepEstado> ObterListaEstado()
         {
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
-                return context.RepEstado.ToList<RepEstado>();
+                return representante.RepEstado.ToList<RepEstado>();
             }
         }
 
 
         public static RepVendedor ObterVendedor(long pVendedorId)
         {
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                var vendedor = context.RepVendedor.Where(vd => vd.Id == pVendedorId).FirstOrDefault();
+                var vendedor = representante.RepVendedor.Where(vd => vd.Id == pVendedorId).FirstOrDefault();
 
                 return vendedor;
 
@@ -435,7 +459,7 @@ namespace ModelLibrary
         public static List<ListaRepVendedorHome> ObterListaVendedorHome(long pCargaId, string pFiltro = "")
         {
 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
                 string query = @"SELECT RepVendedor.Id, Nome, CpfCnpj as Documento, Endereco, Complemento, Bairro, Cidade || UF as CidadeUF, Telefone || '/' || Celular as Telefones,
@@ -470,7 +494,7 @@ namespace ModelLibrary
 
                 if (pFiltro != "") query += " WHERE " + pFiltro;
 
-                var result = context.Database.SqlQuery<ListaRepVendedorHome>(query);
+                var result = representante.Database.SqlQuery<ListaRepVendedorHome>(query);
 
 
                 return result.ToList<ListaRepVendedorHome>();
@@ -484,10 +508,10 @@ namespace ModelLibrary
         public static RepVendedor PesquisarVendedor(string pCodigo = "", string pCPFCnpj = "")
         {
 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                var vendedor = context.RepVendedor.Where(vd => vd.Id.ToString() == pCodigo || vd.CpfCnpj.Trim() == pCPFCnpj).FirstOrDefault();
+                var vendedor = representante.RepVendedor.Where(vd => vd.Id.ToString() == pCodigo || vd.CpfCnpj.Trim() == pCPFCnpj).FirstOrDefault();
 
                 return vendedor;
 
@@ -501,7 +525,7 @@ namespace ModelLibrary
 
             if (pModo == "Create")
             {
-                using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+                using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
                 {
 
                     if (pVendedorId > 0)
@@ -511,7 +535,7 @@ namespace ModelLibrary
 
                     } else
                     {
-                        var maxVendedor = context.RepVendedor.OrderByDescending(i => i.Id).FirstOrDefault();
+                        var maxVendedor = representante.RepVendedor.OrderByDescending(i => i.Id).FirstOrDefault();
 
                         long newId = maxVendedor == null ? 999001 : maxVendedor.Id + 1;
 
@@ -522,9 +546,9 @@ namespace ModelLibrary
 
                     Console.WriteLine("Incluindo Vendedor - " + pVendedorId.ToString() + " Nome> " + pVendedor.Nome + " ...");
 
-                    context.RepVendedor.Add(pVendedor);
+                    representante.RepVendedor.Add(pVendedor);
 
-                    context.SaveChanges();
+                    representante.SaveChanges();
 
                     Console.WriteLine("Vendedor Incluído!");
                 }
@@ -532,10 +556,10 @@ namespace ModelLibrary
             } else
             {
 
-                using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+                using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
                 {
                     Console.WriteLine("Alterando Vendedor - " + pVendedorId.ToString() + " Nome> " + pVendedor.Nome + " ...");
-                    var result = context.RepVendedor.SingleOrDefault(vd => vd.Id == pVendedorId);
+                    var result = representante.RepVendedor.SingleOrDefault(vd => vd.Id == pVendedorId);
                     if (result != null)
                     {
 
@@ -564,7 +588,7 @@ namespace ModelLibrary
                         result.LimiteCredito = pVendedor.LimiteCredito;
                         result.Observacao = pVendedor.Observacao;
 
-                        context.SaveChanges();
+                        representante.SaveChanges();
 
                         Console.WriteLine("Vendedor Alterado!");
                     }
@@ -578,10 +602,10 @@ namespace ModelLibrary
         public static RepVendedorBase PesquisarVendedorBase(string pCPFCnpj = "")
         {
 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                var vendedor = context.RepVendedorBase.Where(vd => vd.CpfCnpj.Trim() == pCPFCnpj).FirstOrDefault();
+                var vendedor = representante.RepVendedorBase.Where(vd => vd.CpfCnpj.Trim() == pCPFCnpj).FirstOrDefault();
                 return vendedor;
 
             }
@@ -590,10 +614,10 @@ namespace ModelLibrary
 
         public static RepVendedorBase ObterVendedorBase(long pVendedorId)
         {
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                var vendedor = context.RepVendedorBase.Where(vd => vd.Id == pVendedorId).FirstOrDefault();
+                var vendedor = representante.RepVendedorBase.Where(vd => vd.Id == pVendedorId).FirstOrDefault();
 
                 return vendedor;
 
@@ -603,18 +627,18 @@ namespace ModelLibrary
 
         public static RepPedido ObterVendedorPedido(long pVendedorId, long pCargaId)
         {
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
-                var pedido = context.RepPedido.OrderByDescending(i => i.Id).FirstOrDefault(p => p.VendedorId == pVendedorId && p.CargaId == pCargaId);
+                var pedido = representante.RepPedido.OrderByDescending(i => i.Id).FirstOrDefault(p => p.VendedorId == pVendedorId && p.CargaId == pCargaId);
                 return pedido;
             }
             
         }
         public static int ContarPedidos(long pVendedorId)
         {
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
-                int countpedido = context.RepPedido.OrderByDescending(i => i.Id).Where(p => p.VendedorId == pVendedorId).Count();
+                int countpedido = representante.RepPedido.OrderByDescending(i => i.Id).Where(p => p.VendedorId == pVendedorId).Count();
                 return countpedido;
             }
 
@@ -623,13 +647,13 @@ namespace ModelLibrary
 
         public static List<ListaRepVendedorPedido> ObterVendedorPedidoItem(long pPedidoId)
         {
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                var result = context.RepPedido
-                           .Join(context.RepPedidoItem, pd => pd.Id, pi => pi.PedidoId, (pd, pi) => new { RepPedido = pd, RepPedidoItem = pi })
-                           .Join(context.RepProdutoGrade, pi => pi.RepPedidoItem.ProdutoGradeId, pg => pg.Id, (pi, pg) => new { RepPedidoItem = pi, RepProdutoGrade = pg })
-                           .Join(context.RepProduto, pg => pg.RepProdutoGrade.ProdutoId, pr => pr.Id, (pg, pr) => new { RepProdutoGrade = pg, RepProduto = pr })
+                var result = representante.RepPedido
+                           .Join(representante.RepPedidoItem, pd => pd.Id, pi => pi.PedidoId, (pd, pi) => new { RepPedido = pd, RepPedidoItem = pi })
+                           .Join(representante.RepProdutoGrade, pi => pi.RepPedidoItem.ProdutoGradeId, pg => pg.Id, (pi, pg) => new { RepPedidoItem = pi, RepProdutoGrade = pg })
+                           .Join(representante.RepProduto, pg => pg.RepProdutoGrade.ProdutoId, pr => pr.Id, (pg, pr) => new { RepProdutoGrade = pg, RepProduto = pr })
                            .Where(pd => pd.RepProdutoGrade.RepPedidoItem.RepPedido.Id == pPedidoId)
                            .Select(ls => new ListaRepVendedorPedido()
                            {
@@ -664,17 +688,17 @@ namespace ModelLibrary
 
             Console.WriteLine("Inserindo Pedido");
 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                var maxPedido = context.RepPedido.OrderByDescending(i => i.Id).FirstOrDefault();
+                var maxPedido = representante.RepPedido.OrderByDescending(i => i.Id).FirstOrDefault();
 
                 long newId = maxPedido == null ? 1 : maxPedido.Id + 1;
 
-                var carga = context.RepCarga.FirstOrDefault();
+                var carga = representante.RepCarga.FirstOrDefault();
 
 
-                var pedidoanterior = context.RepPedido.FirstOrDefault(pd => pd.VendedorId == pVendedorId);
+                var pedidoanterior = representante.RepPedido.FirstOrDefault(pd => pd.VendedorId == pVendedorId);
 
 
                 /***********
@@ -721,10 +745,10 @@ namespace ModelLibrary
                     Status = "0"
                 };
 
-                context.RepPedido.Add(novopedido);
+                representante.RepPedido.Add(novopedido);
 
 
-                context.SaveChanges();
+                representante.SaveChanges();
 
 
                 return newId;
@@ -735,11 +759,11 @@ namespace ModelLibrary
         public static void AtualizarPedido(long pPedidoId, decimal pValor)
         {
 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
 
-                var pedido = context.RepPedido.SingleOrDefault(pd => pd.Id == pPedidoId);
+                var pedido = representante.RepPedido.SingleOrDefault(pd => pd.Id == pPedidoId);
 
                 if (pedido != null)
                 {
@@ -780,7 +804,7 @@ namespace ModelLibrary
                     pedido.ValorComissao = pedido.ValorCompra * (pedido.PercentualFaixa/100);
                     pedido.ValorLiquido = pedido.ValorCompra - pedido.ValorComissao;
 
-                    context.SaveChanges();
+                    representante.SaveChanges();
                 }
 
 
@@ -792,11 +816,11 @@ namespace ModelLibrary
         public static void RetornarPedido(long pPedidoId, decimal pQuantidade, decimal pRetorno, decimal pPreco)
         {
 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
 
-                var pedido = context.RepPedido.SingleOrDefault(pd => pd.Id == pPedidoId);
+                var pedido = representante.RepPedido.SingleOrDefault(pd => pd.Id == pPedidoId);
 
                 if (pedido != null)
                 {
@@ -815,7 +839,7 @@ namespace ModelLibrary
 
                    
 
-                    var pedidoitem = context.RepPedidoItem.GroupBy(pi => pi.PedidoId)
+                    var pedidoitem = representante.RepPedidoItem.GroupBy(pi => pi.PedidoId)
                    .Select(g => new { pedidoid = g.Key, valortotal = g.Sum(i => ((i.Quantidade - i.Retorno) * i.Preco)) })
                    .FirstOrDefault(pi => pi.pedidoid == pedido.Id);
 
@@ -848,7 +872,7 @@ namespace ModelLibrary
                     pedido.ValorComissao = pedido.ValorCompra * (pedido.PercentualFaixa / 100);
                     pedido.ValorLiquido = pedido.ValorCompra - pedido.ValorComissao;
 
-                    context.SaveChanges();
+                    representante.SaveChanges();
 
                 }
 
@@ -867,10 +891,10 @@ namespace ModelLibrary
             Console.WriteLine("InserirPedidoItem");
 
 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                var pedido = context.RepPedido.OrderByDescending(pd => pd.Id).FirstOrDefault(pd => pd.VendedorId == pVendedorId && pd.CargaId == pCargaId);
+                var pedido = representante.RepPedido.OrderByDescending(pd => pd.Id).FirstOrDefault(pd => pd.VendedorId == pVendedorId && pd.CargaId == pCargaId);
                 long vPedidoId = 0;
 
                 if (pedido == null)
@@ -886,7 +910,7 @@ namespace ModelLibrary
                 }
 
 
-                var result = context.RepPedidoItem.SingleOrDefault(pi => pi.PedidoId == vPedidoId && pi.ProdutoGradeId == pProdutoGradeId);
+                var result = representante.RepPedidoItem.SingleOrDefault(pi => pi.PedidoId == vPedidoId && pi.ProdutoGradeId == pProdutoGradeId);
 
                 if (result != null)
                 {
@@ -905,7 +929,7 @@ namespace ModelLibrary
 
                     Console.WriteLine("Inserindo Pedido Item");
 
-                    var maxPedidoItem = context.RepPedidoItem.OrderByDescending(i => i.Id).FirstOrDefault();
+                    var maxPedidoItem = representante.RepPedidoItem.OrderByDescending(i => i.Id).FirstOrDefault();
 
                     long newId = maxPedidoItem == null ? 1 : maxPedidoItem.Id + 1;
 
@@ -920,12 +944,12 @@ namespace ModelLibrary
                         Preco = pPreco
                     };
 
-                    context.RepPedidoItem.Add(novopedidoitem);
+                    representante.RepPedidoItem.Add(novopedidoitem);
 
                 }
 
                 AtualizarPedido(vPedidoId, pQuantidade * pPreco);
-                context.SaveChanges();
+                representante.SaveChanges();
 
 
 
@@ -941,10 +965,10 @@ namespace ModelLibrary
             Console.WriteLine("AtualizarPedidoItem: " + pProdutoGradeId.ToString());
 
 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                var pedidoitem = context.RepPedidoItem.FirstOrDefault(pi => pi.ProdutoGradeId == pProdutoGradeId && pi.PedidoId == pPedidoId);
+                var pedidoitem = representante.RepPedidoItem.FirstOrDefault(pi => pi.ProdutoGradeId == pProdutoGradeId && pi.PedidoId == pPedidoId);
 
                 if (pedidoitem != null)
                 {
@@ -953,7 +977,7 @@ namespace ModelLibrary
                     pedidoitem.Quantidade = pQuantidade;
                     pedidoitem.Preco = pPreco;
 
-                    context.SaveChanges();
+                    representante.SaveChanges();
 
                     AtualizarPedido(pedidoitem.PedidoId, pQuantidade * pPreco);
                 }
@@ -966,10 +990,10 @@ namespace ModelLibrary
         public static void ExcluirPedidoItem(long pPedidoItemId, long pPedidoId, decimal pQuantidade, decimal pPreco)
         {
 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                context.Database.ExecuteSqlCommand("DELETE FROM RepPedidoItem WHERE Id = @pPedidoItemId", new SQLiteParameter("@pPedidoItemId", pPedidoItemId));
+                representante.Database.ExecuteSqlCommand("DELETE FROM RepPedidoItem WHERE Id = @pPedidoItemId", new SQLiteParameter("@pPedidoItemId", pPedidoItemId));
 
                 AtualizarPedido(pPedidoId, -(pQuantidade*pPreco));
 
@@ -984,10 +1008,10 @@ namespace ModelLibrary
             Console.WriteLine("AtualizarPedidoItem: " + pProdutoGradeId.ToString());
 
 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                var pedidoitem = context.RepPedidoItem.FirstOrDefault(pi => pi.ProdutoGradeId == pProdutoGradeId && pi.PedidoId == pPedidoId);
+                var pedidoitem = representante.RepPedidoItem.FirstOrDefault(pi => pi.ProdutoGradeId == pProdutoGradeId && pi.PedidoId == pPedidoId);
 
                 if (pedidoitem != null)
                 {
@@ -996,7 +1020,7 @@ namespace ModelLibrary
 
                     //decimal vValor = Convert.ToDecimal((pedidoitem.Quantidade - pedidoitem.Retorno) * pedidoitem.Preco);
                     pedidoitem.Retorno = pQuantidade;
-                    context.SaveChanges();
+                    representante.SaveChanges();
 
 
                     RetornarPedido(pedidoitem.PedidoId, Convert.ToDecimal(pedidoitem.Quantidade), pQuantidade, Convert.ToDecimal(pedidoitem.Preco));
@@ -1009,9 +1033,9 @@ namespace ModelLibrary
         public static void LimparPedidoVazio()
         {
 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
-                context.Database.ExecuteSqlCommand("DELETE FROM RepPedido WHERE Id NOT IN (SELECT PedidoId FROM RepPedidoItem)");
+                representante.Database.ExecuteSqlCommand("DELETE FROM RepPedido WHERE Id NOT IN (SELECT PedidoId FROM RepPedidoItem)");
             }
 
         }
@@ -1020,7 +1044,7 @@ namespace ModelLibrary
         {
 
 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
                 string query = @"SELECT RepReceberBaixa.Id, RepReceber.Id ReceberId, Documento, Serie, ValorNF 
@@ -1029,7 +1053,7 @@ namespace ModelLibrary
                                 FROM RepReceber LEFT JOIN RepReceberBaixa ON RepReceber.Id = RepReceberBaixa.ReceberId 
                                 WHERE vendedorId = @p0";  
 
-                var result = context.Database.SqlQuery<ListaRecebimentos>(query, pVendedorId);
+                var result = representante.Database.SqlQuery<ListaRecebimentos>(query, pVendedorId);
 
                 return result.ToList<ListaRecebimentos>();
 
@@ -1041,7 +1065,7 @@ namespace ModelLibrary
 
         public static ListaRecebimentos ObterAReceberVendedor(long pVendedorId)
         {
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
                 string query = @"SELECT MAX(RepReceberBaixa.Id) Id, MAX(RepReceber.Id) ReceberId, Max(Documento) Documento, Max(Serie) Serie, Sum(ValorNF) 
@@ -1050,7 +1074,7 @@ namespace ModelLibrary
                                 FROM RepReceber LEFT JOIN RepReceberBaixa ON RepReceber.Id = RepReceberBaixa.ReceberId 
                                 WHERE vendedorId = @p0";
 
-                ListaRecebimentos result = context.Database.SqlQuery<ListaRecebimentos>(query, pVendedorId).FirstOrDefault();
+                ListaRecebimentos result = representante.Database.SqlQuery<ListaRecebimentos>(query, pVendedorId).FirstOrDefault();
 
                 return result;
 
@@ -1061,11 +1085,11 @@ namespace ModelLibrary
         public static void ReceberAcerto(long pPedidoId, decimal pValor)
         {
 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
 
-                var pedido = context.RepPedido.SingleOrDefault(pd => pd.Id == pPedidoId);
+                var pedido = representante.RepPedido.SingleOrDefault(pd => pd.Id == pPedidoId);
 
                 if (pedido != null)
                 {
@@ -1078,7 +1102,7 @@ namespace ModelLibrary
                     pedido.ValorAcerto = pValor;
                     pedido.Status = "3";
 
-                    context.SaveChanges();
+                    representante.SaveChanges();
 
                 }
 
@@ -1094,13 +1118,13 @@ namespace ModelLibrary
 
             Console.WriteLine("Inserindo Receber Baixa");
 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
 
                 if (pId == 0)
                 {
-                    var maxReceberBaixa = context.RepReceberBaixa.OrderByDescending(i => i.Id).FirstOrDefault();
+                    var maxReceberBaixa = representante.RepReceberBaixa.OrderByDescending(i => i.Id).FirstOrDefault();
 
                     long newId = maxReceberBaixa == null ? 1 : maxReceberBaixa.Id + 1;
 
@@ -1115,14 +1139,14 @@ namespace ModelLibrary
                         DataBaixa = DateTime.Now
                     };
 
-                    context.RepReceberBaixa.Add(novoreceberbaixa);
+                    representante.RepReceberBaixa.Add(novoreceberbaixa);
 
 
-                    context.SaveChanges();
+                    representante.SaveChanges();
                 } else
                 {
 
-                    var receberbaixa = context.RepReceberBaixa.SingleOrDefault(rb => rb.Id == pId);
+                    var receberbaixa = representante.RepReceberBaixa.SingleOrDefault(rb => rb.Id == pId);
 
                     if (receberbaixa != null)
                     {
@@ -1132,14 +1156,14 @@ namespace ModelLibrary
                         receberbaixa.DataBaixa = DateTime.Now;
                         receberbaixa.Valor = pValor;
 
-                        context.SaveChanges();
+                        representante.SaveChanges();
 
                     }
 
                 }
                 
 
-                var receber = context.RepReceber.SingleOrDefault(rc => rc.Id == pReceberId);
+                var receber = representante.RepReceber.SingleOrDefault(rc => rc.Id == pReceberId);
 
                 if (receber != null)
                 {
@@ -1148,7 +1172,7 @@ namespace ModelLibrary
                     receber.DataPagamento = DateTime.Now;
                     receber.Status = "1";
 
-                    context.SaveChanges();
+                    representante.SaveChanges();
 
                 }
 
@@ -1160,7 +1184,7 @@ namespace ModelLibrary
         public static List<ListaRepPosicaoFinanceira> ObterPosicaoFinanceira()
         {
 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
 
@@ -1185,7 +1209,7 @@ namespace ModelLibrary
                                     GROUP BY RepVendedor.Id, RepVendedor.Nome";
 
 
-                var result = context.Database.SqlQuery<ListaRepPosicaoFinanceira>(query);
+                var result = representante.Database.SqlQuery<ListaRepPosicaoFinanceira>(query);
 
 
                 return result.ToList<ListaRepPosicaoFinanceira>();
@@ -1214,7 +1238,7 @@ namespace ModelLibrary
         {
 
 
-            using (RepresentanteDBEntities context = new RepresentanteDBEntities())
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
 
@@ -1233,7 +1257,7 @@ namespace ModelLibrary
 
 
 
-                var totalizador = context.Database.SqlQuery<ListaTotalizadores>(query, pCargaId).FirstOrDefault();
+                var totalizador = representante.Database.SqlQuery<ListaTotalizadores>(query, pCargaId).FirstOrDefault();
 
                 vTotalizador.QtdProdutos = totalizador.QtdProdutos;
                 vTotalizador.TotalProdutos = totalizador.TotalProdutos;

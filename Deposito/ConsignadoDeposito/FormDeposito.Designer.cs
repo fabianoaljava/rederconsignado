@@ -249,14 +249,14 @@
             this.lblRetornoMesAno = new MetroFramework.Controls.MetroLabel();
             this.lblRetornoRepresentante = new MetroFramework.Controls.MetroLabel();
             this.lblRetornoPraca = new MetroFramework.Controls.MetroLabel();
-            this.tabEstoque = new System.Windows.Forms.TabPage();
+            this.tabCadastro = new System.Windows.Forms.TabPage();
             this.tabRelatorios = new System.Windows.Forms.TabPage();
             this.pnlRelatorio = new MetroFramework.Controls.MetroPanel();
             this.lblRelatorios = new MetroFramework.Controls.MetroLabel();
+            this.tabEstoque = new System.Windows.Forms.TabPage();
             this.tabConfiguracoes = new System.Windows.Forms.TabPage();
             this.tabAjuda = new System.Windows.Forms.TabPage();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.tabCadastro = new System.Windows.Forms.TabPage();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
@@ -406,7 +406,7 @@
             this.tbcPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tbcPrincipal.Name = "tbcPrincipal";
-            this.tbcPrincipal.SelectedIndex = 0;
+            this.tbcPrincipal.SelectedIndex = 2;
             this.tbcPrincipal.Size = new System.Drawing.Size(860, 645);
             this.tbcPrincipal.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tbcPrincipal.TabIndex = 0;
@@ -3366,13 +3366,13 @@
             this.lblRetornoPraca.TabIndex = 2;
             this.lblRetornoPraca.Text = "Praça";
             // 
-            // tabEstoque
+            // tabCadastro
             // 
-            this.tabEstoque.Location = new System.Drawing.Point(4, 38);
-            this.tabEstoque.Name = "tabEstoque";
-            this.tabEstoque.Size = new System.Drawing.Size(852, 603);
-            this.tabEstoque.TabIndex = 9;
-            this.tabEstoque.Text = "ESTOQUE";
+            this.tabCadastro.Location = new System.Drawing.Point(4, 38);
+            this.tabCadastro.Name = "tabCadastro";
+            this.tabCadastro.Size = new System.Drawing.Size(852, 603);
+            this.tabCadastro.TabIndex = 11;
+            this.tabCadastro.Text = "CADASTROS";
             // 
             // tabRelatorios
             // 
@@ -3407,6 +3407,14 @@
             this.lblRelatorios.TabIndex = 7;
             this.lblRelatorios.Text = "Botões para os Principais Relatórios";
             // 
+            // tabEstoque
+            // 
+            this.tabEstoque.Location = new System.Drawing.Point(4, 38);
+            this.tabEstoque.Name = "tabEstoque";
+            this.tabEstoque.Size = new System.Drawing.Size(852, 603);
+            this.tabEstoque.TabIndex = 9;
+            this.tabEstoque.Text = "ESTOQUE";
+            // 
             // tabConfiguracoes
             // 
             this.tabConfiguracoes.Location = new System.Drawing.Point(4, 38);
@@ -3422,14 +3430,6 @@
             this.tabAjuda.Size = new System.Drawing.Size(852, 603);
             this.tabAjuda.TabIndex = 8;
             this.tabAjuda.Text = "AJUDA";
-            // 
-            // tabCadastro
-            // 
-            this.tabCadastro.Location = new System.Drawing.Point(4, 38);
-            this.tabCadastro.Name = "tabCadastro";
-            this.tabCadastro.Size = new System.Drawing.Size(852, 603);
-            this.tabCadastro.TabIndex = 11;
-            this.tabCadastro.Text = "CADASTROS";
             // 
             // FormDeposito
             // 

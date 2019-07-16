@@ -1548,12 +1548,13 @@ namespace ModelLibrary
 
                 string query = "SELECT DISTINCT 0 Id, " + cCargaId.ToString() + " CargaId, ProdutoGradeId, 0 Quantidade, 0 Retorno FROM RepPedidoItem WHERE ProdutoGradeId NOT IN (SELECT ProdutoGradeId FROM RepCargaProduto)";
                 count = representante.Database.SqlQuery<RepCargaProduto>(query).Count();
+                count += representante.RepCargaProduto.Count();
 
                 vTable = new ListaImportacaoExportacao();
 
                 vTable.Tabela = "CargaProduto";
-                vTable.Acao = "Exportar Produtos que não estavam na carga.";
-                vTable.Rotina = "ExportarProdutoExtra";
+                vTable.Acao = "Exportar Produto da Carga.";
+                vTable.Rotina = "ExportarCargaProduto";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
 
@@ -1834,7 +1835,7 @@ namespace ModelLibrary
 
 
         // Inerir na Carga Produtos que estão em PedidoItem porém não estão em CargaProduto
-        public static Boolean ExportarProdutoExtra()
+        public static Boolean ExportarCargaProduto()
         {
 
 
@@ -1854,16 +1855,41 @@ namespace ModelLibrary
                     {
 
 
-                        var regCargaProduto = new CargaProduto
+                        var maxcargaproduto = representante.RepCargaProduto.OrderByDescending(i => i.Id).FirstOrDefault();
+
+                        long newId = maxcargaproduto == null ? 1 : maxcargaproduto.Id + 1;
+
+                        var regRepCargaProduto = new RepCargaProduto
                         {
+                            Id = newId,
                             CargaId = Convert.ToInt32(cCargaId),
                             ProdutoGradeId = Convert.ToInt32(row.ProdutoGradeId),
                             Quantidade = 0,
                             Retorno = 0
                         };
 
+                        representante.RepCargaProduto.Add(regRepCargaProduto);
 
-                        CargaProdutoInserir(regCargaProduto);
+                    }
+
+
+                    foreach(var row in representante.RepCargaProduto)
+                    {
+
+                        var regCargaProduto = new CargaProduto
+                        {
+                            CargaId = Convert.ToInt32(cCargaId),
+                            ProdutoGradeId = Convert.ToInt32(row.ProdutoGradeId),
+                            Quantidade = Convert.ToDouble(row.Quantidade),
+                            Retorno = Convert.ToDouble(row.Retorno)
+                        };
+
+
+
+
+                        representante.SaveChanges();
+
+                        CargaProdutoAtualizarInserir(regCargaProduto);
                         count++;
                     }
 
@@ -1885,16 +1911,34 @@ namespace ModelLibrary
 
         }
 
-        public static void CargaProdutoInserir(CargaProduto pCargaProduto)
+        public static void CargaProdutoAtualizarInserir(CargaProduto pCargaProduto)
         {
 
             using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
-                Console.WriteLine("Inserindo Produto Extra id: " + pCargaProduto.ProdutoGradeId.ToString());
 
-                deposito.CargaProduto.Add(pCargaProduto);
-                deposito.SaveChanges();
+                var vCargaProduto = deposito.CargaProduto.FirstOrDefault(cp => cp.CargaId == pCargaProduto.CargaId && cp.ProdutoGradeId == pCargaProduto.ProdutoGradeId);
+
+                if (vCargaProduto != null)
+                {
+
+                    Console.WriteLine("Atualizando Produto Grade id: " + pCargaProduto.ProdutoGradeId.ToString());
+
+                    vCargaProduto.Quantidade = pCargaProduto.Quantidade;
+                    vCargaProduto.Retorno = pCargaProduto.Retorno;
+
+
+                    deposito.SaveChanges();
+
+                }
+                else
+                { 
+                    Console.WriteLine("Inserindo Produto Grade id: " + pCargaProduto.ProdutoGradeId.ToString());
+
+                    deposito.CargaProduto.Add(pCargaProduto);
+                    deposito.SaveChanges();
+                }
 
             }
 

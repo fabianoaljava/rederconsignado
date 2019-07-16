@@ -22,8 +22,8 @@ namespace ConsignadoRepresentante
 
         public long cCargaId;
         public string cStatus;
-
-
+       
+    
 
         public DepositoHome cHome;
         public Importar cImportar;
@@ -497,14 +497,20 @@ namespace ConsignadoRepresentante
                 if (Convert.ToInt32(grdConfProduto.Rows[e.RowIndex].Cells[4].Value.ToString()) > 0)
                 {
                     grdConfProduto.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Green;
+                    grdConfProduto.Rows[e.RowIndex].Cells["Acao"].Value = "Resolver Conflito";
+                    grdConfProduto.Rows[e.RowIndex].Cells["Acao"].ContextMenuStrip = cmsResolverConflito;
                 }
                 else if (Convert.ToInt32(grdConfProduto.Rows[e.RowIndex].Cells[4].Value.ToString()) == 0)
                 {
                     grdConfProduto.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Blue;
+                    
                 }
                 else
                 {
                     grdConfProduto.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
+                    grdConfProduto.Rows[e.RowIndex].Cells["Acao"].Value = "Resolver Conflito";
+                    grdConfProduto.Rows[e.RowIndex].Cells["Acao"].ContextMenuStrip = cmsResolverConflito;
+
                 }
             }
             
@@ -580,6 +586,46 @@ namespace ConsignadoRepresentante
             CarregarRepresentante();
 
             cImportar.ExibirImportacao();
+        }
+
+        private void aplicarQuantidadeInformadaToolStripMenuItem_Click(object sender, EventArgs e)
+        {            
+            Console.WriteLine("Aplicar Quantidade Informada em " + grdConfProduto.CurrentRow.Cells["CodigoBarras"].Value.ToString());
+            cConferirProdutos.ResolverConflito(Convert.ToInt32(grdConfProduto.CurrentRow.Cells["ProdutoGradeId"].Value), Convert.ToInt32(grdConfProduto.CurrentRow.Cells["QuantidadeInformada"].Value));
+
+        }
+
+        private void aplicarQuantidadeDaCargaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine("Aplicar Quantidade Carga em " + grdConfProduto.CurrentRow.Cells["CodigoBarras"].Value.ToString());
+            cConferirProdutos.ResolverConflito(Convert.ToInt32(grdConfProduto.CurrentRow.Cells["ProdutoGradeId"].Value), Convert.ToInt32(grdConfProduto.CurrentRow.Cells["QuantidadeCarga"].Value));
+        }
+
+        private void grdConfProduto_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+
+                var hti = grdConfProduto.HitTest(e.X, e.Y);
+                grdConfProduto.ClearSelection();
+                grdConfProduto[hti.ColumnIndex, hti.RowIndex].Selected = true;
+
+
+
+            } 
+
+
+
+        }
+
+        private void grdConfProduto_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+        }
+
+        private void cmsResolverConflito_Opening(object sender, CancelEventArgs e)
+        {
+            //if (cConfProdutoRightMouse) e.Cancel = true;
         }
     }
 }

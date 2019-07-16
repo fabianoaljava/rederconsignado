@@ -135,10 +135,37 @@ namespace ConsignadoRepresentante
             localDeposito.grdConfProduto.Columns[3].HeaderText = "Quantidade Informada";
             localDeposito.grdConfProduto.Columns[4].HeaderText = "Diferença";
             localDeposito.grdConfProduto.Columns[5].HeaderText = "Valor Diferença";
+            
+            localDeposito.grdConfProduto.CellClick += grdConfProduto_CellClick;
+            localDeposito.grdConfProduto.CellMouseDown += grdConfProduto_MouseDown;
 
 
 
 
+
+        }
+
+        private void grdConfProduto_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //if (e.ColumnIndex == localDeposito.grdConfProduto.Columns["Acao"].Index)
+            //{
+            //    localDeposito.grdConfProduto.ClearSelection();
+            //    localDeposito.grdConfProduto.Rows[e.RowIndex].Selected = true;
+            //    if (localDeposito.grdConfProduto.Rows[e.RowIndex].Cells["Acao"].ContextMenuStrip != null)
+            //    {
+            //        localDeposito.grdConfProduto.Rows[e.RowIndex].Cells["Acao"].ContextMenuStrip.Show();
+            //    }
+                
+            //}
+        }
+
+        private void grdConfProduto_MouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            //localDeposito.grdConfProduto.ClearSelection();
+            //if (e.ColumnIndex == localDeposito.grdConfProduto.Columns["Acao"].Index)
+            //{
+            //    localDeposito.grdConfProduto.Rows[e.RowIndex].Selected = true;
+            //}
         }
 
         public void InserirCargaProdutoConferencia()
@@ -295,6 +322,13 @@ namespace ConsignadoRepresentante
             }
 
 
+        }
+
+
+        public void ResolverConflito(int pProdutoGradeID, int pQuantidade)
+        {
+            ModelLibrary.MetodosRepresentante.ResolverConflitoProdutoConferencia(localDeposito.cCargaId, pProdutoGradeID, pQuantidade);
+            ExibirConferenciaProduto(localDeposito.cCargaId);
         }
 
     }
