@@ -37,7 +37,7 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.grdEstoque.DataSource = view;
 
             localRepresentanteForm.grdEstoque.Columns[1].Width = 250;
-            localRepresentanteForm.grdEstoque.Columns[9].DefaultCellStyle.Format = "c";
+            
 
         }
     }

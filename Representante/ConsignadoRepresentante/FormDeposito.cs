@@ -697,5 +697,15 @@ namespace ConsignadoRepresentante
                 cSuplemento.ExcluirCargaProduto();
             }
         }
+
+        private void ofdBDArquivo_FileOk(object sender, CancelEventArgs e)
+        {
+            txtBDLocal.Text = ofdBDArquivo.FileName;
+        }
+
+        private void btnBDLocalProcurar_Click(object sender, EventArgs e)
+        {
+            ofdBDArquivo.ShowDialog();
+        }
     }
 }

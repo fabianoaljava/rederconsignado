@@ -147,6 +147,7 @@ namespace ConsignadoRepresentante
             cVendedor.CarregarFormulario();
             cFinanceiro.CarregarFormulario();
             cProduto.ExibirProdutos();
+            cEstoque.ExibirEstoque();
 
 
         }

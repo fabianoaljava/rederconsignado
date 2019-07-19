@@ -136,15 +136,35 @@
             this.btnExportar = new MetroFramework.Controls.MetroButton();
             this.tabRelatorios = new System.Windows.Forms.TabPage();
             this.pnlRetorno = new MetroFramework.Controls.MetroPanel();
-            this.lblRelatorios = new MetroFramework.Controls.MetroLabel();
             this.tabConfiguracoes = new System.Windows.Forms.TabPage();
-            this.pnlHome = new MetroFramework.Controls.MetroPanel();
             this.tabAjuda = new System.Windows.Forms.TabPage();
             this.bgwExportar = new System.ComponentModel.BackgroundWorker();
             this.bgwImportar = new System.ComponentModel.BackgroundWorker();
             this.cmsResolverConflito = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.aplicarQuantidadeInformadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aplicarQuantidadeDaCargaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pnlAjuda = new MetroFramework.Drawing.Html.HtmlPanel();
+            this.tbcConfiguracao = new MetroFramework.Controls.MetroTabControl();
+            this.tabBancoDeDados = new System.Windows.Forms.TabPage();
+            this.pnlServidor = new MetroFramework.Controls.MetroPanel();
+            this.txtBDCaminho = new MetroFramework.Controls.MetroTextBox();
+            this.lblBDCaminho = new MetroFramework.Controls.MetroLabel();
+            this.btnBDTestar = new MetroFramework.Controls.MetroButton();
+            this.ofdBDArquivo = new System.Windows.Forms.OpenFileDialog();
+            this.lblBDNome = new MetroFramework.Controls.MetroLabel();
+            this.txtBDNome = new MetroFramework.Controls.MetroTextBox();
+            this.lblBDUsuario = new MetroFramework.Controls.MetroLabel();
+            this.txtBDUsuario = new MetroFramework.Controls.MetroTextBox();
+            this.lblBDSenha = new MetroFramework.Controls.MetroLabel();
+            this.txtBDSenha = new MetroFramework.Controls.MetroTextBox();
+            this.lblBDLocal = new MetroFramework.Controls.MetroLabel();
+            this.txtBDLocal = new MetroFramework.Controls.MetroTextBox();
+            this.btnBDLocalProcurar = new MetroFramework.Controls.MetroButton();
+            this.btnBDSalvar = new MetroFramework.Controls.MetroButton();
+            this.btnBDDefault = new MetroFramework.Controls.MetroButton();
+            this.btnRelatorioPedido = new MetroFramework.Controls.MetroButton();
+            this.btnRelatorioSuplemento = new MetroFramework.Controls.MetroButton();
+            this.btnRelatorioRetorno = new MetroFramework.Controls.MetroButton();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
@@ -175,7 +195,11 @@
             this.tabRelatorios.SuspendLayout();
             this.pnlRetorno.SuspendLayout();
             this.tabConfiguracoes.SuspendLayout();
+            this.tabAjuda.SuspendLayout();
             this.cmsResolverConflito.SuspendLayout();
+            this.tbcConfiguracao.SuspendLayout();
+            this.tabBancoDeDados.SuspendLayout();
+            this.pnlServidor.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -309,7 +333,7 @@
             this.tbcPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tbcPrincipal.Name = "tbcPrincipal";
-            this.tbcPrincipal.SelectedIndex = 3;
+            this.tbcPrincipal.SelectedIndex = 0;
             this.tbcPrincipal.Size = new System.Drawing.Size(860, 645);
             this.tbcPrincipal.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tbcPrincipal.TabIndex = 11;
@@ -342,7 +366,7 @@
             // lblHome
             // 
             this.lblHome.AutoSize = true;
-            this.lblHome.Location = new System.Drawing.Point(326, 183);
+            this.lblHome.Location = new System.Drawing.Point(29, 28);
             this.lblHome.Name = "lblHome";
             this.lblHome.Size = new System.Drawing.Size(187, 19);
             this.lblHome.TabIndex = 2;
@@ -1622,7 +1646,9 @@
             // 
             // pnlRetorno
             // 
-            this.pnlRetorno.Controls.Add(this.lblRelatorios);
+            this.pnlRetorno.Controls.Add(this.btnRelatorioRetorno);
+            this.pnlRetorno.Controls.Add(this.btnRelatorioSuplemento);
+            this.pnlRetorno.Controls.Add(this.btnRelatorioPedido);
             this.pnlRetorno.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlRetorno.HorizontalScrollbarBarColor = true;
             this.pnlRetorno.HorizontalScrollbarHighlightOnWheel = false;
@@ -1635,40 +1661,18 @@
             this.pnlRetorno.VerticalScrollbarHighlightOnWheel = false;
             this.pnlRetorno.VerticalScrollbarSize = 10;
             // 
-            // lblRelatorios
-            // 
-            this.lblRelatorios.AutoSize = true;
-            this.lblRelatorios.Location = new System.Drawing.Point(266, 64);
-            this.lblRelatorios.Name = "lblRelatorios";
-            this.lblRelatorios.Size = new System.Drawing.Size(218, 19);
-            this.lblRelatorios.TabIndex = 7;
-            this.lblRelatorios.Text = "Botões para os Principais Relatórios";
-            // 
             // tabConfiguracoes
             // 
-            this.tabConfiguracoes.Controls.Add(this.pnlHome);
+            this.tabConfiguracoes.Controls.Add(this.tbcConfiguracao);
             this.tabConfiguracoes.Location = new System.Drawing.Point(4, 38);
             this.tabConfiguracoes.Name = "tabConfiguracoes";
             this.tabConfiguracoes.Size = new System.Drawing.Size(852, 603);
             this.tabConfiguracoes.TabIndex = 7;
             this.tabConfiguracoes.Text = "CONFIGURAÇÕES";
             // 
-            // pnlHome
-            // 
-            this.pnlHome.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlHome.HorizontalScrollbarBarColor = true;
-            this.pnlHome.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlHome.HorizontalScrollbarSize = 10;
-            this.pnlHome.Location = new System.Drawing.Point(0, 0);
-            this.pnlHome.Name = "pnlHome";
-            this.pnlHome.Size = new System.Drawing.Size(852, 603);
-            this.pnlHome.TabIndex = 0;
-            this.pnlHome.VerticalScrollbarBarColor = true;
-            this.pnlHome.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlHome.VerticalScrollbarSize = 10;
-            // 
             // tabAjuda
             // 
+            this.tabAjuda.Controls.Add(this.pnlAjuda);
             this.tabAjuda.Location = new System.Drawing.Point(4, 38);
             this.tabAjuda.Name = "tabAjuda";
             this.tabAjuda.Size = new System.Drawing.Size(852, 603);
@@ -1708,6 +1712,356 @@
             this.aplicarQuantidadeDaCargaToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
             this.aplicarQuantidadeDaCargaToolStripMenuItem.Text = "Aplicar Quantidade da Carga";
             this.aplicarQuantidadeDaCargaToolStripMenuItem.Click += new System.EventHandler(this.aplicarQuantidadeDaCargaToolStripMenuItem_Click);
+            // 
+            // pnlAjuda
+            // 
+            this.pnlAjuda.AutoScroll = true;
+            this.pnlAjuda.AutoScrollMinSize = new System.Drawing.Size(960, 18);
+            this.pnlAjuda.BackColor = System.Drawing.SystemColors.Window;
+            this.pnlAjuda.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlAjuda.Location = new System.Drawing.Point(0, 0);
+            this.pnlAjuda.Name = "pnlAjuda";
+            this.pnlAjuda.Size = new System.Drawing.Size(852, 603);
+            this.pnlAjuda.TabIndex = 1;
+            this.pnlAjuda.Text = "<b>Conteudo da Ajuda</b> <br> <i>Em breve...</i>";
+            // 
+            // tbcConfiguracao
+            // 
+            this.tbcConfiguracao.Controls.Add(this.tabBancoDeDados);
+            this.tbcConfiguracao.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbcConfiguracao.Location = new System.Drawing.Point(0, 0);
+            this.tbcConfiguracao.Name = "tbcConfiguracao";
+            this.tbcConfiguracao.SelectedIndex = 0;
+            this.tbcConfiguracao.Size = new System.Drawing.Size(852, 603);
+            this.tbcConfiguracao.TabIndex = 0;
+            this.tbcConfiguracao.UseSelectable = true;
+            // 
+            // tabBancoDeDados
+            // 
+            this.tabBancoDeDados.Controls.Add(this.pnlServidor);
+            this.tabBancoDeDados.Location = new System.Drawing.Point(4, 38);
+            this.tabBancoDeDados.Name = "tabBancoDeDados";
+            this.tabBancoDeDados.Size = new System.Drawing.Size(844, 561);
+            this.tabBancoDeDados.TabIndex = 0;
+            this.tabBancoDeDados.Text = "Configurações do Banco de Dados";
+            // 
+            // pnlServidor
+            // 
+            this.pnlServidor.Controls.Add(this.btnBDDefault);
+            this.pnlServidor.Controls.Add(this.btnBDSalvar);
+            this.pnlServidor.Controls.Add(this.btnBDLocalProcurar);
+            this.pnlServidor.Controls.Add(this.lblBDLocal);
+            this.pnlServidor.Controls.Add(this.txtBDLocal);
+            this.pnlServidor.Controls.Add(this.lblBDSenha);
+            this.pnlServidor.Controls.Add(this.txtBDSenha);
+            this.pnlServidor.Controls.Add(this.lblBDUsuario);
+            this.pnlServidor.Controls.Add(this.txtBDUsuario);
+            this.pnlServidor.Controls.Add(this.lblBDNome);
+            this.pnlServidor.Controls.Add(this.txtBDNome);
+            this.pnlServidor.Controls.Add(this.btnBDTestar);
+            this.pnlServidor.Controls.Add(this.lblBDCaminho);
+            this.pnlServidor.Controls.Add(this.txtBDCaminho);
+            this.pnlServidor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlServidor.HorizontalScrollbarBarColor = true;
+            this.pnlServidor.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlServidor.HorizontalScrollbarSize = 10;
+            this.pnlServidor.Location = new System.Drawing.Point(0, 0);
+            this.pnlServidor.Name = "pnlServidor";
+            this.pnlServidor.Size = new System.Drawing.Size(844, 561);
+            this.pnlServidor.TabIndex = 1;
+            this.pnlServidor.VerticalScrollbarBarColor = true;
+            this.pnlServidor.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlServidor.VerticalScrollbarSize = 10;
+            // 
+            // txtBDCaminho
+            // 
+            // 
+            // 
+            // 
+            this.txtBDCaminho.CustomButton.Image = null;
+            this.txtBDCaminho.CustomButton.Location = new System.Drawing.Point(436, 1);
+            this.txtBDCaminho.CustomButton.Name = "";
+            this.txtBDCaminho.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtBDCaminho.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtBDCaminho.CustomButton.TabIndex = 1;
+            this.txtBDCaminho.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtBDCaminho.CustomButton.UseSelectable = true;
+            this.txtBDCaminho.CustomButton.Visible = false;
+            this.txtBDCaminho.Lines = new string[] {
+        ".\\SQLEXPRESSREDER"};
+            this.txtBDCaminho.Location = new System.Drawing.Point(24, 51);
+            this.txtBDCaminho.MaxLength = 32767;
+            this.txtBDCaminho.Name = "txtBDCaminho";
+            this.txtBDCaminho.PasswordChar = '\0';
+            this.txtBDCaminho.PromptText = "Caminho do Banco de Dados";
+            this.txtBDCaminho.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtBDCaminho.SelectedText = "";
+            this.txtBDCaminho.SelectionLength = 0;
+            this.txtBDCaminho.SelectionStart = 0;
+            this.txtBDCaminho.ShortcutsEnabled = true;
+            this.txtBDCaminho.Size = new System.Drawing.Size(458, 23);
+            this.txtBDCaminho.TabIndex = 2;
+            this.txtBDCaminho.Text = ".\\SQLEXPRESSREDER";
+            this.txtBDCaminho.UseSelectable = true;
+            this.txtBDCaminho.WaterMark = "Caminho do Banco de Dados";
+            this.txtBDCaminho.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtBDCaminho.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // lblBDCaminho
+            // 
+            this.lblBDCaminho.AutoSize = true;
+            this.lblBDCaminho.Location = new System.Drawing.Point(24, 26);
+            this.lblBDCaminho.Name = "lblBDCaminho";
+            this.lblBDCaminho.Size = new System.Drawing.Size(246, 19);
+            this.lblBDCaminho.TabIndex = 3;
+            this.lblBDCaminho.Text = "Caminho do Banco de Dados (Depósito)";
+            // 
+            // btnBDTestar
+            // 
+            this.btnBDTestar.Location = new System.Drawing.Point(407, 102);
+            this.btnBDTestar.Name = "btnBDTestar";
+            this.btnBDTestar.Size = new System.Drawing.Size(75, 23);
+            this.btnBDTestar.TabIndex = 4;
+            this.btnBDTestar.Text = "Testar";
+            this.btnBDTestar.UseSelectable = true;
+            // 
+            // ofdBDArquivo
+            // 
+            this.ofdBDArquivo.DefaultExt = "sqlite";
+            this.ofdBDArquivo.FileName = "DBRepresentante.sqlite";
+            this.ofdBDArquivo.Filter = "Banco de Dados SQLite (*.db;*.sqlite;*.slite3;*.db3)|*.db;*.sqlite;*.slite3;*.db3" +
+    "|Todos os Arquivos (*.*)|*.*";
+            this.ofdBDArquivo.InitialDirectory = "C:\\RederConsignado\\";
+            this.ofdBDArquivo.Title = "Localizar Arquivo BD Local";
+            this.ofdBDArquivo.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdBDArquivo_FileOk);
+            // 
+            // lblBDNome
+            // 
+            this.lblBDNome.AutoSize = true;
+            this.lblBDNome.Location = new System.Drawing.Point(24, 77);
+            this.lblBDNome.Name = "lblBDNome";
+            this.lblBDNome.Size = new System.Drawing.Size(166, 19);
+            this.lblBDNome.TabIndex = 6;
+            this.lblBDNome.Text = "Nome do Banco de Dados";
+            // 
+            // txtBDNome
+            // 
+            // 
+            // 
+            // 
+            this.txtBDNome.CustomButton.Image = null;
+            this.txtBDNome.CustomButton.Location = new System.Drawing.Point(144, 1);
+            this.txtBDNome.CustomButton.Name = "";
+            this.txtBDNome.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtBDNome.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtBDNome.CustomButton.TabIndex = 1;
+            this.txtBDNome.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtBDNome.CustomButton.UseSelectable = true;
+            this.txtBDNome.CustomButton.Visible = false;
+            this.txtBDNome.Lines = new string[] {
+        "RederConsignado"};
+            this.txtBDNome.Location = new System.Drawing.Point(24, 102);
+            this.txtBDNome.MaxLength = 32767;
+            this.txtBDNome.Name = "txtBDNome";
+            this.txtBDNome.PasswordChar = '\0';
+            this.txtBDNome.PromptText = "Nome do Banco de Dados";
+            this.txtBDNome.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtBDNome.SelectedText = "";
+            this.txtBDNome.SelectionLength = 0;
+            this.txtBDNome.SelectionStart = 0;
+            this.txtBDNome.ShortcutsEnabled = true;
+            this.txtBDNome.Size = new System.Drawing.Size(166, 23);
+            this.txtBDNome.TabIndex = 5;
+            this.txtBDNome.Text = "RederConsignado";
+            this.txtBDNome.UseSelectable = true;
+            this.txtBDNome.WaterMark = "Nome do Banco de Dados";
+            this.txtBDNome.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtBDNome.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // lblBDUsuario
+            // 
+            this.lblBDUsuario.AutoSize = true;
+            this.lblBDUsuario.Location = new System.Drawing.Point(196, 77);
+            this.lblBDUsuario.Name = "lblBDUsuario";
+            this.lblBDUsuario.Size = new System.Drawing.Size(53, 19);
+            this.lblBDUsuario.TabIndex = 8;
+            this.lblBDUsuario.Text = "Usuário";
+            // 
+            // txtBDUsuario
+            // 
+            // 
+            // 
+            // 
+            this.txtBDUsuario.CustomButton.Image = null;
+            this.txtBDUsuario.CustomButton.Location = new System.Drawing.Point(98, 1);
+            this.txtBDUsuario.CustomButton.Name = "";
+            this.txtBDUsuario.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtBDUsuario.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtBDUsuario.CustomButton.TabIndex = 1;
+            this.txtBDUsuario.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtBDUsuario.CustomButton.UseSelectable = true;
+            this.txtBDUsuario.CustomButton.Visible = false;
+            this.txtBDUsuario.Lines = new string[] {
+        "sa"};
+            this.txtBDUsuario.Location = new System.Drawing.Point(196, 102);
+            this.txtBDUsuario.MaxLength = 32767;
+            this.txtBDUsuario.Name = "txtBDUsuario";
+            this.txtBDUsuario.PasswordChar = '\0';
+            this.txtBDUsuario.PromptText = "Usuario";
+            this.txtBDUsuario.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtBDUsuario.SelectedText = "";
+            this.txtBDUsuario.SelectionLength = 0;
+            this.txtBDUsuario.SelectionStart = 0;
+            this.txtBDUsuario.ShortcutsEnabled = true;
+            this.txtBDUsuario.Size = new System.Drawing.Size(120, 23);
+            this.txtBDUsuario.TabIndex = 7;
+            this.txtBDUsuario.Text = "sa";
+            this.txtBDUsuario.UseSelectable = true;
+            this.txtBDUsuario.WaterMark = "Usuario";
+            this.txtBDUsuario.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtBDUsuario.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // lblBDSenha
+            // 
+            this.lblBDSenha.AutoSize = true;
+            this.lblBDSenha.Location = new System.Drawing.Point(322, 77);
+            this.lblBDSenha.Name = "lblBDSenha";
+            this.lblBDSenha.Size = new System.Drawing.Size(44, 19);
+            this.lblBDSenha.TabIndex = 10;
+            this.lblBDSenha.Text = "Senha";
+            // 
+            // txtBDSenha
+            // 
+            // 
+            // 
+            // 
+            this.txtBDSenha.CustomButton.Image = null;
+            this.txtBDSenha.CustomButton.Location = new System.Drawing.Point(52, 1);
+            this.txtBDSenha.CustomButton.Name = "";
+            this.txtBDSenha.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtBDSenha.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtBDSenha.CustomButton.TabIndex = 1;
+            this.txtBDSenha.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtBDSenha.CustomButton.UseSelectable = true;
+            this.txtBDSenha.CustomButton.Visible = false;
+            this.txtBDSenha.Lines = new string[] {
+        "Reder123"};
+            this.txtBDSenha.Location = new System.Drawing.Point(322, 102);
+            this.txtBDSenha.MaxLength = 32767;
+            this.txtBDSenha.Name = "txtBDSenha";
+            this.txtBDSenha.PasswordChar = '●';
+            this.txtBDSenha.PromptText = "Senha";
+            this.txtBDSenha.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtBDSenha.SelectedText = "";
+            this.txtBDSenha.SelectionLength = 0;
+            this.txtBDSenha.SelectionStart = 0;
+            this.txtBDSenha.ShortcutsEnabled = true;
+            this.txtBDSenha.Size = new System.Drawing.Size(74, 23);
+            this.txtBDSenha.TabIndex = 9;
+            this.txtBDSenha.Text = "Reder123";
+            this.txtBDSenha.UseSelectable = true;
+            this.txtBDSenha.UseSystemPasswordChar = true;
+            this.txtBDSenha.WaterMark = "Senha";
+            this.txtBDSenha.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtBDSenha.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // lblBDLocal
+            // 
+            this.lblBDLocal.AutoSize = true;
+            this.lblBDLocal.Location = new System.Drawing.Point(24, 158);
+            this.lblBDLocal.Name = "lblBDLocal";
+            this.lblBDLocal.Size = new System.Drawing.Size(224, 19);
+            this.lblBDLocal.TabIndex = 12;
+            this.lblBDLocal.Text = "Caminho do Banco de Dados (Local)";
+            // 
+            // txtBDLocal
+            // 
+            // 
+            // 
+            // 
+            this.txtBDLocal.CustomButton.Image = null;
+            this.txtBDLocal.CustomButton.Location = new System.Drawing.Point(350, 1);
+            this.txtBDLocal.CustomButton.Name = "";
+            this.txtBDLocal.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtBDLocal.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtBDLocal.CustomButton.TabIndex = 1;
+            this.txtBDLocal.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtBDLocal.CustomButton.UseSelectable = true;
+            this.txtBDLocal.CustomButton.Visible = false;
+            this.txtBDLocal.Lines = new string[] {
+        "C:\\RederConsignado\\DBRepresentante.sqlite"};
+            this.txtBDLocal.Location = new System.Drawing.Point(24, 183);
+            this.txtBDLocal.MaxLength = 32767;
+            this.txtBDLocal.Name = "txtBDLocal";
+            this.txtBDLocal.PasswordChar = '\0';
+            this.txtBDLocal.PromptText = "Caminho do Banco de Dados";
+            this.txtBDLocal.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtBDLocal.SelectedText = "";
+            this.txtBDLocal.SelectionLength = 0;
+            this.txtBDLocal.SelectionStart = 0;
+            this.txtBDLocal.ShortcutsEnabled = true;
+            this.txtBDLocal.Size = new System.Drawing.Size(372, 23);
+            this.txtBDLocal.TabIndex = 11;
+            this.txtBDLocal.Text = "C:\\RederConsignado\\DBRepresentante.sqlite";
+            this.txtBDLocal.UseSelectable = true;
+            this.txtBDLocal.WaterMark = "Caminho do Banco de Dados";
+            this.txtBDLocal.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtBDLocal.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // btnBDLocalProcurar
+            // 
+            this.btnBDLocalProcurar.Location = new System.Drawing.Point(407, 183);
+            this.btnBDLocalProcurar.Name = "btnBDLocalProcurar";
+            this.btnBDLocalProcurar.Size = new System.Drawing.Size(75, 23);
+            this.btnBDLocalProcurar.TabIndex = 13;
+            this.btnBDLocalProcurar.Text = "Procurar";
+            this.btnBDLocalProcurar.UseSelectable = true;
+            this.btnBDLocalProcurar.Click += new System.EventHandler(this.btnBDLocalProcurar_Click);
+            // 
+            // btnBDSalvar
+            // 
+            this.btnBDSalvar.Location = new System.Drawing.Point(407, 284);
+            this.btnBDSalvar.Name = "btnBDSalvar";
+            this.btnBDSalvar.Size = new System.Drawing.Size(75, 23);
+            this.btnBDSalvar.TabIndex = 14;
+            this.btnBDSalvar.Text = "Salvar";
+            this.btnBDSalvar.UseSelectable = true;
+            // 
+            // btnBDDefault
+            // 
+            this.btnBDDefault.Location = new System.Drawing.Point(24, 284);
+            this.btnBDDefault.Name = "btnBDDefault";
+            this.btnBDDefault.Size = new System.Drawing.Size(166, 23);
+            this.btnBDDefault.TabIndex = 15;
+            this.btnBDDefault.Text = "Restaurar Padrão (Default)";
+            this.btnBDDefault.UseSelectable = true;
+            // 
+            // btnRelatorioPedido
+            // 
+            this.btnRelatorioPedido.Location = new System.Drawing.Point(19, 18);
+            this.btnRelatorioPedido.Name = "btnRelatorioPedido";
+            this.btnRelatorioPedido.Size = new System.Drawing.Size(158, 45);
+            this.btnRelatorioPedido.TabIndex = 8;
+            this.btnRelatorioPedido.Text = "Pedido";
+            this.btnRelatorioPedido.UseSelectable = true;
+            // 
+            // btnRelatorioSuplemento
+            // 
+            this.btnRelatorioSuplemento.Location = new System.Drawing.Point(369, 18);
+            this.btnRelatorioSuplemento.Name = "btnRelatorioSuplemento";
+            this.btnRelatorioSuplemento.Size = new System.Drawing.Size(158, 45);
+            this.btnRelatorioSuplemento.TabIndex = 9;
+            this.btnRelatorioSuplemento.Text = "Suplemento";
+            this.btnRelatorioSuplemento.UseSelectable = true;
+            // 
+            // btnRelatorioRetorno
+            // 
+            this.btnRelatorioRetorno.Location = new System.Drawing.Point(194, 18);
+            this.btnRelatorioRetorno.Name = "btnRelatorioRetorno";
+            this.btnRelatorioRetorno.Size = new System.Drawing.Size(158, 45);
+            this.btnRelatorioRetorno.TabIndex = 10;
+            this.btnRelatorioRetorno.Text = "Retorno";
+            this.btnRelatorioRetorno.UseSelectable = true;
             // 
             // FormDeposito
             // 
@@ -1760,9 +2114,13 @@
             this.pnlExportacaoMain.ResumeLayout(false);
             this.tabRelatorios.ResumeLayout(false);
             this.pnlRetorno.ResumeLayout(false);
-            this.pnlRetorno.PerformLayout();
             this.tabConfiguracoes.ResumeLayout(false);
+            this.tabAjuda.ResumeLayout(false);
             this.cmsResolverConflito.ResumeLayout(false);
+            this.tbcConfiguracao.ResumeLayout(false);
+            this.tabBancoDeDados.ResumeLayout(false);
+            this.pnlServidor.ResumeLayout(false);
+            this.pnlServidor.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1783,7 +2141,6 @@
         private MetroFramework.Controls.MetroLabel lblHome;
         private System.Windows.Forms.Label lblSair;
         private MetroFramework.Controls.MetroPanel pnlRetorno;
-        private MetroFramework.Controls.MetroLabel lblRelatorios;
         public MetroFramework.Controls.MetroPanel pnlImportarPesquisa;
         private MetroFramework.Controls.MetroLabel lblTotalProdutos;
         private MetroFramework.Controls.MetroLabel lblQtdProdutos;
@@ -1822,7 +2179,6 @@
         public MetroFramework.Controls.MetroLabel lblCarga;
         private System.Windows.Forms.TabPage tabConfiguracoes;
         private System.Windows.Forms.TabPage tabAjuda;
-        private MetroFramework.Controls.MetroPanel pnlHome;
         public MetroFramework.Controls.MetroLink btnExcluirImportacao;
         private System.Windows.Forms.TabPage tabSuplemento;
         public System.Windows.Forms.DateTimePicker cbbImportarMesAno;
@@ -1865,6 +2221,28 @@
         public MetroFramework.Controls.MetroTextBox txtSuplCodigoBarras;
         private MetroFramework.Controls.MetroPanel pnlSuplementoMain;
         public MetroFramework.Controls.MetroGrid grdSuplemento;
+        private MetroFramework.Controls.MetroTabControl tbcConfiguracao;
+        private System.Windows.Forms.TabPage tabBancoDeDados;
+        private MetroFramework.Controls.MetroPanel pnlServidor;
+        private MetroFramework.Controls.MetroButton btnBDTestar;
+        private MetroFramework.Controls.MetroLabel lblBDCaminho;
+        private MetroFramework.Controls.MetroTextBox txtBDCaminho;
+        private MetroFramework.Drawing.Html.HtmlPanel pnlAjuda;
+        private System.Windows.Forms.OpenFileDialog ofdBDArquivo;
+        private MetroFramework.Controls.MetroLabel lblBDUsuario;
+        private MetroFramework.Controls.MetroTextBox txtBDUsuario;
+        private MetroFramework.Controls.MetroLabel lblBDNome;
+        private MetroFramework.Controls.MetroTextBox txtBDNome;
+        private MetroFramework.Controls.MetroLabel lblBDSenha;
+        private MetroFramework.Controls.MetroTextBox txtBDSenha;
+        private MetroFramework.Controls.MetroButton btnBDLocalProcurar;
+        private MetroFramework.Controls.MetroLabel lblBDLocal;
+        private MetroFramework.Controls.MetroTextBox txtBDLocal;
+        private MetroFramework.Controls.MetroButton btnBDDefault;
+        private MetroFramework.Controls.MetroButton btnBDSalvar;
+        private MetroFramework.Controls.MetroButton btnRelatorioRetorno;
+        private MetroFramework.Controls.MetroButton btnRelatorioSuplemento;
+        private MetroFramework.Controls.MetroButton btnRelatorioPedido;
     }
 }
 
