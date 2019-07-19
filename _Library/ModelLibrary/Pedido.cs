@@ -42,7 +42,7 @@ namespace ModelLibrary
         public Nullable<double> ValorAReceber { get; set; }
         public Nullable<int> CargaOriginal { get; set; }
         public Nullable<int> QuantidadeRemarcado { get; set; }
-
+    
         public virtual Carga Carga { get; set; }
         public virtual Vendedor Vendedor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

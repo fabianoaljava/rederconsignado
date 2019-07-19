@@ -31,6 +31,7 @@
           <Property Name="ProdutoGradeId" Type="int" Nullable="false" />
           <Property Name="Quantidade" Type="float" />
           <Property Name="Retorno" Type="float" />
+          <Property Name="Tipo" Type="nvarchar" MaxLength="1" />
           <Property Name="temp_old_id" Type="int" />
         </EntityType>
         <EntityType Name="Categoria">
@@ -804,6 +805,7 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <NavigationProperty Name="Carga" Relationship="Self.FK_CargaProduto_Carga" FromRole="CargaProduto" ToRole="Carga" />
           <NavigationProperty Name="ProdutoGrade" Relationship="Self.FK_CargaProduto_ProdutoGrade" FromRole="CargaProduto" ToRole="ProdutoGrade" />
           <Property Name="Retorno" Type="Double" />
+          <Property Name="Tipo" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Categoria">
           <Key>
@@ -1552,6 +1554,7 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <EntitySetMapping Name="CargaProduto">
             <EntityTypeMapping TypeName="ModelDeposito.CargaProduto">
               <MappingFragment StoreEntitySet="CargaProduto">
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
                 <ScalarProperty Name="Retorno" ColumnName="Retorno" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CargaId" ColumnName="CargaId" />

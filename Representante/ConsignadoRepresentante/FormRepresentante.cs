@@ -146,6 +146,7 @@ namespace ConsignadoRepresentante
             cHome.CarregarFormulario();
             cVendedor.CarregarFormulario();
             cFinanceiro.CarregarFormulario();
+            cProduto.ExibirProdutos();
 
 
         }
@@ -675,6 +676,21 @@ namespace ConsignadoRepresentante
         private void txtEmail_Validating(object sender, CancelEventArgs e)
         {
             cVendedor.ValidarEmail(txtEmail.Text, sender, e);
+        }
+
+        private void PesquisarProdutos_KeyUp(object sender, KeyEventArgs e)
+        {
+            cProduto.PesquisarProdutos();
+        }
+
+        private void PesquisarProdutos(object sender, EventArgs e)
+        {
+            cProduto.PesquisarProdutos();
+        }
+
+        private void btnProdutosLimpar_Click(object sender, EventArgs e)
+        {
+            cProduto.ProdutosLimpar();
         }
     }
 }

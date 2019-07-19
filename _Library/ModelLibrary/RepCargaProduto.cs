@@ -19,5 +19,6 @@ namespace ModelLibrary
         public long ProdutoGradeId { get; set; }
         public Nullable<decimal> Quantidade { get; set; }
         public Nullable<decimal> Retorno { get; set; }
+        public string Tipo { get; set; }
     }
 }

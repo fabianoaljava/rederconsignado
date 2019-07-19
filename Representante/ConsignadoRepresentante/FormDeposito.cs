@@ -102,6 +102,7 @@ namespace ConsignadoRepresentante
                     cImportar.CarregarFormularioLocal(); //obter praça e representante local
                     cImportar.ExibirImportacao();
                     cConferirProdutos.ExibirConferenciaProduto(cCargaId);
+                    cSuplemento.ExibirSuplementoProduto(cCargaId);
                     pnlExportacaoMain.Enabled = true;
                 }
                 else
@@ -123,6 +124,7 @@ namespace ConsignadoRepresentante
                     cImportar.CarregarFormularioLocal(); //obter praça e representante local
                     cImportar.ExibirImportacao();
                     cConferirProdutos.ExibirConferenciaProduto(cCargaId);
+                    cSuplemento.ExibirSuplementoProduto(cCargaId);
                     pnlExportacaoMain.Enabled = true;
                 }
                 else
@@ -626,6 +628,74 @@ namespace ConsignadoRepresentante
         private void cmsResolverConflito_Opening(object sender, CancelEventArgs e)
         {
             //if (cConfProdutoRightMouse) e.Cancel = true;
+        }
+
+        private void txtSuplCodigoBarras_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                if (txtSuplCodigoBarras.Text != "")
+                {
+                    e.SuppressKeyPress = true;
+                    cSuplemento.PesquisarSuplementoProduto(txtSuplCodigoBarras.Text);
+                }
+            }
+        }
+
+        private void txtSuplCodigoBarras_Leave(object sender, EventArgs e)
+        {
+
+            if (txtSuplCodigoBarras.Text != "")
+            {
+                cSuplemento.PesquisarSuplementoProduto(txtSuplCodigoBarras.Text);
+            }
+        }
+
+        private void chkSuplQuantidade_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cSuplemento.cProdutoGradeId != 0)
+            {
+                chkSuplQuantidade.Checked = true;
+                txtSuplQuantidade.Enabled = true;
+            }
+            else
+            {
+                txtSuplQuantidade.Text = "";
+                txtSuplQuantidade.Enabled = chkSuplQuantidade.Checked;
+            }
+        }
+
+        private void txtSuplQuantidade_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                btnSuplConfirmar_Click(sender, e);
+
+            }
+        }
+
+        private void btnSuplConfirmar_Click(object sender, EventArgs e)
+        {
+            cSuplemento.ConfirmarSuplemento();
+        }
+
+        private void btnSuplCancelar_Click(object sender, EventArgs e)
+        {
+            cSuplemento.SuplementoProdutoLimpar();
+        }
+
+        private void grdSuplemento_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cSuplemento.EditarCargaProduto();
+        }
+
+        private void grdSuplemento_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Delete)
+            {
+                cSuplemento.ExcluirCargaProduto();
+            }
         }
     }
 }

@@ -88,7 +88,10 @@
     <Compile Include="ListaProdutoConferencia.cs" />
     <Compile Include="ListaProdutosConsignados.cs" />
     <Compile Include="ListaRecebimentos.cs" />
+    <Compile Include="ListaRepCargaProduto.cs" />
+    <Compile Include="ListaRepEstoque.cs" />
     <Compile Include="ListaRepPosicaoFInanceira.cs" />
+    <Compile Include="ListaRepProdutos.cs" />
     <Compile Include="ListaRepProdutosCarga.cs" />
     <Compile Include="ListaProdutosCarga.cs" />
     <Compile Include="LIstaRepVendedorPedido.cs" />

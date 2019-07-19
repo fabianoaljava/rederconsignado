@@ -598,6 +598,7 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.cHome.CarregarFormulario();
             localRepresentanteForm.cFinanceiro.ExibirPosicaoFinancera();
             localRepresentanteForm.tabPosicaoFinanceira.Refresh();
+            localRepresentanteForm.cProduto.ExibirProdutos();
         }
 
 

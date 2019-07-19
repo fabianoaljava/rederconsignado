@@ -959,7 +959,8 @@ namespace ModelLibrary
                             CargaId = row.CargaId,
                             ProdutoGradeId = row.ProdutoGradeId,
                             Quantidade = Convert.ToDecimal(row.Quantidade),
-                            Retorno = Convert.ToDecimal(row.Retorno)
+                            Retorno = Convert.ToDecimal(row.Retorno),
+                            Tipo = row.Tipo
                         };
 
                         newCargaProduto.Add(newReg);
@@ -1546,7 +1547,7 @@ namespace ModelLibrary
                 result.Add(vTable);
 
 
-                string query = "SELECT DISTINCT 0 Id, " + cCargaId.ToString() + " CargaId, ProdutoGradeId, 0 Quantidade, 0 Retorno FROM RepPedidoItem WHERE ProdutoGradeId NOT IN (SELECT ProdutoGradeId FROM RepCargaProduto)";
+                string query = "SELECT DISTINCT 0 Id, " + cCargaId.ToString() + " CargaId, ProdutoGradeId, 0 Quantidade, 0 Retorno, '' Tipo FROM RepPedidoItem WHERE ProdutoGradeId NOT IN (SELECT ProdutoGradeId FROM RepCargaProduto)";
                 count = representante.Database.SqlQuery<RepCargaProduto>(query).Count();
                 count += representante.RepCargaProduto.Count();
 
@@ -1849,7 +1850,7 @@ namespace ModelLibrary
                 using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
                 {
 
-                    string query = "SELECT DISTINCT 0 Id, " + cCargaId.ToString() + " CargaId, ProdutoGradeId, 0 Quantidade, 0 Retorno FROM RepPedidoItem WHERE ProdutoGradeId NOT IN (SELECT ProdutoGradeId FROM RepCargaProduto)";
+                    string query = "SELECT DISTINCT 0 Id, " + cCargaId.ToString() + " CargaId, ProdutoGradeId, 0 Quantidade, 0 Retorno, 'E' Tipo FROM RepPedidoItem WHERE ProdutoGradeId NOT IN (SELECT ProdutoGradeId FROM RepCargaProduto)";
 
                     foreach (var row in representante.Database.SqlQuery<RepCargaProduto>(query))
                     {
@@ -1865,7 +1866,8 @@ namespace ModelLibrary
                             CargaId = Convert.ToInt32(cCargaId),
                             ProdutoGradeId = Convert.ToInt32(row.ProdutoGradeId),
                             Quantidade = 0,
-                            Retorno = 0
+                            Retorno = 0,
+                            Tipo = "E"
                         };
 
                         representante.RepCargaProduto.Add(regRepCargaProduto);
@@ -1881,7 +1883,8 @@ namespace ModelLibrary
                             CargaId = Convert.ToInt32(cCargaId),
                             ProdutoGradeId = Convert.ToInt32(row.ProdutoGradeId),
                             Quantidade = Convert.ToDouble(row.Quantidade),
-                            Retorno = Convert.ToDouble(row.Retorno)
+                            Retorno = Convert.ToDouble(row.Retorno),
+                            Tipo = row.Tipo
                         };
 
 
@@ -1918,7 +1921,7 @@ namespace ModelLibrary
             {
 
 
-                var vCargaProduto = deposito.CargaProduto.FirstOrDefault(cp => cp.CargaId == pCargaProduto.CargaId && cp.ProdutoGradeId == pCargaProduto.ProdutoGradeId);
+                var vCargaProduto = deposito.CargaProduto.FirstOrDefault(cp => cp.CargaId == pCargaProduto.CargaId && cp.ProdutoGradeId == pCargaProduto.ProdutoGradeId && pCargaProduto.Tipo == pCargaProduto.Tipo);
 
                 if (vCargaProduto != null)
                 {
@@ -1926,7 +1929,7 @@ namespace ModelLibrary
                     Console.WriteLine("Atualizando Produto Grade id: " + pCargaProduto.ProdutoGradeId.ToString());
 
                     vCargaProduto.Quantidade = pCargaProduto.Quantidade;
-                    vCargaProduto.Retorno = pCargaProduto.Retorno;
+                    vCargaProduto.Retorno = pCargaProduto.Retorno;                    
 
 
                     deposito.SaveChanges();
@@ -1935,7 +1938,6 @@ namespace ModelLibrary
                 else
                 { 
                     Console.WriteLine("Inserindo Produto Grade id: " + pCargaProduto.ProdutoGradeId.ToString());
-
                     deposito.CargaProduto.Add(pCargaProduto);
                     deposito.SaveChanges();
                 }

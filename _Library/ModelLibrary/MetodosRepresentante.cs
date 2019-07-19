@@ -206,7 +206,7 @@ namespace ModelLibrary
         {
             using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
-
+                
 
                 string query = @"SELECT RepProduto.CodigoBarras || RepProdutoGrade.Digito as CodigoBarras,
 	                                RepProduto.Descricao,
@@ -227,19 +227,6 @@ namespace ModelLibrary
 
                 var result = representante.Database.SqlQuery<ListaRepProdutosConferencia>(query);
 
-                //var result = representante.RepProdutosConferencia
-                //           .Where(pg => pg.CargaId == pCargaId)
-                //           .Select(pg => new ListaRepProdutosConferencia()
-                //           {
-                //               CodigoBarras = pg.CodigoBarras.ToString(),
-                //               Descricao = pg.Descricao,
-                //               QuantidadeCarga = pg.QuantidadeCarga,
-                //               QuantidadeInformada = pg.QuantidadeInformada,
-                //               Diferenca = pg.Diferenca,
-                //               CargaId = pg.CargaId,
-                //               ProdutoGradeId = pg.ProdutoGradeId,
-                //               ProdutoId = pg.ProdutoId                              
-                //           });
 
                 return result.ToList<ListaRepProdutosConferencia>();
 
@@ -247,6 +234,60 @@ namespace ModelLibrary
         }
 
 
+        public static List<ListaRepProdutos> ObterListaProdutos(Dictionary<string, string> pCriterio = null)
+        {
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+                //" CodigoBarras Like '%" + localRepresentanteForm.txtProdutosCodigoBarras.Text + "%'"
+
+                string vCriterio = "";
+                string vCriterioSoma = "";
+
+                string query = @"SELECT RepProdutoGrade.CodigoBarras || RepProdutoGrade.Digito CodigoBarras, 
+                                    Descricao, Tamanho, Cor, ValorSaida, 
+                                    IFNULL(SUM(RepCargaProduto.Quantidade-RepCargaProduto.Retorno),0) SaldoEstoque, 
+                                    RepProdutoGrade.Id ProdutoGradeId 
+                                FROM RepProduto                                    
+                                    INNER JOIN RepProdutoGrade ON RepProduto.Id = RepProdutoGrade.ProdutoId
+                                    LEFT JOIN RepCargaProduto ON RepProdutoGrade.Id = RepCargaProduto.ProdutoGradeId";
+
+                if (pCriterio != null)
+                {
+                    if (pCriterio["CodigoBarras"] != "")
+                    {
+                        vCriterio = " RepProdutoGrade.CodigoBarras || RepProdutoGrade.Digito LIKE '%" + pCriterio["CodigoBarras"] + "%'";
+                    }
+
+                    if (pCriterio["Nome"] != "")
+                    {
+                        vCriterio += vCriterio != "" ? " OR " : ""; 
+                        vCriterio += " Descricao LIKE '%" + pCriterio["Nome"] + "%'";
+                    }      
+                    
+                    if (pCriterio["SaldoEstoque"] == "Y")
+                    {
+                        vCriterioSoma = " HAVING IFNULL(SUM(RepCargaProduto.Quantidade-RepCargaProduto.Retorno),0) > 0 ";
+                    } else if (pCriterio["SaldoEstoque"] == "N")
+                    {
+                        vCriterioSoma = " HAVING IFNULL(SUM(RepCargaProduto.Quantidade-RepCargaProduto.Retorno),0) = 0 ";
+                    }
+                }
+
+                query += vCriterio != "" ? " WHERE " + vCriterio : "";
+
+                query += @" GROUP BY RepProdutoGrade.CodigoBarras, RepProdutoGrade.Digito, Descricao, Tamanho, Cor, ValorSaida, RepProdutoGrade.Id";
+
+                query += vCriterioSoma;
+
+                Console.WriteLine("Listando Produtos Query: " + query);
+
+                var result = representante.Database.SqlQuery<ListaRepProdutos>(query);
+
+
+                return result.ToList<ListaRepProdutos>();
+
+            }
+        }
 
 
 
@@ -293,7 +334,7 @@ namespace ModelLibrary
         }
 
 
-        public static Boolean InserirProdutoConferencia(long pCargaId, long pProdutoGradeId, decimal pQuantidade, Boolean pForce = true)
+        public static Boolean InserirProdutoConferencia(long pCargaId, long pProdutoGradeId, decimal pQuantidade)
         {
 
 
@@ -1268,9 +1309,164 @@ namespace ModelLibrary
         }
 
 
+        public static List<ListaRepCargaProduto> ObterListaSuplemento()
+        {
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+                var cargaproduto = representante.RepCargaProduto
+                                    .Join(representante.RepProdutoGrade, cp => cp.ProdutoGradeId, pg => pg.Id, (cp, pg) => new { RepCargaProduto = cp, RepProdutoGrade = pg })
+                                    .Join(representante.RepProduto, pg => pg.RepProdutoGrade.ProdutoId, pr => pr.Id, (pg, pr) => new { RepProdutoGrade = pg, RepProduto = pr })
+                                    .Where(cp => cp.RepProdutoGrade.RepCargaProduto.Tipo == "S")
+                                    .Select(pg => new ListaRepCargaProduto()
+                                    {
+                                        CodigoBarras = pg.RepProdutoGrade.RepProdutoGrade.CodigoBarras.ToString() + pg.RepProdutoGrade.RepProdutoGrade.Digito.ToString(),
+                                        Descricao = pg.RepProduto.Descricao,
+                                        Quantidade = pg.RepProdutoGrade.RepCargaProduto.Quantidade,
+                                        Tipo = pg.RepProdutoGrade.RepCargaProduto.Tipo,
+                                        CargaId = pg.RepProdutoGrade.RepCargaProduto.CargaId.Value,
+                                        ProdutoGradeId = pg.RepProdutoGrade.RepCargaProduto.ProdutoGradeId                                   
+                                    }).ToList<ListaRepCargaProduto>();
+
+                return cargaproduto;
+            }
+        }
+
+        public static void InserirSuplemento(long pCargaId, long pProdutoGradeId, decimal pQuantidade)
+        {
+
+
+            Console.WriteLine("InserirSuplemento");
+
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+
+                var cargaproduto = representante.RepCargaProduto.FirstOrDefault(pd => pd.ProdutoGradeId == pProdutoGradeId && pd.Tipo == "S");
+
+
+                if (cargaproduto != null)
+                {
+                    Console.WriteLine("Atualizando Carga Produto (Suplemento)");
+                    var tmpQtd = cargaproduto.Quantidade;
+                    cargaproduto.Quantidade = (tmpQtd + pQuantidade);
+                }
+                else
+                {
+                    Console.WriteLine("Inserindo Carga Produto (Suplemento)");
+
+                    var maxCargaProduto = representante.RepCargaProduto.OrderByDescending(i => i.Id).FirstOrDefault();
+
+                    long newId = maxCargaProduto == null ? 1 : maxCargaProduto.Id + 1;
+
+
+                    var novacargaproduto = new RepCargaProduto
+                    {
+                        Id = newId,
+                        CargaId = pCargaId,
+                        ProdutoGradeId = pProdutoGradeId,
+                        Quantidade = pQuantidade,
+                        Tipo = "S"
+                    };
+
+                    representante.RepCargaProduto.Add(novacargaproduto);
+
+                }
+
+
+                representante.SaveChanges();
 
 
 
+
+
+            }
+
+
+
+
+
+        }
+
+        public static void AlterarSuplemento(long pCargaId, long pProdutoGradeId, decimal pQuantidade)
+        {
+
+
+            Console.WriteLine("AlterarSuplemento");
+
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+
+                var cargaproduto = representante.RepCargaProduto.FirstOrDefault(pd => pd.ProdutoGradeId == pProdutoGradeId && pd.Tipo == "S");
+
+
+                if (cargaproduto != null)
+                {
+                    Console.WriteLine("Alterando Carga Produto (Suplemento)");
+                    cargaproduto.Quantidade = pQuantidade;
+                    representante.SaveChanges();
+                }              
+
+
+            }
+
+        }
+
+        public static void ExcluirSuplemento(long pCargaId, long pCargaProdutoGradeId)
+        {
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+
+                representante.Database.ExecuteSqlCommand("DELETE FROM RepCargaProduto WHERE Tipo = 'S' AND CargaId = @pCargaId AND ProdutoGradeId = @pProdutoGradeId", new SQLiteParameter("@pCargaId", pCargaId), new SQLiteParameter("@pProdutoGradeId", pCargaProdutoGradeId));
+
+            }
+        }
+
+        public static List<ListaRepEstoque> ObterListaEstoque()
+        {
+
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+
+
+                string query = @"SELECT Produto.CodigoBarras || '' || Produto.Digito as CodigoBarras, 
+	                                Produto.Descricao || ' ' || Produto.Tamanho Descricao,
+	                                IFNULL(Vendido.Vendido,0) Vendido, 
+	                                IFNULL(Carga.ViagemPlus,0) Carga, 
+	                                IFNULL(Vendido.RetornoPlus,0) Retorno, 
+	                                IFNULL(Consignado.Consignado,0) Consignado, 
+	                                (IFNULL(Carga.ViagemPlus,0) - IFNULL(Vendido.Vendido,0) - IFNULL(Vendido.RetornoPlus,0) - IFNULL(Consignado.Consignado,0)) SaldoCarro	
+	                                FROM
+		                                (SELECT RepProduto.Id Id, RepProdutoGrade.Id ProdutoGradeId, RepProduto.CodigoBarras, RepProdutoGrade.Digito, RepProduto.Descricao, RepProdutoGrade.Tamanho 
+			                                FROM RepProduto 
+			                                INNER JOIN RepProdutoGrade ON RepProdutoGrade.ProdutoId = RepProduto.Id) AS Produto
+	                                LEFT JOIN 
+		                                (SELECT RepProdutoGrade.Id ProdutoGradeId, RepProdutoGrade.ValorSaida Preco, RepCargaProduto.Quantidade ViagemPlus, RepCargaProduto.Retorno ContagemCarro 
+			                                FROM RepCargaProduto 
+			                                INNER JOIN RepProdutoGrade ON RepProdutoGrade.Id = RepCargaProduto.ProdutoGradeId) AS Carga ON Produto.ProdutoGradeId = Carga.ProdutoGradeId
+	                                LEFT JOIN 
+		                                (SELECT ProdutoGradeId, SUM(RepPedidoItem.Quantidade) Consignado 
+			                                FROM RepPedido
+			                                INNER JOIN RepPedidoItem ON RepPedidoItem.PedidoId = RepPedido.Id
+			                                WHERE  RepPedido.ValorAcerto <= 0											
+			                                GROUP BY ProdutoGradeId) AS Consignado ON Produto.ProdutoGradeId = Consignado.ProdutoGradeId
+	                                LEFT JOIN 
+		                                (SELECT ProdutoGradeId, SUM(RepPedidoItem.Quantidade - RepPedidoItem.Retorno) Vendido, SUM(RepPedidoItem.Retorno) RetornoPlus  
+			                                FROM RepPedido
+			                                INNER JOIN RepPedidoItem ON RepPedidoItem.PedidoId = RepPedido.Id
+			                                WHERE RepPedido.ValorAcerto > 0
+			                                GROUP BY ProdutoGradeId) AS Vendido ON Produto.ProdutoGradeId = Vendido.ProdutoGradeId
+	                                WHERE  Carga.ProdutoGradeId IS NOT NULL
+	                                ORDER BY Descricao";
+
+
+                var result = representante.Database.SqlQuery<ListaRepEstoque>(query);
+
+
+                return result.ToList<ListaRepEstoque>();
+
+            }
+
+
+        }
 
     }
 }

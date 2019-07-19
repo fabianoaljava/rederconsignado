@@ -300,7 +300,7 @@ namespace ConsignadoRepresentante
             var representante = ModelLibrary.MetodosRepresentante.ObterRepresentante(representanteId);
             localDeposito.cbbImportarRepresentante.SelectedIndex = representante == null ? -1 : localDeposito.cbbImportarRepresentante.FindString(representante.Nome);
 
-            localDeposito.lblCarga.Text += " " + praca.Descricao.Trim() + " | " + representante.Nome.Trim() + " | " + carga.Mes.ToString() + "/" + carga.Ano.ToString();
+            localDeposito.lblCarga.Text = praca.Id + " - " + praca.Descricao.Trim() + " | " + representante.Id + " - " + representante.Nome.Trim() + " | " + carga.Mes.ToString() + "/" + carga.Ano.ToString();
 
             localDeposito.btnImportar.Text = "Importar";
             localDeposito.btnImportar.Visible = true;            

@@ -19,7 +19,6 @@ namespace ModelLibrary
         public string Cor { get; set; }
         public string Tamanho { get; set; }
         public Nullable<double> Quantidade { get; set; }
-        public Nullable<double> Retorno { get; set; }
         public Nullable<double> ValorSaida { get; set; }
         public Nullable<double> ValorCusto { get; set; }
         public int ProdutoId { get; set; }
@@ -30,6 +29,6 @@ namespace ModelLibrary
         public Nullable<int> Ano { get; set; }
         public Nullable<int> Mes { get; set; }
         public int CargaProdutoId { get; set; }
-
+        public Nullable<double> Retorno { get; set; }
     }
 }

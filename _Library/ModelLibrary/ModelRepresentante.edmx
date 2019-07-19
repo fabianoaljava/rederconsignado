@@ -55,6 +55,7 @@
           <Property Name="ProdutoGradeId" Type="integer" Nullable="false" />
           <Property Name="Quantidade" Type="decimal" Precision="53" Scale="0" />
           <Property Name="Retorno" Type="decimal" Precision="53" Scale="0" />
+          <Property Name="Tipo" Type="nvarchar" MaxLength="2147483647" />
         </EntityType>
         <EntityType Name="RepCategoria">
           <Key>
@@ -390,6 +391,7 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <Property Name="ProdutoGradeId" Type="Int64" Nullable="false" />
           <Property Name="Quantidade" Type="Decimal" Precision="53" Scale="0" />
           <Property Name="Retorno" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="Tipo" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="RepCategoria">
           <Key>
@@ -740,6 +742,7 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <EntitySetMapping Name="RepCargaProduto">
             <EntityTypeMapping TypeName="ModelRepresentante.RepCargaProduto">
               <MappingFragment StoreEntitySet="RepCargaProduto">
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
                 <ScalarProperty Name="Retorno" ColumnName="Retorno" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CargaId" ColumnName="CargaId" />
