@@ -38,7 +38,6 @@ namespace ConsignadoRepresentante
 
             localRepresentanteForm.grdEstoque.Columns[1].Width = 250;
             
-
         }
     }
 }

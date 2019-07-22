@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.Entity;
 using ConsignadoRepresentante;
-
+using CrystalDecisions.CrystalReports.Engine;
+using ConsignadoRepresentante.Reports;
+using ConsignadoRepresentante.DataSet;
 
 namespace ConsignadoRepresentante
 {
@@ -692,6 +694,34 @@ namespace ConsignadoRepresentante
         private void btnProdutosLimpar_Click(object sender, EventArgs e)
         {
             cProduto.ProdutosLimpar();
+        }
+
+        private void btnPedidoImprimir_Click(object sender, EventArgs e)
+        {
+
+            Reports.VendedorPedido relatoriopedido = new Reports.VendedorPedido();
+
+            ModelLibrary.RelatoriosRepresentante.VendedorPedido vendedorPedido = ModelLibrary.RelatoriosRepresentante.RelatorioVendedorPedido(cVendedor.cVendedorId, cCargaId);
+
+            List<ModelLibrary.RelatoriosRepresentante.VendedorPedidoItem> vendedorPedidoItem = ModelLibrary.RelatoriosRepresentante.RelatorioVendedorPedidoItem(vendedorPedido.CodigoPedido);
+
+            BindingSource bs = new BindingSource();
+            bs.DataSource = vendedorPedidoItem;
+
+            relatoriopedido.SetDataSource(bs);
+
+
+            FormRelatorio formRelatorio = new FormRelatorio();
+            formRelatorio.Show();
+
+
+            formRelatorio.crvRelatorio.ReportSource = relatoriopedido;
+            formRelatorio.crvRelatorio.RefreshReport();
+
+
+
+
+
         }
     }
 }

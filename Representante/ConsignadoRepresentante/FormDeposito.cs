@@ -707,5 +707,10 @@ namespace ConsignadoRepresentante
         {
             ofdBDArquivo.ShowDialog();
         }
+
+        private void btnRelatorioPedido_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

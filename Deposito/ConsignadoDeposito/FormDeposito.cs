@@ -844,6 +844,11 @@ namespace ConsignadoDeposito
 
         }
 
+        private void btnRelatorioCarga_Click(object sender, EventArgs e)
+        {
+            
+        }
+
 
 
 
