@@ -242,6 +242,7 @@
             this.lblValorCompra = new MetroFramework.Controls.MetroLabel();
             this.lblValorPedido = new MetroFramework.Controls.MetroLabel();
             this.pnlPesquisaVendedor = new MetroFramework.Controls.MetroPanel();
+            this.btnPedidoImpRetorno = new MetroFramework.Controls.MetroButton();
             this.btnPedidoImprimir = new MetroFramework.Controls.MetroButton();
             this.btnNovoPedido = new MetroFramework.Controls.MetroButton();
             this.txtVendedorPesqCpfCnpj = new MetroFramework.Controls.MetroTextBox();
@@ -754,7 +755,7 @@
             this.tbcVendedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcVendedor.Location = new System.Drawing.Point(0, 0);
             this.tbcVendedor.Name = "tbcVendedor";
-            this.tbcVendedor.SelectedIndex = 2;
+            this.tbcVendedor.SelectedIndex = 4;
             this.tbcVendedor.Size = new System.Drawing.Size(960, 370);
             this.tbcVendedor.TabIndex = 2;
             this.tbcVendedor.UseSelectable = true;
@@ -3276,6 +3277,7 @@
             // 
             // pnlPesquisaVendedor
             // 
+            this.pnlPesquisaVendedor.Controls.Add(this.btnPedidoImpRetorno);
             this.pnlPesquisaVendedor.Controls.Add(this.btnPedidoImprimir);
             this.pnlPesquisaVendedor.Controls.Add(this.btnNovoPedido);
             this.pnlPesquisaVendedor.Controls.Add(this.txtVendedorPesqCpfCnpj);
@@ -3300,10 +3302,23 @@
             this.pnlPesquisaVendedor.VerticalScrollbarHighlightOnWheel = false;
             this.pnlPesquisaVendedor.VerticalScrollbarSize = 10;
             // 
+            // btnPedidoImpRetorno
+            // 
+            this.btnPedidoImpRetorno.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPedidoImpRetorno.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.btnPedidoImpRetorno.Location = new System.Drawing.Point(792, 11);
+            this.btnPedidoImpRetorno.Name = "btnPedidoImpRetorno";
+            this.btnPedidoImpRetorno.Size = new System.Drawing.Size(77, 59);
+            this.btnPedidoImpRetorno.TabIndex = 32;
+            this.btnPedidoImpRetorno.Text = "Imprimir \r\nRetorno";
+            this.btnPedidoImpRetorno.UseSelectable = true;
+            this.btnPedidoImpRetorno.Click += new System.EventHandler(this.btnImprimirRetorno_Click);
+            // 
             // btnPedidoImprimir
             // 
             this.btnPedidoImprimir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPedidoImprimir.Location = new System.Drawing.Point(714, 11);
+            this.btnPedidoImprimir.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.btnPedidoImprimir.Location = new System.Drawing.Point(709, 11);
             this.btnPedidoImprimir.Name = "btnPedidoImprimir";
             this.btnPedidoImprimir.Size = new System.Drawing.Size(77, 59);
             this.btnPedidoImprimir.TabIndex = 31;
@@ -3315,7 +3330,8 @@
             // 
             this.btnNovoPedido.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNovoPedido.Enabled = false;
-            this.btnNovoPedido.Location = new System.Drawing.Point(797, 11);
+            this.btnNovoPedido.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.btnNovoPedido.Location = new System.Drawing.Point(626, 11);
             this.btnNovoPedido.Name = "btnNovoPedido";
             this.btnNovoPedido.Size = new System.Drawing.Size(77, 59);
             this.btnNovoPedido.TabIndex = 30;
@@ -3471,9 +3487,9 @@
             // 
             this.btnVendedorNovo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnVendedorNovo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVendedorNovo.Location = new System.Drawing.Point(880, 11);
+            this.btnVendedorNovo.Location = new System.Drawing.Point(875, 11);
             this.btnVendedorNovo.Name = "btnVendedorNovo";
-            this.btnVendedorNovo.Size = new System.Drawing.Size(72, 59);
+            this.btnVendedorNovo.Size = new System.Drawing.Size(77, 59);
             this.btnVendedorNovo.TabIndex = 5;
             this.btnVendedorNovo.Text = "Cadastrar Vendedor";
             this.btnVendedorNovo.UseVisualStyleBackColor = true;
@@ -4252,5 +4268,6 @@
         public MetroFramework.Controls.MetroGrid grdEstoque;
         public MetroFramework.Controls.MetroComboBox cbbProdutoSaldo;
         public MetroFramework.Controls.MetroButton btnPedidoImprimir;
+        public MetroFramework.Controls.MetroButton btnPedidoImpRetorno;
     }
 }

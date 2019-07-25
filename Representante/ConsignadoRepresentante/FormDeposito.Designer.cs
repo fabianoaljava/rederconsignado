@@ -165,6 +165,7 @@
             this.aplicarQuantidadeInformadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aplicarQuantidadeDaCargaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ofdBDArquivo = new System.Windows.Forms.OpenFileDialog();
+            this.btnSuplementoImprimir = new MetroFramework.Controls.MetroButton();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
@@ -333,7 +334,7 @@
             this.tbcPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tbcPrincipal.Name = "tbcPrincipal";
-            this.tbcPrincipal.SelectedIndex = 5;
+            this.tbcPrincipal.SelectedIndex = 3;
             this.tbcPrincipal.Size = new System.Drawing.Size(860, 645);
             this.tbcPrincipal.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tbcPrincipal.TabIndex = 11;
@@ -1339,6 +1340,7 @@
             // 
             // pnlSuplementoTop
             // 
+            this.pnlSuplementoTop.Controls.Add(this.btnSuplementoImprimir);
             this.pnlSuplementoTop.Controls.Add(this.lblSuplemento);
             this.pnlSuplementoTop.Controls.Add(this.btnSuplCancelar);
             this.pnlSuplementoTop.Controls.Add(this.chkSuplQuantidade);
@@ -2064,6 +2066,18 @@
             this.ofdBDArquivo.Title = "Localizar Arquivo BD Local";
             this.ofdBDArquivo.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdBDArquivo_FileOk);
             // 
+            // btnSuplementoImprimir
+            // 
+            this.btnSuplementoImprimir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSuplementoImprimir.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.btnSuplementoImprimir.Location = new System.Drawing.Point(767, 9);
+            this.btnSuplementoImprimir.Name = "btnSuplementoImprimir";
+            this.btnSuplementoImprimir.Size = new System.Drawing.Size(77, 42);
+            this.btnSuplementoImprimir.TabIndex = 32;
+            this.btnSuplementoImprimir.Text = "Imprimir \r\nSuplemento";
+            this.btnSuplementoImprimir.UseSelectable = true;
+            this.btnSuplementoImprimir.Click += new System.EventHandler(this.btnSuplementoImprimir_Click);
+            // 
             // FormDeposito
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2244,6 +2258,7 @@
         private MetroFramework.Controls.MetroButton btnRelatorioRetorno;
         private MetroFramework.Controls.MetroButton btnRelatorioSuplemento;
         private MetroFramework.Controls.MetroButton btnRelatorioPedido;
+        public MetroFramework.Controls.MetroButton btnSuplementoImprimir;
     }
 }
 

@@ -699,27 +699,101 @@ namespace ConsignadoRepresentante
         private void btnPedidoImprimir_Click(object sender, EventArgs e)
         {
 
-            Reports.VendedorPedido relatoriopedido = new Reports.VendedorPedido();
+
+            Cursor.Current = Cursors.WaitCursor;
+
+            btnPedidoImprimir.Text = "Imprimindo...";
+            btnPedidoImprimir.Enabled = false;
 
             ModelLibrary.RelatoriosRepresentante.VendedorPedido vendedorPedido = ModelLibrary.RelatoriosRepresentante.RelatorioVendedorPedido(cVendedor.cVendedorId, cCargaId);
 
-            List<ModelLibrary.RelatoriosRepresentante.VendedorPedidoItem> vendedorPedidoItem = ModelLibrary.RelatoriosRepresentante.RelatorioVendedorPedidoItem(vendedorPedido.CodigoPedido);
-
-            BindingSource bs = new BindingSource();
-            bs.DataSource = vendedorPedidoItem;
-
-            relatoriopedido.SetDataSource(bs);
 
 
-            FormRelatorio formRelatorio = new FormRelatorio();
-            formRelatorio.Show();
+            if (vendedorPedido == null)
+            {
+                MessageBox.Show("Erro ao imprimir relatório - Não foi possível encontrar pedido.", "Reder - Impressão", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                List<ModelLibrary.RelatoriosRepresentante.ListaProdutos> vendedorPedidoItem = ModelLibrary.RelatoriosRepresentante.RelatorioVendedorPedidoItem(vendedorPedido.CodigoPedido);
+
+                BindingSource bs = new BindingSource();
+
+                Reports.VendedorPedido relatoriopedido = new Reports.VendedorPedido();
+
+                bs.DataSource = vendedorPedidoItem;
+                relatoriopedido.SetDataSource(bs);
+
+                bs.DataSource = vendedorPedido;
+                relatoriopedido.Database.Tables["Pedido"].SetDataSource(bs);
+
+                relatoriopedido.PrintToPrinter(1, true, 0, 0);
+
+                btnPedidoImprimir.Text = "Imprimir " + Environment.NewLine + "Pedido";
+                btnPedidoImprimir.Enabled = true;
+                Cursor.Current = Cursors.Default;
 
 
-            formRelatorio.crvRelatorio.ReportSource = relatoriopedido;
-            formRelatorio.crvRelatorio.RefreshReport();
+                //FormRelatorio formRelatorio = new FormRelatorio();
+                //formRelatorio.Show();
+
+
+                //formRelatorio.crvRelatorio.ReportSource = relatoriopedido;
+                //formRelatorio.crvRelatorio.RefreshReport();
+            }
 
 
 
+        }
+
+        private void btnImprimirRetorno_Click(object sender, EventArgs e)
+        {
+
+
+            Cursor.Current = Cursors.WaitCursor;
+
+            btnPedidoImpRetorno.Text = "Imprimindo...";
+            btnPedidoImpRetorno.Enabled = false;
+
+            
+
+            ModelLibrary.RelatoriosRepresentante.VendedorPedido vendedorPedido = ModelLibrary.RelatoriosRepresentante.RelatorioVendedorPedido(cVendedor.cVendedorId, cCargaId);
+
+
+            if (vendedorPedido == null)
+            {
+                MessageBox.Show("Erro ao imprimir relatório - Não foi possível encontrar pedido.", "Reder - Impressão", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } else
+            {
+                List<ModelLibrary.RelatoriosRepresentante.ListaProdutos> vendedorPedidoItem = ModelLibrary.RelatoriosRepresentante.RelatorioVendedorPedidoItem(vendedorPedido.CodigoPedido);
+
+                BindingSource bs = new BindingSource();
+
+                Reports.VendedorRetorno relatorioretorno = new Reports.VendedorRetorno();
+
+                bs.DataSource = vendedorPedidoItem;
+                relatorioretorno.SetDataSource(bs);
+
+
+                bs.DataSource = vendedorPedido;
+                relatorioretorno.Database.Tables["Pedido"].SetDataSource(bs);
+
+                relatorioretorno.PrintToPrinter(1, true, 0, 0);
+
+
+                btnPedidoImpRetorno.Text = "Imprimir " + Environment.NewLine + "Retorno";
+                btnPedidoImpRetorno.Enabled = true;
+                Cursor.Current = Cursors.Default;
+
+
+                //FormRelatorio formRelatorio = new FormRelatorio();
+                //formRelatorio.Show();
+
+
+                //formRelatorio.crvRelatorio.ReportSource = relatorioretorno;
+                //formRelatorio.crvRelatorio.RefreshReport();
+            }
+            
 
 
         }

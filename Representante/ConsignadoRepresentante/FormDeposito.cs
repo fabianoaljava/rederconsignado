@@ -712,5 +712,50 @@ namespace ConsignadoRepresentante
         {
             
         }
+
+        private void btnSuplementoImprimir_Click(object sender, EventArgs e)
+        {
+
+
+            Cursor.Current = Cursors.WaitCursor;
+
+            btnSuplementoImprimir.Text = "Imprimindo...";
+            btnSuplementoImprimir.Enabled = false;
+
+            List<ModelLibrary.RelatoriosRepresentante.ListaProdutos> suplemento = ModelLibrary.RelatoriosRepresentante.RelatorioSuplemento();
+
+
+
+            if (suplemento == null)
+            {
+                MessageBox.Show("Erro ao imprimir relatório - Não foi possível encontrar suplemento.", "Reder - Impressão", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                
+                BindingSource bs = new BindingSource();
+
+                Reports.Suplemento relatoriosuplemento = new Reports.Suplemento();
+
+                bs.DataSource = suplemento;
+                relatoriosuplemento.SetDataSource(bs);
+
+
+                relatoriosuplemento.PrintToPrinter(1, true, 0, 0);
+
+                btnSuplementoImprimir.Text = "Imprimir " + Environment.NewLine + "Suplemento";
+                btnSuplementoImprimir.Enabled = true;
+                Cursor.Current = Cursors.Default;
+
+
+                //FormRelatorio formRelatorio = new FormRelatorio();
+                //formRelatorio.Show();
+
+
+                //formRelatorio.crvRelatorio.ReportSource = relatoriopedido;
+                //formRelatorio.crvRelatorio.RefreshReport();
+            }
+
+        }
     }
 }

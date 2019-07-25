@@ -312,6 +312,9 @@ namespace ConsignadoRepresentante
 
                 localRepresentanteForm.dlbLimitePedidoUtilizado.Text = string.Format("{0:N}", pedido.ValorPedido);
                 localRepresentanteForm.dlbLimiteCreditoUtilizado.Text = string.Format("{0:N}", creditoutilizado);
+                localRepresentanteForm.btnPedidoImprimir.Enabled = true;
+                localRepresentanteForm.btnPedidoImpRetorno.Enabled = true;
+
             } else
             {
                 if (receber != null)
@@ -323,7 +326,9 @@ namespace ConsignadoRepresentante
                 }
 
                 localRepresentanteForm.dlbLimitePedidoUtilizado.Text = "0";
-                
+                localRepresentanteForm.btnPedidoImprimir.Enabled = false;
+                localRepresentanteForm.btnPedidoImpRetorno.Enabled = false;
+
             }
 
 
