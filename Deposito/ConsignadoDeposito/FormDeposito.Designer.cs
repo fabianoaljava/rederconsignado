@@ -31,6 +31,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDeposito));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -59,12 +60,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDeposito));
             this.notifyIconDeposito = new System.Windows.Forms.NotifyIcon(this.components);
             this.panelHeader = new System.Windows.Forms.Panel();
             this.lblSair = new System.Windows.Forms.Label();
             this.lblNome = new System.Windows.Forms.Label();
             this.lblUsuario = new System.Windows.Forms.Label();
+            this.picUser = new System.Windows.Forms.PictureBox();
+            this.picLogo = new System.Windows.Forms.PictureBox();
             this.panelMain = new System.Windows.Forms.Panel();
             this.tbcPrincipal = new MetroFramework.Controls.MetroTabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
@@ -133,6 +135,7 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlRetornoProduto = new MetroFramework.Controls.MetroPanel();
+            this.btnRetornoRefazer = new MetroFramework.Controls.MetroButton();
             this.btnConferenciaProdutos = new MetroFramework.Controls.MetroButton();
             this.lblRetornarProduto = new MetroFramework.Controls.MetroLabel();
             this.btnRetornoCancelar = new MetroFramework.Controls.MetroButton();
@@ -149,7 +152,7 @@
             this.pnlRetornoPedidoMain = new MetroFramework.Controls.MetroPanel();
             this.grdRetornoPedido = new MetroFramework.Controls.MetroGrid();
             this.pnlRetornoPedidoBottom = new MetroFramework.Controls.MetroPanel();
-            this.tabRetornoLancPedidos = new System.Windows.Forms.TabPage();
+            this.tabRetornoPedidoDetalhe = new System.Windows.Forms.TabPage();
             this.pnlLancamentoPedidos = new MetroFramework.Controls.MetroPanel();
             this.grdLancPedido = new MetroFramework.Controls.MetroGrid();
             this.pnlLancPedMain = new MetroFramework.Controls.MetroPanel();
@@ -168,9 +171,8 @@
             this.txtLancPedQuantidade = new MetroFramework.Controls.MetroTextBox();
             this.txtLancPedProduto = new MetroFramework.Controls.MetroTextBox();
             this.txtLancPedCodigoBarras = new MetroFramework.Controls.MetroTextBox();
-            this.pnlLancPedPesquisaVendedor = new MetroFramework.Controls.MetroPanel();
-            this.lblPesqVendedor = new MetroFramework.Controls.MetroLabel();
-            this.grpPesqVendedorPedido = new System.Windows.Forms.GroupBox();
+            this.pnlPedidoDetalhe = new MetroFramework.Controls.MetroPanel();
+            this.grpPedidoDetalhe = new System.Windows.Forms.GroupBox();
             this.dlbPedidoStatus = new MetroFramework.Controls.MetroLabel();
             this.lblPedidoStatus = new MetroFramework.Controls.MetroLabel();
             this.dlbValorRestante = new MetroFramework.Controls.MetroLabel();
@@ -191,13 +193,6 @@
             this.dlbValorPedido = new MetroFramework.Controls.MetroLabel();
             this.lblValorCompra = new MetroFramework.Controls.MetroLabel();
             this.lblValorPedido = new MetroFramework.Controls.MetroLabel();
-            this.btnPesqVendedorOK = new MetroFramework.Controls.MetroButton();
-            this.btnPesqVendedorLimpar = new MetroFramework.Controls.MetroButton();
-            this.btnPesqVendedorPesquisar = new MetroFramework.Controls.MetroButton();
-            this.lblVendedorOu = new MetroFramework.Controls.MetroLabel();
-            this.txtPesqVendedorCpfCnpj = new MetroFramework.Controls.MetroTextBox();
-            this.cbbPesqVendedor = new MetroFramework.Controls.MetroComboBox();
-            this.lblLancPedPesquisaVendedor = new MetroFramework.Controls.MetroLabel();
             this.tabPedidosFechados = new System.Windows.Forms.TabPage();
             this.pnlPedidoAnteriorSet = new MetroFramework.Controls.MetroPanel();
             this.pnlPedidoAnteriorMain = new MetroFramework.Controls.MetroPanel();
@@ -250,15 +245,19 @@
             this.tabCadastro = new System.Windows.Forms.TabPage();
             this.tabRelatorios = new System.Windows.Forms.TabPage();
             this.pnlRelatorio = new MetroFramework.Controls.MetroPanel();
+            this.btnRelatorioCarga = new MetroFramework.Controls.MetroButton();
             this.lblRelatorios = new MetroFramework.Controls.MetroLabel();
             this.tabEstoque = new System.Windows.Forms.TabPage();
             this.tabConfiguracoes = new System.Windows.Forms.TabPage();
             this.tabAjuda = new System.Windows.Forms.TabPage();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.picUser = new System.Windows.Forms.PictureBox();
-            this.picLogo = new System.Windows.Forms.PictureBox();
-            this.btnRelatorioCarga = new MetroFramework.Controls.MetroButton();
+            this.dlbCodigoPedido = new MetroFramework.Controls.MetroLabel();
+            this.lblCodigoPedido = new MetroFramework.Controls.MetroLabel();
+            this.dlbPedidoVendedor = new MetroFramework.Controls.MetroLabel();
+            this.lblPedidoVendedor = new MetroFramework.Controls.MetroLabel();
             this.panelHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picUser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.panelMain.SuspendLayout();
             this.tbcPrincipal.SuspendLayout();
             this.tabHome.SuspendLayout();
@@ -287,13 +286,13 @@
             this.pnlRetornoPedidoSet.SuspendLayout();
             this.pnlRetornoPedidoMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdRetornoPedido)).BeginInit();
-            this.tabRetornoLancPedidos.SuspendLayout();
+            this.tabRetornoPedidoDetalhe.SuspendLayout();
             this.pnlLancamentoPedidos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdLancPedido)).BeginInit();
             this.pnlLancPedMain.SuspendLayout();
             this.pnlLancPedTop.SuspendLayout();
-            this.pnlLancPedPesquisaVendedor.SuspendLayout();
-            this.grpPesqVendedorPedido.SuspendLayout();
+            this.pnlPedidoDetalhe.SuspendLayout();
+            this.grpPedidoDetalhe.SuspendLayout();
             this.tabPedidosFechados.SuspendLayout();
             this.pnlPedidoAnteriorSet.SuspendLayout();
             this.pnlPedidoAnteriorMain.SuspendLayout();
@@ -308,8 +307,6 @@
             this.grpRetornoDadosCarga.SuspendLayout();
             this.tabRelatorios.SuspendLayout();
             this.pnlRelatorio.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picUser)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // notifyIconDeposito
@@ -362,6 +359,29 @@
             this.lblUsuario.TabIndex = 2;
             this.lblUsuario.Text = "[[usuario]]";
             // 
+            // picUser
+            // 
+            this.picUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picUser.Image = ((System.Drawing.Image)(resources.GetObject("picUser.Image")));
+            this.picUser.InitialImage = null;
+            this.picUser.Location = new System.Drawing.Point(799, 7);
+            this.picUser.Name = "picUser";
+            this.picUser.Size = new System.Drawing.Size(49, 50);
+            this.picUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picUser.TabIndex = 1;
+            this.picUser.TabStop = false;
+            // 
+            // picLogo
+            // 
+            this.picLogo.Image = global::ConsignadoDeposito.Properties.Resources.Reder_black;
+            this.picLogo.InitialImage = ((System.Drawing.Image)(resources.GetObject("picLogo.InitialImage")));
+            this.picLogo.Location = new System.Drawing.Point(12, 7);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(142, 50);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picLogo.TabIndex = 0;
+            this.picLogo.TabStop = false;
+            // 
             // panelMain
             // 
             this.panelMain.Controls.Add(this.tbcPrincipal);
@@ -384,7 +404,7 @@
             this.tbcPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tbcPrincipal.Name = "tbcPrincipal";
-            this.tbcPrincipal.SelectedIndex = 4;
+            this.tbcPrincipal.SelectedIndex = 2;
             this.tbcPrincipal.Size = new System.Drawing.Size(860, 645);
             this.tbcPrincipal.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tbcPrincipal.TabIndex = 0;
@@ -1252,13 +1272,13 @@
             this.tbcRetorno.Controls.Add(this.tabRetornoProdutos);
             this.tbcRetorno.Controls.Add(this.tabRetornoConfProduto);
             this.tbcRetorno.Controls.Add(this.tabRetornoPedido);
-            this.tbcRetorno.Controls.Add(this.tabRetornoLancPedidos);
+            this.tbcRetorno.Controls.Add(this.tabRetornoPedidoDetalhe);
             this.tbcRetorno.Controls.Add(this.tabPedidosFechados);
             this.tbcRetorno.Controls.Add(this.tabRetornoAcertos);
             this.tbcRetorno.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcRetorno.Location = new System.Drawing.Point(0, 131);
             this.tbcRetorno.Name = "tbcRetorno";
-            this.tbcRetorno.SelectedIndex = 4;
+            this.tbcRetorno.SelectedIndex = 3;
             this.tbcRetorno.Size = new System.Drawing.Size(852, 472);
             this.tbcRetorno.TabIndex = 2;
             this.tbcRetorno.UseSelectable = true;
@@ -1320,7 +1340,6 @@
             dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.grdRetornoProduto.DefaultCellStyle = dataGridViewCellStyle7;
-            this.grdRetornoProduto.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdRetornoProduto.EnableHeadersVisualStyles = false;
             this.grdRetornoProduto.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.grdRetornoProduto.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -1372,6 +1391,7 @@
             // 
             // pnlRetornoProduto
             // 
+            this.pnlRetornoProduto.Controls.Add(this.btnRetornoRefazer);
             this.pnlRetornoProduto.Controls.Add(this.btnConferenciaProdutos);
             this.pnlRetornoProduto.Controls.Add(this.lblRetornarProduto);
             this.pnlRetornoProduto.Controls.Add(this.btnRetornoCancelar);
@@ -1392,11 +1412,21 @@
             this.pnlRetornoProduto.VerticalScrollbarHighlightOnWheel = false;
             this.pnlRetornoProduto.VerticalScrollbarSize = 10;
             // 
+            // btnRetornoRefazer
+            // 
+            this.btnRetornoRefazer.Location = new System.Drawing.Point(678, 10);
+            this.btnRetornoRefazer.Name = "btnRetornoRefazer";
+            this.btnRetornoRefazer.Size = new System.Drawing.Size(68, 42);
+            this.btnRetornoRefazer.TabIndex = 13;
+            this.btnRetornoRefazer.Text = "Refazer \r\nRetorno";
+            this.btnRetornoRefazer.UseSelectable = true;
+            this.btnRetornoRefazer.Click += new System.EventHandler(this.btnRetornoRefazer_Click);
+            // 
             // btnConferenciaProdutos
             // 
-            this.btnConferenciaProdutos.Location = new System.Drawing.Point(716, 10);
+            this.btnConferenciaProdutos.Location = new System.Drawing.Point(751, 10);
             this.btnConferenciaProdutos.Name = "btnConferenciaProdutos";
-            this.btnConferenciaProdutos.Size = new System.Drawing.Size(114, 42);
+            this.btnConferenciaProdutos.Size = new System.Drawing.Size(84, 42);
             this.btnConferenciaProdutos.TabIndex = 12;
             this.btnConferenciaProdutos.Text = "Finalizar \r\nConferência \r\nde Produtos";
             this.btnConferenciaProdutos.UseSelectable = true;
@@ -1417,7 +1447,7 @@
             this.btnRetornoCancelar.Enabled = false;
             this.btnRetornoCancelar.Location = new System.Drawing.Point(613, 29);
             this.btnRetornoCancelar.Name = "btnRetornoCancelar";
-            this.btnRetornoCancelar.Size = new System.Drawing.Size(67, 23);
+            this.btnRetornoCancelar.Size = new System.Drawing.Size(59, 23);
             this.btnRetornoCancelar.TabIndex = 10;
             this.btnRetornoCancelar.Text = "Cancelar";
             this.btnRetornoCancelar.UseSelectable = true;
@@ -1731,20 +1761,20 @@
             this.pnlRetornoPedidoBottom.VerticalScrollbarHighlightOnWheel = false;
             this.pnlRetornoPedidoBottom.VerticalScrollbarSize = 10;
             // 
-            // tabRetornoLancPedidos
+            // tabRetornoPedidoDetalhe
             // 
-            this.tabRetornoLancPedidos.Controls.Add(this.pnlLancamentoPedidos);
-            this.tabRetornoLancPedidos.Location = new System.Drawing.Point(4, 38);
-            this.tabRetornoLancPedidos.Name = "tabRetornoLancPedidos";
-            this.tabRetornoLancPedidos.Size = new System.Drawing.Size(844, 430);
-            this.tabRetornoLancPedidos.TabIndex = 1;
-            this.tabRetornoLancPedidos.Text = "Lançamento de Pedidos";
+            this.tabRetornoPedidoDetalhe.Controls.Add(this.pnlLancamentoPedidos);
+            this.tabRetornoPedidoDetalhe.Location = new System.Drawing.Point(4, 38);
+            this.tabRetornoPedidoDetalhe.Name = "tabRetornoPedidoDetalhe";
+            this.tabRetornoPedidoDetalhe.Size = new System.Drawing.Size(844, 430);
+            this.tabRetornoPedidoDetalhe.TabIndex = 1;
+            this.tabRetornoPedidoDetalhe.Text = "Detalhes do Pedido";
             // 
             // pnlLancamentoPedidos
             // 
             this.pnlLancamentoPedidos.Controls.Add(this.grdLancPedido);
             this.pnlLancamentoPedidos.Controls.Add(this.pnlLancPedMain);
-            this.pnlLancamentoPedidos.Controls.Add(this.pnlLancPedPesquisaVendedor);
+            this.pnlLancamentoPedidos.Controls.Add(this.pnlPedidoDetalhe);
             this.pnlLancamentoPedidos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlLancamentoPedidos.HorizontalScrollbarBarColor = true;
             this.pnlLancamentoPedidos.HorizontalScrollbarHighlightOnWheel = false;
@@ -1791,7 +1821,7 @@
             this.grdLancPedido.EnableHeadersVisualStyles = false;
             this.grdLancPedido.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.grdLancPedido.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.grdLancPedido.Location = new System.Drawing.Point(0, 235);
+            this.grdLancPedido.Location = new System.Drawing.Point(0, 215);
             this.grdLancPedido.MultiSelect = false;
             this.grdLancPedido.Name = "grdLancPedido";
             this.grdLancPedido.ReadOnly = true;
@@ -1810,7 +1840,7 @@
             this.grdLancPedido.RowTemplate.ReadOnly = true;
             this.grdLancPedido.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.grdLancPedido.ShowEditingIcon = false;
-            this.grdLancPedido.Size = new System.Drawing.Size(844, 195);
+            this.grdLancPedido.Size = new System.Drawing.Size(844, 215);
             this.grdLancPedido.StandardTab = true;
             this.grdLancPedido.TabIndex = 7;
             this.grdLancPedido.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdLancPedido_CellDoubleClick);
@@ -1822,7 +1852,7 @@
             this.pnlLancPedMain.HorizontalScrollbarBarColor = true;
             this.pnlLancPedMain.HorizontalScrollbarHighlightOnWheel = false;
             this.pnlLancPedMain.HorizontalScrollbarSize = 10;
-            this.pnlLancPedMain.Location = new System.Drawing.Point(0, 157);
+            this.pnlLancPedMain.Location = new System.Drawing.Point(0, 137);
             this.pnlLancPedMain.Name = "pnlLancPedMain";
             this.pnlLancPedMain.Size = new System.Drawing.Size(844, 78);
             this.pnlLancPedMain.TabIndex = 6;
@@ -2133,77 +2163,62 @@
             this.txtLancPedCodigoBarras.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtLancPedCodigoBarras_KeyUp);
             this.txtLancPedCodigoBarras.Leave += new System.EventHandler(this.txtLancPedCodigoBarras_Leave);
             // 
-            // pnlLancPedPesquisaVendedor
+            // pnlPedidoDetalhe
             // 
-            this.pnlLancPedPesquisaVendedor.Controls.Add(this.lblPesqVendedor);
-            this.pnlLancPedPesquisaVendedor.Controls.Add(this.grpPesqVendedorPedido);
-            this.pnlLancPedPesquisaVendedor.Controls.Add(this.btnPesqVendedorOK);
-            this.pnlLancPedPesquisaVendedor.Controls.Add(this.btnPesqVendedorLimpar);
-            this.pnlLancPedPesquisaVendedor.Controls.Add(this.btnPesqVendedorPesquisar);
-            this.pnlLancPedPesquisaVendedor.Controls.Add(this.lblVendedorOu);
-            this.pnlLancPedPesquisaVendedor.Controls.Add(this.txtPesqVendedorCpfCnpj);
-            this.pnlLancPedPesquisaVendedor.Controls.Add(this.cbbPesqVendedor);
-            this.pnlLancPedPesquisaVendedor.Controls.Add(this.lblLancPedPesquisaVendedor);
-            this.pnlLancPedPesquisaVendedor.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlLancPedPesquisaVendedor.HorizontalScrollbarBarColor = true;
-            this.pnlLancPedPesquisaVendedor.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlLancPedPesquisaVendedor.HorizontalScrollbarSize = 10;
-            this.pnlLancPedPesquisaVendedor.Location = new System.Drawing.Point(0, 0);
-            this.pnlLancPedPesquisaVendedor.Name = "pnlLancPedPesquisaVendedor";
-            this.pnlLancPedPesquisaVendedor.Size = new System.Drawing.Size(844, 157);
-            this.pnlLancPedPesquisaVendedor.TabIndex = 2;
-            this.pnlLancPedPesquisaVendedor.VerticalScrollbarBarColor = true;
-            this.pnlLancPedPesquisaVendedor.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlLancPedPesquisaVendedor.VerticalScrollbarSize = 10;
+            this.pnlPedidoDetalhe.Controls.Add(this.grpPedidoDetalhe);
+            this.pnlPedidoDetalhe.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlPedidoDetalhe.HorizontalScrollbarBarColor = true;
+            this.pnlPedidoDetalhe.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlPedidoDetalhe.HorizontalScrollbarSize = 10;
+            this.pnlPedidoDetalhe.Location = new System.Drawing.Point(0, 0);
+            this.pnlPedidoDetalhe.Name = "pnlPedidoDetalhe";
+            this.pnlPedidoDetalhe.Size = new System.Drawing.Size(844, 137);
+            this.pnlPedidoDetalhe.TabIndex = 2;
+            this.pnlPedidoDetalhe.VerticalScrollbarBarColor = true;
+            this.pnlPedidoDetalhe.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlPedidoDetalhe.VerticalScrollbarSize = 10;
             // 
-            // lblPesqVendedor
+            // grpPedidoDetalhe
             // 
-            this.lblPesqVendedor.ForeColor = System.Drawing.Color.Red;
-            this.lblPesqVendedor.Location = new System.Drawing.Point(173, 4);
-            this.lblPesqVendedor.Name = "lblPesqVendedor";
-            this.lblPesqVendedor.Size = new System.Drawing.Size(566, 20);
-            this.lblPesqVendedor.TabIndex = 29;
-            this.lblPesqVendedor.Text = "<<Resultado da Pesquisa>>";
-            this.lblPesqVendedor.UseCustomForeColor = true;
-            this.lblPesqVendedor.Visible = false;
-            // 
-            // grpPesqVendedorPedido
-            // 
-            this.grpPesqVendedorPedido.BackColor = System.Drawing.Color.White;
-            this.grpPesqVendedorPedido.Controls.Add(this.dlbPedidoStatus);
-            this.grpPesqVendedorPedido.Controls.Add(this.lblPedidoStatus);
-            this.grpPesqVendedorPedido.Controls.Add(this.dlbValorRestante);
-            this.grpPesqVendedorPedido.Controls.Add(this.lblValorRestante);
-            this.grpPesqVendedorPedido.Controls.Add(this.dlbValorAcerto);
-            this.grpPesqVendedorPedido.Controls.Add(this.lblValorAcerto);
-            this.grpPesqVendedorPedido.Controls.Add(this.dlbRecebimentoAnterior);
-            this.grpPesqVendedorPedido.Controls.Add(this.lblValorEmAberto);
-            this.grpPesqVendedorPedido.Controls.Add(this.dlbValorLiquido);
-            this.grpPesqVendedorPedido.Controls.Add(this.lblValorRecebido);
-            this.grpPesqVendedorPedido.Controls.Add(this.dlbTotalAPagar);
-            this.grpPesqVendedorPedido.Controls.Add(this.lblTotalAPagar);
-            this.grpPesqVendedorPedido.Controls.Add(this.dlbValorComissao);
-            this.grpPesqVendedorPedido.Controls.Add(this.lblValorComissao);
-            this.grpPesqVendedorPedido.Controls.Add(this.dlbPercentualComissao);
-            this.grpPesqVendedorPedido.Controls.Add(this.lblPercentualComissao);
-            this.grpPesqVendedorPedido.Controls.Add(this.dlbValorCompra);
-            this.grpPesqVendedorPedido.Controls.Add(this.dlbValorPedido);
-            this.grpPesqVendedorPedido.Controls.Add(this.lblValorCompra);
-            this.grpPesqVendedorPedido.Controls.Add(this.lblValorPedido);
-            this.grpPesqVendedorPedido.Location = new System.Drawing.Point(14, 54);
-            this.grpPesqVendedorPedido.Name = "grpPesqVendedorPedido";
-            this.grpPesqVendedorPedido.Size = new System.Drawing.Size(815, 97);
-            this.grpPesqVendedorPedido.TabIndex = 28;
-            this.grpPesqVendedorPedido.TabStop = false;
-            this.grpPesqVendedorPedido.Visible = false;
+            this.grpPedidoDetalhe.BackColor = System.Drawing.Color.White;
+            this.grpPedidoDetalhe.Controls.Add(this.dlbPedidoVendedor);
+            this.grpPedidoDetalhe.Controls.Add(this.lblPedidoVendedor);
+            this.grpPedidoDetalhe.Controls.Add(this.dlbCodigoPedido);
+            this.grpPedidoDetalhe.Controls.Add(this.lblCodigoPedido);
+            this.grpPedidoDetalhe.Controls.Add(this.dlbPedidoStatus);
+            this.grpPedidoDetalhe.Controls.Add(this.lblPedidoStatus);
+            this.grpPedidoDetalhe.Controls.Add(this.dlbValorRestante);
+            this.grpPedidoDetalhe.Controls.Add(this.lblValorRestante);
+            this.grpPedidoDetalhe.Controls.Add(this.dlbValorAcerto);
+            this.grpPedidoDetalhe.Controls.Add(this.lblValorAcerto);
+            this.grpPedidoDetalhe.Controls.Add(this.dlbRecebimentoAnterior);
+            this.grpPedidoDetalhe.Controls.Add(this.lblValorEmAberto);
+            this.grpPedidoDetalhe.Controls.Add(this.dlbValorLiquido);
+            this.grpPedidoDetalhe.Controls.Add(this.lblValorRecebido);
+            this.grpPedidoDetalhe.Controls.Add(this.dlbTotalAPagar);
+            this.grpPedidoDetalhe.Controls.Add(this.lblTotalAPagar);
+            this.grpPedidoDetalhe.Controls.Add(this.dlbValorComissao);
+            this.grpPedidoDetalhe.Controls.Add(this.lblValorComissao);
+            this.grpPedidoDetalhe.Controls.Add(this.dlbPercentualComissao);
+            this.grpPedidoDetalhe.Controls.Add(this.lblPercentualComissao);
+            this.grpPedidoDetalhe.Controls.Add(this.dlbValorCompra);
+            this.grpPedidoDetalhe.Controls.Add(this.dlbValorPedido);
+            this.grpPedidoDetalhe.Controls.Add(this.lblValorCompra);
+            this.grpPedidoDetalhe.Controls.Add(this.lblValorPedido);
+            this.grpPedidoDetalhe.Location = new System.Drawing.Point(14, 3);
+            this.grpPedidoDetalhe.Name = "grpPedidoDetalhe";
+            this.grpPedidoDetalhe.Size = new System.Drawing.Size(823, 128);
+            this.grpPedidoDetalhe.TabIndex = 28;
+            this.grpPedidoDetalhe.TabStop = false;
+            this.grpPedidoDetalhe.Visible = false;
             // 
             // dlbPedidoStatus
             // 
             this.dlbPedidoStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dlbPedidoStatus.ForeColor = System.Drawing.Color.Black;
-            this.dlbPedidoStatus.Location = new System.Drawing.Point(94, 68);
+            this.dlbPedidoStatus.Location = new System.Drawing.Point(367, 18);
             this.dlbPedidoStatus.Name = "dlbPedidoStatus";
-            this.dlbPedidoStatus.Size = new System.Drawing.Size(712, 20);
+            this.dlbPedidoStatus.Size = new System.Drawing.Size(176, 20);
             this.dlbPedidoStatus.TabIndex = 32;
             this.dlbPedidoStatus.Text = "<<Status do Pedido>>";
             this.dlbPedidoStatus.UseCustomForeColor = true;
@@ -2213,7 +2228,7 @@
             this.lblPedidoStatus.AutoSize = true;
             this.lblPedidoStatus.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lblPedidoStatus.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.lblPedidoStatus.Location = new System.Drawing.Point(4, 70);
+            this.lblPedidoStatus.Location = new System.Drawing.Point(277, 20);
             this.lblPedidoStatus.Name = "lblPedidoStatus";
             this.lblPedidoStatus.Size = new System.Drawing.Size(86, 15);
             this.lblPedidoStatus.TabIndex = 31;
@@ -2224,7 +2239,7 @@
             this.dlbValorRestante.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dlbValorRestante.FontSize = MetroFramework.MetroLabelSize.Small;
             this.dlbValorRestante.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.dlbValorRestante.Location = new System.Drawing.Point(720, 34);
+            this.dlbValorRestante.Location = new System.Drawing.Point(720, 90);
             this.dlbValorRestante.Name = "dlbValorRestante";
             this.dlbValorRestante.Size = new System.Drawing.Size(84, 19);
             this.dlbValorRestante.TabIndex = 21;
@@ -2235,7 +2250,7 @@
             // 
             this.lblValorRestante.AutoSize = true;
             this.lblValorRestante.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblValorRestante.Location = new System.Drawing.Point(717, 15);
+            this.lblValorRestante.Location = new System.Drawing.Point(717, 71);
             this.lblValorRestante.Name = "lblValorRestante";
             this.lblValorRestante.Size = new System.Drawing.Size(54, 15);
             this.lblValorRestante.TabIndex = 20;
@@ -2246,7 +2261,7 @@
             this.dlbValorAcerto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dlbValorAcerto.FontSize = MetroFramework.MetroLabelSize.Small;
             this.dlbValorAcerto.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.dlbValorAcerto.Location = new System.Drawing.Point(630, 34);
+            this.dlbValorAcerto.Location = new System.Drawing.Point(630, 90);
             this.dlbValorAcerto.Name = "dlbValorAcerto";
             this.dlbValorAcerto.Size = new System.Drawing.Size(84, 19);
             this.dlbValorAcerto.TabIndex = 19;
@@ -2257,7 +2272,7 @@
             // 
             this.lblValorAcerto.AutoSize = true;
             this.lblValorAcerto.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblValorAcerto.Location = new System.Drawing.Point(627, 15);
+            this.lblValorAcerto.Location = new System.Drawing.Point(627, 71);
             this.lblValorAcerto.Name = "lblValorAcerto";
             this.lblValorAcerto.Size = new System.Drawing.Size(73, 15);
             this.lblValorAcerto.TabIndex = 18;
@@ -2268,7 +2283,7 @@
             this.dlbRecebimentoAnterior.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dlbRecebimentoAnterior.FontSize = MetroFramework.MetroLabelSize.Small;
             this.dlbRecebimentoAnterior.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.dlbRecebimentoAnterior.Location = new System.Drawing.Point(434, 34);
+            this.dlbRecebimentoAnterior.Location = new System.Drawing.Point(434, 90);
             this.dlbRecebimentoAnterior.Name = "dlbRecebimentoAnterior";
             this.dlbRecebimentoAnterior.Size = new System.Drawing.Size(84, 19);
             this.dlbRecebimentoAnterior.TabIndex = 17;
@@ -2279,7 +2294,7 @@
             // 
             this.lblValorEmAberto.AutoSize = true;
             this.lblValorEmAberto.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblValorEmAberto.Location = new System.Drawing.Point(431, 15);
+            this.lblValorEmAberto.Location = new System.Drawing.Point(431, 71);
             this.lblValorEmAberto.Name = "lblValorEmAberto";
             this.lblValorEmAberto.Size = new System.Drawing.Size(83, 15);
             this.lblValorEmAberto.TabIndex = 16;
@@ -2290,7 +2305,7 @@
             this.dlbValorLiquido.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dlbValorLiquido.FontSize = MetroFramework.MetroLabelSize.Small;
             this.dlbValorLiquido.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.dlbValorLiquido.Location = new System.Drawing.Point(345, 34);
+            this.dlbValorLiquido.Location = new System.Drawing.Point(345, 90);
             this.dlbValorLiquido.Name = "dlbValorLiquido";
             this.dlbValorLiquido.Size = new System.Drawing.Size(84, 19);
             this.dlbValorLiquido.TabIndex = 15;
@@ -2301,7 +2316,7 @@
             // 
             this.lblValorRecebido.AutoSize = true;
             this.lblValorRecebido.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblValorRecebido.Location = new System.Drawing.Point(345, 15);
+            this.lblValorRecebido.Location = new System.Drawing.Point(345, 71);
             this.lblValorRecebido.Name = "lblValorRecebido";
             this.lblValorRecebido.Size = new System.Drawing.Size(74, 15);
             this.lblValorRecebido.TabIndex = 14;
@@ -2311,7 +2326,7 @@
             // 
             this.dlbTotalAPagar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dlbTotalAPagar.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.dlbTotalAPagar.Location = new System.Drawing.Point(522, 34);
+            this.dlbTotalAPagar.Location = new System.Drawing.Point(522, 90);
             this.dlbTotalAPagar.Name = "dlbTotalAPagar";
             this.dlbTotalAPagar.Size = new System.Drawing.Size(105, 19);
             this.dlbTotalAPagar.TabIndex = 13;
@@ -2323,7 +2338,7 @@
             this.lblTotalAPagar.AutoSize = true;
             this.lblTotalAPagar.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lblTotalAPagar.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.lblTotalAPagar.Location = new System.Drawing.Point(531, 16);
+            this.lblTotalAPagar.Location = new System.Drawing.Point(531, 72);
             this.lblTotalAPagar.Name = "lblTotalAPagar";
             this.lblTotalAPagar.Size = new System.Drawing.Size(77, 15);
             this.lblTotalAPagar.TabIndex = 12;
@@ -2334,7 +2349,7 @@
             this.dlbValorComissao.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dlbValorComissao.FontSize = MetroFramework.MetroLabelSize.Small;
             this.dlbValorComissao.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.dlbValorComissao.Location = new System.Drawing.Point(256, 34);
+            this.dlbValorComissao.Location = new System.Drawing.Point(256, 90);
             this.dlbValorComissao.Name = "dlbValorComissao";
             this.dlbValorComissao.Size = new System.Drawing.Size(84, 19);
             this.dlbValorComissao.TabIndex = 11;
@@ -2345,7 +2360,7 @@
             // 
             this.lblValorComissao.AutoSize = true;
             this.lblValorComissao.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblValorComissao.Location = new System.Drawing.Point(256, 15);
+            this.lblValorComissao.Location = new System.Drawing.Point(256, 71);
             this.lblValorComissao.Name = "lblValorComissao";
             this.lblValorComissao.Size = new System.Drawing.Size(87, 15);
             this.lblValorComissao.TabIndex = 10;
@@ -2356,7 +2371,7 @@
             this.dlbPercentualComissao.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dlbPercentualComissao.FontSize = MetroFramework.MetroLabelSize.Small;
             this.dlbPercentualComissao.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.dlbPercentualComissao.Location = new System.Drawing.Point(183, 34);
+            this.dlbPercentualComissao.Location = new System.Drawing.Point(183, 90);
             this.dlbPercentualComissao.Name = "dlbPercentualComissao";
             this.dlbPercentualComissao.Size = new System.Drawing.Size(71, 19);
             this.dlbPercentualComissao.TabIndex = 9;
@@ -2367,7 +2382,7 @@
             // 
             this.lblPercentualComissao.AutoSize = true;
             this.lblPercentualComissao.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblPercentualComissao.Location = new System.Drawing.Point(183, 15);
+            this.lblPercentualComissao.Location = new System.Drawing.Point(183, 71);
             this.lblPercentualComissao.Name = "lblPercentualComissao";
             this.lblPercentualComissao.Size = new System.Drawing.Size(71, 15);
             this.lblPercentualComissao.TabIndex = 8;
@@ -2378,7 +2393,7 @@
             this.dlbValorCompra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dlbValorCompra.FontSize = MetroFramework.MetroLabelSize.Small;
             this.dlbValorCompra.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.dlbValorCompra.Location = new System.Drawing.Point(94, 34);
+            this.dlbValorCompra.Location = new System.Drawing.Point(94, 90);
             this.dlbValorCompra.Name = "dlbValorCompra";
             this.dlbValorCompra.Size = new System.Drawing.Size(84, 19);
             this.dlbValorCompra.TabIndex = 3;
@@ -2390,7 +2405,7 @@
             this.dlbValorPedido.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dlbValorPedido.FontSize = MetroFramework.MetroLabelSize.Small;
             this.dlbValorPedido.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.dlbValorPedido.Location = new System.Drawing.Point(6, 34);
+            this.dlbValorPedido.Location = new System.Drawing.Point(6, 90);
             this.dlbValorPedido.Name = "dlbValorPedido";
             this.dlbValorPedido.Size = new System.Drawing.Size(84, 19);
             this.dlbValorPedido.TabIndex = 2;
@@ -2401,7 +2416,7 @@
             // 
             this.lblValorCompra.AutoSize = true;
             this.lblValorCompra.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblValorCompra.Location = new System.Drawing.Point(94, 15);
+            this.lblValorCompra.Location = new System.Drawing.Point(94, 71);
             this.lblValorCompra.Name = "lblValorCompra";
             this.lblValorCompra.Size = new System.Drawing.Size(79, 15);
             this.lblValorCompra.TabIndex = 1;
@@ -2411,108 +2426,11 @@
             // 
             this.lblValorPedido.AutoSize = true;
             this.lblValorPedido.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblValorPedido.Location = new System.Drawing.Point(6, 15);
+            this.lblValorPedido.Location = new System.Drawing.Point(6, 71);
             this.lblValorPedido.Name = "lblValorPedido";
             this.lblValorPedido.Size = new System.Drawing.Size(73, 15);
             this.lblValorPedido.TabIndex = 0;
             this.lblValorPedido.Text = "Valor Pedido:";
-            // 
-            // btnPesqVendedorOK
-            // 
-            this.btnPesqVendedorOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnPesqVendedorOK.Location = new System.Drawing.Point(545, 27);
-            this.btnPesqVendedorOK.Name = "btnPesqVendedorOK";
-            this.btnPesqVendedorOK.Size = new System.Drawing.Size(30, 25);
-            this.btnPesqVendedorOK.TabIndex = 27;
-            this.btnPesqVendedorOK.Text = "OK";
-            this.btnPesqVendedorOK.UseSelectable = true;
-            this.btnPesqVendedorOK.Click += new System.EventHandler(this.btnPesqVendedorOK_Click);
-            // 
-            // btnPesqVendedorLimpar
-            // 
-            this.btnPesqVendedorLimpar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnPesqVendedorLimpar.Location = new System.Drawing.Point(664, 27);
-            this.btnPesqVendedorLimpar.Name = "btnPesqVendedorLimpar";
-            this.btnPesqVendedorLimpar.Size = new System.Drawing.Size(75, 25);
-            this.btnPesqVendedorLimpar.TabIndex = 26;
-            this.btnPesqVendedorLimpar.Text = "Limpar";
-            this.btnPesqVendedorLimpar.UseSelectable = true;
-            this.btnPesqVendedorLimpar.Click += new System.EventHandler(this.btnPesqVendedorLimpar_Click);
-            // 
-            // btnPesqVendedorPesquisar
-            // 
-            this.btnPesqVendedorPesquisar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnPesqVendedorPesquisar.Location = new System.Drawing.Point(580, 27);
-            this.btnPesqVendedorPesquisar.Name = "btnPesqVendedorPesquisar";
-            this.btnPesqVendedorPesquisar.Size = new System.Drawing.Size(78, 25);
-            this.btnPesqVendedorPesquisar.TabIndex = 25;
-            this.btnPesqVendedorPesquisar.Text = "Pesquisar";
-            this.btnPesqVendedorPesquisar.UseSelectable = true;
-            // 
-            // lblVendedorOu
-            // 
-            this.lblVendedorOu.AutoSize = true;
-            this.lblVendedorOu.Location = new System.Drawing.Point(364, 29);
-            this.lblVendedorOu.Name = "lblVendedorOu";
-            this.lblVendedorOu.Size = new System.Drawing.Size(24, 19);
-            this.lblVendedorOu.TabIndex = 24;
-            this.lblVendedorOu.Text = "ou";
-            // 
-            // txtPesqVendedorCpfCnpj
-            // 
-            // 
-            // 
-            // 
-            this.txtPesqVendedorCpfCnpj.CustomButton.Image = null;
-            this.txtPesqVendedorCpfCnpj.CustomButton.Location = new System.Drawing.Point(118, 1);
-            this.txtPesqVendedorCpfCnpj.CustomButton.Name = "";
-            this.txtPesqVendedorCpfCnpj.CustomButton.Size = new System.Drawing.Size(23, 23);
-            this.txtPesqVendedorCpfCnpj.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtPesqVendedorCpfCnpj.CustomButton.TabIndex = 1;
-            this.txtPesqVendedorCpfCnpj.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtPesqVendedorCpfCnpj.CustomButton.UseSelectable = true;
-            this.txtPesqVendedorCpfCnpj.CustomButton.Visible = false;
-            this.txtPesqVendedorCpfCnpj.FontSize = MetroFramework.MetroTextBoxSize.Medium;
-            this.txtPesqVendedorCpfCnpj.Lines = new string[0];
-            this.txtPesqVendedorCpfCnpj.Location = new System.Drawing.Point(397, 27);
-            this.txtPesqVendedorCpfCnpj.MaxLength = 32767;
-            this.txtPesqVendedorCpfCnpj.Name = "txtPesqVendedorCpfCnpj";
-            this.txtPesqVendedorCpfCnpj.PasswordChar = '\0';
-            this.txtPesqVendedorCpfCnpj.PromptText = "CPF/CNPJ";
-            this.txtPesqVendedorCpfCnpj.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtPesqVendedorCpfCnpj.SelectedText = "";
-            this.txtPesqVendedorCpfCnpj.SelectionLength = 0;
-            this.txtPesqVendedorCpfCnpj.SelectionStart = 0;
-            this.txtPesqVendedorCpfCnpj.ShortcutsEnabled = true;
-            this.txtPesqVendedorCpfCnpj.Size = new System.Drawing.Size(142, 25);
-            this.txtPesqVendedorCpfCnpj.TabIndex = 23;
-            this.txtPesqVendedorCpfCnpj.UseSelectable = true;
-            this.txtPesqVendedorCpfCnpj.WaterMark = "CPF/CNPJ";
-            this.txtPesqVendedorCpfCnpj.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtPesqVendedorCpfCnpj.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // cbbPesqVendedor
-            // 
-            this.cbbPesqVendedor.FontSize = MetroFramework.MetroComboBoxSize.Small;
-            this.cbbPesqVendedor.FormattingEnabled = true;
-            this.cbbPesqVendedor.ItemHeight = 19;
-            this.cbbPesqVendedor.Location = new System.Drawing.Point(14, 27);
-            this.cbbPesqVendedor.Name = "cbbPesqVendedor";
-            this.cbbPesqVendedor.PromptText = "Selecione o vendedor";
-            this.cbbPesqVendedor.Size = new System.Drawing.Size(343, 25);
-            this.cbbPesqVendedor.Sorted = true;
-            this.cbbPesqVendedor.TabIndex = 22;
-            this.cbbPesqVendedor.UseSelectable = true;
-            // 
-            // lblLancPedPesquisaVendedor
-            // 
-            this.lblLancPedPesquisaVendedor.AutoSize = true;
-            this.lblLancPedPesquisaVendedor.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.lblLancPedPesquisaVendedor.Location = new System.Drawing.Point(10, 4);
-            this.lblLancPedPesquisaVendedor.Name = "lblLancPedPesquisaVendedor";
-            this.lblLancPedPesquisaVendedor.Size = new System.Drawing.Size(157, 19);
-            this.lblLancPedPesquisaVendedor.TabIndex = 21;
-            this.lblLancPedPesquisaVendedor.Text = "Pesquisa de Vendedor";
             // 
             // tabPedidosFechados
             // 
@@ -3178,7 +3096,7 @@
             this.cbbRetornoMesAno.ShowUpDown = true;
             this.cbbRetornoMesAno.Size = new System.Drawing.Size(97, 26);
             this.cbbRetornoMesAno.TabIndex = 15;
-            this.cbbRetornoMesAno.Value = new System.DateTime(2019, 7, 11, 0, 0, 0, 0);
+            this.cbbRetornoMesAno.Value = new System.DateTime(2019, 1, 1, 0, 0, 0, 0);
             this.cbbRetornoMesAno.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cbbRetornoMesAno_KeyUp);
             // 
             // txtRetornoCodRepresentante
@@ -3377,6 +3295,16 @@
             this.pnlRelatorio.VerticalScrollbarHighlightOnWheel = false;
             this.pnlRelatorio.VerticalScrollbarSize = 10;
             // 
+            // btnRelatorioCarga
+            // 
+            this.btnRelatorioCarga.Location = new System.Drawing.Point(19, 17);
+            this.btnRelatorioCarga.Name = "btnRelatorioCarga";
+            this.btnRelatorioCarga.Size = new System.Drawing.Size(178, 50);
+            this.btnRelatorioCarga.TabIndex = 8;
+            this.btnRelatorioCarga.Text = "Carga";
+            this.btnRelatorioCarga.UseSelectable = true;
+            this.btnRelatorioCarga.Click += new System.EventHandler(this.btnRelatorioCarga_Click);
+            // 
             // lblRelatorios
             // 
             this.lblRelatorios.AutoSize = true;
@@ -3410,38 +3338,49 @@
             this.tabAjuda.TabIndex = 8;
             this.tabAjuda.Text = "AJUDA";
             // 
-            // picUser
+            // dlbCodigoPedido
             // 
-            this.picUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picUser.Image = ((System.Drawing.Image)(resources.GetObject("picUser.Image")));
-            this.picUser.InitialImage = null;
-            this.picUser.Location = new System.Drawing.Point(799, 7);
-            this.picUser.Name = "picUser";
-            this.picUser.Size = new System.Drawing.Size(49, 50);
-            this.picUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picUser.TabIndex = 1;
-            this.picUser.TabStop = false;
+            this.dlbCodigoPedido.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dlbCodigoPedido.ForeColor = System.Drawing.Color.Black;
+            this.dlbCodigoPedido.Location = new System.Drawing.Point(94, 16);
+            this.dlbCodigoPedido.Name = "dlbCodigoPedido";
+            this.dlbCodigoPedido.Size = new System.Drawing.Size(176, 20);
+            this.dlbCodigoPedido.TabIndex = 34;
+            this.dlbCodigoPedido.Text = "<<Numero do Pedido>>";
+            this.dlbCodigoPedido.UseCustomForeColor = true;
             // 
-            // picLogo
+            // lblCodigoPedido
             // 
-            this.picLogo.Image = global::ConsignadoDeposito.Properties.Resources.Reder_black;
-            this.picLogo.InitialImage = ((System.Drawing.Image)(resources.GetObject("picLogo.InitialImage")));
-            this.picLogo.Location = new System.Drawing.Point(12, 7);
-            this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(142, 50);
-            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picLogo.TabIndex = 0;
-            this.picLogo.TabStop = false;
+            this.lblCodigoPedido.AutoSize = true;
+            this.lblCodigoPedido.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblCodigoPedido.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.lblCodigoPedido.Location = new System.Drawing.Point(4, 18);
+            this.lblCodigoPedido.Name = "lblCodigoPedido";
+            this.lblCodigoPedido.Size = new System.Drawing.Size(58, 15);
+            this.lblCodigoPedido.TabIndex = 33;
+            this.lblCodigoPedido.Text = "Pedido #:";
             // 
-            // btnRelatorioCarga
+            // dlbPedidoVendedor
             // 
-            this.btnRelatorioCarga.Location = new System.Drawing.Point(19, 17);
-            this.btnRelatorioCarga.Name = "btnRelatorioCarga";
-            this.btnRelatorioCarga.Size = new System.Drawing.Size(178, 50);
-            this.btnRelatorioCarga.TabIndex = 8;
-            this.btnRelatorioCarga.Text = "Carga";
-            this.btnRelatorioCarga.UseSelectable = true;
-            this.btnRelatorioCarga.Click += new System.EventHandler(this.btnRelatorioCarga_Click);
+            this.dlbPedidoVendedor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dlbPedidoVendedor.ForeColor = System.Drawing.Color.Black;
+            this.dlbPedidoVendedor.Location = new System.Drawing.Point(94, 43);
+            this.dlbPedidoVendedor.Name = "dlbPedidoVendedor";
+            this.dlbPedidoVendedor.Size = new System.Drawing.Size(449, 20);
+            this.dlbPedidoVendedor.TabIndex = 36;
+            this.dlbPedidoVendedor.Text = "<<Vendedor>>";
+            this.dlbPedidoVendedor.UseCustomForeColor = true;
+            // 
+            // lblPedidoVendedor
+            // 
+            this.lblPedidoVendedor.AutoSize = true;
+            this.lblPedidoVendedor.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblPedidoVendedor.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.lblPedidoVendedor.Location = new System.Drawing.Point(4, 45);
+            this.lblPedidoVendedor.Name = "lblPedidoVendedor";
+            this.lblPedidoVendedor.Size = new System.Drawing.Size(64, 15);
+            this.lblPedidoVendedor.TabIndex = 35;
+            this.lblPedidoVendedor.Text = "Vendedor:";
             // 
             // FormDeposito
             // 
@@ -3459,6 +3398,8 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormDeposito_FormClosed);
             this.Load += new System.EventHandler(this.FormDeposito_Load);
             this.panelHeader.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.panelMain.ResumeLayout(false);
             this.tbcPrincipal.ResumeLayout(false);
             this.tabHome.ResumeLayout(false);
@@ -3493,16 +3434,15 @@
             this.pnlRetornoPedidoSet.ResumeLayout(false);
             this.pnlRetornoPedidoMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdRetornoPedido)).EndInit();
-            this.tabRetornoLancPedidos.ResumeLayout(false);
+            this.tabRetornoPedidoDetalhe.ResumeLayout(false);
             this.pnlLancamentoPedidos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdLancPedido)).EndInit();
             this.pnlLancPedMain.ResumeLayout(false);
             this.pnlLancPedTop.ResumeLayout(false);
             this.pnlLancPedTop.PerformLayout();
-            this.pnlLancPedPesquisaVendedor.ResumeLayout(false);
-            this.pnlLancPedPesquisaVendedor.PerformLayout();
-            this.grpPesqVendedorPedido.ResumeLayout(false);
-            this.grpPesqVendedorPedido.PerformLayout();
+            this.pnlPedidoDetalhe.ResumeLayout(false);
+            this.grpPedidoDetalhe.ResumeLayout(false);
+            this.grpPedidoDetalhe.PerformLayout();
             this.tabPedidosFechados.ResumeLayout(false);
             this.pnlPedidoAnteriorSet.ResumeLayout(false);
             this.pnlPedidoAnteriorMain.ResumeLayout(false);
@@ -3521,8 +3461,6 @@
             this.tabRelatorios.ResumeLayout(false);
             this.pnlRelatorio.ResumeLayout(false);
             this.pnlRelatorio.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picUser)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -3563,7 +3501,7 @@
         public MetroFramework.Controls.MetroTextBox txtCargaCodigoBarras;
         public MetroFramework.Controls.MetroButton btnCargaOK;
         public MetroFramework.Controls.MetroTabControl tbcRetorno;
-        private System.Windows.Forms.TabPage tabRetornoLancPedidos;
+        private System.Windows.Forms.TabPage tabRetornoPedidoDetalhe;
         private System.Windows.Forms.TabPage tabRetornoAcertos;
         private MetroFramework.Controls.MetroPanel pnlRetornoPesquisa;
         private MetroFramework.Controls.MetroButton btnRetornoOK;
@@ -3665,15 +3603,8 @@
         private MetroFramework.Controls.MetroLabel metroLabel1;
         public MetroFramework.Controls.MetroTextBox txtRetornoRecDocumento;
         public MetroFramework.Controls.MetroDateTime txtRetornoRecData;
-        private MetroFramework.Controls.MetroPanel pnlLancPedPesquisaVendedor;
-        private MetroFramework.Controls.MetroButton btnPesqVendedorOK;
-        private MetroFramework.Controls.MetroButton btnPesqVendedorLimpar;
-        private MetroFramework.Controls.MetroButton btnPesqVendedorPesquisar;
-        private MetroFramework.Controls.MetroLabel lblVendedorOu;
-        public MetroFramework.Controls.MetroTextBox txtPesqVendedorCpfCnpj;
-        public MetroFramework.Controls.MetroComboBox cbbPesqVendedor;
-        private MetroFramework.Controls.MetroLabel lblLancPedPesquisaVendedor;
-        public System.Windows.Forms.GroupBox grpPesqVendedorPedido;
+        private MetroFramework.Controls.MetroPanel pnlPedidoDetalhe;
+        public System.Windows.Forms.GroupBox grpPedidoDetalhe;
         public MetroFramework.Controls.MetroLabel dlbRecebimentoAnterior;
         private MetroFramework.Controls.MetroLabel lblValorEmAberto;
         public MetroFramework.Controls.MetroLabel dlbValorLiquido;
@@ -3699,7 +3630,6 @@
         public MetroFramework.Controls.MetroTextBox txtLancPedQuantidade;
         public MetroFramework.Controls.MetroTextBox txtLancPedProduto;
         public MetroFramework.Controls.MetroTextBox txtLancPedCodigoBarras;
-        public MetroFramework.Controls.MetroLabel lblPesqVendedor;
         public MetroFramework.Controls.MetroButton btnConferenciaProdutos;
         private System.Windows.Forms.TabPage tabPedidosFechados;
         private MetroFramework.Controls.MetroPanel pnlPedidoAnteriorSet;
@@ -3727,5 +3657,10 @@
         private MetroFramework.Controls.MetroLabel lblPedidoStatus;
         private System.Windows.Forms.TabPage tabCadastro;
         private MetroFramework.Controls.MetroButton btnRelatorioCarga;
+        public MetroFramework.Controls.MetroButton btnRetornoRefazer;
+        public MetroFramework.Controls.MetroLabel dlbCodigoPedido;
+        private MetroFramework.Controls.MetroLabel lblCodigoPedido;
+        public MetroFramework.Controls.MetroLabel dlbPedidoVendedor;
+        private MetroFramework.Controls.MetroLabel lblPedidoVendedor;
     }
 }

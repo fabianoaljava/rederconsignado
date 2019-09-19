@@ -147,9 +147,6 @@
     <Compile Include="ProdutoGrade.cs">
       <DependentUpon>ModelDeposito.tt</DependentUpon>
     </Compile>
-    <Compile Include="ProdutosCarga.cs">
-      <DependentUpon>ModelDeposito.tt</DependentUpon>
-    </Compile>
     <Compile Include="Receber.cs">
       <DependentUpon>ModelDeposito.tt</DependentUpon>
     </Compile>
@@ -229,12 +226,6 @@
     </Compile>
     <Compile Include="SQLiteEFDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Suplemento.cs">
-      <DependentUpon>ModelDeposito.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SuplementoProduto.cs">
-      <DependentUpon>ModelDeposito.tt</DependentUpon>
-    </Compile>
     <Compile Include="Tamanho.cs">
       <DependentUpon>ModelDeposito.tt</DependentUpon>
     </Compile>

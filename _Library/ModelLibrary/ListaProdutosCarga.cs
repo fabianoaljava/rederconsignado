@@ -14,6 +14,7 @@
         public Nullable<double> Retorno { get; set; }
         public Nullable<double> ValorSaida { get; set; }
         public Nullable<double> ValorCusto { get; set; }
+        public string Tipo { get; set; }
         public int CargaId { get; set; }
         public int ProdutoGradeId { get; set; }
 

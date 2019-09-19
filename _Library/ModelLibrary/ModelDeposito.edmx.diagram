@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="926f0eb72a4d455b9572d2d400d6cd88" Name="Diagram1" ZoomLevel="94">
+      <Diagram DiagramId="926f0eb72a4d455b9572d2d400d6cd88" Name="Diagram1" ZoomLevel="100">
         <EntityTypeShape EntityType="ModelDeposito.Carga" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ModelDeposito.CargaProduto" Width="1.5" PointX="7.5" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="ModelDeposito.Categoria" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
@@ -13,7 +13,6 @@
         <EntityTypeShape EntityType="ModelDeposito.Produto" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ModelDeposito.ProdutoGrade" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="ModelDeposito.Usuario" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ModelDeposito.ProdutosCarga" Width="1.5" PointX="9.75" PointY="6.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ModelDeposito.Representante" Width="1.5" PointX="0.5" PointY="4.625" IsExpanded="true" />
         <AssociationConnector Association="ModelDeposito.FK_Carga_Praca" ManuallyRouted="false" />
         <AssociationConnector Association="ModelDeposito.FK_Carga_Representante" ManuallyRouted="false" />
@@ -32,8 +31,6 @@
         <EntityTypeShape EntityType="ModelDeposito.PedidoItem" Width="1.5" PointX="12.875" PointY="10.5" />
         <EntityTypeShape EntityType="ModelDeposito.Receber" Width="1.5" PointX="12.625" PointY="15.375" />
         <EntityTypeShape EntityType="ModelDeposito.ReceberBaixa" Width="1.5" PointX="14.875" PointY="14.875" />
-        <EntityTypeShape EntityType="ModelDeposito.Suplemento" Width="1.5" PointX="5.25" PointY="28.75" />
-        <EntityTypeShape EntityType="ModelDeposito.SuplementoProduto" Width="1.5" PointX="9.625" PointY="1" />
         <EntityTypeShape EntityType="ModelDeposito.Tamanho" Width="1.5" PointX="14.375" PointY="7.25" />
         <EntityTypeShape EntityType="ModelDeposito.Vendedor" Width="1.5" PointX="7.375" PointY="17.125" />
         <AssociationConnector Association="ModelDeposito.FK_Pedido_Carga" />
@@ -45,10 +42,8 @@
         <AssociationConnector Association="ModelDeposito.FK_Pedido_Vendedor" />
         <AssociationConnector Association="ModelDeposito.FK_PedidoItem_Pedido" />
         <AssociationConnector Association="ModelDeposito.FK_PedidoItem_ProdutoGrade" />
-        <AssociationConnector Association="ModelDeposito.FK_SuplementoProduto_ProdutoGrade" />
         <AssociationConnector Association="ModelDeposito.FK_Receber_Vendedor" />
         <AssociationConnector Association="ModelDeposito.FK_ReceberBaixa_Receber" />
-        <AssociationConnector Association="ModelDeposito.FK_SuplementoProduto_Suplemento" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

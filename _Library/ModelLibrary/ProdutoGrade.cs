@@ -19,7 +19,6 @@ namespace ModelLibrary
         {
             this.CargaProduto = new HashSet<CargaProduto>();
             this.PedidoItem = new HashSet<PedidoItem>();
-            this.SuplementoProduto = new HashSet<SuplementoProduto>();
         }
     
         public int Id { get; set; }
@@ -44,7 +43,5 @@ namespace ModelLibrary
         public virtual Produto Produto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PedidoItem> PedidoItem { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SuplementoProduto> SuplementoProduto { get; set; }
     }
 }

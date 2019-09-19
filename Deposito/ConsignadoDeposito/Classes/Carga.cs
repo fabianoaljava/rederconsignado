@@ -243,6 +243,7 @@ namespace ConsignadoDeposito
             localDepositoForm.txtCargaCodigoBarras.ReadOnly = false;
             cCargaProdutoGradeId = 0;
             cModoCargaProduto = "Insert";
+            localDepositoForm.txtCargaCodigoBarras.Focus();
         }
 
 
@@ -266,8 +267,8 @@ namespace ConsignadoDeposito
             localDepositoForm.grdCargaProduto.DataSource = view;
 
             /// Ocultar colunas CargaId e cCargaProdutoGradeId
-            localDepositoForm.grdCargaProduto.Columns[8].Visible = false;
             localDepositoForm.grdCargaProduto.Columns[9].Visible = false;
+            localDepositoForm.grdCargaProduto.Columns[10].Visible = false;
 
             /// Exibir Coluna como "Moeda"
             localDepositoForm.grdCargaProduto.Columns[6].DefaultCellStyle.Format = "c";
@@ -355,9 +356,9 @@ namespace ConsignadoDeposito
 
 
             cModoCargaProduto = "Edit";
-            cCargaProdutoGradeId = Convert.ToInt32(localDepositoForm.grdCargaProduto.CurrentRow.Cells[9].Value);
+            cCargaProdutoGradeId = Convert.ToInt32(localDepositoForm.grdCargaProduto.CurrentRow.Cells["ProdutoGradeId"].Value);
 
-            localDepositoForm.txtCargaCodigoBarras.Text = localDepositoForm.grdCargaProduto.CurrentRow.Cells[0].Value.ToString();
+            localDepositoForm.txtCargaCodigoBarras.Text = localDepositoForm.grdCargaProduto.CurrentRow.Cells["CodigoBarras"].Value.ToString();
             localDepositoForm.txtCargaCodigoBarras.ReadOnly = true;
 
 
@@ -366,9 +367,9 @@ namespace ConsignadoDeposito
                 localDepositoForm.chkCargaQuantidade.Checked = true;
                 localDepositoForm.txtCargaQuantidade.Enabled = true;
             }
-            localDepositoForm.txtCargaQuantidade.Text = localDepositoForm.grdCargaProduto.CurrentRow.Cells[4].Value.ToString();
+            localDepositoForm.txtCargaQuantidade.Text = localDepositoForm.grdCargaProduto.CurrentRow.Cells["Quantidade"].Value.ToString();
 
-            localDepositoForm.txtCargaProduto.Text = localDepositoForm.grdCargaProduto.CurrentRow.Cells[1].Value.ToString();
+            localDepositoForm.txtCargaProduto.Text = localDepositoForm.grdCargaProduto.CurrentRow.Cells["Descricao"].Value.ToString();
 
 
             localDepositoForm.btnCargaConfirmar.Enabled = true;
@@ -483,7 +484,7 @@ namespace ConsignadoDeposito
             if (MessageBox.Show("Deseja realmente excluir o produto selecionado?", "ATENÇÃO! Exclusão de Produto", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
                 LimparCargaProduto();
-                cCargaProdutoGradeId = Convert.ToInt32(localDepositoForm.grdCargaProduto.CurrentRow.Cells[9].Value);
+                cCargaProdutoGradeId = Convert.ToInt32(localDepositoForm.grdCargaProduto.CurrentRow.Cells["grdCargaProduto"].Value);
 
 
                 ModelLibrary.MetodosDeposito.ExcluirCargaProduto(cCargaId, cCargaProdutoGradeId);

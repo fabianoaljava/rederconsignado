@@ -228,26 +228,6 @@
           <Property Name="DataBaixa" Type="date" />
           <Property Name="temp_old_id" Type="int" />
         </EntityType>
-        <EntityType Name="Suplemento">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Data" Type="date" />
-          <Property Name="Situacao" Type="nvarchar" MaxLength="1" />
-          <Property Name="Observacao" Type="ntext" />
-          <Property Name="temp_old_id" Type="int" />
-        </EntityType>
-        <EntityType Name="SuplementoProduto">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SuplementoId" Type="int" />
-          <Property Name="ProdutoGradeId" Type="int" />
-          <Property Name="Quantidade" Type="float" />
-          <Property Name="temp_old_id" Type="int" />
-        </EntityType>
         <EntityType Name="Tamanho">
           <Key>
             <PropertyRef Name="Id" />
@@ -315,31 +295,6 @@
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'RederConsignado.dbo.ProdutosCarga' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="ProdutosCarga">
-          <Key>
-            <PropertyRef Name="Descricao" />
-            <PropertyRef Name="ProdutoId" />
-            <PropertyRef Name="CargaProdutoId" />
-            <PropertyRef Name="CargaId" />
-            <PropertyRef Name="ProdutoGradeId" />
-          </Key>
-          <Property Name="CodigoBarras" Type="nvarchar" MaxLength="13" />
-          <Property Name="Descricao" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Cor" Type="nvarchar" MaxLength="3" />
-          <Property Name="Tamanho" Type="nvarchar" MaxLength="3" />
-          <Property Name="Quantidade" Type="float" />
-          <Property Name="Retorno" Type="float" />
-          <Property Name="ValorSaida" Type="float" />
-          <Property Name="ValorCusto" Type="float" />
-          <Property Name="ProdutoId" Type="int" Nullable="false" />
-          <Property Name="CargaProdutoId" Type="int" Nullable="false" />
-          <Property Name="CargaId" Type="int" Nullable="false" />
-          <Property Name="ProdutoGradeId" Type="int" Nullable="false" />
-          <Property Name="PracaId" Type="int" />
-          <Property Name="RepresentanteId" Type="int" />
-          <Property Name="Ano" Type="int" />
-          <Property Name="Mes" Type="int" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'RederConsignado.dbo.Representante' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Representante">
@@ -586,30 +541,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SuplementoProduto_ProdutoGrade">
-          <End Role="ProdutoGrade" Type="Self.ProdutoGrade" Multiplicity="0..1" />
-          <End Role="SuplementoProduto" Type="Self.SuplementoProduto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProdutoGrade">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SuplementoProduto">
-              <PropertyRef Name="ProdutoGradeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SuplementoProduto_Suplemento">
-          <End Role="Suplemento" Type="Self.Suplemento" Multiplicity="0..1" />
-          <End Role="SuplementoProduto" Type="Self.SuplementoProduto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Suplemento">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SuplementoProduto">
-              <PropertyRef Name="SuplementoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Function Name="RemoveExtraChars" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
           <Parameter Name="p_OriginalString" Type="varchar" Mode="In" />
         </Function>
@@ -630,31 +561,9 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <EntitySet Name="ProdutoGrade" EntityType="Self.ProdutoGrade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Receber" EntityType="Self.Receber" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReceberBaixa" EntityType="Self.ReceberBaixa" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Suplemento" EntityType="Self.Suplemento" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SuplementoProduto" EntityType="Self.SuplementoProduto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tamanho" EntityType="Self.Tamanho" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vendedor" EntityType="Self.Vendedor" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ProdutosCarga" EntityType="Self.ProdutosCarga" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ProdutosCarga].[CodigoBarras] AS [CodigoBarras], 
-    [ProdutosCarga].[Descricao] AS [Descricao], 
-    [ProdutosCarga].[Cor] AS [Cor], 
-    [ProdutosCarga].[Tamanho] AS [Tamanho], 
-    [ProdutosCarga].[Quantidade] AS [Quantidade], 
-    [ProdutosCarga].[Retorno] AS [Retorno], 
-    [ProdutosCarga].[ValorSaida] AS [ValorSaida], 
-    [ProdutosCarga].[ValorCusto] AS [ValorCusto], 
-    [ProdutosCarga].[ProdutoId] AS [ProdutoId], 
-    [ProdutosCarga].[CargaProdutoId] AS [CargaProdutoId], 
-    [ProdutosCarga].[CargaId] AS [CargaId], 
-    [ProdutosCarga].[ProdutoGradeId] AS [ProdutoGradeId], 
-    [ProdutosCarga].[PracaId] AS [PracaId], 
-    [ProdutosCarga].[RepresentanteId] AS [RepresentanteId], 
-    [ProdutosCarga].[Ano] AS [Ano], 
-    [ProdutosCarga].[Mes] AS [Mes]
-    FROM [dbo].[ProdutosCarga] AS [ProdutosCarga]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="Representante" EntityType="Self.Representante" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Representante].[Id] AS [Id], 
@@ -757,15 +666,7 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
             <End Role="Receber" EntitySet="Receber" />
             <End Role="ReceberBaixa" EntitySet="ReceberBaixa" />
           </AssociationSet>
-          <AssociationSet Name="FK_SuplementoProduto_ProdutoGrade" Association="Self.FK_SuplementoProduto_ProdutoGrade">
-            <End Role="ProdutoGrade" EntitySet="ProdutoGrade" />
-            <End Role="SuplementoProduto" EntitySet="SuplementoProduto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SuplementoProduto_Suplemento" Association="Self.FK_SuplementoProduto_Suplemento">
-            <End Role="Suplemento" EntitySet="Suplemento" />
-            <End Role="SuplementoProduto" EntitySet="SuplementoProduto" />
-          </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -894,7 +795,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <NavigationProperty Name="CargaProduto" Relationship="Self.FK_CargaProduto_ProdutoGrade" FromRole="ProdutoGrade" ToRole="CargaProduto" />
           <NavigationProperty Name="Produto" Relationship="Self.FK_ProdutoGrade_Produto" FromRole="ProdutoGrade" ToRole="Produto" />
           <NavigationProperty Name="PedidoItem" Relationship="ModelDeposito.FK_PedidoItem_ProdutoGrade" FromRole="ProdutoGrade" ToRole="PedidoItem" />
-          <NavigationProperty Name="SuplementoProduto" Relationship="ModelDeposito.FK_SuplementoProduto_ProdutoGrade" FromRole="ProdutoGrade" ToRole="SuplementoProduto" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -924,31 +824,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <Property Name="Observacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="temp_old_id" Type="Int32" />
           <NavigationProperty Name="Carga" Relationship="Self.FK_Carga_Representante" FromRole="Usuario" ToRole="Carga" />
-        </EntityType>
-        <EntityType Name="ProdutosCarga">
-          <Key>
-            <PropertyRef Name="Descricao" />
-            <PropertyRef Name="ProdutoId" />
-            <PropertyRef Name="CargaId" />
-            <PropertyRef Name="ProdutoGradeId" />
-            <PropertyRef Name="CargaProdutoId" />
-          </Key>
-          <Property Name="CodigoBarras" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
-          <Property Name="Descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Cor" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="Tamanho" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="Quantidade" Type="Double" />
-          <Property Name="ValorSaida" Type="Double" />
-          <Property Name="ValorCusto" Type="Double" />
-          <Property Name="ProdutoId" Type="Int32" Nullable="false" />
-          <Property Name="CargaId" Type="Int32" Nullable="false" />
-          <Property Name="ProdutoGradeId" Type="Int32" Nullable="false" />
-          <Property Name="PracaId" Type="Int32" />
-          <Property Name="RepresentanteId" Type="Int32" />
-          <Property Name="Ano" Type="Int32" />
-          <Property Name="Mes" Type="Int32" />
-          <Property Name="CargaProdutoId" Type="Int32" Nullable="false" />
-          <Property Name="Retorno" Type="Double" />
         </EntityType>
         <EntityType Name="Representante">
           <Key>
@@ -1073,7 +948,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <EntitySet Name="Produto" EntityType="Self.Produto" />
           <EntitySet Name="ProdutoGrade" EntityType="Self.ProdutoGrade" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
-          <EntitySet Name="ProdutosCarga" EntityType="Self.ProdutosCarga" />
           <EntitySet Name="Representante" EntityType="Self.Representante" />
           <AssociationSet Name="FK_Carga_Praca" Association="Self.FK_Carga_Praca">
             <End Role="Praca" EntitySet="Praca" />
@@ -1113,8 +987,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <EntitySet Name="PedidoItem" EntityType="ModelDeposito.PedidoItem" />
           <EntitySet Name="Receber" EntityType="ModelDeposito.Receber" />
           <EntitySet Name="ReceberBaixa" EntityType="ModelDeposito.ReceberBaixa" />
-          <EntitySet Name="Suplemento" EntityType="ModelDeposito.Suplemento" />
-          <EntitySet Name="SuplementoProduto" EntityType="ModelDeposito.SuplementoProduto" />
           <EntitySet Name="Tamanho" EntityType="ModelDeposito.Tamanho" />
           <EntitySet Name="Vendedor" EntityType="ModelDeposito.Vendedor" />
           <AssociationSet Name="FK_Pedido_Carga" Association="ModelDeposito.FK_Pedido_Carga">
@@ -1153,10 +1025,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
             <End Role="ProdutoGrade" EntitySet="ProdutoGrade" />
             <End Role="PedidoItem" EntitySet="PedidoItem" />
           </AssociationSet>
-          <AssociationSet Name="FK_SuplementoProduto_ProdutoGrade" Association="ModelDeposito.FK_SuplementoProduto_ProdutoGrade">
-            <End Role="ProdutoGrade" EntitySet="ProdutoGrade" />
-            <End Role="SuplementoProduto" EntitySet="SuplementoProduto" />
-          </AssociationSet>
           <AssociationSet Name="FK_Receber_Vendedor" Association="ModelDeposito.FK_Receber_Vendedor">
             <End Role="Vendedor" EntitySet="Vendedor" />
             <End Role="Receber" EntitySet="Receber" />
@@ -1164,10 +1032,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <AssociationSet Name="FK_ReceberBaixa_Receber" Association="ModelDeposito.FK_ReceberBaixa_Receber">
             <End Role="Receber" EntitySet="Receber" />
             <End Role="ReceberBaixa" EntitySet="ReceberBaixa" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SuplementoProduto_Suplemento" Association="ModelDeposito.FK_SuplementoProduto_Suplemento">
-            <End Role="Suplemento" EntitySet="Suplemento" />
-            <End Role="SuplementoProduto" EntitySet="SuplementoProduto" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Totalizadores">
@@ -1308,29 +1172,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <Property Name="temp_old_id" Type="Int32" />
           <NavigationProperty Name="Carga" Relationship="ModelDeposito.FK_ReceberBaixa_Carga" FromRole="ReceberBaixa" ToRole="Carga" />
           <NavigationProperty Name="Receber" Relationship="ModelDeposito.FK_ReceberBaixa_Receber" FromRole="ReceberBaixa" ToRole="Receber" />
-        </EntityType>
-        <EntityType Name="Suplemento">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Data" Type="DateTime" Precision="0" />
-          <Property Name="Situacao" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="Observacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="temp_old_id" Type="Int32" />
-          <NavigationProperty Name="SuplementoProduto" Relationship="ModelDeposito.FK_SuplementoProduto_Suplemento" FromRole="Suplemento" ToRole="SuplementoProduto" />
-        </EntityType>
-        <EntityType Name="SuplementoProduto">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SuplementoId" Type="Int32" />
-          <Property Name="ProdutoGradeId" Type="Int32" />
-          <Property Name="Quantidade" Type="Double" />
-          <Property Name="temp_old_id" Type="Int32" />
-          <NavigationProperty Name="ProdutoGrade" Relationship="ModelDeposito.FK_SuplementoProduto_ProdutoGrade" FromRole="SuplementoProduto" ToRole="ProdutoGrade" />
-          <NavigationProperty Name="Suplemento" Relationship="ModelDeposito.FK_SuplementoProduto_Suplemento" FromRole="SuplementoProduto" ToRole="Suplemento" />
         </EntityType>
         <EntityType Name="Tamanho">
           <Key>
@@ -1479,18 +1320,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SuplementoProduto_ProdutoGrade">
-          <End Type="ModelDeposito.ProdutoGrade" Role="ProdutoGrade" Multiplicity="0..1" />
-          <End Type="ModelDeposito.SuplementoProduto" Role="SuplementoProduto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProdutoGrade">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SuplementoProduto">
-              <PropertyRef Name="ProdutoGradeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Receber_Vendedor">
           <End Type="ModelDeposito.Vendedor" Role="Vendedor" Multiplicity="0..1" />
           <End Type="ModelDeposito.Receber" Role="Receber" Multiplicity="*" />
@@ -1512,18 +1341,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
             </Principal>
             <Dependent Role="ReceberBaixa">
               <PropertyRef Name="ReceberId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SuplementoProduto_Suplemento">
-          <End Type="ModelDeposito.Suplemento" Role="Suplemento" Multiplicity="0..1" />
-          <End Type="ModelDeposito.SuplementoProduto" Role="SuplementoProduto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Suplemento">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SuplementoProduto">
-              <PropertyRef Name="SuplementoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1673,28 +1490,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
                 <ScalarProperty Name="Comissao" ColumnName="Comissao" />
                 <ScalarProperty Name="Observacao" ColumnName="Observacao" />
                 <ScalarProperty Name="temp_old_id" ColumnName="temp_old_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProdutosCarga">
-            <EntityTypeMapping TypeName="ModelDeposito.ProdutosCarga">
-              <MappingFragment StoreEntitySet="ProdutosCarga">
-                <ScalarProperty Name="Retorno" ColumnName="Retorno" />
-                <ScalarProperty Name="CargaProdutoId" ColumnName="CargaProdutoId" />
-                <ScalarProperty Name="CodigoBarras" ColumnName="CodigoBarras" />
-                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
-                <ScalarProperty Name="Cor" ColumnName="Cor" />
-                <ScalarProperty Name="Tamanho" ColumnName="Tamanho" />
-                <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
-                <ScalarProperty Name="ValorSaida" ColumnName="ValorSaida" />
-                <ScalarProperty Name="ValorCusto" ColumnName="ValorCusto" />
-                <ScalarProperty Name="ProdutoId" ColumnName="ProdutoId" />
-                <ScalarProperty Name="CargaId" ColumnName="CargaId" />
-                <ScalarProperty Name="ProdutoGradeId" ColumnName="ProdutoGradeId" />
-                <ScalarProperty Name="PracaId" ColumnName="PracaId" />
-                <ScalarProperty Name="RepresentanteId" ColumnName="RepresentanteId" />
-                <ScalarProperty Name="Ano" ColumnName="Ano" />
-                <ScalarProperty Name="Mes" ColumnName="Mes" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1857,28 +1652,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
                 <ScalarProperty Name="CargaId" ColumnName="CargaId" />
                 <ScalarProperty Name="ReceberId" ColumnName="ReceberId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Suplemento">
-            <EntityTypeMapping TypeName="ModelDeposito.Suplemento">
-              <MappingFragment StoreEntitySet="Suplemento">
-                <ScalarProperty Name="temp_old_id" ColumnName="temp_old_id" />
-                <ScalarProperty Name="Observacao" ColumnName="Observacao" />
-                <ScalarProperty Name="Situacao" ColumnName="Situacao" />
-                <ScalarProperty Name="Data" ColumnName="Data" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SuplementoProduto">
-            <EntityTypeMapping TypeName="ModelDeposito.SuplementoProduto">
-              <MappingFragment StoreEntitySet="SuplementoProduto">
-                <ScalarProperty Name="temp_old_id" ColumnName="temp_old_id" />
-                <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
-                <ScalarProperty Name="ProdutoGradeId" ColumnName="ProdutoGradeId" />
-                <ScalarProperty Name="SuplementoId" ColumnName="SuplementoId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

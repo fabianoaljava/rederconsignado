@@ -22,6 +22,7 @@ namespace ConsignadoDeposito
         public Int32 cRetornoId;
         public Int32 cRetornoVendedorId;
         public Int32 cRetornoPedidoId;
+        public string cRetornoPedidoCodigo;
         public Int32 cRetornoPedidoItemId;
         public Int32 cRetornoPedidoProdutoGradeId;
         public string cModoRetornoPedidoItem;
@@ -92,7 +93,7 @@ namespace ConsignadoDeposito
             CarregarResumo();
             CarregarGradeRetornoProduto(cRetornoId);
             CarregarPedidos();
-            CarregarListaPesquisaVendedor();
+            PedidoDetalheLimpar();
             CarregarPedidosFechados();
             CarregarContasAReceber();
             CarregarConferenciaProdutos();
@@ -238,7 +239,7 @@ namespace ConsignadoDeposito
             CarregarResumo();
             CarregarGradeRetornoProduto(cRetornoId);
             CarregarPedidos();
-            CarregarListaPesquisaVendedor();
+            PedidoDetalheLimpar();
             CarregarPedidosFechados();            
             CarregarContasAReceber();
             CarregarConferenciaProdutos();
@@ -277,6 +278,7 @@ namespace ConsignadoDeposito
             localDepositoForm.txtRetornoCodigoBarras.ReadOnly = false;
             cRetornoProdutoGradeId = 0;
             cModoRetornoProduto = "Insert";
+            localDepositoForm.txtRetornoCodigoBarras.Focus();
         }
 
 
@@ -302,8 +304,8 @@ namespace ConsignadoDeposito
             localDepositoForm.grdRetornoProduto.Columns[2].Width = 250;
 
             /// Ocultar colunas CargaId e cRetornoProdutoGradeId
-            localDepositoForm.grdRetornoProduto.Columns[8].Visible = false;
             localDepositoForm.grdRetornoProduto.Columns[9].Visible = false;
+            localDepositoForm.grdRetornoProduto.Columns[10].Visible = false;
 
             /// Exibir Coluna como "Moeda"
             localDepositoForm.grdRetornoProduto.Columns[6].DefaultCellStyle.Format = "c";
@@ -402,9 +404,9 @@ namespace ConsignadoDeposito
 
 
             cModoRetornoProduto = "Edit";
-            cRetornoProdutoGradeId = Convert.ToInt32(localDepositoForm.grdRetornoProduto.CurrentRow.Cells[9].Value);
+            cRetornoProdutoGradeId = Convert.ToInt32(localDepositoForm.grdRetornoProduto.CurrentRow.Cells["ProdutoGradeId"].Value);
 
-            localDepositoForm.txtRetornoCodigoBarras.Text = localDepositoForm.grdRetornoProduto.CurrentRow.Cells[0].Value.ToString();
+            localDepositoForm.txtRetornoCodigoBarras.Text = localDepositoForm.grdRetornoProduto.CurrentRow.Cells["CodigoBarras"].Value.ToString();
             localDepositoForm.txtRetornoCodigoBarras.ReadOnly = true;
 
 
@@ -413,9 +415,9 @@ namespace ConsignadoDeposito
                 localDepositoForm.chkRetornoQuantidade.Checked = true;
                 localDepositoForm.txtRetornoQuantidade.Enabled = true;
             }
-            localDepositoForm.txtRetornoQuantidade.Text = localDepositoForm.grdRetornoProduto.CurrentRow.Cells[5].Value.ToString();
+            localDepositoForm.txtRetornoQuantidade.Text = localDepositoForm.grdRetornoProduto.CurrentRow.Cells["Retorno"].Value.ToString();
 
-            localDepositoForm.txtRetornoProduto.Text = localDepositoForm.grdRetornoProduto.CurrentRow.Cells[1].Value.ToString();
+            localDepositoForm.txtRetornoProduto.Text = localDepositoForm.grdRetornoProduto.CurrentRow.Cells["Descricao"].Value.ToString();
 
 
             localDepositoForm.btnRetornoConfirmar.Enabled = true;
@@ -472,6 +474,15 @@ namespace ConsignadoDeposito
         }
 
 
+        public void RefazerRetorno()
+        {
+            ModelLibrary.MetodosDeposito.RefazerRetorno(cRetornoId);
+
+            MessageBox.Show("O retorno pode ser refeito agora.");
+
+            PesquisarCarga();
+        }
+
 
 
         ////////////////////////////////////////////
@@ -502,11 +513,98 @@ namespace ConsignadoDeposito
         }
 
         ////////////////////////////////////////////
-        /// Lançamento de Pedidos
+        /// Detalhes do Pedido
         ////////////////////////////////////////////
-        
+
+        public void ExibirDetalhesPedido(string pCodigoPedido)
+        {
+
+            LancamentoPedidoLimpar();
 
 
+
+            var pedido = ModelLibrary.MetodosDeposito.ObterPedido(pCodigoPedido);
+
+            if (pedido != null)
+            {
+
+
+
+                cRetornoPedidoId = pedido.Id;
+                cRetornoPedidoCodigo = pedido.CodigoPedido;
+
+
+                localDepositoForm.grpPedidoDetalhe.Visible = true;
+                
+                localDepositoForm.pnlLancPedTop.Visible = true;
+                localDepositoForm.pnlLancPedMain.Visible = true;
+
+                localDepositoForm.dlbCodigoPedido.Text = pedido.CodigoPedido;
+
+
+                var vendedor = ModelLibrary.MetodosDeposito.ObterVendedor(pedido.VendedorId);
+                localDepositoForm.dlbPedidoVendedor.Text = (vendedor != null)?vendedor.Nome:"Não encontrado";
+
+
+                localDepositoForm.dlbValorPedido.Text = string.Format("{0:C2}", pedido.ValorPedido);
+                localDepositoForm.dlbValorCompra.Text = string.Format("{0:C2}", pedido.ValorCompra);
+                localDepositoForm.dlbPercentualComissao.Text = string.Format("{0}%", pedido.PercentualFaixa);
+                localDepositoForm.dlbValorComissao.Text = string.Format("{0:C2}", pedido.ValorComissao);
+                localDepositoForm.dlbValorLiquido.Text = string.Format("{0:C2}", pedido.ValorLiquido);
+                localDepositoForm.dlbRecebimentoAnterior.Text = string.Format("{0:C2}", pedido.ValorAReceber);
+                localDepositoForm.dlbValorAcerto.Text = string.Format("{0:C2}", pedido.ValorAcerto);
+                localDepositoForm.dlbValorRestante.Text = string.Format("{0:C2}", pedido.ValorLiquido + pedido.ValorAReceber - pedido.ValorAcerto);
+
+                localDepositoForm.dlbTotalAPagar.Text = string.Format("{0:C2}", pedido.ValorLiquido + pedido.ValorAReceber);
+
+                string pedidostatus = "";
+
+                switch (pedido.Status)
+                {
+                    case "0":
+                        pedidostatus = "Aberto";
+                        break;
+                    case "1":
+                        pedidostatus = "Aguardando retorno";
+                        break;
+                    case "2":
+                        pedidostatus = "Retornado";
+                        break;
+                    case "3":
+                        pedidostatus = "Acerto realizado";
+                        break;
+                    case "4":
+                        pedidostatus = "Fechado";
+                        break;
+                }
+
+
+
+                localDepositoForm.dlbPedidoStatus.Text = pedidostatus;
+                CarregarListaLancamentoPedido();
+            }
+        }
+
+
+        public void PedidoDetalheLimpar()
+        {
+
+            cRetornoPedidoId = 0;
+            cRetornoPedidoCodigo = "";
+
+            localDepositoForm.grpPedidoDetalhe.Visible = false;
+
+            localDepositoForm.pnlLancPedTop.Visible = false;
+            localDepositoForm.pnlLancPedMain.Visible = false;
+
+            localDepositoForm.dlbCodigoPedido.Text = "";
+            localDepositoForm.dlbPedidoStatus.Text = "";
+            localDepositoForm.dlbPedidoVendedor.Text = "";
+
+            LancamentoPedidoLimpar();
+
+        }
+        /*
         public void CarregarListaPesquisaVendedor()
         {
 
@@ -650,12 +748,12 @@ namespace ConsignadoDeposito
 
         }
 
-
+        */
 
         public void LancamentoPedidoLimpar()
         {
             cRetornoPedidoId = 0;
-            localDepositoForm.grpPesqVendedorPedido.Visible = false;
+            localDepositoForm.grpPedidoDetalhe.Visible = false;
             localDepositoForm.pnlLancPedTop.Visible = false;
             localDepositoForm.pnlLancPedMain.Visible = false;
             localDepositoForm.grdLancPedido.DataSource = null;
@@ -830,7 +928,7 @@ namespace ConsignadoDeposito
         public void LancamentoPedidoReload()
         {
             CarregarPedidos();
-            VendedorExibir(cRetornoVendedorId);            
+            ExibirDetalhesPedido(cRetornoPedidoCodigo);            
         }
 
         ////////////////////////////////////////////

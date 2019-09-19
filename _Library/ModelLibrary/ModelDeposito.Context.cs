@@ -33,7 +33,6 @@ namespace ModelLibrary
         public virtual DbSet<Produto> Produto { get; set; }
         public virtual DbSet<ProdutoGrade> ProdutoGrade { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
-        public virtual DbSet<ProdutosCarga> ProdutosCarga { get; set; }
         public virtual DbSet<Representante> Representante { get; set; }
         public virtual DbSet<Totalizadores> Totalizadores { get; set; }
         public virtual DbSet<Cidade> Cidade { get; set; }
@@ -45,8 +44,6 @@ namespace ModelLibrary
         public virtual DbSet<PedidoItem> PedidoItem { get; set; }
         public virtual DbSet<Receber> Receber { get; set; }
         public virtual DbSet<ReceberBaixa> ReceberBaixa { get; set; }
-        public virtual DbSet<Suplemento> Suplemento { get; set; }
-        public virtual DbSet<SuplementoProduto> SuplementoProduto { get; set; }
         public virtual DbSet<Tamanho> Tamanho { get; set; }
         public virtual DbSet<Vendedor> Vendedor { get; set; }
     }

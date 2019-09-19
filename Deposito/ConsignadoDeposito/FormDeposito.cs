@@ -77,8 +77,11 @@ namespace ConsignadoDeposito
 
         public void CarregarDeposito()
         {
-            cbbCargaMesAno.Value = DateTime.Today;
-            cbbRetornoMesAno.Value = DateTime.Today;
+            DateTime date = DateTime.Today;
+            var firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
+
+            cbbCargaMesAno.Value = firstDayOfMonth;
+            cbbRetornoMesAno.Value = firstDayOfMonth;
             cCarga.CarregarListaCarga();
             cCarga.CarregarListaRepresentante();
             cRetorno.CarregarListaRetorno();
@@ -746,12 +749,16 @@ namespace ConsignadoDeposito
 
         private void txtLancPedCodigoBarras_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
+            if (txtLancPedCodigoBarras.Text != "")
             {
-                e.SuppressKeyPress = true;
-                txtLancPedCodigoBarras_Leave(sender, e);
+                if (e.KeyData == Keys.Enter)
+                {
+                    e.SuppressKeyPress = true;
+                    txtLancPedCodigoBarras_Leave(sender, e);
 
+                }
             }
+            
         }
 
         private void txtLancPedCodigoBarras_Leave(object sender, EventArgs e)
@@ -760,11 +767,7 @@ namespace ConsignadoDeposito
             {
                 cRetorno.LancamentoPedidoPesquisar(txtLancPedCodigoBarras.Text);
 
-            } else
-            {
-                MessageBox.Show("Informe o Código de Barras do Produto");
-            }
-            
+            } 
         }
 
         private void btnLancPedConfirmar_Click(object sender, EventArgs e)
@@ -777,15 +780,6 @@ namespace ConsignadoDeposito
             cRetorno.LancamentoPedidoItemLimpar();
         }
 
-        private void btnPesqVendedorOK_Click(object sender, EventArgs e)
-        {
-            cRetorno.VendedorPesquisar();
-        }
-
-        private void btnPesqVendedorLimpar_Click(object sender, EventArgs e)
-        {
-            cRetorno.VendedorLimpar();
-        }
 
         private void grdLancPedido_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -824,9 +818,12 @@ namespace ConsignadoDeposito
 
         private void grdRetornoPedido_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            cbbPesqVendedor.Text = grdRetornoPedido.CurrentRow.Cells["Nome"].Value.ToString();
-            tbcRetorno.SelectedTab = tabRetornoLancPedidos;
+            //cbbPesqVendedor.Text = grdRetornoPedido.CurrentRow.Cells["Nome"].Value.ToString();
+            //tbcRetorno.SelectedTab = tabRetornoLancPedidos;
             //cRetorno.VendedorExibir(Convert.ToInt64(grdRetornoPedido.CurrentRow.Cells["VendedorId"].Value));
+
+            tbcRetorno.SelectedTab = tabRetornoPedidoDetalhe;
+            cRetorno.ExibirDetalhesPedido(grdRetornoPedido.CurrentRow.Cells["CodigoPedido"].Value.ToString());
         }
 
         private void lblRetornoResumoSugestao_Click(object sender, EventArgs e)
@@ -834,10 +831,6 @@ namespace ConsignadoDeposito
 
         }
 
-        private void cbbPesqVendedor_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cRetorno.PesquisaVendedor_Change(sender, e);
-        }
 
         private void grdLancPedido_KeyUp(object sender, KeyEventArgs e)
         {
@@ -846,6 +839,15 @@ namespace ConsignadoDeposito
 
         private void btnRelatorioCarga_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void btnRetornoRefazer_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Deseja realmente refazer o retorno? ATENÇÃO: Todas as informações de retorno registradas serão perdidas!", "Refazer Retorno", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                cRetorno.RefazerRetorno();
+            }
             
         }
 
