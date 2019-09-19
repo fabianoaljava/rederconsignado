@@ -821,9 +821,10 @@ namespace ConsignadoDeposito
             //cbbPesqVendedor.Text = grdRetornoPedido.CurrentRow.Cells["Nome"].Value.ToString();
             //tbcRetorno.SelectedTab = tabRetornoLancPedidos;
             //cRetorno.VendedorExibir(Convert.ToInt64(grdRetornoPedido.CurrentRow.Cells["VendedorId"].Value));
-
+            Cursor.Current = Cursors.WaitCursor;
             tbcRetorno.SelectedTab = tabRetornoPedidoDetalhe;
             cRetorno.ExibirDetalhesPedido(grdRetornoPedido.CurrentRow.Cells["CodigoPedido"].Value.ToString());
+            Cursor.Current = Cursors.Default;
         }
 
         private void lblRetornoResumoSugestao_Click(object sender, EventArgs e)
@@ -849,6 +850,15 @@ namespace ConsignadoDeposito
                 cRetorno.RefazerRetorno();
             }
             
+        }
+
+        private void btnNovoPedido_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            Forms.FormNovoPedido formNovoPedido = new Forms.FormNovoPedido(this);
+            formNovoPedido.Show();
+            Cursor.Current = Cursors.Default;
+
         }
 
 
