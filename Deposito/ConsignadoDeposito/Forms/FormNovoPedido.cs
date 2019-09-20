@@ -16,13 +16,13 @@ namespace ConsignadoDeposito.Forms
         public FormDeposito localDepositoForm = null;
 
         public Retorno cRetorno;
+        public int cVendedorId;
 
         public FormNovoPedido(FormDeposito formDeposito)
         {
             InitializeComponent();
 
             localDepositoForm = formDeposito;
-
 
             cRetorno = new Retorno(formDeposito);
         }
@@ -32,7 +32,7 @@ namespace ConsignadoDeposito.Forms
         public void CarregarListaVendedor()
         {
 
-            cbbVendedor.DataSource = ModelLibrary.MetodosDeposito.ObterListaVendedor();
+            cbbVendedor.DataSource = ModelLibrary.MetodosDeposito.ObterListaVendedor();            
             cbbVendedor.DisplayMember = "Nome";
             cbbVendedor.ValueMember = "Id";
             cbbVendedor.Invalidate();
@@ -49,15 +49,61 @@ namespace ConsignadoDeposito.Forms
             if (cbbVendedor.SelectedIndex >= 0)
             {
 
+                btnIncluir.Enabled = false;
+                cVendedorId = 0;
+                txtResultado.Text = "Selecione o vendedor...";
+
                 ModelLibrary.Vendedor vendedor = (ModelLibrary.Vendedor)cbbVendedor.SelectedItem;
 
+                if (vendedor != null)
+                {
+
+                    
 
 
-                //verificar se vendedor possui pedidos fechados 
+                    //verificar se vendedor possui pedidos fechados 
+
+                    // negativado
+                    if (vendedor.Status == "N")
+                    {
+                        txtResultado.Text = "Este vendedor está negativado";
+                    }
+                    else // pedidos anteriores em aberto
+                    {
+
+                        ModelLibrary.Pedido pedidosanteriores = ModelLibrary.MetodosDeposito.ObterPedidosAbertoVendedor(vendedor.Id);
+
+                        if (pedidosanteriores != null)
+                        {
+                            txtResultado.Text = "O vendedor possui pedido anterior em aberto no valor de " + pedidosanteriores.ValorLiquido.ToString() + " lançado em " + pedidosanteriores.DataLancamento.ToString() + ". Código Pedido: " + pedidosanteriores.CodigoPedido + ". Não será possível incluir um novo pedido para este vendedor";
+                        } else
+                        {
+
+                            Nullable<Double> contasareceber = ModelLibrary.MetodosDeposito.ObterValorAReceberVendedor(vendedor.Id);
+
+                            if (contasareceber != null)
+                            {
+
+                                txtResultado.Text = "O vendedor possui contas a receber no valor de " + contasareceber.ToString() + ". Não será possível incluir um novo pedido para este vendedor.";
+
+                            } else
+                            {
+                                txtResultado.Text = "O vendedor está OK. Clique em Incluir.";
+                                cVendedorId = vendedor.Id;
+                                btnIncluir.Enabled = true;
+                            }
 
 
-                txtResultado.Text = (vendedor != null) ? vendedor.CpfCnpj : "Não encontrado";
-                
+                        }
+
+
+                    }
+                    
+                    
+
+
+
+                } 
 
 
             }
@@ -66,7 +112,14 @@ namespace ConsignadoDeposito.Forms
 
         private void btnIncluir_Click(object sender, EventArgs e)
         {
-            //cRetorno.ExibirDetalhesPedido();
+
+            string vCodigoPedido = ModelLibrary.MetodosDeposito.InserirPedido(cVendedorId, localDepositoForm.cRetorno.cRetornoId);
+            localDepositoForm.tbcRetorno.SelectedTab = localDepositoForm.tabRetornoPedidoDetalhe;
+            localDepositoForm.cRetorno.ExibirDetalhesPedido(vCodigoPedido);
+            localDepositoForm.cRetorno.CarregarPedidos();
+            MessageBox.Show("Pedido Incluído com Sucesso");
+            this.Hide();
+
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -77,6 +130,7 @@ namespace ConsignadoDeposito.Forms
         private void FormNovoPedido_Load(object sender, EventArgs e)
         {
             CarregarListaVendedor();
+
         }
     }
 }

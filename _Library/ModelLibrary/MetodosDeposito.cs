@@ -286,7 +286,7 @@ namespace ModelLibrary
 
 
 
-                string query = "UPDATE Carga SET Retorno = 0 WHERE Id = @p0";
+                string query = "UPDATE Carga SET Status = 'R', DataConferencia = null, DataFinalizacao = null WHERE Id = @p0";
 
                 deposito.Database.ExecuteSqlCommand(query, pCargaId);
 
@@ -603,6 +603,78 @@ namespace ModelLibrary
         }
 
 
+        public static string InserirPedido(int pVendedorId, int pCargaId)
+        {
+
+            Console.WriteLine("Inserindo Pedido");
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                var maxPedido = deposito.Pedido.OrderByDescending(i => i.Id).FirstOrDefault();
+
+                int newId = maxPedido == null ? 1 : maxPedido.Id + 1;
+
+                var carga = deposito.Carga.FirstOrDefault();
+
+
+                var pedidoanterior = deposito.Pedido.FirstOrDefault(pd => pd.VendedorId == pVendedorId);
+
+
+                /***********
+                 * 
+                 * A FaixaComissao será implementada manualmente, via código por enquanto. 
+                 * Durante a atividade (Trello) Configuração - será implementado via banco de dados
+                 * Sugestão: Criar uma tabela especifica para comissao com adição de N faixas.
+                 * 
+                */
+
+
+
+                string vCodigoPedido = "";
+
+                vCodigoPedido += carga.PracaId.ToString().PadLeft(3, '0');
+                vCodigoPedido += carga.RepresentanteId.ToString().PadLeft(3, '0');
+                vCodigoPedido += carga.Mes.ToString().PadLeft(2, '0');
+                vCodigoPedido += carga.Ano.ToString().Substring(2, 2);
+                vCodigoPedido += pVendedorId.ToString().PadLeft(5, '0');
+                vCodigoPedido += newId.ToString().PadLeft(7, '0');
+
+
+                var novopedido = new Pedido
+                {
+                    VendedorId = pVendedorId,
+                    CargaId = pCargaId,
+                    CargaOriginal = pCargaId,
+                    RepresentanteId = carga.RepresentanteId,
+                    CodigoPedido = vCodigoPedido,
+                    DataLancamento = DateTime.Now,
+                    DataPrevisaoRetorno = DateTime.Now.AddDays(50),
+                    ValorPedido = 0,
+                    ValorCompra = 0,
+                    PercentualCompra = 0,
+                    FaixaComissao = 0,
+                    PercentualFaixa = 0,
+                    ValorComissao = 0,
+                    ValorLiquido = 0,
+                    ValorAReceber = pedidoanterior == null ? 0 : pedidoanterior.ValorLiquido - pedidoanterior.ValorAcerto,
+                    ValorAcerto = null,
+                    QuantidadeRemarcado = 0,
+                    Remarcado = 0,
+                    Status = "0"
+                };
+
+                deposito.Pedido.Add(novopedido);
+
+
+                deposito.SaveChanges();
+
+                return vCodigoPedido;
+
+
+            }
+        }
+
         public static void AtualizarPedido(long pPedidoId)
         {
 
@@ -656,6 +728,16 @@ namespace ModelLibrary
             }
         }
 
+
+        public static Pedido ObterPedidosAbertoVendedor(long pVendedorId)
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+                var pedidos = deposito.Pedido.OrderByDescending(pd => pd.Id).Where(pd => pd.VendedorId == pVendedorId && (pd.Status == "0" || pd.Status == "1" || pd.Status == "2"));
+                return pedidos.FirstOrDefault();
+            }
+
+        }
 
         public static List<ListaPedidosRetorno> ObterListaPedidosRetorno(long pCargaId, bool pAtual = true)
         {
@@ -858,6 +940,7 @@ namespace ModelLibrary
 
         }
 
+
         
 
         public static void SalvarAReceberBaixa(int pReceberId, int pReceberBaixaId, double pValor, string pData)
@@ -917,7 +1000,7 @@ namespace ModelLibrary
         }
 
 
-        public static void IncluirReceber(int pCargaId, int pVendedorId, double pValor, DateTime pDataVencimento)
+        public static void InserirReceber(int pCargaId, int pVendedorId, double pValor, DateTime pDataVencimento)
         {
             using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
@@ -956,6 +1039,32 @@ namespace ModelLibrary
             }
         }
 
+
+
+        public static Nullable<Double> ObterValorAReceberVendedor(long pVendedorId)
+        {
+
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+
+                string query = @"SELECT Sum(ValorAReceber) as ValorAReceber
+	                                FROM Receber 
+		                                INNER JOIN Vendedor ON Receber.VendedorId = Vendedor.Id
+		                                LEFT JOIN ReceberBaixa ON Receber.Id = ReceberBaixa.ReceberId
+		                                WHERE (Receber.VendedorId = @p0) 
+			                                AND Receber.DataPagamento IS NULL 
+			                                AND ValorNF > 0";
+
+                var result = deposito.Database.SqlQuery<Nullable<Double>>(query, pVendedorId);
+
+                return result.FirstOrDefault();
+
+            }
+
+        }
+
         public static List<Vendedor> ObterListaVendedor(long pCargaId = 0)
         {
             using (DepositoDBEntities deposito = new DepositoDBEntities())
@@ -965,7 +1074,7 @@ namespace ModelLibrary
 
                 if (pCargaId == 0) {
 
-                    result = deposito.Vendedor.ToList<Vendedor>();
+                    result = deposito.Vendedor.OrderBy(vd => vd.Nome).ToList<Vendedor>();
 
                 } else
                 {
@@ -992,7 +1101,7 @@ namespace ModelLibrary
                                     FROM Receber 
                                     INNER JOIN Carga ON Receber.CargaId = Carga.Id
                                     WHERE PracaId = @p1
-                                    )";
+                                    ) ORDER BY Nome";
 
 
                         result = deposito.Database.SqlQuery<Vendedor>(query, carga.RepresentanteId, carga.PracaId, carga.Mes.ToString() + carga.Ano.ToString()).ToList<Vendedor>();
@@ -1037,17 +1146,7 @@ namespace ModelLibrary
 
             }
         }
-
-
-        public static Pedido ObterVendedorPedido(long pVendedorId, long pCargaId)
-        {
-            using (DepositoDBEntities deposito = new DepositoDBEntities())
-            {
-                var pedido = deposito.Pedido.OrderByDescending(i => i.Id).FirstOrDefault(p => p.VendedorId == pVendedorId && p.CargaId == pCargaId);
-                return pedido;
-            }
-
-        }
+        
 
         public static void NegativarVendedor(long pVendedorId)
         {

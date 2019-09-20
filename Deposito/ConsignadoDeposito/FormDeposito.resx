@@ -120,6 +120,33 @@
   <metadata name="notifyIconDeposito.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>325, 17</value>
   </metadata>
+  <data name="lblHome.Text" xml:space="preserve">
+    <value>Gráficos, Relatórios, Destaques
+
+Sugestão:
+
+Cargas Abertas / Em Andamento / Conferidas / Fechadas 
+Total de Produtos Consignados
+Total de Produtos a Retornar
+Total de Produtos Retornados
+Total de Produtos Vendidos
+Total de Pedidos em Aberto
+Total de Pedidos Fechados
+Vendedores não encontrados
+Valor Total Consignado
+Total a Receber
+Total Recebido
+</value>
+  </data>
+  <metadata name="ctmCargaProduto.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="ctmRetornoProduto.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>165, 17</value>
+  </metadata>
+  <metadata name="colorDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>480, 17</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="picUser.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2147,33 +2174,6 @@
         ABhNG1J2/mKrAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="lblHome.Text" xml:space="preserve">
-    <value>Gráficos, Relatórios, Destaques
-
-Sugestão:
-
-Cargas Abertas / Em Andamento / Conferidas / Fechadas 
-Total de Produtos Consignados
-Total de Produtos a Retornar
-Total de Produtos Retornados
-Total de Produtos Vendidos
-Total de Pedidos em Aberto
-Total de Pedidos Fechados
-Vendedores não encontrados
-Valor Total Consignado
-Total a Receber
-Total Recebido
-</value>
-  </data>
-  <metadata name="ctmCargaProduto.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="ctmRetornoProduto.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>165, 17</value>
-  </metadata>
-  <metadata name="colorDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>480, 17</value>
-  </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAACMuAAAjLgAAAAAAAAAA

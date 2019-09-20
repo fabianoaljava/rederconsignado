@@ -179,10 +179,13 @@ namespace ConsignadoDeposito
                         /// Habilita Acerto
                         /// Habilita Finalizar Acerto
                         localDepositoForm.pnlRetornoProduto.Enabled = true;
-                        localDepositoForm.btnConferenciaProdutos.Enabled = true;
+                        localDepositoForm.pnlRetornoPedidoTop.Enabled = true;
                         localDepositoForm.pnlLancPedTop.Enabled = true;
                         localDepositoForm.pnlContasAReceberTop.Enabled = true;
-                        localDepositoForm.btnFinalizarAcerto.Enabled = true;
+
+                        localDepositoForm.btnAcoes.Text = "Finalizar \n Conferencia \n de Produtos";
+                        localDepositoForm.btnAcoes.Enabled = true;
+
                     }
                     else if (carga.Status == "C") {
                         /// Desabilita Retorno de Produtos
@@ -191,10 +194,11 @@ namespace ConsignadoDeposito
                         /// Habilita Acerto
                         /// Habilita Finalizar Acerto
                         localDepositoForm.pnlRetornoProduto.Enabled = false;
-                        localDepositoForm.btnConferenciaProdutos.Enabled = false;
+                        localDepositoForm.pnlRetornoPedidoTop.Enabled = true;
                         localDepositoForm.pnlLancPedTop.Enabled = true;
                         localDepositoForm.pnlContasAReceberTop.Enabled = true;
-                        localDepositoForm.btnFinalizarAcerto.Enabled = true;
+                        localDepositoForm.btnAcoes.Text = "Finalizar \n Acerto";
+                        localDepositoForm.btnAcoes.Enabled = true;
                     }
                     else
                     {
@@ -204,10 +208,13 @@ namespace ConsignadoDeposito
                         /// Desabilita Acerto
                         /// Desabilita Finalizar Acerto
                         localDepositoForm.pnlRetornoProduto.Enabled = false;
-                        localDepositoForm.btnConferenciaProdutos.Enabled = false;
+                        localDepositoForm.pnlRetornoPedidoTop.Enabled = false;
                         localDepositoForm.pnlLancPedTop.Enabled = false;
                         localDepositoForm.pnlContasAReceberTop.Enabled = false;
-                        localDepositoForm.btnFinalizarAcerto.Enabled = false;
+
+
+                        localDepositoForm.btnAcoes.Text = "Refazer \n Retorno";
+                        localDepositoForm.btnAcoes.Enabled = true;
                     }
 
 
@@ -1068,6 +1075,7 @@ namespace ConsignadoDeposito
 
             if (localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["ValorPago"].Value == null) {
 
+                localDepositoForm.txtRetornoRecAReceber.Text = localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["ValorAReceber"].Value.ToString();
                 localDepositoForm.txtRetornoRecValor.Text = localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["ValorAReceber"].Value.ToString();
                 localDepositoForm.txtRetornoRecData.Text = DateTime.Now.ToString();
 
@@ -1078,6 +1086,7 @@ namespace ConsignadoDeposito
             } else
             {
 
+                localDepositoForm.txtRetornoRecAReceber.Text = localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["ValorAReceber"].Value.ToString();
                 localDepositoForm.txtRetornoRecValor.Text = localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["ValorPago"].Value.ToString();
                 localDepositoForm.txtRetornoRecData.Text = localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["DataPagamento"].Value.ToString();
                 cRetornoReceberBaixaId = Convert.ToInt32(localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["ReceberBaixaId"].Value);
@@ -1096,11 +1105,32 @@ namespace ConsignadoDeposito
         public void ConfirmarAReceber()
         {
 
-            ModelLibrary.MetodosDeposito.SalvarAReceberBaixa(cRetornoReceberId, cRetornoReceberBaixaId, Convert.ToDouble(localDepositoForm.txtRetornoRecValor.Text), localDepositoForm.txtRetornoRecData.Text);
+            Double vValor, vValorAReceber;
+            try
+            {
+                vValor = Convert.ToDouble(localDepositoForm.txtRetornoRecValor.Text);
+                vValorAReceber = Convert.ToDouble(localDepositoForm.txtRetornoRecAReceber.Text);
+            } catch
+            {
+                vValor = 0;
+                vValorAReceber = 0;
+            }
 
-            CarregarContasAReceber();
 
-            LimparAReceber();
+            if (vValor > vValorAReceber)
+            {
+                MessageBox.Show("O valor recebido informado está acima do valor a receber. Verifique os dados digitados.");
+                localDepositoForm.txtRetornoRecValor.Focus();
+            } else
+            {
+                ModelLibrary.MetodosDeposito.SalvarAReceberBaixa(cRetornoReceberId, cRetornoReceberBaixaId, Convert.ToDouble(localDepositoForm.txtRetornoRecValor.Text), localDepositoForm.txtRetornoRecData.Text);
+
+                CarregarContasAReceber();
+
+                LimparAReceber();
+            }
+
+
 
         }
 

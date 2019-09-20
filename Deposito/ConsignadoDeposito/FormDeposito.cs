@@ -788,19 +788,13 @@ namespace ConsignadoDeposito
 
         private void btnFinalizarAcerto_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Deseja Realmente finalizar o Acerto? ATENÇÃO: Não será possível retornar produtos ou pedidos após confirmar essa ação.", "Finalizar Acerto", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                cRetorno.FinalizarAcerto();
-            }
+
         }
 
         private void btnConferenciaProdutos_Click(object sender, EventArgs e)
         {
 
-            if (MessageBox.Show("Deseja Realmente finalizar a Conferência de Produtos? ATENÇÃO: Não será possível retornar produtos após confirmar essa ação.", "Finalizar Conferência de Produtos", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                cRetorno.FinalizarRetorno();
-            }
+
             
         }
 
@@ -845,10 +839,7 @@ namespace ConsignadoDeposito
 
         private void btnRetornoRefazer_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Deseja realmente refazer o retorno? ATENÇÃO: Todas as informações de retorno registradas serão perdidas!", "Refazer Retorno", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-            {
-                cRetorno.RefazerRetorno();
-            }
+
             
         }
 
@@ -859,6 +850,31 @@ namespace ConsignadoDeposito
             formNovoPedido.Show();
             Cursor.Current = Cursors.Default;
 
+        }
+
+        private void btnAcoes_Click(object sender, EventArgs e)
+        {
+            switch (btnAcoes.Text)
+            {
+                case "Finalizar \n Conferencia \n de Produtos":
+                    if (MessageBox.Show("Deseja Realmente finalizar a Conferência de Produtos? ATENÇÃO: Não será possível retornar produtos após confirmar essa ação.", "Finalizar Conferência de Produtos", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        cRetorno.FinalizarRetorno();
+                    }
+                    break;
+                case "Finalizar \n Acerto":
+                    if (MessageBox.Show("Deseja Realmente finalizar o Acerto? ATENÇÃO: Não será possível retornar produtos ou pedidos após confirmar essa ação.", "Finalizar Acerto", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        cRetorno.FinalizarAcerto();
+                    }
+                    break;
+                case "Refazer \n Retorno":
+                    if (MessageBox.Show("Deseja realmente refazer o retorno? ATENÇÃO: Todas as informações de retorno registradas serão perdidas!", "Refazer Retorno", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                    {
+                        cRetorno.RefazerRetorno();
+                    }
+                    break;
+            }
         }
 
 
