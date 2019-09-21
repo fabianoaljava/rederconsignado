@@ -1288,7 +1288,7 @@ namespace ModelLibrary
 
 
 
-                string query = @"SELECT RepCarga.Id, sum(RepCargaProduto.Quantidade) QtdProdutos, sum(ValorSaida) TotalProdutos 
+                string query = @"SELECT RepCarga.Id, sum(RepCargaProduto.Quantidade) QtdProdutos, sum(RepCargaProduto.Quantidade) * sum(ValorSaida) TotalProdutos 
                                     FROM RepCarga 
                                     INNER JOIN RepCargaProduto On RepCargaProduto.CargaId = RepCarga.Id 
                                     INNER JOIN RepProdutoGrade ON ProdutoGradeId = RepProdutoGrade.Id

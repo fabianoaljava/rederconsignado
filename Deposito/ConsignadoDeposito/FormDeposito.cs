@@ -877,6 +877,14 @@ namespace ConsignadoDeposito
             }
         }
 
+        private void menuCadastroProduto_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            Forms.FormProduto formProduto = new Forms.FormProduto(this);
+            formProduto.Show();
+            Cursor.Current = Cursors.Default;
+        }
+
 
 
 

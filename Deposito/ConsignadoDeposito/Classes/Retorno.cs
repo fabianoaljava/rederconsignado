@@ -76,6 +76,22 @@ namespace ConsignadoDeposito
             localDepositoForm.txtRetornoProduto.Text = "";
             localDepositoForm.txtRetornoQuantidade.Text = "";
             localDepositoForm.btnRetornoConfirmar.Enabled = false;
+
+
+            localDepositoForm.dlbRetornoDataAbertura.Text = "-";
+            localDepositoForm.dlbRetornoDataExportacao.Text = "-";
+            localDepositoForm.dlbRetornoDataRetorno.Text = "-";
+            localDepositoForm.dlbRetornoDataConferencia.Text = "-";
+            localDepositoForm.dlbRetornoDataFinalizacao.Text = "-";
+
+
+
+
+            localDepositoForm.dlbRetornoQtdProdutos.Text = "0";
+            localDepositoForm.dlbRetornoTotalProdutos.Text = "0.00";
+
+
+            localDepositoForm.dlbRetornoTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Medium;
         }
 
         public void ResetarVariaveis()
@@ -136,9 +152,19 @@ namespace ConsignadoDeposito
 
                     var totalizadores = ModelLibrary.MetodosDeposito.ObterTotalizadores(cRetornoId);
 
-                    localDepositoForm.dlbRetornoQtdProdutos.Text = totalizadores[0].ToString();
-                    localDepositoForm.dlbRetornoTotalProdutos.Text = totalizadores[1].ToString("C");
-                    
+                    localDepositoForm.dlbRetornoQtdProdutos.Text = totalizadores.QtdProdutos.ToString();
+                    localDepositoForm.dlbRetornoTotalProdutos.Text = String.Format("{0:C2}", totalizadores.TotalProdutos);
+
+
+                    if (totalizadores.TotalProdutos > 999999)
+                    {
+                        localDepositoForm.dlbRetornoTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Small;
+                    }
+                    else
+                    {
+                        localDepositoForm.dlbRetornoTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Medium;
+                    }
+
                     localDepositoForm.dlbRetornoDataAbertura.Text = carga.DataAbertura.HasValue ? carga.DataAbertura.Value.ToShortDateString() : "-";
                     localDepositoForm.dlbRetornoDataExportacao.Text = carga.DataExportacao.HasValue ? carga.DataExportacao.Value.ToShortDateString() : "-";
                     localDepositoForm.dlbRetornoDataRetorno.Text = carga.DataRetorno.HasValue ? carga.DataRetorno.Value.ToShortDateString() : "-";
@@ -146,25 +172,6 @@ namespace ConsignadoDeposito
                     localDepositoForm.dlbRetornoDataFinalizacao.Text = carga.DataFinalizacao.HasValue ? carga.DataFinalizacao.Value.ToShortDateString() : "-";
 
                     
-
-                    var viagemanterior = ModelLibrary.MetodosDeposito.ObterCargaAnterior(representanteId, pracaId, carga.DataAbertura.Value);
-
-                    if (viagemanterior != null)
-                    {
-
-                        /*
-                         * Carregar Dados da Viagem ANterior 
-                         */
-
-                    }
-                    else
-                    {
-
-                        /*
-                         * Exibir informações como ND
-                         */
-
-                    }
 
 
                     CarregarFormulario();

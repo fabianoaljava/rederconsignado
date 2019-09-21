@@ -1166,35 +1166,32 @@ namespace ModelLibrary
 
 
 
-        public static decimal[] ObterTotalizadores(int pCargaId)
+        public static ListaTotalizadoresDeposito ObterTotalizadores(int pCargaId)
         {
-
-
-            var ret = new decimal[4];
 
 
             using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
+                ListaTotalizadoresDeposito vTotalizador = new ListaTotalizadoresDeposito();
 
 
-                var result = (from tt in deposito.Totalizadores
-                              where tt.Id == pCargaId
-                              select tt).FirstOrDefault<Totalizadores>();
 
-                if (result != null)
-                {
-                    ret[0] = Convert.ToDecimal(result.QtdProdutos);
-                    ret[1] = Convert.ToDecimal(result.TotalProdutos);
-                } else
-                {
-                    ret[0] = 0;
-                    ret[1] = 0;
-                }
+                string query = @"SELECT Carga.Id, sum(CargaProduto.Quantidade) QtdProdutos, sum(CargaProduto.Quantidade)*sum(ValorSaida) TotalProdutos  
+                                    FROM Carga 
+                                    INNER JOIN CargaProduto On CargaProduto.CargaId = Carga.Id 
+                                    INNER JOIN ProdutoGrade ON ProdutoGradeId = ProdutoGrade.Id 
+                                 WHERE Carga.Id = @p0
+                                 GROUP BY Carga.Id";
 
 
-                
-                return ret;
+
+                var totalizador = deposito.Database.SqlQuery<ListaTotalizadoresDeposito>(query, pCargaId).FirstOrDefault();
+
+                vTotalizador.QtdProdutos = totalizador.QtdProdutos;
+                vTotalizador.TotalProdutos = totalizador.TotalProdutos;
+
+                return vTotalizador;
 
 
             }

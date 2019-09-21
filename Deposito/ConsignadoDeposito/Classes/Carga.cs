@@ -68,6 +68,28 @@ namespace ConsignadoDeposito
             localDepositoForm.txtCargaProduto.Text = "";
             localDepositoForm.txtCargaQuantidade.Text = "";
             localDepositoForm.btnCargaConfirmar.Enabled = false;
+
+
+            localDepositoForm.dlbCargaDataAbertura.Text = "-";
+            localDepositoForm.dlbCargaDataExportacao.Text = "-";
+            localDepositoForm.dlbCargaDataRetorno.Text = "-";
+            localDepositoForm.dlbCargaDataConferencia.Text = "-";
+            localDepositoForm.dlbCargaDataFinalizacao.Text = "-";
+
+
+
+            localDepositoForm.dlbCargaVADataAbertura.Text = "-";
+            localDepositoForm.dlbCargaVADataExportacao.Text = "-";
+            localDepositoForm.dlbCargaVADataRetorno.Text = "-";
+            localDepositoForm.dlbCargaVADataConferencia.Text = "-";
+            localDepositoForm.dlbCargaVADataFinalizacao.Text = "-";
+
+
+            localDepositoForm.dlbCargaQtdProdutos.Text = "0";
+            localDepositoForm.dlbCargaTotalProdutos.Text = "0.00";
+
+
+            localDepositoForm.dlbCargaTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Medium;
         }
 
         public void ResetarVariaveis()
@@ -150,6 +172,8 @@ namespace ConsignadoDeposito
 
                     }
 
+                    CargaTotalizadores();
+
 
 
                     /// se status da carga = A
@@ -221,8 +245,17 @@ namespace ConsignadoDeposito
 
             var totalizadores = ModelLibrary.MetodosDeposito.ObterTotalizadores(cCargaId);
 
-            localDepositoForm.dlbCargaQtdProdutos.Text = totalizadores[0].ToString();
-            localDepositoForm.dlbCargaTotalProdutos.Text = totalizadores[1].ToString("C");
+            localDepositoForm.dlbCargaQtdProdutos.Text = totalizadores.QtdProdutos.ToString();
+            localDepositoForm.dlbCargaTotalProdutos.Text = String.Format("{0:C}", totalizadores.TotalProdutos);
+
+            if (totalizadores.TotalProdutos > 999999)
+            {
+                localDepositoForm.dlbCargaTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Small;
+            } else
+            {
+                localDepositoForm.dlbCargaTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Medium;
+            }
+
 
 
         }

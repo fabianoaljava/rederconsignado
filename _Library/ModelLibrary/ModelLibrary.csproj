@@ -97,6 +97,7 @@
     <Compile Include="LIstaRepVendedorPedido.cs" />
     <Compile Include="ListaRepVendedorHome.cs" />
     <Compile Include="ListaTotalizadores.cs" />
+    <Compile Include="ListaTotalizadoresDeposito.cs" />
     <Compile Include="MetodosDeposito.cs" />
     <Compile Include="MetodosRepresentante.cs" />
     <Compile Include="ModelDeposito.Context.cs">
