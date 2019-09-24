@@ -73,6 +73,7 @@ namespace ModelLibrary
         }
 
 
+               
         public static List<Praca> ObterListaPracas()
         {
             using (DepositoDBEntities deposito = new DepositoDBEntities())
@@ -354,6 +355,15 @@ namespace ModelLibrary
 
                 return produtocarga;
 
+            }
+        }
+
+
+        public static List<Produto> ObterListaProdutos()
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+                return deposito.Produto.ToList<Produto>();
             }
         }
 
@@ -1160,6 +1170,41 @@ namespace ModelLibrary
                 }
             }
 
+        }
+
+
+
+        public static List<Categoria> ObterListaCategorias()
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+                return deposito.Categoria.ToList<Categoria>();
+            }
+        }
+
+        public static List<Fornecedor> ObterListaFornecedores()
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+                return deposito.Fornecedor.ToList<Fornecedor>();
+            }
+        }
+
+        public static List<Cor> ObterListaCores()
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+                return deposito.Cor.ToList<Cor>();
+            }
+        }
+
+
+        public static List<Tamanho> ObterListaTamanhos()
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+                return deposito.Tamanho.ToList<Tamanho>();
+            }
         }
 
 
