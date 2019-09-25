@@ -28,7 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlProduto = new MetroFramework.Controls.MetroPanel();
+            this.grpProduto = new System.Windows.Forms.GroupBox();
+            this.btnCancelarProduto = new MetroFramework.Controls.MetroButton();
+            this.btnExcluirProduto = new MetroFramework.Controls.MetroButton();
+            this.btnSalvarProduto = new MetroFramework.Controls.MetroButton();
+            this.lblFornecedor = new MetroFramework.Controls.MetroLabel();
+            this.cbbFornecedor = new MetroFramework.Controls.MetroComboBox();
+            this.lblCategoria = new MetroFramework.Controls.MetroLabel();
+            this.cbbCategoria = new MetroFramework.Controls.MetroComboBox();
+            this.lblDigitoVerificador = new MetroFramework.Controls.MetroLabel();
+            this.lblCodigoBarras = new MetroFramework.Controls.MetroLabel();
+            this.txtDigitoVerificador = new MetroFramework.Controls.MetroTextBox();
+            this.txtCodigoBarras = new MetroFramework.Controls.MetroTextBox();
+            this.lblUnidade = new MetroFramework.Controls.MetroLabel();
+            this.txtUnidade = new MetroFramework.Controls.MetroTextBox();
+            this.txtNomeProduto = new MetroFramework.Controls.MetroTextBox();
+            this.lblNomeProduto = new MetroFramework.Controls.MetroLabel();
+            this.grpPesquisa = new System.Windows.Forms.GroupBox();
+            this.txtPesquisaCodProduto = new MetroFramework.Controls.MetroTextBox();
+            this.cbbPesquisaProduto = new MetroFramework.Controls.MetroComboBox();
+            this.btnNovoProduto = new MetroFramework.Controls.MetroButton();
             this.grpAdicionarGrade = new System.Windows.Forms.GroupBox();
             this.txtValorCusto = new MetroFramework.Controls.MetroTextBox();
             this.txtGradeDV = new MetroFramework.Controls.MetroTextBox();
@@ -39,35 +62,17 @@
             this.btnGradeConfirmar = new MetroFramework.Controls.MetroButton();
             this.lblAdicionarGrade = new MetroFramework.Controls.MetroLabel();
             this.txtGradeCodigoBarras = new MetroFramework.Controls.MetroTextBox();
-            this.grpProduto = new System.Windows.Forms.GroupBox();
-            this.grpPesquisa = new System.Windows.Forms.GroupBox();
-            this.txtPesquisaCodProduto = new MetroFramework.Controls.MetroTextBox();
-            this.cbbPesquisaProduto = new MetroFramework.Controls.MetroComboBox();
-            this.btnPesquisaOK = new MetroFramework.Controls.MetroButton();
-            this.btnNovoProduto = new MetroFramework.Controls.MetroButton();
             this.pnlProdutoItem = new MetroFramework.Controls.MetroPanel();
             this.pblProdutoBottom = new MetroFramework.Controls.MetroPanel();
             this.pnlProdutoGrade = new MetroFramework.Controls.MetroPanel();
-            this.txtNomeProduto = new MetroFramework.Controls.MetroTextBox();
-            this.lblNomeProduto = new MetroFramework.Controls.MetroLabel();
-            this.txtUnidade = new MetroFramework.Controls.MetroTextBox();
-            this.lblUnidade = new MetroFramework.Controls.MetroLabel();
-            this.txtDigitoVerificador = new MetroFramework.Controls.MetroTextBox();
-            this.txtCodigoBarras = new MetroFramework.Controls.MetroTextBox();
-            this.lblCodigoBarras = new MetroFramework.Controls.MetroLabel();
-            this.lblDigitoVerificador = new MetroFramework.Controls.MetroLabel();
-            this.cbbCategoria = new MetroFramework.Controls.MetroComboBox();
-            this.lblCategoria = new MetroFramework.Controls.MetroLabel();
-            this.lblFornecedor = new MetroFramework.Controls.MetroLabel();
-            this.cbbFornecedor = new MetroFramework.Controls.MetroComboBox();
-            this.btnSalvarProduto = new MetroFramework.Controls.MetroButton();
-            this.btnExcluirProduto = new MetroFramework.Controls.MetroButton();
-            this.btnCancelarProduto = new MetroFramework.Controls.MetroButton();
+            this.grdProdutoGrade = new MetroFramework.Controls.MetroGrid();
             this.pnlProduto.SuspendLayout();
-            this.grpAdicionarGrade.SuspendLayout();
             this.grpProduto.SuspendLayout();
             this.grpPesquisa.SuspendLayout();
+            this.grpAdicionarGrade.SuspendLayout();
             this.pnlProdutoItem.SuspendLayout();
+            this.pnlProdutoGrade.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdProdutoGrade)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlProduto
@@ -86,6 +91,345 @@
             this.pnlProduto.VerticalScrollbarBarColor = true;
             this.pnlProduto.VerticalScrollbarHighlightOnWheel = false;
             this.pnlProduto.VerticalScrollbarSize = 10;
+            // 
+            // grpProduto
+            // 
+            this.grpProduto.Controls.Add(this.btnCancelarProduto);
+            this.grpProduto.Controls.Add(this.btnExcluirProduto);
+            this.grpProduto.Controls.Add(this.btnSalvarProduto);
+            this.grpProduto.Controls.Add(this.lblFornecedor);
+            this.grpProduto.Controls.Add(this.cbbFornecedor);
+            this.grpProduto.Controls.Add(this.lblCategoria);
+            this.grpProduto.Controls.Add(this.cbbCategoria);
+            this.grpProduto.Controls.Add(this.lblDigitoVerificador);
+            this.grpProduto.Controls.Add(this.lblCodigoBarras);
+            this.grpProduto.Controls.Add(this.txtDigitoVerificador);
+            this.grpProduto.Controls.Add(this.txtCodigoBarras);
+            this.grpProduto.Controls.Add(this.lblUnidade);
+            this.grpProduto.Controls.Add(this.txtUnidade);
+            this.grpProduto.Controls.Add(this.txtNomeProduto);
+            this.grpProduto.Controls.Add(this.lblNomeProduto);
+            this.grpProduto.Location = new System.Drawing.Point(6, 74);
+            this.grpProduto.Name = "grpProduto";
+            this.grpProduto.Size = new System.Drawing.Size(666, 152);
+            this.grpProduto.TabIndex = 16;
+            this.grpProduto.TabStop = false;
+            this.grpProduto.Text = "Dados do Produto";
+            this.grpProduto.Visible = false;
+            // 
+            // btnCancelarProduto
+            // 
+            this.btnCancelarProduto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnCancelarProduto.Location = new System.Drawing.Point(443, 114);
+            this.btnCancelarProduto.Name = "btnCancelarProduto";
+            this.btnCancelarProduto.Size = new System.Drawing.Size(103, 29);
+            this.btnCancelarProduto.TabIndex = 29;
+            this.btnCancelarProduto.Text = "Cancelar";
+            this.btnCancelarProduto.UseSelectable = true;
+            this.btnCancelarProduto.Click += new System.EventHandler(this.btnCancelarProduto_Click);
+            // 
+            // btnExcluirProduto
+            // 
+            this.btnExcluirProduto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnExcluirProduto.Location = new System.Drawing.Point(8, 117);
+            this.btnExcluirProduto.Name = "btnExcluirProduto";
+            this.btnExcluirProduto.Size = new System.Drawing.Size(103, 29);
+            this.btnExcluirProduto.TabIndex = 28;
+            this.btnExcluirProduto.Text = "Excluir Produto";
+            this.btnExcluirProduto.UseSelectable = true;
+            // 
+            // btnSalvarProduto
+            // 
+            this.btnSalvarProduto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnSalvarProduto.Location = new System.Drawing.Point(552, 114);
+            this.btnSalvarProduto.Name = "btnSalvarProduto";
+            this.btnSalvarProduto.Size = new System.Drawing.Size(103, 29);
+            this.btnSalvarProduto.TabIndex = 13;
+            this.btnSalvarProduto.Text = "Salvar";
+            this.btnSalvarProduto.UseSelectable = true;
+            this.btnSalvarProduto.Click += new System.EventHandler(this.btnSalvarProduto_Click);
+            // 
+            // lblFornecedor
+            // 
+            this.lblFornecedor.AutoSize = true;
+            this.lblFornecedor.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblFornecedor.Location = new System.Drawing.Point(254, 65);
+            this.lblFornecedor.Name = "lblFornecedor";
+            this.lblFornecedor.Size = new System.Drawing.Size(65, 15);
+            this.lblFornecedor.TabIndex = 27;
+            this.lblFornecedor.Text = "Fornecedor";
+            // 
+            // cbbFornecedor
+            // 
+            this.cbbFornecedor.FontSize = MetroFramework.MetroComboBoxSize.Small;
+            this.cbbFornecedor.FormattingEnabled = true;
+            this.cbbFornecedor.ItemHeight = 19;
+            this.cbbFornecedor.Location = new System.Drawing.Point(254, 83);
+            this.cbbFornecedor.Name = "cbbFornecedor";
+            this.cbbFornecedor.PromptText = "Fornecedor";
+            this.cbbFornecedor.Size = new System.Drawing.Size(401, 25);
+            this.cbbFornecedor.TabIndex = 26;
+            this.cbbFornecedor.UseSelectable = true;
+            // 
+            // lblCategoria
+            // 
+            this.lblCategoria.AutoSize = true;
+            this.lblCategoria.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblCategoria.Location = new System.Drawing.Point(8, 65);
+            this.lblCategoria.Name = "lblCategoria";
+            this.lblCategoria.Size = new System.Drawing.Size(56, 15);
+            this.lblCategoria.TabIndex = 25;
+            this.lblCategoria.Text = "Categoria";
+            // 
+            // cbbCategoria
+            // 
+            this.cbbCategoria.FontSize = MetroFramework.MetroComboBoxSize.Small;
+            this.cbbCategoria.FormattingEnabled = true;
+            this.cbbCategoria.ItemHeight = 19;
+            this.cbbCategoria.Location = new System.Drawing.Point(8, 83);
+            this.cbbCategoria.Name = "cbbCategoria";
+            this.cbbCategoria.PromptText = "Categoria";
+            this.cbbCategoria.Size = new System.Drawing.Size(238, 25);
+            this.cbbCategoria.TabIndex = 24;
+            this.cbbCategoria.UseSelectable = true;
+            // 
+            // lblDigitoVerificador
+            // 
+            this.lblDigitoVerificador.AutoSize = true;
+            this.lblDigitoVerificador.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblDigitoVerificador.Location = new System.Drawing.Point(625, 21);
+            this.lblDigitoVerificador.Name = "lblDigitoVerificador";
+            this.lblDigitoVerificador.Size = new System.Drawing.Size(22, 15);
+            this.lblDigitoVerificador.TabIndex = 23;
+            this.lblDigitoVerificador.Text = "DV";
+            // 
+            // lblCodigoBarras
+            // 
+            this.lblCodigoBarras.AutoSize = true;
+            this.lblCodigoBarras.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblCodigoBarras.Location = new System.Drawing.Point(498, 21);
+            this.lblCodigoBarras.Name = "lblCodigoBarras";
+            this.lblCodigoBarras.Size = new System.Drawing.Size(95, 15);
+            this.lblCodigoBarras.TabIndex = 22;
+            this.lblCodigoBarras.Text = "Código de Barras";
+            // 
+            // txtDigitoVerificador
+            // 
+            // 
+            // 
+            // 
+            this.txtDigitoVerificador.CustomButton.Image = null;
+            this.txtDigitoVerificador.CustomButton.Location = new System.Drawing.Point(8, 1);
+            this.txtDigitoVerificador.CustomButton.Name = "";
+            this.txtDigitoVerificador.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtDigitoVerificador.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtDigitoVerificador.CustomButton.TabIndex = 1;
+            this.txtDigitoVerificador.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtDigitoVerificador.CustomButton.UseSelectable = true;
+            this.txtDigitoVerificador.CustomButton.Visible = false;
+            this.txtDigitoVerificador.Lines = new string[0];
+            this.txtDigitoVerificador.Location = new System.Drawing.Point(625, 39);
+            this.txtDigitoVerificador.MaxLength = 32767;
+            this.txtDigitoVerificador.Name = "txtDigitoVerificador";
+            this.txtDigitoVerificador.PasswordChar = '\0';
+            this.txtDigitoVerificador.PromptText = "Dígito";
+            this.txtDigitoVerificador.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtDigitoVerificador.SelectedText = "";
+            this.txtDigitoVerificador.SelectionLength = 0;
+            this.txtDigitoVerificador.SelectionStart = 0;
+            this.txtDigitoVerificador.ShortcutsEnabled = true;
+            this.txtDigitoVerificador.Size = new System.Drawing.Size(30, 23);
+            this.txtDigitoVerificador.TabIndex = 21;
+            this.txtDigitoVerificador.UseSelectable = true;
+            this.txtDigitoVerificador.WaterMark = "Dígito";
+            this.txtDigitoVerificador.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtDigitoVerificador.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // txtCodigoBarras
+            // 
+            // 
+            // 
+            // 
+            this.txtCodigoBarras.CustomButton.Image = null;
+            this.txtCodigoBarras.CustomButton.Location = new System.Drawing.Point(97, 1);
+            this.txtCodigoBarras.CustomButton.Name = "";
+            this.txtCodigoBarras.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtCodigoBarras.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtCodigoBarras.CustomButton.TabIndex = 1;
+            this.txtCodigoBarras.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtCodigoBarras.CustomButton.UseSelectable = true;
+            this.txtCodigoBarras.CustomButton.Visible = false;
+            this.txtCodigoBarras.Lines = new string[0];
+            this.txtCodigoBarras.Location = new System.Drawing.Point(500, 39);
+            this.txtCodigoBarras.MaxLength = 32767;
+            this.txtCodigoBarras.Name = "txtCodigoBarras";
+            this.txtCodigoBarras.PasswordChar = '\0';
+            this.txtCodigoBarras.PromptText = "Código de Barras";
+            this.txtCodigoBarras.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtCodigoBarras.SelectedText = "";
+            this.txtCodigoBarras.SelectionLength = 0;
+            this.txtCodigoBarras.SelectionStart = 0;
+            this.txtCodigoBarras.ShortcutsEnabled = true;
+            this.txtCodigoBarras.Size = new System.Drawing.Size(119, 23);
+            this.txtCodigoBarras.TabIndex = 20;
+            this.txtCodigoBarras.UseSelectable = true;
+            this.txtCodigoBarras.WaterMark = "Código de Barras";
+            this.txtCodigoBarras.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtCodigoBarras.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // lblUnidade
+            // 
+            this.lblUnidade.AutoSize = true;
+            this.lblUnidade.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblUnidade.Location = new System.Drawing.Point(443, 21);
+            this.lblUnidade.Name = "lblUnidade";
+            this.lblUnidade.Size = new System.Drawing.Size(49, 15);
+            this.lblUnidade.TabIndex = 16;
+            this.lblUnidade.Text = "Unidade";
+            // 
+            // txtUnidade
+            // 
+            // 
+            // 
+            // 
+            this.txtUnidade.CustomButton.Image = null;
+            this.txtUnidade.CustomButton.Location = new System.Drawing.Point(29, 1);
+            this.txtUnidade.CustomButton.Name = "";
+            this.txtUnidade.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtUnidade.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtUnidade.CustomButton.TabIndex = 1;
+            this.txtUnidade.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtUnidade.CustomButton.UseSelectable = true;
+            this.txtUnidade.CustomButton.Visible = false;
+            this.txtUnidade.Lines = new string[0];
+            this.txtUnidade.Location = new System.Drawing.Point(443, 39);
+            this.txtUnidade.MaxLength = 32767;
+            this.txtUnidade.Name = "txtUnidade";
+            this.txtUnidade.PasswordChar = '\0';
+            this.txtUnidade.PromptText = "Unidade";
+            this.txtUnidade.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtUnidade.SelectedText = "";
+            this.txtUnidade.SelectionLength = 0;
+            this.txtUnidade.SelectionStart = 0;
+            this.txtUnidade.ShortcutsEnabled = true;
+            this.txtUnidade.Size = new System.Drawing.Size(51, 23);
+            this.txtUnidade.TabIndex = 15;
+            this.txtUnidade.UseSelectable = true;
+            this.txtUnidade.WaterMark = "Unidade";
+            this.txtUnidade.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtUnidade.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // txtNomeProduto
+            // 
+            // 
+            // 
+            // 
+            this.txtNomeProduto.CustomButton.Image = null;
+            this.txtNomeProduto.CustomButton.Location = new System.Drawing.Point(407, 1);
+            this.txtNomeProduto.CustomButton.Name = "";
+            this.txtNomeProduto.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtNomeProduto.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtNomeProduto.CustomButton.TabIndex = 1;
+            this.txtNomeProduto.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtNomeProduto.CustomButton.UseSelectable = true;
+            this.txtNomeProduto.CustomButton.Visible = false;
+            this.txtNomeProduto.Lines = new string[0];
+            this.txtNomeProduto.Location = new System.Drawing.Point(8, 39);
+            this.txtNomeProduto.MaxLength = 32767;
+            this.txtNomeProduto.Name = "txtNomeProduto";
+            this.txtNomeProduto.PasswordChar = '\0';
+            this.txtNomeProduto.PromptText = "Nome";
+            this.txtNomeProduto.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtNomeProduto.SelectedText = "";
+            this.txtNomeProduto.SelectionLength = 0;
+            this.txtNomeProduto.SelectionStart = 0;
+            this.txtNomeProduto.ShortcutsEnabled = true;
+            this.txtNomeProduto.Size = new System.Drawing.Size(429, 23);
+            this.txtNomeProduto.TabIndex = 13;
+            this.txtNomeProduto.UseSelectable = true;
+            this.txtNomeProduto.WaterMark = "Nome";
+            this.txtNomeProduto.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtNomeProduto.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // lblNomeProduto
+            // 
+            this.lblNomeProduto.AutoSize = true;
+            this.lblNomeProduto.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblNomeProduto.Location = new System.Drawing.Point(6, 21);
+            this.lblNomeProduto.Name = "lblNomeProduto";
+            this.lblNomeProduto.Size = new System.Drawing.Size(101, 15);
+            this.lblNomeProduto.TabIndex = 14;
+            this.lblNomeProduto.Text = "Nome do Produto";
+            // 
+            // grpPesquisa
+            // 
+            this.grpPesquisa.Controls.Add(this.txtPesquisaCodProduto);
+            this.grpPesquisa.Controls.Add(this.cbbPesquisaProduto);
+            this.grpPesquisa.Location = new System.Drawing.Point(6, 8);
+            this.grpPesquisa.Name = "grpPesquisa";
+            this.grpPesquisa.Size = new System.Drawing.Size(554, 60);
+            this.grpPesquisa.TabIndex = 14;
+            this.grpPesquisa.TabStop = false;
+            this.grpPesquisa.Text = "Pesquisa";
+            // 
+            // txtPesquisaCodProduto
+            // 
+            // 
+            // 
+            // 
+            this.txtPesquisaCodProduto.CustomButton.Image = global::ConsignadoDeposito.Properties.Resources.darkmagnify1;
+            this.txtPesquisaCodProduto.CustomButton.Location = new System.Drawing.Point(178, 1);
+            this.txtPesquisaCodProduto.CustomButton.Name = "";
+            this.txtPesquisaCodProduto.CustomButton.Size = new System.Drawing.Size(27, 27);
+            this.txtPesquisaCodProduto.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtPesquisaCodProduto.CustomButton.TabIndex = 1;
+            this.txtPesquisaCodProduto.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtPesquisaCodProduto.CustomButton.UseSelectable = true;
+            this.txtPesquisaCodProduto.DisplayIcon = true;
+            this.txtPesquisaCodProduto.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.txtPesquisaCodProduto.IconRight = true;
+            this.txtPesquisaCodProduto.Lines = new string[0];
+            this.txtPesquisaCodProduto.Location = new System.Drawing.Point(8, 19);
+            this.txtPesquisaCodProduto.Margin = new System.Windows.Forms.Padding(5);
+            this.txtPesquisaCodProduto.MaxLength = 32767;
+            this.txtPesquisaCodProduto.Name = "txtPesquisaCodProduto";
+            this.txtPesquisaCodProduto.PasswordChar = '\0';
+            this.txtPesquisaCodProduto.PromptText = "Código de Barras";
+            this.txtPesquisaCodProduto.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtPesquisaCodProduto.SelectedText = "";
+            this.txtPesquisaCodProduto.SelectionLength = 0;
+            this.txtPesquisaCodProduto.SelectionStart = 0;
+            this.txtPesquisaCodProduto.ShortcutsEnabled = true;
+            this.txtPesquisaCodProduto.ShowButton = true;
+            this.txtPesquisaCodProduto.Size = new System.Drawing.Size(206, 29);
+            this.txtPesquisaCodProduto.TabIndex = 11;
+            this.txtPesquisaCodProduto.UseSelectable = true;
+            this.txtPesquisaCodProduto.WaterMark = "Código de Barras";
+            this.txtPesquisaCodProduto.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtPesquisaCodProduto.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtPesquisaCodProduto.ButtonClick += new MetroFramework.Controls.MetroTextBox.ButClick(this.txtPesquisaCodProduto_Click);
+            // 
+            // cbbPesquisaProduto
+            // 
+            this.cbbPesquisaProduto.FormattingEnabled = true;
+            this.cbbPesquisaProduto.ItemHeight = 23;
+            this.cbbPesquisaProduto.Location = new System.Drawing.Point(222, 19);
+            this.cbbPesquisaProduto.Name = "cbbPesquisaProduto";
+            this.cbbPesquisaProduto.PromptText = "Selecione o Produto";
+            this.cbbPesquisaProduto.Size = new System.Drawing.Size(324, 29);
+            this.cbbPesquisaProduto.TabIndex = 12;
+            this.cbbPesquisaProduto.UseSelectable = true;
+            // 
+            // btnNovoProduto
+            // 
+            this.btnNovoProduto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnNovoProduto.Location = new System.Drawing.Point(570, 16);
+            this.btnNovoProduto.Name = "btnNovoProduto";
+            this.btnNovoProduto.Size = new System.Drawing.Size(100, 52);
+            this.btnNovoProduto.TabIndex = 15;
+            this.btnNovoProduto.Text = "Adicionar\r\nNovo";
+            this.btnNovoProduto.UseSelectable = true;
+            this.btnNovoProduto.Click += new System.EventHandler(this.btnNovoProduto_Click);
             // 
             // grpAdicionarGrade
             // 
@@ -288,110 +632,6 @@
             this.txtGradeCodigoBarras.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtGradeCodigoBarras.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // grpProduto
-            // 
-            this.grpProduto.Controls.Add(this.btnCancelarProduto);
-            this.grpProduto.Controls.Add(this.btnExcluirProduto);
-            this.grpProduto.Controls.Add(this.btnSalvarProduto);
-            this.grpProduto.Controls.Add(this.lblFornecedor);
-            this.grpProduto.Controls.Add(this.cbbFornecedor);
-            this.grpProduto.Controls.Add(this.lblCategoria);
-            this.grpProduto.Controls.Add(this.cbbCategoria);
-            this.grpProduto.Controls.Add(this.lblDigitoVerificador);
-            this.grpProduto.Controls.Add(this.lblCodigoBarras);
-            this.grpProduto.Controls.Add(this.txtDigitoVerificador);
-            this.grpProduto.Controls.Add(this.txtCodigoBarras);
-            this.grpProduto.Controls.Add(this.lblUnidade);
-            this.grpProduto.Controls.Add(this.txtUnidade);
-            this.grpProduto.Controls.Add(this.txtNomeProduto);
-            this.grpProduto.Controls.Add(this.lblNomeProduto);
-            this.grpProduto.Location = new System.Drawing.Point(6, 74);
-            this.grpProduto.Name = "grpProduto";
-            this.grpProduto.Size = new System.Drawing.Size(666, 152);
-            this.grpProduto.TabIndex = 16;
-            this.grpProduto.TabStop = false;
-            this.grpProduto.Text = "Dados do Produto";
-            // 
-            // grpPesquisa
-            // 
-            this.grpPesquisa.Controls.Add(this.txtPesquisaCodProduto);
-            this.grpPesquisa.Controls.Add(this.cbbPesquisaProduto);
-            this.grpPesquisa.Controls.Add(this.btnPesquisaOK);
-            this.grpPesquisa.Location = new System.Drawing.Point(6, 8);
-            this.grpPesquisa.Name = "grpPesquisa";
-            this.grpPesquisa.Size = new System.Drawing.Size(554, 60);
-            this.grpPesquisa.TabIndex = 14;
-            this.grpPesquisa.TabStop = false;
-            this.grpPesquisa.Text = "Pesquisa";
-            // 
-            // txtPesquisaCodProduto
-            // 
-            // 
-            // 
-            // 
-            this.txtPesquisaCodProduto.CustomButton.Image = global::ConsignadoDeposito.Properties.Resources.darkmagnify1;
-            this.txtPesquisaCodProduto.CustomButton.Location = new System.Drawing.Point(91, 1);
-            this.txtPesquisaCodProduto.CustomButton.Name = "";
-            this.txtPesquisaCodProduto.CustomButton.Size = new System.Drawing.Size(27, 27);
-            this.txtPesquisaCodProduto.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtPesquisaCodProduto.CustomButton.TabIndex = 1;
-            this.txtPesquisaCodProduto.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtPesquisaCodProduto.CustomButton.UseSelectable = true;
-            this.txtPesquisaCodProduto.DisplayIcon = true;
-            this.txtPesquisaCodProduto.FontSize = MetroFramework.MetroTextBoxSize.Medium;
-            this.txtPesquisaCodProduto.IconRight = true;
-            this.txtPesquisaCodProduto.Lines = new string[0];
-            this.txtPesquisaCodProduto.Location = new System.Drawing.Point(8, 19);
-            this.txtPesquisaCodProduto.Margin = new System.Windows.Forms.Padding(5);
-            this.txtPesquisaCodProduto.MaxLength = 32767;
-            this.txtPesquisaCodProduto.Name = "txtPesquisaCodProduto";
-            this.txtPesquisaCodProduto.PasswordChar = '\0';
-            this.txtPesquisaCodProduto.PromptText = "Código de Barras";
-            this.txtPesquisaCodProduto.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtPesquisaCodProduto.SelectedText = "";
-            this.txtPesquisaCodProduto.SelectionLength = 0;
-            this.txtPesquisaCodProduto.SelectionStart = 0;
-            this.txtPesquisaCodProduto.ShortcutsEnabled = true;
-            this.txtPesquisaCodProduto.ShowButton = true;
-            this.txtPesquisaCodProduto.Size = new System.Drawing.Size(119, 29);
-            this.txtPesquisaCodProduto.TabIndex = 11;
-            this.txtPesquisaCodProduto.UseSelectable = true;
-            this.txtPesquisaCodProduto.WaterMark = "Código de Barras";
-            this.txtPesquisaCodProduto.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtPesquisaCodProduto.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // cbbPesquisaProduto
-            // 
-            this.cbbPesquisaProduto.FormattingEnabled = true;
-            this.cbbPesquisaProduto.ItemHeight = 23;
-            this.cbbPesquisaProduto.Location = new System.Drawing.Point(135, 19);
-            this.cbbPesquisaProduto.Name = "cbbPesquisaProduto";
-            this.cbbPesquisaProduto.PromptText = "Selecione o Produto";
-            this.cbbPesquisaProduto.Size = new System.Drawing.Size(324, 29);
-            this.cbbPesquisaProduto.Sorted = true;
-            this.cbbPesquisaProduto.TabIndex = 12;
-            this.cbbPesquisaProduto.UseSelectable = true;
-            // 
-            // btnPesquisaOK
-            // 
-            this.btnPesquisaOK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnPesquisaOK.Location = new System.Drawing.Point(475, 19);
-            this.btnPesquisaOK.Name = "btnPesquisaOK";
-            this.btnPesquisaOK.Size = new System.Drawing.Size(52, 29);
-            this.btnPesquisaOK.TabIndex = 10;
-            this.btnPesquisaOK.Text = "OK";
-            this.btnPesquisaOK.UseSelectable = true;
-            // 
-            // btnNovoProduto
-            // 
-            this.btnNovoProduto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnNovoProduto.Location = new System.Drawing.Point(570, 16);
-            this.btnNovoProduto.Name = "btnNovoProduto";
-            this.btnNovoProduto.Size = new System.Drawing.Size(100, 52);
-            this.btnNovoProduto.TabIndex = 15;
-            this.btnNovoProduto.Text = "Adicionar\r\nNovo";
-            this.btnNovoProduto.UseSelectable = true;
-            // 
             // pnlProdutoItem
             // 
             this.pnlProdutoItem.Controls.Add(this.grpAdicionarGrade);
@@ -406,6 +646,7 @@
             this.pnlProdutoItem.VerticalScrollbarBarColor = true;
             this.pnlProdutoItem.VerticalScrollbarHighlightOnWheel = false;
             this.pnlProdutoItem.VerticalScrollbarSize = 10;
+            this.pnlProdutoItem.Visible = false;
             // 
             // pblProdutoBottom
             // 
@@ -423,6 +664,7 @@
             // 
             // pnlProdutoGrade
             // 
+            this.pnlProdutoGrade.Controls.Add(this.grdProdutoGrade);
             this.pnlProdutoGrade.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlProdutoGrade.HorizontalScrollbarBarColor = true;
             this.pnlProdutoGrade.HorizontalScrollbarHighlightOnWheel = false;
@@ -434,250 +676,51 @@
             this.pnlProdutoGrade.VerticalScrollbarBarColor = true;
             this.pnlProdutoGrade.VerticalScrollbarHighlightOnWheel = false;
             this.pnlProdutoGrade.VerticalScrollbarSize = 10;
+            this.pnlProdutoGrade.Visible = false;
             // 
-            // txtNomeProduto
+            // grdProdutoGrade
             // 
-            // 
-            // 
-            // 
-            this.txtNomeProduto.CustomButton.Image = null;
-            this.txtNomeProduto.CustomButton.Location = new System.Drawing.Point(407, 1);
-            this.txtNomeProduto.CustomButton.Name = "";
-            this.txtNomeProduto.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtNomeProduto.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtNomeProduto.CustomButton.TabIndex = 1;
-            this.txtNomeProduto.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtNomeProduto.CustomButton.UseSelectable = true;
-            this.txtNomeProduto.CustomButton.Visible = false;
-            this.txtNomeProduto.Lines = new string[0];
-            this.txtNomeProduto.Location = new System.Drawing.Point(8, 39);
-            this.txtNomeProduto.MaxLength = 32767;
-            this.txtNomeProduto.Name = "txtNomeProduto";
-            this.txtNomeProduto.PasswordChar = '\0';
-            this.txtNomeProduto.PromptText = "Nome";
-            this.txtNomeProduto.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtNomeProduto.SelectedText = "";
-            this.txtNomeProduto.SelectionLength = 0;
-            this.txtNomeProduto.SelectionStart = 0;
-            this.txtNomeProduto.ShortcutsEnabled = true;
-            this.txtNomeProduto.Size = new System.Drawing.Size(429, 23);
-            this.txtNomeProduto.TabIndex = 13;
-            this.txtNomeProduto.UseSelectable = true;
-            this.txtNomeProduto.WaterMark = "Nome";
-            this.txtNomeProduto.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtNomeProduto.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // lblNomeProduto
-            // 
-            this.lblNomeProduto.AutoSize = true;
-            this.lblNomeProduto.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblNomeProduto.Location = new System.Drawing.Point(6, 21);
-            this.lblNomeProduto.Name = "lblNomeProduto";
-            this.lblNomeProduto.Size = new System.Drawing.Size(101, 15);
-            this.lblNomeProduto.TabIndex = 14;
-            this.lblNomeProduto.Text = "Nome do Produto";
-            // 
-            // txtUnidade
-            // 
-            // 
-            // 
-            // 
-            this.txtUnidade.CustomButton.Image = null;
-            this.txtUnidade.CustomButton.Location = new System.Drawing.Point(29, 1);
-            this.txtUnidade.CustomButton.Name = "";
-            this.txtUnidade.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtUnidade.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtUnidade.CustomButton.TabIndex = 1;
-            this.txtUnidade.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtUnidade.CustomButton.UseSelectable = true;
-            this.txtUnidade.CustomButton.Visible = false;
-            this.txtUnidade.Lines = new string[0];
-            this.txtUnidade.Location = new System.Drawing.Point(443, 39);
-            this.txtUnidade.MaxLength = 32767;
-            this.txtUnidade.Name = "txtUnidade";
-            this.txtUnidade.PasswordChar = '\0';
-            this.txtUnidade.PromptText = "Unidade";
-            this.txtUnidade.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtUnidade.SelectedText = "";
-            this.txtUnidade.SelectionLength = 0;
-            this.txtUnidade.SelectionStart = 0;
-            this.txtUnidade.ShortcutsEnabled = true;
-            this.txtUnidade.Size = new System.Drawing.Size(51, 23);
-            this.txtUnidade.TabIndex = 15;
-            this.txtUnidade.UseSelectable = true;
-            this.txtUnidade.WaterMark = "Unidade";
-            this.txtUnidade.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtUnidade.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // lblUnidade
-            // 
-            this.lblUnidade.AutoSize = true;
-            this.lblUnidade.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblUnidade.Location = new System.Drawing.Point(443, 21);
-            this.lblUnidade.Name = "lblUnidade";
-            this.lblUnidade.Size = new System.Drawing.Size(49, 15);
-            this.lblUnidade.TabIndex = 16;
-            this.lblUnidade.Text = "Unidade";
-            // 
-            // txtDigitoVerificador
-            // 
-            // 
-            // 
-            // 
-            this.txtDigitoVerificador.CustomButton.Image = null;
-            this.txtDigitoVerificador.CustomButton.Location = new System.Drawing.Point(8, 1);
-            this.txtDigitoVerificador.CustomButton.Name = "";
-            this.txtDigitoVerificador.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtDigitoVerificador.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtDigitoVerificador.CustomButton.TabIndex = 1;
-            this.txtDigitoVerificador.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtDigitoVerificador.CustomButton.UseSelectable = true;
-            this.txtDigitoVerificador.CustomButton.Visible = false;
-            this.txtDigitoVerificador.Lines = new string[0];
-            this.txtDigitoVerificador.Location = new System.Drawing.Point(625, 39);
-            this.txtDigitoVerificador.MaxLength = 32767;
-            this.txtDigitoVerificador.Name = "txtDigitoVerificador";
-            this.txtDigitoVerificador.PasswordChar = '\0';
-            this.txtDigitoVerificador.PromptText = "Dígito";
-            this.txtDigitoVerificador.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtDigitoVerificador.SelectedText = "";
-            this.txtDigitoVerificador.SelectionLength = 0;
-            this.txtDigitoVerificador.SelectionStart = 0;
-            this.txtDigitoVerificador.ShortcutsEnabled = true;
-            this.txtDigitoVerificador.Size = new System.Drawing.Size(30, 23);
-            this.txtDigitoVerificador.TabIndex = 21;
-            this.txtDigitoVerificador.UseSelectable = true;
-            this.txtDigitoVerificador.WaterMark = "Dígito";
-            this.txtDigitoVerificador.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtDigitoVerificador.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // txtCodigoBarras
-            // 
-            // 
-            // 
-            // 
-            this.txtCodigoBarras.CustomButton.Image = null;
-            this.txtCodigoBarras.CustomButton.Location = new System.Drawing.Point(97, 1);
-            this.txtCodigoBarras.CustomButton.Name = "";
-            this.txtCodigoBarras.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtCodigoBarras.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtCodigoBarras.CustomButton.TabIndex = 1;
-            this.txtCodigoBarras.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtCodigoBarras.CustomButton.UseSelectable = true;
-            this.txtCodigoBarras.CustomButton.Visible = false;
-            this.txtCodigoBarras.Lines = new string[0];
-            this.txtCodigoBarras.Location = new System.Drawing.Point(500, 39);
-            this.txtCodigoBarras.MaxLength = 32767;
-            this.txtCodigoBarras.Name = "txtCodigoBarras";
-            this.txtCodigoBarras.PasswordChar = '\0';
-            this.txtCodigoBarras.PromptText = "Código de Barras";
-            this.txtCodigoBarras.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtCodigoBarras.SelectedText = "";
-            this.txtCodigoBarras.SelectionLength = 0;
-            this.txtCodigoBarras.SelectionStart = 0;
-            this.txtCodigoBarras.ShortcutsEnabled = true;
-            this.txtCodigoBarras.Size = new System.Drawing.Size(119, 23);
-            this.txtCodigoBarras.TabIndex = 20;
-            this.txtCodigoBarras.UseSelectable = true;
-            this.txtCodigoBarras.WaterMark = "Código de Barras";
-            this.txtCodigoBarras.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtCodigoBarras.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // lblCodigoBarras
-            // 
-            this.lblCodigoBarras.AutoSize = true;
-            this.lblCodigoBarras.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblCodigoBarras.Location = new System.Drawing.Point(498, 21);
-            this.lblCodigoBarras.Name = "lblCodigoBarras";
-            this.lblCodigoBarras.Size = new System.Drawing.Size(95, 15);
-            this.lblCodigoBarras.TabIndex = 22;
-            this.lblCodigoBarras.Text = "Código de Barras";
-            // 
-            // lblDigitoVerificador
-            // 
-            this.lblDigitoVerificador.AutoSize = true;
-            this.lblDigitoVerificador.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblDigitoVerificador.Location = new System.Drawing.Point(625, 21);
-            this.lblDigitoVerificador.Name = "lblDigitoVerificador";
-            this.lblDigitoVerificador.Size = new System.Drawing.Size(22, 15);
-            this.lblDigitoVerificador.TabIndex = 23;
-            this.lblDigitoVerificador.Text = "DV";
-            // 
-            // cbbCategoria
-            // 
-            this.cbbCategoria.FontSize = MetroFramework.MetroComboBoxSize.Small;
-            this.cbbCategoria.FormattingEnabled = true;
-            this.cbbCategoria.ItemHeight = 19;
-            this.cbbCategoria.Location = new System.Drawing.Point(8, 83);
-            this.cbbCategoria.Name = "cbbCategoria";
-            this.cbbCategoria.PromptText = "Categoria";
-            this.cbbCategoria.Size = new System.Drawing.Size(238, 25);
-            this.cbbCategoria.Sorted = true;
-            this.cbbCategoria.TabIndex = 24;
-            this.cbbCategoria.UseSelectable = true;
-            // 
-            // lblCategoria
-            // 
-            this.lblCategoria.AutoSize = true;
-            this.lblCategoria.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblCategoria.Location = new System.Drawing.Point(8, 65);
-            this.lblCategoria.Name = "lblCategoria";
-            this.lblCategoria.Size = new System.Drawing.Size(56, 15);
-            this.lblCategoria.TabIndex = 25;
-            this.lblCategoria.Text = "Categoria";
-            // 
-            // lblFornecedor
-            // 
-            this.lblFornecedor.AutoSize = true;
-            this.lblFornecedor.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblFornecedor.Location = new System.Drawing.Point(254, 65);
-            this.lblFornecedor.Name = "lblFornecedor";
-            this.lblFornecedor.Size = new System.Drawing.Size(65, 15);
-            this.lblFornecedor.TabIndex = 27;
-            this.lblFornecedor.Text = "Fornecedor";
-            // 
-            // cbbFornecedor
-            // 
-            this.cbbFornecedor.FontSize = MetroFramework.MetroComboBoxSize.Small;
-            this.cbbFornecedor.FormattingEnabled = true;
-            this.cbbFornecedor.ItemHeight = 19;
-            this.cbbFornecedor.Location = new System.Drawing.Point(254, 83);
-            this.cbbFornecedor.Name = "cbbFornecedor";
-            this.cbbFornecedor.PromptText = "Fornecedor";
-            this.cbbFornecedor.Size = new System.Drawing.Size(401, 25);
-            this.cbbFornecedor.Sorted = true;
-            this.cbbFornecedor.TabIndex = 26;
-            this.cbbFornecedor.UseSelectable = true;
-            // 
-            // btnSalvarProduto
-            // 
-            this.btnSalvarProduto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnSalvarProduto.Location = new System.Drawing.Point(552, 114);
-            this.btnSalvarProduto.Name = "btnSalvarProduto";
-            this.btnSalvarProduto.Size = new System.Drawing.Size(103, 29);
-            this.btnSalvarProduto.TabIndex = 13;
-            this.btnSalvarProduto.Text = "Salvar";
-            this.btnSalvarProduto.UseSelectable = true;
-            // 
-            // btnExcluirProduto
-            // 
-            this.btnExcluirProduto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnExcluirProduto.Location = new System.Drawing.Point(8, 117);
-            this.btnExcluirProduto.Name = "btnExcluirProduto";
-            this.btnExcluirProduto.Size = new System.Drawing.Size(103, 29);
-            this.btnExcluirProduto.TabIndex = 28;
-            this.btnExcluirProduto.Text = "Excluir Produto";
-            this.btnExcluirProduto.UseSelectable = true;
-            // 
-            // btnCancelarProduto
-            // 
-            this.btnCancelarProduto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnCancelarProduto.Location = new System.Drawing.Point(443, 114);
-            this.btnCancelarProduto.Name = "btnCancelarProduto";
-            this.btnCancelarProduto.Size = new System.Drawing.Size(103, 29);
-            this.btnCancelarProduto.TabIndex = 29;
-            this.btnCancelarProduto.Text = "Cancelar";
-            this.btnCancelarProduto.UseSelectable = true;
+            this.grdProdutoGrade.AllowUserToResizeRows = false;
+            this.grdProdutoGrade.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdProdutoGrade.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.grdProdutoGrade.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.grdProdutoGrade.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdProdutoGrade.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.grdProdutoGrade.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grdProdutoGrade.DefaultCellStyle = dataGridViewCellStyle2;
+            this.grdProdutoGrade.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdProdutoGrade.EnableHeadersVisualStyles = false;
+            this.grdProdutoGrade.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.grdProdutoGrade.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdProdutoGrade.Location = new System.Drawing.Point(0, 0);
+            this.grdProdutoGrade.Name = "grdProdutoGrade";
+            this.grdProdutoGrade.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdProdutoGrade.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.grdProdutoGrade.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.grdProdutoGrade.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.grdProdutoGrade.Size = new System.Drawing.Size(679, 254);
+            this.grdProdutoGrade.TabIndex = 2;
             // 
             // FormProduto
             // 
@@ -694,12 +737,14 @@
             this.TopMost = true;
             this.Load += new System.EventHandler(this.FormProduto_Load);
             this.pnlProduto.ResumeLayout(false);
-            this.grpAdicionarGrade.ResumeLayout(false);
-            this.grpAdicionarGrade.PerformLayout();
             this.grpProduto.ResumeLayout(false);
             this.grpProduto.PerformLayout();
             this.grpPesquisa.ResumeLayout(false);
+            this.grpAdicionarGrade.ResumeLayout(false);
+            this.grpAdicionarGrade.PerformLayout();
             this.pnlProdutoItem.ResumeLayout(false);
+            this.pnlProdutoGrade.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grdProdutoGrade)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -726,7 +771,6 @@
         private System.Windows.Forms.GroupBox grpPesquisa;
         public MetroFramework.Controls.MetroTextBox txtPesquisaCodProduto;
         public MetroFramework.Controls.MetroComboBox cbbPesquisaProduto;
-        public MetroFramework.Controls.MetroButton btnPesquisaOK;
         public MetroFramework.Controls.MetroButton btnNovoProduto;
         private System.Windows.Forms.GroupBox grpAdicionarGrade;
         public MetroFramework.Controls.MetroTextBox txtValorCusto;
@@ -741,5 +785,6 @@
         private MetroFramework.Controls.MetroPanel pnlProdutoItem;
         private MetroFramework.Controls.MetroPanel pblProdutoBottom;
         private MetroFramework.Controls.MetroPanel pnlProdutoGrade;
+        private MetroFramework.Controls.MetroGrid grdProdutoGrade;
     }
 }

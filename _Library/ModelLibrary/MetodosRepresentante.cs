@@ -298,7 +298,7 @@ namespace ModelLibrary
             {
 
                 var produto = (from p in representante.RepProduto
-                               where (p.CodigoBarras == pCodigo || p.Id.ToString() == pCodigo)
+                               where (p.CodigoBarras == pCodigo)
                                select p).FirstOrDefault<RepProduto>();
 
                 return produto;
@@ -306,7 +306,7 @@ namespace ModelLibrary
 
         }
 
-        public static RepProdutoGrade ObterProdutoGrade(string pCodigo)
+        public static RepProdutoGrade sGrade(string pCodigo)
         {
 
             using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
@@ -319,7 +319,7 @@ namespace ModelLibrary
                     Console.WriteLine(vCodigoSemDigito + ':' + vDigito);
 
                     var produtograde = (from pg in representante.RepProdutoGrade
-                                        where (pg.CodigoBarras == vCodigoSemDigito && pg.Digito == vDigito) || pg.Id.ToString() == pCodigo
+                                        where (pg.CodigoBarras == vCodigoSemDigito && pg.Digito == vDigito)
                                         select pg).FirstOrDefault<RepProdutoGrade>();
 
                     return produtograde;

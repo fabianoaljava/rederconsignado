@@ -374,13 +374,48 @@ namespace ModelLibrary
             {
 
                 var produto = (from p in deposito.Produto
-                                    where (p.CodigoBarras == pCodigo || p.Id.ToString() == pCodigo)
+                                    where (p.CodigoBarras == pCodigo)
                                     select p).FirstOrDefault<Produto>();
 
                 return produto;
             }
 
         }
+
+        public static void SalvarProduto(string pModo, Produto pProduto, long pCodigoProduto = 0)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                if (pModo == "Create")
+                {
+
+                        deposito.Produto.Add(pProduto);
+                        deposito.SaveChanges();
+
+                } else
+                {
+                    var produto = deposito.Produto.SingleOrDefault(pd => pd.Id == pCodigoProduto);
+                    if (produto != null)
+                    {
+
+                        produto.Descricao = pProduto.Descricao;
+                        produto.CategoriaId = pProduto.CategoriaId;
+                        produto.FornecedorId = pProduto.FornecedorId;
+                        produto.Unidade = pProduto.Unidade;
+                        produto.CodigoBarras = pProduto.CodigoBarras;
+                        pProduto.Digito = pProduto.Digito;
+
+                        deposito.SaveChanges();
+                    }
+                }
+            }
+
+
+        }
+
+
 
         public static ProdutoGrade ObterProdutoGrade(string pCodigo)
         {
@@ -393,7 +428,7 @@ namespace ModelLibrary
                 Console.WriteLine(vCodigoSemDigito + ':' + vDigito);
 
                 var produtograde = (from pg in deposito.ProdutoGrade
-                                    where (pg.CodigoBarras == vCodigoSemDigito && pg.Digito == vDigito) || pg.Id.ToString() == pCodigo
+                                    where (pg.CodigoBarras == vCodigoSemDigito && pg.Digito == vDigito)
                                     select pg).FirstOrDefault<ProdutoGrade>();
 
                 return produtograde;
