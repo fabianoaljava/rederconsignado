@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlProduto = new MetroFramework.Controls.MetroPanel();
             this.grpProduto = new System.Windows.Forms.GroupBox();
             this.btnCancelarProduto = new MetroFramework.Controls.MetroButton();
@@ -53,15 +54,14 @@
             this.cbbPesquisaProduto = new MetroFramework.Controls.MetroComboBox();
             this.btnNovoProduto = new MetroFramework.Controls.MetroButton();
             this.grpAdicionarGrade = new System.Windows.Forms.GroupBox();
-            this.txtValorCusto = new MetroFramework.Controls.MetroTextBox();
             this.txtGradeDV = new MetroFramework.Controls.MetroTextBox();
+            this.txtValorCusto = new MetroFramework.Controls.MetroTextBox();
             this.txtValorSaida = new MetroFramework.Controls.MetroTextBox();
             this.cbbGradeTamanho = new MetroFramework.Controls.MetroComboBox();
             this.cbbGradeCor = new MetroFramework.Controls.MetroComboBox();
             this.btnGradeCancelar = new MetroFramework.Controls.MetroButton();
             this.btnGradeConfirmar = new MetroFramework.Controls.MetroButton();
             this.lblAdicionarGrade = new MetroFramework.Controls.MetroLabel();
-            this.txtGradeCodigoBarras = new MetroFramework.Controls.MetroTextBox();
             this.pnlProdutoItem = new MetroFramework.Controls.MetroPanel();
             this.pblProdutoBottom = new MetroFramework.Controls.MetroPanel();
             this.pnlProdutoGrade = new MetroFramework.Controls.MetroPanel();
@@ -109,13 +109,13 @@
             this.grpProduto.Controls.Add(this.txtUnidade);
             this.grpProduto.Controls.Add(this.txtNomeProduto);
             this.grpProduto.Controls.Add(this.lblNomeProduto);
+            this.grpProduto.Enabled = false;
             this.grpProduto.Location = new System.Drawing.Point(6, 74);
             this.grpProduto.Name = "grpProduto";
             this.grpProduto.Size = new System.Drawing.Size(666, 152);
             this.grpProduto.TabIndex = 16;
             this.grpProduto.TabStop = false;
             this.grpProduto.Text = "Dados do Produto";
-            this.grpProduto.Visible = false;
             // 
             // btnCancelarProduto
             // 
@@ -137,6 +137,7 @@
             this.btnExcluirProduto.TabIndex = 28;
             this.btnExcluirProduto.Text = "Excluir Produto";
             this.btnExcluirProduto.UseSelectable = true;
+            this.btnExcluirProduto.Click += new System.EventHandler(this.btnExcluirProduto_Click);
             // 
             // btnSalvarProduto
             // 
@@ -229,7 +230,7 @@
             this.txtDigitoVerificador.CustomButton.Visible = false;
             this.txtDigitoVerificador.Lines = new string[0];
             this.txtDigitoVerificador.Location = new System.Drawing.Point(625, 39);
-            this.txtDigitoVerificador.MaxLength = 32767;
+            this.txtDigitoVerificador.MaxLength = 1;
             this.txtDigitoVerificador.Name = "txtDigitoVerificador";
             this.txtDigitoVerificador.PasswordChar = '\0';
             this.txtDigitoVerificador.PromptText = "Dígito";
@@ -244,6 +245,7 @@
             this.txtDigitoVerificador.WaterMark = "Dígito";
             this.txtDigitoVerificador.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtDigitoVerificador.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtDigitoVerificador.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ControlOnlyInt);
             // 
             // txtCodigoBarras
             // 
@@ -276,6 +278,8 @@
             this.txtCodigoBarras.WaterMark = "Código de Barras";
             this.txtCodigoBarras.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtCodigoBarras.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtCodigoBarras.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ControlOnlyInt);
+            this.txtCodigoBarras.Validating += new System.ComponentModel.CancelEventHandler(this.txtCodigoBarras_Validating);
             // 
             // lblUnidade
             // 
@@ -408,6 +412,8 @@
             this.txtPesquisaCodProduto.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtPesquisaCodProduto.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.txtPesquisaCodProduto.ButtonClick += new MetroFramework.Controls.MetroTextBox.ButClick(this.txtPesquisaCodProduto_Click);
+            this.txtPesquisaCodProduto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ControlOnlyInt);
+            this.txtPesquisaCodProduto.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPesquisaCodProduto_KeyUp);
             // 
             // cbbPesquisaProduto
             // 
@@ -433,20 +439,54 @@
             // 
             // grpAdicionarGrade
             // 
-            this.grpAdicionarGrade.Controls.Add(this.txtValorCusto);
             this.grpAdicionarGrade.Controls.Add(this.txtGradeDV);
+            this.grpAdicionarGrade.Controls.Add(this.txtValorCusto);
             this.grpAdicionarGrade.Controls.Add(this.txtValorSaida);
             this.grpAdicionarGrade.Controls.Add(this.cbbGradeTamanho);
             this.grpAdicionarGrade.Controls.Add(this.cbbGradeCor);
             this.grpAdicionarGrade.Controls.Add(this.btnGradeCancelar);
             this.grpAdicionarGrade.Controls.Add(this.btnGradeConfirmar);
             this.grpAdicionarGrade.Controls.Add(this.lblAdicionarGrade);
-            this.grpAdicionarGrade.Controls.Add(this.txtGradeCodigoBarras);
             this.grpAdicionarGrade.Location = new System.Drawing.Point(6, 6);
             this.grpAdicionarGrade.Name = "grpAdicionarGrade";
             this.grpAdicionarGrade.Size = new System.Drawing.Size(666, 75);
             this.grpAdicionarGrade.TabIndex = 17;
             this.grpAdicionarGrade.TabStop = false;
+            // 
+            // txtGradeDV
+            // 
+            // 
+            // 
+            // 
+            this.txtGradeDV.CustomButton.Image = null;
+            this.txtGradeDV.CustomButton.Location = new System.Drawing.Point(25, 1);
+            this.txtGradeDV.CustomButton.Name = "";
+            this.txtGradeDV.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtGradeDV.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtGradeDV.CustomButton.TabIndex = 1;
+            this.txtGradeDV.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtGradeDV.CustomButton.UseSelectable = true;
+            this.txtGradeDV.CustomButton.Visible = false;
+            this.txtGradeDV.Lines = new string[0];
+            this.txtGradeDV.Location = new System.Drawing.Point(8, 37);
+            this.txtGradeDV.MaxLength = 1;
+            this.txtGradeDV.Name = "txtGradeDV";
+            this.txtGradeDV.PasswordChar = '\0';
+            this.txtGradeDV.PromptText = "Digito";
+            this.txtGradeDV.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtGradeDV.SelectedText = "";
+            this.txtGradeDV.SelectionLength = 0;
+            this.txtGradeDV.SelectionStart = 0;
+            this.txtGradeDV.ShortcutsEnabled = true;
+            this.txtGradeDV.Size = new System.Drawing.Size(47, 23);
+            this.txtGradeDV.TabIndex = 21;
+            this.txtGradeDV.UseSelectable = true;
+            this.txtGradeDV.WaterMark = "Digito";
+            this.txtGradeDV.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtGradeDV.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtGradeDV.TextChanged += new System.EventHandler(this.txtGradeDV_TextChanged);
+            this.txtGradeDV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ControlOnlyInt);
+            this.txtGradeDV.Validating += new System.ComponentModel.CancelEventHandler(this.txtGradeDV_Validating);
             // 
             // txtValorCusto
             // 
@@ -463,7 +503,7 @@
             this.txtValorCusto.CustomButton.UseSelectable = true;
             this.txtValorCusto.CustomButton.Visible = false;
             this.txtValorCusto.Lines = new string[0];
-            this.txtValorCusto.Location = new System.Drawing.Point(423, 38);
+            this.txtValorCusto.Location = new System.Drawing.Point(378, 37);
             this.txtValorCusto.MaxLength = 32767;
             this.txtValorCusto.Name = "txtValorCusto";
             this.txtValorCusto.PasswordChar = '\0';
@@ -479,38 +519,7 @@
             this.txtValorCusto.WaterMark = "Valor Custo";
             this.txtValorCusto.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtValorCusto.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // txtGradeDV
-            // 
-            // 
-            // 
-            // 
-            this.txtGradeDV.CustomButton.Image = null;
-            this.txtGradeDV.CustomButton.Location = new System.Drawing.Point(8, 1);
-            this.txtGradeDV.CustomButton.Name = "";
-            this.txtGradeDV.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtGradeDV.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtGradeDV.CustomButton.TabIndex = 1;
-            this.txtGradeDV.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtGradeDV.CustomButton.UseSelectable = true;
-            this.txtGradeDV.CustomButton.Visible = false;
-            this.txtGradeDV.Lines = new string[0];
-            this.txtGradeDV.Location = new System.Drawing.Point(133, 38);
-            this.txtGradeDV.MaxLength = 32767;
-            this.txtGradeDV.Name = "txtGradeDV";
-            this.txtGradeDV.PasswordChar = '\0';
-            this.txtGradeDV.PromptText = "DV";
-            this.txtGradeDV.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtGradeDV.SelectedText = "";
-            this.txtGradeDV.SelectionLength = 0;
-            this.txtGradeDV.SelectionStart = 0;
-            this.txtGradeDV.ShortcutsEnabled = true;
-            this.txtGradeDV.Size = new System.Drawing.Size(30, 23);
-            this.txtGradeDV.TabIndex = 19;
-            this.txtGradeDV.UseSelectable = true;
-            this.txtGradeDV.WaterMark = "DV";
-            this.txtGradeDV.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtGradeDV.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtValorCusto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ControlOnlyNumbers);
             // 
             // txtValorSaida
             // 
@@ -527,7 +536,7 @@
             this.txtValorSaida.CustomButton.UseSelectable = true;
             this.txtValorSaida.CustomButton.Visible = false;
             this.txtValorSaida.Lines = new string[0];
-            this.txtValorSaida.Location = new System.Drawing.Point(337, 38);
+            this.txtValorSaida.Location = new System.Drawing.Point(292, 37);
             this.txtValorSaida.MaxLength = 32767;
             this.txtValorSaida.Name = "txtValorSaida";
             this.txtValorSaida.PasswordChar = '\0';
@@ -543,17 +552,17 @@
             this.txtValorSaida.WaterMark = "Valor Saída";
             this.txtValorSaida.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtValorSaida.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtValorSaida.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ControlOnlyNumbers);
             // 
             // cbbGradeTamanho
             // 
             this.cbbGradeTamanho.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.cbbGradeTamanho.FormattingEnabled = true;
             this.cbbGradeTamanho.ItemHeight = 19;
-            this.cbbGradeTamanho.Location = new System.Drawing.Point(252, 37);
+            this.cbbGradeTamanho.Location = new System.Drawing.Point(169, 36);
             this.cbbGradeTamanho.Name = "cbbGradeTamanho";
             this.cbbGradeTamanho.PromptText = "Tam";
-            this.cbbGradeTamanho.Size = new System.Drawing.Size(79, 25);
-            this.cbbGradeTamanho.Sorted = true;
+            this.cbbGradeTamanho.Size = new System.Drawing.Size(118, 25);
             this.cbbGradeTamanho.TabIndex = 17;
             this.cbbGradeTamanho.UseSelectable = true;
             // 
@@ -562,33 +571,34 @@
             this.cbbGradeCor.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.cbbGradeCor.FormattingEnabled = true;
             this.cbbGradeCor.ItemHeight = 19;
-            this.cbbGradeCor.Location = new System.Drawing.Point(167, 37);
+            this.cbbGradeCor.Location = new System.Drawing.Point(61, 36);
             this.cbbGradeCor.Name = "cbbGradeCor";
             this.cbbGradeCor.PromptText = "Cor";
-            this.cbbGradeCor.Size = new System.Drawing.Size(79, 25);
-            this.cbbGradeCor.Sorted = true;
+            this.cbbGradeCor.Size = new System.Drawing.Size(102, 25);
             this.cbbGradeCor.TabIndex = 16;
             this.cbbGradeCor.UseSelectable = true;
             // 
             // btnGradeCancelar
             // 
             this.btnGradeCancelar.Enabled = false;
-            this.btnGradeCancelar.Location = new System.Drawing.Point(581, 38);
+            this.btnGradeCancelar.Location = new System.Drawing.Point(536, 36);
             this.btnGradeCancelar.Name = "btnGradeCancelar";
             this.btnGradeCancelar.Size = new System.Drawing.Size(67, 23);
             this.btnGradeCancelar.TabIndex = 15;
             this.btnGradeCancelar.Text = "Cancelar";
             this.btnGradeCancelar.UseSelectable = true;
+            this.btnGradeCancelar.Click += new System.EventHandler(this.btnGradeCancelar_Click);
             // 
             // btnGradeConfirmar
             // 
             this.btnGradeConfirmar.Enabled = false;
-            this.btnGradeConfirmar.Location = new System.Drawing.Point(509, 38);
+            this.btnGradeConfirmar.Location = new System.Drawing.Point(464, 36);
             this.btnGradeConfirmar.Name = "btnGradeConfirmar";
             this.btnGradeConfirmar.Size = new System.Drawing.Size(66, 23);
             this.btnGradeConfirmar.TabIndex = 14;
             this.btnGradeConfirmar.Text = "Confirmar";
             this.btnGradeConfirmar.UseSelectable = true;
+            this.btnGradeConfirmar.Click += new System.EventHandler(this.btnGradeConfirmar_Click);
             // 
             // lblAdicionarGrade
             // 
@@ -600,42 +610,11 @@
             this.lblAdicionarGrade.TabIndex = 13;
             this.lblAdicionarGrade.Text = "Adicionar Grade";
             // 
-            // txtGradeCodigoBarras
-            // 
-            // 
-            // 
-            // 
-            this.txtGradeCodigoBarras.CustomButton.Image = null;
-            this.txtGradeCodigoBarras.CustomButton.Location = new System.Drawing.Point(97, 1);
-            this.txtGradeCodigoBarras.CustomButton.Name = "";
-            this.txtGradeCodigoBarras.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtGradeCodigoBarras.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtGradeCodigoBarras.CustomButton.TabIndex = 1;
-            this.txtGradeCodigoBarras.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtGradeCodigoBarras.CustomButton.UseSelectable = true;
-            this.txtGradeCodigoBarras.CustomButton.Visible = false;
-            this.txtGradeCodigoBarras.Lines = new string[0];
-            this.txtGradeCodigoBarras.Location = new System.Drawing.Point(8, 38);
-            this.txtGradeCodigoBarras.MaxLength = 32767;
-            this.txtGradeCodigoBarras.Name = "txtGradeCodigoBarras";
-            this.txtGradeCodigoBarras.PasswordChar = '\0';
-            this.txtGradeCodigoBarras.PromptText = "Código de Barras";
-            this.txtGradeCodigoBarras.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtGradeCodigoBarras.SelectedText = "";
-            this.txtGradeCodigoBarras.SelectionLength = 0;
-            this.txtGradeCodigoBarras.SelectionStart = 0;
-            this.txtGradeCodigoBarras.ShortcutsEnabled = true;
-            this.txtGradeCodigoBarras.Size = new System.Drawing.Size(119, 23);
-            this.txtGradeCodigoBarras.TabIndex = 12;
-            this.txtGradeCodigoBarras.UseSelectable = true;
-            this.txtGradeCodigoBarras.WaterMark = "Código de Barras";
-            this.txtGradeCodigoBarras.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtGradeCodigoBarras.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
             // pnlProdutoItem
             // 
             this.pnlProdutoItem.Controls.Add(this.grpAdicionarGrade);
             this.pnlProdutoItem.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlProdutoItem.Enabled = false;
             this.pnlProdutoItem.HorizontalScrollbarBarColor = true;
             this.pnlProdutoItem.HorizontalScrollbarHighlightOnWheel = false;
             this.pnlProdutoItem.HorizontalScrollbarSize = 10;
@@ -646,7 +625,6 @@
             this.pnlProdutoItem.VerticalScrollbarBarColor = true;
             this.pnlProdutoItem.VerticalScrollbarHighlightOnWheel = false;
             this.pnlProdutoItem.VerticalScrollbarSize = 10;
-            this.pnlProdutoItem.Visible = false;
             // 
             // pblProdutoBottom
             // 
@@ -676,51 +654,66 @@
             this.pnlProdutoGrade.VerticalScrollbarBarColor = true;
             this.pnlProdutoGrade.VerticalScrollbarHighlightOnWheel = false;
             this.pnlProdutoGrade.VerticalScrollbarSize = 10;
-            this.pnlProdutoGrade.Visible = false;
             // 
             // grdProdutoGrade
             // 
+            this.grdProdutoGrade.AllowUserToAddRows = false;
+            this.grdProdutoGrade.AllowUserToDeleteRows = false;
+            this.grdProdutoGrade.AllowUserToOrderColumns = true;
             this.grdProdutoGrade.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.grdProdutoGrade.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.grdProdutoGrade.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.grdProdutoGrade.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.grdProdutoGrade.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.grdProdutoGrade.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.grdProdutoGrade.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdProdutoGrade.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.grdProdutoGrade.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdProdutoGrade.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdProdutoGrade.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.grdProdutoGrade.ColumnHeadersHeight = 22;
+            this.grdProdutoGrade.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grdProdutoGrade.DefaultCellStyle = dataGridViewCellStyle3;
             this.grdProdutoGrade.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdProdutoGrade.EnableHeadersVisualStyles = false;
             this.grdProdutoGrade.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.grdProdutoGrade.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.grdProdutoGrade.Location = new System.Drawing.Point(0, 0);
+            this.grdProdutoGrade.MultiSelect = false;
             this.grdProdutoGrade.Name = "grdProdutoGrade";
+            this.grdProdutoGrade.ReadOnly = true;
             this.grdProdutoGrade.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdProdutoGrade.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdProdutoGrade.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.grdProdutoGrade.RowHeadersVisible = false;
             this.grdProdutoGrade.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.grdProdutoGrade.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.grdProdutoGrade.RowTemplate.ReadOnly = true;
+            this.grdProdutoGrade.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.grdProdutoGrade.ShowEditingIcon = false;
             this.grdProdutoGrade.Size = new System.Drawing.Size(679, 254);
-            this.grdProdutoGrade.TabIndex = 2;
+            this.grdProdutoGrade.StandardTab = true;
+            this.grdProdutoGrade.TabIndex = 3;
+            this.grdProdutoGrade.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdProdutoGrade_CellDoubleClick);
+            this.grdProdutoGrade.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.grdProdutoGrade_RowPostPaint);
+            this.grdProdutoGrade.KeyUp += new System.Windows.Forms.KeyEventHandler(this.grdProdutoGrade_KeyUp);
             // 
             // FormProduto
             // 
@@ -731,10 +724,11 @@
             this.Controls.Add(this.pblProdutoBottom);
             this.Controls.Add(this.pnlProdutoItem);
             this.Controls.Add(this.pnlProduto);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(719, 703);
             this.Name = "FormProduto";
             this.Text = "Cadastro de Produto";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.FormProduto_Load);
             this.pnlProduto.ResumeLayout(false);
             this.grpProduto.ResumeLayout(false);
@@ -774,17 +768,16 @@
         public MetroFramework.Controls.MetroButton btnNovoProduto;
         private System.Windows.Forms.GroupBox grpAdicionarGrade;
         public MetroFramework.Controls.MetroTextBox txtValorCusto;
-        public MetroFramework.Controls.MetroTextBox txtGradeDV;
         public MetroFramework.Controls.MetroTextBox txtValorSaida;
         public MetroFramework.Controls.MetroComboBox cbbGradeTamanho;
         public MetroFramework.Controls.MetroComboBox cbbGradeCor;
         public MetroFramework.Controls.MetroButton btnGradeCancelar;
         public MetroFramework.Controls.MetroButton btnGradeConfirmar;
         private MetroFramework.Controls.MetroLabel lblAdicionarGrade;
-        public MetroFramework.Controls.MetroTextBox txtGradeCodigoBarras;
         private MetroFramework.Controls.MetroPanel pnlProdutoItem;
         private MetroFramework.Controls.MetroPanel pblProdutoBottom;
         private MetroFramework.Controls.MetroPanel pnlProdutoGrade;
-        private MetroFramework.Controls.MetroGrid grdProdutoGrade;
+        public MetroFramework.Controls.MetroGrid grdProdutoGrade;
+        public MetroFramework.Controls.MetroTextBox txtGradeDV;
     }
 }

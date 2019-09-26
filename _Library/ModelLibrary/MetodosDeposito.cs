@@ -382,7 +382,7 @@ namespace ModelLibrary
 
         }
 
-        public static void SalvarProduto(string pModo, Produto pProduto, long pCodigoProduto = 0)
+        public static void SalvarProduto(string pModo, Produto pProduto, long pProdutoId = 0)
         {
 
             using (DepositoDBEntities deposito = new DepositoDBEntities())
@@ -396,7 +396,7 @@ namespace ModelLibrary
 
                 } else
                 {
-                    var produto = deposito.Produto.SingleOrDefault(pd => pd.Id == pCodigoProduto);
+                    var produto = deposito.Produto.SingleOrDefault(pd => pd.Id == pProdutoId);
                     if (produto != null)
                     {
 
@@ -404,8 +404,16 @@ namespace ModelLibrary
                         produto.CategoriaId = pProduto.CategoriaId;
                         produto.FornecedorId = pProduto.FornecedorId;
                         produto.Unidade = pProduto.Unidade;
-                        produto.CodigoBarras = pProduto.CodigoBarras;
-                        pProduto.Digito = pProduto.Digito;
+
+                        if (produto.CodigoBarras != pProduto.CodigoBarras)
+                        {
+
+                            produto.CodigoBarras = pProduto.CodigoBarras;
+                            string query = "UPDATE ProdutoGrade SET CodigoBarras = @p0 WHERE ProdutoId = @p1";
+                            deposito.Database.ExecuteSqlCommand(query, pProduto.CodigoBarras, pProdutoId);
+                        }
+                        
+                        produto.Digito = pProduto.Digito;
 
                         deposito.SaveChanges();
                     }
@@ -416,6 +424,39 @@ namespace ModelLibrary
         }
 
 
+        public static void ExcluirProduto (long pProdutoId)
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                var produto = deposito.Produto.SingleOrDefault(pd => pd.Id == pProdutoId);
+
+
+                produto.Status = "0";
+
+                deposito.SaveChanges();
+
+            }
+
+
+        }
+
+
+        public static List<ListaProdutoGrade> ObterListaProdutosGrade(long pProdutoId)
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {               
+
+                string query = @"SELECT Id, CodigoBarras, Digito, Cor, Tamanho, ValorSaida, ValorCusto, DataFinal
+                                    FROM ProdutoGrade 
+                                WHERE ProdutoId = @p0";
+
+                var result = deposito.Database.SqlQuery<ListaProdutoGrade>(query, pProdutoId);
+
+                return result.ToList<ListaProdutoGrade>();
+            }
+
+        }
 
         public static ProdutoGrade ObterProdutoGrade(string pCodigo)
         {
@@ -433,6 +474,92 @@ namespace ModelLibrary
 
                 return produtograde;
             }
+
+        }
+
+
+        public static int ObterUltimoProdutoGrade(int pProdutoId)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+                var maxDV = deposito.ProdutoGrade.OrderByDescending(i => i.Digito).Where(pg => pg.ProdutoId == pProdutoId).FirstOrDefault();
+
+                int DV = maxDV == null ? 1 : Convert.ToInt32(maxDV.Digito) + 1;
+
+
+                return DV;
+            }
+
+        }
+
+
+        public static void ProdutoGradeExcluir(int pProdutoGradeId)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+                var produto = deposito.ProdutoGrade.SingleOrDefault(pd => pd.Id == pProdutoGradeId);
+
+
+                produto.DataFinal = DateTime.Now;
+
+                deposito.SaveChanges();
+
+            }
+            
+        }
+
+        public static bool ProdutoGradeValidarDV(int pProdutoId, string pDigito)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                var DV = deposito.ProdutoGrade.OrderByDescending(i => i.Digito).Where(pg => pg.ProdutoId == pProdutoId && pg.Digito == pDigito).FirstOrDefault();
+
+                if (DV == null)
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+
+
+            }                
+
+
+        }
+
+        public static void SalvarProdutoGrade(ProdutoGrade pProdutoGrade, int pProdutoGradeId = 0)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+                if (pProdutoGradeId == 0) //INSERIR
+                {
+                    deposito.ProdutoGrade.Add(pProdutoGrade);
+                    deposito.SaveChanges();
+
+                }
+                else // atualizar
+                {
+                    var produtograde = deposito.ProdutoGrade.SingleOrDefault(pd => pd.Id == pProdutoGradeId);
+                    if (produtograde != null)
+                    {
+
+                        produtograde.Digito = pProdutoGrade.Digito;
+                        produtograde.Tamanho = pProdutoGrade.Tamanho;
+                        produtograde.Cor = pProdutoGrade.Cor;
+                        produtograde.ValorCusto = pProdutoGrade.ValorCusto;
+                        produtograde.ValorSaida = pProdutoGrade.ValorSaida;
+                        deposito.SaveChanges();
+                    }
+                }
+            }
+
+
 
         }
 
