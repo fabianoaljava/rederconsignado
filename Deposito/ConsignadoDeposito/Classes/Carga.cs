@@ -335,35 +335,46 @@ namespace ConsignadoDeposito
 
                 var produto = ModelLibrary.MetodosDeposito.ObterProduto(produtograde.CodigoBarras);
 
-                localDepositoForm.txtCargaProduto.Text = produto.Descricao;
 
-                if (localDepositoForm.txtCargaCodigoBarras.Text != produtograde.CodigoBarras + produtograde.Digito)
+                if (produtograde.Status != "1" || produto.Status != "1")
                 {
-                    localDepositoForm.txtCargaCodigoBarras.Text = produtograde.CodigoBarras + produtograde.Digito;
-                    if (localDepositoForm.chkCargaQuantidade.Checked == false)
+
+                    MessageBox.Show("Este produto foi excluído e não pode ser inserido na carga.");
+
+                } else
+                {
+                    localDepositoForm.txtCargaProduto.Text = produto.Descricao;
+
+                    if (localDepositoForm.txtCargaCodigoBarras.Text != produtograde.CodigoBarras + produtograde.Digito)
                     {
-                        localDepositoForm.chkCargaQuantidade.Checked = true;
-                        localDepositoForm.txtCargaQuantidade.Enabled = true;
+                        localDepositoForm.txtCargaCodigoBarras.Text = produtograde.CodigoBarras + produtograde.Digito;
+                        if (localDepositoForm.chkCargaQuantidade.Checked == false)
+                        {
+                            localDepositoForm.chkCargaQuantidade.Checked = true;
+                            localDepositoForm.txtCargaQuantidade.Enabled = true;
+                        }
+                    }
+
+
+
+                    cCargaProdutoGradeId = produtograde.Id;
+
+                    localDepositoForm.btnCargaConfirmar.Enabled = true;
+                    localDepositoForm.btnCargaCancelar.Enabled = true;
+
+                    if (localDepositoForm.chkCargaQuantidade.Checked)
+                    {
+                        localDepositoForm.txtCargaQuantidade.Focus();
+
+                    }
+                    else
+                    {
+                        //inserir direto qtd=1
+                        InserirCargaProdutoGrade();
                     }
                 }
 
-
-
-                cCargaProdutoGradeId = produtograde.Id;
-
-                localDepositoForm.btnCargaConfirmar.Enabled = true;
-                localDepositoForm.btnCargaCancelar.Enabled = true;
-
-                if (localDepositoForm.chkCargaQuantidade.Checked)
-                {
-                    localDepositoForm.txtCargaQuantidade.Focus();
-
-                }
-                else
-                {
-                    //inserir direto qtd=1
-                    InserirCargaProdutoGrade();
-                }
+                
 
             }
             else

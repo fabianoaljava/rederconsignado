@@ -353,45 +353,57 @@ namespace ConsignadoDeposito
             var produtograde = ModelLibrary.MetodosDeposito.ObterProdutoGrade(pCodigo);
 
             if (produtograde != null)
-            {
+            {              
 
                 var produto = ModelLibrary.MetodosDeposito.ObterProduto(produtograde.CodigoBarras);
 
-                localDepositoForm.txtRetornoProduto.Text = produto.Descricao;
-
-                if (localDepositoForm.txtRetornoCodigoBarras.Text != produtograde.CodigoBarras + produtograde.Digito)
+                if (produtograde.Status != "1" || produto.Status != "1")
                 {
-                    localDepositoForm.txtRetornoCodigoBarras.Text = produtograde.CodigoBarras + produtograde.Digito;
-                    if (localDepositoForm.chkRetornoQuantidade.Checked == false)
+
+                    MessageBox.Show("Este produto foi excluído e não pode ser retornado.");
+                     
+                } else
+                {
+
+                    localDepositoForm.txtRetornoProduto.Text = produto.Descricao;
+
+                    if (localDepositoForm.txtRetornoCodigoBarras.Text != produtograde.CodigoBarras + produtograde.Digito)
                     {
-                        localDepositoForm.chkRetornoQuantidade.Checked = true;
-                        localDepositoForm.txtRetornoQuantidade.Enabled = true;
+                        localDepositoForm.txtRetornoCodigoBarras.Text = produtograde.CodigoBarras + produtograde.Digito;
+                        if (localDepositoForm.chkRetornoQuantidade.Checked == false)
+                        {
+                            localDepositoForm.chkRetornoQuantidade.Checked = true;
+                            localDepositoForm.txtRetornoQuantidade.Enabled = true;
+                        }
                     }
+
+
+
+                    cRetornoProdutoGradeId = produtograde.Id;
+
+
+                    localDepositoForm.btnRetornoConfirmar.Enabled = true;
+                    localDepositoForm.btnRetornoCancelar.Enabled = true;
+
+                    if (localDepositoForm.chkRetornoQuantidade.Checked)
+                    {
+                        localDepositoForm.txtRetornoQuantidade.Focus();
+
+                    }
+                    else
+                    {
+                        //inserir direto qtd=1
+                        var cargaproduto = ModelLibrary.MetodosDeposito.ObterProdutoCarga(cRetornoId, cRetornoProdutoGradeId);
+
+                        double tempQtd = cargaproduto.Retorno.Value;
+                        localDepositoForm.txtRetornoQuantidade.Text = (tempQtd + 1).ToString();
+                        AlterarRetornoProdutoGrade();
+
+                    }
+
                 }
 
-
-
-                cRetornoProdutoGradeId = produtograde.Id;
-
-
-                localDepositoForm.btnRetornoConfirmar.Enabled = true;
-                localDepositoForm.btnRetornoCancelar.Enabled = true;
-
-                if (localDepositoForm.chkRetornoQuantidade.Checked)
-                {
-                    localDepositoForm.txtRetornoQuantidade.Focus();
-
-                }
-                else
-                {
-                    //inserir direto qtd=1
-                    var cargaproduto = ModelLibrary.MetodosDeposito.ObterProdutoCarga(cRetornoId, cRetornoProdutoGradeId);
-
-                    double tempQtd = cargaproduto.Retorno.Value;
-                    localDepositoForm.txtRetornoQuantidade.Text = (tempQtd + 1).ToString();
-                    AlterarRetornoProdutoGrade();
-
-                }
+                
 
             }
             else
@@ -877,19 +889,27 @@ namespace ConsignadoDeposito
 
                     var produto = ModelLibrary.MetodosDeposito.ObterProduto(produtograde.CodigoBarras);
 
+                    if (produtograde.Status != "1" || produto.Status != "1")
+                    {
+
+                        MessageBox.Show("Este produto foi excluído e não pode ser inserido no pedido.");
+
+                    } else
+                    {
+                        localDepositoForm.txtLancPedProduto.Text = produto.Descricao;
+                        localDepositoForm.txtLancPedQuantidade.Text = "";
+                        localDepositoForm.txtLancPedQtdRetorno.Text = "";
+                        localDepositoForm.txtLancPedPreco.Text = produtograde.ValorSaida.ToString();
+
+                        localDepositoForm.txtLancPedQuantidade.Focus();
+                        cRetornoPedidoProdutoGradeId = produtograde.Id;
+                        cModoRetornoPedidoItem = "Insert";
+
+                        localDepositoForm.btnLancPedConfirmar.Enabled = true;
+                        localDepositoForm.btnLancPedCancelar.Enabled = true;
+                    }
 
 
-                    localDepositoForm.txtLancPedProduto.Text = produto.Descricao;
-                    localDepositoForm.txtLancPedQuantidade.Text = "";
-                    localDepositoForm.txtLancPedQtdRetorno.Text = "";
-                    localDepositoForm.txtLancPedPreco.Text = produtograde.ValorSaida.ToString();
-
-                    localDepositoForm.txtLancPedQuantidade.Focus();
-                    cRetornoPedidoProdutoGradeId = produtograde.Id;
-                    cModoRetornoPedidoItem = "Insert";
-
-                    localDepositoForm.btnLancPedConfirmar.Enabled = true;
-                    localDepositoForm.btnLancPedCancelar.Enabled = true;
                 }
                 else
                 {
