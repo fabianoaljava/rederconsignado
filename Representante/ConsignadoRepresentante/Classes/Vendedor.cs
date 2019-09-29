@@ -238,7 +238,50 @@ namespace ConsignadoRepresentante
 
                         if (MessageBox.Show("O CPF/CNPJ informado está cadastrado em uma outra carga. Deseja carregar os dados e continuar com a inclusão?", "Reder Consignado", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                         {
-                            VendedorBaseExibir(vendedorbase.Id);
+                            if (vendedorbase.PedidoAberto != "")
+                            {
+                                MessageBox.Show(vendedorbase.PedidoAberto, "Reder Consignado", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                                VendedorLimpar();
+
+                            } else
+                            {
+
+                                if (vendedorbase.DebitoAReceber > 0)
+                                {
+                                    if (MessageBox.Show("O vendedor possui débitos anteriores no valor de " + vendedorbase.DebitoAReceber.ToString() + ". Deseja registrar o recebimento deste pagamento?", "Reder Consignado", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                                    {
+                                        Decimal valorrecebido = ControllerLibrary.Funcoes.ShowDialogNumeric("Informe o valor recebido", "Valor");
+
+                                        if (valorrecebido != vendedorbase.DebitoAReceber)
+                                        {
+                                            if (MessageBox.Show("O valor informado foi " + valorrecebido.ToString() + " e está diferente do débito anterior = " + vendedorbase.DebitoAReceber  + ". O cadastro do vendedor só será permitido após o recebimento total do débito. Deseja registrar o pagamento mesmo assim?", "Reder Consignado", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                                            {
+                                                ModelLibrary.MetodosRepresentante.ReceberExtra(vendedorbase.Id, localRepresentanteForm.cCargaId, valorrecebido, vendedorbase.DebitoAReceber);
+                                                
+                                            }
+
+                                            VendedorLimpar();
+
+                                        } else
+                                        {
+
+                                            ModelLibrary.MetodosRepresentante.ReceberExtra(vendedorbase.Id, localRepresentanteForm.cCargaId, valorrecebido, vendedorbase.DebitoAReceber);
+                                            VendedorBaseExibir(vendedorbase.Id);
+
+                                        }
+                                        
+                                    } else
+                                    {
+                                        VendedorLimpar();
+                                    }
+
+                                } else
+                                {
+                                    VendedorBaseExibir(vendedorbase.Id);
+                                }
+                            }
+                            
                         }
                         else
                         {

@@ -1222,6 +1222,86 @@ namespace ModelLibrary
 
         }
 
+
+        public static void ReceberExtra(long pVendedorId, long pCargaId, decimal pValor, Nullable<decimal> pValorAReceber)
+        {
+
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+
+                Console.WriteLine("Criando titulo a receber.");
+
+                var maxReceber = representante.RepReceber.OrderByDescending(i => i.Id).FirstOrDefault();
+
+                long newReceberId = maxReceber == null ? 1 : maxReceber.Id + 1;
+
+
+                var novoreceber = new RepReceber
+                {
+                    Id = newReceberId,
+                    VendedorId = pVendedorId,
+                    CargaId = pCargaId,
+                    Documento = pVendedorId,
+                    Serie = DateTime.Now.Month.ToString() + (DateTime.Now.Year.ToString()).Substring(2, 2),
+                    ValorNF = pValor,
+                    ValorDuplicata = pValorAReceber,
+                    ValorAReceber = pValorAReceber,
+                    DataEmissao = DateTime.Now,
+                    DataVencimento = DateTime.Now,
+                    DataPagamento = DateTime.Now,
+                    Observacoes = "Título Gerado pelo Representante",
+                    Status = "1"                  
+                };
+
+                representante.RepReceber.Add(novoreceber);
+
+                representante.SaveChanges();
+
+
+                Console.WriteLine("Criando baixa de titulo a receber.");
+
+                var maxReceberBaixa = representante.RepReceberBaixa.OrderByDescending(i => i.Id).FirstOrDefault();
+
+                long newId = maxReceberBaixa == null ? 1 : maxReceberBaixa.Id + 1;
+
+
+                var novoreceberbaixa = new RepReceberBaixa
+                {
+                    Id = newId,
+                    ReceberId = newReceberId,
+                    CargaId = pCargaId,
+                    Valor = pValor,
+                    DataPagamento = DateTime.Now,
+                    DataBaixa = DateTime.Now
+                };
+
+                representante.RepReceberBaixa.Add(novoreceberbaixa);
+
+                representante.SaveChanges();
+
+
+                Console.WriteLine("Atualizando Vendedor.");
+
+                var vendedorbase = representante.RepVendedorBase.SingleOrDefault(vd => vd.Id == pVendedorId);
+
+                if (vendedorbase != null)
+                {
+                    vendedorbase.DebitoAReceber = vendedorbase.DebitoAReceber - pValor;
+                }
+
+
+                representante.SaveChanges();
+
+
+
+
+
+            }
+
+
+
+        }
+
         public static List<ListaRepPosicaoFinanceira> ObterPosicaoFinanceira()
         {
 

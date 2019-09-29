@@ -1096,6 +1096,23 @@ namespace ModelLibrary
 
                     foreach (var row in deposito.Vendedor)
                     {
+
+                        Pedido pedidoaberto = ModelLibrary.MetodosDeposito.ObterPedidosAbertoVendedor(row.Id);
+
+                        string vPedidoAberto = "";
+
+                        if (pedidoaberto != null)
+                        {
+                            Carga carga = ModelLibrary.MetodosDeposito.ObterCargaById(pedidoaberto.CargaId);
+
+                            vPedidoAberto = "O vendedor possui pedido anterior em aberto para a carga # " + pedidoaberto.CargaId.ToString() + " | Praça #: " + carga.PracaId.ToString() + " | Representante # " + carga.RepresentanteId.ToString();
+                        }
+
+
+
+                        Nullable<double> vDebitoAReceber = ModelLibrary.MetodosDeposito.ObterValorAReceberVendedor(row.Id);
+
+                        
                         var newReg = new RepVendedorBase
                         {
                             Id = row.Id,
@@ -1120,7 +1137,10 @@ namespace ModelLibrary
                             LimitePedido = Convert.ToDecimal(row.LimitePedido),
                             LimiteCredito = Convert.ToDecimal(row.LimiteCredito),
                             Status = row.Status,
-                            Observacao = row.Observacao
+                            Observacao = row.Observacao,
+                            PedidoAberto = vPedidoAberto,
+                            DebitoAReceber = Convert.ToDecimal(vDebitoAReceber)
+
                         };
 
                         newVendedorBase.Add(newReg);

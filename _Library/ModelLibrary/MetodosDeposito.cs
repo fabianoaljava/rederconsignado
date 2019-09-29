@@ -132,6 +132,18 @@ namespace ModelLibrary
         }
 
 
+        public static Carga ObterCargaById(long pCargaId)
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                var carga = deposito.Carga.FirstOrDefault(c => c.Id == pCargaId);
+
+                return carga;
+
+            }
+        }
+
         public static Carga ObterCargaAnterior(long pRepresentanteId, long pPracaId, DateTime pDataAbertura)
         {
             using (DepositoDBEntities deposito = new DepositoDBEntities())

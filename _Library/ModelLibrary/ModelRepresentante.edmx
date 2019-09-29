@@ -322,6 +322,8 @@
           <Property Name="LimiteCredito" Type="decimal" Precision="53" Scale="0" />
           <Property Name="Status" Type="nvarchar" MaxLength="2147483647" />
           <Property Name="Observacao" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="PedidoAberto" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="DebitoAReceber" Type="decimal" Precision="53" Scale="0" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'main.RepRepresentante' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -640,6 +642,8 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <Property Name="LimiteCredito" Type="Decimal" Precision="53" Scale="0" />
           <Property Name="Status" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
           <Property Name="Observacao" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="PedidoAberto" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="DebitoAReceber" Type="Decimal" Precision="53" Scale="0" />
         </EntityType>
         <EntityType Name="RepReceber">
           <Key>
@@ -963,6 +967,8 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <EntitySetMapping Name="RepVendedorBase">
             <EntityTypeMapping TypeName="ModelRepresentante.RepVendedorBase">
               <MappingFragment StoreEntitySet="RepVendedorBase">
+                <ScalarProperty Name="DebitoAReceber" ColumnName="DebitoAReceber" />
+                <ScalarProperty Name="PedidoAberto" ColumnName="PedidoAberto" />
                 <ScalarProperty Name="Observacao" ColumnName="Observacao" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="LimiteCredito" ColumnName="LimiteCredito" />
