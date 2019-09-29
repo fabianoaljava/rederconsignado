@@ -363,7 +363,7 @@ namespace ModelLibrary
         {
             using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
-                return deposito.Produto.ToList<Produto>();
+                return deposito.Produto.Where(pd => pd.Status == "1").ToList<Produto>();
             }
         }
 
@@ -431,8 +431,11 @@ namespace ModelLibrary
 
                 var produto = deposito.Produto.SingleOrDefault(pd => pd.Id == pProdutoId);
 
-
                 produto.Status = "0";
+
+                string query = "UPDATE ProdutoGrade SET Status = '0', DataFinal = GetDate() WHERE ProdutoId = @p0";
+                deposito.Database.ExecuteSqlCommand(query, pProdutoId);
+
 
                 deposito.SaveChanges();
 
@@ -499,11 +502,11 @@ namespace ModelLibrary
 
             using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
-                var produto = deposito.ProdutoGrade.SingleOrDefault(pd => pd.Id == pProdutoGradeId);
+                var produtograde = deposito.ProdutoGrade.SingleOrDefault(pd => pd.Id == pProdutoGradeId);
 
 
-                produto.DataFinal = DateTime.Now;
-
+                produtograde.DataFinal = DateTime.Now;
+                produtograde.Status = "0";
                 deposito.SaveChanges();
 
             }

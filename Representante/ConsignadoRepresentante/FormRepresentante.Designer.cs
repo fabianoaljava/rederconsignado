@@ -77,20 +77,6 @@
             this.chkVendedorComPedidoAnterior = new MetroFramework.Controls.MetroCheckBox();
             this.pnlHomeGrid = new MetroFramework.Controls.MetroPanel();
             this.grdHome = new MetroFramework.Controls.MetroGrid();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.documentoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.enderecoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.complementoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bairroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cidadeUFDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.telefonesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pedidoAnteriorDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.recebidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pedidoAtualDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.codigoPedidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.receberDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.listaRepVendedorHomeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabVendedores = new System.Windows.Forms.TabPage();
             this.pnlVendedorResultado = new MetroFramework.Controls.MetroPanel();
             this.tbcVendedor = new MetroFramework.Controls.MetroTabControl();
@@ -279,6 +265,24 @@
             this.grdEstoque = new MetroFramework.Controls.MetroGrid();
             this.tabAjuda = new System.Windows.Forms.TabPage();
             this.pnlAjuda = new MetroFramework.Drawing.Html.HtmlPanel();
+            this.lblPedidoLimite = new MetroFramework.Controls.MetroLabel();
+            this.dlbPedidoLimite = new MetroFramework.Controls.MetroLabel();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.documentoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.enderecoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.complementoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bairroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cidadeUFDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.telefonesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pedidoAnteriorDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.recebidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pedidoAtualDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.codigoPedidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.receberDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.listaRepVendedorHomeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.lblRetornoValorCompra = new MetroFramework.Controls.MetroLabel();
+            this.dlbRetornoValorCompra = new MetroFramework.Controls.MetroLabel();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
@@ -289,7 +293,6 @@
             this.pnlHomeFiltros.SuspendLayout();
             this.pnlHomeGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdHome)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.listaRepVendedorHomeBindingSource)).BeginInit();
             this.tabVendedores.SuspendLayout();
             this.pnlVendedorResultado.SuspendLayout();
             this.tbcVendedor.SuspendLayout();
@@ -327,6 +330,7 @@
             this.pnlEstoqueMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdEstoque)).BeginInit();
             this.tabAjuda.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.listaRepVendedorHomeBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -625,101 +629,6 @@
             this.grdHome.VirtualMode = true;
             this.grdHome.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdHome_CellContentDoubleClick);
             // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.Width = 40;
-            // 
-            // nomeDataGridViewTextBoxColumn
-            // 
-            this.nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
-            this.nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
-            this.nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
-            this.nomeDataGridViewTextBoxColumn.Width = 60;
-            // 
-            // documentoDataGridViewTextBoxColumn
-            // 
-            this.documentoDataGridViewTextBoxColumn.DataPropertyName = "Documento";
-            this.documentoDataGridViewTextBoxColumn.HeaderText = "Documento";
-            this.documentoDataGridViewTextBoxColumn.Name = "documentoDataGridViewTextBoxColumn";
-            this.documentoDataGridViewTextBoxColumn.Width = 90;
-            // 
-            // enderecoDataGridViewTextBoxColumn
-            // 
-            this.enderecoDataGridViewTextBoxColumn.DataPropertyName = "Endereco";
-            this.enderecoDataGridViewTextBoxColumn.HeaderText = "Endereco";
-            this.enderecoDataGridViewTextBoxColumn.Name = "enderecoDataGridViewTextBoxColumn";
-            this.enderecoDataGridViewTextBoxColumn.Width = 78;
-            // 
-            // complementoDataGridViewTextBoxColumn
-            // 
-            this.complementoDataGridViewTextBoxColumn.DataPropertyName = "Complemento";
-            this.complementoDataGridViewTextBoxColumn.HeaderText = "Complemento";
-            this.complementoDataGridViewTextBoxColumn.Name = "complementoDataGridViewTextBoxColumn";
-            this.complementoDataGridViewTextBoxColumn.Width = 102;
-            // 
-            // bairroDataGridViewTextBoxColumn
-            // 
-            this.bairroDataGridViewTextBoxColumn.DataPropertyName = "Bairro";
-            this.bairroDataGridViewTextBoxColumn.HeaderText = "Bairro";
-            this.bairroDataGridViewTextBoxColumn.Name = "bairroDataGridViewTextBoxColumn";
-            this.bairroDataGridViewTextBoxColumn.Width = 61;
-            // 
-            // cidadeUFDataGridViewTextBoxColumn
-            // 
-            this.cidadeUFDataGridViewTextBoxColumn.DataPropertyName = "CidadeUF";
-            this.cidadeUFDataGridViewTextBoxColumn.HeaderText = "CidadeUF";
-            this.cidadeUFDataGridViewTextBoxColumn.Name = "cidadeUFDataGridViewTextBoxColumn";
-            this.cidadeUFDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // telefonesDataGridViewTextBoxColumn
-            // 
-            this.telefonesDataGridViewTextBoxColumn.DataPropertyName = "Telefones";
-            this.telefonesDataGridViewTextBoxColumn.HeaderText = "Telefones";
-            this.telefonesDataGridViewTextBoxColumn.Name = "telefonesDataGridViewTextBoxColumn";
-            this.telefonesDataGridViewTextBoxColumn.Width = 78;
-            // 
-            // pedidoAnteriorDataGridViewCheckBoxColumn
-            // 
-            this.pedidoAnteriorDataGridViewCheckBoxColumn.DataPropertyName = "PedidoAnterior";
-            this.pedidoAnteriorDataGridViewCheckBoxColumn.HeaderText = "PedidoAnterior";
-            this.pedidoAnteriorDataGridViewCheckBoxColumn.Name = "pedidoAnteriorDataGridViewCheckBoxColumn";
-            this.pedidoAnteriorDataGridViewCheckBoxColumn.Width = 89;
-            // 
-            // recebidoDataGridViewTextBoxColumn
-            // 
-            this.recebidoDataGridViewTextBoxColumn.DataPropertyName = "Recebido";
-            this.recebidoDataGridViewTextBoxColumn.HeaderText = "Recebido";
-            this.recebidoDataGridViewTextBoxColumn.Name = "recebidoDataGridViewTextBoxColumn";
-            this.recebidoDataGridViewTextBoxColumn.Width = 78;
-            // 
-            // pedidoAtualDataGridViewCheckBoxColumn
-            // 
-            this.pedidoAtualDataGridViewCheckBoxColumn.DataPropertyName = "PedidoAtual";
-            this.pedidoAtualDataGridViewCheckBoxColumn.HeaderText = "PedidoAtual";
-            this.pedidoAtualDataGridViewCheckBoxColumn.Name = "pedidoAtualDataGridViewCheckBoxColumn";
-            this.pedidoAtualDataGridViewCheckBoxColumn.Width = 74;
-            // 
-            // codigoPedidoDataGridViewTextBoxColumn
-            // 
-            this.codigoPedidoDataGridViewTextBoxColumn.DataPropertyName = "CodigoPedido";
-            this.codigoPedidoDataGridViewTextBoxColumn.HeaderText = "CodigoPedido";
-            this.codigoPedidoDataGridViewTextBoxColumn.Name = "codigoPedidoDataGridViewTextBoxColumn";
-            this.codigoPedidoDataGridViewTextBoxColumn.Width = 104;
-            // 
-            // receberDataGridViewCheckBoxColumn
-            // 
-            this.receberDataGridViewCheckBoxColumn.DataPropertyName = "Receber";
-            this.receberDataGridViewCheckBoxColumn.HeaderText = "Receber";
-            this.receberDataGridViewCheckBoxColumn.Name = "receberDataGridViewCheckBoxColumn";
-            this.receberDataGridViewCheckBoxColumn.Width = 52;
-            // 
-            // listaRepVendedorHomeBindingSource
-            // 
-            this.listaRepVendedorHomeBindingSource.DataSource = typeof(ModelLibrary.ListaRepVendedorHome);
-            // 
             // tabVendedores
             // 
             this.tabVendedores.Controls.Add(this.pnlVendedorResultado);
@@ -755,7 +664,7 @@
             this.tbcVendedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcVendedor.Location = new System.Drawing.Point(0, 0);
             this.tbcVendedor.Name = "tbcVendedor";
-            this.tbcVendedor.SelectedIndex = 4;
+            this.tbcVendedor.SelectedIndex = 3;
             this.tbcVendedor.Size = new System.Drawing.Size(960, 370);
             this.tbcVendedor.TabIndex = 2;
             this.tbcVendedor.UseSelectable = true;
@@ -820,9 +729,9 @@
             this.lblInicioLimiteCredUtilizado.AutoSize = true;
             this.lblInicioLimiteCredUtilizado.Location = new System.Drawing.Point(415, 88);
             this.lblInicioLimiteCredUtilizado.Name = "lblInicioLimiteCredUtilizado";
-            this.lblInicioLimiteCredUtilizado.Size = new System.Drawing.Size(102, 19);
+            this.lblInicioLimiteCredUtilizado.Size = new System.Drawing.Size(120, 19);
             this.lblInicioLimiteCredUtilizado.TabIndex = 25;
-            this.lblInicioLimiteCredUtilizado.Text = "Limite Utilizado:";
+            this.lblInicioLimiteCredUtilizado.Text = "Débito em Aberto:";
             // 
             // dlbLimiteCredito
             // 
@@ -858,9 +767,9 @@
             this.lblInicioLimitePedUtilizado.AutoSize = true;
             this.lblInicioLimitePedUtilizado.Location = new System.Drawing.Point(152, 88);
             this.lblInicioLimitePedUtilizado.Name = "lblInicioLimitePedUtilizado";
-            this.lblInicioLimitePedUtilizado.Size = new System.Drawing.Size(102, 19);
+            this.lblInicioLimitePedUtilizado.Size = new System.Drawing.Size(87, 19);
             this.lblInicioLimitePedUtilizado.TabIndex = 21;
-            this.lblInicioLimitePedUtilizado.Text = "Limite Utilizado:";
+            this.lblInicioLimitePedUtilizado.Text = "Pedido Atual:";
             // 
             // dlbLimitePedido
             // 
@@ -2028,6 +1937,8 @@
             // 
             // pnlVendedorPedidoMontar
             // 
+            this.pnlVendedorPedidoMontar.Controls.Add(this.lblPedidoLimite);
+            this.pnlVendedorPedidoMontar.Controls.Add(this.dlbPedidoLimite);
             this.pnlVendedorPedidoMontar.Controls.Add(this.txtPedidoPrecoOriginal);
             this.pnlVendedorPedidoMontar.Controls.Add(this.txtPedidoQtdOriginal);
             this.pnlVendedorPedidoMontar.Controls.Add(this.lblPedidoTotal);
@@ -2059,7 +1970,7 @@
             // 
             // 
             this.txtPedidoPrecoOriginal.CustomButton.Image = null;
-            this.txtPedidoPrecoOriginal.CustomButton.Location = new System.Drawing.Point(77, 1);
+            this.txtPedidoPrecoOriginal.CustomButton.Location = new System.Drawing.Point(36, 1);
             this.txtPedidoPrecoOriginal.CustomButton.Name = "";
             this.txtPedidoPrecoOriginal.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.txtPedidoPrecoOriginal.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -2068,7 +1979,7 @@
             this.txtPedidoPrecoOriginal.CustomButton.UseSelectable = true;
             this.txtPedidoPrecoOriginal.CustomButton.Visible = false;
             this.txtPedidoPrecoOriginal.Lines = new string[0];
-            this.txtPedidoPrecoOriginal.Location = new System.Drawing.Point(840, 39);
+            this.txtPedidoPrecoOriginal.Location = new System.Drawing.Point(556, 7);
             this.txtPedidoPrecoOriginal.MaxLength = 32767;
             this.txtPedidoPrecoOriginal.Name = "txtPedidoPrecoOriginal";
             this.txtPedidoPrecoOriginal.PasswordChar = '\0';
@@ -2078,7 +1989,7 @@
             this.txtPedidoPrecoOriginal.SelectionLength = 0;
             this.txtPedidoPrecoOriginal.SelectionStart = 0;
             this.txtPedidoPrecoOriginal.ShortcutsEnabled = true;
-            this.txtPedidoPrecoOriginal.Size = new System.Drawing.Size(99, 23);
+            this.txtPedidoPrecoOriginal.Size = new System.Drawing.Size(58, 23);
             this.txtPedidoPrecoOriginal.TabIndex = 39;
             this.txtPedidoPrecoOriginal.TabStop = false;
             this.txtPedidoPrecoOriginal.UseSelectable = true;
@@ -2093,7 +2004,7 @@
             // 
             // 
             this.txtPedidoQtdOriginal.CustomButton.Image = null;
-            this.txtPedidoQtdOriginal.CustomButton.Location = new System.Drawing.Point(77, 1);
+            this.txtPedidoQtdOriginal.CustomButton.Location = new System.Drawing.Point(35, 1);
             this.txtPedidoQtdOriginal.CustomButton.Name = "";
             this.txtPedidoQtdOriginal.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.txtPedidoQtdOriginal.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -2102,7 +2013,7 @@
             this.txtPedidoQtdOriginal.CustomButton.UseSelectable = true;
             this.txtPedidoQtdOriginal.CustomButton.Visible = false;
             this.txtPedidoQtdOriginal.Lines = new string[0];
-            this.txtPedidoQtdOriginal.Location = new System.Drawing.Point(840, 10);
+            this.txtPedidoQtdOriginal.Location = new System.Drawing.Point(620, 7);
             this.txtPedidoQtdOriginal.MaxLength = 32767;
             this.txtPedidoQtdOriginal.Name = "txtPedidoQtdOriginal";
             this.txtPedidoQtdOriginal.PasswordChar = '\0';
@@ -2112,7 +2023,7 @@
             this.txtPedidoQtdOriginal.SelectionLength = 0;
             this.txtPedidoQtdOriginal.SelectionStart = 0;
             this.txtPedidoQtdOriginal.ShortcutsEnabled = true;
-            this.txtPedidoQtdOriginal.Size = new System.Drawing.Size(99, 23);
+            this.txtPedidoQtdOriginal.Size = new System.Drawing.Size(57, 23);
             this.txtPedidoQtdOriginal.TabIndex = 38;
             this.txtPedidoQtdOriginal.TabStop = false;
             this.txtPedidoQtdOriginal.UseSelectable = true;
@@ -2135,7 +2046,7 @@
             this.dlbPedidoTotal.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.dlbPedidoTotal.Location = new System.Drawing.Point(760, 36);
             this.dlbPedidoTotal.Name = "dlbPedidoTotal";
-            this.dlbPedidoTotal.Size = new System.Drawing.Size(170, 23);
+            this.dlbPedidoTotal.Size = new System.Drawing.Size(90, 23);
             this.dlbPedidoTotal.TabIndex = 28;
             this.dlbPedidoTotal.Text = "N/A";
             // 
@@ -2145,7 +2056,7 @@
             // 
             // 
             this.txtPedidoProdutoGradeId.CustomButton.Image = null;
-            this.txtPedidoProdutoGradeId.CustomButton.Location = new System.Drawing.Point(77, 1);
+            this.txtPedidoProdutoGradeId.CustomButton.Location = new System.Drawing.Point(45, 1);
             this.txtPedidoProdutoGradeId.CustomButton.Name = "";
             this.txtPedidoProdutoGradeId.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.txtPedidoProdutoGradeId.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -2154,7 +2065,7 @@
             this.txtPedidoProdutoGradeId.CustomButton.UseSelectable = true;
             this.txtPedidoProdutoGradeId.CustomButton.Visible = false;
             this.txtPedidoProdutoGradeId.Lines = new string[0];
-            this.txtPedidoProdutoGradeId.Location = new System.Drawing.Point(651, 7);
+            this.txtPedidoProdutoGradeId.Location = new System.Drawing.Point(683, 7);
             this.txtPedidoProdutoGradeId.MaxLength = 32767;
             this.txtPedidoProdutoGradeId.Name = "txtPedidoProdutoGradeId";
             this.txtPedidoProdutoGradeId.PasswordChar = '\0';
@@ -2164,7 +2075,7 @@
             this.txtPedidoProdutoGradeId.SelectionLength = 0;
             this.txtPedidoProdutoGradeId.SelectionStart = 0;
             this.txtPedidoProdutoGradeId.ShortcutsEnabled = true;
-            this.txtPedidoProdutoGradeId.Size = new System.Drawing.Size(99, 23);
+            this.txtPedidoProdutoGradeId.Size = new System.Drawing.Size(67, 23);
             this.txtPedidoProdutoGradeId.TabIndex = 27;
             this.txtPedidoProdutoGradeId.TabStop = false;
             this.txtPedidoProdutoGradeId.UseSelectable = true;
@@ -2468,6 +2379,8 @@
             // 
             // pnlVendedorRetorno
             // 
+            this.pnlVendedorRetorno.Controls.Add(this.lblRetornoValorCompra);
+            this.pnlVendedorRetorno.Controls.Add(this.dlbRetornoValorCompra);
             this.pnlVendedorRetorno.Controls.Add(this.txtRetornoPreco);
             this.pnlVendedorRetorno.Controls.Add(this.txtRetornoQtdPedido);
             this.pnlVendedorRetorno.Controls.Add(this.lblRetornoTotalPedido);
@@ -2498,7 +2411,7 @@
             // 
             // 
             this.txtRetornoPreco.CustomButton.Image = null;
-            this.txtRetornoPreco.CustomButton.Location = new System.Drawing.Point(77, 1);
+            this.txtRetornoPreco.CustomButton.Location = new System.Drawing.Point(28, 1);
             this.txtRetornoPreco.CustomButton.Name = "";
             this.txtRetornoPreco.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.txtRetornoPreco.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -2507,7 +2420,7 @@
             this.txtRetornoPreco.CustomButton.UseSelectable = true;
             this.txtRetornoPreco.CustomButton.Visible = false;
             this.txtRetornoPreco.Lines = new string[0];
-            this.txtRetornoPreco.Location = new System.Drawing.Point(847, 35);
+            this.txtRetornoPreco.Location = new System.Drawing.Point(649, 6);
             this.txtRetornoPreco.MaxLength = 32767;
             this.txtRetornoPreco.Name = "txtRetornoPreco";
             this.txtRetornoPreco.PasswordChar = '\0';
@@ -2517,7 +2430,7 @@
             this.txtRetornoPreco.SelectionLength = 0;
             this.txtRetornoPreco.SelectionStart = 0;
             this.txtRetornoPreco.ShortcutsEnabled = true;
-            this.txtRetornoPreco.Size = new System.Drawing.Size(99, 23);
+            this.txtRetornoPreco.Size = new System.Drawing.Size(50, 23);
             this.txtRetornoPreco.TabIndex = 37;
             this.txtRetornoPreco.TabStop = false;
             this.txtRetornoPreco.UseSelectable = true;
@@ -2532,7 +2445,7 @@
             // 
             // 
             this.txtRetornoQtdPedido.CustomButton.Image = null;
-            this.txtRetornoQtdPedido.CustomButton.Location = new System.Drawing.Point(77, 1);
+            this.txtRetornoQtdPedido.CustomButton.Location = new System.Drawing.Point(21, 1);
             this.txtRetornoQtdPedido.CustomButton.Name = "";
             this.txtRetornoQtdPedido.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.txtRetornoQtdPedido.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -2541,7 +2454,7 @@
             this.txtRetornoQtdPedido.CustomButton.UseSelectable = true;
             this.txtRetornoQtdPedido.CustomButton.Visible = false;
             this.txtRetornoQtdPedido.Lines = new string[0];
-            this.txtRetornoQtdPedido.Location = new System.Drawing.Point(847, 6);
+            this.txtRetornoQtdPedido.Location = new System.Drawing.Point(600, 6);
             this.txtRetornoQtdPedido.MaxLength = 32767;
             this.txtRetornoQtdPedido.Name = "txtRetornoQtdPedido";
             this.txtRetornoQtdPedido.PasswordChar = '\0';
@@ -2551,7 +2464,7 @@
             this.txtRetornoQtdPedido.SelectionLength = 0;
             this.txtRetornoQtdPedido.SelectionStart = 0;
             this.txtRetornoQtdPedido.ShortcutsEnabled = true;
-            this.txtRetornoQtdPedido.Size = new System.Drawing.Size(99, 23);
+            this.txtRetornoQtdPedido.Size = new System.Drawing.Size(43, 23);
             this.txtRetornoQtdPedido.TabIndex = 36;
             this.txtRetornoQtdPedido.TabStop = false;
             this.txtRetornoQtdPedido.UseSelectable = true;
@@ -2574,7 +2487,7 @@
             this.dlbRetornoTotalPedido.FontWeight = MetroFramework.MetroLabelWeight.Bold;
             this.dlbRetornoTotalPedido.Location = new System.Drawing.Point(757, 33);
             this.dlbRetornoTotalPedido.Name = "dlbRetornoTotalPedido";
-            this.dlbRetornoTotalPedido.Size = new System.Drawing.Size(170, 23);
+            this.dlbRetornoTotalPedido.Size = new System.Drawing.Size(91, 23);
             this.dlbRetornoTotalPedido.TabIndex = 34;
             this.dlbRetornoTotalPedido.Text = "N/A";
             // 
@@ -2584,7 +2497,7 @@
             // 
             // 
             this.txtRetornoProdutoGradeId.CustomButton.Image = null;
-            this.txtRetornoProdutoGradeId.CustomButton.Location = new System.Drawing.Point(77, 1);
+            this.txtRetornoProdutoGradeId.CustomButton.Location = new System.Drawing.Point(25, 1);
             this.txtRetornoProdutoGradeId.CustomButton.Name = "";
             this.txtRetornoProdutoGradeId.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.txtRetornoProdutoGradeId.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -2593,7 +2506,7 @@
             this.txtRetornoProdutoGradeId.CustomButton.UseSelectable = true;
             this.txtRetornoProdutoGradeId.CustomButton.Visible = false;
             this.txtRetornoProdutoGradeId.Lines = new string[0];
-            this.txtRetornoProdutoGradeId.Location = new System.Drawing.Point(652, 6);
+            this.txtRetornoProdutoGradeId.Location = new System.Drawing.Point(704, 6);
             this.txtRetornoProdutoGradeId.MaxLength = 32767;
             this.txtRetornoProdutoGradeId.Name = "txtRetornoProdutoGradeId";
             this.txtRetornoProdutoGradeId.PasswordChar = '\0';
@@ -2603,7 +2516,7 @@
             this.txtRetornoProdutoGradeId.SelectionLength = 0;
             this.txtRetornoProdutoGradeId.SelectionStart = 0;
             this.txtRetornoProdutoGradeId.ShortcutsEnabled = true;
-            this.txtRetornoProdutoGradeId.Size = new System.Drawing.Size(99, 23);
+            this.txtRetornoProdutoGradeId.Size = new System.Drawing.Size(47, 23);
             this.txtRetornoProdutoGradeId.TabIndex = 33;
             this.txtRetornoProdutoGradeId.TabStop = false;
             this.txtRetornoProdutoGradeId.UseSelectable = true;
@@ -3305,8 +3218,9 @@
             // btnPedidoImpRetorno
             // 
             this.btnPedidoImpRetorno.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPedidoImpRetorno.Enabled = false;
             this.btnPedidoImpRetorno.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.btnPedidoImpRetorno.Location = new System.Drawing.Point(792, 11);
+            this.btnPedidoImpRetorno.Location = new System.Drawing.Point(709, 11);
             this.btnPedidoImpRetorno.Name = "btnPedidoImpRetorno";
             this.btnPedidoImpRetorno.Size = new System.Drawing.Size(77, 59);
             this.btnPedidoImpRetorno.TabIndex = 32;
@@ -3317,8 +3231,9 @@
             // btnPedidoImprimir
             // 
             this.btnPedidoImprimir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPedidoImprimir.Enabled = false;
             this.btnPedidoImprimir.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.btnPedidoImprimir.Location = new System.Drawing.Point(709, 11);
+            this.btnPedidoImprimir.Location = new System.Drawing.Point(626, 11);
             this.btnPedidoImprimir.Name = "btnPedidoImprimir";
             this.btnPedidoImprimir.Size = new System.Drawing.Size(77, 59);
             this.btnPedidoImprimir.TabIndex = 31;
@@ -3331,7 +3246,7 @@
             this.btnNovoPedido.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNovoPedido.Enabled = false;
             this.btnNovoPedido.FontWeight = MetroFramework.MetroButtonWeight.Regular;
-            this.btnNovoPedido.Location = new System.Drawing.Point(626, 11);
+            this.btnNovoPedido.Location = new System.Drawing.Point(792, 11);
             this.btnNovoPedido.Name = "btnNovoPedido";
             this.btnNovoPedido.Size = new System.Drawing.Size(77, 59);
             this.btnNovoPedido.TabIndex = 30;
@@ -3967,6 +3882,137 @@
             this.pnlAjuda.TabIndex = 0;
             this.pnlAjuda.Text = "<b>Conteudo da Ajuda</b> <br> <i>Em breve...</i>";
             // 
+            // lblPedidoLimite
+            // 
+            this.lblPedidoLimite.AutoSize = true;
+            this.lblPedidoLimite.Location = new System.Drawing.Point(854, 13);
+            this.lblPedidoLimite.Name = "lblPedidoLimite";
+            this.lblPedidoLimite.Size = new System.Drawing.Size(92, 19);
+            this.lblPedidoLimite.TabIndex = 41;
+            this.lblPedidoLimite.Text = "Limite Pedido:";
+            // 
+            // dlbPedidoLimite
+            // 
+            this.dlbPedidoLimite.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.dlbPedidoLimite.Location = new System.Drawing.Point(854, 36);
+            this.dlbPedidoLimite.Name = "dlbPedidoLimite";
+            this.dlbPedidoLimite.Size = new System.Drawing.Size(90, 23);
+            this.dlbPedidoLimite.TabIndex = 40;
+            this.dlbPedidoLimite.Text = "N/A";
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.Width = 40;
+            // 
+            // nomeDataGridViewTextBoxColumn
+            // 
+            this.nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
+            this.nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
+            this.nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
+            this.nomeDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // documentoDataGridViewTextBoxColumn
+            // 
+            this.documentoDataGridViewTextBoxColumn.DataPropertyName = "Documento";
+            this.documentoDataGridViewTextBoxColumn.HeaderText = "Documento";
+            this.documentoDataGridViewTextBoxColumn.Name = "documentoDataGridViewTextBoxColumn";
+            this.documentoDataGridViewTextBoxColumn.Width = 90;
+            // 
+            // enderecoDataGridViewTextBoxColumn
+            // 
+            this.enderecoDataGridViewTextBoxColumn.DataPropertyName = "Endereco";
+            this.enderecoDataGridViewTextBoxColumn.HeaderText = "Endereco";
+            this.enderecoDataGridViewTextBoxColumn.Name = "enderecoDataGridViewTextBoxColumn";
+            this.enderecoDataGridViewTextBoxColumn.Width = 78;
+            // 
+            // complementoDataGridViewTextBoxColumn
+            // 
+            this.complementoDataGridViewTextBoxColumn.DataPropertyName = "Complemento";
+            this.complementoDataGridViewTextBoxColumn.HeaderText = "Complemento";
+            this.complementoDataGridViewTextBoxColumn.Name = "complementoDataGridViewTextBoxColumn";
+            this.complementoDataGridViewTextBoxColumn.Width = 102;
+            // 
+            // bairroDataGridViewTextBoxColumn
+            // 
+            this.bairroDataGridViewTextBoxColumn.DataPropertyName = "Bairro";
+            this.bairroDataGridViewTextBoxColumn.HeaderText = "Bairro";
+            this.bairroDataGridViewTextBoxColumn.Name = "bairroDataGridViewTextBoxColumn";
+            this.bairroDataGridViewTextBoxColumn.Width = 61;
+            // 
+            // cidadeUFDataGridViewTextBoxColumn
+            // 
+            this.cidadeUFDataGridViewTextBoxColumn.DataPropertyName = "CidadeUF";
+            this.cidadeUFDataGridViewTextBoxColumn.HeaderText = "CidadeUF";
+            this.cidadeUFDataGridViewTextBoxColumn.Name = "cidadeUFDataGridViewTextBoxColumn";
+            this.cidadeUFDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // telefonesDataGridViewTextBoxColumn
+            // 
+            this.telefonesDataGridViewTextBoxColumn.DataPropertyName = "Telefones";
+            this.telefonesDataGridViewTextBoxColumn.HeaderText = "Telefones";
+            this.telefonesDataGridViewTextBoxColumn.Name = "telefonesDataGridViewTextBoxColumn";
+            this.telefonesDataGridViewTextBoxColumn.Width = 78;
+            // 
+            // pedidoAnteriorDataGridViewCheckBoxColumn
+            // 
+            this.pedidoAnteriorDataGridViewCheckBoxColumn.DataPropertyName = "PedidoAnterior";
+            this.pedidoAnteriorDataGridViewCheckBoxColumn.HeaderText = "PedidoAnterior";
+            this.pedidoAnteriorDataGridViewCheckBoxColumn.Name = "pedidoAnteriorDataGridViewCheckBoxColumn";
+            this.pedidoAnteriorDataGridViewCheckBoxColumn.Width = 89;
+            // 
+            // recebidoDataGridViewTextBoxColumn
+            // 
+            this.recebidoDataGridViewTextBoxColumn.DataPropertyName = "Recebido";
+            this.recebidoDataGridViewTextBoxColumn.HeaderText = "Recebido";
+            this.recebidoDataGridViewTextBoxColumn.Name = "recebidoDataGridViewTextBoxColumn";
+            this.recebidoDataGridViewTextBoxColumn.Width = 78;
+            // 
+            // pedidoAtualDataGridViewCheckBoxColumn
+            // 
+            this.pedidoAtualDataGridViewCheckBoxColumn.DataPropertyName = "PedidoAtual";
+            this.pedidoAtualDataGridViewCheckBoxColumn.HeaderText = "PedidoAtual";
+            this.pedidoAtualDataGridViewCheckBoxColumn.Name = "pedidoAtualDataGridViewCheckBoxColumn";
+            this.pedidoAtualDataGridViewCheckBoxColumn.Width = 74;
+            // 
+            // codigoPedidoDataGridViewTextBoxColumn
+            // 
+            this.codigoPedidoDataGridViewTextBoxColumn.DataPropertyName = "CodigoPedido";
+            this.codigoPedidoDataGridViewTextBoxColumn.HeaderText = "CodigoPedido";
+            this.codigoPedidoDataGridViewTextBoxColumn.Name = "codigoPedidoDataGridViewTextBoxColumn";
+            this.codigoPedidoDataGridViewTextBoxColumn.Width = 104;
+            // 
+            // receberDataGridViewCheckBoxColumn
+            // 
+            this.receberDataGridViewCheckBoxColumn.DataPropertyName = "Receber";
+            this.receberDataGridViewCheckBoxColumn.HeaderText = "Receber";
+            this.receberDataGridViewCheckBoxColumn.Name = "receberDataGridViewCheckBoxColumn";
+            this.receberDataGridViewCheckBoxColumn.Width = 52;
+            // 
+            // listaRepVendedorHomeBindingSource
+            // 
+            this.listaRepVendedorHomeBindingSource.DataSource = typeof(ModelLibrary.ListaRepVendedorHome);
+            // 
+            // lblRetornoValorCompra
+            // 
+            this.lblRetornoValorCompra.AutoSize = true;
+            this.lblRetornoValorCompra.Location = new System.Drawing.Point(854, 10);
+            this.lblRetornoValorCompra.Name = "lblRetornoValorCompra";
+            this.lblRetornoValorCompra.Size = new System.Drawing.Size(94, 19);
+            this.lblRetornoValorCompra.TabIndex = 39;
+            this.lblRetornoValorCompra.Text = "Valor Compra:";
+            // 
+            // dlbRetornoValorCompra
+            // 
+            this.dlbRetornoValorCompra.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.dlbRetornoValorCompra.Location = new System.Drawing.Point(854, 33);
+            this.dlbRetornoValorCompra.Name = "dlbRetornoValorCompra";
+            this.dlbRetornoValorCompra.Size = new System.Drawing.Size(84, 23);
+            this.dlbRetornoValorCompra.TabIndex = 38;
+            this.dlbRetornoValorCompra.Text = "N/A";
+            // 
             // FormRepresentante
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3992,7 +4038,6 @@
             this.pnlHomeFiltros.PerformLayout();
             this.pnlHomeGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdHome)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.listaRepVendedorHomeBindingSource)).EndInit();
             this.tabVendedores.ResumeLayout(false);
             this.pnlVendedorResultado.ResumeLayout(false);
             this.tbcVendedor.ResumeLayout(false);
@@ -4042,6 +4087,7 @@
             this.pnlEstoqueMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdEstoque)).EndInit();
             this.tabAjuda.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.listaRepVendedorHomeBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -4269,5 +4315,9 @@
         public MetroFramework.Controls.MetroComboBox cbbProdutoSaldo;
         public MetroFramework.Controls.MetroButton btnPedidoImprimir;
         public MetroFramework.Controls.MetroButton btnPedidoImpRetorno;
+        private MetroFramework.Controls.MetroLabel lblPedidoLimite;
+        public MetroFramework.Controls.MetroLabel dlbPedidoLimite;
+        private MetroFramework.Controls.MetroLabel lblRetornoValorCompra;
+        public MetroFramework.Controls.MetroLabel dlbRetornoValorCompra;
     }
 }

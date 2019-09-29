@@ -145,7 +145,7 @@ namespace ModelLibrary
 
                 vTable = new ListaImportacaoExportacao();
 
-                count = deposito.Produto.Count();
+                count = deposito.Produto.Where(pd => pd.Status == "1").Count();
 
                 vTable.Tabela = "Produto";
                 vTable.Acao = "Importar Produtos";
@@ -158,7 +158,7 @@ namespace ModelLibrary
 
                 vTable = new ListaImportacaoExportacao();
 
-                count = deposito.ProdutoGrade.Count();
+                count = deposito.ProdutoGrade.Where(pg => pg.DataFinal == null && pg.Status == "1").Count();
 
                 vTable.Tabela = "ProdutoGrade";
                 vTable.Acao = "Importar Grade de Produtos";
@@ -700,7 +700,7 @@ namespace ModelLibrary
                 using (DepositoDBEntities deposito = new DepositoDBEntities())
                 {
 
-                    foreach (var row in deposito.Produto)
+                    foreach (var row in deposito.Produto.Where(pd => pd.Status == "1"))
                     {
                         var newReg = new RepProduto
                         {
@@ -759,7 +759,7 @@ namespace ModelLibrary
                 using (DepositoDBEntities deposito = new DepositoDBEntities())
                 {
 
-                    foreach (var row in deposito.ProdutoGrade)
+                    foreach (var row in deposito.ProdutoGrade.Where(pg => pg.DataFinal == null && pg.Status == "1"))
                     {
                         var newReg = new RepProdutoGrade
                         {

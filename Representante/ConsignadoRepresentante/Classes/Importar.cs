@@ -107,14 +107,43 @@ namespace ConsignadoRepresentante
             localDeposito.txtImportarCodRepresentante.Text = "";
             localDeposito.txtImportarCodRepresentante.WaterMark = "Cod. Representante";
             localDeposito.cbbImportarMesAno.ResetText();
-            localDeposito.tbcImportarConferencia.Visible = false;
+            //localDeposito.tbcImportarConferencia.Visible = false;
             localDeposito.txtConfCodigoBarras.Text = "";
             localDeposito.txtConfProduto.Text = "";
             localDeposito.txtConfQuantidade.Text = "";
             localDeposito.btnConferenciaConfirmar.Enabled = false;
 
+
+
+
+
+            localDeposito.dlbQtdProdutos.Text = "0.00";
+            localDeposito.dlbTotalProdutos.Text = "0.00";
+
+            localDeposito.dlbImportarDataAbertura.Text = "-";
+            localDeposito.dlbCargaDataExportacao.Text = "-";
+            localDeposito.dlbImportarDataRetorno.Text = "-";
+            localDeposito.dlbImportarDataConferencia.Text = "-";
+            localDeposito.dlbImportarDataFinalizacao.Text = "-";
+
+
+            localDeposito.dlbCargaAnteriorDataAbertura.Text = "-";
+            localDeposito.dlbCargaAnteriorDataExportacao.Text = "-";
+            localDeposito.dlbCargaAnteriorDataRetorno.Text = "-";
+            localDeposito.dlbCargaAnteriorDataConferencia.Text = "-";
+            localDeposito.dlbCargaAnteriorDataFinalizacao.Text = "-";
+
+
+
             localDeposito.pnlImportarPesquisa.Enabled = true;
             localDeposito.pnlExportacaoMain.Enabled = true;
+
+
+            //Desativar aba conferencia de produtos 
+            localDeposito.pnlConferirProduto.Enabled = false;
+
+            //Desativar aba suplemento
+            localDeposito.pnlSuplementoTop.Enabled = false;
         }
 
 
@@ -367,10 +396,12 @@ namespace ConsignadoRepresentante
                 localDeposito.pnlConferirProduto.Enabled = false;
 
                 //Desativar aba suplemento
+                localDeposito.pnlSuplementoTop.Enabled = false;
             } else
             {
                 localDeposito.pnlExportacaoMain.Enabled = true;
                 localDeposito.pnlConferirProduto.Enabled = true;
+                localDeposito.pnlSuplementoTop.Enabled = true;
             }
             
 

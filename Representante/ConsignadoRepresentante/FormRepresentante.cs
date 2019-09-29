@@ -712,6 +712,10 @@ namespace ConsignadoRepresentante
             if (vendedorPedido == null)
             {
                 MessageBox.Show("Erro ao imprimir relatório - Não foi possível encontrar pedido.", "Reder - Impressão", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                btnPedidoImprimir.Text = "Imprimir " + Environment.NewLine + "Pedido";
+                btnPedidoImprimir.Enabled = true;
+                Cursor.Current = Cursors.Default;
             }
             else
             {
@@ -763,6 +767,9 @@ namespace ConsignadoRepresentante
             if (vendedorPedido == null)
             {
                 MessageBox.Show("Erro ao imprimir relatório - Não foi possível encontrar pedido.", "Reder - Impressão", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                btnPedidoImpRetorno.Text = "Imprimir " + Environment.NewLine + "Retorno";
+                btnPedidoImpRetorno.Enabled = true;
+                Cursor.Current = Cursors.Default;
             } else
             {
                 List<ModelLibrary.RelatoriosRepresentante.ListaProdutos> vendedorPedidoItem = ModelLibrary.RelatoriosRepresentante.RelatorioVendedorPedidoItem(vendedorPedido.CodigoPedido);

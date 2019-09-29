@@ -312,6 +312,15 @@ namespace ConsignadoRepresentante
 
                 localRepresentanteForm.dlbLimitePedidoUtilizado.Text = string.Format("{0:N}", pedido.ValorPedido);
                 localRepresentanteForm.dlbLimiteCreditoUtilizado.Text = string.Format("{0:N}", creditoutilizado);
+
+                if (creditoutilizado > 0)
+                {
+                    localRepresentanteForm.dlbLimiteCreditoUtilizado.ForeColor = Color.Red;
+                } else
+                {
+                    localRepresentanteForm.dlbLimiteCreditoUtilizado.ForeColor = Color.Black;
+                }
+
                 localRepresentanteForm.btnPedidoImprimir.Enabled = true;
                 localRepresentanteForm.btnPedidoImpRetorno.Enabled = true;
 
@@ -386,8 +395,17 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.txtLimiteCredito.Text = "99999,00";
             localRepresentanteForm.txtObservacao.Text = "";
 
+
+            localRepresentanteForm.txtCPFCnpj.ReadOnly = false;
+            localRepresentanteForm.txtRGInscricao.ReadOnly = false;
+            localRepresentanteForm.cbbTipoPessoa.Enabled = true;
+
+
             localRepresentanteForm.dlbPedidoTotal.Text = "N/A";
             localRepresentanteForm.dlbRetornoTotalPedido.Text = "N/A";
+
+            
+            localRepresentanteForm.dlbRetornoValorCompra.Text = "N/A";
 
 
             cVendedorId = 0;
@@ -402,6 +420,11 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.grdVendedorPedido.DataSource = null;
             localRepresentanteForm.grdVendedorRetorno.DataSource = null;
             localRepresentanteForm.grdFinanceiroRecebimentos.DataSource = null;
+
+
+
+            localRepresentanteForm.btnPedidoImprimir.Enabled = false;
+            localRepresentanteForm.btnPedidoImpRetorno.Enabled = false;
 
         }
 
@@ -467,6 +490,13 @@ namespace ConsignadoRepresentante
                 localRepresentanteForm.txtObservacao.Text = vendedor.Observacao.Trim();
 
                 cVendedorModo = "Edit";
+
+
+                localRepresentanteForm.txtCPFCnpj.ReadOnly = true;
+                localRepresentanteForm.txtRGInscricao.ReadOnly = true;
+                localRepresentanteForm.cbbTipoPessoa.Enabled = false;
+                localRepresentanteForm.txtLimiteCredito.ReadOnly = true;
+                localRepresentanteForm.txtLimitePedido.ReadOnly = true;
 
 
                 localRepresentanteForm.cbbPesqVendedor.Text = vendedor.Nome;
@@ -700,6 +730,9 @@ namespace ConsignadoRepresentante
 
             cVendedorPedidoModo = "Insert";
 
+            localRepresentanteForm.txtPedidoCodigoBarras.Focus();
+
+
 
 
         }
@@ -812,7 +845,10 @@ namespace ConsignadoRepresentante
 
                
                 localRepresentanteForm.dlbPedidoTotal.Text = String.Format("{0:C2}", pedido.ValorPedido);
-                localRepresentanteForm.dlbRetornoTotalPedido.Text = String.Format("{0:C2}", pedido.ValorPedido);                
+                localRepresentanteForm.dlbPedidoLimite.Text = (localRepresentanteForm.txtLimitePedido.Text == "0,00") ? "<ILIMITADO>" : String.Format("{0:C2}", localRepresentanteForm.txtLimitePedido.Text);
+                localRepresentanteForm.dlbRetornoTotalPedido.Text = String.Format("{0:C2}", pedido.ValorPedido);
+
+                localRepresentanteForm.dlbRetornoValorCompra.Text = String.Format("{0:C2}", pedido.ValorCompra);
 
                 if (pedido.DataRetorno != null)
                 {
@@ -905,7 +941,7 @@ namespace ConsignadoRepresentante
                 if (vQuantidade > 0)
                 {
 
-                    decimal valorpedido = Convert.ToDecimal(localRepresentanteForm.txtPedidoQuantidade.Text) * Convert.ToDecimal(localRepresentanteForm.txtPedidoPrecoUnit.Text);
+                    decimal valorpedido = Convert.ToDecimal(vQuantidade) * Convert.ToDecimal(localRepresentanteForm.txtPedidoPrecoUnit.Text);
 
                     var pedidoliberado = PedidoValidar(valorpedido);
 
@@ -1132,6 +1168,9 @@ namespace ConsignadoRepresentante
 
             cVendedorProdRetModo = "Insert";
 
+
+            localRepresentanteForm.txtRetornoCodigoBarras.Focus();
+
         }
 
 
@@ -1161,6 +1200,10 @@ namespace ConsignadoRepresentante
                     localRepresentanteForm.txtRetornoCodigoBarras.Text = localRepresentanteForm.grdVendedorRetorno.Rows[rowIndex].Cells["CodigoBarras"].Value.ToString();
                     localRepresentanteForm.txtRetornoProdutoGradeId.Text = localRepresentanteForm.grdVendedorRetorno.Rows[rowIndex].Cells["ProdutoGradeId"].Value.ToString();
                     localRepresentanteForm.txtRetornoProduto.Text = localRepresentanteForm.grdVendedorRetorno.Rows[rowIndex].Cells["Descricao"].Value.ToString();
+
+
+                    localRepresentanteForm.txtRetornoQtdPedido.Text = localRepresentanteForm.grdVendedorRetorno.CurrentRow.Cells["Quantidade"].Value != null ? localRepresentanteForm.grdVendedorRetorno.CurrentRow.Cells["Quantidade"].Value.ToString() : "";
+                    localRepresentanteForm.txtRetornoPreco.Text = localRepresentanteForm.grdVendedorRetorno.CurrentRow.Cells["Preco"].Value != null ? localRepresentanteForm.grdVendedorRetorno.CurrentRow.Cells["Preco"].Value.ToString() : "";
 
                     /*if (localRepresentanteForm.chkRetornoQuantidade.Checked == false)
                     {
@@ -1207,7 +1250,8 @@ namespace ConsignadoRepresentante
 
 
                 }
-            } catch
+            }
+            catch
             {
                 MessageBox.Show("Ocorreu um erro ao processar Pesquisa de Produto", "Pesquisa de Produto", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -1219,9 +1263,9 @@ namespace ConsignadoRepresentante
                 localRepresentanteForm.btnRetornoConfirmar.Enabled = false;
                 localRepresentanteForm.btnRetornoCancelar.Enabled = false;
             }
-            
 
-            
+
+
         }
 
 

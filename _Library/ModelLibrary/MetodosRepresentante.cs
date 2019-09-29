@@ -306,7 +306,7 @@ namespace ModelLibrary
 
         }
 
-        public static RepProdutoGrade sGrade(string pCodigo)
+        public static RepProdutoGrade ObterProdutoGrade(string pCodigo)
         {
 
             using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
@@ -503,7 +503,7 @@ namespace ModelLibrary
             using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                string query = @"SELECT RepVendedor.Id, Nome, CpfCnpj as Documento, Endereco, Complemento, Bairro, Cidade || UF as CidadeUF, Telefone || '/' || Celular as Telefones,
+                string query = @"SELECT RepVendedor.Id, Nome, CpfCnpj as Documento, Endereco, Complemento, Bairro, Cidade || '/' || UF as CidadeUF, Telefone || '/' || Celular as Telefones,
                                     CASE WHEN PedidoAnterior.VendedorId IS NOT NULL
                                             THEN true
                                             ELSE false
@@ -1300,8 +1300,9 @@ namespace ModelLibrary
 
                 var totalizador = representante.Database.SqlQuery<ListaTotalizadores>(query, pCargaId).FirstOrDefault();
 
-                vTotalizador.QtdProdutos = totalizador.QtdProdutos;
-                vTotalizador.TotalProdutos = totalizador.TotalProdutos;
+
+                vTotalizador.QtdProdutos = (totalizador == null)?0:totalizador.QtdProdutos;
+                vTotalizador.TotalProdutos = (totalizador == null) ? 0 : totalizador.TotalProdutos;
 
                 return vTotalizador;
 
@@ -1364,6 +1365,7 @@ namespace ModelLibrary
                         CargaId = pCargaId,
                         ProdutoGradeId = pProdutoGradeId,
                         Quantidade = pQuantidade,
+                        Retorno = 0,
                         Tipo = "S"
                     };
 
@@ -1401,7 +1403,7 @@ namespace ModelLibrary
                 if (cargaproduto != null)
                 {
                     Console.WriteLine("Alterando Carga Produto (Suplemento)");
-                    cargaproduto.Quantidade = pQuantidade;
+                    cargaproduto.Quantidade = pQuantidade;                    
                     representante.SaveChanges();
                 }              
 

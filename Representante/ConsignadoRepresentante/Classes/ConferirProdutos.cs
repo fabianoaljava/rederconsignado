@@ -114,6 +114,10 @@ namespace ConsignadoRepresentante
 
             localDeposito.tbcImportarConferencia.Visible = true;
 
+            //Desativar aba conferencia de produtos 
+            localDeposito.pnlConferirProduto.Enabled = true;
+
+
 
             List<ModelLibrary.ListaRepProdutosConferencia> prodconferencia = ModelLibrary.MetodosRepresentante.ObterProdutosConferencia(pCargaId);
 

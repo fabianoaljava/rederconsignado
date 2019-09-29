@@ -109,11 +109,13 @@ namespace ConsignadoRepresentante
         public void ExibirSuplementoProduto(long pCargaId)
         {
 
-            Console.WriteLine("Exibindo o Suplemento da CargaID = " + pCargaId.ToString());           
+            Console.WriteLine("Exibindo o Suplemento da CargaID = " + pCargaId.ToString());
 
 
-            
-             List<ModelLibrary.ListaRepCargaProduto> cargaproduto = ModelLibrary.MetodosRepresentante.ObterListaSuplemento();
+            //Desativar aba suplemento
+            localDeposito.pnlSuplementoTop.Enabled = true;
+
+            List<ModelLibrary.ListaRepCargaProduto> cargaproduto = ModelLibrary.MetodosRepresentante.ObterListaSuplemento();
 
             BindingListView<ModelLibrary.ListaRepCargaProduto> view = new BindingListView<ModelLibrary.ListaRepCargaProduto>(cargaproduto);
 

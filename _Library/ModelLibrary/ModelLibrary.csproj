@@ -80,25 +80,25 @@
       <DependentUpon>ModelDeposito.tt</DependentUpon>
     </Compile>
     <Compile Include="ImportarExportar.cs" />
-    <Compile Include="ListaAReceber.cs" />
-    <Compile Include="ListaImportacaoExportacao.cs" />
-    <Compile Include="ListaPedidoItem.cs" />
-    <Compile Include="ListaPedidosFechados.cs" />
-    <Compile Include="ListaPedidosRetorno.cs" />
-    <Compile Include="ListaProdutoConferencia.cs" />
-    <Compile Include="ListaProdutoGrade.cs" />
-    <Compile Include="ListaProdutosConsignados.cs" />
-    <Compile Include="ListaRecebimentos.cs" />
-    <Compile Include="ListaRepCargaProduto.cs" />
-    <Compile Include="ListaRepEstoque.cs" />
-    <Compile Include="ListaRepPosicaoFInanceira.cs" />
-    <Compile Include="ListaRepProdutos.cs" />
-    <Compile Include="ListaRepProdutosCarga.cs" />
-    <Compile Include="ListaProdutosCarga.cs" />
-    <Compile Include="LIstaRepVendedorPedido.cs" />
-    <Compile Include="ListaRepVendedorHome.cs" />
-    <Compile Include="ListaTotalizadores.cs" />
-    <Compile Include="ListaTotalizadoresDeposito.cs" />
+    <Compile Include="Listas\ListaAReceber.cs" />
+    <Compile Include="Listas\ListaImportacaoExportacao.cs" />
+    <Compile Include="Listas\ListaPedidoItem.cs" />
+    <Compile Include="Listas\ListaPedidosFechados.cs" />
+    <Compile Include="Listas\ListaPedidosRetorno.cs" />
+    <Compile Include="Listas\ListaProdutoConferencia.cs" />
+    <Compile Include="Listas\ListaProdutoGrade.cs" />
+    <Compile Include="Listas\ListaProdutosConsignados.cs" />
+    <Compile Include="Listas\ListaRecebimentos.cs" />
+    <Compile Include="Listas\ListaRepCargaProduto.cs" />
+    <Compile Include="Listas\ListaRepEstoque.cs" />
+    <Compile Include="Listas\ListaRepPosicaoFInanceira.cs" />
+    <Compile Include="Listas\ListaRepProdutos.cs" />
+    <Compile Include="Listas\ListaRepProdutosCarga.cs" />
+    <Compile Include="Listas\ListaProdutosCarga.cs" />
+    <Compile Include="Listas\LIstaRepVendedorPedido.cs" />
+    <Compile Include="Listas\ListaRepVendedorHome.cs" />
+    <Compile Include="Listas\ListaTotalizadores.cs" />
+    <Compile Include="Listas\ListaTotalizadoresDeposito.cs" />
     <Compile Include="MetodosDeposito.cs" />
     <Compile Include="MetodosRepresentante.cs" />
     <Compile Include="ModelDeposito.Context.cs">
@@ -180,7 +180,7 @@
     <Compile Include="RepFornecedor.cs">
       <DependentUpon>ModelRepresentante.tt</DependentUpon>
     </Compile>
-    <Compile Include="ListaRepProdutosConferencia.cs" />
+    <Compile Include="Listas\ListaRepProdutosConferencia.cs" />
     <Compile Include="RepPais.cs">
       <DependentUpon>ModelRepresentante.tt</DependentUpon>
     </Compile>
