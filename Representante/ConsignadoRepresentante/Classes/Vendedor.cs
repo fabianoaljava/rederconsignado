@@ -439,6 +439,7 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.txtObservacao.Text = "";
 
 
+            localRepresentanteForm.txtNome.ReadOnly = false;
             localRepresentanteForm.txtCPFCnpj.ReadOnly = false;
             localRepresentanteForm.txtRGInscricao.ReadOnly = false;
             localRepresentanteForm.cbbTipoPessoa.Enabled = true;
@@ -534,7 +535,7 @@ namespace ConsignadoRepresentante
 
                 cVendedorModo = "Edit";
 
-
+                localRepresentanteForm.txtNome.ReadOnly = true;
                 localRepresentanteForm.txtCPFCnpj.ReadOnly = true;
                 localRepresentanteForm.txtRGInscricao.ReadOnly = true;
                 localRepresentanteForm.cbbTipoPessoa.Enabled = false;

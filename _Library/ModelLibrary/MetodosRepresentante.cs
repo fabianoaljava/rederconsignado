@@ -163,6 +163,21 @@ namespace ModelLibrary
         }
 
 
+        public static RepCargaProduto ObterCargaProduto(long pCargaId, long pProdutoId)
+        {
+
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+
+                var cargaproduto = representante.RepCargaProduto.FirstOrDefault(cp => cp.CargaId == pCargaId && cp.ProdutoGradeId == pProdutoId);
+
+                return cargaproduto;
+
+            }
+
+        }
+
+
         public static void AlterarStatusCarga(long pCargaId, string pStatus)
         {
 
@@ -332,6 +347,9 @@ namespace ModelLibrary
             }
 
         }
+
+
+
 
 
         public static Boolean InserirProdutoConferencia(long pCargaId, long pProdutoGradeId, decimal pQuantidade)

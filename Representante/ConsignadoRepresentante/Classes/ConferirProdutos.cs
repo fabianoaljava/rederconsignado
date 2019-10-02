@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -210,6 +211,29 @@ namespace ConsignadoRepresentante
                         }
                     }
 
+
+
+                    if (localDeposito.chkConfQuantidade.Checked)
+                    {
+                        
+
+                        ModelLibrary.RepCargaProduto repCargaProduto = ModelLibrary.MetodosRepresentante.ObterCargaProduto(localDeposito.cCargaId, cImportarProdutoId);
+
+                        if (repCargaProduto!= null)
+                        {
+                            if (vQuantidade != repCargaProduto.Quantidade) //se a quantidade da carga for diferente da informada soar bipe
+                            {
+
+                                System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\RederConsignado\honk.wav");
+                                player.Play();
+
+                            }
+                        }
+
+
+
+                    }
+
                     ExibirConferenciaProduto(localDeposito.cCargaId);
                     ConferenciaProdutoLimpar();
                 }
@@ -279,6 +303,21 @@ namespace ConsignadoRepresentante
             {*/
 
             ModelLibrary.MetodosRepresentante.AlterarProdutoConferencia(localDeposito.cCargaId, cImportarProdutoId, Convert.ToDecimal(localDeposito.txtConfQuantidade.Text));
+
+
+
+            ModelLibrary.RepCargaProduto repCargaProduto = ModelLibrary.MetodosRepresentante.ObterCargaProduto(localDeposito.cCargaId, cImportarProdutoId);
+
+            if (repCargaProduto != null)
+            {
+                if (Convert.ToDecimal(localDeposito.txtConfQuantidade.Text) != repCargaProduto.Quantidade) //se a quantidade da carga for diferente da informada soar bipe
+                {
+
+                    System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\RederConsignado\honk.wav");
+                    player.Play();
+
+                }
+            }
 
             ExibirConferenciaProduto(localDeposito.cCargaId);
 
