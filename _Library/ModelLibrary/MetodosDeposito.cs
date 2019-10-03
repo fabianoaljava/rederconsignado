@@ -473,6 +473,33 @@ namespace ModelLibrary
 
         }
 
+        public static List<ProdutoGrade> ObterProdutosGrade(string pPesquisa)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+                if (pPesquisa != "")
+                {
+                    string vCodigoSemDigito = pPesquisa.Substring(0, pPesquisa.Length - 1);
+                    string vDigito = pPesquisa.Substring(pPesquisa.Length - 1);
+
+                    Console.WriteLine(vCodigoSemDigito + ':' + vDigito);
+
+                    var produtograde = (from pg in deposito.ProdutoGrade
+                                        where ((pg.CodigoBarras == vCodigoSemDigito && pg.Digito == vDigito) || pg.ProdutoId == Convert.ToInt64(pPesquisa))
+                                        select pg).ToList<ProdutoGrade>();
+
+                    return produtograde;
+
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+        }
+
         public static ProdutoGrade ObterProdutoGrade(string pCodigo)
         {
 

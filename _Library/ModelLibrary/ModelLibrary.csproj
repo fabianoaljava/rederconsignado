@@ -95,6 +95,7 @@
     <Compile Include="Listas\ListaRepProdutos.cs" />
     <Compile Include="Listas\ListaRepProdutosCarga.cs" />
     <Compile Include="Listas\ListaProdutosCarga.cs" />
+    <Compile Include="Listas\ListaRepProdutosGrade.cs" />
     <Compile Include="Listas\LIstaRepVendedorPedido.cs" />
     <Compile Include="Listas\ListaRepVendedorHome.cs" />
     <Compile Include="Listas\ListaTotalizadores.cs" />

@@ -268,24 +268,36 @@ namespace ModelLibrary
 
                 if (pCriterio != null)
                 {
-                    if (pCriterio["CodigoBarras"] != "")
+                    if (pCriterio.ContainsKey("CodigoBarras"))
                     {
                         vCriterio = " RepProdutoGrade.CodigoBarras || RepProdutoGrade.Digito LIKE '%" + pCriterio["CodigoBarras"] + "%'";
                     }
 
-                    if (pCriterio["Nome"] != "")
+
+                    if (pCriterio.ContainsKey("CodigoGeral"))
+                    {
+                        vCriterio = "(RepProdutoGrade.CodigoBarras || RepProdutoGrade.Digito = '" + pCriterio["CodigoGeral"] + "') OR RepProdutoGrade.ProdutoId = " + pCriterio["CodigoGeral"];
+                    }
+
+                    if (pCriterio.ContainsKey("Nome"))
                     {
                         vCriterio += vCriterio != "" ? " OR " : ""; 
                         vCriterio += " Descricao LIKE '%" + pCriterio["Nome"] + "%'";
                     }      
-                    
-                    if (pCriterio["SaldoEstoque"] == "Y")
+
+                    if (pCriterio.ContainsKey("SaldoEstoque"))
                     {
-                        vCriterioSoma = " HAVING IFNULL(SUM(RepCargaProduto.Quantidade-RepCargaProduto.Retorno),0) > 0 ";
-                    } else if (pCriterio["SaldoEstoque"] == "N")
-                    {
-                        vCriterioSoma = " HAVING IFNULL(SUM(RepCargaProduto.Quantidade-RepCargaProduto.Retorno),0) = 0 ";
+                        if (pCriterio["SaldoEstoque"] == "Y")
+                        {
+                            vCriterioSoma = " HAVING IFNULL(SUM(RepCargaProduto.Quantidade-RepCargaProduto.Retorno),0) > 0 ";
+                        }
+                        else if (pCriterio["SaldoEstoque"] == "N")
+                        {
+                            vCriterioSoma = " HAVING IFNULL(SUM(RepCargaProduto.Quantidade-RepCargaProduto.Retorno),0) = 0 ";
+                        }
                     }
+                    
+
                 }
 
                 query += vCriterio != "" ? " WHERE " + vCriterio : "";
@@ -321,27 +333,67 @@ namespace ModelLibrary
 
         }
 
-        public static RepProdutoGrade ObterProdutoGrade(string pCodigo)
+
+        public static List<RepProdutoGrade> ObterProdutosGrade(string pPesquisa)
         {
 
             using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
-                if (pCodigo != "")
+                if (pPesquisa != "")
                 {
-                    string vCodigoSemDigito = pCodigo.Substring(0, pCodigo.Length - 1);
-                    string vDigito = pCodigo.Substring(pCodigo.Length - 1);
+                    string vCodigoSemDigito = pPesquisa.Substring(0, pPesquisa.Length - 1);
+                    string vDigito = pPesquisa.Substring(pPesquisa.Length - 1);
+
+                    long vProdutoId = Convert.ToInt64(pPesquisa);
 
                     Console.WriteLine(vCodigoSemDigito + ':' + vDigito);
 
                     var produtograde = (from pg in representante.RepProdutoGrade
-                                        where (pg.CodigoBarras == vCodigoSemDigito && pg.Digito == vDigito)
+                                        where ((pg.CodigoBarras == vCodigoSemDigito && pg.Digito == vDigito) || pg.ProdutoId == vProdutoId)
+                                        select pg).ToList<RepProdutoGrade>();
+
+                    return produtograde;
+
+                } else
+                {
+                    return null;
+                }
+            }
+
+        }
+
+        public static RepProdutoGrade ObterProdutoGrade(string pCodigo, long pProdutoGradeId = 0)
+        {
+
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+
+                if (pProdutoGradeId > 0)
+                {
+                    var produtograde = (from pg in representante.RepProdutoGrade
+                                        where (pg.Id == pProdutoGradeId)
                                         select pg).FirstOrDefault<RepProdutoGrade>();
 
                     return produtograde;
                 } else
                 {
-                    return null;
+                    if (pCodigo != "")
+                    {
+                        string vCodigoSemDigito = pCodigo.Substring(0, pCodigo.Length - 1);
+                        string vDigito = pCodigo.Substring(pCodigo.Length - 1);
+
+                        var produtograde = (from pg in representante.RepProdutoGrade
+                                            where (pg.CodigoBarras == vCodigoSemDigito && pg.Digito == vDigito)
+                                            select pg).FirstOrDefault<RepProdutoGrade>();
+
+                        return produtograde;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
+
 
                 
             }

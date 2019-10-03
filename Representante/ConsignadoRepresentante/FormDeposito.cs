@@ -757,5 +757,11 @@ namespace ConsignadoRepresentante
             }
 
         }
+
+        private void smnRepresentante_Click(object sender, EventArgs e)
+        {
+            FormRepresentante formRepresentante = new FormRepresentante(this, lblUsuario.Text, lblNome.Text);
+            formRepresentante.Show();
+        }
     }
 }

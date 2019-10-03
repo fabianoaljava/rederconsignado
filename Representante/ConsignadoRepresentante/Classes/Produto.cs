@@ -61,8 +61,9 @@ namespace ConsignadoRepresentante
 
             var vCriterio = new Dictionary<string, string>();
 
-            vCriterio["CodigoBarras"] = localRepresentanteForm.txtProdutosCodigoBarras.Text != ""? localRepresentanteForm.txtProdutosCodigoBarras.Text : "";
-            vCriterio["Nome"] = localRepresentanteForm.txtProdutosNome.Text != "" ? localRepresentanteForm.txtProdutosNome.Text : "";
+            if (localRepresentanteForm.txtProdutosCodigoBarras.Text != "") vCriterio["CodigoBarras"] = localRepresentanteForm.txtProdutosCodigoBarras.Text;
+
+            if (localRepresentanteForm.txtProdutosNome.Text != "") vCriterio["Nome"] =  localRepresentanteForm.txtProdutosNome.Text;
 
 
             if (localRepresentanteForm.cbbProdutoSaldo.Text == "Com Saldo em Estoque")
@@ -71,10 +72,7 @@ namespace ConsignadoRepresentante
             }
             else if (localRepresentanteForm.cbbProdutoSaldo.Text == "Sem Saldo em Estoque")
             {
-                vCriterio["SaldoEstoque"] = "N";
-            } else
-            {
-                vCriterio["SaldoEstoque"] = "";
+                vCriterio["SaldoEstoque"] = "N";            
             }
 
             List<ModelLibrary.ListaRepProdutos> produtos = ModelLibrary.MetodosRepresentante.ObterListaProdutos(vCriterio);

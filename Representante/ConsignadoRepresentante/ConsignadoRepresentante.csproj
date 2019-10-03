@@ -183,6 +183,12 @@
     <Compile Include="FormRepresentante.Designer.cs">
       <DependentUpon>FormRepresentante.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modal\FormProdutosGrade.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modal\FormProdutosGrade.Designer.cs">
+      <DependentUpon>FormProdutosGrade.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\Produto.cs" />
     <Compile Include="Classes\Vendedor.cs" />
@@ -222,6 +228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormRepresentante.resx">
       <DependentUpon>FormRepresentante.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modal\FormProdutosGrade.resx">
+      <DependentUpon>FormProdutosGrade.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

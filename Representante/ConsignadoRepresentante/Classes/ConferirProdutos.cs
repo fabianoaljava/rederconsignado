@@ -53,9 +53,42 @@ namespace ConsignadoRepresentante
         public void PesquisarConferenciaProduto(string pCodigo)
         {
 
+            long vProdutoGradeId = 0;
+            List<ModelLibrary.RepProdutoGrade> produtosgrade = ModelLibrary.MetodosRepresentante.ObterProdutosGrade(pCodigo);
+
+            if (produtosgrade != null)
+            {
+                if (produtosgrade.Count > 1)
+                {
+                    Modal.FormProdutosGrade formProdutosGrade = new Modal.FormProdutosGrade(pCodigo);
+
+                    var result = formProdutosGrade.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        vProdutoGradeId = formProdutosGrade.cProdutoGradeId;
+                        ExibirProdutoGrade(vProdutoGradeId);
+                    } else
+                    {
+                        vProdutoGradeId = 0;
+                    }
+                } else
+                {
+                    vProdutoGradeId = produtosgrade.FirstOrDefault().Id;
+                    ExibirProdutoGrade(vProdutoGradeId);
+                }
+            } else
+            {
+                vProdutoGradeId = 0;
+                ExibirProdutoGrade(vProdutoGradeId);
+            }
+            
+        }
 
 
-            var produtograde = ModelLibrary.MetodosRepresentante.ObterProdutoGrade(pCodigo);
+        public void ExibirProdutoGrade(long pProdutoGradeId)
+        {
+            var produtograde = ModelLibrary.MetodosRepresentante.ObterProdutoGrade("", pProdutoGradeId);
 
             if (produtograde != null)
             {
@@ -96,8 +129,8 @@ namespace ConsignadoRepresentante
             else
             {
 
-                MessageBox.Show("Dígito verificador inválido. Não foi possível encontrar a grade deste produto.");
-                
+                MessageBox.Show("Dígito verificador ou Código inválido. Não foi possível encontrar a grade deste produto.");
+
                 cImportarProdutoId = 0;
                 localDeposito.txtConfCodigoBarras.Text = "";
                 localDeposito.txtConfCodigoBarras.Focus();
