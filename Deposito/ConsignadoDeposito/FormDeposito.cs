@@ -68,11 +68,42 @@ namespace ConsignadoDeposito
 
         }
 
+        public void ControlOnlyNumbers(object sender, KeyPressEventArgs e)
+        {
+
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+    (e.KeyChar != ','))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == ',') && ((sender as MetroFramework.Controls.MetroTextBox).Text.IndexOf(',') > -1))
+            {
+                e.Handled = true;
+            }
+
+        }
+
+
+        public void ControlOnlyInt(object sender, KeyPressEventArgs e)
+        {
+
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+
+        }
+
 
         ////////////////////////////////////////
         /// Funções do Formulário Principal
         ////////////////////////////////////////
-        
+
 
 
         public void CarregarDeposito()
@@ -339,17 +370,18 @@ namespace ConsignadoDeposito
                 if (txtCargaCodigoBarras.Text != "")
                 {
                     e.SuppressKeyPress = true;
-                    cCarga.PesquisarCargaProduto(txtCargaCodigoBarras.Text);
+                    //cCarga.PesquisarCargaProduto(txtCargaCodigoBarras.Text);
+                    SendKeys.Send("{TAB}");
                 }
             }
         }
 
         private void txtCargaCodigoBarras_Leave(object sender, EventArgs e)
         {
-            if (txtCargaCodigoBarras.Text != "")
-            {
-                cCarga.PesquisarCargaProduto(txtCargaCodigoBarras.Text);
-            }
+            //if (txtCargaCodigoBarras.Text != "")
+            //{
+            //    cCarga.PesquisarCargaProduto(txtCargaCodigoBarras.Text);
+            //}
         }
 
         private void chkCargaQuantidade_CheckedChanged(object sender, EventArgs e)
@@ -846,7 +878,7 @@ namespace ConsignadoDeposito
         private void btnNovoPedido_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            Forms.FormNovoPedido formNovoPedido = new Forms.FormNovoPedido(this);
+            Modal.FormNovoPedido formNovoPedido = new Modal.FormNovoPedido(this);
             formNovoPedido.Show();
             Cursor.Current = Cursors.Default;
 
@@ -880,9 +912,17 @@ namespace ConsignadoDeposito
         private void menuCadastroProduto_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            Forms.FormProduto formProduto = new Forms.FormProduto(this);
+            Modal.FormProduto formProduto = new Modal.FormProduto(this);
             formProduto.Show();
             Cursor.Current = Cursors.Default;
+        }
+
+        private void txtCargaCodigoBarras_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtCargaCodigoBarras.Text != "")
+            {
+                cCarga.PesquisarCargaProduto(txtCargaCodigoBarras.Text);
+            }
         }
 
 

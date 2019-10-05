@@ -1,4 +1,4 @@
-﻿namespace ConsignadoDeposito.Forms
+﻿namespace ConsignadoDeposito.Modal
 {
     partial class FormNovoPedido
     {

@@ -238,34 +238,44 @@ namespace ConsignadoRepresentante
                     if (ModelLibrary.MetodosRepresentante.InserirProdutoConferencia(localDeposito.cCargaId, cImportarProdutoId, vQuantidade) == false)
                     {
                         if (MessageBox.Show("O produto informado não foi registrado na carga. Deseja incluí-lo como suplemento?", "Produto não encontrado!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        {
-                            //Implementar suplemento posteriormente
-                            MessageBox.Show("Desculpe! Opção Suplemento ainda não implementada no sistema.");
+                        {                                                    
+                            localDeposito.tbcPrincipal.SelectedTab = localDeposito.tabSuplemento;
+
+                            localDeposito.txtSuplCodigoBarras.Text = localDeposito.txtConfCodigoBarras.Text;
+
+                            localDeposito.txtSuplQuantidade.Text = localDeposito.txtConfQuantidade.Text;
+                            localDeposito.txtConfCodigoBarras.Text = "";
+                            localDeposito.txtSuplCodigoBarras.Focus();
+
+
                         }
-                    }
-
-
-
-                    if (localDeposito.chkConfQuantidade.Checked)
+                    } else
                     {
-                        
 
-                        ModelLibrary.RepCargaProduto repCargaProduto = ModelLibrary.MetodosRepresentante.ObterCargaProduto(localDeposito.cCargaId, cImportarProdutoId);
-
-                        if (repCargaProduto!= null)
+                        if (localDeposito.chkConfQuantidade.Checked)
                         {
-                            if (vQuantidade != repCargaProduto.Quantidade) //se a quantidade da carga for diferente da informada soar bipe
+
+
+                            ModelLibrary.RepCargaProduto repCargaProduto = ModelLibrary.MetodosRepresentante.ObterCargaProduto(localDeposito.cCargaId, cImportarProdutoId);
+
+                            if (repCargaProduto != null)
                             {
+                                if (vQuantidade != repCargaProduto.Quantidade) //se a quantidade da carga for diferente da informada soar bipe
+                                {
 
-                                System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\RederConsignado\honk.wav");
-                                player.Play();
+                                    System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\RederConsignado\honk.wav");
+                                    player.Play();
 
+                                }
                             }
+
+
+
                         }
-
-
-
                     }
+
+
+
 
                     ExibirConferenciaProduto(localDeposito.cCargaId);
                     ConferenciaProdutoLimpar();

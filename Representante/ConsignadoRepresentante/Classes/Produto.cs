@@ -61,7 +61,7 @@ namespace ConsignadoRepresentante
 
             var vCriterio = new Dictionary<string, string>();
 
-            if (localRepresentanteForm.txtProdutosCodigoBarras.Text != "") vCriterio["CodigoBarras"] = localRepresentanteForm.txtProdutosCodigoBarras.Text;
+            if (localRepresentanteForm.txtProdutosCodigoBarras.Text != "") vCriterio["CodigoGeral"] = localRepresentanteForm.txtProdutosCodigoBarras.Text;
 
             if (localRepresentanteForm.txtProdutosNome.Text != "") vCriterio["Nome"] =  localRepresentanteForm.txtProdutosNome.Text;
 

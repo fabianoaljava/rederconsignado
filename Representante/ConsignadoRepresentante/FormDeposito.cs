@@ -191,6 +191,36 @@ namespace ConsignadoRepresentante
             Application.Exit();
         }
 
+        public void ControlOnlyNumbers(object sender, KeyPressEventArgs e)
+        {
+
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+    (e.KeyChar != ','))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == ',') && ((sender as MetroFramework.Controls.MetroTextBox).Text.IndexOf(',') > -1))
+            {
+                e.Handled = true;
+            }
+
+        }
+
+
+        public void ControlOnlyInt(object sender, KeyPressEventArgs e)
+        {
+
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+
+        }
 
 
 
@@ -424,17 +454,18 @@ namespace ConsignadoRepresentante
                 if (txtConfCodigoBarras.Text != "")
                 {
                     e.SuppressKeyPress = true;
-                    cConferirProdutos.PesquisarConferenciaProduto(txtConfCodigoBarras.Text);
+                    //cConferirProdutos.PesquisarConferenciaProduto(txtConfCodigoBarras.Text);
+                    SendKeys.Send("{TAB}");
                 }                    
             }
         }
 
         private void txtConfCodigoBarras_Leave(object sender, EventArgs e)
         {
-            if (txtConfCodigoBarras.Text != "")
-            {
-                cConferirProdutos.PesquisarConferenciaProduto(txtConfCodigoBarras.Text);
-            }
+            //if (txtConfCodigoBarras.Text != "")
+            //{
+            //    cConferirProdutos.PesquisarConferenciaProduto(txtConfCodigoBarras.Text);
+            //}
         }
 
 
@@ -637,18 +668,17 @@ namespace ConsignadoRepresentante
                 if (txtSuplCodigoBarras.Text != "")
                 {
                     e.SuppressKeyPress = true;
-                    cSuplemento.PesquisarSuplementoProduto(txtSuplCodigoBarras.Text);
+                    SendKeys.Send("{TAB}");
                 }
             }
         }
 
         private void txtSuplCodigoBarras_Leave(object sender, EventArgs e)
         {
-
-            if (txtSuplCodigoBarras.Text != "")
-            {
-                cSuplemento.PesquisarSuplementoProduto(txtSuplCodigoBarras.Text);
-            }
+            //if (txtSuplCodigoBarras.Text != "")
+            //{
+            //    cSuplemento.PesquisarSuplementoProduto(txtSuplCodigoBarras.Text);
+            //}
         }
 
         private void chkSuplQuantidade_CheckedChanged(object sender, EventArgs e)
@@ -762,6 +792,26 @@ namespace ConsignadoRepresentante
         {
             FormRepresentante formRepresentante = new FormRepresentante(this, lblUsuario.Text, lblNome.Text);
             formRepresentante.Show();
+        }
+
+        private void txtSuplCodigoBarras_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtSuplCodigoBarras.Text != "")
+            {
+                cSuplemento.PesquisarSuplementoProduto(txtSuplCodigoBarras.Text);
+            } else
+            {
+                //e.Cancel = true; //cancel the validation.
+            }
+        }
+
+
+        private void txtConfCodigoBarras_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtConfCodigoBarras.Text != "")
+            {
+                cConferirProdutos.PesquisarConferenciaProduto(txtConfCodigoBarras.Text);
+            }
         }
     }
 }

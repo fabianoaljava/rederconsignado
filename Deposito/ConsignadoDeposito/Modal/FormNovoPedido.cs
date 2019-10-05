@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ConsignadoDeposito.Forms
+namespace ConsignadoDeposito.Modal
 {
     public partial class FormNovoPedido : MetroFramework.Forms.MetroForm
     {

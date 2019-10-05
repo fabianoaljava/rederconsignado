@@ -326,9 +326,47 @@ namespace ConsignadoDeposito
         public void PesquisarCargaProduto(string pCodigo)
         {
 
+            long vProdutoGradeId = 0;
+            List<ModelLibrary.RepProdutoGrade> produtosgrade = ModelLibrary.MetodosRepresentante.ObterProdutosGrade(pCodigo);
+
+            if (produtosgrade != null)
+            {
+                if (produtosgrade.Count > 1)
+                {
+                    Modal.FormProdutosGrade formProdutosGrade = new Modal.FormProdutosGrade(pCodigo);
+                    
+
+                    var result = formProdutosGrade.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        vProdutoGradeId = formProdutosGrade.cProdutoGradeId;
+                        ExibirProdutoGrade(vProdutoGradeId);
+                    }
+                    else
+                    {
+                        vProdutoGradeId = 0;
+                    }
+                }
+                else
+                {
+                    vProdutoGradeId = produtosgrade.FirstOrDefault().Id;
+                    ExibirProdutoGrade(vProdutoGradeId);
+                }
+            }
+            else
+            {
+                vProdutoGradeId = 0;
+                ExibirProdutoGrade(vProdutoGradeId);
+            }
+
+           
+        }
 
 
-            var produtograde = ModelLibrary.MetodosDeposito.ObterProdutoGrade(pCodigo);
+        public void ExibirProdutoGrade(long pProdutoGradeId)
+        {
+            var produtograde = ModelLibrary.MetodosDeposito.ObterProdutoGrade("", pProdutoGradeId);
 
             if (produtograde != null)
             {
@@ -341,7 +379,8 @@ namespace ConsignadoDeposito
 
                     MessageBox.Show("Este produto foi excluído e não pode ser inserido na carga.");
 
-                } else
+                }
+                else
                 {
                     localDepositoForm.txtCargaProduto.Text = produto.Descricao;
 
@@ -374,7 +413,7 @@ namespace ConsignadoDeposito
                     }
                 }
 
-                
+
 
             }
             else
@@ -391,7 +430,6 @@ namespace ConsignadoDeposito
 
             }
         }
-
 
         public void ExibirCargaProdutoGrade()
         {

@@ -413,7 +413,8 @@ namespace ConsignadoRepresentante
                 if (txtPedidoCodigoBarras.Text != "")
                 {
                     e.SuppressKeyPress = true;
-                    cVendedor.PedidoPesquisar(txtPedidoCodigoBarras.Text);
+                    //cVendedor.PedidoPesquisar(txtPedidoCodigoBarras.Text);
+                    SendKeys.Send("{TAB}");
                 }
 
             }
@@ -421,10 +422,10 @@ namespace ConsignadoRepresentante
 
         private void txtPedidoCodigoBarras_Leave(object sender, EventArgs e)
         {
-            if (txtPedidoCodigoBarras.Text != "")
-            {
-                cVendedor.PedidoPesquisar(txtPedidoCodigoBarras.Text);
-            }
+            //if (txtPedidoCodigoBarras.Text != "")
+            //{
+            //    cVendedor.PedidoPesquisar(txtPedidoCodigoBarras.Text);
+            //}
         }
 
         private void btnPedidoConfirmar_Click(object sender, EventArgs e)
@@ -803,6 +804,14 @@ namespace ConsignadoRepresentante
             
 
 
+        }
+
+        private void txtPedidoCodigoBarras_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtPedidoCodigoBarras.Text != "")
+            {
+                cVendedor.PedidoPesquisar(txtPedidoCodigoBarras.Text);
+            }
         }
     }
 }

@@ -238,7 +238,8 @@ namespace ModelLibrary
                                 INNER JOIN RepCargaProduto ON RepCarga.Id = RepCargaProduto.CargaId
                                 INNER JOIN RepProdutoGrade ON RepCargaProduto.ProdutoGradeId = RepProdutoGrade.Id
                                 INNER JOIN RepProduto ON RepProdutoGrade.ProdutoId = RepProduto.Id
-                                LEFT JOIN RepCargaConferencia ON RepCargaConferencia.CargaId = RepCarga.Id AND RepCargaConferencia.ProdutoGradeId = RepProdutoGrade.Id";
+                                LEFT JOIN RepCargaConferencia ON RepCargaConferencia.CargaId = RepCarga.Id AND RepCargaConferencia.ProdutoGradeId = RepProdutoGrade.Id
+                                WHERE Tipo != 'S'";
 
                 var result = representante.Database.SqlQuery<ListaRepProdutosConferencia>(query);
 
@@ -413,7 +414,7 @@ namespace ModelLibrary
             using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                var produto = representante.RepCargaProduto.FirstOrDefault(pd => pd.ProdutoGradeId == pProdutoGradeId);
+                var produto = representante.RepCargaProduto.FirstOrDefault(pd => pd.ProdutoGradeId == pProdutoGradeId && pd.Tipo != "S");
 
                 if (produto == null)
                 {

@@ -51,9 +51,46 @@ namespace ConsignadoRepresentante
         public void PesquisarSuplementoProduto(string pCodigo)
         {
 
+            long vProdutoGradeId = 0;
+            List<ModelLibrary.RepProdutoGrade> produtosgrade = ModelLibrary.MetodosRepresentante.ObterProdutosGrade(pCodigo);
+
+            if (produtosgrade != null)
+            {
+                if (produtosgrade.Count > 1)
+                {
+                    Modal.FormProdutosGrade formProdutosGrade = new Modal.FormProdutosGrade(pCodigo);
+
+                    var result = formProdutosGrade.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        vProdutoGradeId = formProdutosGrade.cProdutoGradeId;
+                        ExibirProdutoGrade(vProdutoGradeId);
+                    }
+                    else
+                    {
+                        vProdutoGradeId = 0;
+                    }
+                }
+                else
+                {
+                    vProdutoGradeId = produtosgrade.FirstOrDefault().Id;
+                    ExibirProdutoGrade(vProdutoGradeId);
+                }
+            }
+            else
+            {
+                vProdutoGradeId = 0;
+                ExibirProdutoGrade(vProdutoGradeId);
+            }
 
 
-            var produtograde = ModelLibrary.MetodosRepresentante.ObterProdutoGrade(pCodigo);
+        }
+
+
+        public void ExibirProdutoGrade(long pProdutoGradeId)
+        {
+            var produtograde = ModelLibrary.MetodosRepresentante.ObterProdutoGrade("", pProdutoGradeId);
 
             if (produtograde != null)
             {

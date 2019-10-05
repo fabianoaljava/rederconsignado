@@ -140,17 +140,23 @@
     <Compile Include="FormLogin.Designer.cs">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormNovoPedido.cs">
+    <Compile Include="Modal\FormNovoPedido.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormNovoPedido.Designer.cs">
+    <Compile Include="Modal\FormNovoPedido.Designer.cs">
       <DependentUpon>FormNovoPedido.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormProduto.cs">
+    <Compile Include="Modal\FormProduto.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormProduto.Designer.cs">
+    <Compile Include="Modal\FormProduto.Designer.cs">
       <DependentUpon>FormProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modal\FormProdutosGrade.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modal\FormProdutosGrade.Designer.cs">
+      <DependentUpon>FormProdutosGrade.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
@@ -160,11 +166,14 @@
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormNovoPedido.resx">
+    <EmbeddedResource Include="Modal\FormNovoPedido.resx">
       <DependentUpon>FormNovoPedido.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormProduto.resx">
+    <EmbeddedResource Include="Modal\FormProduto.resx">
       <DependentUpon>FormProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modal\FormProdutosGrade.resx">
+      <DependentUpon>FormProdutosGrade.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -253,6 +262,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Forms\" />
     <Folder Include="Reports\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

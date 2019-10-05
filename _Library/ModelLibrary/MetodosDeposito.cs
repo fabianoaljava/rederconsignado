@@ -500,21 +500,41 @@ namespace ModelLibrary
 
         }
 
-        public static ProdutoGrade ObterProdutoGrade(string pCodigo)
+        public static ProdutoGrade ObterProdutoGrade(string pCodigo, long pProdutoGradeId = 0)
         {
 
             using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
-                string vCodigoSemDigito = pCodigo.Substring(0, pCodigo.Length - 1);
-                string vDigito = pCodigo.Substring(pCodigo.Length - 1);
 
-                Console.WriteLine(vCodigoSemDigito + ':' + vDigito);
+                if (pProdutoGradeId > 0)
+                {
+                    var produtograde = (from pg in deposito.ProdutoGrade
+                                        where (pg.Id == pProdutoGradeId)
+                                        select pg).FirstOrDefault<ProdutoGrade>();
 
-                var produtograde = (from pg in deposito.ProdutoGrade
-                                    where (pg.CodigoBarras == vCodigoSemDigito && pg.Digito == vDigito)
-                                    select pg).FirstOrDefault<ProdutoGrade>();
+                    return produtograde;
+                }
+                else
+                {
 
-                return produtograde;
+                    if (pCodigo != "")
+                    {
+                        string vCodigoSemDigito = pCodigo.Substring(0, pCodigo.Length - 1);
+                        string vDigito = pCodigo.Substring(pCodigo.Length - 1);
+
+                        Console.WriteLine(vCodigoSemDigito + ':' + vDigito);
+
+                        var produtograde = (from pg in deposito.ProdutoGrade
+                                            where (pg.CodigoBarras == vCodigoSemDigito && pg.Digito == vDigito)
+                                            select pg).FirstOrDefault<ProdutoGrade>();
+
+                        return produtograde;
+                    } else
+                    {
+                        return null;
+                    }
+                }
+
             }
 
         }

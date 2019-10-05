@@ -9,9 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ConsignadoRepresentante.Modal
+namespace ConsignadoDeposito.Modal
 {
-    
+
 
     public partial class FormProdutosGrade : MetroFramework.Forms.MetroForm
     {
@@ -59,15 +59,12 @@ namespace ConsignadoRepresentante.Modal
 
         private void grdProdutoGrade_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            cProdutoGradeId = Convert.ToInt64(grdProdutoGrade.CurrentRow.Cells["ProdutoGradeId"].Value);
-            btnConfirmar.Enabled = true;
+
         }
 
         private void grdProdutoGrade_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (cProdutoGradeId > 0) {
-                btnConfirmar_Click(sender, e);
-            }            
+
         }
     }
 }

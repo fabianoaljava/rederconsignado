@@ -787,8 +787,46 @@ namespace ConsignadoRepresentante
         public void PedidoPesquisar(string pCodigo)
         {
 
+            long vProdutoGradeId = 0;
+            List<ModelLibrary.RepProdutoGrade> produtosgrade = ModelLibrary.MetodosRepresentante.ObterProdutosGrade(pCodigo);
 
-            var produtograde = ModelLibrary.MetodosRepresentante.ObterProdutoGrade(pCodigo);
+            if (produtosgrade != null)
+            {
+                if (produtosgrade.Count > 1)
+                {
+                    Modal.FormProdutosGrade formProdutosGrade = new Modal.FormProdutosGrade(pCodigo);
+
+                    var result = formProdutosGrade.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        vProdutoGradeId = formProdutosGrade.cProdutoGradeId;
+                        ExibirProdutoGrade(vProdutoGradeId);
+                    }
+                    else
+                    {
+                        vProdutoGradeId = 0;
+                    }
+                }
+                else
+                {
+                    vProdutoGradeId = produtosgrade.FirstOrDefault().Id;
+                    ExibirProdutoGrade(vProdutoGradeId);
+                }
+            }
+            else
+            {
+                vProdutoGradeId = 0;
+                ExibirProdutoGrade(vProdutoGradeId);
+            }
+
+
+        }
+
+        public void ExibirProdutoGrade(long pProdutoGradeId)
+        {
+
+            var produtograde = ModelLibrary.MetodosRepresentante.ObterProdutoGrade("", pProdutoGradeId);
 
             if (produtograde != null)
             {
@@ -1231,7 +1269,7 @@ namespace ConsignadoRepresentante
 
                 DataGridViewRow row = localRepresentanteForm.grdVendedorRetorno.Rows
                     .Cast<DataGridViewRow>()
-                    .Where(r => r.Cells["CodigoBarras"].Value.ToString().Equals(pCodigo))
+                    .Where(r => r.Cells["CodigoBarras"].Value.ToString().Equals(pCodigo) || r.Cells["ProdutoGradeId"].Value.ToString().Equals(pCodigo))
                     .First();
 
                 rowIndex = row.Index;
