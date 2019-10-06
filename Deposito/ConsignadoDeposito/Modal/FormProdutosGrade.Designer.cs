@@ -119,6 +119,8 @@
             this.grdProdutoGrade.UseCustomBackColor = true;
             this.grdProdutoGrade.UseCustomForeColor = true;
             this.grdProdutoGrade.UseStyleColors = true;
+            this.grdProdutoGrade.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdProdutoGrade_CellClick);
+            this.grdProdutoGrade.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdProdutoGrade_CellContentDoubleClick);
             // 
             // pnlProdutoGradeBottom
             // 
@@ -146,6 +148,7 @@
             this.btnCancelar.TabIndex = 3;
             this.btnCancelar.Text = "Ca&ncelar";
             this.btnCancelar.UseSelectable = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnConfirmar
             // 
@@ -157,6 +160,7 @@
             this.btnConfirmar.TabIndex = 2;
             this.btnConfirmar.Text = "&Confirmar";
             this.btnConfirmar.UseSelectable = true;
+            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
             // pnlProdutoGradeTop
             // 
@@ -202,6 +206,7 @@
             this.ShowInTaskbar = false;
             this.Text = "Selecionar Produto da Grade";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.FormProdutosGrade_Load);
             this.pnlProdutoGradeMiddle.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdProdutoGrade)).EndInit();
             this.pnlProdutoGradeBottom.ResumeLayout(false);

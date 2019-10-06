@@ -36,6 +36,7 @@
             this.txtSenha = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnNothing = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -110,6 +111,7 @@
             // btnCancelar
             // 
             this.btnCancelar.BackColor = System.Drawing.Color.Coral;
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.ForeColor = System.Drawing.Color.White;
             this.btnCancelar.Location = new System.Drawing.Point(94, 191);
@@ -122,11 +124,25 @@
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // btnNothing
+            // 
+            this.btnNothing.Location = new System.Drawing.Point(333, 12);
+            this.btnNothing.Name = "btnNothing";
+            this.btnNothing.Size = new System.Drawing.Size(75, 23);
+            this.btnNothing.TabIndex = 5;
+            this.btnNothing.TabStop = false;
+            this.btnNothing.Text = "DoNothing";
+            this.btnNothing.UseVisualStyleBackColor = true;
+            this.btnNothing.Visible = false;
+            // 
             // FormLogin
             // 
+            this.AcceptButton = this.btnNothing;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(420, 272);
+            this.Controls.Add(this.btnNothing);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtSenha);
@@ -158,5 +174,6 @@
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button btnCancelar;
         public System.Windows.Forms.TextBox txtLogin;
+        private System.Windows.Forms.Button btnNothing;
     }
 }

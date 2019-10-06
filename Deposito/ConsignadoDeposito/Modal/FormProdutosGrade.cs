@@ -46,9 +46,9 @@ namespace ConsignadoDeposito.Modal
 
             vCriterio["CodigoGeral"] = cCodigo;
 
-            List<ModelLibrary.ListaRepProdutos> produtosgrade = ModelLibrary.MetodosRepresentante.ObterListaProdutos(vCriterio);
+            List<ModelLibrary.ListaProdutos> produtosgrade = ModelLibrary.MetodosDeposito.ObterListaProdutos(vCriterio);
 
-            BindingListView<ModelLibrary.ListaRepProdutos> view = new BindingListView<ModelLibrary.ListaRepProdutos>(produtosgrade);
+            BindingListView<ModelLibrary.ListaProdutos> view = new BindingListView<ModelLibrary.ListaProdutos>(produtosgrade);
 
             grdProdutoGrade.DataSource = view;
 
@@ -59,12 +59,16 @@ namespace ConsignadoDeposito.Modal
 
         private void grdProdutoGrade_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            cProdutoGradeId = Convert.ToInt64(grdProdutoGrade.CurrentRow.Cells["ProdutoGradeId"].Value);
+            btnConfirmar.Enabled = true;
         }
 
         private void grdProdutoGrade_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            if (cProdutoGradeId > 0)
+            {
+                btnConfirmar_Click(sender, e);
+            }
         }
     }
 }

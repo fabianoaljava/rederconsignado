@@ -349,11 +349,50 @@ namespace ConsignadoDeposito
         public void PesquisarRetornoProduto(string pCodigo)
         {
 
+            long vProdutoGradeId = 0;
+            List<ModelLibrary.ProdutoGrade> produtosgrade = ModelLibrary.MetodosDeposito.ObterProdutosGrade(pCodigo);
 
-            var produtograde = ModelLibrary.MetodosDeposito.ObterProdutoGrade(pCodigo);
+            if (produtosgrade != null)
+            {
+                if (produtosgrade.Count > 1)
+                {
+                    Modal.FormProdutosGrade formProdutosGrade = new Modal.FormProdutosGrade(pCodigo);
+                    
+
+                    var result = formProdutosGrade.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        vProdutoGradeId = formProdutosGrade.cProdutoGradeId;
+                        ExibirProdutoGrade(vProdutoGradeId);
+                    }
+                    else
+                    {
+                        vProdutoGradeId = 0;
+                    }
+                }
+                else
+                {
+                    vProdutoGradeId = produtosgrade.FirstOrDefault().Id;
+                    ExibirProdutoGrade(vProdutoGradeId);
+                }
+            }
+            else
+            {
+                vProdutoGradeId = 0;
+                ExibirProdutoGrade(vProdutoGradeId);
+            }
+            
+
+        }
+
+
+        public void ExibirProdutoGrade(long pProdutoGradeId)
+        {
+            var produtograde = ModelLibrary.MetodosDeposito.ObterProdutoGrade("", pProdutoGradeId);
 
             if (produtograde != null)
-            {              
+            {
 
                 var produto = ModelLibrary.MetodosDeposito.ObterProduto(produtograde.CodigoBarras);
 
@@ -361,8 +400,9 @@ namespace ConsignadoDeposito
                 {
 
                     MessageBox.Show("Este produto foi excluído e não pode ser retornado.");
-                     
-                } else
+
+                }
+                else
                 {
 
                     localDepositoForm.txtRetornoProduto.Text = produto.Descricao;
@@ -403,7 +443,7 @@ namespace ConsignadoDeposito
 
                 }
 
-                
+
 
             }
             else
@@ -419,9 +459,7 @@ namespace ConsignadoDeposito
 
 
             }
-
         }
-
 
         public void ExibirRetornoProdutoGrade()
         {
@@ -816,6 +854,7 @@ namespace ConsignadoDeposito
             localDepositoForm.grdLancPedido.Columns[0].Visible = false;
             localDepositoForm.grdLancPedido.Columns[2].Width = 450;
             localDepositoForm.grdLancPedido.Columns[5].DefaultCellStyle.Format = "c";
+            localDepositoForm.grdLancPedido.Columns[6].Visible = false;
 
         }
 
@@ -828,7 +867,7 @@ namespace ConsignadoDeposito
 
             DataGridViewRow pedidoitem = localDepositoForm.grdLancPedido.Rows
                 .Cast<DataGridViewRow>()
-                .Where(r => r.Cells["CodigoBarras"].Value.ToString().Equals(pCodigo))
+                .Where(r => r.Cells["CodigoBarras"].Value.ToString().Equals(pCodigo) || r.Cells["ProdutoGradeId"].Value.ToString().Equals(pCodigo))
                 .FirstOrDefault();
 
 

@@ -371,11 +371,78 @@ namespace ModelLibrary
         }
 
 
-        public static List<Produto> ObterListaProdutos()
+        public static List<Produto> ObterListaProduto()
         {
             using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
                 return deposito.Produto.Where(pd => pd.Status == "1").ToList<Produto>();
+            }
+        }
+
+
+        public static List<ListaProdutos> ObterListaProdutos(Dictionary<string, string> pCriterio = null)
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {                
+
+                string vCriterio = "";
+                string vCriterioSoma = "";
+
+                string query = @"SELECT ProdutoGrade.CodigoBarras + '' + ProdutoGrade.Digito CodigoBarras, 
+                                    Descricao, Tamanho, Cor, ValorSaida, 
+                                    ISNULL(SUM(CargaProduto.Quantidade-CargaProduto.Retorno),0) SaldoEstoque, 
+                                    ProdutoGrade.Id ProdutoGradeId 
+                                FROM Produto                                    
+                                    INNER JOIN ProdutoGrade ON Produto.Id = ProdutoGrade.ProdutoId
+                                    LEFT JOIN CargaProduto ON ProdutoGrade.Id = CargaProduto.ProdutoGradeId";
+
+                if (pCriterio != null)
+                {
+                    if (pCriterio.ContainsKey("CodigoBarras"))
+                    {
+                        vCriterio = " ProdutoGrade.CodigoBarras + '' + ProdutoGrade.Digito LIKE '%" + pCriterio["CodigoBarras"] + "%'";
+                    }
+
+
+                    if (pCriterio.ContainsKey("CodigoGeral"))
+                    {
+                        vCriterio = "(ProdutoGrade.CodigoBarras + '' + ProdutoGrade.Digito = '" + pCriterio["CodigoGeral"] + "') OR ProdutoGrade.ProdutoId = " + pCriterio["CodigoGeral"];
+                    }
+
+                    if (pCriterio.ContainsKey("Nome"))
+                    {
+                        vCriterio += vCriterio != "" ? " OR " : "";
+                        vCriterio += " Descricao LIKE '%" + pCriterio["Nome"] + "%'";
+                    }
+
+                    if (pCriterio.ContainsKey("SaldoEstoque"))
+                    {
+                        if (pCriterio["SaldoEstoque"] == "Y")
+                        {
+                            vCriterioSoma = " HAVING ISNULL(SUM(CargaProduto.Quantidade-CargaProduto.Retorno),0) > 0 ";
+                        }
+                        else if (pCriterio["SaldoEstoque"] == "N")
+                        {
+                            vCriterioSoma = " HAVING ISNULL(SUM(CargaProduto.Quantidade-CargaProduto.Retorno),0) = 0 ";
+                        }
+                    }
+
+
+                }
+
+                query += vCriterio != "" ? " WHERE " + vCriterio : "";
+
+                query += @" GROUP BY ProdutoGrade.CodigoBarras, ProdutoGrade.Digito, Descricao, Tamanho, Cor, ValorSaida, ProdutoGrade.Id";
+
+                query += vCriterioSoma;
+
+                Console.WriteLine("Listando Produtos Query: " + query);
+
+                var result = deposito.Database.SqlQuery<ListaProdutos>(query);
+
+
+                return result.ToList<ListaProdutos>();
+
             }
         }
 
@@ -457,7 +524,7 @@ namespace ModelLibrary
         }
 
 
-        public static List<ListaProdutoGrade> ObterListaProdutosGrade(long pProdutoId)
+        public static List<ListaProdutoGrade> ObterListaProdutoGrade(long pProdutoId)
         {
             using (DepositoDBEntities deposito = new DepositoDBEntities())
             {               
@@ -483,10 +550,12 @@ namespace ModelLibrary
                     string vCodigoSemDigito = pPesquisa.Substring(0, pPesquisa.Length - 1);
                     string vDigito = pPesquisa.Substring(pPesquisa.Length - 1);
 
+                    long vProdutoId = Convert.ToInt64(pPesquisa);
+
                     Console.WriteLine(vCodigoSemDigito + ':' + vDigito);
 
                     var produtograde = (from pg in deposito.ProdutoGrade
-                                        where ((pg.CodigoBarras == vCodigoSemDigito && pg.Digito == vDigito) || pg.ProdutoId == Convert.ToInt64(pPesquisa))
+                                        where ((pg.CodigoBarras == vCodigoSemDigito && pg.Digito == vDigito) || pg.ProdutoId == vProdutoId)
                                         select pg).ToList<ProdutoGrade>();
 
                     return produtograde;
@@ -1047,7 +1116,7 @@ namespace ModelLibrary
             using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
-                string query = @"SELECT PedidoItem.Id as PedidoItemId, Produto.CodigoBarras + '' + ProdutoGrade.Digito as CodigoBarras, Produto.Descricao NomeProduto, PedidoItem.Quantidade, PedidoItem.Retorno, PedidoItem.Preco
+                string query = @"SELECT PedidoItem.Id as PedidoItemId, Produto.CodigoBarras + '' + ProdutoGrade.Digito as CodigoBarras, Produto.Descricao NomeProduto, PedidoItem.Quantidade, PedidoItem.Retorno, PedidoItem.Preco, ProdutoGradeId
 	                            FROM PedidoItem 
 		                            INNER JOIN ProdutoGrade ON PedidoItem.ProdutoGradeId = ProdutoGrade.Id
 		                            INNER JOIN Produto ON ProdutoGrade.ProdutoId = Produto.Id

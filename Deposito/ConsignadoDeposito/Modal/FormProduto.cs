@@ -32,7 +32,7 @@ namespace ConsignadoDeposito.Modal
 
         public void CarregarListaProdutos()
         {
-            cbbPesquisaProduto.DataSource = ModelLibrary.MetodosDeposito.ObterListaProdutos();
+            cbbPesquisaProduto.DataSource = ModelLibrary.MetodosDeposito.ObterListaProduto();
             cbbPesquisaProduto.DisplayMember = "Descricao";
             cbbPesquisaProduto.ValueMember = "Id";
             cbbPesquisaProduto.Invalidate();
@@ -93,7 +93,7 @@ namespace ConsignadoDeposito.Modal
             //grdProdutoGrade
 
 
-            List<ModelLibrary.ListaProdutoGrade> produtosgrade = ModelLibrary.MetodosDeposito.ObterListaProdutosGrade(cProdutoId);
+            List<ModelLibrary.ListaProdutoGrade> produtosgrade = ModelLibrary.MetodosDeposito.ObterListaProdutoGrade(cProdutoId);
 
             BindingListView<ModelLibrary.ListaProdutoGrade> view = new BindingListView<ModelLibrary.ListaProdutoGrade>(produtosgrade);
             

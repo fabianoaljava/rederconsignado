@@ -647,17 +647,18 @@ namespace ConsignadoDeposito
                 if (txtRetornoCodigoBarras.Text != "")
                 {
                     e.SuppressKeyPress = true;
-                    cRetorno.PesquisarRetornoProduto(txtRetornoCodigoBarras.Text);
+                    //cRetorno.PesquisarRetornoProduto(txtRetornoCodigoBarras.Text);
+                    SendKeys.Send("{TAB}");
                 }
             }
         }
 
         private void txtRetornoCodigoBarras_Leave(object sender, EventArgs e)
         {
-            if (txtRetornoCodigoBarras.Text != "")
-            {
-                cRetorno.PesquisarRetornoProduto(txtRetornoCodigoBarras.Text);
-            }
+            //if (txtRetornoCodigoBarras.Text != "")
+            //{
+            //    cRetorno.PesquisarRetornoProduto(txtRetornoCodigoBarras.Text);
+            //}
         }
 
         private void chkRetornoQuantidade_CheckedChanged(object sender, EventArgs e)
@@ -786,7 +787,8 @@ namespace ConsignadoDeposito
                 if (e.KeyData == Keys.Enter)
                 {
                     e.SuppressKeyPress = true;
-                    txtLancPedCodigoBarras_Leave(sender, e);
+                    //txtLancPedCodigoBarras_Leave(sender, e);
+                    SendKeys.Send("{TAB}");
 
                 }
             }
@@ -795,11 +797,11 @@ namespace ConsignadoDeposito
 
         private void txtLancPedCodigoBarras_Leave(object sender, EventArgs e)
         {
-            if (txtLancPedCodigoBarras.Text != "")
-            {
-                cRetorno.LancamentoPedidoPesquisar(txtLancPedCodigoBarras.Text);
+            //if (txtLancPedCodigoBarras.Text != "")
+            //{
+            //    cRetorno.LancamentoPedidoPesquisar(txtLancPedCodigoBarras.Text);
 
-            } 
+            //} 
         }
 
         private void btnLancPedConfirmar_Click(object sender, EventArgs e)
@@ -922,6 +924,23 @@ namespace ConsignadoDeposito
             if (txtCargaCodigoBarras.Text != "")
             {
                 cCarga.PesquisarCargaProduto(txtCargaCodigoBarras.Text);
+            }
+        }
+
+        private void txtRetornoCodigoBarras_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtRetornoCodigoBarras.Text != "")
+            {
+                cRetorno.PesquisarRetornoProduto(txtRetornoCodigoBarras.Text);
+            }
+        }
+
+        private void txtLancPedCodigoBarras_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtLancPedCodigoBarras.Text != "")
+            {
+                cRetorno.LancamentoPedidoPesquisar(txtLancPedCodigoBarras.Text);
+
             }
         }
 

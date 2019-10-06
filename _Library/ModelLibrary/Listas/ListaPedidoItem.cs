@@ -15,6 +15,7 @@ namespace ModelLibrary
         public Nullable<double> Quantidade { get; set; }
         public Nullable<double> Retorno { get; set; }
         public Nullable<double> Preco { get; set; }
+        public int ProdutoGradeId { get; set; }
 
     }
 }

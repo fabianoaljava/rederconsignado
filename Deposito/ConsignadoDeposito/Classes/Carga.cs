@@ -327,7 +327,7 @@ namespace ConsignadoDeposito
         {
 
             long vProdutoGradeId = 0;
-            List<ModelLibrary.RepProdutoGrade> produtosgrade = ModelLibrary.MetodosRepresentante.ObterProdutosGrade(pCodigo);
+            List<ModelLibrary.ProdutoGrade> produtosgrade = ModelLibrary.MetodosDeposito.ObterProdutosGrade(pCodigo);
 
             if (produtosgrade != null)
             {
