@@ -140,6 +140,12 @@
     <Compile Include="FormLogin.Designer.cs">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modal\FormListaCarga.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modal\FormListaCarga.Designer.cs">
+      <DependentUpon>FormListaCarga.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modal\FormNovoPedido.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +171,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modal\FormListaCarga.resx">
+      <DependentUpon>FormListaCarga.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modal\FormNovoPedido.resx">
       <DependentUpon>FormNovoPedido.cs</DependentUpon>

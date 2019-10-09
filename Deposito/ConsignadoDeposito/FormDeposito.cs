@@ -353,7 +353,10 @@ namespace ConsignadoDeposito
 
         private void btnCargaPesquisar_Click(object sender, EventArgs e)
         {
-            ///Abre Janela de Pesquisa de Carga com opção para Alterar / Excluir - se tiver permissão
+            Cursor.Current = Cursors.WaitCursor;
+            Modal.FormListaCarga formPesquisa = new Modal.FormListaCarga(this, "Carga");
+            formPesquisa.ShowDialog();
+            Cursor.Current = Cursors.Default;
         }
 
         private void btnCargaLimpar_Click(object sender, EventArgs e)
@@ -915,7 +918,7 @@ namespace ConsignadoDeposito
         {
             Cursor.Current = Cursors.WaitCursor;
             Modal.FormProduto formProduto = new Modal.FormProduto(this);
-            formProduto.Show();
+            formProduto.ShowDialog();
             Cursor.Current = Cursors.Default;
         }
 
@@ -942,6 +945,14 @@ namespace ConsignadoDeposito
                 cRetorno.LancamentoPedidoPesquisar(txtLancPedCodigoBarras.Text);
 
             }
+        }
+
+        private void btnRetornoPesquisar_Click_1(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            Modal.FormListaCarga formPesquisa = new Modal.FormListaCarga(this, "Retorno");
+            formPesquisa.ShowDialog();
+            Cursor.Current = Cursors.Default;
         }
 
 
