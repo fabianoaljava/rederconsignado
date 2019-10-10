@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
@@ -44,10 +44,10 @@
             this.cbbCargaPraca = new MetroFramework.Controls.MetroComboBox();
             this.lblCargaRepresentante = new MetroFramework.Controls.MetroLabel();
             this.lblCargaPraca = new MetroFramework.Controls.MetroLabel();
-            this.cbbCargaMesAno = new System.Windows.Forms.DateTimePicker();
+            this.cbbAnoMesInicial = new System.Windows.Forms.DateTimePicker();
             this.lblCargaMesAno = new MetroFramework.Controls.MetroLabel();
             this.lblInfo = new MetroFramework.Controls.MetroLabel();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.cbbAnoMesFinal = new System.Windows.Forms.DateTimePicker();
             this.lblE = new MetroFramework.Controls.MetroLabel();
             this.btnFiltrar = new MetroFramework.Controls.MetroButton();
             this.btnLimpar = new MetroFramework.Controls.MetroButton();
@@ -62,9 +62,9 @@
             this.metroPanel1.Controls.Add(this.btnLimpar);
             this.metroPanel1.Controls.Add(this.btnFiltrar);
             this.metroPanel1.Controls.Add(this.lblE);
-            this.metroPanel1.Controls.Add(this.dateTimePicker1);
+            this.metroPanel1.Controls.Add(this.cbbAnoMesFinal);
             this.metroPanel1.Controls.Add(this.lblInfo);
-            this.metroPanel1.Controls.Add(this.cbbCargaMesAno);
+            this.metroPanel1.Controls.Add(this.cbbAnoMesInicial);
             this.metroPanel1.Controls.Add(this.lblCargaMesAno);
             this.metroPanel1.Controls.Add(this.txtCargaCodRepresentante);
             this.metroPanel1.Controls.Add(this.txtCargaCodPraca);
@@ -125,6 +125,7 @@
             this.btnCancelar.TabIndex = 10;
             this.btnCancelar.Text = "Ca&ncelar";
             this.btnCancelar.UseSelectable = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnConfirmar
             // 
@@ -136,6 +137,7 @@
             this.btnConfirmar.TabIndex = 9;
             this.btnConfirmar.Text = "&Confirmar";
             this.btnConfirmar.UseSelectable = true;
+            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
             // grdCarga
             // 
@@ -143,31 +145,30 @@
             this.grdCarga.AllowUserToDeleteRows = false;
             this.grdCarga.AllowUserToOrderColumns = true;
             this.grdCarga.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.grdCarga.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.grdCarga.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.grdCarga.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
             this.grdCarga.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.grdCarga.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.grdCarga.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.grdCarga.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdCarga.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdCarga.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.grdCarga.ColumnHeadersHeight = 22;
             this.grdCarga.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdCarga.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grdCarga.DefaultCellStyle = dataGridViewCellStyle11;
             this.grdCarga.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdCarga.EnableHeadersVisualStyles = false;
             this.grdCarga.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -177,14 +178,14 @@
             this.grdCarga.Name = "grdCarga";
             this.grdCarga.ReadOnly = true;
             this.grdCarga.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdCarga.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdCarga.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.grdCarga.RowHeadersVisible = false;
             this.grdCarga.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grdCarga.RowTemplate.ReadOnly = true;
@@ -196,6 +197,8 @@
             this.grdCarga.UseCustomBackColor = true;
             this.grdCarga.UseCustomForeColor = true;
             this.grdCarga.UseStyleColors = true;
+            this.grdCarga.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdCarga_CellClick);
+            this.grdCarga.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdCarga_CellContentDoubleClick);
             // 
             // txtCargaCodRepresentante
             // 
@@ -319,20 +322,20 @@
             this.lblCargaPraca.TabIndex = 7;
             this.lblCargaPraca.Text = "Praça";
             // 
-            // cbbCargaMesAno
+            // cbbAnoMesInicial
             // 
-            this.cbbCargaMesAno.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbCargaMesAno.CustomFormat = "MM/yyyy";
-            this.cbbCargaMesAno.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbCargaMesAno.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.cbbCargaMesAno.Location = new System.Drawing.Point(542, 24);
-            this.cbbCargaMesAno.Margin = new System.Windows.Forms.Padding(5);
-            this.cbbCargaMesAno.Name = "cbbCargaMesAno";
-            this.cbbCargaMesAno.ShowUpDown = true;
-            this.cbbCargaMesAno.Size = new System.Drawing.Size(97, 26);
-            this.cbbCargaMesAno.TabIndex = 4;
-            this.cbbCargaMesAno.Value = new System.DateTime(2019, 1, 11, 0, 0, 0, 0);
-            this.cbbCargaMesAno.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
+            this.cbbAnoMesInicial.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbAnoMesInicial.CustomFormat = "MM/yyyy";
+            this.cbbAnoMesInicial.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbAnoMesInicial.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.cbbAnoMesInicial.Location = new System.Drawing.Point(542, 24);
+            this.cbbAnoMesInicial.Margin = new System.Windows.Forms.Padding(5);
+            this.cbbAnoMesInicial.Name = "cbbAnoMesInicial";
+            this.cbbAnoMesInicial.ShowUpDown = true;
+            this.cbbAnoMesInicial.Size = new System.Drawing.Size(97, 26);
+            this.cbbAnoMesInicial.TabIndex = 4;
+            this.cbbAnoMesInicial.Value = new System.DateTime(2019, 1, 11, 0, 0, 0, 0);
+            this.cbbAnoMesInicial.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // lblCargaMesAno
             // 
@@ -353,20 +356,20 @@
             this.lblInfo.TabIndex = 12;
             this.lblInfo.Text = "Filtrar por:";
             // 
-            // dateTimePicker1
+            // cbbAnoMesFinal
             // 
-            this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.CustomFormat = "MM/yyyy";
-            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(542, 56);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(5);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.ShowUpDown = true;
-            this.dateTimePicker1.Size = new System.Drawing.Size(97, 26);
-            this.dateTimePicker1.TabIndex = 5;
-            this.dateTimePicker1.Value = new System.DateTime(2019, 7, 11, 0, 0, 0, 0);
-            this.dateTimePicker1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
+            this.cbbAnoMesFinal.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbAnoMesFinal.CustomFormat = "MM/yyyy";
+            this.cbbAnoMesFinal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbAnoMesFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.cbbAnoMesFinal.Location = new System.Drawing.Point(542, 56);
+            this.cbbAnoMesFinal.Margin = new System.Windows.Forms.Padding(5);
+            this.cbbAnoMesFinal.Name = "cbbAnoMesFinal";
+            this.cbbAnoMesFinal.ShowUpDown = true;
+            this.cbbAnoMesFinal.Size = new System.Drawing.Size(97, 26);
+            this.cbbAnoMesFinal.TabIndex = 5;
+            this.cbbAnoMesFinal.Value = new System.DateTime(2019, 7, 11, 0, 0, 0, 0);
+            this.cbbAnoMesFinal.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // lblE
             // 
@@ -395,6 +398,7 @@
             this.btnLimpar.TabIndex = 7;
             this.btnLimpar.Text = "&Limpar";
             this.btnLimpar.UseSelectable = true;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // FormListaCarga
             // 
@@ -432,11 +436,11 @@
         public MetroFramework.Controls.MetroComboBox cbbCargaPraca;
         private MetroFramework.Controls.MetroLabel lblCargaRepresentante;
         private MetroFramework.Controls.MetroLabel lblCargaPraca;
-        public System.Windows.Forms.DateTimePicker cbbCargaMesAno;
+        public System.Windows.Forms.DateTimePicker cbbAnoMesInicial;
         private MetroFramework.Controls.MetroLabel lblCargaMesAno;
         private MetroFramework.Controls.MetroButton btnFiltrar;
         private MetroFramework.Controls.MetroLabel lblE;
-        public System.Windows.Forms.DateTimePicker dateTimePicker1;
+        public System.Windows.Forms.DateTimePicker cbbAnoMesFinal;
         private MetroFramework.Controls.MetroLabel lblInfo;
         private MetroFramework.Controls.MetroButton btnLimpar;
     }

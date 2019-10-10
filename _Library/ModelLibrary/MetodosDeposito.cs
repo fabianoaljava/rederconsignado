@@ -155,7 +155,54 @@ namespace ModelLibrary
                                       select c).FirstOrDefault<Carga>();
                 return viagemanterior;
 
+                
+
             }
+        }
+
+
+        public static List<ListaPesquisaCarga> PesquisarCarga(long pPracaId = 0, long pRepresentanteId = 0, string pAnoMesInicial = null, string pAnoMesFinal = null)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                string query = @"SELECT Carga.Id Id, PracaId, Praca.Descricao Praca, RepresentanteId, Representante.Nome Representante, Ano, Mes, 
+                                    DataAbertura, DataExportacao, DataRetorno, DataConferencia, DataFinalizacao, Carga.Status, Cast(Concat(Ano,RIGHT('0' + CAST(Mes AS varchar(2)), 2)) AS int)  AnoMes
+	                            FROM Carga
+	                                INNER JOIN Praca ON Carga.PracaId = Praca.Id
+	                                INNER JOIN Representante ON Carga.RepresentanteId = Representante.Id
+                                WHERE 1=1 ";
+                
+                if (pPracaId != 0)
+                {
+                    query += " AND Carga.PracaId = " + pPracaId.ToString();
+                }
+
+
+                if (pRepresentanteId != 0)
+                {
+                    query += " AND Carga.RepresentanteId = " + pRepresentanteId.ToString();
+                }
+
+                if (pAnoMesInicial != null && pAnoMesFinal != null)
+                {
+                    query += " AND Cast(Concat(Ano,RIGHT('0' + CAST(Mes AS varchar(2)), 2)) AS int)  between " + pAnoMesInicial + " AND " + pAnoMesFinal;
+                } else if (pAnoMesInicial != null)
+                {
+                    query += " AND Cast(Concat(Ano,RIGHT('0' + CAST(Mes AS varchar(2)), 2)) AS int)  >= " + pAnoMesInicial;
+                } else if (pAnoMesFinal != null)
+                {
+                    query += " AND Cast(Concat(Ano,RIGHT('0' + CAST(Mes AS varchar(2)), 2)) AS int)  <= " + pAnoMesFinal;
+                }
+
+
+                var result = deposito.Database.SqlQuery<ListaPesquisaCarga>(query).ToList<ListaPesquisaCarga>();
+
+                return result.ToList<ListaPesquisaCarga>();
+
+            }
+
         }
 
         public static string ValidarInclusaoCarga(int pPracaId)

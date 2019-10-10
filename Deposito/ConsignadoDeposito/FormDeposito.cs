@@ -355,8 +355,27 @@ namespace ConsignadoDeposito
         {
             Cursor.Current = Cursors.WaitCursor;
             Modal.FormListaCarga formPesquisa = new Modal.FormListaCarga(this, "Carga");
-            formPesquisa.ShowDialog();
-            Cursor.Current = Cursors.Default;
+            var result = formPesquisa.ShowDialog();
+            
+            if (result == DialogResult.OK)
+            {
+
+                txtCargaCodPraca.Text = formPesquisa.cPracaId.ToString();
+                txtCargaCodPraca_ButtonClick(sender, e);
+                txtCargaCodRepresentante.Text = formPesquisa.cRepresentanteId.ToString();
+                txtCargaCodRepresentante_ButtonClick(sender, e);
+                cbbCargaMesAno.Value = Convert.ToDateTime(formPesquisa.cAno.ToString()+"-" + formPesquisa.cMes.ToString() + "-01");
+
+               // MessageBox.Show(Convert.ToDateTime(formPesquisa.cAno.ToString() + "-" + formPesquisa.cMes.ToString() + "-01").ToString());
+
+
+
+
+
+                cCarga.PesquisarCarga();
+            }
+
+                Cursor.Current = Cursors.Default;
         }
 
         private void btnCargaLimpar_Click(object sender, EventArgs e)
@@ -949,13 +968,30 @@ namespace ConsignadoDeposito
 
         private void btnRetornoPesquisar_Click_1(object sender, EventArgs e)
         {
+
+
             Cursor.Current = Cursors.WaitCursor;
             Modal.FormListaCarga formPesquisa = new Modal.FormListaCarga(this, "Retorno");
-            formPesquisa.ShowDialog();
-            Cursor.Current = Cursors.Default;
+            var result = formPesquisa.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+
+                txtRetornoCodPraca.Text = formPesquisa.cPracaId.ToString();
+                txtRetornoCodPraca_ButtonClick(sender, e);
+                txtRetornoCodRepresentante.Text = formPesquisa.cRepresentanteId.ToString();
+                txtRetornoCodRepresentante_ButtonClick(sender, e);
+                cbbRetornoMesAno.Value = Convert.ToDateTime(formPesquisa.cAno.ToString() + "-" + formPesquisa.cMes.ToString() + "-01");
+
+
+
+
+                cRetorno.PesquisarCarga();
+
+
+
+            }
         }
-
-
 
 
 

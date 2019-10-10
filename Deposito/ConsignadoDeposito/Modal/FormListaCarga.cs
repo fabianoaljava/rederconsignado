@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Equin.ApplicationFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,11 @@ namespace ConsignadoDeposito.Modal
 
         public FormDeposito localDepositoForm = null;
         public string cOrigem;
+
+
+
+        public int cPracaId, cRepresentanteId, cMes, cAno;
+        
 
         public FormListaCarga(FormDeposito formDeposito, string pOrigem)
         {
@@ -42,6 +48,34 @@ namespace ConsignadoDeposito.Modal
             cbbCargaRepresentante.SelectedIndex = -1;
         }
 
+
+        public void LimparPesquisa()
+        {
+            txtCargaCodPraca.Text = "";
+            cbbCargaPraca.SelectedIndex = -1;
+            txtCargaCodRepresentante.Text = "";
+            cbbCargaRepresentante.SelectedIndex = -1;
+            cbbAnoMesInicial.ResetText();
+            cbbAnoMesFinal.ResetText();
+
+            LimparGrade();
+
+
+            this.cRepresentanteId = 0;
+            this.cPracaId = 0;
+            this.cAno = 0;
+            this.cMes = 0;
+
+        }
+
+
+        public void LimparGrade()
+        {
+
+            grdCarga.DataSource = null;
+            grdCarga.Refresh();
+
+        }
 
 
         private void FormListaCarga_Load(object sender, EventArgs e)
@@ -74,7 +108,7 @@ namespace ConsignadoDeposito.Modal
                     if (txtCargaCodRepresentante.Text != "")
                     {
                         txtCargaCodRepresentante_ButtonClick(sender, e);
-                        cbbCargaMesAno.Focus();
+                        cbbAnoMesInicial.Focus();
                     }
                 }
                 else if (objname == "txtCargaCodPraca")
@@ -97,8 +131,7 @@ namespace ConsignadoDeposito.Modal
 
         private void txtCargaCodPraca_ButtonClick(object sender, EventArgs e)
         {
-            //ResetarVariaveis();
-            //LimparGradeCarga();
+            LimparGrade();
 
             Console.WriteLine("CargaButtonClick");
 
@@ -132,8 +165,7 @@ namespace ConsignadoDeposito.Modal
         private void txtCargaCodRepresentante_ButtonClick(object sender, EventArgs e)
         {
 
-           // ResetarVariaveis();
-            //LimparGradeCarga();
+            LimparGrade();
 
             Console.WriteLine("RepresentanteButtonClick");
 
@@ -217,6 +249,80 @@ namespace ConsignadoDeposito.Modal
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
 
+            LimparGrade();
+            Cursor.Current = Cursors.WaitCursor;
+
+
+            ModelLibrary.Representante representante = (ModelLibrary.Representante)cbbCargaRepresentante.SelectedItem;
+            var representanteId = (representante != null) ? representante.Id :0;
+            ModelLibrary.Praca praca = (ModelLibrary.Praca)cbbCargaPraca.SelectedItem;
+            var pracaId = (praca != null) ? praca.Id : 0;
+
+
+            string vAnoMesInicial = cbbAnoMesInicial.Value.Year.ToString() + cbbAnoMesInicial.Value.Month.ToString().PadLeft(2, '0');
+            string vAnoMesFinal = cbbAnoMesFinal.Value.Year.ToString() + cbbAnoMesFinal.Value.Month.ToString().PadLeft(2, '0');
+
+
+
+            List<ModelLibrary.ListaPesquisaCarga> carga = ModelLibrary.MetodosDeposito.PesquisarCarga(pracaId, representanteId, vAnoMesInicial, vAnoMesFinal);
+
+            BindingListView<ModelLibrary.ListaPesquisaCarga> view = new BindingListView<ModelLibrary.ListaPesquisaCarga>(carga);
+
+            grdCarga.DataSource = view;
+
+
+
+            grdCarga.Columns[0].Visible = false;
+            grdCarga.Columns[1].Width = 30;
+            grdCarga.Columns[2].Width = 200;
+            grdCarga.Columns[3].Width = 30;
+            grdCarga.Columns[4].Width = 200;
+            grdCarga.Columns[5].Width = 60;
+            grdCarga.Columns[6].Width = 30;
+            grdCarga.Columns[12].Width = 30;
+            grdCarga.Columns[12].Visible = false;
+
+
+            Cursor.Current = Cursors.Default;
+
+
+        }
+
+        private void btnConfirmar_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            LimparPesquisa();
+            this.Close();
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            LimparPesquisa();
+        }
+
+        private void grdCarga_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.cRepresentanteId = Convert.ToInt32(grdCarga.CurrentRow.Cells["RepresentanteId"].Value);
+            this.cPracaId = Convert.ToInt32(grdCarga.CurrentRow.Cells["PracaId"].Value);
+            this.cAno = Convert.ToInt32(grdCarga.CurrentRow.Cells["Ano"].Value);
+            this.cMes = Convert.ToInt32(grdCarga.CurrentRow.Cells["Mes"].Value);
+
+            btnConfirmar.Enabled = true;
+        }
+
+        private void grdCarga_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (cRepresentanteId > 0 && cPracaId > 0 && cAno > 0 && cMes > 0)
+            {
+                btnConfirmar_Click(sender, e);
+            }
+            
         }
     }
 }

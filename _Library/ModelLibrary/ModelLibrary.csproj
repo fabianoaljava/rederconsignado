@@ -85,6 +85,7 @@
     <Compile Include="Listas\ListaPedidoItem.cs" />
     <Compile Include="Listas\ListaPedidosFechados.cs" />
     <Compile Include="Listas\ListaPedidosRetorno.cs" />
+    <Compile Include="Listas\ListaPesquisaCarga.cs" />
     <Compile Include="Listas\ListaProdutoConferencia.cs" />
     <Compile Include="Listas\ListaProdutoGrade.cs" />
     <Compile Include="Listas\ListaProdutos.cs" />
