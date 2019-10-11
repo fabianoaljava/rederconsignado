@@ -28,10 +28,8 @@ namespace ConsignadoDeposito
         public Home cHome;
         public Carga cCarga;
         public Retorno cRetorno;
-        public Acerto cAcerto;
-        public Financeiro cFinanceiro;
-        public Relatorio cRelatorio;        
-        public Ajuda cAjuda;
+        public Estoque cEstoque;
+
 
 
 
@@ -60,10 +58,8 @@ namespace ConsignadoDeposito
             cHome = new Home(this);
             cCarga = new Carga(this);
             cRetorno = new Retorno(this);
-            cAcerto = new Acerto(this);
-            cFinanceiro = new Financeiro(this);
-            cRelatorio = new Relatorio(this);
-            cAjuda = new Ajuda(this);
+            cEstoque = new Estoque(this);
+
 
 
         }
@@ -353,29 +349,7 @@ namespace ConsignadoDeposito
 
         private void btnCargaPesquisar_Click(object sender, EventArgs e)
         {
-            Cursor.Current = Cursors.WaitCursor;
-            Modal.FormListaCarga formPesquisa = new Modal.FormListaCarga(this, "Carga");
-            var result = formPesquisa.ShowDialog();
             
-            if (result == DialogResult.OK)
-            {
-
-                txtCargaCodPraca.Text = formPesquisa.cPracaId.ToString();
-                txtCargaCodPraca_ButtonClick(sender, e);
-                txtCargaCodRepresentante.Text = formPesquisa.cRepresentanteId.ToString();
-                txtCargaCodRepresentante_ButtonClick(sender, e);
-                cbbCargaMesAno.Value = Convert.ToDateTime(formPesquisa.cAno.ToString()+"-" + formPesquisa.cMes.ToString() + "-01");
-
-               // MessageBox.Show(Convert.ToDateTime(formPesquisa.cAno.ToString() + "-" + formPesquisa.cMes.ToString() + "-01").ToString());
-
-
-
-
-
-                cCarga.PesquisarCarga();
-            }
-
-                Cursor.Current = Cursors.Default;
         }
 
         private void btnCargaLimpar_Click(object sender, EventArgs e)
@@ -935,10 +909,7 @@ namespace ConsignadoDeposito
 
         private void menuCadastroProduto_Click(object sender, EventArgs e)
         {
-            Cursor.Current = Cursors.WaitCursor;
-            Modal.FormProduto formProduto = new Modal.FormProduto(this);
-            formProduto.ShowDialog();
-            Cursor.Current = Cursors.Default;
+
         }
 
         private void txtCargaCodigoBarras_Validating(object sender, CancelEventArgs e)
@@ -967,6 +938,66 @@ namespace ConsignadoDeposito
         }
 
         private void btnRetornoPesquisar_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtProdutosCodigoBarras_KeyUp(object sender, KeyEventArgs e)
+        {
+            cEstoque.PesquisarProdutos();
+        }
+
+        private void txtProdutosNome_KeyUp(object sender, KeyEventArgs e)
+        {
+            cEstoque.PesquisarProdutos();
+        }
+
+        private void btnProdutosLimpar_Click(object sender, EventArgs e)
+        {
+            cEstoque.ProdutosLimpar();
+        }
+
+        private void cbbProdutoSaldo_SelectedValueChanged(object sender, EventArgs e)
+        {
+            cEstoque.PesquisarProdutos();
+        }
+
+        private void mnuProdutoAdicionar_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            Modal.FormProduto formProduto = new Modal.FormProduto(this);
+            formProduto.ShowDialog();
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void mnuCargaPesquisar_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            Modal.FormListaCarga formPesquisa = new Modal.FormListaCarga(this, "Carga");
+            var result = formPesquisa.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+
+                txtCargaCodPraca.Text = formPesquisa.cPracaId.ToString();
+                txtCargaCodPraca_ButtonClick(sender, e);
+                txtCargaCodRepresentante.Text = formPesquisa.cRepresentanteId.ToString();
+                txtCargaCodRepresentante_ButtonClick(sender, e);
+                cbbCargaMesAno.Value = Convert.ToDateTime(formPesquisa.cAno.ToString() + "-" + formPesquisa.cMes.ToString() + "-01");
+
+                // MessageBox.Show(Convert.ToDateTime(formPesquisa.cAno.ToString() + "-" + formPesquisa.cMes.ToString() + "-01").ToString());
+
+
+
+
+
+                cCarga.PesquisarCarga();
+            }
+
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void mnuRetornoPesquisar_Click(object sender, EventArgs e)
         {
 
 

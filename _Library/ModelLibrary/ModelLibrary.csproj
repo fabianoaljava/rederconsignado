@@ -234,9 +234,6 @@
     <Compile Include="Tamanho.cs">
       <DependentUpon>ModelDeposito.tt</DependentUpon>
     </Compile>
-    <Compile Include="Totalizadores.cs">
-      <DependentUpon>ModelDeposito.tt</DependentUpon>
-    </Compile>
     <Compile Include="Usuario.cs">
       <DependentUpon>ModelDeposito.tt</DependentUpon>
     </Compile>

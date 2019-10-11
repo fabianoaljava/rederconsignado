@@ -280,7 +280,7 @@ namespace ConsignadoDeposito.Modal
             grdCarga.Columns[5].Width = 60;
             grdCarga.Columns[6].Width = 30;
             grdCarga.Columns[12].Width = 30;
-            grdCarga.Columns[12].Visible = false;
+            grdCarga.Columns[13].Visible = false;
 
 
             Cursor.Current = Cursors.Default;

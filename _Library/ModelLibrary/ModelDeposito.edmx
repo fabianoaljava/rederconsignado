@@ -72,7 +72,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="ProdutoId" Type="int" />
+          <Property Name="ProdutoGradeId" Type="int" />
           <Property Name="TipoMovimentacao" Type="nvarchar" MaxLength="1" />
           <Property Name="Quantidade" Type="float" />
           <Property Name="Observacao" Type="ntext" />
@@ -294,8 +294,6 @@
           <Property Name="temp_old_id" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'RederConsignado.dbo.ProdutosCarga' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <!--Errors Found During Generation:
 warning 6002: The table/view 'RederConsignado.dbo.Representante' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Representante">
           <Key>
@@ -326,16 +324,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Representante' does not have a
           <Property Name="Comissao" Type="float" />
           <Property Name="Observacao" Type="text" />
           <Property Name="temp_old_id" Type="int" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Totalizadores">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="QtdProdutos" Type="float" />
-          <Property Name="TotalProdutos" Type="float" />
         </EntityType>
         <Association Name="FK_Carga_Praca">
           <End Role="Praca" Type="Self.Praca" Multiplicity="0..1" />
@@ -409,15 +397,15 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Estoque_Produto">
-          <End Role="Produto" Type="Self.Produto" Multiplicity="0..1" />
+        <Association Name="FK_Estoque_ProdutoGrade">
+          <End Role="ProdutoGrade" Type="Self.ProdutoGrade" Multiplicity="0..1" />
           <End Role="Estoque" Type="Self.Estoque" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Produto">
+            <Principal Role="ProdutoGrade">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Estoque">
-              <PropertyRef Name="ProdutoId" />
+              <PropertyRef Name="ProdutoGradeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -591,13 +579,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
     [Representante].[temp_old_id] AS [temp_old_id]
     FROM [dbo].[Representante] AS [Representante]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Totalizadores" EntityType="Self.Totalizadores" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Totalizadores].[Id] AS [Id], 
-    [Totalizadores].[QtdProdutos] AS [QtdProdutos], 
-    [Totalizadores].[TotalProdutos] AS [TotalProdutos]
-    FROM [dbo].[Totalizadores] AS [Totalizadores]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Carga_Praca" Association="Self.FK_Carga_Praca">
             <End Role="Praca" EntitySet="Praca" />
             <End Role="Carga" EntitySet="Carga" />
@@ -622,8 +603,8 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Estado" EntitySet="Estado" />
           </AssociationSet>
-          <AssociationSet Name="FK_Estoque_Produto" Association="Self.FK_Estoque_Produto">
-            <End Role="Produto" EntitySet="Produto" />
+          <AssociationSet Name="FK_Estoque_ProdutoGrade" Association="Self.FK_Estoque_ProdutoGrade">
+            <End Role="ProdutoGrade" EntitySet="ProdutoGrade" />
             <End Role="Estoque" EntitySet="Estoque" />
           </AssociationSet>
           <AssociationSet Name="FK_Pedido_Carga" Association="Self.FK_Pedido_Carga">
@@ -666,7 +647,7 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
             <End Role="Receber" EntitySet="Receber" />
             <End Role="ReceberBaixa" EntitySet="ReceberBaixa" />
           </AssociationSet>
-          </EntityContainer>
+        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -770,7 +751,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <NavigationProperty Name="Categoria" Relationship="Self.FK_Produto_Categoria" FromRole="Produto" ToRole="Categoria" />
           <NavigationProperty Name="Fornecedor" Relationship="Self.FK_Produto_Fornecedor" FromRole="Produto" ToRole="Fornecedor" />
           <NavigationProperty Name="ProdutoGrade" Relationship="Self.FK_ProdutoGrade_Produto" FromRole="Produto" ToRole="ProdutoGrade" />
-          <NavigationProperty Name="Estoque" Relationship="ModelDeposito.FK_Estoque_Produto" FromRole="Produto" ToRole="Estoque" />
         </EntityType>
         <EntityType Name="ProdutoGrade">
           <Key>
@@ -795,6 +775,7 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <NavigationProperty Name="CargaProduto" Relationship="Self.FK_CargaProduto_ProdutoGrade" FromRole="ProdutoGrade" ToRole="CargaProduto" />
           <NavigationProperty Name="Produto" Relationship="Self.FK_ProdutoGrade_Produto" FromRole="ProdutoGrade" ToRole="Produto" />
           <NavigationProperty Name="PedidoItem" Relationship="ModelDeposito.FK_PedidoItem_ProdutoGrade" FromRole="ProdutoGrade" ToRole="PedidoItem" />
+          <NavigationProperty Name="Estoque" Relationship="ModelDeposito.FK_Estoque_ProdutoGrade" FromRole="ProdutoGrade" ToRole="Estoque" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -977,7 +958,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
             <End Role="Produto" EntitySet="Produto" />
             <End Role="ProdutoGrade" EntitySet="ProdutoGrade" />
           </AssociationSet>
-          <EntitySet Name="Totalizadores" EntityType="ModelDeposito.Totalizadores" />
           <EntitySet Name="Cidade" EntityType="ModelDeposito.Cidade" />
           <EntitySet Name="Cor" EntityType="ModelDeposito.Cor" />
           <EntitySet Name="Estado" EntityType="ModelDeposito.Estado" />
@@ -1009,10 +989,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Estado" EntitySet="Estado" />
           </AssociationSet>
-          <AssociationSet Name="FK_Estoque_Produto" Association="ModelDeposito.FK_Estoque_Produto">
-            <End Role="Produto" EntitySet="Produto" />
-            <End Role="Estoque" EntitySet="Estoque" />
-          </AssociationSet>
           <AssociationSet Name="FK_Pedido_Vendedor" Association="ModelDeposito.FK_Pedido_Vendedor">
             <End Role="Vendedor" EntitySet="Vendedor" />
             <End Role="Pedido" EntitySet="Pedido" />
@@ -1033,15 +1009,11 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
             <End Role="Receber" EntitySet="Receber" />
             <End Role="ReceberBaixa" EntitySet="ReceberBaixa" />
           </AssociationSet>
+          <AssociationSet Name="FK_Estoque_ProdutoGrade" Association="ModelDeposito.FK_Estoque_ProdutoGrade">
+            <End Role="ProdutoGrade" EntitySet="ProdutoGrade" />
+            <End Role="Estoque" EntitySet="Estoque" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Totalizadores">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="QtdProdutos" Type="Double" />
-          <Property Name="TotalProdutos" Type="Double" />
-        </EntityType>
         <EntityType Name="Cidade">
           <Key>
             <PropertyRef Name="Id" />
@@ -1075,12 +1047,12 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="ProdutoId" Type="Int32" />
           <Property Name="TipoMovimentacao" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="Quantidade" Type="Double" />
           <Property Name="Observacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="temp_old_id" Type="Int32" />
-          <NavigationProperty Name="Produto" Relationship="ModelDeposito.FK_Estoque_Produto" FromRole="Estoque" ToRole="Produto" />
+          <Property Name="ProdutoGradeId" Type="Int32" />
+          <NavigationProperty Name="ProdutoGrade" Relationship="ModelDeposito.FK_Estoque_ProdutoGrade" FromRole="Estoque" ToRole="ProdutoGrade" />
         </EntityType>
         <EntityType Name="Pais">
           <Key>
@@ -1272,18 +1244,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Estoque_Produto">
-          <End Type="ModelDeposito.Produto" Role="Produto" Multiplicity="0..1" />
-          <End Type="ModelDeposito.Estoque" Role="Estoque" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Produto">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Estoque">
-              <PropertyRef Name="ProdutoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Pedido_Vendedor">
           <End Type="ModelDeposito.Vendedor" Role="Vendedor" Multiplicity="1" />
           <End Type="ModelDeposito.Pedido" Role="Pedido" Multiplicity="*" />
@@ -1341,6 +1301,18 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
             </Principal>
             <Dependent Role="ReceberBaixa">
               <PropertyRef Name="ReceberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Estoque_ProdutoGrade">
+          <End Type="ModelDeposito.ProdutoGrade" Role="ProdutoGrade" Multiplicity="0..1" />
+          <End Type="ModelDeposito.Estoque" Role="Estoque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProdutoGrade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Estoque">
+              <PropertyRef Name="ProdutoGradeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1522,15 +1494,6 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Totalizadores">
-            <EntityTypeMapping TypeName="ModelDeposito.Totalizadores">
-              <MappingFragment StoreEntitySet="Totalizadores">
-                <ScalarProperty Name="TotalProdutos" ColumnName="TotalProdutos" />
-                <ScalarProperty Name="QtdProdutos" ColumnName="QtdProdutos" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Cidade">
             <EntityTypeMapping TypeName="ModelDeposito.Cidade">
               <MappingFragment StoreEntitySet="Cidade">
@@ -1562,11 +1525,11 @@ warning 6002: The table/view 'RederConsignado.dbo.Totalizadores' does not have a
           <EntitySetMapping Name="Estoque">
             <EntityTypeMapping TypeName="ModelDeposito.Estoque">
               <MappingFragment StoreEntitySet="Estoque">
+                <ScalarProperty Name="ProdutoGradeId" ColumnName="ProdutoGradeId" />
                 <ScalarProperty Name="temp_old_id" ColumnName="temp_old_id" />
                 <ScalarProperty Name="Observacao" ColumnName="Observacao" />
                 <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
                 <ScalarProperty Name="TipoMovimentacao" ColumnName="TipoMovimentacao" />
-                <ScalarProperty Name="ProdutoId" ColumnName="ProdutoId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

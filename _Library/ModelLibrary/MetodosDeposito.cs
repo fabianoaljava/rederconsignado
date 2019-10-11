@@ -432,16 +432,14 @@ namespace ModelLibrary
             using (DepositoDBEntities deposito = new DepositoDBEntities())
             {                
 
-                string vCriterio = "";
-                string vCriterioSoma = "";
+                string vCriterio = "";                
 
                 string query = @"SELECT ProdutoGrade.CodigoBarras + '' + ProdutoGrade.Digito CodigoBarras, 
-                                    Descricao, Tamanho, Cor, ValorSaida, 
-                                    ISNULL(SUM(CargaProduto.Quantidade-CargaProduto.Retorno),0) SaldoEstoque, 
+                                    Descricao, Tamanho, Cor, ISNULL(ValorSaida, 0) ValorSaida, ISNULL(ValorCusto, 0) ValorCusto,
+                                    ISNULL(ProdutoGrade.QUantidade,0) SaldoEstoque, ISNULL(ProdutoGrade.QUantidade,0) * ISNULL(ValorSaida, 0) Valor,
                                     ProdutoGrade.Id ProdutoGradeId 
                                 FROM Produto                                    
-                                    INNER JOIN ProdutoGrade ON Produto.Id = ProdutoGrade.ProdutoId
-                                    LEFT JOIN CargaProduto ON ProdutoGrade.Id = CargaProduto.ProdutoGradeId";
+                                    INNER JOIN ProdutoGrade ON Produto.Id = ProdutoGrade.ProdutoId";
 
                 if (pCriterio != null)
                 {
@@ -453,7 +451,7 @@ namespace ModelLibrary
 
                     if (pCriterio.ContainsKey("CodigoGeral"))
                     {
-                        vCriterio = "(ProdutoGrade.CodigoBarras + '' + ProdutoGrade.Digito = '" + pCriterio["CodigoGeral"] + "') OR ProdutoGrade.ProdutoId = " + pCriterio["CodigoGeral"];
+                        vCriterio = "(ProdutoGrade.CodigoBarras + '' + ProdutoGrade.Digito = '" + pCriterio["CodigoGeral"] + "' OR ProdutoGrade.ProdutoId = " + pCriterio["CodigoGeral"] + ")";
                     }
 
                     if (pCriterio.ContainsKey("Nome"))
@@ -462,15 +460,20 @@ namespace ModelLibrary
                         vCriterio += " Descricao LIKE '%" + pCriterio["Nome"] + "%'";
                     }
 
+
+                    vCriterio = (vCriterio!="")?"(" + vCriterio + ")":"";
+
                     if (pCriterio.ContainsKey("SaldoEstoque"))
                     {
                         if (pCriterio["SaldoEstoque"] == "Y")
                         {
-                            vCriterioSoma = " HAVING ISNULL(SUM(CargaProduto.Quantidade-CargaProduto.Retorno),0) > 0 ";
+                            vCriterio += vCriterio != "" ? " AND " : "";
+                            vCriterio += " ISNULL(ProdutoGrade.QUantidade,0) > 0 ";
                         }
                         else if (pCriterio["SaldoEstoque"] == "N")
                         {
-                            vCriterioSoma = " HAVING ISNULL(SUM(CargaProduto.Quantidade-CargaProduto.Retorno),0) = 0 ";
+                            vCriterio += vCriterio != "" ? " AND " : "";
+                            vCriterio += " ISNULL(ProdutoGrade.QUantidade,0) = 0 ";
                         }
                     }
 
@@ -478,10 +481,7 @@ namespace ModelLibrary
                 }
 
                 query += vCriterio != "" ? " WHERE " + vCriterio : "";
-
-                query += @" GROUP BY ProdutoGrade.CodigoBarras, ProdutoGrade.Digito, Descricao, Tamanho, Cor, ValorSaida, ProdutoGrade.Id";
-
-                query += vCriterioSoma;
+                                
 
                 Console.WriteLine("Listando Produtos Query: " + query);
 

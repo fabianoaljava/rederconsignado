@@ -15,12 +15,12 @@ namespace ModelLibrary
     public partial class Estoque
     {
         public int Id { get; set; }
-        public Nullable<int> ProdutoId { get; set; }
         public string TipoMovimentacao { get; set; }
         public Nullable<double> Quantidade { get; set; }
         public string Observacao { get; set; }
         public Nullable<int> temp_old_id { get; set; }
+        public Nullable<int> ProdutoGradeId { get; set; }
     
-        public virtual Produto Produto { get; set; }
+        public virtual ProdutoGrade ProdutoGrade { get; set; }
     }
 }

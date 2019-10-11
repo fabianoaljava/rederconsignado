@@ -21,7 +21,6 @@
         <AssociationConnector Association="ModelDeposito.FK_Produto_Categoria" ManuallyRouted="false" />
         <AssociationConnector Association="ModelDeposito.FK_Produto_Fornecedor" ManuallyRouted="false" />
         <AssociationConnector Association="ModelDeposito.FK_ProdutoGrade_Produto" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="ModelDeposito.Totalizadores" Width="1.5" PointX="5.375" PointY="6.75" />
         <EntityTypeShape EntityType="ModelDeposito.Cidade" Width="1.5" PointX="16.875" PointY="3.625" />
         <EntityTypeShape EntityType="ModelDeposito.Cor" Width="1.5" PointX="12.375" PointY="7.25" />
         <EntityTypeShape EntityType="ModelDeposito.Estado" Width="1.5" PointX="14.625" PointY="3.375" />
@@ -38,12 +37,12 @@
         <AssociationConnector Association="ModelDeposito.FK_ReceberBaixa_Carga" />
         <AssociationConnector Association="ModelDeposito.FK_Cidade_Estado" />
         <AssociationConnector Association="ModelDeposito.FK_Estado_Pais" />
-        <AssociationConnector Association="ModelDeposito.FK_Estoque_Produto" />
         <AssociationConnector Association="ModelDeposito.FK_Pedido_Vendedor" />
         <AssociationConnector Association="ModelDeposito.FK_PedidoItem_Pedido" />
         <AssociationConnector Association="ModelDeposito.FK_PedidoItem_ProdutoGrade" />
         <AssociationConnector Association="ModelDeposito.FK_Receber_Vendedor" />
         <AssociationConnector Association="ModelDeposito.FK_ReceberBaixa_Receber" />
+        <AssociationConnector Association="ModelDeposito.FK_Estoque_ProdutoGrade" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

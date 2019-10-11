@@ -120,12 +120,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Acerto.cs" />
-    <Compile Include="Classes\Ajuda.cs" />
     <Compile Include="Classes\Carga.cs" />
-    <Compile Include="Classes\Financeiro.cs" />
+    <Compile Include="Classes\Estoque.cs" />
     <Compile Include="Classes\Home.cs" />
-    <Compile Include="Classes\Relatorio.cs" />
     <Compile Include="Classes\Retorno.cs" />
     <Compile Include="FormDeposito.cs">
       <SubType>Form</SubType>

@@ -34,7 +34,6 @@ namespace ModelLibrary
         public virtual DbSet<ProdutoGrade> ProdutoGrade { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Representante> Representante { get; set; }
-        public virtual DbSet<Totalizadores> Totalizadores { get; set; }
         public virtual DbSet<Cidade> Cidade { get; set; }
         public virtual DbSet<Cor> Cor { get; set; }
         public virtual DbSet<Estado> Estado { get; set; }

@@ -52,7 +52,23 @@ namespace ConsignadoDeposito.Modal
 
             grdProdutoGrade.DataSource = view;
 
-            grdProdutoGrade.Columns[6].Visible = false;
+            grdProdutoGrade.ColumnHeadersHeight = 40;
+
+            grdProdutoGrade.Columns[0].Width = 100;
+            grdProdutoGrade.Columns[1].Width = 250;
+            grdProdutoGrade.Columns[2].Width = 70;
+            grdProdutoGrade.Columns[3].Width = 70;
+            grdProdutoGrade.Columns[4].Width = 80;
+            grdProdutoGrade.Columns[4].HeaderText = "Valor Saída";
+            grdProdutoGrade.Columns[4].DefaultCellStyle.Format = "c";
+            grdProdutoGrade.Columns[5].Width = 80;
+            grdProdutoGrade.Columns[5].HeaderText = "Valor Custo";
+            grdProdutoGrade.Columns[5].DefaultCellStyle.Format = "c";
+            grdProdutoGrade.Columns[6].Width = 70;
+            grdProdutoGrade.Columns[6].HeaderText = "Saldo em Estoque";
+            grdProdutoGrade.Columns[7].Width = 80;
+            grdProdutoGrade.Columns[7].DefaultCellStyle.Format = "c";
+            grdProdutoGrade.Columns[8].Visible = false;
 
 
 

@@ -18,7 +18,6 @@ namespace ModelLibrary
         public Produto()
         {
             this.ProdutoGrade = new HashSet<ProdutoGrade>();
-            this.Estoque = new HashSet<Estoque>();
         }
     
         public int Id { get; set; }
@@ -36,7 +35,5 @@ namespace ModelLibrary
         public virtual Fornecedor Fornecedor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProdutoGrade> ProdutoGrade { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Estoque> Estoque { get; set; }
     }
 }
