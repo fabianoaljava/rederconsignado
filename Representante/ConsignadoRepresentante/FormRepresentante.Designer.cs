@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRepresentante));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -57,13 +58,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRepresentante));
             this.panelHeader = new System.Windows.Forms.Panel();
             this.lblCarga = new MetroFramework.Controls.MetroLabel();
             this.lblServerStatus = new MetroFramework.Controls.MetroLabel();
             this.lblSair = new System.Windows.Forms.Label();
             this.lblNome = new System.Windows.Forms.Label();
             this.lblUsuario = new System.Windows.Forms.Label();
+            this.picUser = new System.Windows.Forms.PictureBox();
+            this.picLogo = new System.Windows.Forms.PictureBox();
             this.panelMain = new System.Windows.Forms.Panel();
             this.tbcPrincipal = new MetroFramework.Controls.MetroTabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
@@ -75,6 +77,20 @@
             this.chkVendedorComPedidoAnterior = new MetroFramework.Controls.MetroCheckBox();
             this.pnlHomeGrid = new MetroFramework.Controls.MetroPanel();
             this.grdHome = new MetroFramework.Controls.MetroGrid();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.documentoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.enderecoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.complementoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bairroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cidadeUFDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.telefonesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pedidoAnteriorDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.recebidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pedidoAtualDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.codigoPedidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.receberDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.listaRepVendedorHomeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabVendedores = new System.Windows.Forms.TabPage();
             this.pnlVendedorResultado = new MetroFramework.Controls.MetroPanel();
             this.tbcVendedor = new MetroFramework.Controls.MetroTabControl();
@@ -267,23 +283,9 @@
             this.grdEstoque = new MetroFramework.Controls.MetroGrid();
             this.tabAjuda = new System.Windows.Forms.TabPage();
             this.pnlAjuda = new MetroFramework.Drawing.Html.HtmlPanel();
-            this.picUser = new System.Windows.Forms.PictureBox();
-            this.picLogo = new System.Windows.Forms.PictureBox();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.documentoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.enderecoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.complementoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bairroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cidadeUFDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.telefonesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pedidoAnteriorDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.recebidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pedidoAtualDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.codigoPedidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.receberDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.listaRepVendedorHomeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panelHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picUser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.panelMain.SuspendLayout();
             this.tbcPrincipal.SuspendLayout();
             this.tabHome.SuspendLayout();
@@ -291,6 +293,7 @@
             this.pnlHomeFiltros.SuspendLayout();
             this.pnlHomeGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdHome)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listaRepVendedorHomeBindingSource)).BeginInit();
             this.tabVendedores.SuspendLayout();
             this.pnlVendedorResultado.SuspendLayout();
             this.tbcVendedor.SuspendLayout();
@@ -328,9 +331,6 @@
             this.pnlEstoqueMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdEstoque)).BeginInit();
             this.tabAjuda.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picUser)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.listaRepVendedorHomeBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -403,6 +403,29 @@
             this.lblUsuario.TabIndex = 2;
             this.lblUsuario.Text = "[[login]]";
             // 
+            // picUser
+            // 
+            this.picUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picUser.Image = ((System.Drawing.Image)(resources.GetObject("picUser.Image")));
+            this.picUser.InitialImage = null;
+            this.picUser.Location = new System.Drawing.Point(907, 7);
+            this.picUser.Name = "picUser";
+            this.picUser.Size = new System.Drawing.Size(49, 50);
+            this.picUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picUser.TabIndex = 1;
+            this.picUser.TabStop = false;
+            // 
+            // picLogo
+            // 
+            this.picLogo.Image = ((System.Drawing.Image)(resources.GetObject("picLogo.Image")));
+            this.picLogo.InitialImage = ((System.Drawing.Image)(resources.GetObject("picLogo.InitialImage")));
+            this.picLogo.Location = new System.Drawing.Point(12, 7);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(142, 50);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picLogo.TabIndex = 0;
+            this.picLogo.TabStop = false;
+            // 
             // panelMain
             // 
             this.panelMain.Controls.Add(this.tbcPrincipal);
@@ -423,7 +446,7 @@
             this.tbcPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tbcPrincipal.Name = "tbcPrincipal";
-            this.tbcPrincipal.SelectedIndex = 1;
+            this.tbcPrincipal.SelectedIndex = 3;
             this.tbcPrincipal.Size = new System.Drawing.Size(968, 546);
             this.tbcPrincipal.TabIndex = 0;
             this.tbcPrincipal.UseSelectable = true;
@@ -604,6 +627,101 @@
             this.grdHome.TabIndex = 2;
             this.grdHome.VirtualMode = true;
             this.grdHome.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdHome_CellContentDoubleClick);
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.Width = 40;
+            // 
+            // nomeDataGridViewTextBoxColumn
+            // 
+            this.nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
+            this.nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
+            this.nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
+            this.nomeDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // documentoDataGridViewTextBoxColumn
+            // 
+            this.documentoDataGridViewTextBoxColumn.DataPropertyName = "Documento";
+            this.documentoDataGridViewTextBoxColumn.HeaderText = "Documento";
+            this.documentoDataGridViewTextBoxColumn.Name = "documentoDataGridViewTextBoxColumn";
+            this.documentoDataGridViewTextBoxColumn.Width = 90;
+            // 
+            // enderecoDataGridViewTextBoxColumn
+            // 
+            this.enderecoDataGridViewTextBoxColumn.DataPropertyName = "Endereco";
+            this.enderecoDataGridViewTextBoxColumn.HeaderText = "Endereco";
+            this.enderecoDataGridViewTextBoxColumn.Name = "enderecoDataGridViewTextBoxColumn";
+            this.enderecoDataGridViewTextBoxColumn.Width = 78;
+            // 
+            // complementoDataGridViewTextBoxColumn
+            // 
+            this.complementoDataGridViewTextBoxColumn.DataPropertyName = "Complemento";
+            this.complementoDataGridViewTextBoxColumn.HeaderText = "Complemento";
+            this.complementoDataGridViewTextBoxColumn.Name = "complementoDataGridViewTextBoxColumn";
+            this.complementoDataGridViewTextBoxColumn.Width = 102;
+            // 
+            // bairroDataGridViewTextBoxColumn
+            // 
+            this.bairroDataGridViewTextBoxColumn.DataPropertyName = "Bairro";
+            this.bairroDataGridViewTextBoxColumn.HeaderText = "Bairro";
+            this.bairroDataGridViewTextBoxColumn.Name = "bairroDataGridViewTextBoxColumn";
+            this.bairroDataGridViewTextBoxColumn.Width = 61;
+            // 
+            // cidadeUFDataGridViewTextBoxColumn
+            // 
+            this.cidadeUFDataGridViewTextBoxColumn.DataPropertyName = "CidadeUF";
+            this.cidadeUFDataGridViewTextBoxColumn.HeaderText = "CidadeUF";
+            this.cidadeUFDataGridViewTextBoxColumn.Name = "cidadeUFDataGridViewTextBoxColumn";
+            this.cidadeUFDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // telefonesDataGridViewTextBoxColumn
+            // 
+            this.telefonesDataGridViewTextBoxColumn.DataPropertyName = "Telefones";
+            this.telefonesDataGridViewTextBoxColumn.HeaderText = "Telefones";
+            this.telefonesDataGridViewTextBoxColumn.Name = "telefonesDataGridViewTextBoxColumn";
+            this.telefonesDataGridViewTextBoxColumn.Width = 78;
+            // 
+            // pedidoAnteriorDataGridViewCheckBoxColumn
+            // 
+            this.pedidoAnteriorDataGridViewCheckBoxColumn.DataPropertyName = "PedidoAnterior";
+            this.pedidoAnteriorDataGridViewCheckBoxColumn.HeaderText = "PedidoAnterior";
+            this.pedidoAnteriorDataGridViewCheckBoxColumn.Name = "pedidoAnteriorDataGridViewCheckBoxColumn";
+            this.pedidoAnteriorDataGridViewCheckBoxColumn.Width = 89;
+            // 
+            // recebidoDataGridViewTextBoxColumn
+            // 
+            this.recebidoDataGridViewTextBoxColumn.DataPropertyName = "Recebido";
+            this.recebidoDataGridViewTextBoxColumn.HeaderText = "Recebido";
+            this.recebidoDataGridViewTextBoxColumn.Name = "recebidoDataGridViewTextBoxColumn";
+            this.recebidoDataGridViewTextBoxColumn.Width = 78;
+            // 
+            // pedidoAtualDataGridViewCheckBoxColumn
+            // 
+            this.pedidoAtualDataGridViewCheckBoxColumn.DataPropertyName = "PedidoAtual";
+            this.pedidoAtualDataGridViewCheckBoxColumn.HeaderText = "PedidoAtual";
+            this.pedidoAtualDataGridViewCheckBoxColumn.Name = "pedidoAtualDataGridViewCheckBoxColumn";
+            this.pedidoAtualDataGridViewCheckBoxColumn.Width = 74;
+            // 
+            // codigoPedidoDataGridViewTextBoxColumn
+            // 
+            this.codigoPedidoDataGridViewTextBoxColumn.DataPropertyName = "CodigoPedido";
+            this.codigoPedidoDataGridViewTextBoxColumn.HeaderText = "CodigoPedido";
+            this.codigoPedidoDataGridViewTextBoxColumn.Name = "codigoPedidoDataGridViewTextBoxColumn";
+            this.codigoPedidoDataGridViewTextBoxColumn.Width = 104;
+            // 
+            // receberDataGridViewCheckBoxColumn
+            // 
+            this.receberDataGridViewCheckBoxColumn.DataPropertyName = "Receber";
+            this.receberDataGridViewCheckBoxColumn.HeaderText = "Receber";
+            this.receberDataGridViewCheckBoxColumn.Name = "receberDataGridViewCheckBoxColumn";
+            this.receberDataGridViewCheckBoxColumn.Width = 52;
+            // 
+            // listaRepVendedorHomeBindingSource
+            // 
+            this.listaRepVendedorHomeBindingSource.DataSource = typeof(ModelLibrary.ListaRepVendedorHome);
             // 
             // tabVendedores
             // 
@@ -3895,124 +4013,6 @@
             this.pnlAjuda.TabIndex = 0;
             this.pnlAjuda.Text = "<b>Conteudo da Ajuda</b> <br> <i>Em breve...</i>";
             // 
-            // picUser
-            // 
-            this.picUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.picUser.Image = ((System.Drawing.Image)(resources.GetObject("picUser.Image")));
-            this.picUser.InitialImage = null;
-            this.picUser.Location = new System.Drawing.Point(907, 7);
-            this.picUser.Name = "picUser";
-            this.picUser.Size = new System.Drawing.Size(49, 50);
-            this.picUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picUser.TabIndex = 1;
-            this.picUser.TabStop = false;
-            // 
-            // picLogo
-            // 
-            this.picLogo.Image = ((System.Drawing.Image)(resources.GetObject("picLogo.Image")));
-            this.picLogo.InitialImage = ((System.Drawing.Image)(resources.GetObject("picLogo.InitialImage")));
-            this.picLogo.Location = new System.Drawing.Point(12, 7);
-            this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(142, 50);
-            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picLogo.TabIndex = 0;
-            this.picLogo.TabStop = false;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.Width = 40;
-            // 
-            // nomeDataGridViewTextBoxColumn
-            // 
-            this.nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
-            this.nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
-            this.nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
-            this.nomeDataGridViewTextBoxColumn.Width = 60;
-            // 
-            // documentoDataGridViewTextBoxColumn
-            // 
-            this.documentoDataGridViewTextBoxColumn.DataPropertyName = "Documento";
-            this.documentoDataGridViewTextBoxColumn.HeaderText = "Documento";
-            this.documentoDataGridViewTextBoxColumn.Name = "documentoDataGridViewTextBoxColumn";
-            this.documentoDataGridViewTextBoxColumn.Width = 90;
-            // 
-            // enderecoDataGridViewTextBoxColumn
-            // 
-            this.enderecoDataGridViewTextBoxColumn.DataPropertyName = "Endereco";
-            this.enderecoDataGridViewTextBoxColumn.HeaderText = "Endereco";
-            this.enderecoDataGridViewTextBoxColumn.Name = "enderecoDataGridViewTextBoxColumn";
-            this.enderecoDataGridViewTextBoxColumn.Width = 78;
-            // 
-            // complementoDataGridViewTextBoxColumn
-            // 
-            this.complementoDataGridViewTextBoxColumn.DataPropertyName = "Complemento";
-            this.complementoDataGridViewTextBoxColumn.HeaderText = "Complemento";
-            this.complementoDataGridViewTextBoxColumn.Name = "complementoDataGridViewTextBoxColumn";
-            this.complementoDataGridViewTextBoxColumn.Width = 102;
-            // 
-            // bairroDataGridViewTextBoxColumn
-            // 
-            this.bairroDataGridViewTextBoxColumn.DataPropertyName = "Bairro";
-            this.bairroDataGridViewTextBoxColumn.HeaderText = "Bairro";
-            this.bairroDataGridViewTextBoxColumn.Name = "bairroDataGridViewTextBoxColumn";
-            this.bairroDataGridViewTextBoxColumn.Width = 61;
-            // 
-            // cidadeUFDataGridViewTextBoxColumn
-            // 
-            this.cidadeUFDataGridViewTextBoxColumn.DataPropertyName = "CidadeUF";
-            this.cidadeUFDataGridViewTextBoxColumn.HeaderText = "CidadeUF";
-            this.cidadeUFDataGridViewTextBoxColumn.Name = "cidadeUFDataGridViewTextBoxColumn";
-            this.cidadeUFDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // telefonesDataGridViewTextBoxColumn
-            // 
-            this.telefonesDataGridViewTextBoxColumn.DataPropertyName = "Telefones";
-            this.telefonesDataGridViewTextBoxColumn.HeaderText = "Telefones";
-            this.telefonesDataGridViewTextBoxColumn.Name = "telefonesDataGridViewTextBoxColumn";
-            this.telefonesDataGridViewTextBoxColumn.Width = 78;
-            // 
-            // pedidoAnteriorDataGridViewCheckBoxColumn
-            // 
-            this.pedidoAnteriorDataGridViewCheckBoxColumn.DataPropertyName = "PedidoAnterior";
-            this.pedidoAnteriorDataGridViewCheckBoxColumn.HeaderText = "PedidoAnterior";
-            this.pedidoAnteriorDataGridViewCheckBoxColumn.Name = "pedidoAnteriorDataGridViewCheckBoxColumn";
-            this.pedidoAnteriorDataGridViewCheckBoxColumn.Width = 89;
-            // 
-            // recebidoDataGridViewTextBoxColumn
-            // 
-            this.recebidoDataGridViewTextBoxColumn.DataPropertyName = "Recebido";
-            this.recebidoDataGridViewTextBoxColumn.HeaderText = "Recebido";
-            this.recebidoDataGridViewTextBoxColumn.Name = "recebidoDataGridViewTextBoxColumn";
-            this.recebidoDataGridViewTextBoxColumn.Width = 78;
-            // 
-            // pedidoAtualDataGridViewCheckBoxColumn
-            // 
-            this.pedidoAtualDataGridViewCheckBoxColumn.DataPropertyName = "PedidoAtual";
-            this.pedidoAtualDataGridViewCheckBoxColumn.HeaderText = "PedidoAtual";
-            this.pedidoAtualDataGridViewCheckBoxColumn.Name = "pedidoAtualDataGridViewCheckBoxColumn";
-            this.pedidoAtualDataGridViewCheckBoxColumn.Width = 74;
-            // 
-            // codigoPedidoDataGridViewTextBoxColumn
-            // 
-            this.codigoPedidoDataGridViewTextBoxColumn.DataPropertyName = "CodigoPedido";
-            this.codigoPedidoDataGridViewTextBoxColumn.HeaderText = "CodigoPedido";
-            this.codigoPedidoDataGridViewTextBoxColumn.Name = "codigoPedidoDataGridViewTextBoxColumn";
-            this.codigoPedidoDataGridViewTextBoxColumn.Width = 104;
-            // 
-            // receberDataGridViewCheckBoxColumn
-            // 
-            this.receberDataGridViewCheckBoxColumn.DataPropertyName = "Receber";
-            this.receberDataGridViewCheckBoxColumn.HeaderText = "Receber";
-            this.receberDataGridViewCheckBoxColumn.Name = "receberDataGridViewCheckBoxColumn";
-            this.receberDataGridViewCheckBoxColumn.Width = 52;
-            // 
-            // listaRepVendedorHomeBindingSource
-            // 
-            this.listaRepVendedorHomeBindingSource.DataSource = typeof(ModelLibrary.ListaRepVendedorHome);
-            // 
             // FormRepresentante
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4028,6 +4028,8 @@
             this.Load += new System.EventHandler(this.FormRepresentante_Load);
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.panelMain.ResumeLayout(false);
             this.tbcPrincipal.ResumeLayout(false);
             this.tabHome.ResumeLayout(false);
@@ -4036,6 +4038,7 @@
             this.pnlHomeFiltros.PerformLayout();
             this.pnlHomeGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdHome)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listaRepVendedorHomeBindingSource)).EndInit();
             this.tabVendedores.ResumeLayout(false);
             this.pnlVendedorResultado.ResumeLayout(false);
             this.tbcVendedor.ResumeLayout(false);
@@ -4085,9 +4088,6 @@
             this.pnlEstoqueMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdEstoque)).EndInit();
             this.tabAjuda.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picUser)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.listaRepVendedorHomeBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

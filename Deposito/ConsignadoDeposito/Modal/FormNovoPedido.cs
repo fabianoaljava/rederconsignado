@@ -118,13 +118,13 @@ namespace ConsignadoDeposito.Modal
             localDepositoForm.cRetorno.ExibirDetalhesPedido(vCodigoPedido);
             localDepositoForm.cRetorno.CarregarPedidos();
             MessageBox.Show("Pedido Incluído com Sucesso");
-            this.Hide();
+            this.Close();
 
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Close();
         }
 
         private void FormNovoPedido_Load(object sender, EventArgs e)

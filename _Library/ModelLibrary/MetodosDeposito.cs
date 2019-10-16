@@ -1251,6 +1251,19 @@ namespace ModelLibrary
 
         }
 
+
+
+        public static Receber ObterAReceber(int pReceberId)
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+                var receber = deposito.Receber.Where(rc => rc.Id == pReceberId).FirstOrDefault();
+
+                return receber;
+            }
+
+
+        }
         public static List<ListaAReceber> ObterListaAReceber(long pCargaId)
         {
 
@@ -1291,7 +1304,28 @@ namespace ModelLibrary
         }
 
 
-        
+        public static List<ListaReceberBaixa> ObterListaReceberBaixa(int pReceberId)
+        {
+
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                
+                string query = @"SELECT Id, ReceberId, Valor, DataPagamento, DataBaixa FROM ReceberBaixa
+	                                WHERE ReceberId = @p0";
+
+                
+                var result = deposito.Database.SqlQuery<ListaReceberBaixa>(query, pReceberId);
+
+                return result.ToList<ListaReceberBaixa>();
+
+            }
+
+        }
+
+
+
 
         public static void SalvarAReceberBaixa(int pReceberId, int pReceberBaixaId, double pValor, string pData)
         {
@@ -1350,7 +1384,48 @@ namespace ModelLibrary
         }
 
 
-        public static void InserirReceber(int pCargaId, int pVendedorId, double pValor, DateTime pDataVencimento)
+
+        public static void InserirReceber(Receber pReceber)
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+                
+
+                deposito.Receber.Add(pReceber);
+                deposito.SaveChanges();
+
+
+            }
+        }
+
+
+
+        public static void AtualizarReceber(Receber pReceber)
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                var receber = deposito.Receber.FirstOrDefault(rc => rc.Id == pReceber.Id);
+
+
+                receber.ValorNF = pReceber.ValorNF;
+                receber.ValorDuplicata = pReceber.ValorDuplicata;
+                receber.ValorAReceber = pReceber.ValorAReceber;
+
+                receber.DataEmissao = pReceber.DataEmissao;
+                receber.DataLancamento = pReceber.DataLancamento;
+                receber.DataVencimento = pReceber.DataVencimento;
+
+                receber.Observacoes = pReceber.Observacoes;
+                
+                deposito.SaveChanges();
+
+
+            }
+        }
+
+
+        public static void InserirReceberAutomatico(int pCargaId, int pVendedorId, double pValor, DateTime pDataVencimento)
         {
             using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
@@ -1485,17 +1560,49 @@ namespace ModelLibrary
             }
         }
 
-        public static Vendedor PesquisarVendedor(string pCPFCnpj = "")
+
+        public static List<ListaVendedor> PesquisarVendedor(long pVendedorId = 0, string pCPFCNPJ = "", string pNome = "")
         {
             using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
-                var vendedor = deposito.Vendedor.Where(vd => vd.CpfCnpj.Trim() == pCPFCnpj).FirstOrDefault();
+                string query = @"SELECT Id, Nome, CPFCnpj, Cidade + '/' + UF Cidade, Status, Observacao FROM Vendedor WHERE 1=1 ";
 
-                return vendedor;
+                if (pVendedorId != 0)
+                {
+                    query += " AND Id = " + pVendedorId;
+                }
+
+                if (pCPFCNPJ != "")
+                {
+                    query += " AND CPFCnpj = '" + pCPFCNPJ + "'";
+                }
+
+                if (pNome != "")
+                {
+                    query += " AND Nome Like '%" + pNome + "%'";
+                }
+
+                var result = deposito.Database.SqlQuery<ListaVendedor>(query).ToList<ListaVendedor>();
+
+
+                return result;
+
 
             }
         }
+
+        //public static Vendedor PesquisarVendedor(string pCPFCnpj = "")
+        //{
+        //    using (DepositoDBEntities deposito = new DepositoDBEntities())
+        //    {
+
+        //        var vendedor = deposito.Vendedor.Where(vd => vd.CpfCnpj.Trim() == pCPFCnpj).FirstOrDefault();
+
+        //        return vendedor;
+
+        //    }
+        //}
         
 
         public static void NegativarVendedor(long pVendedorId)

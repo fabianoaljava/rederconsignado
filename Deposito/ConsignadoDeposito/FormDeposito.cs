@@ -730,51 +730,14 @@ namespace ConsignadoDeposito
 
         private void grdContasAReceber_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            cRetorno.ExibirAReceber();
+            //Exibir Detalhes
         }
 
-        private void btnRetornoRecConfirmar_Click(object sender, EventArgs e)
-        {
-            cRetorno.ConfirmarAReceber();
-        }
 
-        private void btnRetornoRecCancelar_Click(object sender, EventArgs e)
-        {
-            cRetorno.LimparAReceber();
-        }
 
-        private void txtRetornoRecDocumento_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyData == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-                txtRetornoRecSerie.Focus();
 
-            }
-        }
 
-        private void txtRetornoRecSerie_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyData == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-                txtRetornoRecSerie_Leave(sender, e);
-            }
-        }
 
-        private void txtRetornoRecSerie_Leave(object sender, EventArgs e)
-        {
-            if (txtRetornoRecDocumento.Text != "")
-            {
-                cRetorno.PesquisarAReceber(txtRetornoRecDocumento.Text, txtRetornoRecSerie.Text);
-                txtRetornoRecValor.Focus();
-            } else
-            {
-                MessageBox.Show("Informe o Número do Documento");
-                txtRetornoRecDocumento.Focus();
-            }
-
-        }
 
         private void txtLancPedCodigoBarras_KeyUp(object sender, KeyEventArgs e)
         {
@@ -877,34 +840,14 @@ namespace ConsignadoDeposito
         {
             Cursor.Current = Cursors.WaitCursor;
             Modal.FormNovoPedido formNovoPedido = new Modal.FormNovoPedido(this);
-            formNovoPedido.Show();
+            formNovoPedido.ShowDialog();
             Cursor.Current = Cursors.Default;
 
         }
 
         private void btnAcoes_Click(object sender, EventArgs e)
         {
-            switch (btnAcoes.Text)
-            {
-                case "Finalizar \n Conferencia \n de Produtos":
-                    if (MessageBox.Show("Deseja Realmente finalizar a Conferência de Produtos? ATENÇÃO: Não será possível retornar produtos após confirmar essa ação.", "Finalizar Conferência de Produtos", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        cRetorno.FinalizarRetorno();
-                    }
-                    break;
-                case "Finalizar \n Acerto":
-                    if (MessageBox.Show("Deseja Realmente finalizar o Acerto? ATENÇÃO: Não será possível retornar produtos ou pedidos após confirmar essa ação.", "Finalizar Acerto", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        cRetorno.FinalizarAcerto();
-                    }
-                    break;
-                case "Refazer \n Retorno":
-                    if (MessageBox.Show("Deseja realmente refazer o retorno? ATENÇÃO: Todas as informações de retorno registradas serão perdidas!", "Refazer Retorno", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-                    {
-                        cRetorno.RefazerRetorno();
-                    }
-                    break;
-            }
+            
         }
 
         private void menuCadastroProduto_Click(object sender, EventArgs e)
@@ -1022,6 +965,86 @@ namespace ConsignadoDeposito
 
 
             }
+        }
+
+        private void mnuRetornoAcoes_Click(object sender, EventArgs e)
+        {
+            switch (mnuRetornoAcoes.Text)
+            {
+                case "Finalizar Conferencia de Produtos":
+                    if (MessageBox.Show("Deseja Realmente finalizar a Conferência de Produtos? ATENÇÃO: Não será possível retornar produtos após confirmar essa ação.", "Finalizar Conferência de Produtos", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        cRetorno.FinalizarRetorno();
+                    }
+                    break;
+                case "Finalizar Acerto":
+                    if (MessageBox.Show("Deseja Realmente finalizar o Acerto? ATENÇÃO: Não será possível retornar produtos ou pedidos após confirmar essa ação.", "Finalizar Acerto", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        cRetorno.FinalizarAcerto();
+                    }
+                    break;
+                case "Refazer Retorno":
+                    if (MessageBox.Show("Deseja realmente refazer o retorno? ATENÇÃO: Todas as informações de retorno registradas serão perdidas!", "Refazer Retorno", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                    {
+                        cRetorno.RefazerRetorno();
+                    }
+                    break;
+            }
+        }
+
+
+
+        private void btnRetornoAcertoIncluir_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            Modal.FormAReceber formAReceber = new Modal.FormAReceber(this, "Create");
+            formAReceber.ShowDialog();
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void smnRetornoAcertoTitulo_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            Modal.FormAReceber formAReceber = new Modal.FormAReceber(this, "Update");
+            formAReceber.ShowDialog();
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void grdContasAReceber_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                cmsRetornoAcerto.Show(Cursor.Position.X, Cursor.Position.Y);
+            }
+        }
+
+        private void grdContasAReceber_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            //handle the row selection on right click
+            if (e.Button == MouseButtons.Right)
+            {
+                try
+                {
+                    grdContasAReceber.CurrentCell = grdContasAReceber.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    // Can leave these here - doesn't hurt
+                    grdContasAReceber.Rows[e.RowIndex].Selected = true;
+                    grdContasAReceber.Focus();
+
+                    cRetorno.cRetornoReceberId = Convert.ToInt32(grdContasAReceber.Rows[e.RowIndex].Cells[1].Value);
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+
+        private void smnRetornoAcertoPagamento_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            Modal.FormReceberBaixa formReceberBaixa = new Modal.FormReceberBaixa(this);
+            formReceberBaixa.ShowDialog();
+            Cursor.Current = Cursors.Default;
         }
 
 

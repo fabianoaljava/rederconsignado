@@ -90,6 +90,7 @@
     <Compile Include="Listas\ListaProdutoGrade.cs" />
     <Compile Include="Listas\ListaProdutos.cs" />
     <Compile Include="Listas\ListaProdutosConsignados.cs" />
+    <Compile Include="Listas\ListaReceberBaixa.cs" />
     <Compile Include="Listas\ListaRecebimentos.cs" />
     <Compile Include="Listas\ListaRepCargaProduto.cs" />
     <Compile Include="Listas\ListaRepEstoque.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Listas\ListaRepVendedorHome.cs" />
     <Compile Include="Listas\ListaTotalizadores.cs" />
     <Compile Include="Listas\ListaTotalizadoresDeposito.cs" />
+    <Compile Include="Listas\ListaVendedor.cs" />
     <Compile Include="MetodosDeposito.cs" />
     <Compile Include="MetodosRepresentante.cs" />
     <Compile Include="ModelDeposito.Context.cs">

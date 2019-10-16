@@ -120,6 +120,7 @@
             // btnCancelarProduto
             // 
             this.btnCancelarProduto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnCancelarProduto.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelarProduto.Location = new System.Drawing.Point(443, 114);
             this.btnCancelarProduto.Name = "btnCancelarProduto";
             this.btnCancelarProduto.Size = new System.Drawing.Size(103, 29);
@@ -717,9 +718,12 @@
             // 
             // FormProduto
             // 
+            this.AcceptButton = this.btnSalvarProduto;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancelarProduto;
             this.ClientSize = new System.Drawing.Size(719, 703);
+            this.ControlBox = false;
             this.Controls.Add(this.pnlProdutoGrade);
             this.Controls.Add(this.pblProdutoBottom);
             this.Controls.Add(this.pnlProdutoItem);
@@ -728,7 +732,10 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(719, 703);
             this.Name = "FormProduto";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Cadastro de Produto";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.FormProduto_Load);
             this.pnlProduto.ResumeLayout(false);
             this.grpProduto.ResumeLayout(false);

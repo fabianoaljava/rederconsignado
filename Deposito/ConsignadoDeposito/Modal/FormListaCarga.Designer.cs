@@ -28,177 +28,139 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
-            this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
-            this.btnCancelar = new MetroFramework.Controls.MetroButton();
-            this.btnConfirmar = new MetroFramework.Controls.MetroButton();
-            this.grdCarga = new MetroFramework.Controls.MetroGrid();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.pnlSelecionarCarga = new MetroFramework.Controls.MetroPanel();
+            this.btnLimpar = new MetroFramework.Controls.MetroButton();
+            this.btnFiltrar = new MetroFramework.Controls.MetroButton();
+            this.lblE = new MetroFramework.Controls.MetroLabel();
+            this.cbbAnoMesFinal = new System.Windows.Forms.DateTimePicker();
+            this.lblInfo = new MetroFramework.Controls.MetroLabel();
+            this.cbbAnoMesInicial = new System.Windows.Forms.DateTimePicker();
+            this.lblCargaMesAno = new MetroFramework.Controls.MetroLabel();
             this.txtCargaCodRepresentante = new MetroFramework.Controls.MetroTextBox();
             this.txtCargaCodPraca = new MetroFramework.Controls.MetroTextBox();
             this.cbbCargaRepresentante = new MetroFramework.Controls.MetroComboBox();
             this.cbbCargaPraca = new MetroFramework.Controls.MetroComboBox();
             this.lblCargaRepresentante = new MetroFramework.Controls.MetroLabel();
             this.lblCargaPraca = new MetroFramework.Controls.MetroLabel();
-            this.cbbAnoMesInicial = new System.Windows.Forms.DateTimePicker();
-            this.lblCargaMesAno = new MetroFramework.Controls.MetroLabel();
-            this.lblInfo = new MetroFramework.Controls.MetroLabel();
-            this.cbbAnoMesFinal = new System.Windows.Forms.DateTimePicker();
-            this.lblE = new MetroFramework.Controls.MetroLabel();
-            this.btnFiltrar = new MetroFramework.Controls.MetroButton();
-            this.btnLimpar = new MetroFramework.Controls.MetroButton();
-            this.metroPanel1.SuspendLayout();
-            this.metroPanel2.SuspendLayout();
-            this.metroPanel3.SuspendLayout();
+            this.pnlBottomForm = new MetroFramework.Controls.MetroPanel();
+            this.btnCancelar = new MetroFramework.Controls.MetroButton();
+            this.btnConfirmar = new MetroFramework.Controls.MetroButton();
+            this.pnlMainGrid = new MetroFramework.Controls.MetroPanel();
+            this.grdCarga = new MetroFramework.Controls.MetroGrid();
+            this.pnlSelecionarCarga.SuspendLayout();
+            this.pnlBottomForm.SuspendLayout();
+            this.pnlMainGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdCarga)).BeginInit();
             this.SuspendLayout();
             // 
-            // metroPanel1
+            // pnlSelecionarCarga
             // 
-            this.metroPanel1.Controls.Add(this.btnLimpar);
-            this.metroPanel1.Controls.Add(this.btnFiltrar);
-            this.metroPanel1.Controls.Add(this.lblE);
-            this.metroPanel1.Controls.Add(this.cbbAnoMesFinal);
-            this.metroPanel1.Controls.Add(this.lblInfo);
-            this.metroPanel1.Controls.Add(this.cbbAnoMesInicial);
-            this.metroPanel1.Controls.Add(this.lblCargaMesAno);
-            this.metroPanel1.Controls.Add(this.txtCargaCodRepresentante);
-            this.metroPanel1.Controls.Add(this.txtCargaCodPraca);
-            this.metroPanel1.Controls.Add(this.cbbCargaRepresentante);
-            this.metroPanel1.Controls.Add(this.cbbCargaPraca);
-            this.metroPanel1.Controls.Add(this.lblCargaRepresentante);
-            this.metroPanel1.Controls.Add(this.lblCargaPraca);
-            this.metroPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.metroPanel1.HorizontalScrollbarBarColor = true;
-            this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.HorizontalScrollbarSize = 10;
-            this.metroPanel1.Location = new System.Drawing.Point(20, 60);
-            this.metroPanel1.Name = "metroPanel1";
-            this.metroPanel1.Size = new System.Drawing.Size(760, 99);
-            this.metroPanel1.TabIndex = 0;
-            this.metroPanel1.VerticalScrollbarBarColor = true;
-            this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel1.VerticalScrollbarSize = 10;
+            this.pnlSelecionarCarga.Controls.Add(this.btnLimpar);
+            this.pnlSelecionarCarga.Controls.Add(this.btnFiltrar);
+            this.pnlSelecionarCarga.Controls.Add(this.lblE);
+            this.pnlSelecionarCarga.Controls.Add(this.cbbAnoMesFinal);
+            this.pnlSelecionarCarga.Controls.Add(this.lblInfo);
+            this.pnlSelecionarCarga.Controls.Add(this.cbbAnoMesInicial);
+            this.pnlSelecionarCarga.Controls.Add(this.lblCargaMesAno);
+            this.pnlSelecionarCarga.Controls.Add(this.txtCargaCodRepresentante);
+            this.pnlSelecionarCarga.Controls.Add(this.txtCargaCodPraca);
+            this.pnlSelecionarCarga.Controls.Add(this.cbbCargaRepresentante);
+            this.pnlSelecionarCarga.Controls.Add(this.cbbCargaPraca);
+            this.pnlSelecionarCarga.Controls.Add(this.lblCargaRepresentante);
+            this.pnlSelecionarCarga.Controls.Add(this.lblCargaPraca);
+            this.pnlSelecionarCarga.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlSelecionarCarga.HorizontalScrollbarBarColor = true;
+            this.pnlSelecionarCarga.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlSelecionarCarga.HorizontalScrollbarSize = 10;
+            this.pnlSelecionarCarga.Location = new System.Drawing.Point(20, 60);
+            this.pnlSelecionarCarga.Name = "pnlSelecionarCarga";
+            this.pnlSelecionarCarga.Size = new System.Drawing.Size(760, 99);
+            this.pnlSelecionarCarga.TabIndex = 0;
+            this.pnlSelecionarCarga.VerticalScrollbarBarColor = true;
+            this.pnlSelecionarCarga.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlSelecionarCarga.VerticalScrollbarSize = 10;
             // 
-            // metroPanel2
+            // btnLimpar
             // 
-            this.metroPanel2.Controls.Add(this.btnCancelar);
-            this.metroPanel2.Controls.Add(this.btnConfirmar);
-            this.metroPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.metroPanel2.HorizontalScrollbarBarColor = true;
-            this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel2.HorizontalScrollbarSize = 10;
-            this.metroPanel2.Location = new System.Drawing.Point(20, 457);
-            this.metroPanel2.Name = "metroPanel2";
-            this.metroPanel2.Size = new System.Drawing.Size(760, 39);
-            this.metroPanel2.TabIndex = 1;
-            this.metroPanel2.VerticalScrollbarBarColor = true;
-            this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel2.VerticalScrollbarSize = 10;
+            this.btnLimpar.Location = new System.Drawing.Point(647, 64);
+            this.btnLimpar.Name = "btnLimpar";
+            this.btnLimpar.Size = new System.Drawing.Size(90, 18);
+            this.btnLimpar.TabIndex = 7;
+            this.btnLimpar.Text = "&Limpar";
+            this.btnLimpar.UseSelectable = true;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
-            // metroPanel3
+            // btnFiltrar
             // 
-            this.metroPanel3.Controls.Add(this.grdCarga);
-            this.metroPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.metroPanel3.HorizontalScrollbarBarColor = true;
-            this.metroPanel3.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanel3.HorizontalScrollbarSize = 10;
-            this.metroPanel3.Location = new System.Drawing.Point(20, 159);
-            this.metroPanel3.Name = "metroPanel3";
-            this.metroPanel3.Size = new System.Drawing.Size(760, 298);
-            this.metroPanel3.TabIndex = 2;
-            this.metroPanel3.VerticalScrollbarBarColor = true;
-            this.metroPanel3.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanel3.VerticalScrollbarSize = 10;
+            this.btnFiltrar.Location = new System.Drawing.Point(647, 24);
+            this.btnFiltrar.Name = "btnFiltrar";
+            this.btnFiltrar.Size = new System.Drawing.Size(90, 34);
+            this.btnFiltrar.TabIndex = 6;
+            this.btnFiltrar.Text = "&Filtrar";
+            this.btnFiltrar.UseSelectable = true;
+            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
             // 
-            // btnCancelar
+            // lblE
             // 
-            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnCancelar.Location = new System.Drawing.Point(0, 0);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 39);
-            this.btnCancelar.TabIndex = 10;
-            this.btnCancelar.Text = "Ca&ncelar";
-            this.btnCancelar.UseSelectable = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            this.lblE.AutoSize = true;
+            this.lblE.Location = new System.Drawing.Point(520, 59);
+            this.lblE.Name = "lblE";
+            this.lblE.Size = new System.Drawing.Size(16, 19);
+            this.lblE.TabIndex = 14;
+            this.lblE.Text = "e";
             // 
-            // btnConfirmar
+            // cbbAnoMesFinal
             // 
-            this.btnConfirmar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnConfirmar.Enabled = false;
-            this.btnConfirmar.Location = new System.Drawing.Point(685, 0);
-            this.btnConfirmar.Name = "btnConfirmar";
-            this.btnConfirmar.Size = new System.Drawing.Size(75, 39);
-            this.btnConfirmar.TabIndex = 9;
-            this.btnConfirmar.Text = "&Confirmar";
-            this.btnConfirmar.UseSelectable = true;
-            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
+            this.cbbAnoMesFinal.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbAnoMesFinal.CustomFormat = "MM/yyyy";
+            this.cbbAnoMesFinal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbAnoMesFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.cbbAnoMesFinal.Location = new System.Drawing.Point(542, 56);
+            this.cbbAnoMesFinal.Margin = new System.Windows.Forms.Padding(5);
+            this.cbbAnoMesFinal.Name = "cbbAnoMesFinal";
+            this.cbbAnoMesFinal.ShowUpDown = true;
+            this.cbbAnoMesFinal.Size = new System.Drawing.Size(97, 26);
+            this.cbbAnoMesFinal.TabIndex = 5;
+            this.cbbAnoMesFinal.Value = new System.DateTime(2019, 7, 11, 0, 0, 0, 0);
+            this.cbbAnoMesFinal.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
-            // grdCarga
+            // lblInfo
             // 
-            this.grdCarga.AllowUserToAddRows = false;
-            this.grdCarga.AllowUserToDeleteRows = false;
-            this.grdCarga.AllowUserToOrderColumns = true;
-            this.grdCarga.AllowUserToResizeRows = false;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.grdCarga.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
-            this.grdCarga.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.grdCarga.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.grdCarga.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.grdCarga.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdCarga.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
-            this.grdCarga.ColumnHeadersHeight = 22;
-            this.grdCarga.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdCarga.DefaultCellStyle = dataGridViewCellStyle11;
-            this.grdCarga.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdCarga.EnableHeadersVisualStyles = false;
-            this.grdCarga.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.grdCarga.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.grdCarga.Location = new System.Drawing.Point(0, 0);
-            this.grdCarga.MultiSelect = false;
-            this.grdCarga.Name = "grdCarga";
-            this.grdCarga.ReadOnly = true;
-            this.grdCarga.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdCarga.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
-            this.grdCarga.RowHeadersVisible = false;
-            this.grdCarga.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.grdCarga.RowTemplate.ReadOnly = true;
-            this.grdCarga.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdCarga.ShowEditingIcon = false;
-            this.grdCarga.Size = new System.Drawing.Size(760, 298);
-            this.grdCarga.StandardTab = true;
-            this.grdCarga.TabIndex = 8;
-            this.grdCarga.UseCustomBackColor = true;
-            this.grdCarga.UseCustomForeColor = true;
-            this.grdCarga.UseStyleColors = true;
-            this.grdCarga.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdCarga_CellClick);
-            this.grdCarga.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdCarga_CellContentDoubleClick);
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblInfo.Location = new System.Drawing.Point(0, 0);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(72, 19);
+            this.lblInfo.TabIndex = 12;
+            this.lblInfo.Text = "Filtrar por:";
+            // 
+            // cbbAnoMesInicial
+            // 
+            this.cbbAnoMesInicial.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbAnoMesInicial.CustomFormat = "MM/yyyy";
+            this.cbbAnoMesInicial.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbAnoMesInicial.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.cbbAnoMesInicial.Location = new System.Drawing.Point(542, 24);
+            this.cbbAnoMesInicial.Margin = new System.Windows.Forms.Padding(5);
+            this.cbbAnoMesInicial.Name = "cbbAnoMesInicial";
+            this.cbbAnoMesInicial.ShowUpDown = true;
+            this.cbbAnoMesInicial.Size = new System.Drawing.Size(97, 26);
+            this.cbbAnoMesInicial.TabIndex = 4;
+            this.cbbAnoMesInicial.Value = new System.DateTime(2019, 1, 11, 0, 0, 0, 0);
+            this.cbbAnoMesInicial.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
+            // 
+            // lblCargaMesAno
+            // 
+            this.lblCargaMesAno.AutoSize = true;
+            this.lblCargaMesAno.Location = new System.Drawing.Point(449, 27);
+            this.lblCargaMesAno.Name = "lblCargaMesAno";
+            this.lblCargaMesAno.Size = new System.Drawing.Size(92, 19);
+            this.lblCargaMesAno.TabIndex = 11;
+            this.lblCargaMesAno.Text = "Período Entre:";
             // 
             // txtCargaCodRepresentante
             // 
@@ -322,83 +284,121 @@
             this.lblCargaPraca.TabIndex = 7;
             this.lblCargaPraca.Text = "Praça";
             // 
-            // cbbAnoMesInicial
+            // pnlBottomForm
             // 
-            this.cbbAnoMesInicial.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbAnoMesInicial.CustomFormat = "MM/yyyy";
-            this.cbbAnoMesInicial.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbAnoMesInicial.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.cbbAnoMesInicial.Location = new System.Drawing.Point(542, 24);
-            this.cbbAnoMesInicial.Margin = new System.Windows.Forms.Padding(5);
-            this.cbbAnoMesInicial.Name = "cbbAnoMesInicial";
-            this.cbbAnoMesInicial.ShowUpDown = true;
-            this.cbbAnoMesInicial.Size = new System.Drawing.Size(97, 26);
-            this.cbbAnoMesInicial.TabIndex = 4;
-            this.cbbAnoMesInicial.Value = new System.DateTime(2019, 1, 11, 0, 0, 0, 0);
-            this.cbbAnoMesInicial.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
+            this.pnlBottomForm.Controls.Add(this.btnCancelar);
+            this.pnlBottomForm.Controls.Add(this.btnConfirmar);
+            this.pnlBottomForm.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlBottomForm.HorizontalScrollbarBarColor = true;
+            this.pnlBottomForm.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlBottomForm.HorizontalScrollbarSize = 10;
+            this.pnlBottomForm.Location = new System.Drawing.Point(20, 457);
+            this.pnlBottomForm.Name = "pnlBottomForm";
+            this.pnlBottomForm.Size = new System.Drawing.Size(760, 39);
+            this.pnlBottomForm.TabIndex = 1;
+            this.pnlBottomForm.VerticalScrollbarBarColor = true;
+            this.pnlBottomForm.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlBottomForm.VerticalScrollbarSize = 10;
             // 
-            // lblCargaMesAno
+            // btnCancelar
             // 
-            this.lblCargaMesAno.AutoSize = true;
-            this.lblCargaMesAno.Location = new System.Drawing.Point(449, 27);
-            this.lblCargaMesAno.Name = "lblCargaMesAno";
-            this.lblCargaMesAno.Size = new System.Drawing.Size(92, 19);
-            this.lblCargaMesAno.TabIndex = 11;
-            this.lblCargaMesAno.Text = "Período Entre:";
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnCancelar.Location = new System.Drawing.Point(0, 0);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 39);
+            this.btnCancelar.TabIndex = 10;
+            this.btnCancelar.Text = "Ca&ncelar";
+            this.btnCancelar.UseSelectable = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // lblInfo
+            // btnConfirmar
             // 
-            this.lblInfo.AutoSize = true;
-            this.lblInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblInfo.Location = new System.Drawing.Point(0, 0);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(72, 19);
-            this.lblInfo.TabIndex = 12;
-            this.lblInfo.Text = "Filtrar por:";
+            this.btnConfirmar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnConfirmar.Enabled = false;
+            this.btnConfirmar.Location = new System.Drawing.Point(685, 0);
+            this.btnConfirmar.Name = "btnConfirmar";
+            this.btnConfirmar.Size = new System.Drawing.Size(75, 39);
+            this.btnConfirmar.TabIndex = 9;
+            this.btnConfirmar.Text = "&Confirmar";
+            this.btnConfirmar.UseSelectable = true;
+            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
-            // cbbAnoMesFinal
+            // pnlMainGrid
             // 
-            this.cbbAnoMesFinal.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbAnoMesFinal.CustomFormat = "MM/yyyy";
-            this.cbbAnoMesFinal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbAnoMesFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.cbbAnoMesFinal.Location = new System.Drawing.Point(542, 56);
-            this.cbbAnoMesFinal.Margin = new System.Windows.Forms.Padding(5);
-            this.cbbAnoMesFinal.Name = "cbbAnoMesFinal";
-            this.cbbAnoMesFinal.ShowUpDown = true;
-            this.cbbAnoMesFinal.Size = new System.Drawing.Size(97, 26);
-            this.cbbAnoMesFinal.TabIndex = 5;
-            this.cbbAnoMesFinal.Value = new System.DateTime(2019, 7, 11, 0, 0, 0, 0);
-            this.cbbAnoMesFinal.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
+            this.pnlMainGrid.Controls.Add(this.grdCarga);
+            this.pnlMainGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMainGrid.HorizontalScrollbarBarColor = true;
+            this.pnlMainGrid.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlMainGrid.HorizontalScrollbarSize = 10;
+            this.pnlMainGrid.Location = new System.Drawing.Point(20, 159);
+            this.pnlMainGrid.Name = "pnlMainGrid";
+            this.pnlMainGrid.Size = new System.Drawing.Size(760, 298);
+            this.pnlMainGrid.TabIndex = 2;
+            this.pnlMainGrid.VerticalScrollbarBarColor = true;
+            this.pnlMainGrid.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlMainGrid.VerticalScrollbarSize = 10;
             // 
-            // lblE
+            // grdCarga
             // 
-            this.lblE.AutoSize = true;
-            this.lblE.Location = new System.Drawing.Point(520, 59);
-            this.lblE.Name = "lblE";
-            this.lblE.Size = new System.Drawing.Size(16, 19);
-            this.lblE.TabIndex = 14;
-            this.lblE.Text = "e";
-            // 
-            // btnFiltrar
-            // 
-            this.btnFiltrar.Location = new System.Drawing.Point(647, 24);
-            this.btnFiltrar.Name = "btnFiltrar";
-            this.btnFiltrar.Size = new System.Drawing.Size(90, 34);
-            this.btnFiltrar.TabIndex = 6;
-            this.btnFiltrar.Text = "&Filtrar";
-            this.btnFiltrar.UseSelectable = true;
-            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
-            // 
-            // btnLimpar
-            // 
-            this.btnLimpar.Location = new System.Drawing.Point(647, 64);
-            this.btnLimpar.Name = "btnLimpar";
-            this.btnLimpar.Size = new System.Drawing.Size(90, 18);
-            this.btnLimpar.TabIndex = 7;
-            this.btnLimpar.Text = "&Limpar";
-            this.btnLimpar.UseSelectable = true;
-            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
+            this.grdCarga.AllowUserToAddRows = false;
+            this.grdCarga.AllowUserToDeleteRows = false;
+            this.grdCarga.AllowUserToOrderColumns = true;
+            this.grdCarga.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.grdCarga.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.grdCarga.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdCarga.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.grdCarga.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.grdCarga.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdCarga.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.grdCarga.ColumnHeadersHeight = 22;
+            this.grdCarga.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grdCarga.DefaultCellStyle = dataGridViewCellStyle3;
+            this.grdCarga.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdCarga.EnableHeadersVisualStyles = false;
+            this.grdCarga.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.grdCarga.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdCarga.Location = new System.Drawing.Point(0, 0);
+            this.grdCarga.MultiSelect = false;
+            this.grdCarga.Name = "grdCarga";
+            this.grdCarga.ReadOnly = true;
+            this.grdCarga.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdCarga.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.grdCarga.RowHeadersVisible = false;
+            this.grdCarga.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.grdCarga.RowTemplate.ReadOnly = true;
+            this.grdCarga.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.grdCarga.ShowEditingIcon = false;
+            this.grdCarga.Size = new System.Drawing.Size(760, 298);
+            this.grdCarga.StandardTab = true;
+            this.grdCarga.TabIndex = 8;
+            this.grdCarga.UseCustomBackColor = true;
+            this.grdCarga.UseCustomForeColor = true;
+            this.grdCarga.UseStyleColors = true;
+            this.grdCarga.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdCarga_CellClick);
+            this.grdCarga.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdCarga_CellContentDoubleClick);
             // 
             // FormListaCarga
             // 
@@ -407,16 +407,22 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(800, 516);
-            this.Controls.Add(this.metroPanel3);
-            this.Controls.Add(this.metroPanel2);
-            this.Controls.Add(this.metroPanel1);
+            this.ControlBox = false;
+            this.Controls.Add(this.pnlMainGrid);
+            this.Controls.Add(this.pnlBottomForm);
+            this.Controls.Add(this.pnlSelecionarCarga);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormListaCarga";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Selecionar Carga/Retorno";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.FormListaCarga_Load);
-            this.metroPanel1.ResumeLayout(false);
-            this.metroPanel1.PerformLayout();
-            this.metroPanel2.ResumeLayout(false);
-            this.metroPanel3.ResumeLayout(false);
+            this.pnlSelecionarCarga.ResumeLayout(false);
+            this.pnlSelecionarCarga.PerformLayout();
+            this.pnlBottomForm.ResumeLayout(false);
+            this.pnlMainGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdCarga)).EndInit();
             this.ResumeLayout(false);
 
@@ -424,9 +430,9 @@
 
         #endregion
 
-        private MetroFramework.Controls.MetroPanel metroPanel1;
-        private MetroFramework.Controls.MetroPanel metroPanel2;
-        private MetroFramework.Controls.MetroPanel metroPanel3;
+        private MetroFramework.Controls.MetroPanel pnlSelecionarCarga;
+        private MetroFramework.Controls.MetroPanel pnlBottomForm;
+        private MetroFramework.Controls.MetroPanel pnlMainGrid;
         private MetroFramework.Controls.MetroButton btnCancelar;
         private MetroFramework.Controls.MetroButton btnConfirmar;
         public MetroFramework.Controls.MetroGrid grdCarga;

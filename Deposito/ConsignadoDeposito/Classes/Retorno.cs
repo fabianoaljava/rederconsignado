@@ -92,6 +92,11 @@ namespace ConsignadoDeposito
 
 
             localDepositoForm.dlbRetornoTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Medium;
+
+
+            localDepositoForm.mnuRetornoAcoes.Text = "Selecione a Carga";
+            localDepositoForm.mnuRetornoAcoes.Enabled = false;
+
         }
 
         public void ResetarVariaveis()
@@ -190,8 +195,8 @@ namespace ConsignadoDeposito
                         localDepositoForm.pnlLancPedTop.Enabled = true;
                         localDepositoForm.pnlContasAReceberTop.Enabled = true;
 
-                        localDepositoForm.btnAcoes.Text = "Finalizar \n Conferencia \n de Produtos";
-                        localDepositoForm.btnAcoes.Enabled = true;
+                        localDepositoForm.mnuRetornoAcoes.Text = "Finalizar Conferencia de Produtos";
+                        localDepositoForm.mnuRetornoAcoes.Enabled = true;
 
                     }
                     else if (carga.Status == "C") {
@@ -204,10 +209,10 @@ namespace ConsignadoDeposito
                         localDepositoForm.pnlRetornoPedidoTop.Enabled = true;
                         localDepositoForm.pnlLancPedTop.Enabled = true;
                         localDepositoForm.pnlContasAReceberTop.Enabled = true;
-                        localDepositoForm.btnAcoes.Text = "Finalizar \n Acerto";
-                        localDepositoForm.btnAcoes.Enabled = true;
+                        localDepositoForm.mnuRetornoAcoes.Text = "Finalizar Acerto";
+                        localDepositoForm.mnuRetornoAcoes.Enabled = true;
                     }
-                    else
+                    else if (carga.Status == "F")
                     {
                         /// Desabilita Retorno de Produtos
                         /// Desabilita FInalizar Conferencia de Produtos
@@ -220,8 +225,24 @@ namespace ConsignadoDeposito
                         localDepositoForm.pnlContasAReceberTop.Enabled = false;
 
 
-                        localDepositoForm.btnAcoes.Text = "Refazer \n Retorno";
-                        localDepositoForm.btnAcoes.Enabled = true;
+                        localDepositoForm.mnuRetornoAcoes.Text = "Refazer Retorno";
+                        localDepositoForm.mnuRetornoAcoes.Enabled = true;
+                    }
+                    else if (carga.Status == "A")
+                    {
+                        /// Desabilita Retorno de Produtos
+                        /// Desabilita FInalizar Conferencia de Produtos
+                        /// Desabilita Lançamento de Pedidos
+                        /// Desabilita Acerto
+                        /// Desabilita Finalizar Acerto
+                        localDepositoForm.pnlRetornoProduto.Enabled = false;
+                        localDepositoForm.pnlRetornoPedidoTop.Enabled = false;
+                        localDepositoForm.pnlLancPedTop.Enabled = false;
+                        localDepositoForm.pnlContasAReceberTop.Enabled = false;
+
+
+                        localDepositoForm.mnuRetornoAcoes.Text = "Retorno não iniciado";
+                        localDepositoForm.mnuRetornoAcoes.Enabled = false;
                     }
 
 
@@ -1058,147 +1079,7 @@ namespace ConsignadoDeposito
         }
 
 
-        public void LimparAReceber()
-        {
-            localDepositoForm.txtRetornoRecDocumento.Text = "";
-            localDepositoForm.txtRetornoRecDocumento.ReadOnly = false;
-            localDepositoForm.txtRetornoRecSerie.Text = "";
-            localDepositoForm.txtRetornoRecSerie.ReadOnly = false;
 
-
-            localDepositoForm.txtRetornoRecNome.Text = "";
-            localDepositoForm.txtRetornoRecValor.Text = "";
-            localDepositoForm.txtRetornoRecData.Text = DateTime.Now.ToString();
-
-
-            cModoRetornoReceber = null;
-            cRetornoReceberBaixaId = 0;
-
-            localDepositoForm.btnRetornoRecConfirmar.Enabled = false;
-            localDepositoForm.btnRetornoRecCancelar.Enabled = false;
-
-        }
-
-
-        public void PesquisarAReceber(string pDocumento, string pSerie) 
-        {
-
-
-            int rowIndex = -1;
-
-            DataGridViewRow receber = localDepositoForm.grdContasAReceber.Rows
-                .Cast<DataGridViewRow>()
-                .Where(r => r.Cells["Documento"].Value.ToString().Equals(pDocumento) && r.Cells["Serie"].Value.ToString().Equals(pSerie))
-                .FirstOrDefault();
-
-
-
-
-            if (receber != null)
-            {
-
-                rowIndex = receber.Index;
-
-                ExibirAReceber(rowIndex);
-            }
-            else
-            {
-
-                MessageBox.Show("Documento ou série não encontrados. Por favor, verifique os dados digitados");
-
-                cRetornoProdutoGradeId = 0;
-                localDepositoForm.txtRetornoRecDocumento.Focus();
-
-                localDepositoForm.btnRetornoRecConfirmar.Enabled = false;
-                localDepositoForm.btnRetornoRecCancelar.Enabled = false;
-
-
-            }
-
-
-        }
-
-        public void ExibirAReceber(int rowindex = -1)
-        {
-
-            
-            if (rowindex == -1)
-            {
-                rowindex = localDepositoForm.grdContasAReceber.CurrentRow.Index;
-            }
-
-
-            cRetornoReceberId = Convert.ToInt32(localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["Id"].Value);
-
-            localDepositoForm.txtRetornoRecDocumento.Text = localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["Documento"].Value.ToString();
-            localDepositoForm.txtRetornoRecDocumento.ReadOnly = true;
-
-            localDepositoForm.txtRetornoRecSerie.Text = localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["Serie"].Value.ToString();
-            localDepositoForm.txtRetornoRecSerie.ReadOnly = true;
-
-
-            localDepositoForm.txtRetornoRecNome.Text = localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["Nome"].Value.ToString();
-
-            if (localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["ValorPago"].Value == null) {
-
-                localDepositoForm.txtRetornoRecAReceber.Text = localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["ValorAReceber"].Value.ToString();
-                localDepositoForm.txtRetornoRecValor.Text = localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["ValorAReceber"].Value.ToString();
-                localDepositoForm.txtRetornoRecData.Text = DateTime.Now.ToString();
-
-                cRetornoReceberBaixaId = 0;
-
-                cModoRetornoReceber = "Insert";
-
-            } else
-            {
-
-                localDepositoForm.txtRetornoRecAReceber.Text = localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["ValorAReceber"].Value.ToString();
-                localDepositoForm.txtRetornoRecValor.Text = localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["ValorPago"].Value.ToString();
-                localDepositoForm.txtRetornoRecData.Text = localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["DataPagamento"].Value.ToString();
-                cRetornoReceberBaixaId = Convert.ToInt32(localDepositoForm.grdContasAReceber.Rows[rowindex].Cells["ReceberBaixaId"].Value);
-                cModoRetornoReceber = "Edit";
-
-            }
-            
-
-            localDepositoForm.btnRetornoRecConfirmar.Enabled = true;
-            localDepositoForm.btnRetornoRecCancelar.Enabled = true;
-
-
-        }
-
-
-        public void ConfirmarAReceber()
-        {
-
-            Double vValor, vValorAReceber;
-            try
-            {
-                vValor = Convert.ToDouble(localDepositoForm.txtRetornoRecValor.Text);
-                vValorAReceber = Convert.ToDouble(localDepositoForm.txtRetornoRecAReceber.Text);
-            } catch
-            {
-                vValor = 0;
-                vValorAReceber = 0;
-            }
-
-
-            if (vValor > vValorAReceber)
-            {
-                MessageBox.Show("O valor recebido informado está acima do valor a receber. Verifique os dados digitados.");
-                localDepositoForm.txtRetornoRecValor.Focus();
-            } else
-            {
-                ModelLibrary.MetodosDeposito.SalvarAReceberBaixa(cRetornoReceberId, cRetornoReceberBaixaId, Convert.ToDouble(localDepositoForm.txtRetornoRecValor.Text), localDepositoForm.txtRetornoRecData.Text);
-
-                CarregarContasAReceber();
-
-                LimparAReceber();
-            }
-
-
-
-        }
 
 
 
