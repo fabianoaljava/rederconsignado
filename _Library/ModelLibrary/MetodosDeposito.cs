@@ -1705,6 +1705,167 @@ namespace ModelLibrary
 
 
 
+        public static Estoque ObterEstoqueMovimentacao(long pEstoqueId)
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                var estoque = deposito.Estoque.Where(vd => vd.Id == pEstoqueId).FirstOrDefault();
+
+                return estoque;
+
+            }
+        }
+
+        public static List<Estoque> ObterListaEstoqueMovimentacao(int pProdutoGradeId)
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                string query = @"SELECT 
+	                                Id, CASE TipoMovimentacao 
+	                                WHEN 'E' THEN '(+) Entrada'
+	                                WHEN 'S' THEN '(-) Saida'	       
+	                                ELSE 'Indefinido' END as TipoMovimentacao, Quantidade, Observacao, ProdutoGradeId, temp_old_id
+                                FROM Estoque 
+                                    WHERE ProdutoGradeId = @p0";                
+
+                var result = deposito.Database.SqlQuery<Estoque>(query, pProdutoGradeId).ToList<Estoque>();
+
+                return result.ToList<Estoque>();
+
+            }
+        }
+
+
+        public static void SalvarEstoqueMovimentacao(int pEstoqueId, int pProdutoGradeId, string pTipoMovimentacao, int pQuantidade, string pObservacao)
+        {
+
+
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+                if (pEstoqueId == 0) // Incluir
+                {
+
+                    var maxEstoque = deposito.Estoque.OrderByDescending(i => i.Id).FirstOrDefault();
+
+
+
+                    int newId = maxEstoque == null ? 1 : maxEstoque.Id + 1;
+
+
+                    //insert
+                    var estoque = new Estoque
+                    {
+                        Id = newId,
+                        ProdutoGradeId = pProdutoGradeId,
+                        TipoMovimentacao = pTipoMovimentacao,
+                        Quantidade = pQuantidade,
+                        Observacao = pObservacao                        
+                    };
+
+                    deposito.Estoque.Add(estoque);
+
+
+                    var produtograde = deposito.ProdutoGrade.SingleOrDefault(rb => rb.Id == pProdutoGradeId);
+                    if (pTipoMovimentacao == "E")
+                    {
+                        produtograde.Quantidade += pQuantidade;
+
+                    } else
+                    {
+                        produtograde.Quantidade -= pQuantidade;
+                    }
+
+
+                    deposito.SaveChanges();
+
+
+
+                }
+                else
+                {
+
+                    var result = deposito.Estoque.SingleOrDefault(rb => rb.Id == pEstoqueId);
+                    if (result != null)
+                    {
+                        var produtograde = deposito.ProdutoGrade.SingleOrDefault(rb => rb.Id == result.ProdutoGradeId);
+
+                        if (result.TipoMovimentacao == "E")
+                        {
+                            produtograde.Quantidade -= result.Quantidade;
+                        } else
+                        {
+                            produtograde.Quantidade += result.Quantidade;
+                        }
+
+                        
+                        result.TipoMovimentacao = pTipoMovimentacao;
+                        result.Quantidade = pQuantidade;
+                        result.Observacao = pObservacao;
+
+
+                        if (pTipoMovimentacao == "E")
+                        {
+                            produtograde.Quantidade += pQuantidade;
+                        }
+                        else
+                        {
+                            produtograde.Quantidade -= pQuantidade;
+                        }
+
+
+                        deposito.SaveChanges();
+
+
+
+                    }
+
+                }
+
+            }
+
+
+
+
+        }
+
+
+
+        public static void ExcluirEstoqueMovimentacao(long pEstoqueId)
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                var result = deposito.Estoque.SingleOrDefault(rb => rb.Id == pEstoqueId);
+                if (result != null)
+                {
+                    var produtograde = deposito.ProdutoGrade.SingleOrDefault(rb => rb.Id == result.ProdutoGradeId);
+
+                    if (result.TipoMovimentacao == "E")
+                    {
+                        produtograde.Quantidade -= result.Quantidade;
+                    }
+                    else
+                    {
+                        produtograde.Quantidade += result.Quantidade;
+                    }
+
+                    string query = "DELETE FROM Estoque WHERE Id = @p0";
+                    deposito.Database.ExecuteSqlCommand(query, pEstoqueId);
+
+                    deposito.SaveChanges();
+
+
+                }
+
+            }
+
+
+        }
+
+
         public static List<Categoria> ObterListaCategorias()
         {
             using (DepositoDBEntities deposito = new DepositoDBEntities())
@@ -1737,6 +1898,8 @@ namespace ModelLibrary
                 return deposito.Tamanho.ToList<Tamanho>();
             }
         }
+
+
 
 
 
