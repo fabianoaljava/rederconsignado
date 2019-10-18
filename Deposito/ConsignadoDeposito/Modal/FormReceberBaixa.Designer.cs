@@ -33,16 +33,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlTop = new MetroFramework.Controls.MetroPanel();
-            this.pnlBottom = new MetroFramework.Controls.MetroPanel();
-            this.pnlMain = new MetroFramework.Controls.MetroPanel();
-            this.lblValor = new MetroFramework.Controls.MetroLabel();
-            this.txtValor = new MetroFramework.Controls.MetroTextBox();
-            this.lblDataPagamento = new MetroFramework.Controls.MetroLabel();
-            this.cbbDataPagamento = new MetroFramework.Controls.MetroDateTime();
             this.btnCancelar = new MetroFramework.Controls.MetroButton();
             this.btnConfirmar = new MetroFramework.Controls.MetroButton();
-            this.btnGradeCancelar = new MetroFramework.Controls.MetroButton();
-            this.btnGradeConfirmar = new MetroFramework.Controls.MetroButton();
+            this.lblDataPagamento = new MetroFramework.Controls.MetroLabel();
+            this.cbbDataPagamento = new MetroFramework.Controls.MetroDateTime();
+            this.lblValor = new MetroFramework.Controls.MetroLabel();
+            this.txtValor = new MetroFramework.Controls.MetroTextBox();
+            this.pnlBottom = new MetroFramework.Controls.MetroPanel();
+            this.btnFechar = new MetroFramework.Controls.MetroButton();
+            this.pnlMain = new MetroFramework.Controls.MetroPanel();
             this.grdReceberBaixa = new MetroFramework.Controls.MetroGrid();
             this.pnlTop.SuspendLayout();
             this.pnlBottom.SuspendLayout();
@@ -52,8 +51,8 @@
             // 
             // pnlTop
             // 
-            this.pnlTop.Controls.Add(this.btnGradeCancelar);
-            this.pnlTop.Controls.Add(this.btnGradeConfirmar);
+            this.pnlTop.Controls.Add(this.btnCancelar);
+            this.pnlTop.Controls.Add(this.btnConfirmar);
             this.pnlTop.Controls.Add(this.lblDataPagamento);
             this.pnlTop.Controls.Add(this.cbbDataPagamento);
             this.pnlTop.Controls.Add(this.lblValor);
@@ -70,36 +69,50 @@
             this.pnlTop.VerticalScrollbarHighlightOnWheel = false;
             this.pnlTop.VerticalScrollbarSize = 10;
             // 
-            // pnlBottom
+            // btnCancelar
             // 
-            this.pnlBottom.Controls.Add(this.btnCancelar);
-            this.pnlBottom.Controls.Add(this.btnConfirmar);
-            this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlBottom.HorizontalScrollbarBarColor = true;
-            this.pnlBottom.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlBottom.HorizontalScrollbarSize = 10;
-            this.pnlBottom.Location = new System.Drawing.Point(20, 273);
-            this.pnlBottom.Name = "pnlBottom";
-            this.pnlBottom.Size = new System.Drawing.Size(381, 37);
-            this.pnlBottom.TabIndex = 1;
-            this.pnlBottom.VerticalScrollbarBarColor = true;
-            this.pnlBottom.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlBottom.VerticalScrollbarSize = 10;
+            this.btnCancelar.Location = new System.Drawing.Point(295, 23);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(67, 23);
+            this.btnCancelar.TabIndex = 43;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseSelectable = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnGradeCancelar_Click);
             // 
-            // pnlMain
+            // btnConfirmar
             // 
-            this.pnlMain.Controls.Add(this.grdReceberBaixa);
-            this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMain.HorizontalScrollbarBarColor = true;
-            this.pnlMain.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlMain.HorizontalScrollbarSize = 10;
-            this.pnlMain.Location = new System.Drawing.Point(20, 118);
-            this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(381, 155);
-            this.pnlMain.TabIndex = 2;
-            this.pnlMain.VerticalScrollbarBarColor = true;
-            this.pnlMain.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlMain.VerticalScrollbarSize = 10;
+            this.btnConfirmar.Location = new System.Drawing.Point(223, 23);
+            this.btnConfirmar.Name = "btnConfirmar";
+            this.btnConfirmar.Size = new System.Drawing.Size(66, 23);
+            this.btnConfirmar.TabIndex = 42;
+            this.btnConfirmar.Text = "Confirmar";
+            this.btnConfirmar.UseSelectable = true;
+            this.btnConfirmar.Click += new System.EventHandler(this.btnGradeConfirmar_Click);
+            // 
+            // lblDataPagamento
+            // 
+            this.lblDataPagamento.AutoSize = true;
+            this.lblDataPagamento.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblDataPagamento.Location = new System.Drawing.Point(123, 5);
+            this.lblDataPagamento.Name = "lblDataPagamento";
+            this.lblDataPagamento.Size = new System.Drawing.Size(92, 15);
+            this.lblDataPagamento.TabIndex = 39;
+            this.lblDataPagamento.Text = "Data Pagamento";
+            // 
+            // cbbDataPagamento
+            // 
+            this.cbbDataPagamento.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbDataPagamento.Checked = false;
+            this.cbbDataPagamento.FontSize = MetroFramework.MetroDateTimeSize.Small;
+            this.cbbDataPagamento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.cbbDataPagamento.Location = new System.Drawing.Point(123, 23);
+            this.cbbDataPagamento.MinimumSize = new System.Drawing.Size(0, 25);
+            this.cbbDataPagamento.Name = "cbbDataPagamento";
+            this.cbbDataPagamento.Size = new System.Drawing.Size(92, 25);
+            this.cbbDataPagamento.TabIndex = 38;
+            this.cbbDataPagamento.UseCustomBackColor = true;
+            this.cbbDataPagamento.UseCustomForeColor = true;
+            this.cbbDataPagamento.UseStyleColors = true;
             // 
             // lblValor
             // 
@@ -142,74 +155,49 @@
             this.txtValor.WaterMark = "Valor";
             this.txtValor.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtValor.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtValor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ControlOnlyNumbers);
             // 
-            // lblDataPagamento
+            // pnlBottom
             // 
-            this.lblDataPagamento.AutoSize = true;
-            this.lblDataPagamento.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblDataPagamento.Location = new System.Drawing.Point(123, 5);
-            this.lblDataPagamento.Name = "lblDataPagamento";
-            this.lblDataPagamento.Size = new System.Drawing.Size(92, 15);
-            this.lblDataPagamento.TabIndex = 39;
-            this.lblDataPagamento.Text = "Data Pagamento";
+            this.pnlBottom.Controls.Add(this.btnFechar);
+            this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlBottom.HorizontalScrollbarBarColor = true;
+            this.pnlBottom.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlBottom.HorizontalScrollbarSize = 10;
+            this.pnlBottom.Location = new System.Drawing.Point(20, 273);
+            this.pnlBottom.Name = "pnlBottom";
+            this.pnlBottom.Size = new System.Drawing.Size(381, 37);
+            this.pnlBottom.TabIndex = 1;
+            this.pnlBottom.VerticalScrollbarBarColor = true;
+            this.pnlBottom.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlBottom.VerticalScrollbarSize = 10;
             // 
-            // cbbDataPagamento
+            // btnFechar
             // 
-            this.cbbDataPagamento.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbDataPagamento.Checked = false;
-            this.cbbDataPagamento.Enabled = false;
-            this.cbbDataPagamento.FontSize = MetroFramework.MetroDateTimeSize.Small;
-            this.cbbDataPagamento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.cbbDataPagamento.Location = new System.Drawing.Point(123, 23);
-            this.cbbDataPagamento.MinimumSize = new System.Drawing.Size(0, 25);
-            this.cbbDataPagamento.Name = "cbbDataPagamento";
-            this.cbbDataPagamento.Size = new System.Drawing.Size(92, 25);
-            this.cbbDataPagamento.TabIndex = 38;
-            this.cbbDataPagamento.UseCustomBackColor = true;
-            this.cbbDataPagamento.UseCustomForeColor = true;
-            this.cbbDataPagamento.UseStyleColors = true;
+            this.btnFechar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnFechar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnFechar.Location = new System.Drawing.Point(306, 0);
+            this.btnFechar.Name = "btnFechar";
+            this.btnFechar.Size = new System.Drawing.Size(75, 37);
+            this.btnFechar.TabIndex = 13;
+            this.btnFechar.Text = "&Fechar";
+            this.btnFechar.UseSelectable = true;
+            this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
             // 
-            // btnCancelar
+            // pnlMain
             // 
-            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnCancelar.Location = new System.Drawing.Point(0, 0);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 37);
-            this.btnCancelar.TabIndex = 14;
-            this.btnCancelar.Text = "Ca&ncelar";
-            this.btnCancelar.UseSelectable = true;
-            // 
-            // btnConfirmar
-            // 
-            this.btnConfirmar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnConfirmar.Enabled = false;
-            this.btnConfirmar.Location = new System.Drawing.Point(306, 0);
-            this.btnConfirmar.Name = "btnConfirmar";
-            this.btnConfirmar.Size = new System.Drawing.Size(75, 37);
-            this.btnConfirmar.TabIndex = 13;
-            this.btnConfirmar.Text = "&Confirmar";
-            this.btnConfirmar.UseSelectable = true;
-            // 
-            // btnGradeCancelar
-            // 
-            this.btnGradeCancelar.Enabled = false;
-            this.btnGradeCancelar.Location = new System.Drawing.Point(295, 23);
-            this.btnGradeCancelar.Name = "btnGradeCancelar";
-            this.btnGradeCancelar.Size = new System.Drawing.Size(67, 23);
-            this.btnGradeCancelar.TabIndex = 43;
-            this.btnGradeCancelar.Text = "Cancelar";
-            this.btnGradeCancelar.UseSelectable = true;
-            // 
-            // btnGradeConfirmar
-            // 
-            this.btnGradeConfirmar.Enabled = false;
-            this.btnGradeConfirmar.Location = new System.Drawing.Point(223, 23);
-            this.btnGradeConfirmar.Name = "btnGradeConfirmar";
-            this.btnGradeConfirmar.Size = new System.Drawing.Size(66, 23);
-            this.btnGradeConfirmar.TabIndex = 42;
-            this.btnGradeConfirmar.Text = "Confirmar";
-            this.btnGradeConfirmar.UseSelectable = true;
+            this.pnlMain.Controls.Add(this.grdReceberBaixa);
+            this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMain.HorizontalScrollbarBarColor = true;
+            this.pnlMain.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlMain.HorizontalScrollbarSize = 10;
+            this.pnlMain.Location = new System.Drawing.Point(20, 118);
+            this.pnlMain.Name = "pnlMain";
+            this.pnlMain.Size = new System.Drawing.Size(381, 155);
+            this.pnlMain.TabIndex = 2;
+            this.pnlMain.VerticalScrollbarBarColor = true;
+            this.pnlMain.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlMain.VerticalScrollbarSize = 10;
             // 
             // grdReceberBaixa
             // 
@@ -262,13 +250,16 @@
             this.grdReceberBaixa.ShowEditingIcon = false;
             this.grdReceberBaixa.Size = new System.Drawing.Size(381, 155);
             this.grdReceberBaixa.TabIndex = 4;
+            this.grdReceberBaixa.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdReceberBaixa_CellDoubleClick);
+            this.grdReceberBaixa.KeyUp += new System.Windows.Forms.KeyEventHandler(this.grdReceberBaixa_KeyUp);
             // 
             // FormReceberBaixa
             // 
+            this.AcceptButton = this.btnFechar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnFechar;
             this.ClientSize = new System.Drawing.Size(421, 330);
-            this.ControlBox = false;
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.pnlBottom);
             this.Controls.Add(this.pnlTop);
@@ -298,10 +289,9 @@
         public MetroFramework.Controls.MetroTextBox txtValor;
         private MetroFramework.Controls.MetroLabel lblDataPagamento;
         public MetroFramework.Controls.MetroDateTime cbbDataPagamento;
-        private MetroFramework.Controls.MetroButton btnCancelar;
-        private MetroFramework.Controls.MetroButton btnConfirmar;
-        public MetroFramework.Controls.MetroButton btnGradeCancelar;
-        public MetroFramework.Controls.MetroButton btnGradeConfirmar;
+        private MetroFramework.Controls.MetroButton btnFechar;
+        public MetroFramework.Controls.MetroButton btnCancelar;
+        public MetroFramework.Controls.MetroButton btnConfirmar;
         public MetroFramework.Controls.MetroGrid grdReceberBaixa;
     }
 }

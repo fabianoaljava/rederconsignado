@@ -1277,11 +1277,11 @@ namespace ModelLibrary
 
                 vPracaId = carga != null ? Convert.ToInt32(carga.PracaId) : 0;
 
-                string query = @"SELECT Receber.Id, ReceberBaixa.Id as ReceberBaixaId, Documento, Serie, Nome, ValorAReceber, ReceberBaixa.Valor as ValorPago, ReceberBaixa.DataPagamento 
+                string query = @"SELECT Receber.Id, Max(ReceberBaixa.Id) as ReceberBaixaId, Documento, Serie, Nome, Max(ValorAReceber) ValorAReceber, Sum(ReceberBaixa.Valor) as ValorPago, Max(ReceberBaixa.DataPagamento) DataPagamento
 	                                FROM Receber 
 		                                INNER JOIN Vendedor ON Receber.VendedorId = Vendedor.Id
 		                                LEFT JOIN ReceberBaixa ON Receber.Id = ReceberBaixa.ReceberId
-		                                WHERE (Receber.CargaId = @p0 
+		                                WHERE (Receber.CargaId = @p0
 		                                or VendedorId 
                                             IN(
 	                                            SELECT Distinct VendedorId
@@ -1291,6 +1291,7 @@ namespace ModelLibrary
 			                                AND Receber.DataPagamento IS NULL 
 			                                AND ValorNF > 0 
 			                                AND Receber.CargaId <= @p0
+                                GROUP BY Receber.Id, Documento, Serie, Nome
                                 ORDER BY Nome";
 
                 Console.WriteLine("Obtendo Lista a Receber - CargaId: " + pCargaId.ToString());
@@ -1304,84 +1305,7 @@ namespace ModelLibrary
         }
 
 
-        public static List<ListaReceberBaixa> ObterListaReceberBaixa(int pReceberId)
-        {
-
-
-            using (DepositoDBEntities deposito = new DepositoDBEntities())
-            {
-
-                
-                string query = @"SELECT Id, ReceberId, Valor, DataPagamento, DataBaixa FROM ReceberBaixa
-	                                WHERE ReceberId = @p0";
-
-                
-                var result = deposito.Database.SqlQuery<ListaReceberBaixa>(query, pReceberId);
-
-                return result.ToList<ListaReceberBaixa>();
-
-            }
-
-        }
-
-
-
-
-        public static void SalvarAReceberBaixa(int pReceberId, int pReceberBaixaId, double pValor, string pData)
-        {
-
-
-            
-            using (DepositoDBEntities deposito = new DepositoDBEntities())
-            {
-                if (pReceberBaixaId == 0)
-                {
-
-                    var maxReceberBaixa = deposito.ReceberBaixa.OrderByDescending(i => i.Id).FirstOrDefault();
-
-
-
-                    int newId = maxReceberBaixa == null ? 1 : maxReceberBaixa.Id + 1;
-
-                    Console.WriteLine("Inserindo Baixa A Receber - ReceberId: " + pReceberId.ToString());
-
-                    //insert
-                    var receberbaixa = new ReceberBaixa
-                    {
-                        Id = newId,
-                        ReceberId = Convert.ToInt32(pReceberId),
-                        CargaId = null,
-                        Valor = pValor,
-                        DataPagamento = Convert.ToDateTime(pData),
-                        DataBaixa = DateTime.Now
-
-                    };
-
-                    deposito.ReceberBaixa.Add(receberbaixa);
-                    deposito.SaveChanges();
-
-
-
-                } else
-                {
-
-                    var result = deposito.ReceberBaixa.SingleOrDefault(rb => rb.Id == pReceberBaixaId);
-                    if (result != null)
-                    {
-                        Console.WriteLine("Alterando Baixa A Receber - Id: " + pReceberBaixaId.ToString());
-                        result.Valor = pValor;
-                        result.DataPagamento = Convert.ToDateTime(pData);
-                        deposito.SaveChanges();
-                    }
-
-                }
-                
-            }
-
-
-
-
-        }
+        
 
 
 
@@ -1424,6 +1348,24 @@ namespace ModelLibrary
             }
         }
 
+
+
+        public static void AtualizarStatusReceber(int pReceberId, string pStatus, DateTime? pDataPagamento = null)
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                var receber = deposito.Receber.FirstOrDefault(rc => rc.Id == pReceberId);
+
+
+                receber.Status = pStatus;
+                receber.DataPagamento = pDataPagamento;
+
+                deposito.SaveChanges();
+
+
+            }
+        }
 
         public static void InserirReceberAutomatico(int pCargaId, int pVendedorId, double pValor, DateTime pDataVencimento)
         {
@@ -1487,6 +1429,148 @@ namespace ModelLibrary
                 return result.FirstOrDefault();
 
             }
+
+        }
+
+
+        public static bool ExcluirAReceber(int pReceberId)
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                var receberbaixa = deposito.ReceberBaixa.SingleOrDefault(pd => pd.ReceberId == pReceberId);
+
+                if (receberbaixa == null)
+                {
+                    return false;
+                } else
+                {
+                    string query = "DELETE FROM Receber WHERE Id = @p0";
+                    deposito.Database.ExecuteSqlCommand(query, pReceberId);
+
+
+                    deposito.SaveChanges();
+
+                    return true;
+                }
+
+
+
+            }
+
+
+        }
+
+
+        public static ReceberBaixa ObterReceberBaixa(int pReceberBaixaId)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+                var receberbaixa = deposito.ReceberBaixa.Where(rc => rc.Id == pReceberBaixaId).FirstOrDefault();
+
+                return receberbaixa;
+            }
+
+        }
+
+        public static List<ListaReceberBaixa> ObterListaReceberBaixa(int pReceberId)
+        {
+
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+
+                string query = @"SELECT Id, ReceberId, Valor, DataPagamento, DataBaixa FROM ReceberBaixa
+	                                WHERE ReceberId = @p0";
+
+
+                var result = deposito.Database.SqlQuery<ListaReceberBaixa>(query, pReceberId);
+
+                return result.ToList<ListaReceberBaixa>();
+
+            }
+
+        }
+
+
+
+
+        public static void SalvarAReceberBaixa(int pReceberId, int pReceberBaixaId, double pValor, string pData, int? pCargaId = null)
+        {
+
+
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+                if (pReceberBaixaId == 0)
+                {
+
+                    var maxReceberBaixa = deposito.ReceberBaixa.OrderByDescending(i => i.Id).FirstOrDefault();
+
+
+
+                    int newId = maxReceberBaixa == null ? 1 : maxReceberBaixa.Id + 1;
+
+                    Console.WriteLine("Inserindo Baixa A Receber - ReceberId: " + pReceberId.ToString());
+
+                    //insert
+                    var receberbaixa = new ReceberBaixa
+                    {
+                        Id = newId,
+                        ReceberId = Convert.ToInt32(pReceberId),
+                        CargaId = pCargaId,
+                        Valor = pValor,
+                        DataPagamento = Convert.ToDateTime(pData),
+                        DataBaixa = DateTime.Now
+
+                    };
+
+                    deposito.ReceberBaixa.Add(receberbaixa);
+                    deposito.SaveChanges();
+
+
+
+                }
+                else
+                {
+
+                    var result = deposito.ReceberBaixa.SingleOrDefault(rb => rb.Id == pReceberBaixaId);
+                    if (result != null)
+                    {
+                        Console.WriteLine("Alterando Baixa A Receber - Id: " + pReceberBaixaId.ToString());
+                        result.Valor = pValor;
+                        result.DataPagamento = Convert.ToDateTime(pData);
+                        deposito.SaveChanges();
+                    }
+
+                }
+
+            }
+
+
+
+
+        }
+
+
+
+        public static void ExcluirReceberBaixa(long pReceberBaixaId)
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+
+
+                string query = "DELETE FROM ReceberBaixa WHERE Id = @p0";
+                deposito.Database.ExecuteSqlCommand(query, pReceberBaixaId);
+
+
+                deposito.SaveChanges();
+
+            }
+
 
         }
 

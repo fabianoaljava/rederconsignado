@@ -64,6 +64,7 @@
             this.lblAdicionarGrade = new MetroFramework.Controls.MetroLabel();
             this.pnlProdutoItem = new MetroFramework.Controls.MetroPanel();
             this.pblProdutoBottom = new MetroFramework.Controls.MetroPanel();
+            this.btnFechar = new MetroFramework.Controls.MetroButton();
             this.pnlProdutoGrade = new MetroFramework.Controls.MetroPanel();
             this.grdProdutoGrade = new MetroFramework.Controls.MetroGrid();
             this.pnlProduto.SuspendLayout();
@@ -71,6 +72,7 @@
             this.grpPesquisa.SuspendLayout();
             this.grpAdicionarGrade.SuspendLayout();
             this.pnlProdutoItem.SuspendLayout();
+            this.pblProdutoBottom.SuspendLayout();
             this.pnlProdutoGrade.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdProdutoGrade)).BeginInit();
             this.SuspendLayout();
@@ -629,6 +631,7 @@
             // 
             // pblProdutoBottom
             // 
+            this.pblProdutoBottom.Controls.Add(this.btnFechar);
             this.pblProdutoBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pblProdutoBottom.HorizontalScrollbarBarColor = true;
             this.pblProdutoBottom.HorizontalScrollbarHighlightOnWheel = false;
@@ -640,6 +643,18 @@
             this.pblProdutoBottom.VerticalScrollbarBarColor = true;
             this.pblProdutoBottom.VerticalScrollbarHighlightOnWheel = false;
             this.pblProdutoBottom.VerticalScrollbarSize = 10;
+            // 
+            // btnFechar
+            // 
+            this.btnFechar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnFechar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnFechar.Location = new System.Drawing.Point(604, 0);
+            this.btnFechar.Name = "btnFechar";
+            this.btnFechar.Size = new System.Drawing.Size(75, 43);
+            this.btnFechar.TabIndex = 14;
+            this.btnFechar.Text = "&Fechar";
+            this.btnFechar.UseSelectable = true;
+            this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
             // 
             // pnlProdutoGrade
             // 
@@ -723,7 +738,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelarProduto;
             this.ClientSize = new System.Drawing.Size(719, 703);
-            this.ControlBox = false;
             this.Controls.Add(this.pnlProdutoGrade);
             this.Controls.Add(this.pblProdutoBottom);
             this.Controls.Add(this.pnlProdutoItem);
@@ -744,6 +758,7 @@
             this.grpAdicionarGrade.ResumeLayout(false);
             this.grpAdicionarGrade.PerformLayout();
             this.pnlProdutoItem.ResumeLayout(false);
+            this.pblProdutoBottom.ResumeLayout(false);
             this.pnlProdutoGrade.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdProdutoGrade)).EndInit();
             this.ResumeLayout(false);
@@ -786,5 +801,6 @@
         private MetroFramework.Controls.MetroPanel pnlProdutoGrade;
         public MetroFramework.Controls.MetroGrid grdProdutoGrade;
         public MetroFramework.Controls.MetroTextBox txtGradeDV;
+        private MetroFramework.Controls.MetroButton btnFechar;
     }
 }

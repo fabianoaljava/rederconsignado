@@ -143,6 +143,12 @@
     <Compile Include="Modal\FormAReceber.Designer.cs">
       <DependentUpon>FormAReceber.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modal\FormEstoque.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modal\FormEstoque.Designer.cs">
+      <DependentUpon>FormEstoque.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modal\FormListaCarga.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,6 +195,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modal\FormAReceber.resx">
       <DependentUpon>FormAReceber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modal\FormEstoque.resx">
+      <DependentUpon>FormEstoque.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modal\FormListaCarga.resx">
       <DependentUpon>FormListaCarga.cs</DependentUpon>

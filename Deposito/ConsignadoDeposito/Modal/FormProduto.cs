@@ -574,6 +574,11 @@ namespace ConsignadoDeposito.Modal
             }
         }
 
+        private void btnFechar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void txtGradeDV_TextChanged(object sender, EventArgs e)
         {
             cDVChanged = true;

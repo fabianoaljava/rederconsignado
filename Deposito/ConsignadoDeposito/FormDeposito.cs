@@ -1042,9 +1042,37 @@ namespace ConsignadoDeposito
         private void smnRetornoAcertoPagamento_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            Modal.FormReceberBaixa formReceberBaixa = new Modal.FormReceberBaixa(this);
+            Modal.FormReceberBaixa formReceberBaixa = new Modal.FormReceberBaixa(this, Convert.ToInt32(grdContasAReceber.CurrentRow.Cells["Id"].Value), cRetorno.cRetornoId);
             formReceberBaixa.ShowDialog();
             Cursor.Current = Cursors.Default;
+        }
+
+        private void grdContasAReceber_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            smnRetornoAcertoPagamento_Click(sender, e);
+        }
+
+        private void mnuProdutoMovimentar_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            Modal.FormEstoque formEstoque = new Modal.FormEstoque(this);
+            formEstoque.ShowDialog();
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void mnuProdutoImprimir_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Em desenvolvimento...");
+        }
+
+        private void mnuAjudaAtualizacoes_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Em desenvolvimento...");
+        }
+
+        private void mnuAjudaSobre_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Em desenvolvimento...");
         }
 
 

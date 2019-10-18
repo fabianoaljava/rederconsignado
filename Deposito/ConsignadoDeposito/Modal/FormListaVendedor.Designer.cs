@@ -346,7 +346,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(779, 450);
-            this.ControlBox = false;
             this.Controls.Add(this.pnlMainGrid);
             this.Controls.Add(this.pnlBottomForm);
             this.Controls.Add(this.pnlSearch);

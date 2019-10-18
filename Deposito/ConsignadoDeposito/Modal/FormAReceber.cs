@@ -28,7 +28,7 @@ namespace ConsignadoDeposito.Modal
             cModo = pModo;
         }
 
-        public void DbCreate()
+        public void AdicionarTitulo()
         {
             //insert AReceber
 
@@ -58,7 +58,7 @@ namespace ConsignadoDeposito.Modal
             this.Close();
         }
 
-        public void DbRead()
+        public void ExibirTitulo()
         {
             if (cModo == "Update") // get the current and check if is selected {
             {
@@ -112,7 +112,7 @@ namespace ConsignadoDeposito.Modal
                 {
 
                     MessageBox.Show("Não foi possível carregar o Título a Receber. Por favor entre em contato com o administrador do sistema.", "Erro ao carregar título a receber", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    LimparAReceber();
+                    LimparTitulo();
                     this.Close();
 
                 }
@@ -122,7 +122,7 @@ namespace ConsignadoDeposito.Modal
 
             } else
             {
-                LimparAReceber();
+                LimparTitulo();
 
                 btnConfirmar.Enabled = true;
 
@@ -131,7 +131,7 @@ namespace ConsignadoDeposito.Modal
             }
         }
 
-        public void DbUpdate()
+        public void AlterarTitulo()
         {
             //Update AReceber
 
@@ -158,20 +158,30 @@ namespace ConsignadoDeposito.Modal
         }
 
 
-        public void DbDelete()
+        public void ExcluirTitulo()
         {
 
             
 
             if (MessageBox.Show("Deseja realmente excluir o lançamento selecionado?", "ATENÇÃO! Exclusão de Título a Receber", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
-                //Limpar Form
-                LimparAReceber();
 
                 //verificar se existem registros associados
+                if (ModelLibrary.MetodosDeposito.ExcluirAReceber(cAReceberId))
+                {
+                    MessageBox.Show("Título excluído com sucesso!", "Excluir título a receber", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //Limpar Form
+                    LimparTitulo();
 
-                //Delete AReceber
-                MessageBox.Show("Opção não disponível!", "Excluir título a receber", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                } else
+                {
+                    MessageBox.Show("Não foi possível excluir o título selecionado, pois existem pagamentos relacionados.", "Excluir título a receber", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+
+                
+                
             }
 
         }
@@ -208,7 +218,7 @@ namespace ConsignadoDeposito.Modal
 
         }
 
-        public void LimparAReceber()
+        public void LimparTitulo()
         {
             cAReceberId = 0;
 
@@ -263,11 +273,11 @@ namespace ConsignadoDeposito.Modal
                 // verificar se está no modo Create ou Update
                 if (cModo == "Update")
                 {
-                    DbUpdate();
+                    AlterarTitulo();
                 }
                 else
                 {
-                    DbCreate();
+                    AdicionarTitulo();
                 }
             } else
             {
@@ -286,7 +296,7 @@ namespace ConsignadoDeposito.Modal
 
         private void FormAReceber_Load(object sender, EventArgs e)
         {
-            DbRead();
+            ExibirTitulo();
         }
 
         private void txtValorNF_Validating(object sender, CancelEventArgs e)
