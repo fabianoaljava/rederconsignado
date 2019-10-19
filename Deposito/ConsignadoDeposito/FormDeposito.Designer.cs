@@ -356,6 +356,7 @@
             this.panelHeader.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.panelHeader.Size = new System.Drawing.Size(860, 63);
             this.panelHeader.TabIndex = 2;
+            this.panelHeader.Paint += new System.Windows.Forms.PaintEventHandler(this.panelHeader_Paint);
             // 
             // btnNothing
             // 

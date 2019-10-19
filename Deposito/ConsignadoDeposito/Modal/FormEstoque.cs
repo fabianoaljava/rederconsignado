@@ -324,5 +324,17 @@ namespace ConsignadoDeposito.Modal
                 ExcluirMovimentacao(Convert.ToInt32(grdEstoque.CurrentRow.Cells["Id"].Value));
             }
         }
+
+        private void FormEstoque_Load(object sender, EventArgs e)
+        {
+            if (localDepositoForm.grdProdutos.CurrentRow != null)
+            {
+                PesquisarProduto(localDepositoForm.grdProdutos.CurrentRow.Cells["CodigoBarras"].Value.ToString());
+            } else 
+            if (localDepositoForm.txtProdutosCodigoBarras.Text != "")
+            {
+                PesquisarProduto(localDepositoForm.txtProdutosCodigoBarras.Text);
+            }
+        }
     }
 }

@@ -1075,6 +1075,11 @@ namespace ConsignadoDeposito
             MessageBox.Show("Em desenvolvimento...");
         }
 
+        private void panelHeader_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
 
 
         ////////////////////////////////////////

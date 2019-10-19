@@ -430,6 +430,7 @@
             this.ShowInTaskbar = false;
             this.Text = "Movimentação de Estoque";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.FormEstoque_Load);
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.pnlBottom.ResumeLayout(false);
