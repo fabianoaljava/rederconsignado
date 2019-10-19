@@ -284,6 +284,8 @@ namespace ModelLibrary
                             break;
                         case "E":
                             carga.DataExportacao = DateTime.Now;
+                            // atualizar estoque produto
+                            AtualizarCargaRetornoEstoque(pCargaId, "Carga");
                             break;
                         case "R":
                             carga.DataRetorno = DateTime.Now;
@@ -316,7 +318,7 @@ namespace ModelLibrary
                                     pedido.SingleOrDefault(pd => pd.Id == row.Id).QuantidadeRemarcado++;                                        
                                 }                                    
                             };
-
+                            
                             var receber = deposito.Receber
                                     .Join(deposito.Carga, rc => rc.CargaId, ca => ca.Id, (rc, ca) => new { Receber = rc, Carga = ca })
                                     .Where(q => q.Receber.Status == "0" && q.Carga.PracaId == carga.PracaId)
@@ -325,6 +327,11 @@ namespace ModelLibrary
                             {
                                 receber.SingleOrDefault(rc => rc.Id == row.Id).QuantidadeRemarcado++;
                             }
+
+
+                            // atualizar estoque produto
+                            AtualizarCargaRetornoEstoque(pCargaId, "Retorno");
+
                            break;
                     }
 
@@ -338,21 +345,7 @@ namespace ModelLibrary
         }
 
 
-        public static void RefazerRetorno(int pCargaId)
-        {
 
-            using (DepositoDBEntities deposito = new DepositoDBEntities())
-            {
-
-
-
-                string query = "UPDATE Carga SET Status = 'R', DataConferencia = null, DataFinalizacao = null WHERE Id = @p0";
-
-                deposito.Database.ExecuteSqlCommand(query, pCargaId);
-
-            }
-
-        }
 
 
 
@@ -821,10 +814,9 @@ namespace ModelLibrary
         public static void InserirCargaProduto(int pCargaId, int pProdutoGradeId, double pQuantidade)
         {
 
-            /// Modificar rotina para:
+            
             /// Se o CargaProduto existir na lista - incrementar quantidade
-            /// 
-            Console.WriteLine("InserirCargaProduto");
+            
 
             using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
@@ -832,7 +824,7 @@ namespace ModelLibrary
 
                 if (result != null)
                 {
-                    Console.WriteLine("Inserindo Carga Produto");
+
                     var tmpQtd = result.Quantidade;
 
                     Console.WriteLine("Valor:" + tmpQtd.ToString());
@@ -841,7 +833,6 @@ namespace ModelLibrary
                 } else {
 
 
-                    Console.WriteLine("Atualizando Carga Produto");
                     var novacargaproduto = new CargaProduto
                     {
                         CargaId = pCargaId,
@@ -855,6 +846,10 @@ namespace ModelLibrary
                     deposito.CargaProduto.Add(novacargaproduto);
                     
                 }
+
+
+                //atualizar estoque produto
+
 
 
                 deposito.SaveChanges();
@@ -880,6 +875,8 @@ namespace ModelLibrary
                     result.Quantidade = pQuantidade;
                     deposito.SaveChanges();
                 }
+
+                //atualizar estoque produto
             }
 
 
@@ -895,11 +892,23 @@ namespace ModelLibrary
 
                 deposito.Database.ExecuteSqlCommand("DELETE FROM CargaProduto WHERE CargaId = @pCargaId AND ProdutoGradeId = @pProdutoGradeId", new SqlParameter("@pCargaId", pCargaId), new SqlParameter("@pProdutoGradeId", pCargaProdutoGradeId));
 
-                //CargaProduto cargaproduto = new CargaProduto() { ProdutoGradeId = pCargaProdutoGradeId, CargaId = pCargaId};
-                //deposito.CargaProduto.Attach(cargaproduto);
-                //deposito.CargaProduto.Remove(cargaproduto);
-                //deposito.SaveChanges();
+                //atualizar estoque produto
             }
+        }
+
+
+        public static void RefazerRetorno(int pCargaId)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                string query = "UPDATE Carga SET Status = 'R', DataConferencia = null, DataFinalizacao = null WHERE Id = @p0";
+
+                deposito.Database.ExecuteSqlCommand(query, pCargaId);
+
+            }
+
         }
 
 
@@ -1738,7 +1747,7 @@ namespace ModelLibrary
         }
 
 
-        public static void SalvarEstoqueMovimentacao(int pEstoqueId, int pProdutoGradeId, string pTipoMovimentacao, int pQuantidade, string pObservacao)
+        public static void SalvarEstoqueMovimentacao(int pEstoqueId, int pProdutoGradeId, string pTipoMovimentacao, double pQuantidade, string pObservacao)
         {
 
 
@@ -1862,6 +1871,92 @@ namespace ModelLibrary
 
             }
 
+
+        }
+
+
+        public static void AtualizarCargaRetornoEstoque(long pCargaId, string pFuncao)
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+                // obter lista de cargaproduto
+
+                foreach (var row in deposito.CargaProduto.Where(cp => cp.CargaId == pCargaId))
+                {
+                    if (pFuncao == "Carga")
+                    {
+                        // retirar do estoque a Quantidade
+                        EstoqueMovimentacaoAutomatica(row.ProdutoGradeId, -Convert.ToInt32(row.Quantidade), "Carga: " + pCargaId.ToString());
+
+                    } else
+                    {
+                        // acrescentar ao estoque o Retorno
+                        EstoqueMovimentacaoAutomatica(row.ProdutoGradeId, Convert.ToInt32(row.Quantidade), "Retorno: " + pCargaId.ToString());
+
+                    }
+
+
+                }
+
+            }
+
+
+
+        }
+
+
+        public static void EstoqueMovimentacaoAutomatica(int pProdutoGradeId, double pQuantidade, string pInfo)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+                var maxEstoque = deposito.Estoque.OrderByDescending(i => i.Id).FirstOrDefault();
+                               
+                int newId = maxEstoque == null ? 1 : maxEstoque.Id + 1;
+
+                string vTipoMovimentacao;
+
+                double vQuantidade;
+
+
+                if (pQuantidade > 0)
+                {
+                    vTipoMovimentacao = "E";
+                    vQuantidade = pQuantidade;
+                } else
+                {
+                    vTipoMovimentacao = "S";
+                    vQuantidade = -pQuantidade;
+                }
+
+
+                //insert
+                var estoque = new Estoque
+                {
+                    Id = newId,
+                    ProdutoGradeId = pProdutoGradeId,
+                    TipoMovimentacao = vTipoMovimentacao,
+                    Quantidade = vQuantidade,
+                    Observacao = "Movimentação automatica - " + pInfo
+                };
+
+                deposito.Estoque.Add(estoque);
+
+
+                var produtograde = deposito.ProdutoGrade.SingleOrDefault(rb => rb.Id == pProdutoGradeId);
+                if (vTipoMovimentacao == "E")
+                {
+                    produtograde.Quantidade += vQuantidade;
+
+                }
+                else
+                {
+                    produtograde.Quantidade -= vQuantidade;
+                }
+
+
+                deposito.SaveChanges();
+            }
 
         }
 

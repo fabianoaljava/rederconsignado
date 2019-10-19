@@ -214,7 +214,7 @@ namespace ConsignadoDeposito.Modal
 
             string vTipoMovimentacao = (cbbTipoMovimentacao.Text == "Entrada") ? "E" : "S";
 
-            ModelLibrary.MetodosDeposito.SalvarEstoqueMovimentacao(pEstoqueId, cProdutoGradeId, vTipoMovimentacao, Convert.ToInt32(txtQuantidade.Text), txtObservacoes.Text);
+            ModelLibrary.MetodosDeposito.SalvarEstoqueMovimentacao(pEstoqueId, cProdutoGradeId, vTipoMovimentacao, Convert.ToDouble(txtQuantidade.Text), txtObservacoes.Text);
 
 
             MessageBox.Show("Pagamento alterado com sucesso!", "Alterar pagamento", MessageBoxButtons.OK, MessageBoxIcon.Information);            
