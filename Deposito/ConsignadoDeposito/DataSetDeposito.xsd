@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSetDeposito" targetNamespace="http://tempuri.org/DataSetDeposito.xsd" xmlns:mstns="http://tempuri.org/DataSetDeposito.xsd" xmlns="http://tempuri.org/DataSetDeposito.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSetDeposito" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSetDeposito" msprop:Generator_UserDSName="DataSetDeposito">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="EstoqueProduto" msprop:Generator_TableClassName="EstoqueProdutoDataTable" msprop:Generator_TableVarName="tableEstoqueProduto" msprop:Generator_TablePropName="EstoqueProduto" msprop:Generator_RowDeletingName="EstoqueProdutoRowDeleting" msprop:Generator_RowChangingName="EstoqueProdutoRowChanging" msprop:Generator_RowEvHandlerName="EstoqueProdutoRowChangeEventHandler" msprop:Generator_RowDeletedName="EstoqueProdutoRowDeleted" msprop:Generator_UserTableName="EstoqueProduto" msprop:Generator_RowChangedName="EstoqueProdutoRowChanged" msprop:Generator_RowEvArgName="EstoqueProdutoRowChangeEvent" msprop:Generator_RowClassName="EstoqueProdutoRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CodigoBarras" msprop:Generator_ColumnVarNameInTable="columnCodigoBarras" msprop:Generator_ColumnPropNameInRow="CodigoBarras" msprop:Generator_ColumnPropNameInTable="CodigoBarrasColumn" msprop:Generator_UserColumnName="CodigoBarras" type="xs:string" minOccurs="0" />
+              <xs:element name="Descricao" msprop:Generator_ColumnVarNameInTable="columnDescricao" msprop:Generator_ColumnPropNameInRow="Descricao" msprop:Generator_ColumnPropNameInTable="DescricaoColumn" msprop:Generator_UserColumnName="Descricao" type="xs:string" minOccurs="0" />
+              <xs:element name="Cor" msprop:Generator_ColumnVarNameInTable="columnCor" msprop:Generator_ColumnPropNameInRow="Cor" msprop:Generator_ColumnPropNameInTable="CorColumn" msprop:Generator_UserColumnName="Cor" type="xs:string" minOccurs="0" />
+              <xs:element name="Tamanho" msprop:Generator_ColumnVarNameInTable="columnTamanho" msprop:Generator_ColumnPropNameInRow="Tamanho" msprop:Generator_ColumnPropNameInTable="TamanhoColumn" msprop:Generator_UserColumnName="Tamanho" type="xs:string" minOccurs="0" />
+              <xs:element name="ValorCusto" msprop:Generator_ColumnVarNameInTable="columnValorCusto" msprop:Generator_ColumnPropNameInRow="ValorCusto" msprop:Generator_ColumnPropNameInTable="ValorCustoColumn" msprop:Generator_UserColumnName="ValorCusto" type="xs:string" minOccurs="0" />
+              <xs:element name="ValorSaida" msprop:Generator_ColumnVarNameInTable="columnValorSaida" msprop:Generator_ColumnPropNameInRow="ValorSaida" msprop:Generator_ColumnPropNameInTable="ValorSaidaColumn" msprop:Generator_UserColumnName="ValorSaida" type="xs:string" minOccurs="0" />
+              <xs:element name="SaldoEstoque" msprop:Generator_ColumnVarNameInTable="columnSaldoEstoque" msprop:Generator_ColumnPropNameInRow="SaldoEstoque" msprop:Generator_ColumnPropNameInTable="SaldoEstoqueColumn" msprop:Generator_UserColumnName="SaldoEstoque" type="xs:string" minOccurs="0" />
+              <xs:element name="Valor" msprop:Generator_ColumnVarNameInTable="columnValor" msprop:Generator_ColumnPropNameInRow="Valor" msprop:Generator_ColumnPropNameInTable="ValorColumn" msprop:Generator_UserColumnName="Valor" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

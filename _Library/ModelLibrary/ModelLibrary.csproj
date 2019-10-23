@@ -160,6 +160,7 @@
     <Compile Include="ReceberBaixa.cs">
       <DependentUpon>ModelDeposito.tt</DependentUpon>
     </Compile>
+    <Compile Include="RelatoriosDeposito.cs" />
     <Compile Include="RelatoriosRepresentante.cs" />
     <Compile Include="RepCarga.cs">
       <DependentUpon>ModelRepresentante.tt</DependentUpon>

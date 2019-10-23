@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ConsignadoDeposito;
+using CrystalDecisions.CrystalReports.Engine;
+using ConsignadoDeposito.Reports;
 
 
 namespace ConsignadoDeposito
@@ -1062,7 +1064,65 @@ namespace ConsignadoDeposito
 
         private void mnuProdutoImprimir_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Em desenvolvimento...");
+            Cursor.Current = Cursors.WaitCursor;
+
+            mnuProdutoImprimir.Text = "Imprimindo...";
+            mnuProdutoImprimir.Enabled = false;
+
+
+
+            var vCriterio = new Dictionary<string, string>();
+
+            if (txtProdutosCodigoBarras.Text != "") vCriterio["CodigoGeral"] = txtProdutosCodigoBarras.Text;
+
+            if (txtProdutosNome.Text != "") vCriterio["Nome"] = txtProdutosNome.Text;
+
+
+            if (cbbProdutoSaldo.Text == "Com Saldo em Estoque")
+            {
+                vCriterio["SaldoEstoque"] = "Y";
+            }
+            else if (cbbProdutoSaldo.Text == "Sem Saldo em Estoque")
+            {
+                vCriterio["SaldoEstoque"] = "N";
+            }
+
+
+            List<ModelLibrary.RelatoriosDeposito.EstoqueProduto> estoqueproduto = ModelLibrary.RelatoriosDeposito.RelatorioEstoqueProduto(vCriterio);
+
+            if (estoqueproduto == null)
+            {
+                MessageBox.Show("Erro ao imprimir relatório - Não foi possível encontrar produto.", "Reder - Impressão", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+
+                BindingSource bs = new BindingSource();
+
+                Reports.EstoqueProduto relatorioEstoqueProduto = new Reports.EstoqueProduto();
+
+                bs.DataSource = estoqueproduto;
+                relatorioEstoqueProduto.SetDataSource(bs);
+
+
+                relatorioEstoqueProduto.PrintToPrinter(1, true, 0, 0);
+
+                mnuProdutoImprimir.Text = "Imprimir";
+                mnuProdutoImprimir.Enabled = true;
+                Cursor.Current = Cursors.Default;
+
+
+                //FormRelatorio formRelatorio = new FormRelatorio();
+                //formRelatorio.Show();
+
+
+                //formRelatorio.crvRelatorio.ReportSource = relatorioEstoqueProduto;
+                //formRelatorio.crvRelatorio.RefreshReport();
+            }
+
+
+
+
         }
 
         private void mnuAjudaAtualizacoes_Click(object sender, EventArgs e)
