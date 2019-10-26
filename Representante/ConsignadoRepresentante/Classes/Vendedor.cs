@@ -364,8 +364,8 @@ namespace ConsignadoRepresentante
                     localRepresentanteForm.dlbLimiteCreditoUtilizado.ForeColor = Color.Black;
                 }
 
-                localRepresentanteForm.btnPedidoImprimir.Enabled = true;
-                localRepresentanteForm.btnPedidoImpRetorno.Enabled = true;
+                localRepresentanteForm.smnVendedorRelatorioPedido.Enabled = true;
+                localRepresentanteForm.smnVendedorRelatorioRetorno.Enabled = true;
 
             } else
             {
@@ -378,8 +378,8 @@ namespace ConsignadoRepresentante
                 }
 
                 localRepresentanteForm.dlbLimitePedidoUtilizado.Text = "0";
-                localRepresentanteForm.btnPedidoImprimir.Enabled = false;
-                localRepresentanteForm.btnPedidoImpRetorno.Enabled = false;
+                localRepresentanteForm.smnVendedorRelatorioPedido.Enabled = false;
+                localRepresentanteForm.smnVendedorRelatorioRetorno.Enabled = false;
 
             }
 
@@ -467,8 +467,8 @@ namespace ConsignadoRepresentante
 
 
 
-            localRepresentanteForm.btnPedidoImprimir.Enabled = false;
-            localRepresentanteForm.btnPedidoImpRetorno.Enabled = false;
+            localRepresentanteForm.smnVendedorRelatorioPedido.Enabled = false;
+            localRepresentanteForm.smnVendedorRelatorioRetorno.Enabled = false;
 
         }
 
@@ -952,9 +952,9 @@ namespace ConsignadoRepresentante
 
             if (localRepresentanteForm.txtValorRecebido.Text == "" || countpedidos > 1)
             {
-                localRepresentanteForm.btnNovoPedido.Enabled = false;
+                localRepresentanteForm.smnVendedorPedidoIncluir.Enabled = false;
             } else {
-                localRepresentanteForm.btnNovoPedido.Enabled = true;
+                localRepresentanteForm.smnVendedorPedidoIncluir.Enabled = true;
             }
 
 
@@ -1602,10 +1602,18 @@ namespace ConsignadoRepresentante
 
             if (localRepresentanteForm.txtDuplicataReceber.Text != "")
             {
-                ModelLibrary.MetodosRepresentante.ReceberDuplicata(cDuplicataId, cDuplicataReceberId, localRepresentanteForm.cCargaId, Convert.ToDecimal(localRepresentanteForm.txtDuplicataReceber.Text));
-                //ExibirRecebimentos();
-                VendedorReload();
-                DuplicataLimpar();
+
+                if (Convert.ToDecimal(localRepresentanteForm.txtDuplicataReceber.Text) <= Convert.ToDecimal(localRepresentanteForm.grdFinanceiroRecebimentos.CurrentRow.Cells["ValorDuplicata"].Value))
+                {
+                    ModelLibrary.MetodosRepresentante.ReceberDuplicata(cDuplicataId, cDuplicataReceberId, localRepresentanteForm.cCargaId, Convert.ToDecimal(localRepresentanteForm.txtDuplicataReceber.Text));
+                    //ExibirRecebimentos();
+                    VendedorReload();
+                    DuplicataLimpar();
+                } else
+                {
+                    MessageBox.Show("O valor informado está acima do valor da duplicata, por favor, verifique os dados digitados", "Acerto - Receber Duplicata", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+
             } else
             {
                 MessageBox.Show("Informe o valor recebido da duplicata!");

@@ -747,45 +747,6 @@ namespace ConsignadoRepresentante
         {
 
 
-            Cursor.Current = Cursors.WaitCursor;
-
-            btnSuplementoImprimir.Text = "Imprimindo...";
-            btnSuplementoImprimir.Enabled = false;
-
-            List<ModelLibrary.RelatoriosRepresentante.ListaProdutos> suplemento = ModelLibrary.RelatoriosRepresentante.RelatorioSuplemento();
-
-
-
-            if (suplemento == null)
-            {
-                MessageBox.Show("Erro ao imprimir relatório - Não foi possível encontrar suplemento.", "Reder - Impressão", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                
-                BindingSource bs = new BindingSource();
-
-                Reports.Suplemento relatoriosuplemento = new Reports.Suplemento();
-
-                bs.DataSource = suplemento;
-                relatoriosuplemento.SetDataSource(bs);
-
-
-                relatoriosuplemento.PrintToPrinter(1, true, 0, 0);
-
-                btnSuplementoImprimir.Text = "Imprimir " + Environment.NewLine + "Suplemento";
-                btnSuplementoImprimir.Enabled = true;
-                Cursor.Current = Cursors.Default;
-
-
-                //FormRelatorio formRelatorio = new FormRelatorio();
-                //formRelatorio.Show();
-
-
-                //formRelatorio.crvRelatorio.ReportSource = relatoriopedido;
-                //formRelatorio.crvRelatorio.RefreshReport();
-            }
-
         }
 
         private void smnRepresentante_Click(object sender, EventArgs e)
@@ -812,6 +773,83 @@ namespace ConsignadoRepresentante
             {
                 cConferirProdutos.PesquisarConferenciaProduto(txtConfCodigoBarras.Text);
             }
+        }
+
+        private void smnRetorno_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void smnPesquisar_Click(object sender, EventArgs e)
+        {
+
+
+            Cursor.Current = Cursors.WaitCursor;
+            Modal.FormListaCarga formPesquisa = new Modal.FormListaCarga(this, "Retorno");
+            var result = formPesquisa.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+
+                txtImportarCodPraca.Text = formPesquisa.cPracaId.ToString();
+                txtImportarCodPraca_ButtonClick(sender, e);
+                txtImportarCodRepresentante.Text = formPesquisa.cRepresentanteId.ToString();
+                txtImportarCodRepresentante_ButtonClick(sender, e);
+                cbbImportarMesAno.Value = Convert.ToDateTime(formPesquisa.cAno.ToString() + "-" + formPesquisa.cMes.ToString() + "-01");
+
+
+            }
+        }
+
+        private void smnImprimir_Click(object sender, EventArgs e)
+        {
+
+
+            Cursor.Current = Cursors.WaitCursor;
+
+            smnSuplementoImprimir.Text = "Imprimindo...";
+            smnSuplementoImprimir.Enabled = false;
+
+            List<ModelLibrary.RelatoriosRepresentante.ListaProdutos> suplemento = ModelLibrary.RelatoriosRepresentante.RelatorioSuplemento();
+
+
+
+            if (suplemento == null)
+            {
+                MessageBox.Show("Erro ao imprimir relatório - Não foi possível encontrar suplemento.", "Reder - Impressão", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+
+                BindingSource bs = new BindingSource();
+
+                Reports.Suplemento relatoriosuplemento = new Reports.Suplemento();
+
+                bs.DataSource = suplemento;
+                relatoriosuplemento.SetDataSource(bs);
+
+
+                relatoriosuplemento.PrintToPrinter(1, true, 0, 0);
+
+                smnSuplementoImprimir.Text = "Imprimir";
+                smnSuplementoImprimir.Enabled = true;
+                Cursor.Current = Cursors.Default;
+
+
+                //FormRelatorio formRelatorio = new FormRelatorio();
+                //formRelatorio.Show();
+
+
+                //formRelatorio.crvRelatorio.ReportSource = relatoriopedido;
+                //formRelatorio.crvRelatorio.RefreshReport();
+            }
+        }
+
+        private void smnSobre_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            Modal.FormSobre formSobre = new Modal.FormSobre();
+            formSobre.ShowDialog();
         }
     }
 }

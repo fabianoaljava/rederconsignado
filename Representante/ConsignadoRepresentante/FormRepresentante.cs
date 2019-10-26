@@ -371,7 +371,7 @@ namespace ConsignadoRepresentante
 
         private void btnVendedorNovo_Click(object sender, EventArgs e)
         {
-            cVendedor.VendedorIncluir();
+            
         }
 
         private void btnVendedorCancelar_Click(object sender, EventArgs e)
@@ -672,8 +672,7 @@ namespace ConsignadoRepresentante
 
         private void btnNovoPedido_Click(object sender, EventArgs e)
         {
-            tbcVendedor.SelectedTab = tabVendedorPedidos;
-            cVendedor.PedidoNovo();
+
 
         }
 
@@ -701,10 +700,97 @@ namespace ConsignadoRepresentante
         {
 
 
+
+        }
+
+        private void btnImprimirRetorno_Click(object sender, EventArgs e)
+        {
+
+
+
+        }
+
+        private void txtPedidoCodigoBarras_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtPedidoCodigoBarras.Text != "")
+            {
+                cVendedor.PedidoPesquisar(txtPedidoCodigoBarras.Text);
+            }
+        }
+
+        private void smnVendedorAdicionar_Click(object sender, EventArgs e)
+        {
+            cVendedor.VendedorIncluir();
+        }
+
+        private void smnVendedorPedidoIncluir_Click(object sender, EventArgs e)
+        {
+            tbcVendedor.SelectedTab = tabVendedorPedidos;
+            cVendedor.PedidoNovo();
+        }
+
+        private void smnVendedorRelatorioRetorno_Click(object sender, EventArgs e)
+        {
+
+
             Cursor.Current = Cursors.WaitCursor;
 
-            btnPedidoImprimir.Text = "Imprimindo...";
-            btnPedidoImprimir.Enabled = false;
+            smnVendedorRelatorioRetorno.Text = "Imprimindo...";
+            smnVendedorRelatorioRetorno.Enabled = false;
+
+
+
+            ModelLibrary.RelatoriosRepresentante.VendedorPedido vendedorPedido = ModelLibrary.RelatoriosRepresentante.RelatorioVendedorPedido(cVendedor.cVendedorId, cCargaId);
+
+
+            if (vendedorPedido == null)
+            {
+                MessageBox.Show("Erro ao imprimir relatório - Não foi possível encontrar pedido.", "Reder - Impressão", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                smnVendedorRelatorioRetorno.Text = "Imprimir Retorno";
+                smnVendedorRelatorioRetorno.Enabled = true;
+                Cursor.Current = Cursors.Default;
+            }
+            else
+            {
+                List<ModelLibrary.RelatoriosRepresentante.ListaProdutos> vendedorPedidoItem = ModelLibrary.RelatoriosRepresentante.RelatorioVendedorPedidoItem(vendedorPedido.CodigoPedido);
+
+                BindingSource bs = new BindingSource();
+
+                Reports.VendedorRetorno relatorioretorno = new Reports.VendedorRetorno();
+
+                bs.DataSource = vendedorPedidoItem;
+                relatorioretorno.SetDataSource(bs);
+
+
+                bs.DataSource = vendedorPedido;
+                relatorioretorno.Database.Tables["Pedido"].SetDataSource(bs);
+
+                relatorioretorno.PrintToPrinter(1, true, 0, 0);
+
+
+                smnVendedorRelatorioRetorno.Text = "Imprimir Retorno";
+                smnVendedorRelatorioRetorno.Enabled = true;
+                Cursor.Current = Cursors.Default;
+
+
+                //FormRelatorio formRelatorio = new FormRelatorio();
+                //formRelatorio.Show();
+
+
+                //formRelatorio.crvRelatorio.ReportSource = relatorioretorno;
+                //formRelatorio.crvRelatorio.RefreshReport();
+            }
+
+        }
+
+        private void smnVendedorRelatorioPedido_Click(object sender, EventArgs e)
+        {
+
+
+            Cursor.Current = Cursors.WaitCursor;
+
+            smnVendedorRelatorioPedido.Text = "Imprimindo...";
+            smnVendedorRelatorioPedido.Enabled = false;
 
             ModelLibrary.RelatoriosRepresentante.VendedorPedido vendedorPedido = ModelLibrary.RelatoriosRepresentante.RelatorioVendedorPedido(cVendedor.cVendedorId, cCargaId);
 
@@ -714,8 +800,8 @@ namespace ConsignadoRepresentante
             {
                 MessageBox.Show("Erro ao imprimir relatório - Não foi possível encontrar pedido.", "Reder - Impressão", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                btnPedidoImprimir.Text = "Imprimir " + Environment.NewLine + "Pedido";
-                btnPedidoImprimir.Enabled = true;
+                smnVendedorRelatorioPedido.Text = "Imprimir Pedido";
+                smnVendedorRelatorioPedido.Enabled = true;
                 Cursor.Current = Cursors.Default;
             }
             else
@@ -734,8 +820,8 @@ namespace ConsignadoRepresentante
 
                 relatoriopedido.PrintToPrinter(1, true, 0, 0);
 
-                btnPedidoImprimir.Text = "Imprimir " + Environment.NewLine + "Pedido";
-                btnPedidoImprimir.Enabled = true;
+                smnVendedorRelatorioPedido.Text = "Imprimir Pedido";
+                smnVendedorRelatorioPedido.Enabled = true;
                 Cursor.Current = Cursors.Default;
 
 
@@ -747,71 +833,6 @@ namespace ConsignadoRepresentante
                 //formRelatorio.crvRelatorio.RefreshReport();
             }
 
-
-
-        }
-
-        private void btnImprimirRetorno_Click(object sender, EventArgs e)
-        {
-
-
-            Cursor.Current = Cursors.WaitCursor;
-
-            btnPedidoImpRetorno.Text = "Imprimindo...";
-            btnPedidoImpRetorno.Enabled = false;
-
-            
-
-            ModelLibrary.RelatoriosRepresentante.VendedorPedido vendedorPedido = ModelLibrary.RelatoriosRepresentante.RelatorioVendedorPedido(cVendedor.cVendedorId, cCargaId);
-
-
-            if (vendedorPedido == null)
-            {
-                MessageBox.Show("Erro ao imprimir relatório - Não foi possível encontrar pedido.", "Reder - Impressão", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                btnPedidoImpRetorno.Text = "Imprimir " + Environment.NewLine + "Retorno";
-                btnPedidoImpRetorno.Enabled = true;
-                Cursor.Current = Cursors.Default;
-            } else
-            {
-                List<ModelLibrary.RelatoriosRepresentante.ListaProdutos> vendedorPedidoItem = ModelLibrary.RelatoriosRepresentante.RelatorioVendedorPedidoItem(vendedorPedido.CodigoPedido);
-
-                BindingSource bs = new BindingSource();
-
-                Reports.VendedorRetorno relatorioretorno = new Reports.VendedorRetorno();
-
-                bs.DataSource = vendedorPedidoItem;
-                relatorioretorno.SetDataSource(bs);
-
-
-                bs.DataSource = vendedorPedido;
-                relatorioretorno.Database.Tables["Pedido"].SetDataSource(bs);
-
-                relatorioretorno.PrintToPrinter(1, true, 0, 0);
-
-
-                btnPedidoImpRetorno.Text = "Imprimir " + Environment.NewLine + "Retorno";
-                btnPedidoImpRetorno.Enabled = true;
-                Cursor.Current = Cursors.Default;
-
-
-                //FormRelatorio formRelatorio = new FormRelatorio();
-                //formRelatorio.Show();
-
-
-                //formRelatorio.crvRelatorio.ReportSource = relatorioretorno;
-                //formRelatorio.crvRelatorio.RefreshReport();
-            }
-            
-
-
-        }
-
-        private void txtPedidoCodigoBarras_Validating(object sender, CancelEventArgs e)
-        {
-            if (txtPedidoCodigoBarras.Text != "")
-            {
-                cVendedor.PedidoPesquisar(txtPedidoCodigoBarras.Text);
-            }
         }
     }
 }
