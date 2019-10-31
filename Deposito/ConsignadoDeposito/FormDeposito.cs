@@ -1140,6 +1140,43 @@ namespace ConsignadoDeposito
 
         }
 
+        private void smnCobrancaViagem_Click(object sender, EventArgs e)
+        {
+
+            Cursor.Current = Cursors.WaitCursor;
+
+
+
+            List<ModelLibrary.RelatoriosDeposito.CobrancaViagem> cobrancaViagems = ModelLibrary.RelatoriosDeposito.RelatorioCobrancaViagem(cCarga.cCargaId);
+
+            if (cobrancaViagems == null)
+            {
+                MessageBox.Show("Erro ao imprimir relatório - O relatório está vazio.", "Reder - Impressão", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+
+                BindingSource bs = new BindingSource();
+
+                Reports.CobrancaViagem relatorioEstoqueProduto = new Reports.CobrancaViagem();
+
+                bs.DataSource = cobrancaViagems;
+                relatorioEstoqueProduto.SetDataSource(bs);
+
+
+                FormRelatorio formRelatorio = new FormRelatorio();
+                formRelatorio.Show();
+
+
+                formRelatorio.crvRelatorio.ReportSource = relatorioEstoqueProduto;
+                formRelatorio.crvRelatorio.RefreshReport();
+            }
+
+
+            Cursor.Current = Cursors.Default;
+
+        }
+
 
 
         ////////////////////////////////////////

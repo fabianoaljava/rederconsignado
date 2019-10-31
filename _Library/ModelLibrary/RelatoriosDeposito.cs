@@ -92,5 +92,64 @@ namespace ModelLibrary
             }
         
         }
+
+
+        public class CobrancaViagem
+        {
+
+            public string Codigo { get; set; }
+            public string Tipo { get; set; }
+            public string Vendedor { get; set; }
+            public string CPFCnpj { get; set; }
+            public string RGInsc { get; set; }
+            public string Endereco { get; set; }
+            public string Bairro { get; set; }
+            public string Cidade { get; set; }
+            public string CEP { get; set; }
+            public string Telefone { get; set; }
+            public Double TotalAReceber { get; set; }
+
+        }
+
+
+
+        public static List<CobrancaViagem> RelatorioCobrancaViagem(int pCargaId)
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+                
+                string query = @"SELECT Pedido.CodigoPedido Codigo, 'Pedido' as Tipo, 
+                                        Nome as Vendedor, CpfCnpj as CPFCnpj, RGInscricao as RGInsc,
+                                        Endereco + ' ' + Complemento as Endereco,
+                                        Bairro, Cidade + '/' + UF as Cidade, CEP,
+                                        Telefone + ' | ' + TelefoneComercial + ' | ' + Celular as Telefone,
+                                        ValorLiquido + ValorAReceber - ValorAcerto as TotalAReceber
+                                                FROM Vendedor 
+                                                    INNER JOIN Pedido 
+                                                        ON Pedido.VendedorId = Vendedor.Id
+                                            WHERE Pedido.CargaId = @p0
+                                                    AND ValorLiquido + ValorAReceber - ValorAcerto  > 0
+                                UNION
+                                    SELECT Convert(Varchar(12),Documento) + '/' + Serie Codigo, 'Receber' as Tipo, 
+                                            Nome as Vendedor, CpfCnpj as CPFCnpj, RGInscricao as RGInsc,
+                                            Endereco + ' ' + Complemento as Endereco,
+                                            Bairro, Cidade + '/' + UF as Cidade, CEP,
+                                            Telefone + ' | ' + TelefoneComercial + ' | ' + Celular as Telefone,
+                                            sum(ValorNF)- sum(ISNULL(Valor,0)) TotalAReceber 
+                                                FROM Vendedor 
+                                                    INNER JOIN Receber ON Receber.VendedorId = Vendedor.Id
+                                                    LEFT JOIN ReceberBaixa ON ReceberBaixa.ReceberId = Receber.Id 
+                                            WHERE Receber.CargaId = @p0
+                                            GROUP BY Documento, Serie, Nome, CpfCnpj, RGInscricao, Endereco, Complemento, Bairro, Cidade, UF, CEP, Telefone, TelefoneComercial, Celular
+                                                HAVING sum(ValorNF)- sum(ISNULL(Valor,0)) > 0";
+
+
+                var result = deposito.Database.SqlQuery<CobrancaViagem>(query, pCargaId);
+
+                return result.ToList<CobrancaViagem>();
+
+            }
+
+        }
     }
 }

@@ -11,8 +11,7 @@ using System.Windows.Forms;
 
 namespace ConsignadoDeposito.Modal
 {
-    public partial class FormListaCarga : MetroFramework.Forms.MetroForm
-    {
+    public partial class FormListaCarga : MetroFramework.Forms.MetroForm    {
 
         public FormDeposito localDepositoForm = null;
         public string cOrigem;

@@ -89,6 +89,8 @@ namespace ConsignadoDeposito
             localDepositoForm.dlbCargaTotalProdutos.Text = "0.00";
 
 
+            localDepositoForm.smnCobrancaViagem.Enabled = false;
+
             localDepositoForm.dlbCargaTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Medium;
         }
 
@@ -137,6 +139,8 @@ namespace ConsignadoDeposito
                     localDepositoForm.tbcCarga.Visible = true;
 
                     cCargaId = carga.Id;
+
+                    localDepositoForm.smnCobrancaViagem.Enabled = true;
 
                     CarregarGradeCargaProduto(carga.Id);
 
@@ -274,9 +278,15 @@ namespace ConsignadoDeposito
             localDepositoForm.btnCargaConfirmar.Enabled = false;
             localDepositoForm.btnCargaCancelar.Enabled = false;
             localDepositoForm.txtCargaCodigoBarras.ReadOnly = false;
+
+
+            localDepositoForm.smnCobrancaViagem.Enabled = false;
+
             cCargaProdutoGradeId = 0;
             cModoCargaProduto = "Insert";
             localDepositoForm.txtCargaCodigoBarras.Focus();
+
+            
         }
 
 

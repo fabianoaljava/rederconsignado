@@ -131,6 +131,9 @@
     <Compile Include="Classes\Estoque.cs" />
     <Compile Include="Classes\Home.cs" />
     <Compile Include="Classes\Retorno.cs" />
+    <Compile Include="DataSetDeposito.cs">
+      <DependentUpon>DataSetDeposito.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DataSetDeposito.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -198,6 +201,12 @@
       <DependentUpon>FormReceberBaixa.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\CobrancaViagem.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CobrancaViagem.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\EstoqueProduto.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -245,6 +254,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\CobrancaViagem.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CobrancaViagem.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\EstoqueProduto.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
