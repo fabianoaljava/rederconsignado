@@ -94,7 +94,7 @@ namespace ModelLibrary
         }
 
 
-        public class CobrancaViagem
+        public class CobrancaCarga
         {
 
             public string Codigo { get; set; }
@@ -113,7 +113,7 @@ namespace ModelLibrary
 
 
 
-        public static List<CobrancaViagem> RelatorioCobrancaViagem(int pCargaId)
+        public static List<CobrancaCarga> RelatorioCobrancaCarga(int pCargaId)
         {
             using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
@@ -144,12 +144,72 @@ namespace ModelLibrary
                                                 HAVING sum(ValorNF)- sum(ISNULL(Valor,0)) > 0";
 
 
-                var result = deposito.Database.SqlQuery<CobrancaViagem>(query, pCargaId);
+                var result = deposito.Database.SqlQuery<CobrancaCarga>(query, pCargaId);
 
-                return result.ToList<CobrancaViagem>();
+                return result.ToList<CobrancaCarga>();
 
             }
 
+        }
+
+
+        public class AnaliseRetorno
+        {
+            public string Praca { get; set; }
+            public string Representante { get; set; }
+            public string MesAno { get; set; }
+            public string Produto { get; set; }
+            public string Carga { get; set; }
+            public string Consignado { get; set; }
+            public string Vendido { get; set; }
+            public string PercentVendas { get; set; }
+        }
+
+
+        public static List<AnaliseRetorno> RelatorioAnaliseRetorno(int pRetornoId)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+
+                string query = @"SELECT                                    
+                                    Convert(Varchar(10),Praca.Id) + ' - ' + Praca.Descricao Praca,
+                                    Convert(Varchar(10),Representante.Id) + ' - ' + Representante.Nome Representante,
+                                    Produto.CodigoBarras + ' ' + Produto.Descricao Produto,
+                                    Convert(Varchar(12), CargaProduto.Quantidade) Carga,
+                                    Convert(Varchar(12),Consignado.Consignado) Consignado,
+                                    Convert(Varchar(12),Vendido.Vendido) Vendido,
+                                    CASE 
+	                                    WHEN CargaProduto.Quantidade > 0 THEN Convert(Varchar(12), Vendido.Vendido / CargaProduto.Quantidade * 100)
+	                                    ELSE '' END AS PercentVendas
+                                     FROM Carga 
+                                    INNER JOIN Praca ON Carga.PracaId = Praca.Id
+                                    INNER JOIN Representante ON Carga.RepresentanteId = Representante.Id
+                                    INNER JOIN CargaProduto ON CargaProduto.CargaId = Carga.Id
+                                    INNER JOIN ProdutoGrade ON CargaProduto.ProdutoGradeId = ProdutoGrade.Id
+                                    INNER JOIN Produto ON ProdutoGrade.ProdutoId = Produto.Id
+                                    LEFT JOIN (
+	                                    SELECT CargaId, CargaOriginal, ProdutoGradeId, Sum(Quantidade-Retorno) Consignado 
+	                                    FROM Pedido INNER JOIN PedidoItem ON PedidoItem.PedidoId = Pedido.Id 
+	                                    WHERE Status < 2
+	                                    GROUP BY CargaId, CargaOriginal, ProdutoGradeId
+                                    ) AS Consignado ON (Consignado.CargaId = Carga.Id OR Consignado.CargaOriginal = Carga.Id) AND Consignado.ProdutoGradeId = ProdutoGrade.Id
+                                    LEFT JOIN (
+	                                    SELECT CargaId, CargaOriginal, ProdutoGradeId, Sum(Quantidade-Retorno) Vendido 
+	                                    FROM Pedido INNER JOIN PedidoItem ON PedidoItem.PedidoId = Pedido.Id 
+	                                    WHERE Status >= 2
+	                                    GROUP BY CargaId, CargaOriginal, ProdutoGradeId
+                                    ) AS Vendido ON (Vendido.CargaId = Carga.Id OR Vendido.CargaOriginal = Carga.Id) AND Vendido.ProdutoGradeId = ProdutoGrade.Id
+
+                                    WHERE Carga.Id = @p0
+                                    ORDER BY Produto.Descricao";
+
+
+                var result = deposito.Database.SqlQuery<AnaliseRetorno>(query, pRetornoId);
+
+                return result.ToList<AnaliseRetorno>();
+            }
         }
     }
 }

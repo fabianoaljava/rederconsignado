@@ -201,10 +201,16 @@
       <DependentUpon>FormReceberBaixa.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reports\CobrancaViagem.cs">
+    <Compile Include="Reports\AnaliseRetorno.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CobrancaViagem.rpt</DependentUpon>
+      <DependentUpon>AnaliseRetorno.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\CobrancaCarga.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CobrancaCarga.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\EstoqueProduto.cs">
@@ -255,9 +261,13 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\CobrancaViagem.rpt">
+    <EmbeddedResource Include="Reports\AnaliseRetorno.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>CobrancaViagem.cs</LastGenOutput>
+      <LastGenOutput>AnaliseRetorno.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\CobrancaCarga.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CobrancaCarga.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\EstoqueProduto.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

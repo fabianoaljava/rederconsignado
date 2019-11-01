@@ -97,6 +97,8 @@ namespace ConsignadoDeposito
             localDepositoForm.mnuRetornoAcoes.Text = "Selecione a Carga";
             localDepositoForm.mnuRetornoAcoes.Enabled = false;
 
+            localDepositoForm.smnRetornoAnalise.Enabled = false;
+
         }
 
         public void ResetarVariaveis()
@@ -180,6 +182,9 @@ namespace ConsignadoDeposito
 
 
                     CarregarFormulario();
+
+
+                    localDepositoForm.smnRetornoAnalise.Enabled = true;
 
 
                     /// se status da carga = R

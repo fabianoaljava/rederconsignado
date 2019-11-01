@@ -1147,9 +1147,9 @@ namespace ConsignadoDeposito
 
 
 
-            List<ModelLibrary.RelatoriosDeposito.CobrancaViagem> cobrancaViagems = ModelLibrary.RelatoriosDeposito.RelatorioCobrancaViagem(cCarga.cCargaId);
+            List<ModelLibrary.RelatoriosDeposito.CobrancaCarga> cobrancaCargas = ModelLibrary.RelatoriosDeposito.RelatorioCobrancaCarga(cCarga.cCargaId);
 
-            if (cobrancaViagems == null)
+            if (cobrancaCargas == null)
             {
                 MessageBox.Show("Erro ao imprimir relatório - O relatório está vazio.", "Reder - Impressão", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -1158,17 +1158,55 @@ namespace ConsignadoDeposito
 
                 BindingSource bs = new BindingSource();
 
-                Reports.CobrancaViagem relatorioEstoqueProduto = new Reports.CobrancaViagem();
+                Reports.CobrancaCarga relatorioCobrancaCarga = new Reports.CobrancaCarga();
 
-                bs.DataSource = cobrancaViagems;
-                relatorioEstoqueProduto.SetDataSource(bs);
+                bs.DataSource = cobrancaCargas;
+                relatorioCobrancaCarga.SetDataSource(bs);
 
 
                 FormRelatorio formRelatorio = new FormRelatorio();
                 formRelatorio.Show();
 
 
-                formRelatorio.crvRelatorio.ReportSource = relatorioEstoqueProduto;
+                formRelatorio.crvRelatorio.ReportSource = relatorioCobrancaCarga;
+                formRelatorio.crvRelatorio.RefreshReport();
+            }
+
+
+            Cursor.Current = Cursors.Default;
+
+        }
+
+        private void smnRetornoAnalise_Click(object sender, EventArgs e)
+        {
+
+
+            Cursor.Current = Cursors.WaitCursor;
+
+
+
+            List<ModelLibrary.RelatoriosDeposito.AnaliseRetorno> analiseRetorno = ModelLibrary.RelatoriosDeposito.RelatorioAnaliseRetorno(cRetorno.cRetornoId);
+
+            if (analiseRetorno == null)
+            {
+                MessageBox.Show("Erro ao imprimir relatório - O relatório está vazio.", "Reder - Impressão", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+
+                BindingSource bs = new BindingSource();
+
+                Reports.AnaliseRetorno relatorioAnaliseRetorno = new Reports.AnaliseRetorno();
+
+                bs.DataSource = analiseRetorno;
+                relatorioAnaliseRetorno.SetDataSource(bs);
+
+
+                FormRelatorio formRelatorio = new FormRelatorio();
+                formRelatorio.Show();
+
+
+                formRelatorio.crvRelatorio.ReportSource = relatorioAnaliseRetorno;
                 formRelatorio.crvRelatorio.RefreshReport();
             }
 

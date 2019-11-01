@@ -16,14 +16,14 @@ namespace ConsignadoDeposito.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class CobrancaViagem : ReportClass {
+    public class CobrancaCarga : ReportClass {
         
-        public CobrancaViagem() {
+        public CobrancaCarga() {
         }
         
         public override string ResourceName {
             get {
-                return "CobrancaViagem.rpt";
+                return "CobrancaCarga.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace ConsignadoDeposito.Reports {
         
         public override string FullResourceName {
             get {
-                return "ConsignadoDeposito.Reports.CobrancaViagem.rpt";
+                return "ConsignadoDeposito.Reports.CobrancaCarga.rpt";
             }
             set {
                 // Do nothing
@@ -106,9 +106,9 @@ namespace ConsignadoDeposito.Reports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedCobrancaViagem : Component, ICachedReport {
+    public class CachedCobrancaCarga : Component, ICachedReport {
         
-        public CachedCobrancaViagem() {
+        public CachedCobrancaCarga() {
         }
         
         [Browsable(false)]
@@ -145,7 +145,7 @@ namespace ConsignadoDeposito.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            CobrancaViagem rpt = new CobrancaViagem();
+            CobrancaCarga rpt = new CobrancaCarga();
             rpt.Site = this.Site;
             return rpt;
         }

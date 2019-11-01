@@ -39,6 +39,7 @@
             this.crvRelatorio.Dock = System.Windows.Forms.DockStyle.Fill;
             this.crvRelatorio.Location = new System.Drawing.Point(20, 60);
             this.crvRelatorio.Name = "crvRelatorio";
+            this.crvRelatorio.ShowLogo = false;
             this.crvRelatorio.Size = new System.Drawing.Size(760, 370);
             this.crvRelatorio.TabIndex = 0;
             this.crvRelatorio.Load += new System.EventHandler(this.crystalReportViewer1_Load);
@@ -50,7 +51,8 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.crvRelatorio);
             this.Name = "FormRelatorio";
-            this.Text = "FormRelatorio";
+            this.Text = "RederConsignado - Visualização de Relatório";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ResumeLayout(false);
 
         }
