@@ -233,6 +233,7 @@ namespace ModelLibrary
 	                                RepCargaProduto.Id as CargaProdutoId,
 	                                RepProdutoGrade.Id as ProdutoGradeId,
 	                                RepCarga.Id as CargaId,
+                                    RepCargaProduto.Tipo,
                                     '' as Acao
 	                                FROM RepCarga 
                                 INNER JOIN RepCargaProduto ON RepCarga.Id = RepCargaProduto.CargaId
@@ -405,7 +406,7 @@ namespace ModelLibrary
 
 
 
-        public static Boolean InserirProdutoConferencia(long pCargaId, long pProdutoGradeId, decimal pQuantidade)
+        public static void InserirProdutoConferencia(long pCargaId, long pProdutoGradeId, decimal pQuantidade)
         {
 
 
@@ -414,11 +415,37 @@ namespace ModelLibrary
             using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                var produto = representante.RepCargaProduto.FirstOrDefault(pd => pd.ProdutoGradeId == pProdutoGradeId && pd.Tipo != "S");
+                var produto = representante.RepCargaProduto.FirstOrDefault(pd => pd.ProdutoGradeId == pProdutoGradeId);
 
                 if (produto == null)
                 {
-                    return false;
+
+                    var maxcargaproduto = representante.RepCargaProduto.OrderByDescending(i => i.Id).FirstOrDefault();
+
+                    long newId = maxcargaproduto == null ? 999001 : maxcargaproduto.Id + 1;
+
+                    var novacargaproduto = new RepCargaProduto
+                    {
+                        Id = newId,
+                        CargaId = pCargaId,
+                        ProdutoGradeId = pProdutoGradeId,
+                        Quantidade = 0,
+                        Retorno = 0,
+                        Tipo = "I"
+                    };
+
+                    representante.RepCargaProduto.Add(novacargaproduto);
+
+                    var novacargaconferencia = new RepCargaConferencia
+                    {
+                        CargaId = pCargaId,
+                        ProdutoGradeId = pProdutoGradeId,
+                        Quantidade = pQuantidade
+                    };
+
+                    representante.RepCargaConferencia.Add(novacargaconferencia);
+
+                    representante.SaveChanges();
 
                 } else
                 {
@@ -451,8 +478,6 @@ namespace ModelLibrary
 
 
                     representante.SaveChanges();
-
-                    return true;
                 }
 
                 
@@ -490,7 +515,8 @@ namespace ModelLibrary
             {
 
                 representante.Database.ExecuteSqlCommand("DELETE FROM RepCargaConferencia WHERE CargaId = @pCargaId AND ProdutoGradeId = @pProdutoGradeId", new SQLiteParameter("@pCargaId", pCargaId), new SQLiteParameter("@pProdutoGradeId", pCargaProdutoGradeId));
-
+                representante.Database.ExecuteSqlCommand("DELETE FROM RepCargaProduto WHERE CargaId = @pCargaId AND ProdutoGradeId = @pProdutoGradeId AND Tipo = 'I'", new SQLiteParameter("@pCargaId", pCargaId), new SQLiteParameter("@pProdutoGradeId", pCargaProdutoGradeId));
+                representante.SaveChanges();
             }
         }
 
@@ -510,9 +536,15 @@ namespace ModelLibrary
                 var cargaproduto = representante.RepCargaProduto.SingleOrDefault(cp => cp.CargaId == pCargaId && cp.ProdutoGradeId == pCargaProdutoGradeId);
                 if (cargaproduto != null)
                 {
-                    cargaproduto.Quantidade = pQuantidade;                    
-                }
+                    if (cargaproduto.Tipo == "I") {
 
+                        cargaproduto.Tipo = "S";
+
+                        representante.Database.ExecuteSqlCommand("DELETE FROM RepCargaConferencia WHERE CargaId = @pCargaId AND ProdutoGradeId = @pCargaProdutoGradeId", new SQLiteParameter("@pCargaId", pCargaId), new SQLiteParameter("@pCargaProdutoGradeId", pCargaProdutoGradeId));
+
+                    }
+                    cargaproduto.Quantidade = pQuantidade;
+                }
                 representante.SaveChanges();
             }
 

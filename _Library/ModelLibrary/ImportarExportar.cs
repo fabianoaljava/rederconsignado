@@ -1094,25 +1094,43 @@ namespace ModelLibrary
                 using (DepositoDBEntities deposito = new DepositoDBEntities())
                 {
 
-                    foreach (var row in deposito.Vendedor)
+                    string query = @"SELECT Vendedor.*,
+                                        CASE  
+                                            WHEN Pedidos = 1 THEN 
+                                                'O vendedor possui ' + 
+                                                Convert(VARCHAR(10),Pedidos) + ' pedido anterior em aberto para a carga # ' 
+                                                + Convert(VARCHAR(10),Carga.Id) 
+                                                + ' | Praça: ' + Convert(VARCHAR(10),Praca.Id) + ' - '+  Praca.Descricao
+                                                +' | Representante:' + Convert(VARCHAR(10),Representante.Id) + ' - ' + Representante.Nome 
+                                            WHEN Pedidos > 1 THEN 
+                                                'O vendedor possui ' 
+                                                + Convert(VARCHAR(10),Pedidos) 
+                                                + ' pedidos anteriores em aberto, sendo o ultimo para a carga # ' 
+                                                + Convert(VARCHAR(10),Carga.Id) 
+                                                + ' | Praça: ' + Convert(VARCHAR(10),Praca.Id) + ' - '+  Praca.Descricao
+                                                +' | Representante:' + Convert(VARCHAR(10),Representante.Id) + ' - ' + Representante.Nome 
+                                            ELSE '' END AS PedidoAberto, DebitoAReceber
+                                        FROM Vendedor
+                                            LEFT JOIN
+                                                (SELECT VendedorId, count(Pedido.Id) Pedidos, max(Pedido.CargaId) UltimaCargaId
+                                                    FROM Pedido
+                                                        WHERE Pedido.Status = 0 OR Pedido.Status = 1 OR Pedido.Status = 2
+                                                    GROUP BY VendedorId) AS PedidoAberto ON Vendedor.Id = PedidoAberto.VendedorId
+                                            LEFT JOIN Carga ON Carga.Id = PedidoAberto.UltimaCargaId 
+                                            LEFT JOIN Praca ON Carga.PracaId = Praca.Id
+                                            LEFT JOIN Representante ON Carga.RepresentanteId = Representante.Id
+                                            LEFT JOIN 
+                                                (SELECT VendedorId, Sum(ValorAReceber) as DebitoAReceber
+	                                                FROM Receber 		                                
+		                                                LEFT JOIN ReceberBaixa ON Receber.Id = ReceberBaixa.ReceberId
+		                                                WHERE Receber.DataPagamento IS NULL 
+			                                                AND ValorNF > 0
+                                                GROUP BY VendedorId) AS DebitoAReceber ON Vendedor.Id = DebitoAReceber.VendedorId
+                                        ";
+
+
+                    foreach (var row in deposito.Database.SqlQuery<RepVendedorBase>(query))
                     {
-
-                        Pedido pedidoaberto = ModelLibrary.MetodosDeposito.ObterPedidosAbertoVendedor(row.Id);
-
-                        string vPedidoAberto = "";
-
-                        if (pedidoaberto != null)
-                        {
-                            Carga carga = ModelLibrary.MetodosDeposito.ObterCargaById(pedidoaberto.CargaId);
-
-                            vPedidoAberto = "O vendedor possui pedido anterior em aberto para a carga # " + pedidoaberto.CargaId.ToString() + " | Praça #: " + carga.PracaId.ToString() + " | Representante # " + carga.RepresentanteId.ToString();
-                        }
-
-
-
-                        Nullable<double> vDebitoAReceber = ModelLibrary.MetodosDeposito.ObterValorAReceberVendedor(row.Id);
-
-                        
                         var newReg = new RepVendedorBase
                         {
                             Id = row.Id,
@@ -1138,8 +1156,8 @@ namespace ModelLibrary
                             LimiteCredito = Convert.ToDecimal(row.LimiteCredito),
                             Status = row.Status,
                             Observacao = row.Observacao,
-                            PedidoAberto = vPedidoAberto,
-                            DebitoAReceber = Convert.ToDecimal(vDebitoAReceber)
+                            PedidoAberto = row.PedidoAberto,
+                            DebitoAReceber = Convert.ToDecimal(row.DebitoAReceber)
 
                         };
 

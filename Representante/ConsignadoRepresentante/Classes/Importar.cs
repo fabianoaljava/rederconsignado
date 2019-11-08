@@ -435,6 +435,13 @@ namespace ConsignadoRepresentante
             localDeposito.CarregarRepresentante();
             localDeposito.btnExcluirImportacao.Text = "Excluir";
             localDeposito.btnExcluirImportacao.Visible = false;
+
+
+            localDeposito.grdImportacao.ClearSelection();
+            localDeposito.grdImportacao.DataSource = null;
+            localDeposito.grdImportacao.Refresh();
+
+
             Cursor.Current = Cursors.Default;
 
         }

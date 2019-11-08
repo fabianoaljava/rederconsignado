@@ -60,7 +60,7 @@ namespace ConsignadoRepresentante
             {
                 if (produtosgrade.Count > 1)
                 {
-                    Modal.FormProdutosGrade formProdutosGrade = new Modal.FormProdutosGrade(pCodigo);
+                    Modal.FormProdutosGrade formProdutosGrade = new Modal.FormProdutosGrade(pCodigo, "Conferencia");
 
                     var result = formProdutosGrade.ShowDialog();
 
@@ -92,38 +92,66 @@ namespace ConsignadoRepresentante
 
             if (produtograde != null)
             {
-
-                var produto = ModelLibrary.MetodosRepresentante.ObterProduto(produtograde.CodigoBarras);
-
-                localDeposito.txtConfProduto.Text = produto.Descricao;
-
-                if (localDeposito.txtConfCodigoBarras.Text != produtograde.CodigoBarras + produtograde.Digito)
+                string vTipo;
+                var cargaproduto = ModelLibrary.MetodosRepresentante.ObterCargaProduto(localDeposito.cCargaId, produtograde.Id);
+                if (cargaproduto != null)
                 {
-                    localDeposito.txtConfCodigoBarras.Text = produtograde.CodigoBarras + produtograde.Digito;
-                    if (localDeposito.chkConfQuantidade.Checked == false)
+                    vTipo = cargaproduto.Tipo;                    
+                } else
+                {
+                    vTipo = null;
+                }
+
+                if (vTipo == "S")
+                {
+
+                    MessageBox.Show("O produto informado está registrado como suplemento.");
+
+                    cImportarProdutoId = 0;
+                    localDeposito.txtConfCodigoBarras.Text = "";
+                    localDeposito.txtConfCodigoBarras.Focus();
+                    localDeposito.btnConferenciaConfirmar.Enabled = false;
+                    localDeposito.btnConfCancelar.Enabled = false;
+
+                } else
+                {
+
+                    var produto = ModelLibrary.MetodosRepresentante.ObterProduto(produtograde.CodigoBarras);
+
+                    localDeposito.txtConfProduto.Text = produto.Descricao;
+
+                    if (localDeposito.txtConfCodigoBarras.Text != produtograde.CodigoBarras + produtograde.Digito)
                     {
-                        localDeposito.chkConfQuantidade.Checked = true;
-                        localDeposito.txtConfQuantidade.Enabled = true;
+                        localDeposito.txtConfCodigoBarras.Text = produtograde.CodigoBarras + produtograde.Digito;
+                        if (localDeposito.chkConfQuantidade.Checked == false)
+                        {
+                            localDeposito.chkConfQuantidade.Checked = true;
+                            localDeposito.txtConfQuantidade.Enabled = true;
+                        }
                     }
+
+
+
+                    cImportarProdutoId = produtograde.Id;
+
+                    localDeposito.btnConferenciaConfirmar.Enabled = true;
+                    localDeposito.btnConfCancelar.Enabled = true;
+
+                    if (localDeposito.chkConfQuantidade.Checked)
+                    {
+                        localDeposito.txtConfQuantidade.Focus();
+
+                    }
+                    else
+                    {
+                        //inserir direto qtd=1
+                        InserirCargaProdutoConferencia();
+                    }
+
                 }
+                
 
 
-
-                cImportarProdutoId = produtograde.Id;
-
-                localDeposito.btnConferenciaConfirmar.Enabled = true;
-                localDeposito.btnConfCancelar.Enabled = true;
-
-                if (localDeposito.chkConfQuantidade.Checked)
-                {
-                    localDeposito.txtConfQuantidade.Focus();
-
-                }
-                else
-                {
-                    //inserir direto qtd=1
-                    InserirCargaProdutoConferencia();
-                }
 
             }
             else
@@ -235,43 +263,28 @@ namespace ConsignadoRepresentante
 
                 if (vQuantidade > 0)
                 {
-                    if (ModelLibrary.MetodosRepresentante.InserirProdutoConferencia(localDeposito.cCargaId, cImportarProdutoId, vQuantidade) == false)
-                    {
-                        if (MessageBox.Show("O produto informado não foi registrado na carga. Deseja incluí-lo como suplemento?", "Produto não encontrado!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        {                                                    
-                            localDeposito.tbcPrincipal.SelectedTab = localDeposito.tabSuplemento;
 
-                            localDeposito.txtSuplCodigoBarras.Text = localDeposito.txtConfCodigoBarras.Text;
+                    ModelLibrary.MetodosRepresentante.InserirProdutoConferencia(localDeposito.cCargaId, cImportarProdutoId, vQuantidade);
 
-                            localDeposito.txtSuplQuantidade.Text = localDeposito.txtConfQuantidade.Text;
-                            localDeposito.txtConfCodigoBarras.Text = "";
-                            localDeposito.txtSuplCodigoBarras.Focus();
-
-
-                        }
-                    } else
+                    if (localDeposito.chkConfQuantidade.Checked)
                     {
 
-                        if (localDeposito.chkConfQuantidade.Checked)
+
+                        ModelLibrary.RepCargaProduto repCargaProduto = ModelLibrary.MetodosRepresentante.ObterCargaProduto(localDeposito.cCargaId, cImportarProdutoId);
+
+                        if (repCargaProduto != null)
                         {
-
-
-                            ModelLibrary.RepCargaProduto repCargaProduto = ModelLibrary.MetodosRepresentante.ObterCargaProduto(localDeposito.cCargaId, cImportarProdutoId);
-
-                            if (repCargaProduto != null)
+                            if (vQuantidade != repCargaProduto.Quantidade) //se a quantidade da carga for diferente da informada soar bipe
                             {
-                                if (vQuantidade != repCargaProduto.Quantidade) //se a quantidade da carga for diferente da informada soar bipe
-                                {
 
-                                    System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\RederConsignado\honk.wav");
-                                    player.Play();
+                                System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\RederConsignado\honk.wav");
+                                player.Play();
 
-                                }
                             }
-
-
-
                         }
+
+
+
                     }
 
 

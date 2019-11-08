@@ -18,13 +18,16 @@ namespace ConsignadoRepresentante.Modal
 
         public long cProdutoGradeId { get; set; }
         public string cCodigo { get; set; }
+        public string cOrigem { get; set; }
 
 
-        public FormProdutosGrade(string pCodigo)
+        public FormProdutosGrade(string pCodigo, string pOrigem = null)
         {
             InitializeComponent();
 
             this.cCodigo = pCodigo;
+
+            this.cOrigem = pOrigem;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -53,6 +56,11 @@ namespace ConsignadoRepresentante.Modal
             grdProdutoGrade.DataSource = view;
 
             grdProdutoGrade.Columns[6].Visible = false;
+
+            if (cOrigem == "Conferencia")
+            {
+                grdProdutoGrade.Columns[5].Visible = false;
+            }
 
 
         }

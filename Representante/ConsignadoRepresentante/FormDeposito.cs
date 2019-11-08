@@ -643,6 +643,18 @@ namespace ConsignadoRepresentante
                 grdConfProduto.ClearSelection();
                 grdConfProduto[hti.ColumnIndex, hti.RowIndex].Selected = true;
 
+                if (grdConfProduto.CurrentRow.Cells["Tipo"].Value.ToString() == "I")
+                {
+                    smsConferenciaAdicionarSuplemento.Visible = true;
+                    smsConferenciaQuantidadeInformada.Visible = false;
+                    smsConferenciaQuantidadeCarga.Visible = false;
+                } else
+                {
+                    smsConferenciaAdicionarSuplemento.Visible = false;
+                    smsConferenciaQuantidadeInformada.Visible = true;
+                    smsConferenciaQuantidadeCarga.Visible = true;
+                }
+
 
 
             } 
@@ -850,6 +862,19 @@ namespace ConsignadoRepresentante
             Cursor.Current = Cursors.WaitCursor;
             Modal.FormSobre formSobre = new Modal.FormSobre();
             formSobre.ShowDialog();
+        }
+
+        private void smsConferenciaExcluir_Click(object sender, EventArgs e)
+        {
+            cConferirProdutos.ExcluirCargaProdutoConferencia();
+        }
+
+        private void smsConferenciaAdicionarSuplemento_Click(object sender, EventArgs e)
+        {
+            cConferirProdutos.ResolverConflito(Convert.ToInt32(grdConfProduto.CurrentRow.Cells["ProdutoGradeId"].Value), Convert.ToInt32(grdConfProduto.CurrentRow.Cells["QuantidadeInformada"].Value));
+
+            cSuplemento.ExibirSuplementoProduto(cCargaId);
+
         }
     }
 }

@@ -28,17 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlProdutoGradeTop = new MetroFramework.Controls.MetroPanel();
-            this.pnlProdutoGradeBottom = new MetroFramework.Controls.MetroPanel();
-            this.pnlProdutoGradeMiddle = new MetroFramework.Controls.MetroPanel();
-            this.btnConfirmar = new MetroFramework.Controls.MetroButton();
-            this.btnCancelar = new MetroFramework.Controls.MetroButton();
-            this.grdProdutoGrade = new MetroFramework.Controls.MetroGrid();
             this.lblInfo = new MetroFramework.Controls.MetroLabel();
+            this.pnlProdutoGradeBottom = new MetroFramework.Controls.MetroPanel();
+            this.btnCancelar = new MetroFramework.Controls.MetroButton();
+            this.btnConfirmar = new MetroFramework.Controls.MetroButton();
+            this.pnlProdutoGradeMiddle = new MetroFramework.Controls.MetroPanel();
+            this.grdProdutoGrade = new MetroFramework.Controls.MetroGrid();
             this.pnlProdutoGradeTop.SuspendLayout();
             this.pnlProdutoGradeBottom.SuspendLayout();
             this.pnlProdutoGradeMiddle.SuspendLayout();
@@ -60,6 +60,16 @@
             this.pnlProdutoGradeTop.VerticalScrollbarHighlightOnWheel = false;
             this.pnlProdutoGradeTop.VerticalScrollbarSize = 10;
             // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblInfo.Location = new System.Drawing.Point(0, 0);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(189, 19);
+            this.lblInfo.TabIndex = 2;
+            this.lblInfo.Text = "Selecione o produto da grade:";
+            // 
             // pnlProdutoGradeBottom
             // 
             this.pnlProdutoGradeBottom.Controls.Add(this.btnCancelar);
@@ -76,6 +86,30 @@
             this.pnlProdutoGradeBottom.VerticalScrollbarHighlightOnWheel = false;
             this.pnlProdutoGradeBottom.VerticalScrollbarSize = 10;
             // 
+            // btnCancelar
+            // 
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnCancelar.Location = new System.Drawing.Point(0, 0);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 37);
+            this.btnCancelar.TabIndex = 3;
+            this.btnCancelar.Text = "Ca&ncelar";
+            this.btnCancelar.UseSelectable = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // btnConfirmar
+            // 
+            this.btnConfirmar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnConfirmar.Enabled = false;
+            this.btnConfirmar.Location = new System.Drawing.Point(554, 0);
+            this.btnConfirmar.Name = "btnConfirmar";
+            this.btnConfirmar.Size = new System.Drawing.Size(75, 37);
+            this.btnConfirmar.TabIndex = 2;
+            this.btnConfirmar.Text = "&Confirmar";
+            this.btnConfirmar.UseSelectable = true;
+            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
+            // 
             // pnlProdutoGradeMiddle
             // 
             this.pnlProdutoGradeMiddle.Controls.Add(this.grdProdutoGrade);
@@ -91,61 +125,37 @@
             this.pnlProdutoGradeMiddle.VerticalScrollbarHighlightOnWheel = false;
             this.pnlProdutoGradeMiddle.VerticalScrollbarSize = 10;
             // 
-            // btnConfirmar
-            // 
-            this.btnConfirmar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnConfirmar.Enabled = false;
-            this.btnConfirmar.Location = new System.Drawing.Point(554, 0);
-            this.btnConfirmar.Name = "btnConfirmar";
-            this.btnConfirmar.Size = new System.Drawing.Size(75, 37);
-            this.btnConfirmar.TabIndex = 2;
-            this.btnConfirmar.Text = "&Confirmar";
-            this.btnConfirmar.UseSelectable = true;
-            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnCancelar.Location = new System.Drawing.Point(0, 0);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 37);
-            this.btnCancelar.TabIndex = 3;
-            this.btnCancelar.Text = "Ca&ncelar";
-            this.btnCancelar.UseSelectable = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
             // grdProdutoGrade
             // 
             this.grdProdutoGrade.AllowUserToAddRows = false;
             this.grdProdutoGrade.AllowUserToDeleteRows = false;
             this.grdProdutoGrade.AllowUserToOrderColumns = true;
             this.grdProdutoGrade.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.grdProdutoGrade.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.grdProdutoGrade.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.grdProdutoGrade.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.grdProdutoGrade.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.grdProdutoGrade.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.grdProdutoGrade.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.grdProdutoGrade.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdProdutoGrade.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdProdutoGrade.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.grdProdutoGrade.ColumnHeadersHeight = 22;
             this.grdProdutoGrade.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdProdutoGrade.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grdProdutoGrade.DefaultCellStyle = dataGridViewCellStyle3;
             this.grdProdutoGrade.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdProdutoGrade.EnableHeadersVisualStyles = false;
             this.grdProdutoGrade.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -155,14 +165,14 @@
             this.grdProdutoGrade.Name = "grdProdutoGrade";
             this.grdProdutoGrade.ReadOnly = true;
             this.grdProdutoGrade.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdProdutoGrade.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdProdutoGrade.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.grdProdutoGrade.RowHeadersVisible = false;
             this.grdProdutoGrade.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grdProdutoGrade.RowTemplate.ReadOnly = true;
@@ -176,16 +186,6 @@
             this.grdProdutoGrade.UseStyleColors = true;
             this.grdProdutoGrade.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdProdutoGrade_CellClick);
             this.grdProdutoGrade.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdProdutoGrade_CellContentDoubleClick);
-            // 
-            // lblInfo
-            // 
-            this.lblInfo.AutoSize = true;
-            this.lblInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblInfo.Location = new System.Drawing.Point(0, 0);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(189, 19);
-            this.lblInfo.TabIndex = 2;
-            this.lblInfo.Text = "Selecione o produto da grade:";
             // 
             // FormProdutosGrade
             // 
