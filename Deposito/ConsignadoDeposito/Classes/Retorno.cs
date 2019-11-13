@@ -99,6 +99,10 @@ namespace ConsignadoDeposito
 
             localDepositoForm.smnRetornoAnalise.Enabled = false;
 
+
+            localDepositoForm.dlbTotalAcerto.Text = "-";
+            localDepositoForm.dlbTotalAberto.Text = "-";
+
         }
 
         public void ResetarVariaveis()
@@ -1115,6 +1119,36 @@ namespace ConsignadoDeposito
 
         public void CarregarAcerto()
         {
+
+            List<ModelLibrary.ListaAcerto> acerto = ModelLibrary.MetodosDeposito.ObterListaAcerto(cRetornoId);
+
+            BindingListView<ModelLibrary.ListaAcerto> view = new BindingListView<ModelLibrary.ListaAcerto>(acerto);
+
+            localDepositoForm.grdAcerto.DataSource = view;
+
+            localDepositoForm.grdAcerto.Columns[0].Width = 250;
+            localDepositoForm.grdAcerto.Columns[1].DefaultCellStyle.Format = "c";
+            localDepositoForm.grdAcerto.Columns[2].DefaultCellStyle.Format = "c";
+            localDepositoForm.grdAcerto.Columns[3].DefaultCellStyle.Format = "c";
+            localDepositoForm.grdAcerto.Columns[4].DefaultCellStyle.Format = "c";
+            localDepositoForm.grdAcerto.Columns[5].DefaultCellStyle.Format = "c";
+            localDepositoForm.grdAcerto.Columns[6].DefaultCellStyle.Format = "c";
+
+            //Carregar Totalizadores
+
+
+            double sumValorAcerto = 0;
+            double sumValorAberto = 0; 
+            for (int i = 0; i < localDepositoForm.grdAcerto.Rows.Count; ++i)
+            {
+                sumValorAcerto += Convert.ToDouble(localDepositoForm.grdAcerto.Rows[i].Cells[5].Value);
+                sumValorAberto += Convert.ToDouble(localDepositoForm.grdAcerto.Rows[i].Cells[6].Value);
+            }
+
+
+            localDepositoForm.dlbTotalAcerto.Text = sumValorAcerto.ToString("C");
+            localDepositoForm.dlbTotalAberto.Text = sumValorAberto.ToString("C");
+
 
 
 

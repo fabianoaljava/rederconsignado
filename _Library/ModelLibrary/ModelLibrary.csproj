@@ -80,6 +80,7 @@
       <DependentUpon>ModelDeposito.tt</DependentUpon>
     </Compile>
     <Compile Include="ImportarExportar.cs" />
+    <Compile Include="Listas\ListaAcerto.cs" />
     <Compile Include="Listas\ListaAReceber.cs" />
     <Compile Include="Listas\ListaImportacaoExportacao.cs" />
     <Compile Include="Listas\ListaPedidoItem.cs" />

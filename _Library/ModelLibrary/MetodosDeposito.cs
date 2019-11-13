@@ -1601,6 +1601,35 @@ namespace ModelLibrary
 
         }
 
+
+
+
+        public static List<ListaAcerto> ObterListaAcerto(long pCargaId)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                string query = @"SELECT Nome, '' ValorPedido, '' ValorCompra, '' ValorLiquido, ValorAReceber ValorReceber, ValorAReceber ValorAcerto, 0 ValorAberto, DataEmissao Data 
+                                    FROM Vendedor 
+                                        INNER JOIN Receber ON Vendedor.Id = Receber.VendedorId
+                                      WHERE ValorAReceber > 0 AND CargaId = @p0
+                                    UNION 
+                                      SELECT Nome, ValorPedido, ValorCompra, ValorLiquido, ValorAReceber ValorReceber, ValorAcerto, ValorLiquido+ValorAReceber-ValorAcerto ValorAberto, DataLancamento Data 
+                                        FROM Vendedor
+                                            INNER JOIN Pedido ON Vendedor.Id = Pedido.VendedorId
+                                         WHERE CargaId = @p0;";
+
+                var result = deposito.Database.SqlQuery<ListaAcerto>(query, pCargaId);
+
+                return result.ToList<ListaAcerto>();
+
+            }
+
+        }
+
+
+
         public static List<Vendedor> ObterListaVendedor(long pCargaId = 0)
         {
             using (DepositoDBEntities deposito = new DepositoDBEntities())
