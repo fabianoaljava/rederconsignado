@@ -113,6 +113,7 @@
             this.cbbDataPagamento.UseCustomBackColor = true;
             this.cbbDataPagamento.UseCustomForeColor = true;
             this.cbbDataPagamento.UseStyleColors = true;
+            this.cbbDataPagamento.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             // 
             // lblValor
             // 

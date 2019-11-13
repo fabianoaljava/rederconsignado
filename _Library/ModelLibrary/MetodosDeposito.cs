@@ -260,6 +260,24 @@ namespace ModelLibrary
         }
 
 
+        public static Boolean ExcluirCarga(long pCargaId)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+                var cargaproduto = deposito.CargaProduto.FirstOrDefault(cp => cp.CargaId == pCargaId);
+                if (cargaproduto != null)
+                {
+                    return false;
+                } else
+                {
+                    deposito.Database.ExecuteSqlCommand("DELETE FROM Carga WHERE Id = @pCargaId", new SqlParameter("@pCargaId", pCargaId));
+                    return true;
+                }
+            }
+
+        }
+
         public static void AlterarStatusCarga(long pCargaId, string pStatus)
         {
 
@@ -2022,8 +2040,17 @@ namespace ModelLibrary
 
                 var totalizador = deposito.Database.SqlQuery<ListaTotalizadoresDeposito>(query, pCargaId).FirstOrDefault();
 
-                vTotalizador.QtdProdutos = totalizador.QtdProdutos;
-                vTotalizador.TotalProdutos = totalizador.TotalProdutos;
+                if (totalizador != null)
+                {
+                    vTotalizador.QtdProdutos = totalizador.QtdProdutos;
+                    vTotalizador.TotalProdutos = totalizador.TotalProdutos;
+                } else
+                {
+                    vTotalizador.QtdProdutos = 0;
+                    vTotalizador.TotalProdutos = 0;
+                }
+
+
 
                 return vTotalizador;
 

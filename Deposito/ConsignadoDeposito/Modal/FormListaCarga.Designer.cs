@@ -125,7 +125,7 @@
             this.cbbAnoMesFinal.ShowUpDown = true;
             this.cbbAnoMesFinal.Size = new System.Drawing.Size(97, 26);
             this.cbbAnoMesFinal.TabIndex = 5;
-            this.cbbAnoMesFinal.Value = new System.DateTime(2019, 7, 11, 0, 0, 0, 0);
+            this.cbbAnoMesFinal.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.cbbAnoMesFinal.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // lblInfo
@@ -150,7 +150,7 @@
             this.cbbAnoMesInicial.ShowUpDown = true;
             this.cbbAnoMesInicial.Size = new System.Drawing.Size(97, 26);
             this.cbbAnoMesInicial.TabIndex = 4;
-            this.cbbAnoMesInicial.Value = new System.DateTime(2019, 1, 11, 0, 0, 0, 0);
+            this.cbbAnoMesInicial.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.cbbAnoMesInicial.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
             // 
             // lblCargaMesAno

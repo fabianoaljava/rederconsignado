@@ -91,7 +91,12 @@ namespace ConsignadoDeposito.Modal
 
             CarregarListaCarga();
             CarregarListaRepresentante();
-            
+
+
+            cbbAnoMesInicial.Value = DateTime.Now.AddDays(-180);
+            cbbAnoMesFinal.Value = DateTime.Now;
+
+
         }
 
 

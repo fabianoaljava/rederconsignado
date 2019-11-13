@@ -1215,6 +1215,11 @@ namespace ConsignadoDeposito
 
         }
 
+        private void mnuCargaExcluir_Click(object sender, EventArgs e)
+        {
+            cCarga.CargaExcluir();
+        }
+
 
 
         ////////////////////////////////////////

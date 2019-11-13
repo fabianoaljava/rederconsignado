@@ -41,6 +41,8 @@ namespace ConsignadoRepresentante
             CarregarListaPracaLocal();
             CarregarListaRepresentanteLocal();
 
+            localDeposito.cbbImportarMesAno.Text = DateTime.Now.Month.ToString() + "/" + DateTime.Now.Year.ToString();
+
         }
 
 
@@ -68,6 +70,8 @@ namespace ConsignadoRepresentante
         {
             CarregarListaPracaServer();
             CarregarListaRepresentanteServer();
+
+            localDeposito.cbbImportarMesAno.Text = DateTime.Now.Month.ToString() + "/" + DateTime.Now.Year.ToString();
         }
 
 

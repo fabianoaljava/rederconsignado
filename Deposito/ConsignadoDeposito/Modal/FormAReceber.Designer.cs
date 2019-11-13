@@ -167,6 +167,7 @@
             this.cbbDataPagamento.UseCustomBackColor = true;
             this.cbbDataPagamento.UseCustomForeColor = true;
             this.cbbDataPagamento.UseStyleColors = true;
+            this.cbbDataPagamento.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.cbbDataPagamento.Visible = false;
             // 
             // lblDataVencimento
@@ -192,6 +193,7 @@
             this.cbbDataVencimento.UseCustomBackColor = true;
             this.cbbDataVencimento.UseCustomForeColor = true;
             this.cbbDataVencimento.UseStyleColors = true;
+            this.cbbDataVencimento.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             // 
             // lblDataLancamento
             // 
@@ -217,6 +219,7 @@
             this.cbbDataLancamento.UseCustomBackColor = true;
             this.cbbDataLancamento.UseCustomForeColor = true;
             this.cbbDataLancamento.UseStyleColors = true;
+            this.cbbDataLancamento.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             // 
             // lblValorAReceber
             // 
@@ -473,6 +476,7 @@
             this.cbbDataEmissao.UseCustomBackColor = true;
             this.cbbDataEmissao.UseCustomForeColor = true;
             this.cbbDataEmissao.UseStyleColors = true;
+            this.cbbDataEmissao.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             // 
             // txtValorNF
             // 

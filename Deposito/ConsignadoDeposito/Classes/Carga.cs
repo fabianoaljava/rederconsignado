@@ -92,6 +92,8 @@ namespace ConsignadoDeposito
             localDepositoForm.smnCobrancaViagem.Enabled = false;
 
             localDepositoForm.dlbCargaTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Medium;
+
+            localDepositoForm.mnuCargaExcluir.Visible = false;
         }
 
         public void ResetarVariaveis()
@@ -243,6 +245,24 @@ namespace ConsignadoDeposito
 
         }
 
+
+        public void CargaExcluir()
+        {
+            if (MessageBox.Show("Deseja realmente excluir a carga selecionada?", "ATENÇÃO! Exclusão de Carga", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+
+                if (ModelLibrary.MetodosDeposito.ExcluirCarga(cCargaId)) {
+                    LimparCarga();
+                    LimparCargaProduto();
+                } else {
+
+                    MessageBox.Show("A carga selecionada possui produtos associados, não foi possível excluir");
+
+                }
+            }
+
+        }
+
         public void CargaTotalizadores()
         {
 
@@ -308,6 +328,14 @@ namespace ConsignadoDeposito
             BindingListView<ModelLibrary.ListaProdutosCarga> view = new BindingListView<ModelLibrary.ListaProdutosCarga>(produtos);
 
             localDepositoForm.grdCargaProduto.DataSource = view;
+
+            if (produtos.Count == 0)
+            {
+                localDepositoForm.mnuCargaExcluir.Visible = true;
+            } else
+            {
+                localDepositoForm.mnuCargaExcluir.Visible = false;
+            }
 
             /// Ocultar colunas CargaId e cCargaProdutoGradeId
             localDepositoForm.grdCargaProduto.Columns[9].Visible = false;

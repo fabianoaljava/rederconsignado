@@ -98,7 +98,6 @@ namespace ConsignadoDeposito.Modal
                         lblDataPagamento.Visible = true;
                         cbbDataPagamento.Visible = true;
                         cbbDataPagamento.Value = receber.DataPagamento.Value;
-
                     }
                     
 

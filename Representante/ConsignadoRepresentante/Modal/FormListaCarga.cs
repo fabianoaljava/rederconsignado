@@ -101,6 +101,11 @@ namespace ConsignadoRepresentante.Modal
             }
 
 
+            cbbAnoMesInicial.Value = DateTime.Now.AddMonths(-6);
+            cbbAnoMesFinal.Value = DateTime.Now;
+
+
+
 
         }
 
