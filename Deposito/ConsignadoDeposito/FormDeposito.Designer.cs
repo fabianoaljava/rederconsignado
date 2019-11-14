@@ -60,14 +60,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
             this.notifyIconDeposito = new System.Windows.Forms.NotifyIcon(this.components);
             this.panelHeader = new System.Windows.Forms.Panel();
             this.btnNothing = new System.Windows.Forms.Button();
@@ -224,6 +224,13 @@
             this.pnlContasAReceberTop = new MetroFramework.Controls.MetroPanel();
             this.btnRetornoAcertoIncluir = new MetroFramework.Controls.MetroButton();
             this.tabAcerto = new System.Windows.Forms.TabPage();
+            this.pnlAcertoMain = new MetroFramework.Controls.MetroPanel();
+            this.grdAcerto = new MetroFramework.Controls.MetroGrid();
+            this.pnlAcertoBottom = new MetroFramework.Controls.MetroPanel();
+            this.dlbTotalAberto = new MetroFramework.Controls.MetroLabel();
+            this.lblTotalAberto = new MetroFramework.Controls.MetroLabel();
+            this.dlbTotalAcerto = new MetroFramework.Controls.MetroLabel();
+            this.lblTotalAcerto = new MetroFramework.Controls.MetroLabel();
             this.pnlRetornoPesquisa = new MetroFramework.Controls.MetroPanel();
             this.grpRetornoDadosCarga = new System.Windows.Forms.GroupBox();
             this.lblRetornoTotalProdutos = new MetroFramework.Controls.MetroLabel();
@@ -280,13 +287,6 @@
             this.smnRetornoAcertoTitulo = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.smnRetornoAcertoPagamento = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnlAcertoBottom = new MetroFramework.Controls.MetroPanel();
-            this.pnlAcertoMain = new MetroFramework.Controls.MetroPanel();
-            this.grdAcerto = new MetroFramework.Controls.MetroGrid();
-            this.lblTotalAcerto = new MetroFramework.Controls.MetroLabel();
-            this.dlbTotalAcerto = new MetroFramework.Controls.MetroLabel();
-            this.dlbTotalAberto = new MetroFramework.Controls.MetroLabel();
-            this.lblTotalAberto = new MetroFramework.Controls.MetroLabel();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
@@ -338,6 +338,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdContasAReceber)).BeginInit();
             this.pnlContasAReceberTop.SuspendLayout();
             this.tabAcerto.SuspendLayout();
+            this.pnlAcertoMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdAcerto)).BeginInit();
+            this.pnlAcertoBottom.SuspendLayout();
             this.pnlRetornoPesquisa.SuspendLayout();
             this.grpRetornoDadosCarga.SuspendLayout();
             this.menuRetorno.SuspendLayout();
@@ -351,9 +354,6 @@
             this.tabAjuda.SuspendLayout();
             this.menuaJUDA.SuspendLayout();
             this.cmsRetornoAcerto.SuspendLayout();
-            this.pnlAcertoBottom.SuspendLayout();
-            this.pnlAcertoMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdAcerto)).BeginInit();
             this.SuspendLayout();
             // 
             // notifyIconDeposito
@@ -2847,6 +2847,129 @@
             this.tabAcerto.TabIndex = 9;
             this.tabAcerto.Text = "Acerto";
             // 
+            // pnlAcertoMain
+            // 
+            this.pnlAcertoMain.Controls.Add(this.grdAcerto);
+            this.pnlAcertoMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlAcertoMain.HorizontalScrollbarBarColor = true;
+            this.pnlAcertoMain.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlAcertoMain.HorizontalScrollbarSize = 10;
+            this.pnlAcertoMain.Location = new System.Drawing.Point(0, 0);
+            this.pnlAcertoMain.Name = "pnlAcertoMain";
+            this.pnlAcertoMain.Size = new System.Drawing.Size(844, 369);
+            this.pnlAcertoMain.TabIndex = 1;
+            this.pnlAcertoMain.VerticalScrollbarBarColor = true;
+            this.pnlAcertoMain.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlAcertoMain.VerticalScrollbarSize = 10;
+            // 
+            // grdAcerto
+            // 
+            this.grdAcerto.AllowUserToAddRows = false;
+            this.grdAcerto.AllowUserToDeleteRows = false;
+            this.grdAcerto.AllowUserToOrderColumns = true;
+            this.grdAcerto.AllowUserToResizeRows = false;
+            dataGridViewCellStyle29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.grdAcerto.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle29;
+            this.grdAcerto.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdAcerto.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.grdAcerto.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.grdAcerto.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle30.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdAcerto.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle30;
+            this.grdAcerto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle31.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle31.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle31.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grdAcerto.DefaultCellStyle = dataGridViewCellStyle31;
+            this.grdAcerto.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdAcerto.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.grdAcerto.EnableHeadersVisualStyles = false;
+            this.grdAcerto.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.grdAcerto.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdAcerto.Location = new System.Drawing.Point(0, 0);
+            this.grdAcerto.Name = "grdAcerto";
+            this.grdAcerto.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle32.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle32.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdAcerto.RowHeadersDefaultCellStyle = dataGridViewCellStyle32;
+            this.grdAcerto.RowHeadersVisible = false;
+            this.grdAcerto.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.grdAcerto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.grdAcerto.ShowEditingIcon = false;
+            this.grdAcerto.Size = new System.Drawing.Size(844, 369);
+            this.grdAcerto.TabIndex = 4;
+            // 
+            // pnlAcertoBottom
+            // 
+            this.pnlAcertoBottom.Controls.Add(this.dlbTotalAberto);
+            this.pnlAcertoBottom.Controls.Add(this.lblTotalAberto);
+            this.pnlAcertoBottom.Controls.Add(this.dlbTotalAcerto);
+            this.pnlAcertoBottom.Controls.Add(this.lblTotalAcerto);
+            this.pnlAcertoBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlAcertoBottom.HorizontalScrollbarBarColor = true;
+            this.pnlAcertoBottom.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlAcertoBottom.HorizontalScrollbarSize = 10;
+            this.pnlAcertoBottom.Location = new System.Drawing.Point(0, 369);
+            this.pnlAcertoBottom.Name = "pnlAcertoBottom";
+            this.pnlAcertoBottom.Size = new System.Drawing.Size(844, 37);
+            this.pnlAcertoBottom.TabIndex = 0;
+            this.pnlAcertoBottom.VerticalScrollbarBarColor = true;
+            this.pnlAcertoBottom.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlAcertoBottom.VerticalScrollbarSize = 10;
+            // 
+            // dlbTotalAberto
+            // 
+            this.dlbTotalAberto.AutoSize = true;
+            this.dlbTotalAberto.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.dlbTotalAberto.Location = new System.Drawing.Point(723, 7);
+            this.dlbTotalAberto.Name = "dlbTotalAberto";
+            this.dlbTotalAberto.Size = new System.Drawing.Size(17, 19);
+            this.dlbTotalAberto.TabIndex = 5;
+            this.dlbTotalAberto.Text = "0";
+            // 
+            // lblTotalAberto
+            // 
+            this.lblTotalAberto.AutoSize = true;
+            this.lblTotalAberto.Location = new System.Drawing.Point(635, 7);
+            this.lblTotalAberto.Name = "lblTotalAberto";
+            this.lblTotalAberto.Size = new System.Drawing.Size(85, 19);
+            this.lblTotalAberto.TabIndex = 4;
+            this.lblTotalAberto.Text = "Total Aberto:";
+            // 
+            // dlbTotalAcerto
+            // 
+            this.dlbTotalAcerto.AutoSize = true;
+            this.dlbTotalAcerto.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.dlbTotalAcerto.Location = new System.Drawing.Point(539, 7);
+            this.dlbTotalAcerto.Name = "dlbTotalAcerto";
+            this.dlbTotalAcerto.Size = new System.Drawing.Size(17, 19);
+            this.dlbTotalAcerto.TabIndex = 3;
+            this.dlbTotalAcerto.Text = "0";
+            // 
+            // lblTotalAcerto
+            // 
+            this.lblTotalAcerto.AutoSize = true;
+            this.lblTotalAcerto.Location = new System.Drawing.Point(451, 7);
+            this.lblTotalAcerto.Name = "lblTotalAcerto";
+            this.lblTotalAcerto.Size = new System.Drawing.Size(83, 19);
+            this.lblTotalAcerto.TabIndex = 2;
+            this.lblTotalAcerto.Text = "Total Acerto:";
+            // 
             // pnlRetornoPesquisa
             // 
             this.pnlRetornoPesquisa.Controls.Add(this.grpRetornoDadosCarga);
@@ -3605,129 +3728,6 @@
             this.smnRetornoAcertoPagamento.Text = "Exibir/Editar Pagamento";
             this.smnRetornoAcertoPagamento.Click += new System.EventHandler(this.smnRetornoAcertoPagamento_Click);
             // 
-            // pnlAcertoBottom
-            // 
-            this.pnlAcertoBottom.Controls.Add(this.dlbTotalAberto);
-            this.pnlAcertoBottom.Controls.Add(this.lblTotalAberto);
-            this.pnlAcertoBottom.Controls.Add(this.dlbTotalAcerto);
-            this.pnlAcertoBottom.Controls.Add(this.lblTotalAcerto);
-            this.pnlAcertoBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlAcertoBottom.HorizontalScrollbarBarColor = true;
-            this.pnlAcertoBottom.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlAcertoBottom.HorizontalScrollbarSize = 10;
-            this.pnlAcertoBottom.Location = new System.Drawing.Point(0, 369);
-            this.pnlAcertoBottom.Name = "pnlAcertoBottom";
-            this.pnlAcertoBottom.Size = new System.Drawing.Size(844, 37);
-            this.pnlAcertoBottom.TabIndex = 0;
-            this.pnlAcertoBottom.VerticalScrollbarBarColor = true;
-            this.pnlAcertoBottom.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlAcertoBottom.VerticalScrollbarSize = 10;
-            // 
-            // pnlAcertoMain
-            // 
-            this.pnlAcertoMain.Controls.Add(this.grdAcerto);
-            this.pnlAcertoMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlAcertoMain.HorizontalScrollbarBarColor = true;
-            this.pnlAcertoMain.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlAcertoMain.HorizontalScrollbarSize = 10;
-            this.pnlAcertoMain.Location = new System.Drawing.Point(0, 0);
-            this.pnlAcertoMain.Name = "pnlAcertoMain";
-            this.pnlAcertoMain.Size = new System.Drawing.Size(844, 369);
-            this.pnlAcertoMain.TabIndex = 1;
-            this.pnlAcertoMain.VerticalScrollbarBarColor = true;
-            this.pnlAcertoMain.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlAcertoMain.VerticalScrollbarSize = 10;
-            // 
-            // grdAcerto
-            // 
-            this.grdAcerto.AllowUserToAddRows = false;
-            this.grdAcerto.AllowUserToDeleteRows = false;
-            this.grdAcerto.AllowUserToOrderColumns = true;
-            this.grdAcerto.AllowUserToResizeRows = false;
-            dataGridViewCellStyle29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.grdAcerto.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle29;
-            this.grdAcerto.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.grdAcerto.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.grdAcerto.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.grdAcerto.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle30.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdAcerto.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle30;
-            this.grdAcerto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle31.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle31.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle31.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdAcerto.DefaultCellStyle = dataGridViewCellStyle31;
-            this.grdAcerto.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grdAcerto.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.grdAcerto.EnableHeadersVisualStyles = false;
-            this.grdAcerto.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.grdAcerto.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.grdAcerto.Location = new System.Drawing.Point(0, 0);
-            this.grdAcerto.Name = "grdAcerto";
-            this.grdAcerto.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle32.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle32.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdAcerto.RowHeadersDefaultCellStyle = dataGridViewCellStyle32;
-            this.grdAcerto.RowHeadersVisible = false;
-            this.grdAcerto.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.grdAcerto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdAcerto.ShowEditingIcon = false;
-            this.grdAcerto.Size = new System.Drawing.Size(844, 369);
-            this.grdAcerto.TabIndex = 4;
-            // 
-            // lblTotalAcerto
-            // 
-            this.lblTotalAcerto.AutoSize = true;
-            this.lblTotalAcerto.Location = new System.Drawing.Point(451, 7);
-            this.lblTotalAcerto.Name = "lblTotalAcerto";
-            this.lblTotalAcerto.Size = new System.Drawing.Size(83, 19);
-            this.lblTotalAcerto.TabIndex = 2;
-            this.lblTotalAcerto.Text = "Total Acerto:";
-            // 
-            // dlbTotalAcerto
-            // 
-            this.dlbTotalAcerto.AutoSize = true;
-            this.dlbTotalAcerto.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.dlbTotalAcerto.Location = new System.Drawing.Point(539, 7);
-            this.dlbTotalAcerto.Name = "dlbTotalAcerto";
-            this.dlbTotalAcerto.Size = new System.Drawing.Size(17, 19);
-            this.dlbTotalAcerto.TabIndex = 3;
-            this.dlbTotalAcerto.Text = "0";
-            // 
-            // dlbTotalAberto
-            // 
-            this.dlbTotalAberto.AutoSize = true;
-            this.dlbTotalAberto.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.dlbTotalAberto.Location = new System.Drawing.Point(723, 7);
-            this.dlbTotalAberto.Name = "dlbTotalAberto";
-            this.dlbTotalAberto.Size = new System.Drawing.Size(17, 19);
-            this.dlbTotalAberto.TabIndex = 5;
-            this.dlbTotalAberto.Text = "0";
-            // 
-            // lblTotalAberto
-            // 
-            this.lblTotalAberto.AutoSize = true;
-            this.lblTotalAberto.Location = new System.Drawing.Point(635, 7);
-            this.lblTotalAberto.Name = "lblTotalAberto";
-            this.lblTotalAberto.Size = new System.Drawing.Size(85, 19);
-            this.lblTotalAberto.TabIndex = 4;
-            this.lblTotalAberto.Text = "Total Aberto:";
-            // 
             // FormDeposito
             // 
             this.AcceptButton = this.btnNothing;
@@ -3807,6 +3807,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdContasAReceber)).EndInit();
             this.pnlContasAReceberTop.ResumeLayout(false);
             this.tabAcerto.ResumeLayout(false);
+            this.pnlAcertoMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grdAcerto)).EndInit();
+            this.pnlAcertoBottom.ResumeLayout(false);
+            this.pnlAcertoBottom.PerformLayout();
             this.pnlRetornoPesquisa.ResumeLayout(false);
             this.pnlRetornoPesquisa.PerformLayout();
             this.grpRetornoDadosCarga.ResumeLayout(false);
@@ -3829,10 +3833,6 @@
             this.menuaJUDA.ResumeLayout(false);
             this.menuaJUDA.PerformLayout();
             this.cmsRetornoAcerto.ResumeLayout(false);
-            this.pnlAcertoBottom.ResumeLayout(false);
-            this.pnlAcertoBottom.PerformLayout();
-            this.pnlAcertoMain.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.grdAcerto)).EndInit();
             this.ResumeLayout(false);
 
         }

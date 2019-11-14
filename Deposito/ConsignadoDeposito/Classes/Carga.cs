@@ -388,7 +388,7 @@ namespace ConsignadoDeposito
                 }
                 else
                 {
-                    vProdutoGradeId = produtosgrade.FirstOrDefault().Id;
+                    vProdutoGradeId = (produtosgrade.FirstOrDefault() != null) ? produtosgrade.FirstOrDefault().Id : 0;
                     ExibirProdutoGrade(vProdutoGradeId);
                 }
             }

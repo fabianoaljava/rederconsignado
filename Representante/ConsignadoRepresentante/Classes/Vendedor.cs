@@ -809,8 +809,8 @@ namespace ConsignadoRepresentante
                     }
                 }
                 else
-                {
-                    vProdutoGradeId = produtosgrade.FirstOrDefault().Id;
+                {                    
+                    vProdutoGradeId = (produtosgrade.FirstOrDefault() != null) ? vProdutoGradeId : 0;
                     ExibirProdutoGrade(vProdutoGradeId);
                 }
             }
