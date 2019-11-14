@@ -118,11 +118,10 @@
             this.menuImportar = new System.Windows.Forms.MenuStrip();
             this.smnPesquisar = new System.Windows.Forms.ToolStripMenuItem();
             this.tabConferirProdutos = new System.Windows.Forms.TabPage();
-            this.tbcImportarConferencia = new MetroFramework.Controls.MetroTabControl();
-            this.tabConfProduto = new System.Windows.Forms.TabPage();
-            this.pnlConferirProdutos = new MetroFramework.Controls.MetroPanel();
-            this.grdConfProduto = new MetroFramework.Controls.MetroGrid();
             this.pnlConferirProduto = new MetroFramework.Controls.MetroPanel();
+            this.pnlConferirProdutosMain = new MetroFramework.Controls.MetroPanel();
+            this.grdConfProduto = new MetroFramework.Controls.MetroGrid();
+            this.pnlConferirProdutoTop = new MetroFramework.Controls.MetroPanel();
             this.lblImportarConferirProduto = new MetroFramework.Controls.MetroLabel();
             this.btnConfCancelar = new MetroFramework.Controls.MetroButton();
             this.chkConfQuantidade = new MetroFramework.Controls.MetroCheckBox();
@@ -130,6 +129,9 @@
             this.txtConfQuantidade = new MetroFramework.Controls.MetroTextBox();
             this.txtConfProduto = new MetroFramework.Controls.MetroTextBox();
             this.txtConfCodigoBarras = new MetroFramework.Controls.MetroTextBox();
+            this.menuConferenciaProduto = new System.Windows.Forms.MenuStrip();
+            this.smnConferenciaFinalizar = new System.Windows.Forms.ToolStripMenuItem();
+            this.smnConferenciaRefazer = new System.Windows.Forms.ToolStripMenuItem();
             this.tabSuplemento = new System.Windows.Forms.TabPage();
             this.pnlSuplementoMain = new MetroFramework.Controls.MetroPanel();
             this.grdSuplemento = new MetroFramework.Controls.MetroGrid();
@@ -193,11 +195,11 @@
             this.grpCargaData.SuspendLayout();
             this.menuImportar.SuspendLayout();
             this.tabConferirProdutos.SuspendLayout();
-            this.tbcImportarConferencia.SuspendLayout();
-            this.tabConfProduto.SuspendLayout();
-            this.pnlConferirProdutos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdConfProduto)).BeginInit();
             this.pnlConferirProduto.SuspendLayout();
+            this.pnlConferirProdutosMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdConfProduto)).BeginInit();
+            this.pnlConferirProdutoTop.SuspendLayout();
+            this.menuConferenciaProduto.SuspendLayout();
             this.tabSuplemento.SuspendLayout();
             this.pnlSuplementoMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdSuplemento)).BeginInit();
@@ -341,7 +343,7 @@
             this.tbcPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tbcPrincipal.Name = "tbcPrincipal";
-            this.tbcPrincipal.SelectedIndex = 1;
+            this.tbcPrincipal.SelectedIndex = 2;
             this.tbcPrincipal.Size = new System.Drawing.Size(860, 645);
             this.tbcPrincipal.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tbcPrincipal.TabIndex = 11;
@@ -1089,51 +1091,46 @@
             // 
             // tabConferirProdutos
             // 
-            this.tabConferirProdutos.Controls.Add(this.tbcImportarConferencia);
+            this.tabConferirProdutos.Controls.Add(this.pnlConferirProduto);
             this.tabConferirProdutos.Location = new System.Drawing.Point(4, 38);
             this.tabConferirProdutos.Name = "tabConferirProdutos";
             this.tabConferirProdutos.Size = new System.Drawing.Size(852, 603);
             this.tabConferirProdutos.TabIndex = 10;
             this.tabConferirProdutos.Text = "CONFERIR PRODUTOS";
             // 
-            // tbcImportarConferencia
+            // pnlConferirProduto
             // 
-            this.tbcImportarConferencia.Controls.Add(this.tabConfProduto);
-            this.tbcImportarConferencia.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbcImportarConferencia.Location = new System.Drawing.Point(0, 0);
-            this.tbcImportarConferencia.Name = "tbcImportarConferencia";
-            this.tbcImportarConferencia.SelectedIndex = 0;
-            this.tbcImportarConferencia.Size = new System.Drawing.Size(852, 603);
-            this.tbcImportarConferencia.TabIndex = 2;
-            this.tbcImportarConferencia.UseSelectable = true;
+            this.pnlConferirProduto.Controls.Add(this.pnlConferirProdutosMain);
+            this.pnlConferirProduto.Controls.Add(this.pnlConferirProdutoTop);
+            this.pnlConferirProduto.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlConferirProduto.HorizontalScrollbarBarColor = true;
+            this.pnlConferirProduto.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlConferirProduto.HorizontalScrollbarSize = 10;
+            this.pnlConferirProduto.Location = new System.Drawing.Point(0, 0);
+            this.pnlConferirProduto.Name = "pnlConferirProduto";
+            this.pnlConferirProduto.Size = new System.Drawing.Size(852, 603);
+            this.pnlConferirProduto.TabIndex = 3;
+            this.pnlConferirProduto.VerticalScrollbarBarColor = true;
+            this.pnlConferirProduto.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlConferirProduto.VerticalScrollbarSize = 10;
             // 
-            // tabConfProduto
+            // pnlConferirProdutosMain
             // 
-            this.tabConfProduto.Controls.Add(this.pnlConferirProdutos);
-            this.tabConfProduto.Controls.Add(this.pnlConferirProduto);
-            this.tabConfProduto.Location = new System.Drawing.Point(4, 38);
-            this.tabConfProduto.Name = "tabConfProduto";
-            this.tabConfProduto.Size = new System.Drawing.Size(844, 561);
-            this.tabConfProduto.TabIndex = 0;
-            this.tabConfProduto.Text = "Conferência de Produtos";
-            // 
-            // pnlConferirProdutos
-            // 
-            this.pnlConferirProdutos.AutoScroll = true;
-            this.pnlConferirProdutos.Controls.Add(this.grdConfProduto);
-            this.pnlConferirProdutos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlConferirProdutos.HorizontalScrollbar = true;
-            this.pnlConferirProdutos.HorizontalScrollbarBarColor = true;
-            this.pnlConferirProdutos.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlConferirProdutos.HorizontalScrollbarSize = 10;
-            this.pnlConferirProdutos.Location = new System.Drawing.Point(0, 57);
-            this.pnlConferirProdutos.Name = "pnlConferirProdutos";
-            this.pnlConferirProdutos.Size = new System.Drawing.Size(844, 504);
-            this.pnlConferirProdutos.TabIndex = 1;
-            this.pnlConferirProdutos.VerticalScrollbar = true;
-            this.pnlConferirProdutos.VerticalScrollbarBarColor = true;
-            this.pnlConferirProdutos.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlConferirProdutos.VerticalScrollbarSize = 10;
+            this.pnlConferirProdutosMain.AutoScroll = true;
+            this.pnlConferirProdutosMain.Controls.Add(this.grdConfProduto);
+            this.pnlConferirProdutosMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlConferirProdutosMain.HorizontalScrollbar = true;
+            this.pnlConferirProdutosMain.HorizontalScrollbarBarColor = true;
+            this.pnlConferirProdutosMain.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlConferirProdutosMain.HorizontalScrollbarSize = 10;
+            this.pnlConferirProdutosMain.Location = new System.Drawing.Point(0, 100);
+            this.pnlConferirProdutosMain.Name = "pnlConferirProdutosMain";
+            this.pnlConferirProdutosMain.Size = new System.Drawing.Size(852, 503);
+            this.pnlConferirProdutosMain.TabIndex = 3;
+            this.pnlConferirProdutosMain.VerticalScrollbar = true;
+            this.pnlConferirProdutosMain.VerticalScrollbarBarColor = true;
+            this.pnlConferirProdutosMain.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlConferirProdutosMain.VerticalScrollbarSize = 10;
             // 
             // grdConfProduto
             // 
@@ -1188,45 +1185,45 @@
             this.grdConfProduto.RowTemplate.ReadOnly = true;
             this.grdConfProduto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdConfProduto.ShowEditingIcon = false;
-            this.grdConfProduto.Size = new System.Drawing.Size(844, 504);
+            this.grdConfProduto.Size = new System.Drawing.Size(852, 503);
             this.grdConfProduto.StandardTab = true;
             this.grdConfProduto.TabIndex = 3;
             this.grdConfProduto.UseCustomBackColor = true;
             this.grdConfProduto.UseCustomForeColor = true;
             this.grdConfProduto.UseStyleColors = true;
             this.grdConfProduto.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdConfProduto_CellDoubleClick);
-            this.grdConfProduto.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.grdConfProduto_CellMouseDown);
             this.grdConfProduto.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.grdConfProduto_RowPostPaint);
             this.grdConfProduto.KeyUp += new System.Windows.Forms.KeyEventHandler(this.grdConfProduto_KeyUp);
             this.grdConfProduto.MouseDown += new System.Windows.Forms.MouseEventHandler(this.grdConfProduto_MouseDown);
             // 
-            // pnlConferirProduto
+            // pnlConferirProdutoTop
             // 
-            this.pnlConferirProduto.Controls.Add(this.lblImportarConferirProduto);
-            this.pnlConferirProduto.Controls.Add(this.btnConfCancelar);
-            this.pnlConferirProduto.Controls.Add(this.chkConfQuantidade);
-            this.pnlConferirProduto.Controls.Add(this.btnConferenciaConfirmar);
-            this.pnlConferirProduto.Controls.Add(this.txtConfQuantidade);
-            this.pnlConferirProduto.Controls.Add(this.txtConfProduto);
-            this.pnlConferirProduto.Controls.Add(this.txtConfCodigoBarras);
-            this.pnlConferirProduto.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlConferirProduto.Enabled = false;
-            this.pnlConferirProduto.HorizontalScrollbarBarColor = true;
-            this.pnlConferirProduto.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlConferirProduto.HorizontalScrollbarSize = 10;
-            this.pnlConferirProduto.Location = new System.Drawing.Point(0, 0);
-            this.pnlConferirProduto.Name = "pnlConferirProduto";
-            this.pnlConferirProduto.Size = new System.Drawing.Size(844, 57);
-            this.pnlConferirProduto.TabIndex = 0;
-            this.pnlConferirProduto.VerticalScrollbarBarColor = true;
-            this.pnlConferirProduto.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlConferirProduto.VerticalScrollbarSize = 10;
+            this.pnlConferirProdutoTop.Controls.Add(this.lblImportarConferirProduto);
+            this.pnlConferirProdutoTop.Controls.Add(this.btnConfCancelar);
+            this.pnlConferirProdutoTop.Controls.Add(this.chkConfQuantidade);
+            this.pnlConferirProdutoTop.Controls.Add(this.btnConferenciaConfirmar);
+            this.pnlConferirProdutoTop.Controls.Add(this.txtConfQuantidade);
+            this.pnlConferirProdutoTop.Controls.Add(this.txtConfProduto);
+            this.pnlConferirProdutoTop.Controls.Add(this.txtConfCodigoBarras);
+            this.pnlConferirProdutoTop.Controls.Add(this.menuConferenciaProduto);
+            this.pnlConferirProdutoTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlConferirProdutoTop.Enabled = false;
+            this.pnlConferirProdutoTop.HorizontalScrollbarBarColor = true;
+            this.pnlConferirProdutoTop.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlConferirProdutoTop.HorizontalScrollbarSize = 10;
+            this.pnlConferirProdutoTop.Location = new System.Drawing.Point(0, 0);
+            this.pnlConferirProdutoTop.Name = "pnlConferirProdutoTop";
+            this.pnlConferirProdutoTop.Size = new System.Drawing.Size(852, 100);
+            this.pnlConferirProdutoTop.TabIndex = 2;
+            this.pnlConferirProdutoTop.VerticalScrollbarBarColor = true;
+            this.pnlConferirProdutoTop.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlConferirProdutoTop.VerticalScrollbarSize = 10;
             // 
             // lblImportarConferirProduto
             // 
             this.lblImportarConferirProduto.AutoSize = true;
             this.lblImportarConferirProduto.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.lblImportarConferirProduto.Location = new System.Drawing.Point(4, 4);
+            this.lblImportarConferirProduto.Location = new System.Drawing.Point(10, 38);
             this.lblImportarConferirProduto.Name = "lblImportarConferirProduto";
             this.lblImportarConferirProduto.Size = new System.Drawing.Size(123, 19);
             this.lblImportarConferirProduto.TabIndex = 18;
@@ -1235,7 +1232,7 @@
             // btnConfCancelar
             // 
             this.btnConfCancelar.Enabled = false;
-            this.btnConfCancelar.Location = new System.Drawing.Point(667, 28);
+            this.btnConfCancelar.Location = new System.Drawing.Point(673, 62);
             this.btnConfCancelar.Name = "btnConfCancelar";
             this.btnConfCancelar.Size = new System.Drawing.Size(67, 23);
             this.btnConfCancelar.TabIndex = 10;
@@ -1248,19 +1245,18 @@
             this.chkConfQuantidade.AutoSize = true;
             this.chkConfQuantidade.Checked = true;
             this.chkConfQuantidade.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkConfQuantidade.Location = new System.Drawing.Point(490, 9);
+            this.chkConfQuantidade.Location = new System.Drawing.Point(496, 43);
             this.chkConfQuantidade.Name = "chkConfQuantidade";
             this.chkConfQuantidade.Size = new System.Drawing.Size(97, 15);
             this.chkConfQuantidade.TabIndex = 11;
             this.chkConfQuantidade.TabStop = false;
             this.chkConfQuantidade.Text = "Informar Qtd?";
             this.chkConfQuantidade.UseSelectable = true;
-            this.chkConfQuantidade.CheckedChanged += new System.EventHandler(this.chkCargaQuantidade_CheckedChanged);
             // 
             // btnConferenciaConfirmar
             // 
             this.btnConferenciaConfirmar.Enabled = false;
-            this.btnConferenciaConfirmar.Location = new System.Drawing.Point(595, 28);
+            this.btnConferenciaConfirmar.Location = new System.Drawing.Point(601, 62);
             this.btnConferenciaConfirmar.Name = "btnConferenciaConfirmar";
             this.btnConferenciaConfirmar.Size = new System.Drawing.Size(66, 23);
             this.btnConferenciaConfirmar.TabIndex = 9;
@@ -1283,7 +1279,7 @@
             this.txtConfQuantidade.CustomButton.UseSelectable = true;
             this.txtConfQuantidade.CustomButton.Visible = false;
             this.txtConfQuantidade.Lines = new string[0];
-            this.txtConfQuantidade.Location = new System.Drawing.Point(490, 28);
+            this.txtConfQuantidade.Location = new System.Drawing.Point(496, 62);
             this.txtConfQuantidade.MaxLength = 32767;
             this.txtConfQuantidade.Name = "txtConfQuantidade";
             this.txtConfQuantidade.PasswordChar = '\0';
@@ -1299,7 +1295,6 @@
             this.txtConfQuantidade.WaterMark = "Quantidade";
             this.txtConfQuantidade.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtConfQuantidade.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            this.txtConfQuantidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ControlOnlyNumbers);
             this.txtConfQuantidade.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtConfQuantidade_KeyUp);
             // 
             // txtConfProduto
@@ -1317,7 +1312,7 @@
             this.txtConfProduto.CustomButton.UseSelectable = true;
             this.txtConfProduto.CustomButton.Visible = false;
             this.txtConfProduto.Lines = new string[0];
-            this.txtConfProduto.Location = new System.Drawing.Point(112, 28);
+            this.txtConfProduto.Location = new System.Drawing.Point(118, 62);
             this.txtConfProduto.MaxLength = 32767;
             this.txtConfProduto.Name = "txtConfProduto";
             this.txtConfProduto.PasswordChar = '\0';
@@ -1335,6 +1330,7 @@
             this.txtConfProduto.WaterMark = "Nome do Produto";
             this.txtConfProduto.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtConfProduto.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtConfProduto.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cbbCargaMesAno_KeyUp);
             // 
             // txtConfCodigoBarras
             // 
@@ -1351,7 +1347,7 @@
             this.txtConfCodigoBarras.CustomButton.UseSelectable = true;
             this.txtConfCodigoBarras.CustomButton.Visible = false;
             this.txtConfCodigoBarras.Lines = new string[0];
-            this.txtConfCodigoBarras.Location = new System.Drawing.Point(14, 28);
+            this.txtConfCodigoBarras.Location = new System.Drawing.Point(20, 62);
             this.txtConfCodigoBarras.MaxLength = 32767;
             this.txtConfCodigoBarras.Name = "txtConfCodigoBarras";
             this.txtConfCodigoBarras.PasswordChar = '\0';
@@ -1367,10 +1363,33 @@
             this.txtConfCodigoBarras.WaterMark = "Código de Barras";
             this.txtConfCodigoBarras.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtConfCodigoBarras.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            this.txtConfCodigoBarras.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ControlOnlyInt);
             this.txtConfCodigoBarras.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtConfCodigoBarras_KeyUp);
-            this.txtConfCodigoBarras.Leave += new System.EventHandler(this.txtConfCodigoBarras_Leave);
             this.txtConfCodigoBarras.Validating += new System.ComponentModel.CancelEventHandler(this.txtConfCodigoBarras_Validating);
+            // 
+            // menuConferenciaProduto
+            // 
+            this.menuConferenciaProduto.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.smnConferenciaFinalizar,
+            this.smnConferenciaRefazer});
+            this.menuConferenciaProduto.Location = new System.Drawing.Point(0, 0);
+            this.menuConferenciaProduto.Name = "menuConferenciaProduto";
+            this.menuConferenciaProduto.Size = new System.Drawing.Size(852, 24);
+            this.menuConferenciaProduto.TabIndex = 19;
+            this.menuConferenciaProduto.Text = "menuStrip1";
+            // 
+            // smnConferenciaFinalizar
+            // 
+            this.smnConferenciaFinalizar.Name = "smnConferenciaFinalizar";
+            this.smnConferenciaFinalizar.Size = new System.Drawing.Size(129, 20);
+            this.smnConferenciaFinalizar.Text = "Finalizar Conferência";
+            this.smnConferenciaFinalizar.Click += new System.EventHandler(this.smnConferenciaFinalizar_Click);
+            // 
+            // smnConferenciaRefazer
+            // 
+            this.smnConferenciaRefazer.Name = "smnConferenciaRefazer";
+            this.smnConferenciaRefazer.Size = new System.Drawing.Size(124, 20);
+            this.smnConferenciaRefazer.Text = "Refazer Conferência";
+            this.smnConferenciaRefazer.Click += new System.EventHandler(this.smnConferenciaRefazer_Click);
             // 
             // tabSuplemento
             // 
@@ -2198,12 +2217,13 @@
             this.menuImportar.ResumeLayout(false);
             this.menuImportar.PerformLayout();
             this.tabConferirProdutos.ResumeLayout(false);
-            this.tbcImportarConferencia.ResumeLayout(false);
-            this.tabConfProduto.ResumeLayout(false);
-            this.pnlConferirProdutos.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.grdConfProduto)).EndInit();
             this.pnlConferirProduto.ResumeLayout(false);
-            this.pnlConferirProduto.PerformLayout();
+            this.pnlConferirProdutosMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grdConfProduto)).EndInit();
+            this.pnlConferirProdutoTop.ResumeLayout(false);
+            this.pnlConferirProdutoTop.PerformLayout();
+            this.menuConferenciaProduto.ResumeLayout(false);
+            this.menuConferenciaProduto.PerformLayout();
             this.tabSuplemento.ResumeLayout(false);
             this.pnlSuplementoMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdSuplemento)).EndInit();
@@ -2285,24 +2305,12 @@
         public MetroFramework.Controls.MetroButton btnExportar;
         public System.ComponentModel.BackgroundWorker bgwExportar;
         public MetroFramework.Controls.MetroButton btnExportarAnalisar;
-        public MetroFramework.Controls.MetroTabControl tbcImportarConferencia;
-        private System.Windows.Forms.TabPage tabConfProduto;
-        private MetroFramework.Controls.MetroPanel pnlConferirProdutos;
-        public MetroFramework.Controls.MetroGrid grdConfProduto;
-        private MetroFramework.Controls.MetroLabel lblImportarConferirProduto;
-        public MetroFramework.Controls.MetroButton btnConfCancelar;
-        public MetroFramework.Controls.MetroCheckBox chkConfQuantidade;
-        public MetroFramework.Controls.MetroButton btnConferenciaConfirmar;
-        public MetroFramework.Controls.MetroTextBox txtConfQuantidade;
-        public MetroFramework.Controls.MetroTextBox txtConfProduto;
-        public MetroFramework.Controls.MetroTextBox txtConfCodigoBarras;
         private MetroFramework.Controls.MetroPanel pnlImportacaoGrid;
         public MetroFramework.Controls.MetroGrid grdImportacao;
         public MetroFramework.Controls.MetroButton btnImportarAnalisar;
         public System.ComponentModel.BackgroundWorker bgwImportar;
         public MetroFramework.Controls.MetroLabel dlbTotalProdutos;
         public MetroFramework.Controls.MetroLabel dlbQtdProdutos;
-        public MetroFramework.Controls.MetroPanel pnlConferirProduto;
         private System.Windows.Forms.ContextMenuStrip cmsResolverConflito;
         private System.Windows.Forms.ToolStripMenuItem smsConferenciaQuantidadeInformada;
         private System.Windows.Forms.ToolStripMenuItem smsConferenciaQuantidadeCarga;
@@ -2355,6 +2363,20 @@
         public System.Windows.Forms.ToolStripMenuItem smnSuplementoImprimir;
         private System.Windows.Forms.ToolStripMenuItem smsConferenciaAdicionarSuplemento;
         private System.Windows.Forms.ToolStripMenuItem smsConferenciaExcluir;
+        private MetroFramework.Controls.MetroPanel pnlConferirProdutosMain;
+        public MetroFramework.Controls.MetroGrid grdConfProduto;
+        public MetroFramework.Controls.MetroPanel pnlConferirProdutoTop;
+        private MetroFramework.Controls.MetroLabel lblImportarConferirProduto;
+        public MetroFramework.Controls.MetroButton btnConfCancelar;
+        public MetroFramework.Controls.MetroCheckBox chkConfQuantidade;
+        public MetroFramework.Controls.MetroButton btnConferenciaConfirmar;
+        public MetroFramework.Controls.MetroTextBox txtConfQuantidade;
+        public MetroFramework.Controls.MetroTextBox txtConfProduto;
+        public MetroFramework.Controls.MetroTextBox txtConfCodigoBarras;
+        public MetroFramework.Controls.MetroPanel pnlConferirProduto;
+        private System.Windows.Forms.MenuStrip menuConferenciaProduto;
+        private System.Windows.Forms.ToolStripMenuItem smnConferenciaFinalizar;
+        private System.Windows.Forms.ToolStripMenuItem smnConferenciaRefazer;
     }
 }
 

@@ -520,6 +520,11 @@ namespace ModelLibrary
             }
         }
 
+
+
+
+
+
         public static void ResolverConflitoProdutoConferencia(long pCargaId, long pCargaProdutoGradeId, decimal pQuantidade)
         {
 
@@ -548,6 +553,43 @@ namespace ModelLibrary
                 representante.SaveChanges();
             }
 
+        }
+
+
+        public static void FinalizarConferenciaProduto()
+        {
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+
+                string query = @"INSERT INTO RepCargaConferencia (Id, CargaId, ProdutoGradeId, Quantidade)
+                                    SELECT RepCargaConferencia.ROWID, RepCargaProduto.CargaId, RepCargaProduto.ProdutoGradeId, 0 
+                                        FROM RepCargaProduto
+                                            LEFT JOIN RepCargaConferencia 
+                                                ON RepCargaConferencia.CargaId = RepCargaProduto.CargaId 
+                                                AND RepCargaConferencia.ProdutoGradeId = RepCargaProduto.ProdutoGradeId
+                                 WHERE RepCargaConferencia.Id IS NULL";
+
+                representante.Database.ExecuteSqlCommand(query);                
+                representante.SaveChanges();
+
+            }
+        }
+
+
+        public static void RefazerConferenciaProduto()
+        {
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+
+
+                representante.Database.ExecuteSqlCommand("DELETE FROM RepCargaConferencia");
+                representante.Database.ExecuteSqlCommand("DELETE FROM RepCargaProduto WHERE Tipo = 'I'");
+                
+                representante.SaveChanges();
+
+                
+
+            }
         }
 
         public static List<RepVendedor> ObterListaVendedor()

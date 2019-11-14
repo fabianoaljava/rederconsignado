@@ -406,6 +406,7 @@ namespace ConsignadoRepresentante
                 localDeposito.pnlExportacaoMain.Enabled = true;
                 localDeposito.pnlConferirProduto.Enabled = true;
                 localDeposito.pnlSuplementoTop.Enabled = true;
+                localDeposito.cExportar.ExportarLimpar();
             }
             
 
@@ -444,6 +445,12 @@ namespace ConsignadoRepresentante
             localDeposito.grdImportacao.ClearSelection();
             localDeposito.grdImportacao.DataSource = null;
             localDeposito.grdImportacao.Refresh();
+
+
+            localDeposito.cConferirProdutos.Limpar();
+            localDeposito.cSuplemento.Limpar();
+            localDeposito.cExportar.ExportarLimpar();
+            
 
 
             Cursor.Current = Cursors.Default;

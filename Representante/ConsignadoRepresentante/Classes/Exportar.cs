@@ -27,6 +27,19 @@ namespace ConsignadoRepresentante
         }
 
 
+        public void ExportarLimpar()
+        {
+
+            localDeposito.lblExportacaoAlerta.Text = "ATENÇÃO!" + Environment.NewLine + "Na exportação, os pedidos que estiverem com baixa parcial do contas a receber serão baixados integralmente.";
+            localDeposito.btnExportarAnalisar.Enabled = true;
+            localDeposito.btnExportar.Enabled = true;
+
+            localDeposito.grdExportacao.DataSource = null;
+            localDeposito.grdExportacao.Refresh();
+
+        }
+
+
         public void ExportarAnalisar()
         {
 

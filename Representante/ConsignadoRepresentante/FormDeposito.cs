@@ -651,7 +651,20 @@ namespace ConsignadoRepresentante
                 } else
                 {
                     smsConferenciaAdicionarSuplemento.Visible = false;
-                    smsConferenciaQuantidadeInformada.Visible = true;
+
+                    if (grdConfProduto.CurrentRow.Cells[3].Value != null)
+                    {
+                        if (grdConfProduto.CurrentRow.Cells[3].Value.ToString() != "0")
+                        {
+                            smsConferenciaQuantidadeInformada.Visible = true;
+                        }
+                        else
+                        {
+                            smsConferenciaQuantidadeInformada.Visible = false;
+                        }
+                    }
+
+                    
                     smsConferenciaQuantidadeCarga.Visible = true;
                 }
 
@@ -663,10 +676,6 @@ namespace ConsignadoRepresentante
 
         }
 
-        private void grdConfProduto_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
-        {
-
-        }
 
         private void cmsResolverConflito_Opening(object sender, CancelEventArgs e)
         {
@@ -875,6 +884,33 @@ namespace ConsignadoRepresentante
 
             cSuplemento.ExibirSuplementoProduto(cCargaId);
 
+        }
+
+        private void smnConferenciaFinalizar_Click(object sender, EventArgs e)
+        {
+            grdConfProduto.Columns[2].Visible = true;
+            grdConfProduto.Columns[4].Visible = true;
+            grdConfProduto.Columns[5].Visible = true;
+            grdConfProduto.Columns[11].Visible = true;
+
+
+            ModelLibrary.MetodosRepresentante.FinalizarConferenciaProduto();
+
+            cConferirProdutos.ExibirConferenciaProduto(cCargaId);
+        }
+
+        private void smnConferenciaRefazer_Click(object sender, EventArgs e)
+        {
+
+            DialogResult dialogResult = MessageBox.Show("Deseja Realmente refazer a conferencia de produtos?", "Reder Consignado", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            if (dialogResult == DialogResult.Yes)
+            {
+                ModelLibrary.MetodosRepresentante.RefazerConferenciaProduto();
+
+                cConferirProdutos.ConferenciaProdutoLimpar();
+
+                cConferirProdutos.ExibirConferenciaProduto(cCargaId);
+            }
         }
     }
 }

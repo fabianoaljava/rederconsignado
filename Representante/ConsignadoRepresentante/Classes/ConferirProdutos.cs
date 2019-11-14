@@ -31,9 +31,21 @@ namespace ConsignadoRepresentante
 
         }
 
+
+
+        public void Limpar()
+        {
+
+            ConferenciaProdutoLimpar();
+            localDeposito.grdConfProduto.DataSource = null;
+            localDeposito.grdConfProduto.Refresh();
+
+        }
+
         ////////////////////////////////////////
         /// Conferencia de Produtos
         ////////////////////////////////////////
+
 
 
         public void ConferenciaProdutoLimpar()
@@ -174,10 +186,10 @@ namespace ConsignadoRepresentante
 
             Console.WriteLine("Exibindo conferencia de produto CargaID = " + pCargaId.ToString());
 
-            localDeposito.tbcImportarConferencia.Visible = true;
+            localDeposito.pnlConferirProduto.Visible = true;
 
             //Desativar aba conferencia de produtos 
-            localDeposito.pnlConferirProduto.Enabled = true;
+            localDeposito.pnlConferirProdutoTop.Enabled = true;
 
 
 
@@ -192,7 +204,7 @@ namespace ConsignadoRepresentante
             localDeposito.grdConfProduto.Columns[7].Visible = false;
             localDeposito.grdConfProduto.Columns[8].Visible = false;
             localDeposito.grdConfProduto.Columns[9].Visible = false;
-
+            localDeposito.grdConfProduto.Columns[10].Visible = false;
 
             localDeposito.grdConfProduto.Columns[5].DefaultCellStyle.Format = "c";
 
@@ -201,38 +213,35 @@ namespace ConsignadoRepresentante
             localDeposito.grdConfProduto.Columns[3].HeaderText = "Quantidade Informada";
             localDeposito.grdConfProduto.Columns[4].HeaderText = "Diferença";
             localDeposito.grdConfProduto.Columns[5].HeaderText = "Valor Diferença";
-            
-            localDeposito.grdConfProduto.CellClick += grdConfProduto_CellClick;
-            localDeposito.grdConfProduto.CellMouseDown += grdConfProduto_MouseDown;
 
 
-
-
-
-        }
-
-        private void grdConfProduto_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //if (e.ColumnIndex == localDeposito.grdConfProduto.Columns["Acao"].Index)
-            //{
-            //    localDeposito.grdConfProduto.ClearSelection();
-            //    localDeposito.grdConfProduto.Rows[e.RowIndex].Selected = true;
-            //    if (localDeposito.grdConfProduto.Rows[e.RowIndex].Cells["Acao"].ContextMenuStrip != null)
-            //    {
-            //        localDeposito.grdConfProduto.Rows[e.RowIndex].Cells["Acao"].ContextMenuStrip.Show();
-            //    }
+            bool vFinalizado = true;
+            for (int i = 0; i < localDeposito.grdConfProduto.Rows.Count; ++i)
+            {
+                if (vFinalizado == true)
+                {
+                    if (localDeposito.grdConfProduto.Rows[i].Cells[3].Value == null)
+                    {
+                        vFinalizado = false;
+                    } 
+                }
                 
-            //}
+            }
+
+
+            if (!vFinalizado)
+            {
+                localDeposito.grdConfProduto.Columns[2].Visible = false;
+                localDeposito.grdConfProduto.Columns[4].Visible = false;
+                localDeposito.grdConfProduto.Columns[5].Visible = false;
+                localDeposito.grdConfProduto.Columns[11].Visible = false;
+            } 
+            
+
+
         }
 
-        private void grdConfProduto_MouseDown(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            //localDeposito.grdConfProduto.ClearSelection();
-            //if (e.ColumnIndex == localDeposito.grdConfProduto.Columns["Acao"].Index)
-            //{
-            //    localDeposito.grdConfProduto.Rows[e.RowIndex].Selected = true;
-            //}
-        }
+
 
         public void InserirCargaProdutoConferencia()
         {
@@ -261,7 +270,7 @@ namespace ConsignadoRepresentante
 
                 }
 
-                if (vQuantidade > 0)
+                if (vQuantidade > -1)
                 {
 
                     ModelLibrary.MetodosRepresentante.InserirProdutoConferencia(localDeposito.cCargaId, cImportarProdutoId, vQuantidade);

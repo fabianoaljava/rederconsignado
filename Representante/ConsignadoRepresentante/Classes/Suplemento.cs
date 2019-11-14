@@ -28,6 +28,15 @@ namespace ConsignadoRepresentante
 
         }
 
+        public void Limpar()
+        {
+
+            SuplementoProdutoLimpar();
+            localDeposito.grdSuplemento.DataSource = null;
+            localDeposito.grdSuplemento.Refresh();
+
+        }
+
 
         ////////////////////////////////////////
         /// Suplemento
