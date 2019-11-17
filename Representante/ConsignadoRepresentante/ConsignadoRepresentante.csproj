@@ -195,6 +195,12 @@
     <Compile Include="Modal\FormProdutosGrade.Designer.cs">
       <DependentUpon>FormProdutosGrade.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modal\FormReceberPagamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modal\FormReceberPagamento.Designer.cs">
+      <DependentUpon>FormReceberPagamento.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modal\FormSobre.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -246,6 +252,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modal\FormProdutosGrade.resx">
       <DependentUpon>FormProdutosGrade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modal\FormReceberPagamento.resx">
+      <DependentUpon>FormReceberPagamento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modal\FormSobre.resx">
       <DependentUpon>FormSobre.cs</DependentUpon>

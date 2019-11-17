@@ -43,6 +43,7 @@
         <AssociationConnector Association="ModelDeposito.FK_Receber_Vendedor" />
         <AssociationConnector Association="ModelDeposito.FK_ReceberBaixa_Receber" />
         <AssociationConnector Association="ModelDeposito.FK_Estoque_ProdutoGrade" />
+        <EntityTypeShape EntityType="ModelDeposito.Recebimento" Width="1.5" PointX="7.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -45,5 +45,6 @@ namespace ModelLibrary
         public virtual DbSet<ReceberBaixa> ReceberBaixa { get; set; }
         public virtual DbSet<Tamanho> Tamanho { get; set; }
         public virtual DbSet<Vendedor> Vendedor { get; set; }
+        public virtual DbSet<Recebimento> Recebimento { get; set; }
     }
 }

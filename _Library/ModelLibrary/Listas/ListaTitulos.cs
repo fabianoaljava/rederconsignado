@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace ModelLibrary
 {
-    public class ListaRecebimentos
+    public class ListaTitulos
     {
         public Nullable<long> Id { get; set; }
-        public Nullable<long> ReceberId { get; set; }
         public Nullable<long> Documento { get; set; }
         public string Serie { get; set; }
         public Nullable<decimal> ValorDuplicata { get; set; }
-        public Nullable<decimal> ValorRecebido { get; set; }
+        public Nullable<decimal> ValorAReceber { get; set; }
         public Nullable<System.DateTime> DataEmissao { get; set; }
         public Nullable<System.DateTime> DataVencimento { get; set; }
         public Nullable<System.DateTime> DataPagamento { get; set; }

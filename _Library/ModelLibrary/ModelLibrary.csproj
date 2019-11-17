@@ -92,7 +92,8 @@
     <Compile Include="Listas\ListaProdutos.cs" />
     <Compile Include="Listas\ListaProdutosConsignados.cs" />
     <Compile Include="Listas\ListaReceberBaixa.cs" />
-    <Compile Include="Listas\ListaRecebimentos.cs" />
+    <Compile Include="Listas\ListaRecebimento.cs" />
+    <Compile Include="Listas\ListaTitulos.cs" />
     <Compile Include="Listas\ListaRepCargaProduto.cs" />
     <Compile Include="Listas\ListaRepEstoque.cs" />
     <Compile Include="Listas\ListaRepPosicaoFInanceira.cs" />
@@ -161,6 +162,9 @@
     <Compile Include="ReceberBaixa.cs">
       <DependentUpon>ModelDeposito.tt</DependentUpon>
     </Compile>
+    <Compile Include="Recebimento.cs">
+      <DependentUpon>ModelDeposito.tt</DependentUpon>
+    </Compile>
     <Compile Include="RelatoriosDeposito.cs" />
     <Compile Include="RelatoriosRepresentante.cs" />
     <Compile Include="RepCarga.cs">
@@ -210,6 +214,9 @@
       <DependentUpon>ModelRepresentante.tt</DependentUpon>
     </Compile>
     <Compile Include="RepReceberBaixa.cs">
+      <DependentUpon>ModelRepresentante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepRecebimento.cs">
       <DependentUpon>ModelRepresentante.tt</DependentUpon>
     </Compile>
     <Compile Include="RepRepresentante.cs">

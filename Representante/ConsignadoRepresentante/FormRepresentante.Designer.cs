@@ -77,20 +77,6 @@
             this.chkVendedorComPedidoAnterior = new MetroFramework.Controls.MetroCheckBox();
             this.pnlHomeGrid = new MetroFramework.Controls.MetroPanel();
             this.grdHome = new MetroFramework.Controls.MetroGrid();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.documentoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.enderecoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.complementoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bairroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cidadeUFDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.telefonesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pedidoAnteriorDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.recebidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pedidoAtualDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.codigoPedidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.receberDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.listaRepVendedorHomeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabVendedores = new System.Windows.Forms.TabPage();
             this.pnlVendedorResultado = new MetroFramework.Controls.MetroPanel();
             this.tbcVendedor = new MetroFramework.Controls.MetroTabControl();
@@ -207,25 +193,11 @@
             this.txtRetornoProduto = new MetroFramework.Controls.MetroTextBox();
             this.txtRetornoCodigoBarras = new MetroFramework.Controls.MetroTextBox();
             this.tabVendedorAcerto = new System.Windows.Forms.TabPage();
-            this.pnlRecebimentos = new MetroFramework.Controls.MetroPanel();
-            this.grpReceberTitulo = new System.Windows.Forms.GroupBox();
-            this.dlbDuplicataTotal = new MetroFramework.Controls.MetroLabel();
-            this.lblDuplicataTotal = new MetroFramework.Controls.MetroLabel();
-            this.btnDuplicataCancelar = new MetroFramework.Controls.MetroButton();
-            this.btnDuplicataConfirmar = new MetroFramework.Controls.MetroButton();
-            this.txtDuplicataReceber = new MetroFramework.Controls.MetroTextBox();
-            this.lblDuplicataReceber = new MetroFramework.Controls.MetroLabel();
-            this.grdFinanceiroRecebimentos = new MetroFramework.Controls.MetroGrid();
-            this.lblFincanceiroRecebimentos = new MetroFramework.Controls.MetroLabel();
+            this.pnlTitulos = new MetroFramework.Controls.MetroPanel();
+            this.grdFinanceiroTitulos = new MetroFramework.Controls.MetroGrid();
+            this.lblFincanceiroTitulos = new MetroFramework.Controls.MetroLabel();
             this.pnlAcerto = new MetroFramework.Controls.MetroPanel();
             this.lblAcertoInfo = new MetroFramework.Controls.MetroLabel();
-            this.grpRecebimento = new System.Windows.Forms.GroupBox();
-            this.dlbAcertoAberto = new MetroFramework.Controls.MetroLabel();
-            this.lblAcertoAberto = new MetroFramework.Controls.MetroLabel();
-            this.btnAcertoCancelar = new MetroFramework.Controls.MetroButton();
-            this.btnAcertoConfirmar = new MetroFramework.Controls.MetroButton();
-            this.txtValorRecebido = new MetroFramework.Controls.MetroTextBox();
-            this.lblAcertoValorRecebido = new MetroFramework.Controls.MetroLabel();
             this.grpFinanceiroCalculo = new System.Windows.Forms.GroupBox();
             this.dlbRecebimentoAnterior = new MetroFramework.Controls.MetroLabel();
             this.lblValorEmAberto = new MetroFramework.Controls.MetroLabel();
@@ -245,6 +217,8 @@
             this.dlbValorPedido = new MetroFramework.Controls.MetroLabel();
             this.lblValorCompra = new MetroFramework.Controls.MetroLabel();
             this.lblValorPedido = new MetroFramework.Controls.MetroLabel();
+            this.menuAcerto = new System.Windows.Forms.MenuStrip();
+            this.smnReceberPagamentos = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlPesquisaVendedor = new MetroFramework.Controls.MetroPanel();
             this.txtVendedorPesqCpfCnpj = new MetroFramework.Controls.MetroTextBox();
             this.lblVendedorCpfCnpj = new MetroFramework.Controls.MetroLabel();
@@ -285,6 +259,20 @@
             this.grdEstoque = new MetroFramework.Controls.MetroGrid();
             this.tabAjuda = new System.Windows.Forms.TabPage();
             this.pnlAjuda = new MetroFramework.Drawing.Html.HtmlPanel();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.documentoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.enderecoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.complementoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bairroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cidadeUFDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.telefonesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pedidoAnteriorDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.recebidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pedidoAtualDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.codigoPedidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.receberDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.listaRepVendedorHomeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
@@ -295,7 +283,6 @@
             this.pnlHomeFiltros.SuspendLayout();
             this.pnlHomeGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdHome)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.listaRepVendedorHomeBindingSource)).BeginInit();
             this.tabVendedores.SuspendLayout();
             this.pnlVendedorResultado.SuspendLayout();
             this.tbcVendedor.SuspendLayout();
@@ -314,12 +301,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdVendedorRetorno)).BeginInit();
             this.pnlVendedorRetorno.SuspendLayout();
             this.tabVendedorAcerto.SuspendLayout();
-            this.pnlRecebimentos.SuspendLayout();
-            this.grpReceberTitulo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdFinanceiroRecebimentos)).BeginInit();
+            this.pnlTitulos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdFinanceiroTitulos)).BeginInit();
             this.pnlAcerto.SuspendLayout();
-            this.grpRecebimento.SuspendLayout();
             this.grpFinanceiroCalculo.SuspendLayout();
+            this.menuAcerto.SuspendLayout();
             this.pnlPesquisaVendedor.SuspendLayout();
             this.menuVendedor.SuspendLayout();
             this.tabPosicaoFinanceira.SuspendLayout();
@@ -334,6 +320,7 @@
             this.pnlEstoqueMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdEstoque)).BeginInit();
             this.tabAjuda.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.listaRepVendedorHomeBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -449,7 +436,7 @@
             this.tbcPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tbcPrincipal.Name = "tbcPrincipal";
-            this.tbcPrincipal.SelectedIndex = 0;
+            this.tbcPrincipal.SelectedIndex = 1;
             this.tbcPrincipal.Size = new System.Drawing.Size(968, 546);
             this.tbcPrincipal.TabIndex = 0;
             this.tbcPrincipal.UseSelectable = true;
@@ -631,101 +618,6 @@
             this.grdHome.VirtualMode = true;
             this.grdHome.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdHome_CellContentDoubleClick);
             // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.Width = 40;
-            // 
-            // nomeDataGridViewTextBoxColumn
-            // 
-            this.nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
-            this.nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
-            this.nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
-            this.nomeDataGridViewTextBoxColumn.Width = 60;
-            // 
-            // documentoDataGridViewTextBoxColumn
-            // 
-            this.documentoDataGridViewTextBoxColumn.DataPropertyName = "Documento";
-            this.documentoDataGridViewTextBoxColumn.HeaderText = "Documento";
-            this.documentoDataGridViewTextBoxColumn.Name = "documentoDataGridViewTextBoxColumn";
-            this.documentoDataGridViewTextBoxColumn.Width = 90;
-            // 
-            // enderecoDataGridViewTextBoxColumn
-            // 
-            this.enderecoDataGridViewTextBoxColumn.DataPropertyName = "Endereco";
-            this.enderecoDataGridViewTextBoxColumn.HeaderText = "Endereco";
-            this.enderecoDataGridViewTextBoxColumn.Name = "enderecoDataGridViewTextBoxColumn";
-            this.enderecoDataGridViewTextBoxColumn.Width = 78;
-            // 
-            // complementoDataGridViewTextBoxColumn
-            // 
-            this.complementoDataGridViewTextBoxColumn.DataPropertyName = "Complemento";
-            this.complementoDataGridViewTextBoxColumn.HeaderText = "Complemento";
-            this.complementoDataGridViewTextBoxColumn.Name = "complementoDataGridViewTextBoxColumn";
-            this.complementoDataGridViewTextBoxColumn.Width = 102;
-            // 
-            // bairroDataGridViewTextBoxColumn
-            // 
-            this.bairroDataGridViewTextBoxColumn.DataPropertyName = "Bairro";
-            this.bairroDataGridViewTextBoxColumn.HeaderText = "Bairro";
-            this.bairroDataGridViewTextBoxColumn.Name = "bairroDataGridViewTextBoxColumn";
-            this.bairroDataGridViewTextBoxColumn.Width = 61;
-            // 
-            // cidadeUFDataGridViewTextBoxColumn
-            // 
-            this.cidadeUFDataGridViewTextBoxColumn.DataPropertyName = "CidadeUF";
-            this.cidadeUFDataGridViewTextBoxColumn.HeaderText = "CidadeUF";
-            this.cidadeUFDataGridViewTextBoxColumn.Name = "cidadeUFDataGridViewTextBoxColumn";
-            this.cidadeUFDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // telefonesDataGridViewTextBoxColumn
-            // 
-            this.telefonesDataGridViewTextBoxColumn.DataPropertyName = "Telefones";
-            this.telefonesDataGridViewTextBoxColumn.HeaderText = "Telefones";
-            this.telefonesDataGridViewTextBoxColumn.Name = "telefonesDataGridViewTextBoxColumn";
-            this.telefonesDataGridViewTextBoxColumn.Width = 78;
-            // 
-            // pedidoAnteriorDataGridViewCheckBoxColumn
-            // 
-            this.pedidoAnteriorDataGridViewCheckBoxColumn.DataPropertyName = "PedidoAnterior";
-            this.pedidoAnteriorDataGridViewCheckBoxColumn.HeaderText = "PedidoAnterior";
-            this.pedidoAnteriorDataGridViewCheckBoxColumn.Name = "pedidoAnteriorDataGridViewCheckBoxColumn";
-            this.pedidoAnteriorDataGridViewCheckBoxColumn.Width = 89;
-            // 
-            // recebidoDataGridViewTextBoxColumn
-            // 
-            this.recebidoDataGridViewTextBoxColumn.DataPropertyName = "Recebido";
-            this.recebidoDataGridViewTextBoxColumn.HeaderText = "Recebido";
-            this.recebidoDataGridViewTextBoxColumn.Name = "recebidoDataGridViewTextBoxColumn";
-            this.recebidoDataGridViewTextBoxColumn.Width = 78;
-            // 
-            // pedidoAtualDataGridViewCheckBoxColumn
-            // 
-            this.pedidoAtualDataGridViewCheckBoxColumn.DataPropertyName = "PedidoAtual";
-            this.pedidoAtualDataGridViewCheckBoxColumn.HeaderText = "PedidoAtual";
-            this.pedidoAtualDataGridViewCheckBoxColumn.Name = "pedidoAtualDataGridViewCheckBoxColumn";
-            this.pedidoAtualDataGridViewCheckBoxColumn.Width = 74;
-            // 
-            // codigoPedidoDataGridViewTextBoxColumn
-            // 
-            this.codigoPedidoDataGridViewTextBoxColumn.DataPropertyName = "CodigoPedido";
-            this.codigoPedidoDataGridViewTextBoxColumn.HeaderText = "CodigoPedido";
-            this.codigoPedidoDataGridViewTextBoxColumn.Name = "codigoPedidoDataGridViewTextBoxColumn";
-            this.codigoPedidoDataGridViewTextBoxColumn.Width = 104;
-            // 
-            // receberDataGridViewCheckBoxColumn
-            // 
-            this.receberDataGridViewCheckBoxColumn.DataPropertyName = "Receber";
-            this.receberDataGridViewCheckBoxColumn.HeaderText = "Receber";
-            this.receberDataGridViewCheckBoxColumn.Name = "receberDataGridViewCheckBoxColumn";
-            this.receberDataGridViewCheckBoxColumn.Width = 52;
-            // 
-            // listaRepVendedorHomeBindingSource
-            // 
-            this.listaRepVendedorHomeBindingSource.DataSource = typeof(ModelLibrary.ListaRepVendedorHome);
-            // 
             // tabVendedores
             // 
             this.tabVendedores.Controls.Add(this.pnlVendedorResultado);
@@ -761,7 +653,7 @@
             this.tbcVendedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcVendedor.Location = new System.Drawing.Point(0, 0);
             this.tbcVendedor.Name = "tbcVendedor";
-            this.tbcVendedor.SelectedIndex = 0;
+            this.tbcVendedor.SelectedIndex = 4;
             this.tbcVendedor.Size = new System.Drawing.Size(960, 354);
             this.tbcVendedor.TabIndex = 2;
             this.tbcVendedor.UseSelectable = true;
@@ -1569,7 +1461,7 @@
             // 
             this.cbbDataNasc.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.cbbDataNasc.Location = new System.Drawing.Point(810, 76);
-            this.cbbDataNasc.MinimumSize = new System.Drawing.Size(0, 29);
+            this.cbbDataNasc.MinimumSize = new System.Drawing.Size(4, 29);
             this.cbbDataNasc.Name = "cbbDataNasc";
             this.cbbDataNasc.Size = new System.Drawing.Size(111, 29);
             this.cbbDataNasc.TabIndex = 11;
@@ -2809,7 +2701,7 @@
             // 
             // tabVendedorAcerto
             // 
-            this.tabVendedorAcerto.Controls.Add(this.pnlRecebimentos);
+            this.tabVendedorAcerto.Controls.Add(this.pnlTitulos);
             this.tabVendedorAcerto.Controls.Add(this.pnlAcerto);
             this.tabVendedorAcerto.Location = new System.Drawing.Point(4, 38);
             this.tabVendedorAcerto.Name = "tabVendedorAcerto";
@@ -2817,134 +2709,34 @@
             this.tabVendedorAcerto.TabIndex = 3;
             this.tabVendedorAcerto.Text = "Acerto";
             // 
-            // pnlRecebimentos
+            // pnlTitulos
             // 
-            this.pnlRecebimentos.Controls.Add(this.grpReceberTitulo);
-            this.pnlRecebimentos.Controls.Add(this.grdFinanceiroRecebimentos);
-            this.pnlRecebimentos.Controls.Add(this.lblFincanceiroRecebimentos);
-            this.pnlRecebimentos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlRecebimentos.HorizontalScrollbarBarColor = true;
-            this.pnlRecebimentos.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlRecebimentos.HorizontalScrollbarSize = 10;
-            this.pnlRecebimentos.Location = new System.Drawing.Point(0, 185);
-            this.pnlRecebimentos.Name = "pnlRecebimentos";
-            this.pnlRecebimentos.Size = new System.Drawing.Size(952, 127);
-            this.pnlRecebimentos.TabIndex = 1;
-            this.pnlRecebimentos.VerticalScrollbarBarColor = true;
-            this.pnlRecebimentos.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlRecebimentos.VerticalScrollbarSize = 10;
+            this.pnlTitulos.Controls.Add(this.grdFinanceiroTitulos);
+            this.pnlTitulos.Controls.Add(this.lblFincanceiroTitulos);
+            this.pnlTitulos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlTitulos.HorizontalScrollbarBarColor = true;
+            this.pnlTitulos.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlTitulos.HorizontalScrollbarSize = 10;
+            this.pnlTitulos.Location = new System.Drawing.Point(0, 155);
+            this.pnlTitulos.Name = "pnlTitulos";
+            this.pnlTitulos.Size = new System.Drawing.Size(952, 157);
+            this.pnlTitulos.TabIndex = 1;
+            this.pnlTitulos.VerticalScrollbarBarColor = true;
+            this.pnlTitulos.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlTitulos.VerticalScrollbarSize = 10;
             // 
-            // grpReceberTitulo
+            // grdFinanceiroTitulos
             // 
-            this.grpReceberTitulo.BackColor = System.Drawing.Color.White;
-            this.grpReceberTitulo.Controls.Add(this.dlbDuplicataTotal);
-            this.grpReceberTitulo.Controls.Add(this.lblDuplicataTotal);
-            this.grpReceberTitulo.Controls.Add(this.btnDuplicataCancelar);
-            this.grpReceberTitulo.Controls.Add(this.btnDuplicataConfirmar);
-            this.grpReceberTitulo.Controls.Add(this.txtDuplicataReceber);
-            this.grpReceberTitulo.Controls.Add(this.lblDuplicataReceber);
-            this.grpReceberTitulo.Location = new System.Drawing.Point(17, 44);
-            this.grpReceberTitulo.Name = "grpReceberTitulo";
-            this.grpReceberTitulo.Size = new System.Drawing.Size(890, 83);
-            this.grpReceberTitulo.TabIndex = 34;
-            this.grpReceberTitulo.TabStop = false;
-            this.grpReceberTitulo.Text = "Recebimento de Duplicata";
-            this.grpReceberTitulo.Visible = false;
-            // 
-            // dlbDuplicataTotal
-            // 
-            this.dlbDuplicataTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dlbDuplicataTotal.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.dlbDuplicataTotal.Location = new System.Drawing.Point(518, 32);
-            this.dlbDuplicataTotal.Name = "dlbDuplicataTotal";
-            this.dlbDuplicataTotal.Size = new System.Drawing.Size(102, 26);
-            this.dlbDuplicataTotal.TabIndex = 40;
-            this.dlbDuplicataTotal.Text = "<<valor>>";
-            this.dlbDuplicataTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblDuplicataTotal
-            // 
-            this.lblDuplicataTotal.AutoSize = true;
-            this.lblDuplicataTotal.FontWeight = MetroFramework.MetroLabelWeight.Bold;
-            this.lblDuplicataTotal.Location = new System.Drawing.Point(414, 35);
-            this.lblDuplicataTotal.Name = "lblDuplicataTotal";
-            this.lblDuplicataTotal.Size = new System.Drawing.Size(98, 19);
-            this.lblDuplicataTotal.TabIndex = 39;
-            this.lblDuplicataTotal.Text = "Total a Pagar";
-            // 
-            // btnDuplicataCancelar
-            // 
-            this.btnDuplicataCancelar.Location = new System.Drawing.Point(307, 32);
-            this.btnDuplicataCancelar.Name = "btnDuplicataCancelar";
-            this.btnDuplicataCancelar.Size = new System.Drawing.Size(67, 23);
-            this.btnDuplicataCancelar.TabIndex = 37;
-            this.btnDuplicataCancelar.Text = "Cancelar";
-            this.btnDuplicataCancelar.UseSelectable = true;
-            this.btnDuplicataCancelar.Click += new System.EventHandler(this.btnDuplicataCancelar_Click);
-            // 
-            // btnDuplicataConfirmar
-            // 
-            this.btnDuplicataConfirmar.Location = new System.Drawing.Point(235, 32);
-            this.btnDuplicataConfirmar.Name = "btnDuplicataConfirmar";
-            this.btnDuplicataConfirmar.Size = new System.Drawing.Size(66, 23);
-            this.btnDuplicataConfirmar.TabIndex = 36;
-            this.btnDuplicataConfirmar.Text = "Confirmar";
-            this.btnDuplicataConfirmar.UseSelectable = true;
-            this.btnDuplicataConfirmar.Click += new System.EventHandler(this.btnDuplicataConfirmar_Click);
-            // 
-            // txtDuplicataReceber
-            // 
-            // 
-            // 
-            // 
-            this.txtDuplicataReceber.CustomButton.Image = null;
-            this.txtDuplicataReceber.CustomButton.Location = new System.Drawing.Point(82, 1);
-            this.txtDuplicataReceber.CustomButton.Name = "";
-            this.txtDuplicataReceber.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtDuplicataReceber.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtDuplicataReceber.CustomButton.TabIndex = 1;
-            this.txtDuplicataReceber.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtDuplicataReceber.CustomButton.UseSelectable = true;
-            this.txtDuplicataReceber.CustomButton.Visible = false;
-            this.txtDuplicataReceber.Lines = new string[0];
-            this.txtDuplicataReceber.Location = new System.Drawing.Point(122, 32);
-            this.txtDuplicataReceber.MaxLength = 32767;
-            this.txtDuplicataReceber.Name = "txtDuplicataReceber";
-            this.txtDuplicataReceber.PasswordChar = '\0';
-            this.txtDuplicataReceber.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtDuplicataReceber.SelectedText = "";
-            this.txtDuplicataReceber.SelectionLength = 0;
-            this.txtDuplicataReceber.SelectionStart = 0;
-            this.txtDuplicataReceber.ShortcutsEnabled = true;
-            this.txtDuplicataReceber.Size = new System.Drawing.Size(104, 23);
-            this.txtDuplicataReceber.TabIndex = 35;
-            this.txtDuplicataReceber.UseSelectable = true;
-            this.txtDuplicataReceber.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtDuplicataReceber.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            this.txtDuplicataReceber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ControlOnlyNumbers);
-            this.txtDuplicataReceber.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            // 
-            // lblDuplicataReceber
-            // 
-            this.lblDuplicataReceber.AutoSize = true;
-            this.lblDuplicataReceber.Location = new System.Drawing.Point(20, 32);
-            this.lblDuplicataReceber.Name = "lblDuplicataReceber";
-            this.lblDuplicataReceber.Size = new System.Drawing.Size(100, 19);
-            this.lblDuplicataReceber.TabIndex = 34;
-            this.lblDuplicataReceber.Text = "Valor Recebido:";
-            // 
-            // grdFinanceiroRecebimentos
-            // 
-            this.grdFinanceiroRecebimentos.AllowUserToAddRows = false;
-            this.grdFinanceiroRecebimentos.AllowUserToDeleteRows = false;
-            this.grdFinanceiroRecebimentos.AllowUserToOrderColumns = true;
-            this.grdFinanceiroRecebimentos.AllowUserToResizeRows = false;
+            this.grdFinanceiroTitulos.AllowUserToAddRows = false;
+            this.grdFinanceiroTitulos.AllowUserToDeleteRows = false;
+            this.grdFinanceiroTitulos.AllowUserToOrderColumns = true;
+            this.grdFinanceiroTitulos.AllowUserToResizeRows = false;
             dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.grdFinanceiroRecebimentos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
-            this.grdFinanceiroRecebimentos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.grdFinanceiroRecebimentos.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.grdFinanceiroRecebimentos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.grdFinanceiroRecebimentos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.grdFinanceiroTitulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            this.grdFinanceiroTitulos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdFinanceiroTitulos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.grdFinanceiroTitulos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.grdFinanceiroTitulos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -2952,8 +2744,8 @@
             dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
             dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdFinanceiroRecebimentos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
-            this.grdFinanceiroRecebimentos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdFinanceiroTitulos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            this.grdFinanceiroTitulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -2961,15 +2753,15 @@
             dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
             dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdFinanceiroRecebimentos.DefaultCellStyle = dataGridViewCellStyle15;
-            this.grdFinanceiroRecebimentos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.grdFinanceiroRecebimentos.EnableHeadersVisualStyles = false;
-            this.grdFinanceiroRecebimentos.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.grdFinanceiroRecebimentos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.grdFinanceiroRecebimentos.Location = new System.Drawing.Point(17, 50);
-            this.grdFinanceiroRecebimentos.Name = "grdFinanceiroRecebimentos";
-            this.grdFinanceiroRecebimentos.ReadOnly = true;
-            this.grdFinanceiroRecebimentos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.grdFinanceiroTitulos.DefaultCellStyle = dataGridViewCellStyle15;
+            this.grdFinanceiroTitulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.grdFinanceiroTitulos.EnableHeadersVisualStyles = false;
+            this.grdFinanceiroTitulos.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.grdFinanceiroTitulos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.grdFinanceiroTitulos.Location = new System.Drawing.Point(17, 50);
+            this.grdFinanceiroTitulos.Name = "grdFinanceiroTitulos";
+            this.grdFinanceiroTitulos.ReadOnly = true;
+            this.grdFinanceiroTitulos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             dataGridViewCellStyle16.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -2977,30 +2769,30 @@
             dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
             dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdFinanceiroRecebimentos.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
-            this.grdFinanceiroRecebimentos.RowHeadersVisible = false;
-            this.grdFinanceiroRecebimentos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.grdFinanceiroRecebimentos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdFinanceiroRecebimentos.ShowEditingIcon = false;
-            this.grdFinanceiroRecebimentos.Size = new System.Drawing.Size(900, 74);
-            this.grdFinanceiroRecebimentos.TabIndex = 9;
-            this.grdFinanceiroRecebimentos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdFinanceiroRecebimentos_CellDoubleClick);
+            this.grdFinanceiroTitulos.RowHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            this.grdFinanceiroTitulos.RowHeadersVisible = false;
+            this.grdFinanceiroTitulos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.grdFinanceiroTitulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.grdFinanceiroTitulos.ShowEditingIcon = false;
+            this.grdFinanceiroTitulos.Size = new System.Drawing.Size(900, 74);
+            this.grdFinanceiroTitulos.TabIndex = 9;
+            this.grdFinanceiroTitulos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdFinanceiroRecebimentos_CellDoubleClick);
             // 
-            // lblFincanceiroRecebimentos
+            // lblFincanceiroTitulos
             // 
-            this.lblFincanceiroRecebimentos.AutoSize = true;
-            this.lblFincanceiroRecebimentos.Location = new System.Drawing.Point(17, 18);
-            this.lblFincanceiroRecebimentos.Name = "lblFincanceiroRecebimentos";
-            this.lblFincanceiroRecebimentos.Size = new System.Drawing.Size(102, 19);
-            this.lblFincanceiroRecebimentos.TabIndex = 8;
-            this.lblFincanceiroRecebimentos.Text = "Titulos Gerados:";
+            this.lblFincanceiroTitulos.AutoSize = true;
+            this.lblFincanceiroTitulos.Location = new System.Drawing.Point(17, 18);
+            this.lblFincanceiroTitulos.Name = "lblFincanceiroTitulos";
+            this.lblFincanceiroTitulos.Size = new System.Drawing.Size(102, 19);
+            this.lblFincanceiroTitulos.TabIndex = 8;
+            this.lblFincanceiroTitulos.Text = "Titulos Gerados:";
             // 
             // pnlAcerto
             // 
             this.pnlAcerto.AutoScroll = true;
             this.pnlAcerto.Controls.Add(this.lblAcertoInfo);
-            this.pnlAcerto.Controls.Add(this.grpRecebimento);
             this.pnlAcerto.Controls.Add(this.grpFinanceiroCalculo);
+            this.pnlAcerto.Controls.Add(this.menuAcerto);
             this.pnlAcerto.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlAcerto.HorizontalScrollbar = true;
             this.pnlAcerto.HorizontalScrollbarBarColor = true;
@@ -3008,7 +2800,7 @@
             this.pnlAcerto.HorizontalScrollbarSize = 10;
             this.pnlAcerto.Location = new System.Drawing.Point(0, 0);
             this.pnlAcerto.Name = "pnlAcerto";
-            this.pnlAcerto.Size = new System.Drawing.Size(952, 185);
+            this.pnlAcerto.Size = new System.Drawing.Size(952, 155);
             this.pnlAcerto.TabIndex = 0;
             this.pnlAcerto.VerticalScrollbar = true;
             this.pnlAcerto.VerticalScrollbarBarColor = true;
@@ -3019,109 +2811,12 @@
             // 
             this.lblAcertoInfo.AutoSize = true;
             this.lblAcertoInfo.ForeColor = System.Drawing.Color.DimGray;
-            this.lblAcertoInfo.Location = new System.Drawing.Point(17, 93);
+            this.lblAcertoInfo.Location = new System.Drawing.Point(17, 124);
             this.lblAcertoInfo.Name = "lblAcertoInfo";
-            this.lblAcertoInfo.Size = new System.Drawing.Size(306, 19);
+            this.lblAcertoInfo.Size = new System.Drawing.Size(338, 19);
             this.lblAcertoInfo.TabIndex = 27;
-            this.lblAcertoInfo.Text = "O vendedor não possui nehum pedido em aberto.";
+            this.lblAcertoInfo.Text = "O vendedor não possui nehum pedido atual em aberto.";
             this.lblAcertoInfo.UseCustomForeColor = true;
-            // 
-            // grpRecebimento
-            // 
-            this.grpRecebimento.BackColor = System.Drawing.Color.White;
-            this.grpRecebimento.Controls.Add(this.dlbAcertoAberto);
-            this.grpRecebimento.Controls.Add(this.lblAcertoAberto);
-            this.grpRecebimento.Controls.Add(this.btnAcertoCancelar);
-            this.grpRecebimento.Controls.Add(this.btnAcertoConfirmar);
-            this.grpRecebimento.Controls.Add(this.txtValorRecebido);
-            this.grpRecebimento.Controls.Add(this.lblAcertoValorRecebido);
-            this.grpRecebimento.Location = new System.Drawing.Point(17, 115);
-            this.grpRecebimento.Name = "grpRecebimento";
-            this.grpRecebimento.Size = new System.Drawing.Size(912, 64);
-            this.grpRecebimento.TabIndex = 26;
-            this.grpRecebimento.TabStop = false;
-            this.grpRecebimento.Text = "Recebimento";
-            // 
-            // dlbAcertoAberto
-            // 
-            this.dlbAcertoAberto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dlbAcertoAberto.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.dlbAcertoAberto.Location = new System.Drawing.Point(788, 22);
-            this.dlbAcertoAberto.Name = "dlbAcertoAberto";
-            this.dlbAcertoAberto.Size = new System.Drawing.Size(102, 26);
-            this.dlbAcertoAberto.TabIndex = 18;
-            this.dlbAcertoAberto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblAcertoAberto
-            // 
-            this.lblAcertoAberto.AutoSize = true;
-            this.lblAcertoAberto.Location = new System.Drawing.Point(672, 25);
-            this.lblAcertoAberto.Name = "lblAcertoAberto";
-            this.lblAcertoAberto.Size = new System.Drawing.Size(110, 19);
-            this.lblAcertoAberto.TabIndex = 18;
-            this.lblAcertoAberto.Text = "Valor em Aberto:";
-            // 
-            // btnAcertoCancelar
-            // 
-            this.btnAcertoCancelar.Location = new System.Drawing.Point(307, 25);
-            this.btnAcertoCancelar.Name = "btnAcertoCancelar";
-            this.btnAcertoCancelar.Size = new System.Drawing.Size(67, 23);
-            this.btnAcertoCancelar.TabIndex = 34;
-            this.btnAcertoCancelar.Text = "Cancelar";
-            this.btnAcertoCancelar.UseSelectable = true;
-            this.btnAcertoCancelar.Click += new System.EventHandler(this.btnAcertoCancelar_Click);
-            // 
-            // btnAcertoConfirmar
-            // 
-            this.btnAcertoConfirmar.Location = new System.Drawing.Point(235, 25);
-            this.btnAcertoConfirmar.Name = "btnAcertoConfirmar";
-            this.btnAcertoConfirmar.Size = new System.Drawing.Size(66, 23);
-            this.btnAcertoConfirmar.TabIndex = 33;
-            this.btnAcertoConfirmar.Text = "Confirmar";
-            this.btnAcertoConfirmar.UseSelectable = true;
-            this.btnAcertoConfirmar.Click += new System.EventHandler(this.btnAcertoConfirmar_Click);
-            // 
-            // txtValorRecebido
-            // 
-            // 
-            // 
-            // 
-            this.txtValorRecebido.CustomButton.Image = null;
-            this.txtValorRecebido.CustomButton.Location = new System.Drawing.Point(82, 1);
-            this.txtValorRecebido.CustomButton.Name = "";
-            this.txtValorRecebido.CustomButton.Size = new System.Drawing.Size(21, 21);
-            this.txtValorRecebido.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtValorRecebido.CustomButton.TabIndex = 1;
-            this.txtValorRecebido.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtValorRecebido.CustomButton.UseSelectable = true;
-            this.txtValorRecebido.CustomButton.Visible = false;
-            this.txtValorRecebido.Lines = new string[0];
-            this.txtValorRecebido.Location = new System.Drawing.Point(122, 25);
-            this.txtValorRecebido.MaxLength = 32767;
-            this.txtValorRecebido.Name = "txtValorRecebido";
-            this.txtValorRecebido.PasswordChar = '\0';
-            this.txtValorRecebido.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtValorRecebido.SelectedText = "";
-            this.txtValorRecebido.SelectionLength = 0;
-            this.txtValorRecebido.SelectionStart = 0;
-            this.txtValorRecebido.ShortcutsEnabled = true;
-            this.txtValorRecebido.Size = new System.Drawing.Size(104, 23);
-            this.txtValorRecebido.TabIndex = 32;
-            this.txtValorRecebido.UseSelectable = true;
-            this.txtValorRecebido.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtValorRecebido.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            this.txtValorRecebido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ControlOnlyNumbers);
-            this.txtValorRecebido.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Control_KeyUp);
-            this.txtValorRecebido.Leave += new System.EventHandler(this.txtValorRecebido_Leave);
-            // 
-            // lblAcertoValorRecebido
-            // 
-            this.lblAcertoValorRecebido.AutoSize = true;
-            this.lblAcertoValorRecebido.Location = new System.Drawing.Point(20, 25);
-            this.lblAcertoValorRecebido.Name = "lblAcertoValorRecebido";
-            this.lblAcertoValorRecebido.Size = new System.Drawing.Size(100, 19);
-            this.lblAcertoValorRecebido.TabIndex = 26;
-            this.lblAcertoValorRecebido.Text = "Valor Recebido:";
             // 
             // grpFinanceiroCalculo
             // 
@@ -3144,7 +2839,7 @@
             this.grpFinanceiroCalculo.Controls.Add(this.dlbValorPedido);
             this.grpFinanceiroCalculo.Controls.Add(this.lblValorCompra);
             this.grpFinanceiroCalculo.Controls.Add(this.lblValorPedido);
-            this.grpFinanceiroCalculo.Location = new System.Drawing.Point(17, 8);
+            this.grpFinanceiroCalculo.Location = new System.Drawing.Point(17, 35);
             this.grpFinanceiroCalculo.Name = "grpFinanceiroCalculo";
             this.grpFinanceiroCalculo.Size = new System.Drawing.Size(912, 83);
             this.grpFinanceiroCalculo.TabIndex = 2;
@@ -3322,6 +3017,23 @@
             this.lblValorPedido.Size = new System.Drawing.Size(86, 19);
             this.lblValorPedido.TabIndex = 0;
             this.lblValorPedido.Text = "Valor Pedido:";
+            // 
+            // menuAcerto
+            // 
+            this.menuAcerto.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.smnReceberPagamentos});
+            this.menuAcerto.Location = new System.Drawing.Point(0, 0);
+            this.menuAcerto.Name = "menuAcerto";
+            this.menuAcerto.Size = new System.Drawing.Size(952, 24);
+            this.menuAcerto.TabIndex = 28;
+            this.menuAcerto.Text = "menuStrip1";
+            // 
+            // smnReceberPagamentos
+            // 
+            this.smnReceberPagamentos.Name = "smnReceberPagamentos";
+            this.smnReceberPagamentos.Size = new System.Drawing.Size(163, 20);
+            this.smnReceberPagamentos.Text = "&Exibir/Receber Pagamentos";
+            this.smnReceberPagamentos.Click += new System.EventHandler(this.smnReceberPagamentos_Click);
             // 
             // pnlPesquisaVendedor
             // 
@@ -4012,6 +3724,101 @@
             this.pnlAjuda.TabIndex = 0;
             this.pnlAjuda.Text = "<b>Conteudo da Ajuda</b> <br> <i>Em breve...</i>";
             // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.Width = 40;
+            // 
+            // nomeDataGridViewTextBoxColumn
+            // 
+            this.nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
+            this.nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
+            this.nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
+            this.nomeDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // documentoDataGridViewTextBoxColumn
+            // 
+            this.documentoDataGridViewTextBoxColumn.DataPropertyName = "Documento";
+            this.documentoDataGridViewTextBoxColumn.HeaderText = "Documento";
+            this.documentoDataGridViewTextBoxColumn.Name = "documentoDataGridViewTextBoxColumn";
+            this.documentoDataGridViewTextBoxColumn.Width = 90;
+            // 
+            // enderecoDataGridViewTextBoxColumn
+            // 
+            this.enderecoDataGridViewTextBoxColumn.DataPropertyName = "Endereco";
+            this.enderecoDataGridViewTextBoxColumn.HeaderText = "Endereco";
+            this.enderecoDataGridViewTextBoxColumn.Name = "enderecoDataGridViewTextBoxColumn";
+            this.enderecoDataGridViewTextBoxColumn.Width = 78;
+            // 
+            // complementoDataGridViewTextBoxColumn
+            // 
+            this.complementoDataGridViewTextBoxColumn.DataPropertyName = "Complemento";
+            this.complementoDataGridViewTextBoxColumn.HeaderText = "Complemento";
+            this.complementoDataGridViewTextBoxColumn.Name = "complementoDataGridViewTextBoxColumn";
+            this.complementoDataGridViewTextBoxColumn.Width = 102;
+            // 
+            // bairroDataGridViewTextBoxColumn
+            // 
+            this.bairroDataGridViewTextBoxColumn.DataPropertyName = "Bairro";
+            this.bairroDataGridViewTextBoxColumn.HeaderText = "Bairro";
+            this.bairroDataGridViewTextBoxColumn.Name = "bairroDataGridViewTextBoxColumn";
+            this.bairroDataGridViewTextBoxColumn.Width = 61;
+            // 
+            // cidadeUFDataGridViewTextBoxColumn
+            // 
+            this.cidadeUFDataGridViewTextBoxColumn.DataPropertyName = "CidadeUF";
+            this.cidadeUFDataGridViewTextBoxColumn.HeaderText = "CidadeUF";
+            this.cidadeUFDataGridViewTextBoxColumn.Name = "cidadeUFDataGridViewTextBoxColumn";
+            this.cidadeUFDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // telefonesDataGridViewTextBoxColumn
+            // 
+            this.telefonesDataGridViewTextBoxColumn.DataPropertyName = "Telefones";
+            this.telefonesDataGridViewTextBoxColumn.HeaderText = "Telefones";
+            this.telefonesDataGridViewTextBoxColumn.Name = "telefonesDataGridViewTextBoxColumn";
+            this.telefonesDataGridViewTextBoxColumn.Width = 78;
+            // 
+            // pedidoAnteriorDataGridViewCheckBoxColumn
+            // 
+            this.pedidoAnteriorDataGridViewCheckBoxColumn.DataPropertyName = "PedidoAnterior";
+            this.pedidoAnteriorDataGridViewCheckBoxColumn.HeaderText = "PedidoAnterior";
+            this.pedidoAnteriorDataGridViewCheckBoxColumn.Name = "pedidoAnteriorDataGridViewCheckBoxColumn";
+            this.pedidoAnteriorDataGridViewCheckBoxColumn.Width = 89;
+            // 
+            // recebidoDataGridViewTextBoxColumn
+            // 
+            this.recebidoDataGridViewTextBoxColumn.DataPropertyName = "Recebido";
+            this.recebidoDataGridViewTextBoxColumn.HeaderText = "Recebido";
+            this.recebidoDataGridViewTextBoxColumn.Name = "recebidoDataGridViewTextBoxColumn";
+            this.recebidoDataGridViewTextBoxColumn.Width = 78;
+            // 
+            // pedidoAtualDataGridViewCheckBoxColumn
+            // 
+            this.pedidoAtualDataGridViewCheckBoxColumn.DataPropertyName = "PedidoAtual";
+            this.pedidoAtualDataGridViewCheckBoxColumn.HeaderText = "PedidoAtual";
+            this.pedidoAtualDataGridViewCheckBoxColumn.Name = "pedidoAtualDataGridViewCheckBoxColumn";
+            this.pedidoAtualDataGridViewCheckBoxColumn.Width = 74;
+            // 
+            // codigoPedidoDataGridViewTextBoxColumn
+            // 
+            this.codigoPedidoDataGridViewTextBoxColumn.DataPropertyName = "CodigoPedido";
+            this.codigoPedidoDataGridViewTextBoxColumn.HeaderText = "CodigoPedido";
+            this.codigoPedidoDataGridViewTextBoxColumn.Name = "codigoPedidoDataGridViewTextBoxColumn";
+            this.codigoPedidoDataGridViewTextBoxColumn.Width = 104;
+            // 
+            // receberDataGridViewCheckBoxColumn
+            // 
+            this.receberDataGridViewCheckBoxColumn.DataPropertyName = "Receber";
+            this.receberDataGridViewCheckBoxColumn.HeaderText = "Receber";
+            this.receberDataGridViewCheckBoxColumn.Name = "receberDataGridViewCheckBoxColumn";
+            this.receberDataGridViewCheckBoxColumn.Width = 52;
+            // 
+            // listaRepVendedorHomeBindingSource
+            // 
+            this.listaRepVendedorHomeBindingSource.DataSource = typeof(ModelLibrary.ListaRepVendedorHome);
+            // 
             // FormRepresentante
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4038,7 +3845,6 @@
             this.pnlHomeFiltros.PerformLayout();
             this.pnlHomeGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdHome)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.listaRepVendedorHomeBindingSource)).EndInit();
             this.tabVendedores.ResumeLayout(false);
             this.pnlVendedorResultado.ResumeLayout(false);
             this.tbcVendedor.ResumeLayout(false);
@@ -4061,17 +3867,15 @@
             this.pnlVendedorRetorno.ResumeLayout(false);
             this.pnlVendedorRetorno.PerformLayout();
             this.tabVendedorAcerto.ResumeLayout(false);
-            this.pnlRecebimentos.ResumeLayout(false);
-            this.pnlRecebimentos.PerformLayout();
-            this.grpReceberTitulo.ResumeLayout(false);
-            this.grpReceberTitulo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdFinanceiroRecebimentos)).EndInit();
+            this.pnlTitulos.ResumeLayout(false);
+            this.pnlTitulos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdFinanceiroTitulos)).EndInit();
             this.pnlAcerto.ResumeLayout(false);
             this.pnlAcerto.PerformLayout();
-            this.grpRecebimento.ResumeLayout(false);
-            this.grpRecebimento.PerformLayout();
             this.grpFinanceiroCalculo.ResumeLayout(false);
             this.grpFinanceiroCalculo.PerformLayout();
+            this.menuAcerto.ResumeLayout(false);
+            this.menuAcerto.PerformLayout();
             this.pnlPesquisaVendedor.ResumeLayout(false);
             this.pnlPesquisaVendedor.PerformLayout();
             this.menuVendedor.ResumeLayout(false);
@@ -4090,6 +3894,7 @@
             this.pnlEstoqueMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdEstoque)).EndInit();
             this.tabAjuda.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.listaRepVendedorHomeBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -4203,9 +4008,9 @@
         public MetroFramework.Controls.MetroTextBox txtRetornoProdutoGradeId;
         private MetroFramework.Controls.MetroPanel pnlAcerto;
         public System.Windows.Forms.GroupBox grpFinanceiroCalculo;
-        private MetroFramework.Controls.MetroPanel pnlRecebimentos;
-        public MetroFramework.Controls.MetroGrid grdFinanceiroRecebimentos;
-        private MetroFramework.Controls.MetroLabel lblFincanceiroRecebimentos;
+        private MetroFramework.Controls.MetroPanel pnlTitulos;
+        public MetroFramework.Controls.MetroGrid grdFinanceiroTitulos;
+        private MetroFramework.Controls.MetroLabel lblFincanceiroTitulos;
         public MetroFramework.Controls.MetroLabel dlbRecebimentoAnterior;
         private MetroFramework.Controls.MetroLabel lblValorEmAberto;
         public MetroFramework.Controls.MetroLabel dlbValorLiquido;
@@ -4243,19 +4048,6 @@
         public MetroFramework.Controls.MetroLabel dlbVendedorEndereco;
         public MetroFramework.Controls.MetroLabel dlbVendedorCPF;
         public MetroFramework.Controls.MetroLabel dlbVendedorNome;
-        public MetroFramework.Controls.MetroLabel dlbAcertoAberto;
-        public MetroFramework.Controls.MetroLabel lblAcertoAberto;
-        public MetroFramework.Controls.MetroButton btnAcertoCancelar;
-        public MetroFramework.Controls.MetroButton btnAcertoConfirmar;
-        public MetroFramework.Controls.MetroTextBox txtValorRecebido;
-        private MetroFramework.Controls.MetroLabel lblAcertoValorRecebido;
-        public System.Windows.Forms.GroupBox grpReceberTitulo;
-        public MetroFramework.Controls.MetroButton btnDuplicataCancelar;
-        public MetroFramework.Controls.MetroButton btnDuplicataConfirmar;
-        public MetroFramework.Controls.MetroTextBox txtDuplicataReceber;
-        private MetroFramework.Controls.MetroLabel lblDuplicataReceber;
-        public MetroFramework.Controls.MetroLabel dlbDuplicataTotal;
-        private MetroFramework.Controls.MetroLabel lblDuplicataTotal;
         public MetroFramework.Controls.MetroCheckBox chkVendedorComPedidoAtual;
         public MetroFramework.Controls.MetroCheckBox chkVendedorSemPedidoAtual;
         public MetroFramework.Controls.MetroCheckBox chkVendedorComPedidoAnterior;
@@ -4278,7 +4070,6 @@
         private MetroFramework.Controls.MetroLabel lblPercentualComissao;
         public MetroFramework.Controls.MetroLabel dlbFaixaComissao;
         private MetroFramework.Controls.MetroLabel lblFaixaComissao;
-        public System.Windows.Forms.GroupBox grpRecebimento;
         public MetroFramework.Controls.MetroLabel lblAcertoInfo;
         private MetroFramework.Controls.MetroButton btnHomeAtualizar;
         public MetroFramework.Controls.MetroPanel pnlVendedorPedidoMontar;
@@ -4323,5 +4114,7 @@
         public System.Windows.Forms.ToolStripMenuItem smnVendedorPedidoIncluir;
         public System.Windows.Forms.ToolStripMenuItem smnVendedorRelatorioPedido;
         public System.Windows.Forms.ToolStripMenuItem smnVendedorRelatorioRetorno;
+        private System.Windows.Forms.MenuStrip menuAcerto;
+        private System.Windows.Forms.ToolStripMenuItem smnReceberPagamentos;
     }
 }

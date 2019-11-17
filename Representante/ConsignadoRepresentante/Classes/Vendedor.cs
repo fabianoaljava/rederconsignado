@@ -332,7 +332,7 @@ namespace ConsignadoRepresentante
 
             var pedido = ModelLibrary.MetodosRepresentante.ObterVendedorPedido(cVendedorId, localRepresentanteForm.cCargaId);
             var vendedor = ModelLibrary.MetodosRepresentante.ObterVendedor(cVendedorId);
-            var receber = ModelLibrary.MetodosRepresentante.ObterAReceberVendedor(cVendedorId);
+            var totaltitulos = ModelLibrary.MetodosRepresentante.ObterTotalTitulos(cVendedorId);
 
             if (vendedor != null)
             {
@@ -346,10 +346,10 @@ namespace ConsignadoRepresentante
             {
                 var creditoutilizado = (pedido.ValorAReceber != null) ? pedido.ValorAReceber : 0;
 
-                if (receber != null)
+                if (totaltitulos != null)
                 {
 
-                    creditoutilizado += ((receber.ValorDuplicata != null) ? receber.ValorDuplicata : 0) - ((receber.ValorRecebido != null) ? receber.ValorRecebido : 0);
+                    creditoutilizado += ((totaltitulos.ValorDuplicata != null) ? totaltitulos.ValorDuplicata : 0) - ((totaltitulos.ValorAReceber != null) ? totaltitulos.ValorAReceber : 0);
 
                 }
 
@@ -369,9 +369,9 @@ namespace ConsignadoRepresentante
 
             } else
             {
-                if (receber != null)
+                if (totaltitulos != null)
                 {                    
-                    localRepresentanteForm.dlbLimiteCreditoUtilizado.Text = (((receber.ValorDuplicata != null) ? receber.ValorDuplicata : 0) - ((receber.ValorRecebido != null) ? receber.ValorRecebido : 0)).ToString();
+                    localRepresentanteForm.dlbLimiteCreditoUtilizado.Text = (((totaltitulos.ValorDuplicata != null) ? totaltitulos.ValorDuplicata : 0) - ((totaltitulos.ValorAReceber != null) ? totaltitulos.ValorAReceber : 0)).ToString();
                 } else
                 {
                     localRepresentanteForm.dlbLimiteCreditoUtilizado.Text = "0";
@@ -463,7 +463,7 @@ namespace ConsignadoRepresentante
 
             localRepresentanteForm.grdVendedorPedido.DataSource = null;
             localRepresentanteForm.grdVendedorRetorno.DataSource = null;
-            localRepresentanteForm.grdFinanceiroRecebimentos.DataSource = null;
+            localRepresentanteForm.grdFinanceiroTitulos.DataSource = null;
 
 
 
@@ -560,7 +560,7 @@ namespace ConsignadoRepresentante
                 ExibirPedido(cVendedorId);
                 ExibirRetornoProduto(cVendedorId);
                 //ExibirAcerto(); //--> Inserido em ExibirPedido
-                ExibirRecebimentos();
+                ExibirTitulos();
                 ExibirInicio();
 
 
@@ -588,7 +588,6 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.pnlVendedorPedidoMontar.Enabled = false;
             localRepresentanteForm.pnlVendedorRetorno.Enabled = false;
             localRepresentanteForm.grpFinanceiroCalculo.Visible = false;
-            localRepresentanteForm.grpRecebimento.Visible = false;
             localRepresentanteForm.lblAcertoInfo.Visible = true;
 
             cVendedorModo = "Create";
@@ -672,7 +671,7 @@ namespace ConsignadoRepresentante
             ExibirPedido(cVendedorId);
             ExibirRetornoProduto(cVendedorId);
             ExibirAcerto();
-            ExibirRecebimentos();
+            ExibirTitulos();
             ExibirInicio();
             localRepresentanteForm.cHome.CarregarFormulario();
             localRepresentanteForm.cFinanceiro.ExibirPosicaoFinancera();
@@ -911,11 +910,9 @@ namespace ConsignadoRepresentante
             if (localRepresentanteForm.grdVendedorPedido.RowCount <= 0)
             {
                 localRepresentanteForm.grpFinanceiroCalculo.Visible = false;
-                localRepresentanteForm.grpRecebimento.Visible = false;
             } else
             {
                 localRepresentanteForm.grpFinanceiroCalculo.Visible = true;
-                localRepresentanteForm.grpRecebimento.Visible = true;
                 ExibirRetornoProduto(cVendedorId);
                 ExibirAcerto();
 
@@ -950,12 +947,12 @@ namespace ConsignadoRepresentante
 
             int countpedidos = ModelLibrary.MetodosRepresentante.ContarPedidos(pVendedorId);
 
-            if (localRepresentanteForm.txtValorRecebido.Text == "" || countpedidos > 1)
-            {
-                localRepresentanteForm.smnVendedorPedidoIncluir.Enabled = false;
-            } else {
-                localRepresentanteForm.smnVendedorPedidoIncluir.Enabled = true;
-            }
+            //if (localRepresentanteForm.txtValorRecebido.Text == "" || countpedidos > 1)
+            //{
+            //    localRepresentanteForm.smnVendedorPedidoIncluir.Enabled = false;
+            //} else {
+            //    localRepresentanteForm.smnVendedorPedidoIncluir.Enabled = true;
+            //}
 
 
 
@@ -982,6 +979,7 @@ namespace ConsignadoRepresentante
         public void PedidoNovo()
         {
 
+            ModelLibrary.MetodosRepresentante.RetornarPedido(cPedidoId);
             ModelLibrary.MetodosRepresentante.InserirPedido(cVendedorId, localRepresentanteForm.cCargaId);
             VendedorReload();
         }
@@ -1477,8 +1475,8 @@ namespace ConsignadoRepresentante
                 }
                 
                 
-                localRepresentanteForm.dlbAcertoAberto.Text = string.Format("{0:N}", cValorTotalAPagar - cValorRecebido);
-                localRepresentanteForm.txtValorRecebido.Text = string.Format("{0:N}", pedido.ValorAcerto);
+                //localRepresentanteForm.dlbAcertoAberto.Text = string.Format("{0:N}", cValorTotalAPagar - cValorRecebido);
+                //localRepresentanteForm.txtValorRecebido.Text = string.Format("{0:N}", pedido.ValorAcerto);
 
 
                 string pedidostatus = "";
@@ -1518,27 +1516,26 @@ namespace ConsignadoRepresentante
         }
 
 
-        public void ExibirRecebimentos()
+        public void ExibirTitulos()
         {
             //carregar grid de recebimentos
 
-            List<ModelLibrary.ListaRecebimentos> recebimentos = ModelLibrary.MetodosRepresentante.ObterListaRecebimentos(cVendedorId);
+            List<ModelLibrary.ListaTitulos> titulos = ModelLibrary.MetodosRepresentante.ObterListaTitulos(cVendedorId);
 
-            BindingListView<ModelLibrary.ListaRecebimentos> view = new BindingListView<ModelLibrary.ListaRecebimentos>(recebimentos);
+            BindingListView<ModelLibrary.ListaTitulos> view = new BindingListView<ModelLibrary.ListaTitulos>(titulos);
 
 
-            localRepresentanteForm.grdFinanceiroRecebimentos.DataSource = view;
+            localRepresentanteForm.grdFinanceiroTitulos.DataSource = view;
 
-            localRepresentanteForm.grdFinanceiroRecebimentos.Columns[0].Visible = false;
-            localRepresentanteForm.grdFinanceiroRecebimentos.Columns[1].Visible = false;
-            localRepresentanteForm.grdFinanceiroRecebimentos.Columns[2].Width = 90;
-            localRepresentanteForm.grdFinanceiroRecebimentos.Columns[3].Width = 40;
-            localRepresentanteForm.grdFinanceiroRecebimentos.Columns[4].DefaultCellStyle.Format = "c";
-            localRepresentanteForm.grdFinanceiroRecebimentos.Columns[5].DefaultCellStyle.Format = "c";
-            localRepresentanteForm.grdFinanceiroRecebimentos.Columns[6].Width = 100;
-            localRepresentanteForm.grdFinanceiroRecebimentos.Columns[7].Width = 100;
-            localRepresentanteForm.grdFinanceiroRecebimentos.Columns[8].Width = 100;
-            localRepresentanteForm.grdFinanceiroRecebimentos.Columns[9].Width = 220;
+            localRepresentanteForm.grdFinanceiroTitulos.Columns[0].Visible = false;
+            localRepresentanteForm.grdFinanceiroTitulos.Columns[1].Width = 90;
+            localRepresentanteForm.grdFinanceiroTitulos.Columns[2].Width = 40;
+            localRepresentanteForm.grdFinanceiroTitulos.Columns[3].DefaultCellStyle.Format = "c";
+            localRepresentanteForm.grdFinanceiroTitulos.Columns[4].DefaultCellStyle.Format = "c";
+            localRepresentanteForm.grdFinanceiroTitulos.Columns[5].Width = 100;
+            localRepresentanteForm.grdFinanceiroTitulos.Columns[6].Width = 100;
+            localRepresentanteForm.grdFinanceiroTitulos.Columns[7].Width = 100;
+            localRepresentanteForm.grdFinanceiroTitulos.Columns[8].Width = 220;
 
 
         }
@@ -1546,17 +1543,17 @@ namespace ConsignadoRepresentante
 
         public void ReceberAcerto()
         {
-            //exibir form de recebimento
+            ////exibir form de recebimento
 
-            if (localRepresentanteForm.txtValorRecebido.Text != "")
-            {
-                ModelLibrary.MetodosRepresentante.ReceberAcerto(cPedidoId, Convert.ToDecimal(localRepresentanteForm.txtValorRecebido.Text));
+            //if (localRepresentanteForm.txtValorRecebido.Text != "")
+            //{
+            //    ModelLibrary.MetodosRepresentante.ReceberAcerto(cPedidoId, Convert.ToDecimal(localRepresentanteForm.txtValorRecebido.Text));
 
-                VendedorReload();
-            } else
-            {
-                MessageBox.Show("Informe o valor recebido!");
-            }
+            //    VendedorReload();
+            //} else
+            //{
+            //    MessageBox.Show("Informe o valor recebido!");
+            //}
                 
 
 
@@ -1566,33 +1563,33 @@ namespace ConsignadoRepresentante
         public void CalcularValorEmAberto()
         {
 
-            cValorRecebido = localRepresentanteForm.txtValorRecebido.Text == "" ? 0 : Convert.ToDecimal(localRepresentanteForm.txtValorRecebido.Text);           
-            localRepresentanteForm.dlbAcertoAberto.Text = string.Format("{0:N}", (cValorTotalAPagar - cValorRecebido));
+            //cValorRecebido = localRepresentanteForm.txtValorRecebido.Text == "" ? 0 : Convert.ToDecimal(localRepresentanteForm.txtValorRecebido.Text);           
+            //localRepresentanteForm.dlbAcertoAberto.Text = string.Format("{0:N}", (cValorTotalAPagar - cValorRecebido));
             
         }
 
         public void DuplicataLimpar()
         {
 
-            cDuplicataId = 0;
-            cDuplicataReceberId = 0;
-            localRepresentanteForm.dlbDuplicataTotal.Text = "";
-            localRepresentanteForm.grpReceberTitulo.Visible = false;
-            localRepresentanteForm.txtValorRecebido.Text = "";
-            localRepresentanteForm.txtDuplicataReceber.Text = "";
-            localRepresentanteForm.lblAcertoInfo.Text = "O vendedor não possui nehum pedido em aberto.";
+            //cDuplicataId = 0;
+            //cDuplicataReceberId = 0;
+            //localRepresentanteForm.dlbDuplicataTotal.Text = "";
+            //localRepresentanteForm.grpReceberTitulo.Visible = false;
+            //localRepresentanteForm.txtValorRecebido.Text = "";
+            //localRepresentanteForm.txtDuplicataReceber.Text = "";
+            //localRepresentanteForm.lblAcertoInfo.Text = "O vendedor não possui nehum pedido em aberto.";
 
         }
 
         public void ExibirDuplicata()
         {
 
-            localRepresentanteForm.grpReceberTitulo.Visible = true;
-            cDuplicataId = localRepresentanteForm.grdFinanceiroRecebimentos.CurrentRow.Cells["Id"].Value == null ? 0 : Convert.ToInt64(localRepresentanteForm.grdFinanceiroRecebimentos.CurrentRow.Cells["Id"].Value);
-            cDuplicataReceberId = Convert.ToInt64(localRepresentanteForm.grdFinanceiroRecebimentos.CurrentRow.Cells["ReceberId"].Value);
-            localRepresentanteForm.txtDuplicataReceber.Text = localRepresentanteForm.grdFinanceiroRecebimentos.CurrentRow.Cells["ValorRecebido"].Value != null ? localRepresentanteForm.grdFinanceiroRecebimentos.CurrentRow.Cells["ValorRecebido"].Value.ToString() : "0";
-            localRepresentanteForm.dlbDuplicataTotal.Text = string.Format("{0:C2}", localRepresentanteForm.grdFinanceiroRecebimentos.CurrentRow.Cells["ValorDuplicata"].Value);
-            localRepresentanteForm.txtDuplicataReceber.Focus();
+            //localRepresentanteForm.grpReceberTitulo.Visible = true;
+            //cDuplicataId = localRepresentanteForm.grdFinanceiroRecebimentos.CurrentRow.Cells["Id"].Value == null ? 0 : Convert.ToInt64(localRepresentanteForm.grdFinanceiroRecebimentos.CurrentRow.Cells["Id"].Value);
+            //cDuplicataReceberId = Convert.ToInt64(localRepresentanteForm.grdFinanceiroRecebimentos.CurrentRow.Cells["ReceberId"].Value);
+            //localRepresentanteForm.txtDuplicataReceber.Text = localRepresentanteForm.grdFinanceiroRecebimentos.CurrentRow.Cells["ValorRecebido"].Value != null ? localRepresentanteForm.grdFinanceiroRecebimentos.CurrentRow.Cells["ValorRecebido"].Value.ToString() : "0";
+            //localRepresentanteForm.dlbDuplicataTotal.Text = string.Format("{0:C2}", localRepresentanteForm.grdFinanceiroRecebimentos.CurrentRow.Cells["ValorDuplicata"].Value);
+            //localRepresentanteForm.txtDuplicataReceber.Focus();
 
 
         }
@@ -1600,24 +1597,24 @@ namespace ConsignadoRepresentante
         public void ReceberDuplicata()
         {
 
-            if (localRepresentanteForm.txtDuplicataReceber.Text != "")
-            {
+            //if (localRepresentanteForm.txtDuplicataReceber.Text != "")
+            //{
 
-                if (Convert.ToDecimal(localRepresentanteForm.txtDuplicataReceber.Text) <= Convert.ToDecimal(localRepresentanteForm.grdFinanceiroRecebimentos.CurrentRow.Cells["ValorDuplicata"].Value))
-                {
-                    ModelLibrary.MetodosRepresentante.ReceberDuplicata(cDuplicataId, cDuplicataReceberId, localRepresentanteForm.cCargaId, Convert.ToDecimal(localRepresentanteForm.txtDuplicataReceber.Text));
-                    //ExibirRecebimentos();
-                    VendedorReload();
-                    DuplicataLimpar();
-                } else
-                {
-                    MessageBox.Show("O valor informado está acima do valor da duplicata, por favor, verifique os dados digitados", "Acerto - Receber Duplicata", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
+            //    if (Convert.ToDecimal(localRepresentanteForm.txtDuplicataReceber.Text) <= Convert.ToDecimal(localRepresentanteForm.grdFinanceiroRecebimentos.CurrentRow.Cells["ValorDuplicata"].Value))
+            //    {
+            //        ModelLibrary.MetodosRepresentante.ReceberDuplicata(cDuplicataId, cDuplicataReceberId, localRepresentanteForm.cCargaId, Convert.ToDecimal(localRepresentanteForm.txtDuplicataReceber.Text));
+            //        //ExibirTitulos();
+            //        VendedorReload();
+            //        DuplicataLimpar();
+            //    } else
+            //    {
+            //        MessageBox.Show("O valor informado está acima do valor da duplicata, por favor, verifique os dados digitados", "Acerto - Receber Duplicata", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //    }
 
-            } else
-            {
-                MessageBox.Show("Informe o valor recebido da duplicata!");
-            }
+            //} else
+            //{
+            //    MessageBox.Show("Informe o valor recebido da duplicata!");
+            //}
 
             
 

@@ -222,6 +222,22 @@
           <Property Name="DataPagamento" Type="datetime" />
           <Property Name="DataBaixa" Type="datetime" />
         </EntityType>
+        <EntityType Name="RepRecebimento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" Nullable="false" />
+          <Property Name="Tipo" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="CargaId" Type="integer" />
+          <Property Name="VendedorId" Type="integer" Nullable="false" />
+          <Property Name="ReceberId" Type="integer" />
+          <Property Name="PedidoId" Type="integer" />
+          <Property Name="CodigoPedido" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="ValorRecebido" Type="decimal" Precision="53" Scale="0" />
+          <Property Name="DataPagamento" Type="datetime" />
+          <Property Name="FormaPagamento" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Observacao" Type="nvarchar" MaxLength="2147483647" />
+        </EntityType>
         <EntityType Name="RepSuplemento">
           <Key>
             <PropertyRef Name="Id" />
@@ -352,6 +368,7 @@ warning 6002: The table/view 'main.RepRepresentante' does not have a primary key
           <EntitySet Name="RepProdutoGrade" EntityType="Self.RepProdutoGrade" store:Type="Tables" />
           <EntitySet Name="RepReceber" EntityType="Self.RepReceber" store:Type="Tables" />
           <EntitySet Name="RepReceberBaixa" EntityType="Self.RepReceberBaixa" store:Type="Tables" />
+          <EntitySet Name="RepRecebimento" EntityType="Self.RepRecebimento" store:Type="Tables" />
           <EntitySet Name="RepSuplemento" EntityType="Self.RepSuplemento" store:Type="Tables" />
           <EntitySet Name="RepSuplementoProduto" EntityType="Self.RepSuplementoProduto" store:Type="Tables" />
           <EntitySet Name="RepUsuario" EntityType="Self.RepUsuario" store:Type="Tables" />
@@ -517,6 +534,7 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <EntitySet Name="RepSuplementoProduto" EntityType="ModelRepresentante.RepSuplementoProduto" />
           <EntitySet Name="RepSuplemento" EntityType="ModelRepresentante.RepSuplemento" />
           <EntitySet Name="RepPedidoes" EntityType="ModelRepresentante.RepPedido" />
+          <EntitySet Name="RepRecebimentoes" EntityType="ModelRepresentante.RepRecebimento" />
         </EntityContainer>
         <EntityType Name="RepRepresentante">
           <Key>
@@ -719,6 +737,22 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <Property Name="ValorAReceber" Type="Decimal" Precision="53" Scale="0" />
           <Property Name="CargaOriginal" Type="Int64" />
           <Property Name="QuantidadeRemarcado" Type="Int64" />
+        </EntityType>
+        <EntityType Name="RepRecebimento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Tipo" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="CargaId" Type="Int64" />
+          <Property Name="VendedorId" Type="Int64" Nullable="false" />
+          <Property Name="ReceberId" Type="Int64" />
+          <Property Name="PedidoId" Type="Int64" />
+          <Property Name="CodigoPedido" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="ValorRecebido" Type="Decimal" Precision="53" Scale="0" />
+          <Property Name="DataPagamento" Type="DateTime" />
+          <Property Name="Observacao" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="FormaPagamento" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1071,6 +1105,23 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
                 <ScalarProperty Name="CodigoPedido" ColumnName="CodigoPedido" />
                 <ScalarProperty Name="CargaId" ColumnName="CargaId" />
                 <ScalarProperty Name="VendedorId" ColumnName="VendedorId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RepRecebimentoes">
+            <EntityTypeMapping TypeName="ModelRepresentante.RepRecebimento">
+              <MappingFragment StoreEntitySet="RepRecebimento">
+                <ScalarProperty Name="FormaPagamento" ColumnName="FormaPagamento" />
+                <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+                <ScalarProperty Name="DataPagamento" ColumnName="DataPagamento" />
+                <ScalarProperty Name="ValorRecebido" ColumnName="ValorRecebido" />
+                <ScalarProperty Name="CodigoPedido" ColumnName="CodigoPedido" />
+                <ScalarProperty Name="PedidoId" ColumnName="PedidoId" />
+                <ScalarProperty Name="ReceberId" ColumnName="ReceberId" />
+                <ScalarProperty Name="VendedorId" ColumnName="VendedorId" />
+                <ScalarProperty Name="CargaId" ColumnName="CargaId" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

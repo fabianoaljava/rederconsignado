@@ -811,6 +811,8 @@ namespace ModelLibrary
         }
 
 
+
+
         public static RepPedido ObterVendedorPedido(long pVendedorId, long pCargaId)
         {
             using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
@@ -820,6 +822,28 @@ namespace ModelLibrary
             }
             
         }
+
+
+        public static List<RepPedido> ObterVendedorPedidos(long pVendedorId, long pCargaId)
+        {
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+                List<RepPedido> pedidos = representante.RepPedido.OrderByDescending(i => i.Id).Where(p => p.VendedorId == pVendedorId && p.CargaId == pCargaId).ToList<RepPedido>();
+                return pedidos;
+            }
+
+        }
+
+        public static RepPedido ObterPedido(long pPedidoId)
+        {
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+                var pedido = representante.RepPedido.OrderByDescending(i => i.Id).FirstOrDefault(p => p.Id == pPedidoId);
+                return pedido;
+            }
+
+        }
+
         public static int ContarPedidos(long pVendedorId)
         {
             using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
@@ -829,41 +853,6 @@ namespace ModelLibrary
             }
 
         }
-
-
-        public static List<ListaRepVendedorPedido> ObterVendedorPedidoItem(long pPedidoId)
-        {
-            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
-            {
-
-                var result = representante.RepPedido
-                           .Join(representante.RepPedidoItem, pd => pd.Id, pi => pi.PedidoId, (pd, pi) => new { RepPedido = pd, RepPedidoItem = pi })
-                           .Join(representante.RepProdutoGrade, pi => pi.RepPedidoItem.ProdutoGradeId, pg => pg.Id, (pi, pg) => new { RepPedidoItem = pi, RepProdutoGrade = pg })
-                           .Join(representante.RepProduto, pg => pg.RepProdutoGrade.ProdutoId, pr => pr.Id, (pg, pr) => new { RepProdutoGrade = pg, RepProduto = pr })
-                           .Where(pd => pd.RepProdutoGrade.RepPedidoItem.RepPedido.Id == pPedidoId)
-                           .Select(ls => new ListaRepVendedorPedido()
-                           {
-                               Id = ls.RepProdutoGrade.RepPedidoItem.RepPedidoItem.Id,
-                               PedidoId = ls.RepProdutoGrade.RepPedidoItem.RepPedido.Id,
-                               ProdutoGradeId = ls.RepProdutoGrade.RepProdutoGrade.Id,
-                               CodigoBarras = ls.RepProdutoGrade.RepProdutoGrade.CodigoBarras + ls.RepProdutoGrade.RepProdutoGrade.Digito,
-                               Descricao = ls.RepProduto.Descricao,
-                               Cor = ls.RepProdutoGrade.RepProdutoGrade.Cor,
-                               Tamanho = ls.RepProdutoGrade.RepProdutoGrade.Tamanho,
-                               Quantidade = ls.RepProdutoGrade.RepPedidoItem.RepPedidoItem.Quantidade,
-                               Retorno = ls.RepProdutoGrade.RepPedidoItem.RepPedidoItem.Retorno,
-                               Preco = ls.RepProdutoGrade.RepPedidoItem.RepPedidoItem.Preco
-                           })
-                           .OrderBy(pd => pd.CodigoBarras) ;
-
-
-                //.Where(pd => pd.RepProdutoGrade.RepPedidoItem.RepPedido.VendedorId == pVendedorId && pd.RepProdutoGrade.RepPedidoItem.RepPedido.CargaId == pCargaId)
-
-                return result.ToList<ListaRepVendedorPedido>();
-
-            }
-        }
-
 
 
 
@@ -882,9 +871,19 @@ namespace ModelLibrary
                 long newId = maxPedido == null ? 1 : maxPedido.Id + 1;
 
                 var carga = representante.RepCarga.FirstOrDefault();
+                
 
 
                 var pedidoanterior = representante.RepPedido.FirstOrDefault(pd => pd.VendedorId == pVendedorId);
+
+
+                if (pedidoanterior != null)
+                {                    
+                    pedidoanterior.Status = "3";                    
+                }
+
+
+
 
 
                 /***********
@@ -895,7 +894,7 @@ namespace ModelLibrary
                  * 
                 */
 
-                
+
 
                 string vCodigoPedido = "";
 
@@ -932,6 +931,8 @@ namespace ModelLibrary
                 };
 
                 representante.RepPedido.Add(novopedido);
+
+
 
 
                 representante.SaveChanges();
@@ -999,7 +1000,7 @@ namespace ModelLibrary
 
         }
 
-        public static void RetornarPedido(long pPedidoId, decimal pQuantidade, decimal pRetorno, decimal pPreco)
+        public static void RetornarPedido(long pPedidoId)
         {
 
             using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
@@ -1068,6 +1069,39 @@ namespace ModelLibrary
 
         }
 
+
+        public static List<ListaRepVendedorPedido> ObterVendedorPedidoItem(long pPedidoId)
+        {
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+
+                var result = representante.RepPedido
+                           .Join(representante.RepPedidoItem, pd => pd.Id, pi => pi.PedidoId, (pd, pi) => new { RepPedido = pd, RepPedidoItem = pi })
+                           .Join(representante.RepProdutoGrade, pi => pi.RepPedidoItem.ProdutoGradeId, pg => pg.Id, (pi, pg) => new { RepPedidoItem = pi, RepProdutoGrade = pg })
+                           .Join(representante.RepProduto, pg => pg.RepProdutoGrade.ProdutoId, pr => pr.Id, (pg, pr) => new { RepProdutoGrade = pg, RepProduto = pr })
+                           .Where(pd => pd.RepProdutoGrade.RepPedidoItem.RepPedido.Id == pPedidoId)
+                           .Select(ls => new ListaRepVendedorPedido()
+                           {
+                               Id = ls.RepProdutoGrade.RepPedidoItem.RepPedidoItem.Id,
+                               PedidoId = ls.RepProdutoGrade.RepPedidoItem.RepPedido.Id,
+                               ProdutoGradeId = ls.RepProdutoGrade.RepProdutoGrade.Id,
+                               CodigoBarras = ls.RepProdutoGrade.RepProdutoGrade.CodigoBarras + ls.RepProdutoGrade.RepProdutoGrade.Digito,
+                               Descricao = ls.RepProduto.Descricao,
+                               Cor = ls.RepProdutoGrade.RepProdutoGrade.Cor,
+                               Tamanho = ls.RepProdutoGrade.RepProdutoGrade.Tamanho,
+                               Quantidade = ls.RepProdutoGrade.RepPedidoItem.RepPedidoItem.Quantidade,
+                               Retorno = ls.RepProdutoGrade.RepPedidoItem.RepPedidoItem.Retorno,
+                               Preco = ls.RepProdutoGrade.RepPedidoItem.RepPedidoItem.Preco
+                           })
+                           .OrderBy(pd => pd.CodigoBarras);
+
+
+                //.Where(pd => pd.RepProdutoGrade.RepPedidoItem.RepPedido.VendedorId == pVendedorId && pd.RepProdutoGrade.RepPedidoItem.RepPedido.CargaId == pCargaId)
+
+                return result.ToList<ListaRepVendedorPedido>();
+
+            }
+        }
 
 
         public static void InserirPedidoItem(long pCargaId, long pVendedorId, long pProdutoGradeId, decimal pQuantidade, decimal pPreco)
@@ -1209,7 +1243,7 @@ namespace ModelLibrary
                     representante.SaveChanges();
 
 
-                    RetornarPedido(pedidoitem.PedidoId, Convert.ToDecimal(pedidoitem.Quantidade), pQuantidade, Convert.ToDecimal(pedidoitem.Preco));
+                    RetornarPedido(pedidoitem.PedidoId);
 
                 }
             }
@@ -1226,22 +1260,22 @@ namespace ModelLibrary
 
         }
 
-        public static List<ListaRecebimentos> ObterListaRecebimentos(long pVendedorId)
+        public static List<ListaTitulos> ObterListaTitulos(long pVendedorId)
         {
 
 
             using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                string query = @"SELECT RepReceberBaixa.Id, RepReceber.Id ReceberId, Documento, Serie, ValorNF 
-                                as ValorDuplicata, Valor as ValorRecebido, DataEmissao, DataVencimento, 
-                                RepReceberBaixa.DataPagamento, Observacoes 
-                                FROM RepReceber LEFT JOIN RepReceberBaixa ON RepReceber.Id = RepReceberBaixa.ReceberId 
-                                WHERE vendedorId = @p0";  
+                string query = @"SELECT Id, Documento, Serie, ValorNF 
+                                as ValorDuplicata, ValorDuplicata-ValorAReceber ValorAReceber, DataEmissao, DataVencimento, 
+                                DataPagamento, Observacoes 
+                                FROM RepReceber 
+                                WHERE RepReceber.vendedorId = @p0";  
 
-                var result = representante.Database.SqlQuery<ListaRecebimentos>(query, pVendedorId);
+                var result = representante.Database.SqlQuery<ListaTitulos>(query, pVendedorId);
 
-                return result.ToList<ListaRecebimentos>();
+                return result.ToList<ListaTitulos>();
 
 
             }
@@ -1249,7 +1283,7 @@ namespace ModelLibrary
         }
 
 
-        public static ListaRecebimentos ObterAReceberVendedor(long pVendedorId)
+        public static ListaTitulos ObterTotalTitulos(long pVendedorId)
         {
             using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
@@ -1260,12 +1294,133 @@ namespace ModelLibrary
                                 FROM RepReceber LEFT JOIN RepReceberBaixa ON RepReceber.Id = RepReceberBaixa.ReceberId 
                                 WHERE vendedorId = @p0";
 
-                ListaRecebimentos result = representante.Database.SqlQuery<ListaRecebimentos>(query, pVendedorId).FirstOrDefault();
+                ListaTitulos result = representante.Database.SqlQuery<ListaTitulos>(query, pVendedorId).FirstOrDefault();
 
                 return result;
 
             }
         }
+
+        public static RepRecebimento ObterRecebimento(long pRecebimentoId)
+        {
+
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+
+                var recebimento = representante.RepRecebimento.FirstOrDefault(rc => rc.Id == pRecebimentoId);
+                return recebimento;
+
+            }
+
+        }
+
+
+        public static List<ListaRecebimento> ObterListaRecebimento(long pVendedorId)
+        {
+
+
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+
+                string query = @"SELECT 
+                                    CASE 
+                                        WHEN PedidoId != 0 THEN 'Pedido:' || CodigoPedido
+                                        WHEN ReceberId != 0 THEN 'Titulo:' || RepReceber.Documento || '/' || RepReceber.Serie
+                                        ELSE '' END as Referencia, 
+                                    ValorRecebido, RepRecebimento.DataPagamento, FormaPagamento, Observacao, RepRecebimento.Id, 
+                                    RepRecebimento.CargaId, RepRecebimento.VendedorId, ReceberId, PedidoId, CodigoPedido 
+                                        FROM RepRecebimento
+                                            LEFT JOIN RepReceber ON RepReceber.VendedorId = RepRecebimento.VendedorId
+                                    WHERE RepRecebimento.VendedorId = @p0";
+
+                var result = representante.Database.SqlQuery<ListaRecebimento>(query, pVendedorId);
+
+                return result.ToList<ListaRecebimento>();
+
+
+            }
+
+        }
+
+
+
+        public static void InserirRecebimento(string pTipo, long pCargaId, long pVendedorId, decimal pValorRecebido, string pFormaPagamento, string pObservacao, long pReceberId = 0, long pPedidoId = 0, string pCodigoPedido = "")
+        {
+
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+                var maxRecebimento = representante.RepRecebimento.OrderByDescending(i => i.Id).FirstOrDefault();
+
+                long newId = maxRecebimento == null ? 1 : maxRecebimento.Id + 1;
+
+                var novorecebimento = new RepRecebimento
+                {
+                    Id = newId,
+                    Tipo = pTipo,                    
+                    CargaId = pCargaId,
+                    VendedorId = pVendedorId,
+                    ReceberId = pReceberId,
+                    PedidoId = pPedidoId,
+                    CodigoPedido = pCodigoPedido,
+                    ValorRecebido = pValorRecebido,
+                    DataPagamento = DateTime.Now,
+                    FormaPagamento = pFormaPagamento,
+                    Observacao = pObservacao                    
+                };
+
+                representante.RepRecebimento.Add(novorecebimento);
+
+
+                representante.SaveChanges();
+
+
+                //atualizar tabela Pedido / Receber
+            }
+
+        }
+
+        public static void AlterarRecebimento(long pRecebimentoId, decimal pValorRecebido, string pFormaPagamento, string pObservacao)
+        {
+
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+
+
+                var recebimento = representante.RepRecebimento.FirstOrDefault(rc => rc.Id == pRecebimentoId);
+
+
+                if (recebimento != null)
+                {
+                    recebimento.ValorRecebido = pValorRecebido;
+                    recebimento.FormaPagamento = pFormaPagamento;
+                    recebimento.Observacao = pObservacao;
+
+                    representante.SaveChanges();
+                }
+
+                representante.SaveChanges();
+
+
+                //atualizar tabela Pedido / Receber -- tratar alteração de valor
+            }
+
+
+
+        }
+
+
+        public static void ExcluirRecebimento(long pRecebimentoId)
+        {
+
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+
+
+                representante.Database.ExecuteSqlCommand("DELETE FROM RepRecebimento WHERE Id = @pRecebimentoId", new SQLiteParameter("@pRecebimentoId", pRecebimentoId));
+            }
+
+        }
+
 
 
         public static void ReceberAcerto(long pPedidoId, decimal pValor)

@@ -228,6 +228,22 @@
           <Property Name="DataBaixa" Type="date" />
           <Property Name="temp_old_id" Type="int" />
         </EntityType>
+        <EntityType Name="Recebimento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tipo" Type="nvarchar" MaxLength="22" />
+          <Property Name="CargaId" Type="int" />
+          <Property Name="VendedorId" Type="int" Nullable="false" />
+          <Property Name="ReceberId" Type="int" />
+          <Property Name="PedidoId" Type="int" />
+          <Property Name="CodigoPedido" Type="nvarchar" MaxLength="24" />
+          <Property Name="ValorRecebido" Type="float" />
+          <Property Name="DataPagamento" Type="date" />
+          <Property Name="FormaPagamento" Type="nvarchar" MaxLength="22" />
+          <Property Name="Observacao" Type="ntext" />
+        </EntityType>
         <EntityType Name="Tamanho">
           <Key>
             <PropertyRef Name="Id" />
@@ -549,6 +565,7 @@ warning 6002: The table/view 'RederConsignado.dbo.Representante' does not have a
           <EntitySet Name="ProdutoGrade" EntityType="Self.ProdutoGrade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Receber" EntityType="Self.Receber" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReceberBaixa" EntityType="Self.ReceberBaixa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recebimento" EntityType="Self.Recebimento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tamanho" EntityType="Self.Tamanho" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vendedor" EntityType="Self.Vendedor" Schema="dbo" store:Type="Tables" />
@@ -1013,6 +1030,7 @@ warning 6002: The table/view 'RederConsignado.dbo.Representante' does not have a
             <End Role="ProdutoGrade" EntitySet="ProdutoGrade" />
             <End Role="Estoque" EntitySet="Estoque" />
           </AssociationSet>
+          <EntitySet Name="Recebimento" EntityType="ModelDeposito.Recebimento" />
         </EntityContainer>
         <EntityType Name="Cidade">
           <Key>
@@ -1316,6 +1334,22 @@ warning 6002: The table/view 'RederConsignado.dbo.Representante' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Recebimento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tipo" Type="String" MaxLength="22" FixedLength="false" Unicode="true" />
+          <Property Name="CargaId" Type="Int32" />
+          <Property Name="VendedorId" Type="Int32" Nullable="false" />
+          <Property Name="ReceberId" Type="Int32" />
+          <Property Name="PedidoId" Type="Int32" />
+          <Property Name="CodigoPedido" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="ValorRecebido" Type="Double" />
+          <Property Name="DataPagamento" Type="DateTime" Precision="0" />
+          <Property Name="Observacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FormaPagamento" Type="String" MaxLength="22" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1654,6 +1688,23 @@ warning 6002: The table/view 'RederConsignado.dbo.Representante' does not have a
                 <ScalarProperty Name="Endereco" ColumnName="Endereco" />
                 <ScalarProperty Name="RazaoSocial" ColumnName="RazaoSocial" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recebimento">
+            <EntityTypeMapping TypeName="ModelDeposito.Recebimento">
+              <MappingFragment StoreEntitySet="Recebimento">
+                <ScalarProperty Name="FormaPagamento" ColumnName="FormaPagamento" />
+                <ScalarProperty Name="Observacao" ColumnName="Observacao" />
+                <ScalarProperty Name="DataPagamento" ColumnName="DataPagamento" />
+                <ScalarProperty Name="ValorRecebido" ColumnName="ValorRecebido" />
+                <ScalarProperty Name="CodigoPedido" ColumnName="CodigoPedido" />
+                <ScalarProperty Name="PedidoId" ColumnName="PedidoId" />
+                <ScalarProperty Name="ReceberId" ColumnName="ReceberId" />
+                <ScalarProperty Name="VendedorId" ColumnName="VendedorId" />
+                <ScalarProperty Name="CargaId" ColumnName="CargaId" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -543,8 +543,8 @@ namespace ConsignadoRepresentante
 
         private void btnAcertoCancelar_Click(object sender, EventArgs e)
         {
-            txtValorRecebido.Text = "";
-            cVendedor.CalcularValorEmAberto();
+            //txtValorRecebido.Text = "";
+            //cVendedor.CalcularValorEmAberto();
         }
 
 
@@ -725,8 +725,38 @@ namespace ConsignadoRepresentante
 
         private void smnVendedorPedidoIncluir_Click(object sender, EventArgs e)
         {
-            tbcVendedor.SelectedTab = tabVendedorPedidos;
-            cVendedor.PedidoNovo();
+
+            Boolean vAlerta;
+
+            int vTotal = 0;
+
+            for (int i = 0; i < grdVendedorRetorno.Rows.Count; i++)
+            {
+                if (grdVendedorRetorno.Rows[i].Cells[8] != null && grdVendedorRetorno.Rows[i].Cells[8].Value != null)
+                {
+                    vTotal += int.Parse(grdVendedorRetorno.Rows[i].Cells[8].Value.ToString());
+                }
+            }
+
+            if (vTotal <= 0)
+            {
+                vAlerta = MessageBox.Show("Os produtos do pedido atual ainda não foram retornados. Deseja realmente incluir novo pedido? ATENÇÂO: Caso confirme essa ação, NÃO será possível RETORNAR produtos ao pedido.", "Retornar Produtos", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes;
+            }
+            else
+            {
+                vAlerta = true;
+            }
+
+            if (vAlerta)
+            {
+                tbcVendedor.SelectedTab = tabVendedorPedidos;
+                cVendedor.PedidoNovo();
+            }
+
+
+
+
+
         }
 
         private void smnVendedorRelatorioRetorno_Click(object sender, EventArgs e)
@@ -833,6 +863,13 @@ namespace ConsignadoRepresentante
                 //formRelatorio.crvRelatorio.RefreshReport();
             }
 
+        }
+
+        private void smnReceberPagamentos_Click(object sender, EventArgs e)
+        {
+            Modal.FormReceberPagamento formReceberPagamento = new Modal.FormReceberPagamento(this);
+
+            var result = formReceberPagamento.ShowDialog();
         }
     }
 }
