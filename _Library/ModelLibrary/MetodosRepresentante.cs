@@ -675,7 +675,7 @@ namespace ModelLibrary
                                     FROM RepVendedor
                                     LEFT JOIN (SELECT VendedorId, CodigoPedido, DataRetorno, ValorAcerto FROM RepPedido WHERE CargaId = CargaOriginal) AS PedidoAtual ON RepVendedor.Id = PedidoAtual.VendedorId
                                     LEFT JOIN (SELECT VendedorId, SUM(QuantidadeRemarcado)-1 QuantidadeRemarcado, SUM(ValorLiquido - ValorAcerto) ValorAberto, ValorAcerto as ValorRecebido FROM RepPedido WHERE CargaId != CargaOriginal GROUP BY VendedorId) AS PedidoAnterior ON RepVendedor.Id = PedidoAnterior.VendedorId
-                                    LEFT JOIN (SELECT DISTINCT VendedorId as Receber FROM RepReceber WHERE DataPagamento IS NULL) AS Receber ON RepVendedor.Id = Receber.Receber";
+                                    LEFT JOIN (SELECT DISTINCT VendedorId as Receber FROM RepReceber WHERE ValorAReceber > 0) AS Receber ON RepVendedor.Id = Receber.Receber";
 
 
                 if (pFiltro != "") query += " WHERE " + pFiltro;
@@ -879,7 +879,7 @@ namespace ModelLibrary
 
                 if (pedidoanterior != null)
                 {                    
-                    pedidoanterior.Status = "3";                    
+                    pedidoanterior.Status = "4";                    
                 }
 
 
@@ -909,7 +909,7 @@ namespace ModelLibrary
                 var novopedido = new RepPedido
                 {
                     Id = newId,
-                    VendedorId = pVendedorId,                    
+                    VendedorId = pVendedorId,
                     CargaId = pCargaId,
                     CargaOriginal = pCargaId,
                     RepresentanteId = carga.RepresentanteId,
@@ -923,7 +923,7 @@ namespace ModelLibrary
                     PercentualFaixa = 0,
                     ValorComissao = 0,
                     ValorLiquido = 0,
-                    ValorAReceber = pedidoanterior == null ? 0 : pedidoanterior.ValorLiquido - pedidoanterior.ValorAcerto,
+                    ValorAReceber = pedidoanterior == null ? 0 : decimal.Round(Convert.ToDecimal(pedidoanterior.ValorLiquido - pedidoanterior.ValorAcerto), 2),
                     ValorAcerto = null,
                     QuantidadeRemarcado = 0,
                     Remarcado = 0,
@@ -955,15 +955,15 @@ namespace ModelLibrary
                 if (pedido != null)
                 {
 
-                    var tmpValor = pedido.ValorPedido;
+                    decimal tmpValor = Convert.ToDecimal(pedido.ValorPedido);
 
 
                     Console.WriteLine("ValorTotal:" + tmpValor.ToString());
 
 
 
-                    pedido.ValorPedido = (tmpValor + pValor);
-                    pedido.ValorCompra = (tmpValor + pValor);
+                    pedido.ValorPedido = decimal.Round((tmpValor + pValor),2);
+                    pedido.ValorCompra = decimal.Round((tmpValor + pValor),2);
                     if (pedido.ValorPedido == 0)
                     {
                         pedido.PercentualCompra = 0;
@@ -987,9 +987,9 @@ namespace ModelLibrary
                         pedido.FaixaComissao = 100;
                         pedido.PercentualFaixa = 45;                    
                     }
-
-                    pedido.ValorComissao = pedido.ValorCompra * (pedido.PercentualFaixa/100);
-                    pedido.ValorLiquido = pedido.ValorCompra - pedido.ValorComissao;
+                    
+                    pedido.ValorComissao = decimal.Round(Convert.ToDecimal(pedido.ValorCompra * (pedido.PercentualFaixa / 100)), 2);
+                    pedido.ValorLiquido = decimal.Round(Convert.ToDecimal(pedido.ValorCompra - pedido.ValorComissao),2);
 
                     representante.SaveChanges();
                 }
@@ -1032,11 +1032,11 @@ namespace ModelLibrary
 
 
 
-                    var tmpValor = pedidoitem.valortotal; // + (pQuantidade - pRetorno) * pPreco;
+                    decimal tmpValor = Convert.ToDecimal(pedidoitem.valortotal); // + (pQuantidade - pRetorno) * pPreco;
                     
                     Console.WriteLine("ValorTotal:" + tmpValor.ToString());
 
-                    pedido.ValorCompra = tmpValor;
+                    pedido.ValorCompra = decimal.Round(tmpValor,2);
                     pedido.PercentualCompra = (pedido.ValorCompra / pedido.ValorPedido)*100;
 
 
@@ -1056,8 +1056,10 @@ namespace ModelLibrary
                         pedido.PercentualFaixa = 45;
                     }
 
-                    pedido.ValorComissao = pedido.ValorCompra * (pedido.PercentualFaixa / 100);
-                    pedido.ValorLiquido = pedido.ValorCompra - pedido.ValorComissao;
+                    pedido.ValorComissao = decimal.Round(Convert.ToDecimal(pedido.ValorCompra * (pedido.PercentualFaixa / 100)), 2);
+                    pedido.ValorLiquido = decimal.Round(Convert.ToDecimal(pedido.ValorCompra - pedido.ValorComissao), 2);
+
+
 
                     representante.SaveChanges();
 
@@ -1260,6 +1262,20 @@ namespace ModelLibrary
 
         }
 
+        public static RepReceber ObterTitulo(long pReceberId)
+        {
+
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+
+                var receber = representante.RepReceber.FirstOrDefault(rc => rc.Id == pReceberId);
+
+                return receber;
+
+            }
+
+        }
+
         public static List<ListaTitulos> ObterListaTitulos(long pVendedorId)
         {
 
@@ -1268,7 +1284,7 @@ namespace ModelLibrary
             {
 
                 string query = @"SELECT Id, Documento, Serie, ValorNF 
-                                as ValorDuplicata, ValorDuplicata-ValorAReceber ValorAReceber, DataEmissao, DataVencimento, 
+                                as ValorDuplicata, ValorAReceber, DataEmissao, DataVencimento, 
                                 DataPagamento, Observacoes 
                                 FROM RepReceber 
                                 WHERE RepReceber.vendedorId = @p0";  
@@ -1330,7 +1346,7 @@ namespace ModelLibrary
                                     ValorRecebido, RepRecebimento.DataPagamento, FormaPagamento, Observacao, RepRecebimento.Id, 
                                     RepRecebimento.CargaId, RepRecebimento.VendedorId, ReceberId, PedidoId, CodigoPedido 
                                         FROM RepRecebimento
-                                            LEFT JOIN RepReceber ON RepReceber.VendedorId = RepRecebimento.VendedorId
+                                            LEFT JOIN RepReceber ON RepReceber.VendedorId = RepRecebimento.VendedorId AND RepReceber.Id = ReceberId
                                     WHERE RepRecebimento.VendedorId = @p0";
 
                 var result = representante.Database.SqlQuery<ListaRecebimento>(query, pVendedorId);
@@ -1370,11 +1386,17 @@ namespace ModelLibrary
 
                 representante.RepRecebimento.Add(novorecebimento);
 
+                //atualizar tabela Pedido / Receber
+
+                if (pPedidoId != 0)
+                    ReceberPedido(pPedidoId, pValorRecebido);
+
+                if (pReceberId != 0)
+                    ReceberTitulo(pReceberId, pCargaId, pValorRecebido);
+
 
                 representante.SaveChanges();
 
-
-                //atualizar tabela Pedido / Receber
             }
 
         }
@@ -1391,17 +1413,36 @@ namespace ModelLibrary
 
                 if (recebimento != null)
                 {
-                    recebimento.ValorRecebido = pValorRecebido;
+
+                    decimal tmpValor = decimal.Round(Convert.ToDecimal(recebimento.ValorRecebido),2);
+
+                    recebimento.ValorRecebido = decimal.Round(pValorRecebido,2);
                     recebimento.FormaPagamento = pFormaPagamento;
                     recebimento.Observacao = pObservacao;
 
                     representante.SaveChanges();
+
+
+                    //atualizar tabela Pedido / Receber -- tratar alteração de valor
+                    if (recebimento.PedidoId != null && recebimento.PedidoId != 0)
+                        ReceberPedido(Convert.ToInt64(recebimento.PedidoId), pValorRecebido, tmpValor);
+
+
+                    if (recebimento.ReceberId != null && recebimento.ReceberId != 0)
+                        ReceberTitulo(Convert.ToInt32(recebimento.ReceberId), Convert.ToInt32(recebimento.CargaId), decimal.Round(pValorRecebido,2), decimal.Round(tmpValor,2));
+
+
+
+
                 }
 
                 representante.SaveChanges();
 
 
-                //atualizar tabela Pedido / Receber -- tratar alteração de valor
+                
+
+
+
             }
 
 
@@ -1415,15 +1456,29 @@ namespace ModelLibrary
             using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
+                var recebimento = representante.RepRecebimento.FirstOrDefault(rc => rc.Id == pRecebimentoId);
 
-                representante.Database.ExecuteSqlCommand("DELETE FROM RepRecebimento WHERE Id = @pRecebimentoId", new SQLiteParameter("@pRecebimentoId", pRecebimentoId));
+                if (recebimento != null)
+                {
+                   
+                    if (recebimento.PedidoId != null && recebimento.PedidoId != 0)
+                        ReceberPedido(Convert.ToInt32(recebimento.PedidoId), 0, Convert.ToDecimal(recebimento.ValorRecebido));
+
+                    if (recebimento.ReceberId != null && recebimento.ReceberId != 0)
+                        ReceberTitulo(Convert.ToInt32(recebimento.ReceberId), Convert.ToInt32(recebimento.CargaId), 0, Convert.ToDecimal(recebimento.ValorRecebido));
+
+                    representante.Database.ExecuteSqlCommand("DELETE FROM RepRecebimento WHERE Id = @pRecebimentoId", new SQLiteParameter("@pRecebimentoId", pRecebimentoId));
+
+                    representante.SaveChanges();
+                }
+
             }
 
         }
 
 
 
-        public static void ReceberAcerto(long pPedidoId, decimal pValor)
+        public static void ReceberPedido(long pPedidoId, decimal pValor, decimal? pValorAnterior = null)
         {
 
             using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
@@ -1435,12 +1490,22 @@ namespace ModelLibrary
                 if (pedido != null)
                 {
 
+
                     if (pedido.DataRetorno == null) {
 
                         pedido.DataRetorno = DateTime.Now.Date;
                     }
 
-                    pedido.ValorAcerto = pValor;
+                    if (pValorAnterior == null)
+                    {
+                        if (pedido.ValorAcerto == null) pedido.ValorAcerto = 0;
+                        pedido.ValorAcerto += pValor;
+
+                    } else 
+                    {
+                        pedido.ValorAcerto = pedido.ValorAcerto - pValorAnterior + pValor;
+                    }
+
                     pedido.Status = "3";
 
                     representante.SaveChanges();
@@ -1454,55 +1519,13 @@ namespace ModelLibrary
         }
 
 
-        public static void ReceberDuplicata(long pId, long pReceberId, long pCargaId, decimal pValor)
+        public static void ReceberTitulo(long pReceberId, long pCargaId, decimal pValor, decimal? pValorAnterior = null)
         {
 
             Console.WriteLine("Inserindo Receber Baixa");
 
             using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
-            {
-
-
-                if (pId == 0)
-                {
-                    var maxReceberBaixa = representante.RepReceberBaixa.OrderByDescending(i => i.Id).FirstOrDefault();
-
-                    long newId = maxReceberBaixa == null ? 1 : maxReceberBaixa.Id + 1;
-
-
-                    var novoreceberbaixa = new RepReceberBaixa
-                    {
-                        Id = newId,
-                        ReceberId = pReceberId,
-                        CargaId = pCargaId,
-                        Valor = pValor,
-                        DataPagamento = DateTime.Now,
-                        DataBaixa = DateTime.Now
-                    };
-
-                    representante.RepReceberBaixa.Add(novoreceberbaixa);
-
-
-                    representante.SaveChanges();
-                } else
-                {
-
-                    var receberbaixa = representante.RepReceberBaixa.SingleOrDefault(rb => rb.Id == pId);
-
-                    if (receberbaixa != null)
-                    {
-
-
-                        receberbaixa.DataPagamento = DateTime.Now;
-                        receberbaixa.DataBaixa = DateTime.Now;
-                        receberbaixa.Valor = pValor;
-
-                        representante.SaveChanges();
-
-                    }
-
-                }
-                
+            {                
 
                 var receber = representante.RepReceber.SingleOrDefault(rc => rc.Id == pReceberId);
 
@@ -1510,9 +1533,26 @@ namespace ModelLibrary
                 {
 
 
-                    receber.DataPagamento = DateTime.Now;
-                    receber.Status = "1";
+                    if (pValorAnterior == null)
+                    {
+                        receber.ValorAReceber -= pValor;
 
+                    }
+                    else
+                    {
+                        receber.ValorAReceber = receber.ValorAReceber + pValorAnterior - pValor;
+                    }
+
+                    if (receber.ValorAReceber <= 0)
+                    {
+                        receber.DataPagamento = DateTime.Now;
+                        receber.Status = "1";
+                    } else
+                    {
+                        receber.DataPagamento = null;
+                        receber.Status = "0";
+                    }
+                        
                     representante.SaveChanges();
 
                 }
@@ -1622,10 +1662,9 @@ namespace ModelLibrary
 										                                    INNER JOIN (SELECT PedidoId, sum(Quantidade) Quantidade, sum(Retorno) Retorno FROM RepPedidoItem GROUP BY PedidoId) as RepPedidoItem ON RepPedidoItem.PedidoId = RepPedido.Id
 									                                      GROUP BY VendedorId								
 									                                    UNION
-										                                    SELECT VendedorId, sum(ValorAReceber), sum(IFNULL(Valor, 0)) as ValorRecebido, 0 Quantidade, 0 Retorno, CASE WHEN QuantidadeRemarcado > 0 THEN 1 ELSE 0 END Remarcado, 0 PedidoNovo
-										                                    FROM RepReceber
-											                                    LEFT JOIN RepReceberBaixa on RepReceber.Id = RepReceberBaixa.ReceberId 
-											                                    GROUP BY VendedorId
+										                                    SELECT RepReceber.VendedorId, sum(ValorDuplicata) ValorAReceber, sum(ValorDuplicata-IFNULL(ValorAReceber, 0)) as ValorRecebido, 0 Quantidade, 0 Retorno, CASE WHEN QuantidadeRemarcado > 0 THEN 1 ELSE 0 END Remarcado, 0 PedidoNovo
+										                                    FROM RepReceber											                                    
+											                                    GROUP BY RepReceber.VendedorId
                                                                     ) AS Receber ON RepVendedor.Id = Receber.VendedorId
                                     GROUP BY RepVendedor.Id, RepVendedor.Nome";
 

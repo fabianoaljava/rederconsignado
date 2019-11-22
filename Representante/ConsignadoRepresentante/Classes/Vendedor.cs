@@ -458,7 +458,7 @@ namespace ConsignadoRepresentante
             InicioLimpar();
             PedidoLimpar();
             RetornoProdutoLimpar();
-            DuplicataLimpar();
+            AcertoLimpar();
 
 
             localRepresentanteForm.grdVendedorPedido.DataSource = null;
@@ -479,7 +479,7 @@ namespace ConsignadoRepresentante
 
             PedidoLimpar();
             RetornoProdutoLimpar();
-            DuplicataLimpar();
+            AcertoLimpar();
 
             var vendedor = ModelLibrary.MetodosRepresentante.ObterVendedor(pVendedorId);
 
@@ -947,12 +947,14 @@ namespace ConsignadoRepresentante
 
             int countpedidos = ModelLibrary.MetodosRepresentante.ContarPedidos(pVendedorId);
 
-            //if (localRepresentanteForm.txtValorRecebido.Text == "" || countpedidos > 1)
-            //{
-            //    localRepresentanteForm.smnVendedorPedidoIncluir.Enabled = false;
-            //} else {
-            //    localRepresentanteForm.smnVendedorPedidoIncluir.Enabled = true;
-            //}
+            if (countpedidos == 1)
+            {
+                localRepresentanteForm.smnVendedorPedidoIncluir.Enabled = true;
+            }
+            else
+            {
+                localRepresentanteForm.smnVendedorPedidoIncluir.Enabled = false;
+            }
 
 
 
@@ -1463,6 +1465,10 @@ namespace ConsignadoRepresentante
 
                 localRepresentanteForm.dlbTotalAPagar.Text = string.Format("{0:C2}", pedido.ValorLiquido + pedido.ValorAReceber);
 
+                localRepresentanteForm.dlbTotalAcerto.Text = string.Format("{0:C2}", pedido.ValorAcerto);
+
+                localRepresentanteForm.dlbTotalPendente.Text = string.Format("{0:C2}", pedido.ValorLiquido + pedido.ValorAReceber - pedido.ValorAcerto);
+
                 cValorTotalAPagar = Convert.ToDecimal(pedido.ValorLiquido + pedido.ValorAReceber);
                 cValorRecebido = Convert.ToDecimal(pedido.ValorAcerto);
 
@@ -1475,10 +1481,6 @@ namespace ConsignadoRepresentante
                 }
                 
                 
-                //localRepresentanteForm.dlbAcertoAberto.Text = string.Format("{0:N}", cValorTotalAPagar - cValorRecebido);
-                //localRepresentanteForm.txtValorRecebido.Text = string.Format("{0:N}", pedido.ValorAcerto);
-
-
                 string pedidostatus = "";
 
                 switch (pedido.Status)
@@ -1568,7 +1570,7 @@ namespace ConsignadoRepresentante
             
         }
 
-        public void DuplicataLimpar()
+        public void AcertoLimpar()
         {
 
             //cDuplicataId = 0;
@@ -1577,7 +1579,7 @@ namespace ConsignadoRepresentante
             //localRepresentanteForm.grpReceberTitulo.Visible = false;
             //localRepresentanteForm.txtValorRecebido.Text = "";
             //localRepresentanteForm.txtDuplicataReceber.Text = "";
-            //localRepresentanteForm.lblAcertoInfo.Text = "O vendedor não possui nehum pedido em aberto.";
+            localRepresentanteForm.lblAcertoInfo.Text = "O vendedor não possui nehum pedido em aberto.";
 
         }
 

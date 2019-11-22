@@ -38,6 +38,7 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.lblAutenticacao = new System.Windows.Forms.Label();
             this.pgbAutenticacao = new System.Windows.Forms.ProgressBar();
+            this.bntNothing = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -111,6 +112,7 @@
             // btnCancelar
             // 
             this.btnCancelar.BackColor = System.Drawing.Color.Coral;
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.ForeColor = System.Drawing.Color.White;
             this.btnCancelar.Location = new System.Drawing.Point(94, 191);
@@ -141,11 +143,24 @@
             this.pgbAutenticacao.TabIndex = 6;
             this.pgbAutenticacao.Visible = false;
             // 
+            // bntNothing
+            // 
+            this.bntNothing.Location = new System.Drawing.Point(331, 12);
+            this.bntNothing.Name = "bntNothing";
+            this.bntNothing.Size = new System.Drawing.Size(77, 23);
+            this.bntNothing.TabIndex = 17;
+            this.bntNothing.Text = "Botão Vazio";
+            this.bntNothing.UseSelectable = true;
+            this.bntNothing.Visible = false;
+            // 
             // FormLogin
             // 
+            this.AcceptButton = this.bntNothing;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(420, 292);
+            this.Controls.Add(this.bntNothing);
             this.Controls.Add(this.pgbAutenticacao);
             this.Controls.Add(this.lblAutenticacao);
             this.Controls.Add(this.btnCancelar);
@@ -181,5 +196,6 @@
         public System.Windows.Forms.TextBox txtLogin;
         private System.Windows.Forms.Label lblAutenticacao;
         private System.Windows.Forms.ProgressBar pgbAutenticacao;
+        private MetroFramework.Controls.MetroButton bntNothing;
     }
 }

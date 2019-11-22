@@ -303,7 +303,7 @@ namespace ModelLibrary
                                             FROM Pedido
                                             WHERE CargaId in(SELECT Id FROM Carga WHERE PracaId = @p1)
                                         ) 
-                                        AND DataPagamento IS NULL)";
+                                        AND ValorAReceber > 0)";
 
                 count = deposito.Receber.SqlQuery(query, cCargaId, cPracaId).Count();
 
@@ -315,30 +315,30 @@ namespace ModelLibrary
 
                 result.Add(vTable);
 
-                vTable = new ListaImportacaoExportacao();
+                //vTable = new ListaImportacaoExportacao();
 
-                query = @"SELECT * FROM ReceberBaixa WHERE 
-                                       ReceberId IN (
-                                            SELECT Id FROM Receber 
-                                            WHERE CargaId = @p0 
-                                                OR (VendedorId 
-                                                    IN(
-	                                                    SELECT Distinct VendedorId
-                                                        FROM Pedido
-                                                        WHERE CargaId in(SELECT Id FROM Carga WHERE PracaId = @p1)
-                                                    ) 
-                                                    AND DataPagamento IS NULL)
-                                        )";
+                //query = @"SELECT * FROM ReceberBaixa WHERE 
+                //                       ReceberId IN (
+                //                            SELECT Id FROM Receber 
+                //                            WHERE CargaId = @p0 
+                //                                OR (VendedorId 
+                //                                    IN(
+	               //                                     SELECT Distinct VendedorId
+                //                                        FROM Pedido
+                //                                        WHERE CargaId in(SELECT Id FROM Carga WHERE PracaId = @p1)
+                //                                    ) 
+                //                                    AND DataPagamento IS NULL)
+                //                        )";
 
-                count = deposito.ReceberBaixa.SqlQuery(query, cCargaId, cPracaId).Count();
+                //count = deposito.ReceberBaixa.SqlQuery(query, cCargaId, cPracaId).Count();
 
-                vTable.Tabela = "ReceberBaixa";
-                vTable.Acao = "Importar baixa de pagamentos a receber";
-                vTable.Rotina = "ImportarReceberBaixa";
-                vTable.TotalLinhas = count;
-                vTable.Status = "Preparando...";
+                //vTable.Tabela = "ReceberBaixa";
+                //vTable.Acao = "Importar baixa de pagamentos a receber";
+                //vTable.Rotina = "ImportarReceberBaixa";
+                //vTable.TotalLinhas = count;
+                //vTable.Status = "Preparando...";
 
-                result.Add(vTable);
+                //result.Add(vTable);
 
 
 
@@ -1348,7 +1348,7 @@ namespace ModelLibrary
                                                         FROM Pedido
                                                         WHERE CargaId in(SELECT Id FROM Carga WHERE PracaId = @p1)
                                                     ) 
-                                                    AND DataPagamento IS NULL)";
+                                                    AND ValorAReceber > 0)";
 
 
                     foreach (var row in deposito.Receber.SqlQuery(query, cCargaId, cPracaId))
@@ -1521,6 +1521,7 @@ namespace ModelLibrary
                 representante.Database.ExecuteSqlCommand("delete from RepVendedorBase");
                 representante.Database.ExecuteSqlCommand("delete from RepReceber");
                 representante.Database.ExecuteSqlCommand("delete from RepReceberBaixa");
+                representante.Database.ExecuteSqlCommand("delete from RepRecebimento");
                 representante.Database.ExecuteSqlCommand("delete from RepSuplemento");
 
 

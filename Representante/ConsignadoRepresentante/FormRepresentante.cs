@@ -554,16 +554,6 @@ namespace ConsignadoRepresentante
             cVendedor.ExibirDuplicata();
         }
 
-        private void btnDuplicataConfirmar_Click(object sender, EventArgs e)
-        {
-            cVendedor.ReceberDuplicata();
-        }
-
-        private void btnDuplicataCancelar_Click(object sender, EventArgs e)
-        {
-            cVendedor.DuplicataLimpar();
-        }
-
         private void chkVendedorListaFiltrar(object sender, EventArgs e)
         {
             
@@ -663,6 +653,7 @@ namespace ConsignadoRepresentante
         {
             chkVendedorComPedidoAnterior.Checked = chkVendedorComPedidoAtual.Checked = chkVendedorSemPedidoAtual.Checked = false;
             cHome.CarregarFormulario();
+            cFinanceiro.ExibirPosicaoFinancera();
         }
 
         private void grdPosicaoFinanceira_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)

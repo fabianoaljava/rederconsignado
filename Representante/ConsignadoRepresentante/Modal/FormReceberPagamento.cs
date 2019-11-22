@@ -18,6 +18,8 @@ namespace ConsignadoRepresentante.Modal
 
         public long cRecebimentoId = 0;
 
+        public decimal cValorOriginal = 0;
+
 
         public FormReceberPagamento(FormRepresentante formRepresentante)
         {
@@ -40,9 +42,12 @@ namespace ConsignadoRepresentante.Modal
 
             Dictionary<string, string> referencia = new Dictionary<string, string>();
 
+
+            //referencia.Add("Selecione a referência", "0|0");
+
             foreach (var row in pedido)
             {
-                if (row.ValorLiquido + row.ValorAReceber > 0)
+                //if (row.ValorLiquido + row.ValorAReceber > 0)
                     referencia.Add("Pedido: " + row.CodigoPedido + " | " + string.Format("{0:C2}", row.ValorLiquido + row.ValorAReceber), "Pedido|" + row.Id);
             }
 
@@ -50,7 +55,7 @@ namespace ConsignadoRepresentante.Modal
             foreach (var row in titulo)
             {
 
-                if (row.ValorDuplicata - row.ValorAReceber > 0)
+                //if (row.ValorDuplicata - row.ValorAReceber > 0)
                     referencia.Add("Titulo: " + row.Documento + "/" + row.Serie + " | " + string.Format("{0:C2}", row.ValorDuplicata), "Titulo|" + row.Id);
             }
 
@@ -83,6 +88,12 @@ namespace ConsignadoRepresentante.Modal
                 grdRecebimentos.Columns[9].Visible = false;
                 grdRecebimentos.Columns[10].Visible = false;
 
+
+
+                cbbReferencia.SelectedIndex = -1;
+
+                //CarregarTotalizador();
+
             } else
             {
                 MessageBox.Show("O vendendor selecionado não possui acertos a receber ou o retorno ainda não foi realizado.");
@@ -103,32 +114,63 @@ namespace ConsignadoRepresentante.Modal
             cbbFormaPagamento.SelectedIndex = -1;
             txtObservacao.Text = "";
 
+
+            dlbTotalAReceber.Text = "0,00";
+            dlbTotalRecebido.Text = "0,00";
+
+            lblStatus.Visible = false;
+            lblStatus.Text = "";
             cRecebimentoId = 0;
+            cValorOriginal = 0;
+
+
+            btnConfirmar.Enabled = true;
 
         }
 
         public Boolean ValidarForm()
-        {
+        {            
+
+
+
 
             if (cbbReferencia.SelectedIndex <0)
             {
-                MessageBox.Show("Selecione a referencia!");
+                MessageBox.Show("Selecione a referencia!", "Recebimento", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 cbbReferencia.Focus();
                 return false;
             } else if (txtValorRecebido.Text == "")
             {
-                MessageBox.Show("Informe o valor!");
+                MessageBox.Show("Informe o valor!", "Recebimento", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 txtValorRecebido.Focus();
                 return false;
-            } else if (cbbFormaPagamento.SelectedIndex <0)
+            }
+            else
             {
-                MessageBox.Show("Selecione a forma de pagamento!");
-                cbbReferencia.Focus();
-                return false;
-            } else
-            {
-                return true;
-            }            
+                decimal vValorRecebido = Convert.ToDecimal(txtValorRecebido.Text);
+
+                decimal vValorAReceber = (dlbTotalAReceber.Text != "") ? Convert.ToDecimal(dlbTotalAReceber.Text) : 0;
+
+                if (vValorRecebido - cValorOriginal > vValorAReceber)
+                {
+                    MessageBox.Show("O valor recebido não pode ser maior que o valor a receber.", "Recebimento", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    txtValorRecebido.Focus();
+                    return false;
+                }
+                else if (cbbFormaPagamento.SelectedIndex < 0)
+                {
+                    MessageBox.Show("Selecione a forma de pagamento!", "Recebimento", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    cbbReferencia.Focus();
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+
+            }
+            
+                      
 
         }
 
@@ -152,6 +194,7 @@ namespace ConsignadoRepresentante.Modal
                 cbbReferencia.Enabled = false;
 
                 txtValorRecebido.Text = String.Format("{0:0.00}", recebimento.ValorRecebido);
+                cValorOriginal = Convert.ToDecimal(recebimento.ValorRecebido);
                 cbbFormaPagamento.Text = recebimento.FormaPagamento;
                 txtObservacao.Text = recebimento.Observacao;
 
@@ -168,6 +211,11 @@ namespace ConsignadoRepresentante.Modal
 
             if (ValidarForm())
             {
+
+
+                decimal vValorRecebido = Convert.ToDecimal(txtValorRecebido.Text);
+
+
                 string[] vReferencia;
 
                 vReferencia = ((KeyValuePair<string, string>)cbbReferencia.SelectedItem).Value.ToString().Split('|');
@@ -181,19 +229,30 @@ namespace ConsignadoRepresentante.Modal
                     var pedido = ModelLibrary.MetodosRepresentante.ObterPedido(vPedidoId);
                     vCodigoPedido = (pedido != null) ? pedido.CodigoPedido : "";
                     vReceberId = 0;
-                } else
+                }
+                else
                 {
                     vReceberId = Convert.ToInt32(vReferencia[1]);
                     vPedidoId = 0;
                 }
 
-                decimal vValorRecebido = Convert.ToDecimal(txtValorRecebido.Text);
+
 
                 ModelLibrary.MetodosRepresentante.InserirRecebimento(vReferencia[0], localRepresentanteForm.cCargaId, localRepresentanteForm.cVendedor.cVendedorId, vValorRecebido, cbbFormaPagamento.Text, txtObservacao.Text, vReceberId, vPedidoId, vCodigoPedido);
 
 
                 LimparRecebimento();
                 CarregarRecebimento();
+
+                localRepresentanteForm.cVendedor.ExibirAcerto();
+
+
+
+
+
+
+
+
             } 
 
         }
@@ -209,6 +268,8 @@ namespace ConsignadoRepresentante.Modal
 
                 LimparRecebimento();
                 CarregarRecebimento();
+
+                localRepresentanteForm.cVendedor.ExibirAcerto();
             }
 
 
@@ -223,6 +284,79 @@ namespace ConsignadoRepresentante.Modal
             LimparRecebimento();
             CarregarRecebimento();
 
+            localRepresentanteForm.cVendedor.ExibirAcerto();
+
+        }
+
+
+        public void CarregarTotalizador()
+        {
+
+
+            if (cbbReferencia.SelectedIndex != -1)
+            {
+
+
+                string[] vReferencia;
+
+                vReferencia = ((KeyValuePair<string, string>)cbbReferencia.SelectedItem).Value.ToString().Split('|');
+
+                long vPedidoId, vReceberId;
+
+                if (vReferencia[0] == "Pedido")
+                {
+                    vPedidoId = Convert.ToInt32(vReferencia[1]);
+                    var pedido = ModelLibrary.MetodosRepresentante.ObterPedido(vPedidoId);
+
+                    decimal vValorAcerto = (pedido.ValorAcerto != null) ? Convert.ToDecimal(pedido.ValorAcerto) : 0;
+
+                    dlbTotalRecebido.Text = String.Format("{0:0.00}", vValorAcerto);
+                    dlbTotalAReceber.Text = String.Format("{0:0.00}", (pedido.ValorLiquido + pedido.ValorAReceber - vValorAcerto));
+
+
+                    if (pedido.Status == "4")
+                    {
+                        btnConfirmar.Enabled = false;
+                        lblStatus.Visible = true;
+                        lblStatus.Text = "Este pedido foi fechado na criação de um novo e não pode ser editado";
+                    } else if (pedido.Status == "0" || pedido.Status == "1")
+                    {
+                        btnConfirmar.Enabled = false;
+                        lblStatus.Text = "Este pedido ainda não foi retornado e por isso não é possível fazer o acerto. Por favor, realize o retorno primeiro.";
+                        lblStatus.Visible = true;
+                    }
+                    else
+                    {
+                        localRepresentanteForm.dlbTotalAcerto.Text = String.Format("{0:0.00}", pedido.ValorAcerto);
+                        localRepresentanteForm.dlbTotalPendente.Text = String.Format("{0:0.00}", (pedido.ValorLiquido + pedido.ValorAReceber - pedido.ValorAcerto));
+
+                        btnConfirmar.Enabled = true;
+                        lblStatus.Visible = false;
+
+                        lblStatus.Text = "";
+                    }
+
+                }
+                else if (vReferencia[0] == "Titulo")
+                {
+                    vReceberId = Convert.ToInt32(vReferencia[1]);
+                    var receber = ModelLibrary.MetodosRepresentante.ObterTitulo(vReceberId);
+
+
+                    dlbTotalRecebido.Text = String.Format("{0:0.00}", receber.ValorDuplicata - receber.ValorAReceber);
+                    dlbTotalAReceber.Text = String.Format("{0:0.00}", receber.ValorAReceber);
+
+                    localRepresentanteForm.cVendedor.ExibirTitulos();
+                    localRepresentanteForm.grdFinanceiroTitulos.Refresh();
+
+
+                    btnConfirmar.Enabled = true;
+
+                    lblStatus.Text = "";
+                }
+
+            }
+            
         }
 
 
@@ -309,6 +443,18 @@ namespace ConsignadoRepresentante.Modal
         private void cbbReferencia_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+            CarregarTotalizador();
+
+        }
+
+        private void txtValorRecebido_Validating(object sender, CancelEventArgs e)
+        {
+            
+        }
+
+        private void FormReceberPagamento_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            localRepresentanteForm.cFinanceiro.ExibirPosicaoFinancera();
         }
     }
 }
