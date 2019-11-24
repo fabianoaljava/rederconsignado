@@ -109,7 +109,7 @@
             this.grdCarga.RowTemplate.ReadOnly = true;
             this.grdCarga.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdCarga.ShowEditingIcon = false;
-            this.grdCarga.Size = new System.Drawing.Size(760, 337);
+            this.grdCarga.Size = new System.Drawing.Size(760, 298);
             this.grdCarga.StandardTab = true;
             this.grdCarga.TabIndex = 8;
             this.grdCarga.UseCustomBackColor = true;
@@ -358,7 +358,7 @@
             this.pnlMainGrid.HorizontalScrollbarSize = 10;
             this.pnlMainGrid.Location = new System.Drawing.Point(20, 159);
             this.pnlMainGrid.Name = "pnlMainGrid";
-            this.pnlMainGrid.Size = new System.Drawing.Size(760, 337);
+            this.pnlMainGrid.Size = new System.Drawing.Size(760, 298);
             this.pnlMainGrid.TabIndex = 5;
             this.pnlMainGrid.VerticalScrollbarBarColor = true;
             this.pnlMainGrid.VerticalScrollbarHighlightOnWheel = false;
@@ -407,9 +407,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(800, 516);
-            this.Controls.Add(this.pnlBottomForm);
             this.Controls.Add(this.pnlMainGrid);
             this.Controls.Add(this.pnlSelecionarCarga);
+            this.Controls.Add(this.pnlBottomForm);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormListaCarga";

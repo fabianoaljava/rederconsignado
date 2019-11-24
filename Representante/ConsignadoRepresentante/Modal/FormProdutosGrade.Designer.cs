@@ -35,13 +35,13 @@
             this.pnlProdutoGradeTop = new MetroFramework.Controls.MetroPanel();
             this.lblInfo = new MetroFramework.Controls.MetroLabel();
             this.pnlProdutoGradeBottom = new MetroFramework.Controls.MetroPanel();
-            this.btnCancelar = new MetroFramework.Controls.MetroButton();
-            this.btnConfirmar = new MetroFramework.Controls.MetroButton();
-            this.pnlProdutoGradeMiddle = new MetroFramework.Controls.MetroPanel();
+            this.pnlProdutoGradeMain = new MetroFramework.Controls.MetroPanel();
             this.grdProdutoGrade = new MetroFramework.Controls.MetroGrid();
+            this.btnConfirmar = new MetroFramework.Controls.MetroButton();
+            this.btnCancelar = new MetroFramework.Controls.MetroButton();
             this.pnlProdutoGradeTop.SuspendLayout();
             this.pnlProdutoGradeBottom.SuspendLayout();
-            this.pnlProdutoGradeMiddle.SuspendLayout();
+            this.pnlProdutoGradeMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdProdutoGrade)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,7 +54,7 @@
             this.pnlProdutoGradeTop.HorizontalScrollbarSize = 10;
             this.pnlProdutoGradeTop.Location = new System.Drawing.Point(20, 60);
             this.pnlProdutoGradeTop.Name = "pnlProdutoGradeTop";
-            this.pnlProdutoGradeTop.Size = new System.Drawing.Size(629, 24);
+            this.pnlProdutoGradeTop.Size = new System.Drawing.Size(660, 24);
             this.pnlProdutoGradeTop.TabIndex = 0;
             this.pnlProdutoGradeTop.VerticalScrollbarBarColor = true;
             this.pnlProdutoGradeTop.VerticalScrollbarHighlightOnWheel = false;
@@ -78,52 +78,28 @@
             this.pnlProdutoGradeBottom.HorizontalScrollbarBarColor = true;
             this.pnlProdutoGradeBottom.HorizontalScrollbarHighlightOnWheel = false;
             this.pnlProdutoGradeBottom.HorizontalScrollbarSize = 10;
-            this.pnlProdutoGradeBottom.Location = new System.Drawing.Point(20, 307);
+            this.pnlProdutoGradeBottom.Location = new System.Drawing.Point(20, 301);
             this.pnlProdutoGradeBottom.Name = "pnlProdutoGradeBottom";
-            this.pnlProdutoGradeBottom.Size = new System.Drawing.Size(629, 37);
+            this.pnlProdutoGradeBottom.Size = new System.Drawing.Size(660, 39);
             this.pnlProdutoGradeBottom.TabIndex = 1;
             this.pnlProdutoGradeBottom.VerticalScrollbarBarColor = true;
             this.pnlProdutoGradeBottom.VerticalScrollbarHighlightOnWheel = false;
             this.pnlProdutoGradeBottom.VerticalScrollbarSize = 10;
             // 
-            // btnCancelar
+            // pnlProdutoGradeMain
             // 
-            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnCancelar.Location = new System.Drawing.Point(0, 0);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 37);
-            this.btnCancelar.TabIndex = 3;
-            this.btnCancelar.Text = "Ca&ncelar";
-            this.btnCancelar.UseSelectable = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // btnConfirmar
-            // 
-            this.btnConfirmar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnConfirmar.Enabled = false;
-            this.btnConfirmar.Location = new System.Drawing.Point(554, 0);
-            this.btnConfirmar.Name = "btnConfirmar";
-            this.btnConfirmar.Size = new System.Drawing.Size(75, 37);
-            this.btnConfirmar.TabIndex = 2;
-            this.btnConfirmar.Text = "&Confirmar";
-            this.btnConfirmar.UseSelectable = true;
-            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
-            // 
-            // pnlProdutoGradeMiddle
-            // 
-            this.pnlProdutoGradeMiddle.Controls.Add(this.grdProdutoGrade);
-            this.pnlProdutoGradeMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlProdutoGradeMiddle.HorizontalScrollbarBarColor = true;
-            this.pnlProdutoGradeMiddle.HorizontalScrollbarHighlightOnWheel = false;
-            this.pnlProdutoGradeMiddle.HorizontalScrollbarSize = 10;
-            this.pnlProdutoGradeMiddle.Location = new System.Drawing.Point(20, 84);
-            this.pnlProdutoGradeMiddle.Name = "pnlProdutoGradeMiddle";
-            this.pnlProdutoGradeMiddle.Size = new System.Drawing.Size(629, 223);
-            this.pnlProdutoGradeMiddle.TabIndex = 2;
-            this.pnlProdutoGradeMiddle.VerticalScrollbarBarColor = true;
-            this.pnlProdutoGradeMiddle.VerticalScrollbarHighlightOnWheel = false;
-            this.pnlProdutoGradeMiddle.VerticalScrollbarSize = 10;
+            this.pnlProdutoGradeMain.Controls.Add(this.grdProdutoGrade);
+            this.pnlProdutoGradeMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlProdutoGradeMain.HorizontalScrollbarBarColor = true;
+            this.pnlProdutoGradeMain.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlProdutoGradeMain.HorizontalScrollbarSize = 10;
+            this.pnlProdutoGradeMain.Location = new System.Drawing.Point(20, 84);
+            this.pnlProdutoGradeMain.Name = "pnlProdutoGradeMain";
+            this.pnlProdutoGradeMain.Size = new System.Drawing.Size(660, 217);
+            this.pnlProdutoGradeMain.TabIndex = 2;
+            this.pnlProdutoGradeMain.VerticalScrollbarBarColor = true;
+            this.pnlProdutoGradeMain.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlProdutoGradeMain.VerticalScrollbarSize = 10;
             // 
             // grdProdutoGrade
             // 
@@ -178,24 +154,45 @@
             this.grdProdutoGrade.RowTemplate.ReadOnly = true;
             this.grdProdutoGrade.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdProdutoGrade.ShowEditingIcon = false;
-            this.grdProdutoGrade.Size = new System.Drawing.Size(629, 223);
+            this.grdProdutoGrade.Size = new System.Drawing.Size(660, 217);
             this.grdProdutoGrade.StandardTab = true;
-            this.grdProdutoGrade.TabIndex = 4;
+            this.grdProdutoGrade.TabIndex = 5;
             this.grdProdutoGrade.UseCustomBackColor = true;
             this.grdProdutoGrade.UseCustomForeColor = true;
             this.grdProdutoGrade.UseStyleColors = true;
             this.grdProdutoGrade.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdProdutoGrade_CellClick);
             this.grdProdutoGrade.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdProdutoGrade_CellContentDoubleClick);
             // 
+            // btnConfirmar
+            // 
+            this.btnConfirmar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnConfirmar.Enabled = false;
+            this.btnConfirmar.Location = new System.Drawing.Point(585, 0);
+            this.btnConfirmar.Name = "btnConfirmar";
+            this.btnConfirmar.Size = new System.Drawing.Size(75, 39);
+            this.btnConfirmar.TabIndex = 3;
+            this.btnConfirmar.Text = "&Confirmar";
+            this.btnConfirmar.UseSelectable = true;
+            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnCancelar.Location = new System.Drawing.Point(0, 0);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 39);
+            this.btnCancelar.TabIndex = 4;
+            this.btnCancelar.Text = "Ca&ncelar";
+            this.btnCancelar.UseSelectable = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
             // FormProdutosGrade
             // 
-            this.AcceptButton = this.btnConfirmar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(669, 364);
-            this.ControlBox = false;
-            this.Controls.Add(this.pnlProdutoGradeMiddle);
+            this.ClientSize = new System.Drawing.Size(700, 360);
+            this.Controls.Add(this.pnlProdutoGradeMain);
             this.Controls.Add(this.pnlProdutoGradeBottom);
             this.Controls.Add(this.pnlProdutoGradeTop);
             this.MaximizeBox = false;
@@ -210,7 +207,7 @@
             this.pnlProdutoGradeTop.ResumeLayout(false);
             this.pnlProdutoGradeTop.PerformLayout();
             this.pnlProdutoGradeBottom.ResumeLayout(false);
-            this.pnlProdutoGradeMiddle.ResumeLayout(false);
+            this.pnlProdutoGradeMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdProdutoGrade)).EndInit();
             this.ResumeLayout(false);
 
@@ -219,11 +216,11 @@
         #endregion
 
         private MetroFramework.Controls.MetroPanel pnlProdutoGradeTop;
+        private MetroFramework.Controls.MetroLabel lblInfo;
         private MetroFramework.Controls.MetroPanel pnlProdutoGradeBottom;
         private MetroFramework.Controls.MetroButton btnCancelar;
         private MetroFramework.Controls.MetroButton btnConfirmar;
-        private MetroFramework.Controls.MetroPanel pnlProdutoGradeMiddle;
+        private MetroFramework.Controls.MetroPanel pnlProdutoGradeMain;
         public MetroFramework.Controls.MetroGrid grdProdutoGrade;
-        private MetroFramework.Controls.MetroLabel lblInfo;
     }
 }

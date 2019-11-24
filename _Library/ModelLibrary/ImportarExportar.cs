@@ -315,6 +315,41 @@ namespace ModelLibrary
 
                 result.Add(vTable);
 
+
+
+
+
+                vTable = new ListaImportacaoExportacao();
+
+                query = @"SELECT * FROM Recebimento WHERE 
+                                ReceberId IN (
+                                    SELECT Id FROM Receber 
+                                    WHERE CargaId = @p0 
+                                        OR (VendedorId IN(
+                                                SELECT Distinct VendedorId
+                                                    FROM Pedido
+                                                WHERE CargaId in(SELECT Id FROM Carga WHERE PracaId = @p0)
+                                                )))
+                                OR PedidoId IN (
+                                    SELECT Id FROM Pedido 
+                                    WHERE CargaId = @p0 
+                                        OR (VendedorId IN(
+                                                SELECT Distinct VendedorId
+                                                    FROM Pedido
+                                                WHERE CargaId in(SELECT Id FROM Carga WHERE PracaId = @p0)
+                                                )))";
+
+                count = deposito.Recebimento.SqlQuery(query, cCargaId, cPracaId).Count();
+
+                vTable.Tabela = "Recebimento";
+                vTable.Acao = "Importar recebimentos";
+                vTable.Rotina = "ImportarRecebimento";
+                vTable.TotalLinhas = count;
+                vTable.Status = "Preparando...";
+
+                result.Add(vTable);
+
+
                 //vTable = new ListaImportacaoExportacao();
 
                 //query = @"SELECT * FROM ReceberBaixa WHERE 
@@ -323,7 +358,7 @@ namespace ModelLibrary
                 //                            WHERE CargaId = @p0 
                 //                                OR (VendedorId 
                 //                                    IN(
-	               //                                     SELECT Distinct VendedorId
+                //                                     SELECT Distinct VendedorId
                 //                                        FROM Pedido
                 //                                        WHERE CargaId in(SELECT Id FROM Carga WHERE PracaId = @p1)
                 //                                    ) 
@@ -1399,6 +1434,84 @@ namespace ModelLibrary
         }
 
 
+        public static Boolean ImportarRecebimento()
+        {
+
+            try
+            {
+                int count = 0;
+
+                //ReceberBaixa
+                cResult = "Importando recebimentos ...<br>";
+                Console.WriteLine(cResult);
+
+                var newRecebimento = new List<RepRecebimento>();
+                count = 0;
+                using (DepositoDBEntities deposito = new DepositoDBEntities())
+                {
+
+
+                    string query = @"SELECT * FROM Recebimento WHERE 
+                                ReceberId IN (
+                                    SELECT Id FROM Receber 
+                                    WHERE CargaId = @p0 
+                                        OR (VendedorId IN(
+                                                SELECT Distinct VendedorId
+                                                    FROM Pedido
+                                                WHERE CargaId in(SELECT Id FROM Carga WHERE PracaId = @p0)
+                                                )))
+                                OR PedidoId IN (
+                                    SELECT Id FROM Pedido 
+                                    WHERE CargaId = @p0 
+                                        OR (VendedorId IN(
+                                                SELECT Distinct VendedorId
+                                                    FROM Pedido
+                                                WHERE CargaId in(SELECT Id FROM Carga WHERE PracaId = @p0)
+                                                )))";
+
+
+                    foreach (var row in deposito.Recebimento.SqlQuery(query, cCargaId, cPracaId))
+                    {
+                        var newReg = new RepRecebimento
+                        {
+                            Id = row.Id,       
+                            Tipo = row.Tipo,
+                            CargaId = row.CargaId,
+                            VendedorId = row.VendedorId,
+                            ReceberId = row.ReceberId,
+                            PedidoId = row.PedidoId,
+                            CodigoPedido = row.CodigoPedido,
+                            ValorRecebido = Convert.ToDecimal(row.ValorRecebido),                            
+                            DataPagamento = row.DataPagamento,
+                            Observacao = row.Observacao
+                        };
+
+                        newRecebimento.Add(newReg);
+                        count++;
+                    }
+
+                }
+
+                using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+                {
+                    representante.RepRecebimento.AddRange(newRecebimento);
+                    representante.SaveChanges();
+                }
+
+
+                cResult = count.ToString() + " baixa(s) de pagamento a receber importado(s).";
+                Console.WriteLine(cResult);
+
+                return true;
+            }
+            catch
+            {
+
+                return false;
+
+            }
+        }
+
 
         public static Boolean ImportarReceberBaixa()
         {
@@ -1642,15 +1755,27 @@ namespace ModelLibrary
 
                 vTable = new ListaImportacaoExportacao();
 
-                count = representante.RepReceberBaixa.Where(rb => rb.CargaId != pCargaId).Count();
+                count = representante.RepRecebimento.Count();
 
-                vTable.Tabela = "ReceberBaixa";
-                vTable.Acao = "Exportar Baixa de Contas a Receber";
-                vTable.Rotina = "ExportarReceberBaixa";
+                vTable.Tabela = "Recebimento";
+                vTable.Acao = "Exportar Recebimentos";
+                vTable.Rotina = "ExportarRecebimento";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
 
                 result.Add(vTable);
+
+                //vTable = new ListaImportacaoExportacao();
+
+                //count = representante.RepReceberBaixa.Where(rb => rb.CargaId != pCargaId).Count();
+
+                //vTable.Tabela = "ReceberBaixa";
+                //vTable.Acao = "Exportar Baixa de Contas a Receber";
+                //vTable.Rotina = "ExportarReceberBaixa";
+                //vTable.TotalLinhas = count;
+                //vTable.Status = "Preparando...";
+
+                //result.Add(vTable);
 
 
 
@@ -2291,6 +2416,95 @@ namespace ModelLibrary
             }
 
         }
+
+
+
+
+        // Atualizar Recebimento / DataPagamento
+        public static Boolean ExportarRecebimento()
+        {
+            try
+            {
+                cResult = "Exportando Recebimento(s)...<br>";
+                Console.WriteLine(cResult);
+
+
+                int count = 0;
+                using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+                {
+
+                    foreach (var row in representante.RepRecebimento)
+                    {
+
+
+                        var regRecebimento = new Recebimento
+                        {
+                            Id = Convert.ToInt32(row.Id),
+                            Tipo = row.Tipo,
+                            CargaId = Convert.ToInt32(row.CargaId),
+                            VendedorId = Convert.ToInt32(row.VendedorId),
+                            ReceberId = Convert.ToInt32(row.ReceberId),
+                            PedidoId = Convert.ToInt32(row.PedidoId),
+                            CodigoPedido = row.CodigoPedido,
+                            ValorRecebido = Convert.ToDouble(row.ValorRecebido),
+                            DataPagamento = row.DataPagamento,
+                            FormaPagamento = row.FormaPagamento,
+                            Observacao = row.Observacao
+                        };
+
+                        RecebimentoAtualizarInserir(regRecebimento);
+                        count++;
+                    }
+
+                }
+
+
+                cResult = count.ToString() + " recebimento(s) exportado(s).";
+                Console.WriteLine(cResult);
+
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
+
+        public static void RecebimentoAtualizarInserir(Recebimento pRecebimento)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                var vRecebimento = deposito.Recebimento.FirstOrDefault(rc => rc.Id == pRecebimento.Id);
+
+                if (vRecebimento != null)
+                {
+
+                    Console.WriteLine("Atualizando Recebimento id: " + pRecebimento.Id.ToString());
+                    vRecebimento.ValorRecebido = pRecebimento.ValorRecebido;
+                    vRecebimento.DataPagamento = pRecebimento.DataPagamento;
+                    vRecebimento.FormaPagamento = pRecebimento.FormaPagamento;
+                    vRecebimento.Observacao = pRecebimento.Observacao;
+                                                       
+
+                    deposito.SaveChanges();
+
+                }
+                else
+                {
+                    Console.WriteLine("Inserindo Recebimento id: " + pRecebimento.Id.ToString());
+                    deposito.Recebimento.Add(pRecebimento);
+                    deposito.SaveChanges();
+                }
+
+            }
+
+        }
+
 
         // Atualizar ReceberBaixa / DataPagamento
         public static Boolean ExportarReceberBaixa()
