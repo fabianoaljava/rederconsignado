@@ -45,6 +45,7 @@ namespace ConsignadoRepresentante
 
             if (ModelLibrary.MetodosDeposito.VerificarServidor())
             {
+                ModelLibrary.MetodosRepresentante.Manutencao();
 
 
                 localDeposito.btnExportarAnalisar.Text = "Obtendo Análise...";
@@ -83,6 +84,7 @@ namespace ConsignadoRepresentante
             if (ModelLibrary.MetodosDeposito.VerificarServidor())
             {
 
+                ModelLibrary.MetodosRepresentante.Manutencao();
 
                 localDeposito.btnExportar.Text = "Exportando...";
                 localDeposito.btnExportar.Enabled = false;

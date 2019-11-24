@@ -190,6 +190,18 @@ namespace ConsignadoRepresentante
         }
 
 
+        public void RecarregarDados()
+        {
+
+            cHome.CarregarFormulario();
+            cFinanceiro.ExibirPosicaoFinancera();
+
+            ModelLibrary.MetodosRepresentante.Manutencao();
+
+
+        }
+
+
         ///////////////////////////////////////////////
         /// Mascaras do Formulário
         ///////////////////////////////////////////////
@@ -652,8 +664,9 @@ namespace ConsignadoRepresentante
         private void btnHomeAtualizar_Click(object sender, EventArgs e)
         {
             chkVendedorComPedidoAnterior.Checked = chkVendedorComPedidoAtual.Checked = chkVendedorSemPedidoAtual.Checked = false;
-            cHome.CarregarFormulario();
-            cFinanceiro.ExibirPosicaoFinancera();
+            RecarregarDados();
+
+
         }
 
         private void grdPosicaoFinanceira_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)

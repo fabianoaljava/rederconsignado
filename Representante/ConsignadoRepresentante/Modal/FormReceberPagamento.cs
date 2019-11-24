@@ -198,6 +198,14 @@ namespace ConsignadoRepresentante.Modal
                 cbbFormaPagamento.Text = recebimento.FormaPagamento;
                 txtObservacao.Text = recebimento.Observacao;
 
+                if (recebimento.CargaId != localRepresentanteForm.cCargaId)
+                {
+
+                    lblStatus.Text = "O recebimento selecionado pertence à outra carga e não pode ser alterado.";
+                    btnConfirmar.Enabled = false;
+                   
+                }
+
                 
             }
 
@@ -454,7 +462,9 @@ namespace ConsignadoRepresentante.Modal
 
         private void FormReceberPagamento_FormClosing(object sender, FormClosingEventArgs e)
         {
-            localRepresentanteForm.cFinanceiro.ExibirPosicaoFinancera();
+            localRepresentanteForm.RecarregarDados();
+            localRepresentanteForm.cVendedor.ExibirAcerto();
+
         }
     }
 }

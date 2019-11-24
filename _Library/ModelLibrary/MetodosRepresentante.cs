@@ -969,7 +969,7 @@ namespace ModelLibrary
                         pedido.PercentualCompra = 0;
                     } else
                     {
-                        pedido.PercentualCompra = (pedido.ValorCompra / pedido.ValorPedido) * 100;
+                        pedido.PercentualCompra = decimal.Round(Convert.ToDecimal((pedido.ValorCompra / pedido.ValorPedido) * 100),2);
                     }
                     
 
@@ -1889,7 +1889,22 @@ namespace ModelLibrary
 
         }
 
+        public static void Manutencao()
+        {
 
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+                // Limpar Pedidos sem Itens                
+                representante.Database.ExecuteSqlCommand("DELETE FROM RepPedido WHERE Id NOT IN (SELECT PedidoId FROM RepPedidoItem)");
+                // Reajustar Status do Pedido Quando não houver recebimento
+                representante.Database.ExecuteSqlCommand("UPDATE RepPedido SET Status = '2' WHERE Status = '3' AND Id NOT IN (SELECT PedidoId FROM RepRecebimento)");
+                // Reajustar DataPagamento do Receber Quando não houver recebimento
+                representante.Database.ExecuteSqlCommand("UPDATE RepReceber SET DataPagamento = null, Status = '0' WHERE DataPagamento IS NOT NULL AND Id NOT IN (SELECT ReceberId FROM RepRecebimento)");
+
+            }
+
+
+        }
 
         
 
