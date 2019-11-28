@@ -11,17 +11,16 @@ using System.Windows.Forms;
 
 namespace ConsignadoDeposito.Modal
 {
-    public partial class FormReceberBaixa : MetroFramework.Forms.MetroForm
+    public partial class FormRecebimento : MetroFramework.Forms.MetroForm
     {
 
         public FormDeposito localDepositoForm = null;
-        public string cModo;
-        public int cReceberBaixaId;
-        public int cReceberId;
-        public int cCargaId;
+        public string cModo, cTipo;       
+        public int cReceberId, cRecebimentoId, cPedidoId, cCargaId, cVendedorId;        
+        public double cValorOriginal = 0;
 
 
-        public FormReceberBaixa(FormDeposito formDeposito, int pReceberId, int pCargaId = 0)
+        public FormRecebimento(FormDeposito formDeposito, string pTipo, int pPedidoId, int pReceberId, int pCargaId)
         {
             InitializeComponent();
 
@@ -29,23 +28,92 @@ namespace ConsignadoDeposito.Modal
 
             cReceberId = pReceberId;
 
-            cCargaId = pCargaId;
+            cPedidoId = pPedidoId;
 
+            cTipo = pTipo;
+
+            cCargaId = pCargaId;
+            
         }
 
-        private void CarregarReceberBaixa()
+        private void CarregarRecebimento()
         {
 
-            List<ModelLibrary.ListaReceberBaixa> receberbaixa = ModelLibrary.MetodosDeposito.ObterListaReceberBaixa(cReceberId);
 
-            BindingListView<ModelLibrary.ListaReceberBaixa> view = new BindingListView<ModelLibrary.ListaReceberBaixa>(receberbaixa);
+            if (cTipo == "Pedido")
+            {
+                ModelLibrary.Pedido pedido = ModelLibrary.MetodosDeposito.ObterPedido("", cPedidoId);
 
-            grdReceberBaixa.DataSource = view;
+                cVendedorId = pedido.VendedorId;
+
+                txtReferencia.Text = "Pedido: " + pedido.CodigoPedido + " | " + string.Format("{0:C2}", pedido.ValorLiquido + pedido.ValorAReceber);
 
 
-            grdReceberBaixa.Columns[0].Visible = false;
-            grdReceberBaixa.Columns[1].Visible = false;
-            grdReceberBaixa.Columns[2].DefaultCellStyle.Format = "c";
+                double vValorAcerto = (pedido.ValorAcerto != null) ? Convert.ToDouble(pedido.ValorAcerto) : 0;
+
+                dlbTotalRecebido.Text = String.Format("{0:0.00}", vValorAcerto);
+                dlbTotalAReceber.Text = String.Format("{0:0.00}", (pedido.ValorLiquido + pedido.ValorAReceber - vValorAcerto));
+
+
+                if (pedido.Status == "4" || pedido.Status == "5")
+                {
+                    btnConfirmar.Enabled = false;
+                    lblStatus.Visible = true;
+                    lblStatus.Text = "Este pedido foi fechado na criação de um novo e não pode ser editado";
+                }
+                else if (pedido.Status == "0" || pedido.Status == "1")
+                {
+                    btnConfirmar.Enabled = false;
+                    lblStatus.Text = "Este pedido ainda não foi retornado e por isso não é possível fazer o acerto. Por favor, realize o retorno primeiro.";
+                    lblStatus.Visible = true;
+                }
+                else
+                {
+                    btnConfirmar.Enabled = true;
+                    lblStatus.Visible = false;
+
+                    lblStatus.Text = "";
+                }
+
+
+
+            } else {
+                
+                ModelLibrary.Receber receber = ModelLibrary.MetodosDeposito.ObterAReceber(cReceberId);
+
+                cVendedorId = Convert.ToInt32(receber.VendedorId);
+                txtReferencia.Text = "Titulo: " + receber.Documento + "/" + receber.Serie + " | " + string.Format("{0:C2}", receber.ValorDuplicata);
+
+                dlbTotalRecebido.Text = String.Format("{0:0.00}", receber.ValorDuplicata - receber.ValorAReceber);
+                dlbTotalAReceber.Text = String.Format("{0:0.00}", receber.ValorAReceber);
+
+
+            }
+
+
+
+            List<ModelLibrary.ListaRecebimento> recebimento = ModelLibrary.MetodosDeposito.ObterListaRecebimento(cVendedorId, cReceberId);
+
+            BindingListView<ModelLibrary.ListaRecebimento> view = new BindingListView<ModelLibrary.ListaRecebimento>(recebimento);
+
+            grdRecebimento.DataSource = view;
+
+
+            grdRecebimento.Columns[0].Width = 250;
+            grdRecebimento.Columns[1].DefaultCellStyle.Format = "c";
+
+            grdRecebimento.Columns[5].Visible = false;
+            grdRecebimento.Columns[6].Visible = false;
+            grdRecebimento.Columns[7].Visible = false;
+            grdRecebimento.Columns[8].Visible = false;
+            grdRecebimento.Columns[9].Visible = false;
+            grdRecebimento.Columns[10].Visible = false;
+
+
+            btnConfirmar.Enabled = true;
+
+            lblStatus.Text = "";
+
 
 
         }
@@ -54,34 +122,98 @@ namespace ConsignadoDeposito.Modal
         public void Limpar()
         {
 
-            cReceberBaixaId = 0;
 
-            txtValor.Text = "";
-            cbbDataPagamento.Value = DateTime.Now;      
+
+            txtValorRecebido.Text = "";
+            cbbDataPagamento.Value = DateTime.Now;
+
+            txtValorRecebido.Text = "";
+            cbbFormaPagamento.SelectedIndex = -1;
+
+            txtObservacao.Text = "";
+
+
+            dlbTotalAReceber.Text = "0,00";
+            dlbTotalRecebido.Text = "0,00";
+
+            lblStatus.Visible = false;
+            lblStatus.Text = "";
+
+            cRecebimentoId = 0;
+            cValorOriginal = 0;
+            cVendedorId = 0;
+
+            btnConfirmar.Enabled = true;
+
 
         }
 
 
-        public void ExibirPagamento(int pReceberBaixaId)
+        public Boolean ValidarForm()
         {
 
 
-            ModelLibrary.ReceberBaixa receberBaixa = ModelLibrary.MetodosDeposito.ObterReceberBaixa(pReceberBaixaId);
 
 
-            if (receberBaixa != null)
+            if (txtValorRecebido.Text == "")
+            {
+                MessageBox.Show("Informe o valor!", "Recebimento", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                txtValorRecebido.Focus();
+                return false;
+            }
+            else
+            {
+                double vValorRecebido = Convert.ToDouble(txtValorRecebido.Text);
+
+                double vValorAReceber = (dlbTotalAReceber.Text != "") ? Convert.ToDouble(dlbTotalAReceber.Text) : 0;
+
+                if (vValorRecebido - cValorOriginal > vValorAReceber)
+                {
+                    MessageBox.Show("O valor recebido não pode ser maior que o valor a receber.", "Recebimento", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    txtValorRecebido.Focus();
+                    return false;
+                }
+                else if (cbbFormaPagamento.SelectedIndex < 0)
+                {
+                    MessageBox.Show("Selecione a forma de pagamento!", "Recebimento", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    cbbFormaPagamento.Focus();
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+
+            }
+
+
+
+        }
+
+
+        public void ExibirRecebimento(int pRecebimentoId)
+        {
+
+
+            ModelLibrary.Recebimento recebimento = ModelLibrary.MetodosDeposito.ObterRecebimento(pRecebimentoId);
+
+
+            if (recebimento != null)
             {
 
-                cReceberId = Convert.ToInt32(receberBaixa.ReceberId);
-                cReceberBaixaId = receberBaixa.Id;
-                txtValor.Text = receberBaixa.Valor.Value.ToString("N");
-                cbbDataPagamento.Value = receberBaixa.DataPagamento.Value;
-                
+                cReceberId = Convert.ToInt32(recebimento.ReceberId);
+                cRecebimentoId = recebimento.Id;
+                //txtReferencia.Text = recebimento.Tipo;
+                txtValorRecebido.Text = recebimento.ValorRecebido.Value.ToString("N");
+                cValorOriginal = Convert.ToDouble(recebimento.ValorRecebido);
+                cbbFormaPagamento.Text = recebimento.FormaPagamento;
+                cbbDataPagamento.Value = recebimento.DataPagamento.Value;
+                txtObservacao.Text = recebimento.Observacao;
 
             } else
             {
 
-                MessageBox.Show("Não foi possível carregar o Título a Receber. Por favor entre em contato com o administrador do sistema.", "Erro ao carregar título a receber", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Não foi possível carregar o recebimento. Por favor entre em contato com o administrador do sistema.", "Erro ao carregar título a receber", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Limpar();
                 this.Close();
             }
@@ -91,101 +223,88 @@ namespace ConsignadoDeposito.Modal
 
         }
 
-        public void AdicionarPagamento()
+        public void IncluirRecebimento()
         {
 
-            double vTotalPago = 0;
-            for (int i = 0; i < grdReceberBaixa.Rows.Count; ++i)
+            if (ValidarForm())
             {
-                vTotalPago += Convert.ToInt32(grdReceberBaixa.Rows[i].Cells[2].Value);
-            }
 
-            vTotalPago = vTotalPago + Convert.ToDouble(txtValor.Text);
 
-            if (vTotalPago > Convert.ToDouble(localDepositoForm.grdContasAReceber.CurrentRow.Cells["ValorAReceber"].Value)) 
-            {
-                MessageBox.Show("O valor total pago informado está acima do valor a receber", "Incluir pagamento", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                double vValorRecebido = Convert.ToDouble(txtValorRecebido.Text);
 
-            } else
-            {
-                
+                int vVendedorId;
+                string vCodigoPedido = "";
 
-                ModelLibrary.MetodosDeposito.SalvarAReceberBaixa(cReceberId, 0, Convert.ToDouble(txtValor.Text), cbbDataPagamento.Text, cCargaId);
 
-                if (vTotalPago == Convert.ToDouble(localDepositoForm.grdContasAReceber.CurrentRow.Cells["ValorAReceber"].Value))
+                if (cTipo == "Pedido")
                 {
-                    ModelLibrary.MetodosDeposito.AtualizarStatusReceber(cReceberId, "1", cbbDataPagamento.Value);
+                    var pedido = ModelLibrary.MetodosDeposito.ObterPedido("", cPedidoId);
+                    vCodigoPedido = (pedido != null) ? pedido.CodigoPedido : "";
+                    vVendedorId = pedido.VendedorId;
+                    cReceberId = 0;
+                }
+                else
+                {
+                    var receber = ModelLibrary.MetodosDeposito.ObterAReceber(cReceberId);
+                    vVendedorId = Convert.ToInt32(receber.VendedorId);
+                    cPedidoId = 0;
                 }
 
-                MessageBox.Show("Pagamento Incluído com sucesso!", "Incluir pagamento", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                ModelLibrary.MetodosDeposito.InserirRecebimento(cTipo, cCargaId, vVendedorId, vValorRecebido, cbbFormaPagamento.Text, txtObservacao.Text, cReceberId, cPedidoId, vCodigoPedido);
+
 
                 Limpar();
-
-                CarregarReceberBaixa();
+                CarregarRecebimento();
 
                 localDepositoForm.cRetorno.CarregarContasAReceber();
+
+
+
+
             }
 
 
         }
 
-        public void AlterarPagamento()
+        public void AlterarRecebimento()
         {
-            double vTotalPago = 0;
-            for (int i = 0; i < grdReceberBaixa.Rows.Count; ++i)
+            if (ValidarForm())
             {
-                vTotalPago += Convert.ToInt32(grdReceberBaixa.Rows[i].Cells[2].Value);
-            }
+                double vValorRecebido = Convert.ToDouble(txtValorRecebido.Text);
 
-            vTotalPago = vTotalPago + Convert.ToDouble(txtValor.Text);
-
-            if (vTotalPago > Convert.ToDouble(localDepositoForm.grdContasAReceber.CurrentRow.Cells["ValorAReceber"].Value))
-            {
-                MessageBox.Show("O valor total pago informado está acima do valor a receber", "Alterar pagamento", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-            }
-            else
-            {
-                ModelLibrary.MetodosDeposito.SalvarAReceberBaixa(cReceberId, cReceberBaixaId, Convert.ToDouble(txtValor.Text), cbbDataPagamento.Text, cCargaId);
-
-
-                if (vTotalPago == Convert.ToDouble(localDepositoForm.grdContasAReceber.CurrentRow.Cells["ValorAReceber"].Value))
-                {
-                    ModelLibrary.MetodosDeposito.AtualizarStatusReceber(cReceberId, "1", cbbDataPagamento.Value);
-                }
-
-                MessageBox.Show("Pagamento alterado com sucesso!", "Alterar pagamento", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ModelLibrary.MetodosDeposito.AlterarRecebimento(cRecebimentoId, vValorRecebido, cbbFormaPagamento.Text, txtObservacao.Text);
 
                 Limpar();
-
-                CarregarReceberBaixa();
+                CarregarRecebimento();
 
                 localDepositoForm.cRetorno.CarregarContasAReceber();
             }
 
         }
 
-        public void ExcluirPagamento(int pReceberBaixaId)
+        public void ExcluirRecebimento(int pRecebimentoId)
         {
             if (MessageBox.Show("Deseja realmente excluir o pagamento selecionado?", "ATENÇÃO! Exclusão de Pagamento", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
 
 
-                ModelLibrary.MetodosDeposito.ExcluirReceberBaixa(pReceberBaixaId);
-
-                ModelLibrary.MetodosDeposito.AtualizarStatusReceber(cReceberId, "0");
+                ModelLibrary.MetodosDeposito.ExcluirRecebimento(pRecebimentoId);
+                
 
                 MessageBox.Show("Pagamento Excluído com sucesso!", "Excluir pagamento", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 //Limpar Form
                 Limpar();
 
-                CarregarReceberBaixa();
+                CarregarRecebimento();
 
                 localDepositoForm.cRetorno.CarregarContasAReceber();
 
             }
 
         }
+
 
 
         public void ControlOnlyNumbers(object sender, KeyPressEventArgs e)
@@ -212,7 +331,7 @@ namespace ConsignadoDeposito.Modal
 
             cReceberId = Convert.ToInt32(localDepositoForm.grdContasAReceber.CurrentRow.Cells["Id"].Value);
             Limpar();
-            CarregarReceberBaixa();
+            CarregarRecebimento();
 
             
         }
@@ -220,19 +339,14 @@ namespace ConsignadoDeposito.Modal
         private void btnGradeConfirmar_Click(object sender, EventArgs e)
         {
 
-            if (txtValor.Text != "")
+
+            if (cRecebimentoId != 0) // cModo = Editar
             {
-                if (cReceberBaixaId == 0)
-                {
-                    AdicionarPagamento();
-                }
-                else
-                {
-                    AlterarPagamento();
-                }
-            } else
+                AlterarRecebimento();
+            }
+            else //cModo = Incluir
             {
-                MessageBox.Show("Informe o valor", "Confirmar pagamento", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                IncluirRecebimento();
             }
 
         }
@@ -245,14 +359,14 @@ namespace ConsignadoDeposito.Modal
         private void grdReceberBaixa_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
 
-            ExibirPagamento(Convert.ToInt32(grdReceberBaixa.CurrentRow.Cells["Id"].Value));
+            ExibirRecebimento(Convert.ToInt32(grdRecebimento.CurrentRow.Cells["Id"].Value));
         }
 
         private void grdReceberBaixa_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
             {
-                ExcluirPagamento(Convert.ToInt32(grdReceberBaixa.CurrentRow.Cells["Id"].Value));
+                ExcluirRecebimento(Convert.ToInt32(grdRecebimento.CurrentRow.Cells["Id"].Value));
             }
         }
 

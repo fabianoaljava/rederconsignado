@@ -13,6 +13,7 @@ namespace ModelLibrary
         public int Documento { get; set; }
         public string Serie { get; set; }
         public string Nome { get; set; }
+        public Nullable<double> ValorTotal { get; set; }
         public Nullable<double> ValorAReceber { get; set; }
         public Nullable<double> ValorPago { get; set; }
         public Nullable<DateTime> DataPagamento { get; set; }

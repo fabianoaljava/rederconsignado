@@ -160,7 +160,7 @@ namespace ConsignadoRepresentante.Modal
                 else if (cbbFormaPagamento.SelectedIndex < 0)
                 {
                     MessageBox.Show("Selecione a forma de pagamento!", "Recebimento", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    cbbReferencia.Focus();
+                    cbbFormaPagamento.Focus();
                     return false;
                 }
                 else

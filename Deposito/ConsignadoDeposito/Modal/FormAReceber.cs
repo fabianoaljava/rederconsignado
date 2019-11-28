@@ -301,7 +301,12 @@ namespace ConsignadoDeposito.Modal
         private void txtValorNF_Validating(object sender, CancelEventArgs e)
         {
             if (txtValorDuplicata.Text == "") txtValorDuplicata.Text = txtValorNF.Text;
-            if (txtValorAReceber.Text == "") txtValorAReceber.Text = txtValorNF.Text;
+
+        }
+
+        private void txtValorDuplicata_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtValorAReceber.Text == "") txtValorAReceber.Text = txtValorDuplicata.Text;
         }
     }
 }

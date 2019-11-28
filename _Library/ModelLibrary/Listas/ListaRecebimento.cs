@@ -13,11 +13,11 @@ namespace ModelLibrary
         public DateTime DataPagamento { get; set; }
         public string FormaPagamento { get; set; }
         public string Observacao { get; set; }
-        public long Id { get; set; }
-        public long CargaId { get; set; }
-        public long VendedorId { get; set; }
-        public long ReceberId { get; set; }
-        public long PedidoId { get; set; }
+        public int Id { get; set; }
+        public int CargaId { get; set; }
+        public int VendedorId { get; set; }
+        public int ReceberId { get; set; }
+        public int PedidoId { get; set; }
         public string CodigoPedido { get; set; }
     }
 }

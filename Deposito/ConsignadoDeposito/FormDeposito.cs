@@ -1044,7 +1044,7 @@ namespace ConsignadoDeposito
         private void smnRetornoAcertoPagamento_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            Modal.FormReceberBaixa formReceberBaixa = new Modal.FormReceberBaixa(this, Convert.ToInt32(grdContasAReceber.CurrentRow.Cells["Id"].Value), cRetorno.cRetornoId);
+            Modal.FormRecebimento formReceberBaixa = new Modal.FormRecebimento(this, "Titulo", Convert.ToInt32(grdContasAReceber.CurrentRow.Cells["Id"].Value), 0, cRetorno.cRetornoId);
             formReceberBaixa.ShowDialog();
             Cursor.Current = Cursors.Default;
         }

@@ -965,14 +965,19 @@ namespace ModelLibrary
         }
 
 
-        public static Pedido ObterPedido(string pCodigoPedido)
+        public static Pedido ObterPedido(string pCodigoPedido, int pPedidoId = 0)
         {
 
             using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
-                var pedido = deposito.Pedido.SingleOrDefault(pi => pi.CodigoPedido == pCodigoPedido);
 
-                return pedido;
+                if (pPedidoId == 0)
+                {
+                    return deposito.Pedido.SingleOrDefault(pi => pi.CodigoPedido == pCodigoPedido);
+                } else
+                {
+                    return deposito.Pedido.SingleOrDefault(pi => pi.Id == pPedidoId);
+                }
 
             }
 
@@ -1304,18 +1309,11 @@ namespace ModelLibrary
 
                 vPracaId = carga != null ? Convert.ToInt32(carga.PracaId) : 0;
 
-                string query = @"SELECT Receber.Id, Max(ReceberBaixa.Id) as ReceberBaixaId, Documento, Serie, Nome, Max(ValorAReceber) ValorAReceber, Sum(ReceberBaixa.Valor) as ValorPago, Max(ReceberBaixa.DataPagamento) DataPagamento
+                string query = @"SELECT Receber.Id, Max(Recebimento.Id) as RecebimentoId, Documento, Serie, Nome, Sum(ValorDuplicata) ValorTotal, Max(ValorAReceber) ValorAReceber, Sum(Recebimento.ValorRecebido) as ValorPago, Max(Recebimento.DataPagamento) DataPagamento
 	                                FROM Receber 
 		                                INNER JOIN Vendedor ON Receber.VendedorId = Vendedor.Id
-		                                LEFT JOIN ReceberBaixa ON Receber.Id = ReceberBaixa.ReceberId
-		                                WHERE (Receber.CargaId = @p0
-		                                or VendedorId 
-                                            IN(
-	                                            SELECT Distinct VendedorId
-                                                FROM Pedido
-                                                WHERE CargaId in(SELECT Id FROM Carga WHERE Id <=@p0 and PracaId = @p1)
-                                            )) 
-			                                AND Receber.DataPagamento IS NULL 
+		                                LEFT JOIN Recebimento ON Receber.Id = Recebimento.ReceberId
+		                                WHERE Receber.CargaId = @p0		                                
 			                                AND ValorNF > 0 
 			                                AND Receber.CargaId <= @p0
                                 GROUP BY Receber.Id, Documento, Serie, Nome
@@ -1489,19 +1487,19 @@ namespace ModelLibrary
         }
 
 
-        public static ReceberBaixa ObterReceberBaixa(int pReceberBaixaId)
+        public static Recebimento ObterRecebimento(int pRecebimentoId)
         {
 
             using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
-                var receberbaixa = deposito.ReceberBaixa.Where(rc => rc.Id == pReceberBaixaId).FirstOrDefault();
+                var recebimento = deposito.Recebimento.Where(rc => rc.Id == pRecebimentoId).FirstOrDefault();
 
-                return receberbaixa;
+                return recebimento;
             }
 
         }
 
-        public static List<ListaReceberBaixa> ObterListaReceberBaixa(int pReceberId)
+        public static List<ListaRecebimento> ObterListaRecebimento(long pVendedorId, long pReceberId = 0)
         {
 
 
@@ -1509,18 +1507,231 @@ namespace ModelLibrary
             {
 
 
-                string query = @"SELECT Id, ReceberId, Valor, DataPagamento, DataBaixa FROM ReceberBaixa
-	                                WHERE ReceberId = @p0";
+                string query = @"SELECT 
+                                    CASE 
+                                        WHEN PedidoId != 0 THEN CONCAT('Pedido:',CodigoPedido)
+                                        WHEN ReceberId != 0 THEN CONCAT('Titulo:', Receber.Documento, '/', Receber.Serie)
+                                        ELSE '' END as Referencia, 
+                                    ValorRecebido, Recebimento.DataPagamento, FormaPagamento, Observacao, Recebimento.Id, 
+                                    Recebimento.CargaId, Recebimento.VendedorId, ReceberId, PedidoId, CodigoPedido 
+                                        FROM Recebimento
+                                            LEFT JOIN Receber ON Receber.VendedorId = Recebimento.VendedorId AND Receber.Id = ReceberId
+                                    WHERE Recebimento.VendedorId = @p0 AND Recebimento.ReceberId = @p1";
 
 
-                var result = deposito.Database.SqlQuery<ListaReceberBaixa>(query, pReceberId);
+                var result = deposito.Database.SqlQuery<ListaRecebimento>(query, pVendedorId, pReceberId);
 
-                return result.ToList<ListaReceberBaixa>();
+                return result.ToList<ListaRecebimento>();
 
             }
 
         }
 
+
+
+
+        public static void InserirRecebimento(string pTipo, int pCargaId, int pVendedorId, double pValorRecebido, string pFormaPagamento, string pObservacao, int pReceberId = 0, int pPedidoId = 0, string pCodigoPedido = "")
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+                var maxRecebimento = deposito.Recebimento.OrderByDescending(i => i.Id).FirstOrDefault();
+
+                var novorecebimento = new Recebimento
+                {
+                    Tipo = pTipo,
+                    CargaId = pCargaId,
+                    VendedorId = pVendedorId,
+                    ReceberId = pReceberId,
+                    PedidoId = pPedidoId,
+                    CodigoPedido = pCodigoPedido,
+                    ValorRecebido = pValorRecebido,
+                    DataPagamento = DateTime.Now,
+                    FormaPagamento = pFormaPagamento,
+                    Observacao = pObservacao
+                };
+
+                deposito.Recebimento.Add(novorecebimento);
+
+                //atualizar tabela Pedido / Receber
+
+                if (pPedidoId != 0)
+                    ReceberPedido(pPedidoId, pValorRecebido);
+
+                if (pReceberId != 0)
+                    ReceberTitulo(pReceberId, pCargaId, pValorRecebido);
+
+
+                deposito.SaveChanges();
+
+            }
+
+        }
+
+        public static void AlterarRecebimento(int pRecebimentoId, double pValorRecebido, string pFormaPagamento, string pObservacao)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+
+                var recebimento = deposito.Recebimento.FirstOrDefault(rc => rc.Id == pRecebimentoId);
+
+
+                if (recebimento != null)
+                {
+
+                    double tmpValor = Math.Round(Convert.ToDouble(recebimento.ValorRecebido), 2);
+
+                    recebimento.ValorRecebido = pValorRecebido;
+                    recebimento.FormaPagamento = pFormaPagamento;
+                    recebimento.Observacao = pObservacao;
+
+                    deposito.SaveChanges();
+
+
+                    //atualizar tabela Pedido / Receber-- tratar alteração de valor
+                    if (recebimento.PedidoId != null && recebimento.PedidoId != 0)
+                        ReceberPedido(Convert.ToInt64(recebimento.PedidoId), pValorRecebido, tmpValor);
+
+
+                    if (recebimento.ReceberId != null && recebimento.ReceberId != 0)
+                        ReceberTitulo(Convert.ToInt32(recebimento.ReceberId), Convert.ToInt32(recebimento.CargaId), Math.Round(pValorRecebido, 2), Math.Round(tmpValor, 2));
+
+
+
+
+                }
+
+                deposito.SaveChanges();
+
+
+
+
+
+
+            }
+
+
+
+        }
+
+
+        public static void ExcluirRecebimento(long pRecebimentoId)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                var recebimento = deposito.Recebimento.FirstOrDefault(rc => rc.Id == pRecebimentoId);
+
+                if (recebimento != null)
+                {
+
+                    if (recebimento.PedidoId != null && recebimento.PedidoId != 0)
+                        ReceberPedido(Convert.ToInt32(recebimento.PedidoId), 0, Convert.ToDouble(recebimento.ValorRecebido));
+
+                    if (recebimento.ReceberId != null && recebimento.ReceberId != 0)
+                        ReceberTitulo(Convert.ToInt32(recebimento.ReceberId), Convert.ToInt32(recebimento.CargaId), 0, Convert.ToDouble(recebimento.ValorRecebido));
+
+                    deposito.Database.ExecuteSqlCommand("DELETE FROM Recebimento WHERE Id = @pRecebimentoId", new SqlParameter("@pRecebimentoId", pRecebimentoId));
+
+                    deposito.SaveChanges();
+                }
+
+            }
+
+        }
+
+
+
+        public static void ReceberPedido(long pPedidoId, double pValor, double? pValorAnterior = null)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+
+                var pedido = deposito.Pedido.SingleOrDefault(pd => pd.Id == pPedidoId);
+
+                if (pedido != null)
+                {
+
+
+                    if (pedido.DataRetorno == null)
+                    {
+
+                        pedido.DataRetorno = DateTime.Now.Date;
+                    }
+
+                    if (pValorAnterior == null)
+                    {
+                        if (pedido.ValorAcerto == null) pedido.ValorAcerto = 0;
+                        pedido.ValorAcerto += pValor;
+
+                    }
+                    else
+                    {
+                        pedido.ValorAcerto = pedido.ValorAcerto - pValorAnterior + pValor;
+                    }
+
+                    pedido.Status = "3";
+
+                    deposito.SaveChanges();
+
+                }
+
+
+
+            }
+
+        }
+
+
+        public static void ReceberTitulo(long pReceberId, long pCargaId, double pValor, double? pValorAnterior = null)
+        {
+
+            Console.WriteLine("Inserindo Receber Baixa");
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                var receber = deposito.Receber.SingleOrDefault(rc => rc.Id == pReceberId);
+
+                if (receber != null)
+                {
+
+
+                    if (pValorAnterior == null)
+                    {
+                        receber.ValorAReceber = Math.Round(Convert.ToDouble(receber.ValorAReceber-pValor),2);
+
+
+                    }
+                    else
+                    {
+                        receber.ValorAReceber = receber.ValorAReceber + pValorAnterior - pValor;
+                    }
+
+                    if (receber.ValorAReceber <= 0)
+                    {
+                        receber.DataPagamento = DateTime.Now;
+                        receber.Status = "1";
+                    }
+                    else
+                    {
+                        receber.DataPagamento = null;
+                        receber.Status = "0";
+                    }
+
+                    deposito.SaveChanges();
+
+                }
+
+
+            }
+
+        }
 
 
 
@@ -1610,10 +1821,10 @@ namespace ModelLibrary
             using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
-                string query = @"SELECT Nome, '' ValorPedido, '' ValorCompra, '' ValorLiquido, ValorAReceber ValorReceber, ValorAReceber ValorAcerto, 0 ValorAberto, DataEmissao Data 
+                string query = @"SELECT Nome, '' ValorPedido, '' ValorCompra, '' ValorLiquido, 0 ValorReceber, ValorDuplicata-ValorAReceber ValorAcerto, ValorAReceber ValorAberto, DataEmissao Data 
                                     FROM Vendedor 
                                         INNER JOIN Receber ON Vendedor.Id = Receber.VendedorId
-                                      WHERE ValorAReceber > 0 AND CargaId = @p0
+                                      WHERE ValorDuplicata > ValorAReceber AND CargaId = @p0
                                     UNION 
                                       SELECT Nome, ValorPedido, ValorCompra, ValorLiquido, ValorAReceber ValorReceber, ValorAcerto, ValorLiquido+ValorAReceber-ValorAcerto ValorAberto, DataLancamento Data 
                                         FROM Vendedor
