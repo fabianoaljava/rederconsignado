@@ -349,7 +349,7 @@ namespace ConsignadoRepresentante
                 if (totaltitulos != null)
                 {
 
-                    creditoutilizado += ((totaltitulos.ValorDuplicata != null) ? totaltitulos.ValorDuplicata : 0) - ((totaltitulos.ValorAReceber != null) ? totaltitulos.ValorAReceber : 0);
+                    creditoutilizado += (totaltitulos.ValorAReceber != null) ? totaltitulos.ValorAReceber : 0;
 
                 }
 
@@ -371,7 +371,7 @@ namespace ConsignadoRepresentante
             {
                 if (totaltitulos != null)
                 {                    
-                    localRepresentanteForm.dlbLimiteCreditoUtilizado.Text = (((totaltitulos.ValorDuplicata != null) ? totaltitulos.ValorDuplicata : 0) - ((totaltitulos.ValorAReceber != null) ? totaltitulos.ValorAReceber : 0)).ToString();
+                    localRepresentanteForm.dlbLimiteCreditoUtilizado.Text = ((totaltitulos.ValorAReceber != null) ? totaltitulos.ValorAReceber : 0).ToString();
                 } else
                 {
                     localRepresentanteForm.dlbLimiteCreditoUtilizado.Text = "0";
@@ -467,6 +467,7 @@ namespace ConsignadoRepresentante
 
 
 
+            localRepresentanteForm.smnVendedorPedidoIncluir.Visible = false;            
             localRepresentanteForm.smnVendedorRelatorioPedido.Enabled = false;
             localRepresentanteForm.smnVendedorRelatorioRetorno.Enabled = false;
 
@@ -768,12 +769,17 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.btnPedidoConfirmar.Enabled = false;
             localRepresentanteForm.btnPedidoCancelar.Enabled = false;
             localRepresentanteForm.txtPedidoCodigoBarras.ReadOnly = false;
+            localRepresentanteForm.pnlVendedorPedidoMontar.Enabled = true;
+
+
+
 
 
 
             cVendedorPedidoModo = "Insert";
 
             localRepresentanteForm.txtPedidoCodigoBarras.Focus();
+
 
 
 
@@ -809,7 +815,7 @@ namespace ConsignadoRepresentante
                 }
                 else
                 {                    
-                    vProdutoGradeId = (produtosgrade.FirstOrDefault() != null) ? vProdutoGradeId : 0;
+                    vProdutoGradeId = (produtosgrade.FirstOrDefault() != null) ? produtosgrade.FirstOrDefault().Id : 0;
                     ExibirProdutoGrade(vProdutoGradeId);
                 }
             }
@@ -949,11 +955,13 @@ namespace ConsignadoRepresentante
 
             if (countpedidos == 1)
             {
-                localRepresentanteForm.smnVendedorPedidoIncluir.Enabled = true;
+                localRepresentanteForm.smnVendedorPedidoIncluir.Visible = true;
+                localRepresentanteForm.smnVendedorRelatorioPedido.Enabled = true;
             }
             else
             {
-                localRepresentanteForm.smnVendedorPedidoIncluir.Enabled = false;
+                localRepresentanteForm.smnVendedorPedidoIncluir.Visible = false;
+                localRepresentanteForm.smnVendedorRelatorioPedido.Enabled = false;
             }
 
 

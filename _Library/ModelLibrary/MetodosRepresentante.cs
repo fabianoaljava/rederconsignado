@@ -258,32 +258,48 @@ namespace ModelLibrary
                 //" CodigoBarras Like '%" + localRepresentanteForm.txtProdutosCodigoBarras.Text + "%'"
 
                 string vCriterio = "";
-                string vCriterioSoma = "";
 
-                string query = @"SELECT RepProdutoGrade.CodigoBarras || RepProdutoGrade.Digito CodigoBarras, 
-                                    Descricao, Tamanho, Cor, ValorSaida, 
-                                    IFNULL(SUM(RepCargaProduto.Quantidade-RepCargaProduto.Retorno),0) SaldoEstoque, 
-                                    RepProdutoGrade.Id ProdutoGradeId 
-                                FROM RepProduto                                    
-                                    INNER JOIN RepProdutoGrade ON RepProduto.Id = RepProdutoGrade.ProdutoId
-                                    LEFT JOIN RepCargaProduto ON RepProdutoGrade.Id = RepCargaProduto.ProdutoGradeId";
+                string query = @"SELECT Produto.CodigoBarras || '' || Produto.Digito as CodigoBarras, 
+                                    Produto.Descricao, Produto.Tamanho, Produto.Cor, Produto.ValorSaida, 
+	                                (IFNULL(Carga.ViagemPlus,0) - IFNULL(Vendido.Vendido,0) - IFNULL(Vendido.RetornoPlus,0)+IFNULL(Consignado.ConsignadoRetorno,0)  - IFNULL(Consignado.Consignado,0)) SaldoEstoque, Produto.ProdutoGradeId
+	                                FROM
+		                                (SELECT RepProduto.Id Id, RepProdutoGrade.Id ProdutoGradeId, RepProduto.CodigoBarras, RepProdutoGrade.Digito, RepProduto.Descricao, RepProdutoGrade.Tamanho, RepProdutoGrade.Cor, RepProdutoGrade.ValorSaida
+			                                FROM RepProduto 
+			                                INNER JOIN RepProdutoGrade ON RepProdutoGrade.ProdutoId = RepProduto.Id) AS Produto
+	                                LEFT JOIN 
+		                                (SELECT RepProdutoGrade.Id ProdutoGradeId, RepProdutoGrade.ValorSaida Preco, RepCargaProduto.Quantidade ViagemPlus, RepCargaProduto.Retorno ContagemCarro 
+			                                FROM RepCargaProduto 
+			                                INNER JOIN RepProdutoGrade ON RepProdutoGrade.Id = RepCargaProduto.ProdutoGradeId) AS Carga ON Produto.ProdutoGradeId = Carga.ProdutoGradeId
+	                                LEFT JOIN 
+		                                (SELECT ProdutoGradeId, SUM(RepPedidoItem.Retorno) ConsignadoRetorno, SUM(RepPedidoItem.Quantidade) Consignado 
+			                                FROM RepPedido
+			                                INNER JOIN RepPedidoItem ON RepPedidoItem.PedidoId = RepPedido.Id
+			                                WHERE  RepPedido.ValorAcerto <= 0 OR RepPedido.ValorAcerto IS NULL											
+			                                GROUP BY ProdutoGradeId) AS Consignado ON Produto.ProdutoGradeId = Consignado.ProdutoGradeId
+	                                LEFT JOIN 
+		                                (SELECT ProdutoGradeId, SUM(RepPedidoItem.Quantidade) Vendido, SUM(RepPedidoItem.Retorno) RetornoPlus  
+			                                FROM RepPedido
+			                                INNER JOIN RepPedidoItem ON RepPedidoItem.PedidoId = RepPedido.Id
+			                                WHERE RepPedido.ValorAcerto > 0
+			                                GROUP BY ProdutoGradeId) AS Vendido ON Produto.ProdutoGradeId = Vendido.ProdutoGradeId
+";
 
                 if (pCriterio != null)
                 {
                     if (pCriterio.ContainsKey("CodigoBarras"))
                     {
-                        vCriterio = " RepProdutoGrade.CodigoBarras || RepProdutoGrade.Digito LIKE '%" + pCriterio["CodigoBarras"] + "%'";
+                        vCriterio = " Produto.CodigoBarras || '' || Produto.Digito  LIKE '%" + pCriterio["CodigoBarras"] + "%'";
                     }
 
 
                     if (pCriterio.ContainsKey("CodigoGeral"))
                     {
-                        vCriterio = "(RepProdutoGrade.CodigoBarras || RepProdutoGrade.Digito = '" + pCriterio["CodigoGeral"] + "') OR RepProdutoGrade.ProdutoId = " + pCriterio["CodigoGeral"];
+                        vCriterio = "((Produto.CodigoBarras || '' || Produto.Digito  LIKE '%" + pCriterio["CodigoGeral"] + "%') OR Produto.ProdutoGradeId = " + pCriterio["CodigoGeral"] + ")";
                     }
 
                     if (pCriterio.ContainsKey("Nome"))
                     {
-                        vCriterio += vCriterio != "" ? " OR " : ""; 
+                        vCriterio += vCriterio != "" ? " AND " : ""; 
                         vCriterio += " Descricao LIKE '%" + pCriterio["Nome"] + "%'";
                     }      
 
@@ -291,11 +307,13 @@ namespace ModelLibrary
                     {
                         if (pCriterio["SaldoEstoque"] == "Y")
                         {
-                            vCriterioSoma = " HAVING IFNULL(SUM(RepCargaProduto.Quantidade-RepCargaProduto.Retorno),0) > 0 ";
+                            vCriterio += vCriterio != "" ? " AND " : "";
+                            vCriterio += " (IFNULL(Carga.ViagemPlus,0) - IFNULL(Vendido.Vendido,0) - IFNULL(Vendido.RetornoPlus,0)+IFNULL(Consignado.ConsignadoRetorno,0)  - IFNULL(Consignado.Consignado,0)) > 0 ";
                         }
                         else if (pCriterio["SaldoEstoque"] == "N")
                         {
-                            vCriterioSoma = " HAVING IFNULL(SUM(RepCargaProduto.Quantidade-RepCargaProduto.Retorno),0) = 0 ";
+                            vCriterio += vCriterio != "" ? " AND " : "";
+                            vCriterio += " (IFNULL(Carga.ViagemPlus,0) - IFNULL(Vendido.Vendido,0) - IFNULL(Vendido.RetornoPlus,0)+IFNULL(Consignado.ConsignadoRetorno,0)  - IFNULL(Consignado.Consignado,0)) <= 0 ";
                         }
                     }
                     
@@ -304,9 +322,6 @@ namespace ModelLibrary
 
                 query += vCriterio != "" ? " WHERE " + vCriterio : "";
 
-                query += @" GROUP BY RepProdutoGrade.CodigoBarras, RepProdutoGrade.Digito, Descricao, Tamanho, Cor, ValorSaida, RepProdutoGrade.Id";
-
-                query += vCriterioSoma;
 
                 Console.WriteLine("Listando Produtos Query: " + query);
 
@@ -1585,7 +1600,7 @@ namespace ModelLibrary
                     Serie = DateTime.Now.Month.ToString() + (DateTime.Now.Year.ToString()).Substring(2, 2),
                     ValorNF = pValor,
                     ValorDuplicata = pValorAReceber,
-                    ValorAReceber = pValorAReceber,
+                    ValorAReceber = pValorAReceber- pValor,
                     DataEmissao = DateTime.Now,
                     DataVencimento = DateTime.Now,
                     DataPagamento = DateTime.Now,
@@ -1605,17 +1620,22 @@ namespace ModelLibrary
                 long newId = maxReceberBaixa == null ? 1 : maxReceberBaixa.Id + 1;
 
 
-                var novoreceberbaixa = new RepReceberBaixa
+                var novorecebimento = new RepRecebimento
                 {
                     Id = newId,
-                    ReceberId = newReceberId,
+                    Tipo = "Extra",
                     CargaId = pCargaId,
-                    Valor = pValor,
+                    VendedorId = pVendedorId,
+                    ReceberId = newReceberId,
+                    PedidoId = 0,
+                    CodigoPedido = "",
+                    ValorRecebido = pValorAReceber,
                     DataPagamento = DateTime.Now,
-                    DataBaixa = DateTime.Now
+                    FormaPagamento = "Outros",
+                    Observacao = "Recebimento extra registrado pelo representante"
                 };
 
-                representante.RepReceberBaixa.Add(novoreceberbaixa);
+                representante.RepRecebimento.Add(novorecebimento);
 
                 representante.SaveChanges();
 
@@ -1852,9 +1872,9 @@ namespace ModelLibrary
 	                                Produto.Descricao || ' ' || Produto.Tamanho Descricao,
 	                                IFNULL(Vendido.Vendido,0) Vendido, 
 	                                IFNULL(Carga.ViagemPlus,0) Carga, 
-	                                IFNULL(Vendido.RetornoPlus,0) Retorno, 
+	                                IFNULL(Vendido.RetornoPlus,0)+IFNULL(Consignado.ConsignadoRetorno,0) Retorno, 
 	                                IFNULL(Consignado.Consignado,0) Consignado, 
-	                                (IFNULL(Carga.ViagemPlus,0) - IFNULL(Vendido.Vendido,0) - IFNULL(Vendido.RetornoPlus,0) - IFNULL(Consignado.Consignado,0)) SaldoCarro	
+	                                (IFNULL(Carga.ViagemPlus,0) - IFNULL(Vendido.Vendido,0) - IFNULL(Vendido.RetornoPlus,0)+IFNULL(Consignado.ConsignadoRetorno,0)  - IFNULL(Consignado.Consignado,0)) SaldoCarro	
 	                                FROM
 		                                (SELECT RepProduto.Id Id, RepProdutoGrade.Id ProdutoGradeId, RepProduto.CodigoBarras, RepProdutoGrade.Digito, RepProduto.Descricao, RepProdutoGrade.Tamanho 
 			                                FROM RepProduto 
@@ -1864,13 +1884,13 @@ namespace ModelLibrary
 			                                FROM RepCargaProduto 
 			                                INNER JOIN RepProdutoGrade ON RepProdutoGrade.Id = RepCargaProduto.ProdutoGradeId) AS Carga ON Produto.ProdutoGradeId = Carga.ProdutoGradeId
 	                                LEFT JOIN 
-		                                (SELECT ProdutoGradeId, SUM(RepPedidoItem.Quantidade) Consignado 
+		                                (SELECT ProdutoGradeId, SUM(RepPedidoItem.Retorno) ConsignadoRetorno, SUM(RepPedidoItem.Quantidade) Consignado 
 			                                FROM RepPedido
 			                                INNER JOIN RepPedidoItem ON RepPedidoItem.PedidoId = RepPedido.Id
-			                                WHERE  RepPedido.ValorAcerto <= 0											
+			                                WHERE  RepPedido.ValorAcerto <= 0 OR RepPedido.ValorAcerto IS NULL											
 			                                GROUP BY ProdutoGradeId) AS Consignado ON Produto.ProdutoGradeId = Consignado.ProdutoGradeId
 	                                LEFT JOIN 
-		                                (SELECT ProdutoGradeId, SUM(RepPedidoItem.Quantidade - RepPedidoItem.Retorno) Vendido, SUM(RepPedidoItem.Retorno) RetornoPlus  
+		                                (SELECT ProdutoGradeId, SUM(RepPedidoItem.Quantidade) Vendido, SUM(RepPedidoItem.Retorno) RetornoPlus  
 			                                FROM RepPedido
 			                                INNER JOIN RepPedidoItem ON RepPedidoItem.PedidoId = RepPedido.Id
 			                                WHERE RepPedido.ValorAcerto > 0

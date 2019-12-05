@@ -195,6 +195,8 @@ namespace ConsignadoRepresentante
 
             cHome.CarregarFormulario();
             cFinanceiro.ExibirPosicaoFinancera();
+            cProduto.ExibirProdutos();
+            cEstoque.ExibirEstoque();
 
             ModelLibrary.MetodosRepresentante.Manutencao();
 

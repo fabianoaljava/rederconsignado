@@ -34,7 +34,9 @@ namespace ModelLibrary
             MethodInfo vMetodo = vTipo.GetMethod(pRotina);
             Boolean result = (Boolean)vMetodo.Invoke(null, null);
 
-            return true;
+
+
+            return result;
 
         }
 
@@ -240,7 +242,42 @@ namespace ModelLibrary
                 vTable = new ListaImportacaoExportacao();
 
 
-                count = deposito.Vendedor.Count();
+
+                query = @"SELECT Vendedor.*,
+                                        CASE  
+                                            WHEN Pedidos = 1 THEN 
+                                                'O vendedor possui ' + 
+                                                Convert(VARCHAR(10),Pedidos) + ' pedido anterior em aberto para a carga # ' 
+                                                + Convert(VARCHAR(10),Carga.Id) 
+                                                + ' | Praça: ' + Convert(VARCHAR(10),Praca.Id) + ' - '+  Praca.Descricao
+                                                +' | Representante:' + Convert(VARCHAR(10),Representante.Id) + ' - ' + Representante.Nome 
+                                            WHEN Pedidos > 1 THEN 
+                                                'O vendedor possui ' 
+                                                + Convert(VARCHAR(10),Pedidos) 
+                                                + ' pedidos anteriores em aberto, sendo o ultimo para a carga # ' 
+                                                + Convert(VARCHAR(10),Carga.Id) 
+                                                + ' | Praça: ' + Convert(VARCHAR(10),Praca.Id) + ' - '+  Praca.Descricao
+                                                +' | Representante:' + Convert(VARCHAR(10),Representante.Id) + ' - ' + Representante.Nome 
+                                            ELSE '' END AS PedidoAberto, DebitoAReceber
+                                        FROM Vendedor
+                                            LEFT JOIN
+                                                (SELECT VendedorId, count(Pedido.Id) Pedidos, max(Pedido.CargaId) UltimaCargaId
+                                                    FROM Pedido
+                                                        WHERE Pedido.Status = 0 OR Pedido.Status = 1 OR Pedido.Status = 2
+                                                    GROUP BY VendedorId) AS PedidoAberto ON Vendedor.Id = PedidoAberto.VendedorId
+                                            LEFT JOIN Carga ON Carga.Id = PedidoAberto.UltimaCargaId 
+                                            LEFT JOIN Praca ON Carga.PracaId = Praca.Id
+                                            LEFT JOIN Representante ON Carga.RepresentanteId = Representante.Id
+                                            LEFT JOIN 
+                                                (SELECT VendedorId, Sum(ValorAReceber) as DebitoAReceber
+	                                                FROM Receber 		                                
+		                                                LEFT JOIN ReceberBaixa ON Receber.Id = ReceberBaixa.ReceberId
+		                                                WHERE Receber.DataPagamento IS NULL 
+			                                                AND ValorNF > 0
+                                                GROUP BY VendedorId) AS DebitoAReceber ON Vendedor.Id = DebitoAReceber.VendedorId
+                                        ";                
+
+                count = deposito.Vendedor.SqlQuery(query).Count();
 
                 vTable.Tabela = "Vendedor";
                 vTable.Acao = "Importar Todos Vendedores";
@@ -1129,7 +1166,29 @@ namespace ModelLibrary
                 using (DepositoDBEntities deposito = new DepositoDBEntities())
                 {
 
-                    string query = @"SELECT Vendedor.*,
+                    string query = @"SELECT Vendedor.Id,
+                                            Vendedor.Nome,
+                                            Vendedor.RazaoSocial,
+                                            Vendedor.Endereco,
+                                            Vendedor.Complemento,
+                                            Vendedor.Bairro,
+                                            Vendedor.Cidade,
+                                            Vendedor.UF,
+                                            Vendedor.Cep,
+                                            Vendedor.TipoPessoa,
+                                            Vendedor.CpfCnpj,
+                                            Vendedor.RGInscricao,
+                                            Vendedor.DataNascimento,
+                                            Vendedor.Telefone,
+                                            Vendedor.TelefoneComercial,
+                                            Vendedor.Celular,
+                                            Vendedor.Email,
+                                            Vendedor.DataInicial,
+                                            Vendedor.DataFinal,
+                                            Vendedor.LimitePedido,
+                                            Vendedor.LimiteCredito,
+                                            Vendedor.Status,
+                                            Vendedor.Observacao,
                                         CASE  
                                             WHEN Pedidos = 1 THEN 
                                                 'O vendedor possui ' + 
@@ -1160,11 +1219,10 @@ namespace ModelLibrary
 		                                                LEFT JOIN ReceberBaixa ON Receber.Id = ReceberBaixa.ReceberId
 		                                                WHERE Receber.DataPagamento IS NULL 
 			                                                AND ValorNF > 0
-                                                GROUP BY VendedorId) AS DebitoAReceber ON Vendedor.Id = DebitoAReceber.VendedorId
-                                        ";
+                                                GROUP BY VendedorId) AS DebitoAReceber ON Vendedor.Id = DebitoAReceber.VendedorId";
 
 
-                    foreach (var row in deposito.Database.SqlQuery<RepVendedorBase>(query))
+                    foreach (var row in deposito.Database.SqlQuery<ListaVendedorBase>(query))
                     {
                         var newReg = new RepVendedorBase
                         {
@@ -1765,17 +1823,17 @@ namespace ModelLibrary
 
                 result.Add(vTable);
 
-                //vTable = new ListaImportacaoExportacao();
+                vTable = new ListaImportacaoExportacao();
 
-                //count = representante.RepReceberBaixa.Where(rb => rb.CargaId != pCargaId).Count();
+                count = representante.RepReceberBaixa.Where(rb => rb.CargaId != pCargaId).Count();
 
-                //vTable.Tabela = "ReceberBaixa";
-                //vTable.Acao = "Exportar Baixa de Contas a Receber";
-                //vTable.Rotina = "ExportarReceberBaixa";
-                //vTable.TotalLinhas = count;
-                //vTable.Status = "Preparando...";
+                vTable.Tabela = "ReceberBaixa";
+                vTable.Acao = "Exportar Baixa de Contas a Receber";
+                vTable.Rotina = "ExportarReceberBaixa";
+                vTable.TotalLinhas = count;
+                vTable.Status = "Preparando...";
 
-                //result.Add(vTable);
+                result.Add(vTable);
 
 
 
@@ -2388,7 +2446,7 @@ namespace ModelLibrary
             using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
-                var vReceber = deposito.Receber.FirstOrDefault(rc => rc.Id == pReceber.Id);
+                var vReceber = deposito.Receber.FirstOrDefault(rc => rc.Id == pReceber.Id && rc.CargaId == pReceber.CargaId);
 
                 if (vReceber != null)
                 {
@@ -2403,9 +2461,9 @@ namespace ModelLibrary
                 else
                 {
 
-                    var vendedor = deposito.Vendedor.Where(vd => vd.temp_old_id == pReceber.VendedorId).FirstOrDefault();
+                    //var vendedor = deposito.Vendedor.Where(vd => vd.temp_old_id == pReceber.VendedorId).FirstOrDefault();
 
-                    pReceber.VendedorId = vendedor.Id;
+                    //pReceber.VendedorId = vendedor.Id;
 
 
                     Console.WriteLine("Inserindo Conta a Receber id: " + pReceber.Id.ToString());
@@ -2479,7 +2537,7 @@ namespace ModelLibrary
             using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
 
-                var vRecebimento = deposito.Recebimento.FirstOrDefault(rc => rc.Id == pRecebimento.Id);
+                var vRecebimento = deposito.Recebimento.FirstOrDefault(rc => rc.Id == pRecebimento.Id && rc.CargaId == pRecebimento.CargaId);                                                    
 
                 if (vRecebimento != null)
                 {
@@ -2497,6 +2555,15 @@ namespace ModelLibrary
                 else
                 {
                     Console.WriteLine("Inserindo Recebimento id: " + pRecebimento.Id.ToString());
+
+                    if (pRecebimento.Tipo == "Extra")
+                    {
+                        var receber = deposito.Receber.Where(rc => rc.CargaId == pRecebimento.CargaId && rc.VendedorId == pRecebimento.VendedorId).FirstOrDefault();
+
+                        pRecebimento.ReceberId = receber.Id;
+
+                    }
+                    
                     deposito.Recebimento.Add(pRecebimento);
                     deposito.SaveChanges();
                 }

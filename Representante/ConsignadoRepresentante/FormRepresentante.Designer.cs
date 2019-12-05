@@ -250,7 +250,7 @@
             this.menuVendedor = new System.Windows.Forms.MenuStrip();
             this.smnVendedorAdicionar = new System.Windows.Forms.ToolStripMenuItem();
             this.smnVendedorPedidoIncluir = new System.Windows.Forms.ToolStripMenuItem();
-            this.smnRelatorios = new System.Windows.Forms.ToolStripMenuItem();
+            this.smnVendedorRelatorios = new System.Windows.Forms.ToolStripMenuItem();
             this.smnVendedorRelatorioPedido = new System.Windows.Forms.ToolStripMenuItem();
             this.smnVendedorRelatorioRetorno = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPosicaoFinanceira = new System.Windows.Forms.TabPage();
@@ -440,7 +440,7 @@
             this.tbcPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tbcPrincipal.Name = "tbcPrincipal";
-            this.tbcPrincipal.SelectedIndex = 1;
+            this.tbcPrincipal.SelectedIndex = 0;
             this.tbcPrincipal.Size = new System.Drawing.Size(968, 546);
             this.tbcPrincipal.TabIndex = 0;
             this.tbcPrincipal.UseSelectable = true;
@@ -752,7 +752,7 @@
             this.tbcVendedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcVendedor.Location = new System.Drawing.Point(0, 0);
             this.tbcVendedor.Name = "tbcVendedor";
-            this.tbcVendedor.SelectedIndex = 4;
+            this.tbcVendedor.SelectedIndex = 0;
             this.tbcVendedor.Size = new System.Drawing.Size(960, 354);
             this.tbcVendedor.TabIndex = 2;
             this.tbcVendedor.UseSelectable = true;
@@ -3367,7 +3367,7 @@
             this.menuVendedor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.smnVendedorAdicionar,
             this.smnVendedorPedidoIncluir,
-            this.smnRelatorios});
+            this.smnVendedorRelatorios});
             this.menuVendedor.Location = new System.Drawing.Point(0, 0);
             this.menuVendedor.Name = "menuVendedor";
             this.menuVendedor.Size = new System.Drawing.Size(960, 24);
@@ -3386,16 +3386,17 @@
             this.smnVendedorPedidoIncluir.Name = "smnVendedorPedidoIncluir";
             this.smnVendedorPedidoIncluir.Size = new System.Drawing.Size(88, 20);
             this.smnVendedorPedidoIncluir.Text = "Novo Pedido";
+            this.smnVendedorPedidoIncluir.Visible = false;
             this.smnVendedorPedidoIncluir.Click += new System.EventHandler(this.smnVendedorPedidoIncluir_Click);
             // 
-            // smnRelatorios
+            // smnVendedorRelatorios
             // 
-            this.smnRelatorios.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.smnVendedorRelatorios.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.smnVendedorRelatorioPedido,
             this.smnVendedorRelatorioRetorno});
-            this.smnRelatorios.Name = "smnRelatorios";
-            this.smnRelatorios.Size = new System.Drawing.Size(71, 20);
-            this.smnRelatorios.Text = "Relatórios";
+            this.smnVendedorRelatorios.Name = "smnVendedorRelatorios";
+            this.smnVendedorRelatorios.Size = new System.Drawing.Size(71, 20);
+            this.smnVendedorRelatorios.Text = "Relatórios";
             // 
             // smnVendedorRelatorioPedido
             // 
@@ -4174,8 +4175,6 @@
         public MetroFramework.Controls.MetroLabel dlbRetornoValorCompra;
         private System.Windows.Forms.MenuStrip menuVendedor;
         private System.Windows.Forms.ToolStripMenuItem smnVendedorAdicionar;
-        private System.Windows.Forms.ToolStripMenuItem smnRelatorios;
-        public System.Windows.Forms.ToolStripMenuItem smnVendedorPedidoIncluir;
         public System.Windows.Forms.ToolStripMenuItem smnVendedorRelatorioPedido;
         public System.Windows.Forms.ToolStripMenuItem smnVendedorRelatorioRetorno;
         private System.Windows.Forms.MenuStrip menuAcerto;
@@ -4184,5 +4183,7 @@
         private MetroFramework.Controls.MetroLabel lblTotalPendente;
         public MetroFramework.Controls.MetroLabel dlbTotalAcerto;
         private MetroFramework.Controls.MetroLabel lblTotalAcerto;
+        public System.Windows.Forms.ToolStripMenuItem smnVendedorRelatorios;
+        public System.Windows.Forms.ToolStripMenuItem smnVendedorPedidoIncluir;
     }
 }

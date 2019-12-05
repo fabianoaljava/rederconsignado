@@ -206,7 +206,17 @@ namespace ConsignadoRepresentante.Modal
                    
                 }
 
-                
+                if (recebimento.Tipo == "Extra")
+                {
+
+                    lblStatus.Text = "O recebimento selecionado é referente a débido anterior e foi recebido como Extra. O valor não pode ser alterado.";
+                    txtValorRecebido.ReadOnly = true;                    
+                } else
+                {
+                    txtValorRecebido.ReadOnly = false;
+                }
+
+
             }
 
 

@@ -67,6 +67,7 @@
     <Compile Include="Cidade.cs">
       <DependentUpon>ModelDeposito.tt</DependentUpon>
     </Compile>
+    <Compile Include="Listas\ListaVendedorBase.cs" />
     <Compile Include="Cor.cs">
       <DependentUpon>ModelDeposito.tt</DependentUpon>
     </Compile>
