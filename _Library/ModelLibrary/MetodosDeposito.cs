@@ -1392,44 +1392,7 @@ namespace ModelLibrary
             }
         }
 
-        public static void InserirReceberAutomatico(int pCargaId, int pVendedorId, double pValor, DateTime pDataVencimento)
-        {
-            using (DepositoDBEntities deposito = new DepositoDBEntities())
-            {
-
-
-                var maxReceber = deposito.Receber.OrderByDescending(i => i.Id).FirstOrDefault();
-
-                int newId = maxReceber == null ? 1 : maxReceber.Id + 1;
-
-                Console.WriteLine("Inserindo A Receber - ReceberId: ");
-
-                //insert
-                var receber = new Receber
-                {
-                    Id = newId,
-                    VendedorId = pVendedorId,
-                    CargaId = pCargaId,
-                    Documento = pVendedorId,
-                    Serie = DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString(),
-                    ValorNF = pValor,
-                    ValorDuplicata = pValor,
-                    ValorAReceber = pValor,
-                    DataEmissao = DateTime.Now.Date,
-                    DataLancamento = DateTime.Now.Date,
-                    DataVencimento = pDataVencimento,
-                    DataPagamento = null,
-                    QuantidadeRemarcado = 0,
-                    Observacoes = "Título gerado automaticamente!",
-                    Status = "0"
-                };
-
-                deposito.Receber.Add(receber);
-                deposito.SaveChanges();
-
-
-            }
-        }
+        
 
 
 

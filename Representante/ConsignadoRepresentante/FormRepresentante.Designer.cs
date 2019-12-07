@@ -3896,6 +3896,7 @@
             this.Name = "FormRepresentante";
             this.Text = "Reder Software | Módulo Representante";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormRepresentante_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormRepresentante_FormClosed);
             this.Load += new System.EventHandler(this.FormRepresentante_Load);
             this.panelHeader.ResumeLayout(false);

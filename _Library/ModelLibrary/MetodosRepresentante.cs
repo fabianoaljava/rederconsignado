@@ -294,7 +294,7 @@ namespace ModelLibrary
 
                     if (pCriterio.ContainsKey("CodigoGeral"))
                     {
-                        vCriterio = "((Produto.CodigoBarras || '' || Produto.Digito  LIKE '%" + pCriterio["CodigoGeral"] + "%') OR Produto.ProdutoGradeId = " + pCriterio["CodigoGeral"] + ")";
+                        vCriterio = "((Produto.CodigoBarras || '' || Produto.Digito  LIKE '%" + pCriterio["CodigoGeral"] + "%') OR Produto.Id = " + pCriterio["CodigoGeral"] + ")";
                     }
 
                     if (pCriterio.ContainsKey("Nome"))
@@ -939,7 +939,7 @@ namespace ModelLibrary
                     ValorComissao = 0,
                     ValorLiquido = 0,
                     ValorAReceber = pedidoanterior == null ? 0 : decimal.Round(Convert.ToDecimal(pedidoanterior.ValorLiquido - pedidoanterior.ValorAcerto), 2),
-                    ValorAcerto = null,
+                    ValorAcerto = 0,
                     QuantidadeRemarcado = 0,
                     Remarcado = 0,
                     Status = "0"
@@ -1266,16 +1266,6 @@ namespace ModelLibrary
             }
         }
 
-
-        public static void LimparPedidoVazio()
-        {
-
-            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
-            {
-                representante.Database.ExecuteSqlCommand("DELETE FROM RepPedido WHERE Id NOT IN (SELECT PedidoId FROM RepPedidoItem)");
-            }
-
-        }
 
         public static RepReceber ObterTitulo(long pReceberId)
         {
@@ -1604,7 +1594,7 @@ namespace ModelLibrary
                     DataEmissao = DateTime.Now,
                     DataVencimento = DateTime.Now,
                     DataPagamento = DateTime.Now,
-                    Observacoes = "Título Gerado pelo Representante",
+                    Observacoes = "Título Extra gerado pelo representante",
                     Status = "1"                  
                 };
 
@@ -1615,9 +1605,9 @@ namespace ModelLibrary
 
                 Console.WriteLine("Criando baixa de titulo a receber.");
 
-                var maxReceberBaixa = representante.RepReceberBaixa.OrderByDescending(i => i.Id).FirstOrDefault();
+                var repRecebimento = representante.RepRecebimento.OrderByDescending(i => i.Id).FirstOrDefault();
 
-                long newId = maxReceberBaixa == null ? 1 : maxReceberBaixa.Id + 1;
+                long newId = repRecebimento == null ? 1 : repRecebimento.Id + 1;
 
 
                 var novorecebimento = new RepRecebimento
@@ -1916,6 +1906,15 @@ namespace ModelLibrary
             {
                 // Limpar Pedidos sem Itens                
                 representante.Database.ExecuteSqlCommand("DELETE FROM RepPedido WHERE Id NOT IN (SELECT PedidoId FROM RepPedidoItem)");
+                // Reajustar Status do Pedido o pedido novo não tiver itens
+                representante.Database.ExecuteSqlCommand(@"UPDATE RepPedido SET Status = '2' 
+                                                            WHERE Id NOT IN (
+                                                                SELECT Rp1.Id 
+                                                                    FROM RepPedido Rp1 
+                                                                    INNER JOIN RepPedido Rp2 
+                                                                        ON Rp1.VendedorId = Rp2.VendedorId AND Rp1.Status = '4' AND Rp2.Status != '4'
+                                                                ) 
+                                                            AND Status = '4'");
                 // Reajustar Status do Pedido Quando não houver recebimento
                 representante.Database.ExecuteSqlCommand("UPDATE RepPedido SET Status = '2' WHERE Status = '3' AND Id NOT IN (SELECT PedidoId FROM RepRecebimento)");
                 // Reajustar DataPagamento do Receber Quando não houver recebimento

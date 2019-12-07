@@ -212,6 +212,7 @@ namespace ConsignadoRepresentante
 
                     ExibirSuplementoProduto(localDeposito.cCargaId);
                     SuplementoProdutoLimpar();
+                    localDeposito.RecarregarDados();
                 }
 
 
@@ -284,6 +285,8 @@ namespace ConsignadoRepresentante
 
             SuplementoProdutoLimpar();
 
+            localDeposito.RecarregarDados();
+
             /*} catch
             {
 
@@ -323,6 +326,8 @@ namespace ConsignadoRepresentante
                 ModelLibrary.MetodosRepresentante.ExcluirSuplemento(localDeposito.cCargaId, cProdutoGradeId);
 
                 ExibirSuplementoProduto(localDeposito.cCargaId);
+
+                localDeposito.RecarregarDados();
             }
 
 

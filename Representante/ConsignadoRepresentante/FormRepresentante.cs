@@ -143,6 +143,8 @@ namespace ConsignadoRepresentante
 
         private void CarregarFormulario()
         {
+            ModelLibrary.MetodosRepresentante.Manutencao();
+
             ExibirCarga();
 
             cHome.CarregarFormulario();
@@ -194,6 +196,7 @@ namespace ConsignadoRepresentante
         {
 
             cHome.CarregarFormulario();
+            cVendedor.VendedorReload();
             cFinanceiro.ExibirPosicaoFinancera();
             cProduto.ExibirProdutos();
             cEstoque.ExibirEstoque();
@@ -876,6 +879,11 @@ namespace ConsignadoRepresentante
             Modal.FormReceberPagamento formReceberPagamento = new Modal.FormReceberPagamento(this);
 
             var result = formReceberPagamento.ShowDialog();
+        }
+
+        private void FormRepresentante_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ModelLibrary.MetodosRepresentante.Manutencao();
         }
     }
 }

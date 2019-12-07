@@ -86,7 +86,7 @@ namespace ModelLibrary
                     .Select(pd => pd.Pedido).Count();
 
                 vTable.Tabela = "Todas";
-                vTable.Acao = "Preparar Importacao";
+                vTable.Acao = "Preparar importacao";
                 vTable.Rotina = "ImportarPreparar";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
@@ -100,7 +100,7 @@ namespace ModelLibrary
                 count = deposito.Usuario.Count();
 
                 vTable.Tabela = "Usuario";
-                vTable.Acao = "Importar Usuarios";
+                vTable.Acao = "Importar usuarios";
                 vTable.Rotina = "ImportarUsuario";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
@@ -114,7 +114,7 @@ namespace ModelLibrary
                 count = deposito.Praca.Count();
 
                 vTable.Tabela = "Praca";
-                vTable.Acao = "Importar Pracas";
+                vTable.Acao = "Importar pracas";
                 vTable.Rotina = "ImportarPraca";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
@@ -126,7 +126,7 @@ namespace ModelLibrary
                 count = deposito.Categoria.Count();
 
                 vTable.Tabela = "Categoria";
-                vTable.Acao = "Importar Categorias";
+                vTable.Acao = "Importar categorias";
                 vTable.Rotina = "ImportarCategoria";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
@@ -138,7 +138,7 @@ namespace ModelLibrary
                 count = deposito.Fornecedor.Count();
 
                 vTable.Tabela = "Fornecedor";
-                vTable.Acao = "Importar Fornecedores";
+                vTable.Acao = "Importar fornecedores";
                 vTable.Rotina = "ImportarFornecedor";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
@@ -150,7 +150,7 @@ namespace ModelLibrary
                 count = deposito.Produto.Where(pd => pd.Status == "1").Count();
 
                 vTable.Tabela = "Produto";
-                vTable.Acao = "Importar Produtos";
+                vTable.Acao = "Importar produtos";
                 vTable.Rotina = "ImportarProduto";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
@@ -163,7 +163,7 @@ namespace ModelLibrary
                 count = deposito.ProdutoGrade.Where(pg => pg.DataFinal == null && pg.Status == "1").Count();
 
                 vTable.Tabela = "ProdutoGrade";
-                vTable.Acao = "Importar Grade de Produtos";
+                vTable.Acao = "Importar grade de produtos";
                 vTable.Rotina = "ImportarProdutoGrade";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
@@ -175,7 +175,7 @@ namespace ModelLibrary
                 count = 1;
 
                 vTable.Tabela = "Carga";
-                vTable.Acao = "Importar Carga Atual";
+                vTable.Acao = "Importar carga atual";
                 vTable.Rotina = "ImportarCarga";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
@@ -187,7 +187,7 @@ namespace ModelLibrary
                 count = deposito.Carga.Where(cg => cg.Id != cargaatual.Id && cg.PracaId == cargaatual.PracaId).Count();
 
                 vTable.Tabela = "Carga";
-                vTable.Acao = "Importar Carga Anterior";
+                vTable.Acao = "Importar carga anterior";
                 vTable.Rotina = "ImportarCargaAnterior";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
@@ -200,7 +200,7 @@ namespace ModelLibrary
                 count = deposito.CargaProduto.Where(pg => pg.CargaId == cCargaId).Count();
 
                 vTable.Tabela = "CargaProduto";
-                vTable.Acao = "Importar Produtos da Carga";
+                vTable.Acao = "Importar produtos da carga";
                 vTable.Rotina = "ImportarCargaProduto";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
@@ -229,10 +229,10 @@ namespace ModelLibrary
                                     )";
 
 
-                count = deposito.Vendedor.SqlQuery(query, cRepresentanteId, cPracaId, cMes.ToString() + cAno.ToString()).Count();
+                count = deposito.Vendedor.SqlQuery(query, cRepresentanteId, cPracaId, cAno.ToString()+cMes.ToString()).Count();
 
                 vTable.Tabela = "Vendedor";
-                vTable.Acao = "Importar Vendedores associados a carga/praça";
+                vTable.Acao = "Importar vendedores associados a carga/praça";
                 vTable.Rotina = "ImportarVendedor";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
@@ -280,7 +280,7 @@ namespace ModelLibrary
                 count = deposito.Vendedor.SqlQuery(query).Count();
 
                 vTable.Tabela = "Vendedor";
-                vTable.Acao = "Importar Todos Vendedores";
+                vTable.Acao = "Importar todos vendedores";
                 vTable.Rotina = "ImportarVendedorBase";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
@@ -298,7 +298,7 @@ namespace ModelLibrary
                 //count = deposito.Pedido.Join(deposito.Carga, pd => pd.CargaId, cg => cg.Id, (pd, cg) => new { Pedido = pd, Carga = cg }).Where(pd => pd.Carga.PracaId == cPracaId && pd.Pedido.DataRetorno == null).Count();
 
                 vTable.Tabela = "Pedido";
-                vTable.Acao = "Importar Pedidos";
+                vTable.Acao = "Importar pedidos";
                 vTable.Rotina = "ImportarPedido";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
@@ -322,7 +322,7 @@ namespace ModelLibrary
                 //count = deposito.PedidoItem.Join(deposito.Pedido, pi => pi.PedidoId, pd => pd.Id, (pi, pd) => new { RepPedidoItem = pi, RepPedido = pd }).Where(pi => pi.RepPedido.CargaId == cCargaId).Count();
 
                 vTable.Tabela = "PedidoItem";
-                vTable.Acao = "Importar Itens do Pedidos";
+                vTable.Acao = "Importar itens dos pedidos";
                 vTable.Rotina = "ImportarPedidoItem";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
@@ -365,7 +365,7 @@ namespace ModelLibrary
                                         OR (VendedorId IN(
                                                 SELECT Distinct VendedorId
                                                     FROM Pedido
-                                                WHERE CargaId in(SELECT Id FROM Carga WHERE PracaId = @p0)
+                                                WHERE CargaId in(SELECT Id FROM Carga WHERE PracaId = @p1)
                                                 )))
                                 OR PedidoId IN (
                                     SELECT Id FROM Pedido 
@@ -373,7 +373,7 @@ namespace ModelLibrary
                                         OR (VendedorId IN(
                                                 SELECT Distinct VendedorId
                                                     FROM Pedido
-                                                WHERE CargaId in(SELECT Id FROM Carga WHERE PracaId = @p0)
+                                                WHERE CargaId in(SELECT Id FROM Carga WHERE PracaId = @p1)
                                                 )))";
 
                 count = deposito.Recebimento.SqlQuery(query, cCargaId, cPracaId).Count();
@@ -420,7 +420,7 @@ namespace ModelLibrary
                 count = 0;
 
                 vTable.Tabela = "Carga";
-                vTable.Acao = "Atualizar Status Carga";
+                vTable.Acao = "Atualizar status carga";
                 vTable.Rotina = "AlterarStatusCarga";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
@@ -433,7 +433,7 @@ namespace ModelLibrary
                 count = 0;
 
                 vTable.Tabela = "Todas";
-                vTable.Acao = "Finalizar Importacao...";
+                vTable.Acao = "Finalizar importacao...";
                 vTable.Rotina = "ImportarFinalizar";
                 vTable.TotalLinhas = count;
                 vTable.Status = "Preparando...";
@@ -490,15 +490,18 @@ namespace ModelLibrary
 
                 var receber = deposito.Pedido
                     .Join(deposito.Carga, pd => pd.CargaId, ca => ca.Id, (pd, ca) => new { Pedido = pd, Carga = ca })
-                    .Where(pd => pd.Pedido.ValorAcerto > 0 && pd.Carga.PracaId == cPracaId && pd.Pedido.Status != "3" && pd.Pedido.Status != "4")
+                    .Where(pd => pd.Pedido.ValorAcerto > 0 && pd.Carga.PracaId == cPracaId && pd.Pedido.Status != "4")
                     .Select(pd => pd.Pedido);
 
 
                 foreach (Pedido row in receber)
                 {
+                    Console.WriteLine("Verificando Receber --> ValorAcerto:" + row.ValorAcerto.ToString() + " | ValorLiquido:" + row.ValorLiquido.ToString());
+
                     if (row.ValorLiquido - row.ValorAcerto > 0)
                     {
-                        ModelLibrary.MetodosDeposito.InserirReceberAutomatico(Convert.ToInt32(cCargaId), Convert.ToInt32(row.VendedorId), Convert.ToDouble(row.ValorLiquido + row.ValorAReceber - row.ValorAcerto), Convert.ToDateTime(row.DataPrevisaoRetorno));
+                        double vValor = Math.Round(Convert.ToDouble(row.ValorLiquido + row.ValorAReceber - row.ValorAcerto),2);
+                        InserirReceberAutomatico(Convert.ToInt32(cCargaId), Convert.ToInt32(row.VendedorId), vValor, Convert.ToDateTime(row.DataPrevisaoRetorno));
                     }
                 }
             }
@@ -509,6 +512,56 @@ namespace ModelLibrary
             return true;
         }
 
+
+
+        public static void InserirReceberAutomatico(int pCargaId, int pVendedorId, double pValor, DateTime pDataVencimento)
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+
+                Console.WriteLine("Inserindo Titulo a Receber Automatico");
+
+
+                Receber receberanterior = deposito.Receber.FirstOrDefault(rc => rc.CargaId == pCargaId && rc.VendedorId == pVendedorId && rc.ValorNF == pValor && rc.DataVencimento == pDataVencimento);
+
+                if (receberanterior == null)
+                {
+
+
+                    //insert
+                    var receber = new Receber
+                    {
+                        VendedorId = pVendedorId,
+                        CargaId = pCargaId,
+                        Documento = pVendedorId,
+                        Serie = DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString(),
+                        ValorNF = pValor,
+                        ValorDuplicata = pValor,
+                        ValorAReceber = pValor,
+                        DataEmissao = DateTime.Now.Date,
+                        DataLancamento = DateTime.Now.Date,
+                        DataVencimento = pDataVencimento,
+                        DataPagamento = null,
+                        QuantidadeRemarcado = 0,
+                        Observacoes = "Título gerado automaticamente!",
+                        Status = "0"
+                    };
+
+                    deposito.Receber.Add(receber);
+                    deposito.SaveChanges();
+
+                }
+                else
+                {
+                    Console.WriteLine("Titulo a Receber Automatico Inserido anteriormente.");
+                }
+
+
+
+
+            }
+        }
 
 
         public static Boolean ImportarUsuario()
@@ -1094,7 +1147,7 @@ namespace ModelLibrary
                                             )";
 
 
-                    foreach (var row in deposito.Vendedor.SqlQuery(query, cRepresentanteId, cPracaId, cMes.ToString() + cAno.ToString()))
+                    foreach (var row in deposito.Vendedor.SqlQuery(query, cRepresentanteId, cPracaId, cAno.ToString()+cMes.ToString()))
                     {
                         var newReg = new RepVendedor
                         {
@@ -1516,7 +1569,7 @@ namespace ModelLibrary
                                         OR (VendedorId IN(
                                                 SELECT Distinct VendedorId
                                                     FROM Pedido
-                                                WHERE CargaId in(SELECT Id FROM Carga WHERE PracaId = @p0)
+                                                WHERE CargaId in(SELECT Id FROM Carga WHERE PracaId = @p1)
                                                 )))
                                 OR PedidoId IN (
                                     SELECT Id FROM Pedido 
@@ -1524,7 +1577,7 @@ namespace ModelLibrary
                                         OR (VendedorId IN(
                                                 SELECT Distinct VendedorId
                                                     FROM Pedido
-                                                WHERE CargaId in(SELECT Id FROM Carga WHERE PracaId = @p0)
+                                                WHERE CargaId in(SELECT Id FROM Carga WHERE PracaId = @p1)
                                                 )))";
 
 
@@ -1720,7 +1773,8 @@ namespace ModelLibrary
 
                 var vTable = new ListaImportacaoExportacao();
 
-                int count = 0;
+
+                int count = representante.RepRecebimento.Where(rc => rc.Tipo == "Extra").Count(); ;
 
                 vTable.Tabela = "Todas";
                 vTable.Acao = "Preparar Exportacao";
@@ -1865,11 +1919,73 @@ namespace ModelLibrary
         // Atualizar Tabela Carga: Data Exportação / Status
         public static Boolean ExportarPreparar()
         {
-            ModelLibrary.MetodosRepresentante.LimparPedidoVazio();
-            Thread.Sleep(1000);
-            return true;
+
+            try
+            {
+                ModelLibrary.MetodosRepresentante.Manutencao();
+
+
+                using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+                {
+
+                    foreach (var row in representante.RepRecebimento.Where(rc => rc.Tipo == "Extra"))
+                    {
+
+                        BaixarExtra(row.VendedorId, Convert.ToDouble(row.ValorRecebido), row.ReceberId);
+
+                    }
+
+
+                }
+
+                return true;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Erro: " + e.Message + " | " + e.InnerException);
+                return false;
+            }
+
+            
         }
 
+
+        public static void BaixarExtra(long pVendedorId, double pValor, long? pReceberId)
+        {
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                Console.WriteLine("Baixa de Recebimentos Extras em Receber.");
+
+                foreach (Receber row in deposito.Receber.Where(rc => rc.VendedorId == pVendedorId && rc.ValorAReceber > 0).OrderBy(rc => rc.ValorAReceber))
+                {
+
+                    //Receber receber = deposito.Receber.FirstOrDefault(rc => rc.Id == row.Id);
+                    pValor -= Convert.ToDouble(row.ValorAReceber);
+                    row.Status = "2";
+                    row.ValorAReceber = 0;
+                    row.DataPagamento = DateTime.Now;
+                    row.Observacoes = row.Observacoes + ". Baixado através de titulo extra - Id:|" + pReceberId.ToString();
+
+                }
+
+
+                deposito.SaveChanges();
+
+
+
+
+
+                if (pValor > 0)
+                {
+                    MessageBox.Show("Ocorreu um erro ao executar a baixa do titulo extra. Houve uma divergência de valores. Favor contactar o administrador do sistema e informar as informações a seguir: \n ReceberId = " + pReceberId.ToString() + " | VendedorId = " + pVendedorId.ToString() + " | Valor Restante = " + pValor.ToString(), "IMPORTANTE! Favor entrar em contato com o administrador", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    // implementar envio por email ou bd
+                }
+
+            }
+
+
+        }
 
         public static Boolean ExportarVendedor()
         {
@@ -2127,8 +2243,9 @@ namespace ModelLibrary
 
                 return true;
             }
-            catch
+            catch(Exception e)
             {
+                Console.WriteLine("Erro: " + e.Message);
                 return false;
             }
 

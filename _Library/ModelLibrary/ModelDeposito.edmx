@@ -937,7 +937,7 @@ warning 6002: The table/view 'RederConsignado.dbo.Representante' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="RederConsignadoEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DepositoDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Carga" EntityType="Self.Carga" />
           <EntitySet Name="CargaProduto" EntityType="Self.CargaProduto" />
           <EntitySet Name="Categoria" EntityType="Self.Categoria" />
@@ -1133,7 +1133,7 @@ warning 6002: The table/view 'RederConsignado.dbo.Representante' does not have a
           <Property Name="VendedorId" Type="Int32" />
           <Property Name="CargaId" Type="Int32" />
           <Property Name="Documento" Type="Int32" />
-          <Property Name="Serie" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Serie" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="ValorNF" Type="Double" />
           <Property Name="ValorDuplicata" Type="Double" />
           <Property Name="ValorAReceber" Type="Double" />
@@ -1355,7 +1355,7 @@ warning 6002: The table/view 'RederConsignado.dbo.Representante' does not have a
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelDepositoStoreContainer" CdmEntityContainer="RederConsignadoEntities">
+        <EntityContainerMapping StorageEntityContainer="ModelDepositoStoreContainer" CdmEntityContainer="DepositoDBEntities">
           <EntitySetMapping Name="Carga">
             <EntityTypeMapping TypeName="ModelDeposito.Carga">
               <MappingFragment StoreEntitySet="Carga">

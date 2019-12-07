@@ -255,14 +255,17 @@ namespace ConsignadoRepresentante
 
                                         if (valorrecebido != vendedorbase.DebitoAReceber)
                                         {
-                                            if (MessageBox.Show("O valor informado foi " + valorrecebido.ToString() + " e está diferente do débito anterior = " + vendedorbase.DebitoAReceber  + ". O cadastro do vendedor só será permitido após o recebimento total do débito. Deseja registrar o pagamento mesmo assim?", "Reder Consignado", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-                                            {
-                                                ModelLibrary.MetodosRepresentante.ReceberExtra(vendedorbase.Id, localRepresentanteForm.cCargaId, valorrecebido, vendedorbase.DebitoAReceber);
-                                                
-                                            }
+                                            //if (MessageBox.Show("O valor informado foi " + valorrecebido.ToString() + " e está diferente do débito anterior = " + vendedorbase.DebitoAReceber  + ". O cadastro do vendedor só será permitido após o recebimento total do débito. Deseja registrar o pagamento mesmo assim?", "Reder Consignado", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                                            //{
+                                            //    ModelLibrary.MetodosRepresentante.ReceberExtra(vendedorbase.Id, localRepresentanteForm.cCargaId, valorrecebido, vendedorbase.DebitoAReceber);
 
-                                            VendedorLimpar();
+                                            //}
 
+                                            //VendedorLimpar();
+
+                                            MessageBox.Show("O valor informado foi " + valorrecebido.ToString() + " e está diferente do débito anterior = " + vendedorbase.DebitoAReceber + ". O cadastro do vendedor só será permitido após o recebimento total do débito.", "Reder Consignado", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                                            localRepresentanteForm.txtCPFCnpj.Focus();
+                                            
                                         } else
                                         {
 
@@ -674,10 +677,11 @@ namespace ConsignadoRepresentante
             ExibirAcerto();
             ExibirTitulos();
             ExibirInicio();
-            localRepresentanteForm.cHome.CarregarFormulario();
-            localRepresentanteForm.cFinanceiro.ExibirPosicaoFinancera();
-            localRepresentanteForm.tabPosicaoFinanceira.Refresh();
-            localRepresentanteForm.cProduto.ExibirProdutos();
+            //localRepresentanteForm.RecarregarDados();
+            //localRepresentanteForm.cHome.CarregarFormulario();
+            //localRepresentanteForm.cFinanceiro.ExibirPosicaoFinancera();
+            //localRepresentanteForm.tabPosicaoFinanceira.Refresh();
+            //localRepresentanteForm.cProduto.ExibirProdutos();
         }
 
 

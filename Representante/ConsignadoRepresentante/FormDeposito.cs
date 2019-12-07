@@ -146,7 +146,12 @@ namespace ConsignadoRepresentante
         }
 
 
+        public void RecarregarDados()
+        {
 
+            cImportar.RecarregarDados();
+
+        }
 
 
 

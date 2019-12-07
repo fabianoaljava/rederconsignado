@@ -437,6 +437,8 @@ namespace ConsignadoRepresentante
         {
             ModelLibrary.MetodosRepresentante.ResolverConflitoProdutoConferencia(localDeposito.cCargaId, pProdutoGradeID, pQuantidade);
             ExibirConferenciaProduto(localDeposito.cCargaId);
+
+            localDeposito.RecarregarDados();
         }
 
     }

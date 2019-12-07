@@ -472,9 +472,11 @@ namespace ConsignadoRepresentante.Modal
 
         private void FormReceberPagamento_FormClosing(object sender, FormClosingEventArgs e)
         {
-            localRepresentanteForm.RecarregarDados();
-            localRepresentanteForm.cVendedor.ExibirAcerto();
-
+            //localRepresentanteForm.RecarregarDados();
+            localRepresentanteForm.cVendedor.VendedorReload();
+            //localRepresentanteForm.cVendedor.ExibirAcerto();
+            //localRepresentanteForm.cVendedor.ExibirPedido(localRepresentanteForm.cVendedor.cVendedorId);
+            //localRepresentanteForm.cVendedor.ExibirRetornoProduto(localRepresentanteForm.cVendedor.cVendedorId);
         }
     }
 }

@@ -18,8 +18,11 @@ namespace ConsignadoRepresentante
         /// Declaração de Variáveis
         //////////////////////////////
         ///
-        public long cImportarProdutoId;
+
+        public int cCargaId;
+        public long  cImportarProdutoId;
         public string cModoConferenciaProduto;
+
 
 
         public FormDeposito localDeposito = null;
@@ -104,6 +107,10 @@ namespace ConsignadoRepresentante
 
         public void ImportarLimpar()
         {
+
+
+            cCargaId = 0;
+
             localDeposito.cbbImportarPraca.SelectedIndex = -1;
             localDeposito.cbbImportarRepresentante.SelectedIndex = -1;
             localDeposito.txtImportarCodPraca.Text = "";
@@ -122,7 +129,7 @@ namespace ConsignadoRepresentante
 
 
             localDeposito.dlbQtdProdutos.Text = "0.00";
-            localDeposito.dlbTotalProdutos.Text = "0.00";
+            localDeposito.dlbTotalProdutos.Text = "R$ 0.00";
 
             localDeposito.dlbImportarDataAbertura.Text = "-";
             localDeposito.dlbCargaDataExportacao.Text = "-";
@@ -175,8 +182,8 @@ namespace ConsignadoRepresentante
 
                 if (carga != null) /* Se existir Carga */
                 {
-                    
 
+                    cCargaId = carga.Id;
 
                     //verificar status da carga e aplicar regras de negócio // Colocar código no motor de regras.
                     if (ControllerLibrary.Regras.PermiteImportacaoCarga(carga.Status))
@@ -314,6 +321,8 @@ namespace ConsignadoRepresentante
 
             int cargaId = Convert.ToInt32(carga.Id);
 
+            cCargaId = cargaId;
+
             localDeposito.cCargaId = cargaId;
             localDeposito.cStatus = carga.Status;
 
@@ -343,7 +352,7 @@ namespace ConsignadoRepresentante
             var totalizadores = ModelLibrary.MetodosRepresentante.ObterTotalizadores(cargaId);
 
             localDeposito.dlbQtdProdutos.Text = totalizadores.QtdProdutos.ToString();
-            localDeposito.dlbTotalProdutos.Text = String.Format("{0:C2}", totalizadores.TotalProdutos.ToString());
+            localDeposito.dlbTotalProdutos.Text = String.Format("{0:C2}", totalizadores.TotalProdutos);
 
 
             localDeposito.dlbImportarDataAbertura.Text = carga.DataAbertura.HasValue ? carga.DataAbertura.Value.ToShortDateString() : "-";
@@ -458,7 +467,20 @@ namespace ConsignadoRepresentante
         }
 
 
-        
+        public void RecarregarDados()
+        {
+
+            var totalizadores = ModelLibrary.MetodosRepresentante.ObterTotalizadores(cCargaId);
+
+            localDeposito.dlbQtdProdutos.Text = totalizadores.QtdProdutos.ToString();
+            localDeposito.dlbTotalProdutos.Text = String.Format("{0:C2}", totalizadores.TotalProdutos);
+
+
+
+        }
+
+
+
 
 
     }

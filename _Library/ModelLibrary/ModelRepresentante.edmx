@@ -533,8 +533,8 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
           <EntitySet Name="RepReceberBaixa" EntityType="ModelRepresentante.RepReceberBaixa" />
           <EntitySet Name="RepSuplementoProduto" EntityType="ModelRepresentante.RepSuplementoProduto" />
           <EntitySet Name="RepSuplemento" EntityType="ModelRepresentante.RepSuplemento" />
-          <EntitySet Name="RepPedidoes" EntityType="ModelRepresentante.RepPedido" />
-          <EntitySet Name="RepRecebimentoes" EntityType="ModelRepresentante.RepRecebimento" />
+          <EntitySet Name="RepPedido" EntityType="ModelRepresentante.RepPedido" />
+          <EntitySet Name="RepRecebimento" EntityType="ModelRepresentante.RepRecebimento" />
         </EntityContainer>
         <EntityType Name="RepRepresentante">
           <Key>
@@ -1082,7 +1082,7 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RepPedidoes">
+          <EntitySetMapping Name="RepPedido">
             <EntityTypeMapping TypeName="ModelRepresentante.RepPedido">
               <MappingFragment StoreEntitySet="RepPedido">
                 <ScalarProperty Name="QuantidadeRemarcado" ColumnName="QuantidadeRemarcado" />
@@ -1109,7 +1109,7 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RepRecebimentoes">
+          <EntitySetMapping Name="RepRecebimento">
             <EntityTypeMapping TypeName="ModelRepresentante.RepRecebimento">
               <MappingFragment StoreEntitySet="RepRecebimento">
                 <ScalarProperty Name="FormaPagamento" ColumnName="FormaPagamento" />
@@ -1140,7 +1140,7 @@ FROM [RepRepresentante] AS [RepRepresentante]</DefiningQuery>
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
