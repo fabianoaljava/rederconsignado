@@ -599,6 +599,7 @@ namespace ConsignadoRepresentante
         {
             grdExportacao.Rows[grdExportacao.Rows.Count-1].DefaultCellStyle.ForeColor = Color.Green;
             btnExportar.Text = "Exportação Realizada.";
+            btnExportar.Enabled = false;
             Cursor.Current = Cursors.Default;
 
             cExportar.ExibirExportacao();

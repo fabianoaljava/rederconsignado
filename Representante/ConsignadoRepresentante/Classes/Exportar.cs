@@ -87,7 +87,7 @@ namespace ConsignadoRepresentante
                 ModelLibrary.MetodosRepresentante.Manutencao();
 
                 localDeposito.btnExportar.Text = "Exportando...";
-                //localDeposito.btnExportar.Enabled = false;
+                localDeposito.btnExportar.Enabled = false;
                 localDeposito.grdExportacao.DataSource = ModelLibrary.ImportarExportar.ObterListaExportacao(localDeposito.cCargaId);
 
 

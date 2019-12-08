@@ -1773,8 +1773,9 @@ namespace ModelLibrary
 
                 var vTable = new ListaImportacaoExportacao();
 
+                int count;
 
-                int count = representante.RepRecebimento.Where(rc => rc.Tipo == "Extra").Count(); ;
+                count = representante.RepRecebimento.Where(rc => rc.Tipo == "Extra").Count(); ;
 
                 vTable.Tabela = "Todas";
                 vTable.Acao = "Preparar Exportacao";
@@ -2209,9 +2210,11 @@ namespace ModelLibrary
                         };
 
                         representante.RepCargaProduto.Add(regRepCargaProduto);
+                        representante.SaveChanges();
 
                     }
 
+                    
 
                     foreach(var row in representante.RepCargaProduto)
                     {
@@ -2228,7 +2231,7 @@ namespace ModelLibrary
 
 
 
-                        representante.SaveChanges();
+                        
 
                         CargaProdutoAtualizarInserir(regCargaProduto);
                         count++;

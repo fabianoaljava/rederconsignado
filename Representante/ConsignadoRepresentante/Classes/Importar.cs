@@ -403,6 +403,7 @@ namespace ConsignadoRepresentante
             if (carga.Status != "E")
             {
                 localDeposito.lblExportacaoAlerta.Text = "A Carga não disponível para exportação. Status: " + carga.Status;
+                localDeposito.btnExportar.Enabled = false;
                 localDeposito.pnlExportacaoMain.Enabled = false;
 
                 //Desativar aba conferencia de produtos 
