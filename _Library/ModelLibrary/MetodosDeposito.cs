@@ -792,6 +792,7 @@ namespace ModelLibrary
 			                                GROUP BY ProdutoGradeId, CargaId
                                             ) as Consignado ON Consignado.ProdutoGradeId = ProdutoGrade.Id AND Consignado.CargaId = Carga.Id
                                  WHERE Carga.Id = @p0
+                                    AND CargaProduto.Tipo != 'I'
                                  GROUP BY ProdutoGrade.CodigoBarras, ProdutoGrade.Digito, Produto.Descricao, ProdutoGrade.Tamanho, Carga.Id, ProdutoGrade.ValorSaida";
 
                 var result = deposito.Database.SqlQuery<ListaProdutoConferencia>(query, vCargaId);

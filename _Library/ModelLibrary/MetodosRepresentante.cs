@@ -240,7 +240,7 @@ namespace ModelLibrary
                                 INNER JOIN RepProdutoGrade ON RepCargaProduto.ProdutoGradeId = RepProdutoGrade.Id
                                 INNER JOIN RepProduto ON RepProdutoGrade.ProdutoId = RepProduto.Id
                                 LEFT JOIN RepCargaConferencia ON RepCargaConferencia.CargaId = RepCarga.Id AND RepCargaConferencia.ProdutoGradeId = RepProdutoGrade.Id
-                                WHERE Tipo != 'S'";
+                                WHERE Tipo != 'S' AND Tipo != 'P'";
 
                 var result = representante.Database.SqlQuery<ListaRepProdutosConferencia>(query);
 
@@ -269,7 +269,7 @@ namespace ModelLibrary
 	                                LEFT JOIN 
 		                                (SELECT RepProdutoGrade.Id ProdutoGradeId, RepProdutoGrade.ValorSaida Preco, RepCargaProduto.Quantidade ViagemPlus, RepCargaProduto.Retorno ContagemCarro 
 			                                FROM RepCargaProduto 
-			                                INNER JOIN RepProdutoGrade ON RepProdutoGrade.Id = RepCargaProduto.ProdutoGradeId) AS Carga ON Produto.ProdutoGradeId = Carga.ProdutoGradeId
+			                                INNER JOIN RepProdutoGrade ON RepProdutoGrade.Id = RepCargaProduto.ProdutoGradeId WHERE RepCargaProduto.Tipo != 'P') AS Carga ON Produto.ProdutoGradeId = Carga.ProdutoGradeId
 	                                LEFT JOIN 
 		                                (SELECT ProdutoGradeId, SUM(RepPedidoItem.Retorno) ConsignadoRetorno, SUM(RepPedidoItem.Quantidade) Consignado 
 			                                FROM RepPedido
@@ -582,7 +582,7 @@ namespace ModelLibrary
                                             LEFT JOIN RepCargaConferencia 
                                                 ON RepCargaConferencia.CargaId = RepCargaProduto.CargaId 
                                                 AND RepCargaConferencia.ProdutoGradeId = RepCargaProduto.ProdutoGradeId
-                                 WHERE RepCargaConferencia.Id IS NULL";
+                                 WHERE RepCargaConferencia.Id IS NULL AND RepCargaProduto.Tipo != 'P'";
 
                 representante.Database.ExecuteSqlCommand(query);                
                 representante.SaveChanges();
@@ -1721,7 +1721,7 @@ namespace ModelLibrary
                                     FROM RepCarga 
                                     INNER JOIN RepCargaProduto On RepCargaProduto.CargaId = RepCarga.Id 
                                     INNER JOIN RepProdutoGrade ON ProdutoGradeId = RepProdutoGrade.Id
-                                WHERE RepCarga.Id = @p0
+                                WHERE RepCarga.Id = @p0 AND RepCargaProduto.Tipo != 'P'
                                 GROUP BY RepCarga.Id";
 
 
@@ -1872,7 +1872,7 @@ namespace ModelLibrary
 	                                LEFT JOIN 
 		                                (SELECT RepProdutoGrade.Id ProdutoGradeId, RepProdutoGrade.ValorSaida Preco, RepCargaProduto.Quantidade ViagemPlus, RepCargaProduto.Retorno ContagemCarro 
 			                                FROM RepCargaProduto 
-			                                INNER JOIN RepProdutoGrade ON RepProdutoGrade.Id = RepCargaProduto.ProdutoGradeId) AS Carga ON Produto.ProdutoGradeId = Carga.ProdutoGradeId
+			                                INNER JOIN RepProdutoGrade ON RepProdutoGrade.Id = RepCargaProduto.ProdutoGradeId WHERE RepCargaProduto.Tipo != 'S') AS Carga ON Produto.ProdutoGradeId = Carga.ProdutoGradeId
 	                                LEFT JOIN 
 		                                (SELECT ProdutoGradeId, SUM(RepPedidoItem.Retorno) ConsignadoRetorno, SUM(RepPedidoItem.Quantidade) Consignado 
 			                                FROM RepPedido

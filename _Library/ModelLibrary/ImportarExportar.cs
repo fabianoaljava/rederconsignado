@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -1439,7 +1440,7 @@ namespace ModelLibrary
                             Preco = Convert.ToDecimal(row.RepPedidoItem.Preco)
                         };
 
-                        newPedidoItem.Add(newReg);
+                        newPedidoItem.Add(newReg);                        
                         count++;
                     }
 
@@ -1448,6 +1449,9 @@ namespace ModelLibrary
                 using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
                 {
                     representante.RepPedidoItem.AddRange(newPedidoItem);
+                    representante.SaveChanges();
+
+                    representante.Database.ExecuteSqlCommand("INSERT INTO RepCargaProduto (CargaId, ProdutoGradeId, Quantidade, Retorno, Tipo) SELECT DISTINCT @pCargaId CargaId, ProdutoGradeId, 0 Quantidade, 0 Retorno, 'P' Tipo FROM RepPedidoItem WHERE ProdutoGradeId NOT IN (SELECT ProdutoGradeId FROM RepCargaProduto);", new SQLiteParameter("@pCargaId", cCargaId));
                     representante.SaveChanges();
                 }
 
