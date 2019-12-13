@@ -120,7 +120,6 @@ namespace ConsignadoDeposito
             CarregarResumo();
             CarregarGradeRetornoProduto(cRetornoId);
             CarregarPedidos();
-            PedidoDetalheLimpar();
             CarregarPedidosFechados();
             CarregarContasAReceber();
             CarregarConferenciaProdutos();
@@ -201,7 +200,6 @@ namespace ConsignadoDeposito
                         /// Habilita Finalizar Acerto
                         localDepositoForm.pnlRetornoProduto.Enabled = true;
                         localDepositoForm.pnlRetornoPedidoTop.Enabled = true;
-                        localDepositoForm.pnlLancPedTop.Enabled = true;
                         localDepositoForm.pnlContasAReceberTop.Enabled = true;
 
                         localDepositoForm.mnuRetornoAcoes.Text = "Finalizar Conferencia de Produtos";
@@ -216,7 +214,6 @@ namespace ConsignadoDeposito
                         /// Habilita Finalizar Acerto
                         localDepositoForm.pnlRetornoProduto.Enabled = false;
                         localDepositoForm.pnlRetornoPedidoTop.Enabled = true;
-                        localDepositoForm.pnlLancPedTop.Enabled = true;
                         localDepositoForm.pnlContasAReceberTop.Enabled = true;
                         localDepositoForm.mnuRetornoAcoes.Text = "Finalizar Acerto";
                         localDepositoForm.mnuRetornoAcoes.Enabled = true;
@@ -230,7 +227,6 @@ namespace ConsignadoDeposito
                         /// Desabilita Finalizar Acerto
                         localDepositoForm.pnlRetornoProduto.Enabled = false;
                         localDepositoForm.pnlRetornoPedidoTop.Enabled = false;
-                        localDepositoForm.pnlLancPedTop.Enabled = false;
                         localDepositoForm.pnlContasAReceberTop.Enabled = false;
 
 
@@ -246,7 +242,6 @@ namespace ConsignadoDeposito
                         /// Desabilita Finalizar Acerto
                         localDepositoForm.pnlRetornoProduto.Enabled = false;
                         localDepositoForm.pnlRetornoPedidoTop.Enabled = false;
-                        localDepositoForm.pnlLancPedTop.Enabled = false;
                         localDepositoForm.pnlContasAReceberTop.Enabled = false;
 
 
@@ -283,7 +278,6 @@ namespace ConsignadoDeposito
             CarregarResumo();
             CarregarGradeRetornoProduto(cRetornoId);
             CarregarPedidos();
-            PedidoDetalheLimpar();
             CarregarPedidosFechados();            
             CarregarContasAReceber();
             CarregarConferenciaProdutos();
@@ -597,6 +591,7 @@ namespace ConsignadoDeposito
             localDepositoForm.grdRetornoPedido.Columns[1].Visible = false;
             localDepositoForm.grdRetornoPedido.Columns[2].Width = 450;
             localDepositoForm.grdRetornoPedido.Columns[3].DefaultCellStyle.Format = "c";
+            localDepositoForm.grdRetornoPedido.Columns[5].Width = 200;
 
 
             localDepositoForm.grdRetornoPedido.Refresh();
@@ -605,434 +600,7 @@ namespace ConsignadoDeposito
 
 
         }
-
-        ////////////////////////////////////////////
-        /// Detalhes do Pedido
-        ////////////////////////////////////////////
-
-        public void ExibirDetalhesPedido(string pCodigoPedido)
-        {
-
-            LancamentoPedidoLimpar();
-
-
-
-            var pedido = ModelLibrary.MetodosDeposito.ObterPedido(pCodigoPedido);
-
-            if (pedido != null)
-            {
-
-
-
-                cRetornoPedidoId = pedido.Id;
-                cRetornoPedidoCodigo = pedido.CodigoPedido;
-
-
-                localDepositoForm.grpPedidoDetalhe.Visible = true;
-                
-                localDepositoForm.pnlLancPedTop.Visible = true;
-                localDepositoForm.pnlLancPedMain.Visible = true;
-
-                localDepositoForm.dlbCodigoPedido.Text = pedido.CodigoPedido;
-
-
-                var vendedor = ModelLibrary.MetodosDeposito.ObterVendedor(pedido.VendedorId);
-                localDepositoForm.dlbPedidoVendedor.Text = (vendedor != null)?vendedor.Nome:"Não encontrado";
-
-
-                localDepositoForm.dlbValorPedido.Text = string.Format("{0:C2}", pedido.ValorPedido);
-                localDepositoForm.dlbValorCompra.Text = string.Format("{0:C2}", pedido.ValorCompra);
-                localDepositoForm.dlbPercentualComissao.Text = string.Format("{0}%", pedido.PercentualFaixa);
-                localDepositoForm.dlbValorComissao.Text = string.Format("{0:C2}", pedido.ValorComissao);
-                localDepositoForm.dlbValorLiquido.Text = string.Format("{0:C2}", pedido.ValorLiquido);
-                localDepositoForm.dlbRecebimentoAnterior.Text = string.Format("{0:C2}", pedido.ValorAReceber);
-                localDepositoForm.dlbValorAcerto.Text = string.Format("{0:C2}", pedido.ValorAcerto);
-                localDepositoForm.dlbValorRestante.Text = string.Format("{0:C2}", pedido.ValorLiquido + pedido.ValorAReceber - pedido.ValorAcerto);
-
-                localDepositoForm.dlbTotalAPagar.Text = string.Format("{0:C2}", pedido.ValorLiquido + pedido.ValorAReceber);
-
-                string pedidostatus = "";
-
-                switch (pedido.Status)
-                {
-                    case "0":
-                        pedidostatus = "Aberto";
-                        break;
-                    case "1":
-                        pedidostatus = "Aguardando retorno";
-                        break;
-                    case "2":
-                        pedidostatus = "Retornado";
-                        break;
-                    case "3":
-                        pedidostatus = "Acerto realizado";
-                        break;
-                    case "4":
-                        pedidostatus = "Fechado";
-                        break;
-                }
-
-
-
-                localDepositoForm.dlbPedidoStatus.Text = pedidostatus;
-                CarregarListaLancamentoPedido();
-            }
-        }
-
-
-        public void PedidoDetalheLimpar()
-        {
-
-            cRetornoPedidoId = 0;
-            cRetornoPedidoCodigo = "";
-
-            localDepositoForm.grpPedidoDetalhe.Visible = false;
-
-            localDepositoForm.pnlLancPedTop.Visible = false;
-            localDepositoForm.pnlLancPedMain.Visible = false;
-
-            localDepositoForm.dlbCodigoPedido.Text = "";
-            localDepositoForm.dlbPedidoStatus.Text = "";
-            localDepositoForm.dlbPedidoVendedor.Text = "";
-
-            LancamentoPedidoLimpar();
-
-        }
-        /*
-        public void CarregarListaPesquisaVendedor()
-        {
-
-            localDepositoForm.cbbPesqVendedor.DataSource = ModelLibrary.MetodosDeposito.ObterListaVendedor(cRetornoId);
-            localDepositoForm.cbbPesqVendedor.DisplayMember = "Nome";
-            localDepositoForm.cbbPesqVendedor.ValueMember = "Id";
-            localDepositoForm.cbbPesqVendedor.Invalidate();
-            localDepositoForm.cbbPesqVendedor.SelectedIndex = -1;
-
-            localDepositoForm.cbbPesqVendedor.SelectedIndexChanged += PesquisaVendedor_Change;
-
-        }
-
-
-        public void VendedorLimpar()
-        {
-            localDepositoForm.txtPesqVendedorCpfCnpj.Text = "";
-            localDepositoForm.cbbPesqVendedor.SelectedIndex = -1;
-            localDepositoForm.lblPesqVendedor.Visible = false;
-
-            cRetornoVendedorId = 0;
-
-            LancamentoPedidoLimpar();
-        }
-
-        public void PesquisaVendedor_Change(object sender, EventArgs e)
-        {
-            if (localDepositoForm.cbbPesqVendedor.SelectedIndex >= 0)
-            {
-                
-                ModelLibrary.Vendedor vendedor = (ModelLibrary.Vendedor)localDepositoForm.cbbPesqVendedor.SelectedItem;
-
-                localDepositoForm.txtPesqVendedorCpfCnpj.Text = vendedor.CpfCnpj;
-
-                cRetornoVendedorId = vendedor.Id;
-
-                VendedorExibir(vendedor.Id);
-
-            }
-
-        }
-
-        public void VendedorPesquisar()
-        {
-
-            var vendedor = ModelLibrary.MetodosDeposito.PesquisarVendedor(localDepositoForm.txtPesqVendedorCpfCnpj.Text);
-
-            if (vendedor != null)
-            {
-                localDepositoForm.cbbPesqVendedor.SelectedIndex = localDepositoForm.cbbPesqVendedor.FindString(vendedor.Nome);
-            }
-            else
-            {
-                localDepositoForm.lblPesqVendedor.Visible = true;
-                localDepositoForm.lblPesqVendedor.Text = "Vendedor não encontrado.";
-                LancamentoPedidoLimpar();
-            }
-        }
-
-        public void VendedorExibir(long pVendedorId)
-        {
-
-            LancamentoPedidoLimpar();
-
-            var vendedor = ModelLibrary.MetodosDeposito.ObterVendedor(pVendedorId);
-
-
-            if (vendedor != null)
-            {
-                var pedido = ModelLibrary.MetodosDeposito.ObterVendedorPedido(vendedor.Id, cRetornoId);
-
-                Console.WriteLine("Pesquisando Pedido do Vendedor: " + vendedor.Id.ToString() + " referente a carga: " + cRetornoId.ToString());
-
-                
-
-                if (pedido != null)
-                {
-
-                    cRetornoPedidoId = pedido.Id;
-
-                    localDepositoForm.lblPesqVendedor.Visible = false;
-
-                    localDepositoForm.grpPesqVendedorPedido.Visible = true;
-                    localDepositoForm.pnlLancPedTop.Visible = true;
-                    localDepositoForm.pnlLancPedMain.Visible = true;
-                                       
-
-                    localDepositoForm.dlbValorPedido.Text = string.Format("{0:C2}", pedido.ValorPedido);
-                    localDepositoForm.dlbValorCompra.Text = string.Format("{0:C2}", pedido.ValorCompra);
-                    localDepositoForm.dlbPercentualComissao.Text = string.Format("{0}%", pedido.PercentualFaixa);
-                    localDepositoForm.dlbValorComissao.Text = string.Format("{0:C2}", pedido.ValorComissao);
-                    localDepositoForm.dlbValorLiquido.Text = string.Format("{0:C2}", pedido.ValorLiquido);
-                    localDepositoForm.dlbRecebimentoAnterior.Text = string.Format("{0:C2}", pedido.ValorAReceber);
-                    localDepositoForm.dlbValorAcerto.Text = string.Format("{0:C2}", pedido.ValorAcerto);
-                    localDepositoForm.dlbValorRestante.Text = string.Format("{0:C2}", pedido.ValorLiquido + pedido.ValorAReceber - pedido.ValorAcerto);
-
-                    localDepositoForm.dlbTotalAPagar.Text = string.Format("{0:C2}", pedido.ValorLiquido + pedido.ValorAReceber);
-
-                    string pedidostatus ="";
-
-                    switch (pedido.Status)
-                    {
-                        case "0":
-                            pedidostatus = "Aberto";
-                            break;
-                        case "1":
-                            pedidostatus = "Aguardando retorno";
-                            break;
-                        case "2":
-                            pedidostatus = "Retornado";
-                            break;
-                        case "3":
-                            pedidostatus = "Acerto realizado";
-                            break;
-                        case "4":
-                            pedidostatus = "Fechado";
-                            break;
-                    }
-                        
-
-
-                    localDepositoForm.dlbPedidoStatus.Text = pedidostatus;
-                    CarregarListaLancamentoPedido();
-
-
-                }
-
-                else
-                {
-                    localDepositoForm.lblPesqVendedor.Visible = true;
-                    localDepositoForm.lblPesqVendedor.Text = "Vendedor não possui pedidos associados a esta carga.";
-                    LancamentoPedidoLimpar();
-                }
-            }
-            else
-            {
-                localDepositoForm.lblPesqVendedor.Visible = true;
-                localDepositoForm.lblPesqVendedor.Text = "Vendedor não encontrado.";
-                LancamentoPedidoLimpar();
-            }
-
-        }
-
-        */
-
-        public void LancamentoPedidoLimpar()
-        {
-            cRetornoPedidoId = 0;
-            localDepositoForm.grpPedidoDetalhe.Visible = false;
-            localDepositoForm.pnlLancPedTop.Visible = false;
-            localDepositoForm.pnlLancPedMain.Visible = false;
-            localDepositoForm.grdLancPedido.DataSource = null;
-            localDepositoForm.grdLancPedido.Refresh();
-            LancamentoPedidoItemLimpar();
-        }
-
-        public void LancamentoPedidoItemLimpar()
-        {
-            localDepositoForm.txtLancPedCodigoBarras.Text = "";
-            localDepositoForm.txtLancPedProduto.Text = "";
-            localDepositoForm.txtLancPedQuantidade.Text = "";
-            localDepositoForm.txtLancPedQtdRetorno.Text = "";
-            localDepositoForm.txtLancPedPreco.Text = "";
-
-            localDepositoForm.btnLancPedConfirmar.Enabled = false;
-            localDepositoForm.btnLancPedCancelar.Enabled = false;
-
-
-
-        }
-
-
-        public void CarregarListaLancamentoPedido()
-        {
-
-
-            List<ModelLibrary.ListaPedidoItem> pedidos = ModelLibrary.MetodosDeposito.ObterListaPedidoItem(cRetornoPedidoId);
-
-            BindingListView<ModelLibrary.ListaPedidoItem> view = new BindingListView<ModelLibrary.ListaPedidoItem>(pedidos);
-
-            localDepositoForm.grdLancPedido.DataSource = view;
-
-            localDepositoForm.grdLancPedido.Columns[0].Visible = false;
-            localDepositoForm.grdLancPedido.Columns[2].Width = 450;
-            localDepositoForm.grdLancPedido.Columns[5].DefaultCellStyle.Format = "c";
-            localDepositoForm.grdLancPedido.Columns[6].Visible = false;
-
-        }
-
-
-        public void LancamentoPedidoPesquisar(string pCodigo)
-        {
-
-
-            int rowIndex = -1;
-
-            DataGridViewRow pedidoitem = localDepositoForm.grdLancPedido.Rows
-                .Cast<DataGridViewRow>()
-                .Where(r => r.Cells["CodigoBarras"].Value.ToString().Equals(pCodigo) || r.Cells["ProdutoGradeId"].Value.ToString().Equals(pCodigo))
-                .FirstOrDefault();
-
-
-            if (pedidoitem != null)
-            {
-
-                rowIndex = pedidoitem.Index;
-
-                localDepositoForm.txtLancPedProduto.Text = localDepositoForm.grdLancPedido.Rows[rowIndex].Cells["NomeProduto"].Value.ToString();
-                localDepositoForm.txtLancPedQuantidade.Text = localDepositoForm.grdLancPedido.Rows[rowIndex].Cells["Quantidade"].Value.ToString();
-                localDepositoForm.txtLancPedQtdRetorno.Text = localDepositoForm.grdLancPedido.Rows[rowIndex].Cells["Retorno"].Value.ToString();
-                localDepositoForm.txtLancPedPreco.Text = localDepositoForm.grdLancPedido.Rows[rowIndex].Cells["Preco"].Value.ToString();
-
-
-                if (localDepositoForm.txtLancPedCodigoBarras.Text != localDepositoForm.grdLancPedido.Rows[rowIndex].Cells["CodigoBarras"].Value.ToString())
-                {
-                    localDepositoForm.txtLancPedCodigoBarras.Text = localDepositoForm.grdLancPedido.Rows[rowIndex].Cells["CodigoBarras"].Value.ToString();
-                    if (localDepositoForm.chkLancPedQuantidade.Checked == false)
-                    {
-                        localDepositoForm.chkLancPedQuantidade.Checked = true;
-                        localDepositoForm.txtLancPedQuantidade.Enabled = true;
-                    }
-                }
-
-
-                cRetornoPedidoItemId = Convert.ToInt32(localDepositoForm.grdLancPedido.Rows[rowIndex].Cells["PedidoItemId"].Value.ToString());
-                cModoRetornoPedidoItem = "Edit";
-
-                localDepositoForm.btnLancPedConfirmar.Enabled = true;
-                localDepositoForm.btnLancPedCancelar.Enabled = true;
-
-                if (localDepositoForm.chkLancPedQuantidade.Checked)
-                {
-                    localDepositoForm.txtLancPedQuantidade.Focus();
-
-                }
-                else
-                {
-                    //inserir direto qtd=1
-
-                    int tempQtd = localDepositoForm.grdLancPedido.Rows[rowIndex].Cells["Quantidade"].Value != null ? Convert.ToInt32(localDepositoForm.grdLancPedido.Rows[rowIndex].Cells["Quantidade"].Value) : 0;
-                    localDepositoForm.txtLancPedQuantidade.Text = (tempQtd + 1).ToString();
-                    SalvarLancamentoPedido();
-                }
-
-            }
-            else
-            {
-
-
-                /// pesquisar no BD
-                /// 
-                var produtograde = ModelLibrary.MetodosDeposito.ObterProdutoGrade(localDepositoForm.txtLancPedCodigoBarras.Text);
-
-                if (produtograde != null)
-                {
-                    /// se existir -- carregar com ação de incluir
-
-                    var produto = ModelLibrary.MetodosDeposito.ObterProduto(produtograde.CodigoBarras);
-
-                    if (produtograde.Status != "1" || produto.Status != "1")
-                    {
-
-                        MessageBox.Show("Este produto foi excluído e não pode ser inserido no pedido.");
-
-                    } else
-                    {
-                        localDepositoForm.txtLancPedProduto.Text = produto.Descricao;
-                        localDepositoForm.txtLancPedQuantidade.Text = "";
-                        localDepositoForm.txtLancPedQtdRetorno.Text = "";
-                        localDepositoForm.txtLancPedPreco.Text = produtograde.ValorSaida.ToString();
-
-                        localDepositoForm.txtLancPedQuantidade.Focus();
-                        cRetornoPedidoProdutoGradeId = produtograde.Id;
-                        cModoRetornoPedidoItem = "Insert";
-
-                        localDepositoForm.btnLancPedConfirmar.Enabled = true;
-                        localDepositoForm.btnLancPedCancelar.Enabled = true;
-                    }
-
-
-                }
-                else
-                {
-                    /// se não - exibir mensagem de erro
-                    MessageBox.Show("Dígito verificador inválido. Não foi possível encontrar a grade deste produto.");
-
-                    cRetornoPedidoItemId = 0;
-                    localDepositoForm.txtLancPedCodigoBarras.Focus();
-                    localDepositoForm.btnLancPedConfirmar.Enabled = false;
-                    localDepositoForm.btnLancPedCancelar.Enabled = false;
-                }
-
-            }
-
-        }
-
-
-        public void SalvarLancamentoPedido()
-        {
-            if (cModoRetornoPedidoItem == "Edit")
-            {
-
-                ModelLibrary.MetodosDeposito.AlterarPedidoItem(cRetornoPedidoItemId, Convert.ToDouble(localDepositoForm.txtLancPedQuantidade.Text), Convert.ToDouble(localDepositoForm.txtLancPedQtdRetorno.Text), Convert.ToDouble(localDepositoForm.txtLancPedPreco.Text));
-
-            } else
-            {
-                if (localDepositoForm.txtLancPedQuantidade.Text == "") localDepositoForm.txtLancPedQuantidade.Text = "0";
-                if (localDepositoForm.txtLancPedQtdRetorno.Text == "") localDepositoForm.txtLancPedQtdRetorno.Text = "0";
-                ModelLibrary.MetodosDeposito.InserirPedidoItem(cRetornoPedidoId, cRetornoPedidoProdutoGradeId, Convert.ToDouble(localDepositoForm.txtLancPedQuantidade.Text), Convert.ToDouble(localDepositoForm.txtLancPedQtdRetorno.Text), Convert.ToDouble(localDepositoForm.txtLancPedPreco.Text));
-
-            }
-
-            CarregarListaLancamentoPedido();
-            LancamentoPedidoItemLimpar();
-            LancamentoPedidoReload();
-
-        }
-
-
-        public void ExcluirLancamentoPedido(int pPedidoItemId)
-        {
-
-            ModelLibrary.MetodosDeposito.ExcluirPedidoItem(pPedidoItemId, cRetornoPedidoId);
-
-            CarregarListaLancamentoPedido();
-            LancamentoPedidoItemLimpar();
-            LancamentoPedidoReload();
-        }
-
-        public void LancamentoPedidoReload()
-        {
-            CarregarPedidos();
-            ExibirDetalhesPedido(cRetornoPedidoCodigo);            
-        }
+        
 
         ////////////////////////////////////////////
         /// Pedidos Fechados

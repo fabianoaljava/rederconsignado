@@ -51,6 +51,7 @@
             this.btnConfirmar = new MetroFramework.Controls.MetroButton();
             this.pnlMainGrid = new MetroFramework.Controls.MetroPanel();
             this.grdCarga = new MetroFramework.Controls.MetroGrid();
+            this.btnNothing = new MetroFramework.Controls.MetroButton();
             this.pnlSelecionarCarga.SuspendLayout();
             this.pnlBottomForm.SuspendLayout();
             this.pnlMainGrid.SuspendLayout();
@@ -286,6 +287,7 @@
             // 
             // pnlBottomForm
             // 
+            this.pnlBottomForm.Controls.Add(this.btnNothing);
             this.pnlBottomForm.Controls.Add(this.btnCancelar);
             this.pnlBottomForm.Controls.Add(this.btnConfirmar);
             this.pnlBottomForm.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -400,12 +402,23 @@
             this.grdCarga.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdCarga_CellClick);
             this.grdCarga.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdCarga_CellContentDoubleClick);
             // 
+            // btnNothing
+            // 
+            this.btnNothing.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnNothing.Location = new System.Drawing.Point(335, 5);
+            this.btnNothing.Name = "btnNothing";
+            this.btnNothing.Size = new System.Drawing.Size(90, 30);
+            this.btnNothing.TabIndex = 11;
+            this.btnNothing.Text = "Nothing";
+            this.btnNothing.UseSelectable = true;
+            this.btnNothing.Visible = false;
+            // 
             // FormListaCarga
             // 
-            this.AcceptButton = this.btnConfirmar;
+            this.AcceptButton = this.btnNothing;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnCancelar;
+            this.CancelButton = this.btnNothing;
             this.ClientSize = new System.Drawing.Size(800, 516);
             this.Controls.Add(this.pnlMainGrid);
             this.Controls.Add(this.pnlBottomForm);
@@ -448,5 +461,6 @@
         public System.Windows.Forms.DateTimePicker cbbAnoMesFinal;
         private MetroFramework.Controls.MetroLabel lblInfo;
         private MetroFramework.Controls.MetroButton btnLimpar;
+        private MetroFramework.Controls.MetroButton btnNothing;
     }
 }

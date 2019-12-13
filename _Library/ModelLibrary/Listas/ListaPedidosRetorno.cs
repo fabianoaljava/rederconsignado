@@ -14,6 +14,7 @@ namespace ModelLibrary
         public string Nome { get; set; }
         public Nullable<double> ValorPedido { get; set; }
         public Nullable<DateTime> DataLancamento { get; set; }
+        public string Status { get; set; }
 
     }
 }

@@ -101,6 +101,40 @@ namespace ConsignadoDeposito
             cCargaId = 0;
             cCargaProdutoGradeId = 0;
             cRetornoId = 0;
+
+
+
+            localDepositoForm.tbcCarga.Visible = false;
+            localDepositoForm.txtCargaCodigoBarras.Text = "";
+            localDepositoForm.txtCargaProduto.Text = "";
+            localDepositoForm.txtCargaQuantidade.Text = "";
+            localDepositoForm.btnCargaConfirmar.Enabled = false;
+
+
+            localDepositoForm.dlbCargaDataAbertura.Text = "-";
+            localDepositoForm.dlbCargaDataExportacao.Text = "-";
+            localDepositoForm.dlbCargaDataRetorno.Text = "-";
+            localDepositoForm.dlbCargaDataConferencia.Text = "-";
+            localDepositoForm.dlbCargaDataFinalizacao.Text = "-";
+
+
+
+            localDepositoForm.dlbCargaVADataAbertura.Text = "-";
+            localDepositoForm.dlbCargaVADataExportacao.Text = "-";
+            localDepositoForm.dlbCargaVADataRetorno.Text = "-";
+            localDepositoForm.dlbCargaVADataConferencia.Text = "-";
+            localDepositoForm.dlbCargaVADataFinalizacao.Text = "-";
+
+
+            localDepositoForm.dlbCargaQtdProdutos.Text = "0";
+            localDepositoForm.dlbCargaTotalProdutos.Text = "0.00";
+
+
+            localDepositoForm.smnCobrancaViagem.Enabled = false;
+
+            localDepositoForm.dlbCargaTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Medium;
+
+            localDepositoForm.mnuCargaExcluir.Visible = false;
         }
 
 
@@ -229,6 +263,7 @@ namespace ConsignadoDeposito
         public void CargaInserir(int pRepresentanteId, int pPracaId, int pMes, int pAno)
         {
 
+            ResetarVariaveis();
 
             string vValidaInserir = ModelLibrary.MetodosDeposito.ValidarInclusaoCarga(pPracaId);
 
@@ -237,6 +272,8 @@ namespace ConsignadoDeposito
                 cCargaId = ModelLibrary.MetodosDeposito.InserirCarga(pRepresentanteId, pPracaId, pMes, pAno);
                 localDepositoForm.tbcCarga.Visible = true;
                 localDepositoForm.pnlCargaProduto.Enabled = true;
+
+                localDepositoForm.dlbCargaDataAbertura.Text = DateTime.Today.ToString();
             } else
             {
                 MessageBox.Show(vValidaInserir, "Reder Consignado", MessageBoxButtons.OK, MessageBoxIcon.Stop);

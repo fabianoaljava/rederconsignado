@@ -737,49 +737,7 @@ namespace ConsignadoDeposito
 
 
 
-
-
-
-
-        private void txtLancPedCodigoBarras_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (txtLancPedCodigoBarras.Text != "")
-            {
-                if (e.KeyData == Keys.Enter)
-                {
-                    e.SuppressKeyPress = true;
-                    //txtLancPedCodigoBarras_Leave(sender, e);
-                    SendKeys.Send("{TAB}");
-
-                }
-            }
-            
-        }
-
-        private void txtLancPedCodigoBarras_Leave(object sender, EventArgs e)
-        {
-            //if (txtLancPedCodigoBarras.Text != "")
-            //{
-            //    cRetorno.LancamentoPedidoPesquisar(txtLancPedCodigoBarras.Text);
-
-            //} 
-        }
-
-        private void btnLancPedConfirmar_Click(object sender, EventArgs e)
-        {
-            cRetorno.SalvarLancamentoPedido();
-        }
-
-        private void btnLancPedCancelar_Click(object sender, EventArgs e)
-        {
-            cRetorno.LancamentoPedidoItemLimpar();
-        }
-
-
-        private void grdLancPedido_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            cRetorno.LancamentoPedidoPesquisar(grdLancPedido.CurrentRow.Cells[1].Value.ToString());
-        }
+        
 
         private void btnFinalizarAcerto_Click(object sender, EventArgs e)
         {
@@ -807,13 +765,29 @@ namespace ConsignadoDeposito
 
         private void grdRetornoPedido_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+
+
             //cbbPesqVendedor.Text = grdRetornoPedido.CurrentRow.Cells["Nome"].Value.ToString();
             //tbcRetorno.SelectedTab = tabRetornoLancPedidos;
             //cRetorno.VendedorExibir(Convert.ToInt64(grdRetornoPedido.CurrentRow.Cells["VendedorId"].Value));
+
+            /*
             Cursor.Current = Cursors.WaitCursor;
             tbcRetorno.SelectedTab = tabRetornoPedidoDetalhe;
             cRetorno.ExibirDetalhesPedido(grdRetornoPedido.CurrentRow.Cells["CodigoPedido"].Value.ToString());
             Cursor.Current = Cursors.Default;
+
+            */
+
+            Cursor.Current = Cursors.WaitCursor;
+            Modal.FormPedido formPedido = new Modal.FormPedido(this);
+            formPedido.ExibirDetalhesPedido(grdRetornoPedido.CurrentRow.Cells["CodigoPedido"].Value.ToString());
+            formPedido.ShowDialog();
+            
+            Cursor.Current = Cursors.Default;
+
+
+
         }
 
         private void lblRetornoResumoSugestao_Click(object sender, EventArgs e)
@@ -821,11 +795,6 @@ namespace ConsignadoDeposito
 
         }
 
-
-        private void grdLancPedido_KeyUp(object sender, KeyEventArgs e)
-        {
-
-        }
 
         private void btnRelatorioCarga_Click(object sender, EventArgs e)
         {
@@ -873,14 +842,6 @@ namespace ConsignadoDeposito
             }
         }
 
-        private void txtLancPedCodigoBarras_Validating(object sender, CancelEventArgs e)
-        {
-            if (txtLancPedCodigoBarras.Text != "")
-            {
-                cRetorno.LancamentoPedidoPesquisar(txtLancPedCodigoBarras.Text);
-
-            }
-        }
 
         private void btnRetornoPesquisar_Click_1(object sender, EventArgs e)
         {

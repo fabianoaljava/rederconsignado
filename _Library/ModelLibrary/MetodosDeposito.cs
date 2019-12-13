@@ -1130,7 +1130,14 @@ namespace ModelLibrary
 
 
 
-                string query = @"SELECT CodigoPedido, VendedorId, Nome, ValorPedido, DataLancamento  
+                string query = @"SELECT CodigoPedido, VendedorId, Nome, ValorPedido, DataLancamento, 
+	                            CASE Pedido.Status 
+	                                WHEN '0' THEN '0 - Aberto'
+	                                WHEN '1' THEN '1 - Retorno'
+	                                WHEN '2' THEN '2 - Retornado'
+	                                WHEN '3' THEN '3 - Fechado'
+	                                WHEN '4' THEN '4 - Recebido'
+	                                ELSE 'Indefinido' END as Status 
 	                                FROM Pedido 
 	                                INNER JOIN Vendedor ON Pedido.VendedorId = Vendedor.Id
                                 WHERE CargaId = @p0 AND CargaOriginal = @p0";

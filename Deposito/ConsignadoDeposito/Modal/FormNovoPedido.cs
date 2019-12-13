@@ -114,11 +114,19 @@ namespace ConsignadoDeposito.Modal
         {
 
             string vCodigoPedido = ModelLibrary.MetodosDeposito.InserirPedido(cVendedorId, localDepositoForm.cRetorno.cRetornoId);
-            localDepositoForm.tbcRetorno.SelectedTab = localDepositoForm.tabRetornoPedidoDetalhe;
-            localDepositoForm.cRetorno.ExibirDetalhesPedido(vCodigoPedido);
             localDepositoForm.cRetorno.CarregarPedidos();
             MessageBox.Show("Pedido Incluído com Sucesso");
+
             this.Close();
+
+            Cursor.Current = Cursors.WaitCursor;
+            Modal.FormPedido formPedido = new Modal.FormPedido(localDepositoForm);
+            formPedido.ExibirDetalhesPedido(vCodigoPedido);
+            formPedido.ShowDialog();
+
+            Cursor.Current = Cursors.Default;
+
+            
 
         }
 
