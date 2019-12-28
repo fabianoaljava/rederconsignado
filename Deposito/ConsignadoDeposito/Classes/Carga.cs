@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ConsignadoDeposito;
 using System.Windows.Forms;
 using Equin.ApplicationFramework;
+using System.Diagnostics;
 
 namespace ConsignadoDeposito
 {
@@ -38,103 +39,149 @@ namespace ConsignadoDeposito
 
         public void CarregarListaCarga()
         {
-            localDepositoForm.cbbCargaPraca.DataSource = ModelLibrary.MetodosDeposito.ObterListaPracas();
-            localDepositoForm.cbbCargaPraca.DisplayMember = "Descricao";
-            localDepositoForm.cbbCargaPraca.ValueMember = "Id";
-            localDepositoForm.cbbCargaPraca.Invalidate();
-            localDepositoForm.cbbCargaPraca.SelectedIndex = -1;
+            try
+            {
+                localDepositoForm.cbbCargaPraca.DataSource = ModelLibrary.MetodosDeposito.ObterListaPracas();
+                localDepositoForm.cbbCargaPraca.DisplayMember = "Descricao";
+                localDepositoForm.cbbCargaPraca.ValueMember = "Id";
+                localDepositoForm.cbbCargaPraca.Invalidate();
+                localDepositoForm.cbbCargaPraca.SelectedIndex = -1;
+            } catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Carga.CarregarListaCarga()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         public void CarregarListaRepresentante()
         {
-            localDepositoForm.cbbCargaRepresentante.DataSource = ModelLibrary.MetodosDeposito.ObterListaRepresentantes();
-            localDepositoForm.cbbCargaRepresentante.DisplayMember = "Nome";
-            localDepositoForm.cbbCargaRepresentante.ValueMember = "Id";
-            localDepositoForm.cbbCargaRepresentante.Invalidate();
-            localDepositoForm.cbbCargaRepresentante.SelectedIndex = -1;
+            try
+            {
+                localDepositoForm.cbbCargaRepresentante.DataSource = ModelLibrary.MetodosDeposito.ObterListaRepresentantes();
+                localDepositoForm.cbbCargaRepresentante.DisplayMember = "Nome";
+                localDepositoForm.cbbCargaRepresentante.ValueMember = "Id";
+                localDepositoForm.cbbCargaRepresentante.Invalidate();
+                localDepositoForm.cbbCargaRepresentante.SelectedIndex = -1;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Carga.CarregarListaRepresentante()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
         }
 
 
         public void LimparCarga()
         {
-            localDepositoForm.cbbCargaPraca.SelectedIndex = -1;
-            localDepositoForm.cbbCargaRepresentante.SelectedIndex = -1;
-            localDepositoForm.txtCargaCodPraca.Text = "";
-            localDepositoForm.txtCargaCodRepresentante.Text = "";
-            localDepositoForm.cbbCargaMesAno.ResetText();
 
-            localDepositoForm.tbcCarga.Visible = false;
-            localDepositoForm.txtCargaCodigoBarras.Text = "";
-            localDepositoForm.txtCargaProduto.Text = "";
-            localDepositoForm.txtCargaQuantidade.Text = "";
-            localDepositoForm.btnCargaConfirmar.Enabled = false;
+            try
+            {
+                localDepositoForm.cbbCargaPraca.SelectedIndex = -1;
+                localDepositoForm.cbbCargaRepresentante.SelectedIndex = -1;
+                localDepositoForm.txtCargaCodPraca.Text = "";
+                localDepositoForm.txtCargaCodRepresentante.Text = "";
+                localDepositoForm.cbbCargaMesAno.ResetText();
 
-
-            localDepositoForm.dlbCargaDataAbertura.Text = "-";
-            localDepositoForm.dlbCargaDataExportacao.Text = "-";
-            localDepositoForm.dlbCargaDataRetorno.Text = "-";
-            localDepositoForm.dlbCargaDataConferencia.Text = "-";
-            localDepositoForm.dlbCargaDataFinalizacao.Text = "-";
+                localDepositoForm.tbcCarga.Visible = false;
+                localDepositoForm.txtCargaCodigoBarras.Text = "";
+                localDepositoForm.txtCargaProduto.Text = "";
+                localDepositoForm.txtCargaQuantidade.Text = "";
+                localDepositoForm.btnCargaConfirmar.Enabled = false;
 
 
-
-            localDepositoForm.dlbCargaVADataAbertura.Text = "-";
-            localDepositoForm.dlbCargaVADataExportacao.Text = "-";
-            localDepositoForm.dlbCargaVADataRetorno.Text = "-";
-            localDepositoForm.dlbCargaVADataConferencia.Text = "-";
-            localDepositoForm.dlbCargaVADataFinalizacao.Text = "-";
-
-
-            localDepositoForm.dlbCargaQtdProdutos.Text = "0";
-            localDepositoForm.dlbCargaTotalProdutos.Text = "0.00";
+                localDepositoForm.dlbCargaDataAbertura.Text = "-";
+                localDepositoForm.dlbCargaDataExportacao.Text = "-";
+                localDepositoForm.dlbCargaDataRetorno.Text = "-";
+                localDepositoForm.dlbCargaDataConferencia.Text = "-";
+                localDepositoForm.dlbCargaDataFinalizacao.Text = "-";
 
 
-            localDepositoForm.smnCobrancaViagem.Enabled = false;
 
-            localDepositoForm.dlbCargaTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Medium;
+                localDepositoForm.dlbCargaVADataAbertura.Text = "-";
+                localDepositoForm.dlbCargaVADataExportacao.Text = "-";
+                localDepositoForm.dlbCargaVADataRetorno.Text = "-";
+                localDepositoForm.dlbCargaVADataConferencia.Text = "-";
+                localDepositoForm.dlbCargaVADataFinalizacao.Text = "-";
 
-            localDepositoForm.mnuCargaExcluir.Visible = false;
+
+                localDepositoForm.dlbCargaQtdProdutos.Text = "0";
+                localDepositoForm.dlbCargaTotalProdutos.Text = "0.00";
+
+
+                localDepositoForm.smnCobrancaViagem.Enabled = false;
+
+                localDepositoForm.dlbCargaTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Medium;
+
+                localDepositoForm.mnuCargaExcluir.Visible = false;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Carga.LimparCarga()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            
         }
 
         public void ResetarVariaveis()
         {
-            cCargaId = 0;
-            cCargaProdutoGradeId = 0;
-            cRetornoId = 0;
+
+
+            try
+            {
+                cCargaId = 0;
+                cCargaProdutoGradeId = 0;
+                cRetornoId = 0;
 
 
 
-            localDepositoForm.tbcCarga.Visible = false;
-            localDepositoForm.txtCargaCodigoBarras.Text = "";
-            localDepositoForm.txtCargaProduto.Text = "";
-            localDepositoForm.txtCargaQuantidade.Text = "";
-            localDepositoForm.btnCargaConfirmar.Enabled = false;
+                localDepositoForm.tbcCarga.Visible = false;
+                localDepositoForm.txtCargaCodigoBarras.Text = "";
+                localDepositoForm.txtCargaProduto.Text = "";
+                localDepositoForm.txtCargaQuantidade.Text = "";
+                localDepositoForm.btnCargaConfirmar.Enabled = false;
 
 
-            localDepositoForm.dlbCargaDataAbertura.Text = "-";
-            localDepositoForm.dlbCargaDataExportacao.Text = "-";
-            localDepositoForm.dlbCargaDataRetorno.Text = "-";
-            localDepositoForm.dlbCargaDataConferencia.Text = "-";
-            localDepositoForm.dlbCargaDataFinalizacao.Text = "-";
+                localDepositoForm.dlbCargaDataAbertura.Text = "-";
+                localDepositoForm.dlbCargaDataExportacao.Text = "-";
+                localDepositoForm.dlbCargaDataRetorno.Text = "-";
+                localDepositoForm.dlbCargaDataConferencia.Text = "-";
+                localDepositoForm.dlbCargaDataFinalizacao.Text = "-";
 
 
 
-            localDepositoForm.dlbCargaVADataAbertura.Text = "-";
-            localDepositoForm.dlbCargaVADataExportacao.Text = "-";
-            localDepositoForm.dlbCargaVADataRetorno.Text = "-";
-            localDepositoForm.dlbCargaVADataConferencia.Text = "-";
-            localDepositoForm.dlbCargaVADataFinalizacao.Text = "-";
+                localDepositoForm.dlbCargaVADataAbertura.Text = "-";
+                localDepositoForm.dlbCargaVADataExportacao.Text = "-";
+                localDepositoForm.dlbCargaVADataRetorno.Text = "-";
+                localDepositoForm.dlbCargaVADataConferencia.Text = "-";
+                localDepositoForm.dlbCargaVADataFinalizacao.Text = "-";
 
 
-            localDepositoForm.dlbCargaQtdProdutos.Text = "0";
-            localDepositoForm.dlbCargaTotalProdutos.Text = "0.00";
+                localDepositoForm.dlbCargaQtdProdutos.Text = "0";
+                localDepositoForm.dlbCargaTotalProdutos.Text = "0.00";
 
 
-            localDepositoForm.smnCobrancaViagem.Enabled = false;
+                localDepositoForm.smnCobrancaViagem.Enabled = false;
 
-            localDepositoForm.dlbCargaTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Medium;
+                localDepositoForm.dlbCargaTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Medium;
 
-            localDepositoForm.mnuCargaExcluir.Visible = false;
+                localDepositoForm.mnuCargaExcluir.Visible = false;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Carga.ResetarVariaveis()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+            
         }
 
 
@@ -149,11 +196,9 @@ namespace ConsignadoDeposito
             {
 
 
-
                 LimparCargaProduto();
                 LimparGradeCargaProduto();
-
-
+                
 
                 /* Obter os Campos Selecionados */
 
@@ -251,8 +296,10 @@ namespace ConsignadoDeposito
                 }
 
             }
-            catch (IOException vE)
+            catch (Exception vE)
             {
+                Trace.WriteLine(DateTime.Now.ToString() + "Carga.PesquisarCarga()");
+                Trace.TraceError(vE.Message);
                 MessageBox.Show("Ocorreu um erro ao processar a sua consulta. Verifique os dados digitados e tente novamente. Se o erro persisitr, contate o administrador.", "ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(vE.Message);
             }
@@ -263,21 +310,35 @@ namespace ConsignadoDeposito
         public void CargaInserir(int pRepresentanteId, int pPracaId, int pMes, int pAno)
         {
 
-            ResetarVariaveis();
 
-            string vValidaInserir = ModelLibrary.MetodosDeposito.ValidarInclusaoCarga(pPracaId);
-
-            if (vValidaInserir == "OK")
+            try
             {
-                cCargaId = ModelLibrary.MetodosDeposito.InserirCarga(pRepresentanteId, pPracaId, pMes, pAno);
-                localDepositoForm.tbcCarga.Visible = true;
-                localDepositoForm.pnlCargaProduto.Enabled = true;
 
-                localDepositoForm.dlbCargaDataAbertura.Text = DateTime.Today.ToString();
-            } else
-            {
-                MessageBox.Show(vValidaInserir, "Reder Consignado", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                ResetarVariaveis();
+
+                string vValidaInserir = ModelLibrary.MetodosDeposito.ValidarInclusaoCarga(pPracaId);
+
+                if (vValidaInserir == "OK")
+                {
+                    cCargaId = ModelLibrary.MetodosDeposito.InserirCarga(pRepresentanteId, pPracaId, pMes, pAno);
+                    localDepositoForm.tbcCarga.Visible = true;
+                    localDepositoForm.pnlCargaProduto.Enabled = true;
+
+                    localDepositoForm.dlbCargaDataAbertura.Text = DateTime.Today.ToString();
+                }
+                else
+                {
+                    MessageBox.Show(vValidaInserir, "Reder Consignado", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                }
             }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Carga.CargaInserir()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
 
 
         }
@@ -289,8 +350,20 @@ namespace ConsignadoDeposito
             {
 
                 if (ModelLibrary.MetodosDeposito.ExcluirCarga(cCargaId)) {
-                    LimparCarga();
-                    LimparCargaProduto();
+
+
+                    try
+                    {
+                        LimparCarga();
+                        LimparCargaProduto();
+                    }
+                    catch (Exception vE)
+                    {
+                        Trace.WriteLine(DateTime.Now.ToString() + "Carga.CargaExcluir()");
+                        Trace.TraceError(vE.Message);
+                    }
+
+
                 } else {
 
                     MessageBox.Show("A carga selecionada possui produtos associados, não foi possível excluir");
@@ -303,19 +376,31 @@ namespace ConsignadoDeposito
         public void CargaTotalizadores()
         {
 
-
-            var totalizadores = ModelLibrary.MetodosDeposito.ObterTotalizadores(cCargaId);
-
-            localDepositoForm.dlbCargaQtdProdutos.Text = totalizadores.QtdProdutos.ToString();
-            localDepositoForm.dlbCargaTotalProdutos.Text = String.Format("{0:C}", totalizadores.TotalProdutos);
-
-            if (totalizadores.TotalProdutos > 999999)
+            try
             {
-                localDepositoForm.dlbCargaTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Small;
-            } else
-            {
-                localDepositoForm.dlbCargaTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Medium;
+                var totalizadores = ModelLibrary.MetodosDeposito.ObterTotalizadores(cCargaId);
+
+                localDepositoForm.dlbCargaQtdProdutos.Text = totalizadores.QtdProdutos.ToString();
+                localDepositoForm.dlbCargaTotalProdutos.Text = String.Format("{0:C}", totalizadores.TotalProdutos);
+
+                if (totalizadores.TotalProdutos > 999999)
+                {
+                    localDepositoForm.dlbCargaTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Small;
+                }
+                else
+                {
+                    localDepositoForm.dlbCargaTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Medium;
+                }
             }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Carga.CargaTotalizadores()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
 
 
 
@@ -329,19 +414,31 @@ namespace ConsignadoDeposito
 
         public void LimparCargaProduto()
         {
-            localDepositoForm.txtCargaCodigoBarras.Text = "";
-            localDepositoForm.txtCargaProduto.Text = "";
-            localDepositoForm.txtCargaQuantidade.Text = "";
-            localDepositoForm.btnCargaConfirmar.Enabled = false;
-            localDepositoForm.btnCargaCancelar.Enabled = false;
-            localDepositoForm.txtCargaCodigoBarras.ReadOnly = false;
+
+            try
+            {
+                localDepositoForm.txtCargaCodigoBarras.Text = "";
+                localDepositoForm.txtCargaProduto.Text = "";
+                localDepositoForm.txtCargaQuantidade.Text = "";
+                localDepositoForm.btnCargaConfirmar.Enabled = false;
+                localDepositoForm.btnCargaCancelar.Enabled = false;
+                localDepositoForm.txtCargaCodigoBarras.ReadOnly = false;
 
 
-            localDepositoForm.smnCobrancaViagem.Enabled = false;
+                localDepositoForm.smnCobrancaViagem.Enabled = false;
 
-            cCargaProdutoGradeId = 0;
-            cModoCargaProduto = "Insert";
-            localDepositoForm.txtCargaCodigoBarras.Focus();
+                cCargaProdutoGradeId = 0;
+                cModoCargaProduto = "Insert";
+                localDepositoForm.txtCargaCodigoBarras.Focus();
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Carga.LimparCargaProduto()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            
 
             
         }
@@ -351,49 +448,73 @@ namespace ConsignadoDeposito
         void CarregarGradeCargaProduto(int pCargaId)
         {
 
-            ModelLibrary.Representante representante = (ModelLibrary.Representante)localDepositoForm.cbbCargaRepresentante.SelectedItem;
-            var representanteId = representante.Id;
-            ModelLibrary.Praca praca = (ModelLibrary.Praca)localDepositoForm.cbbCargaPraca.SelectedItem;
-            var pracaId = praca.Id;
-            int mes = localDepositoForm.cbbCargaMesAno.Value.Month;
-            int ano = localDepositoForm.cbbCargaMesAno.Value.Year;
-
-
-
-            List<ModelLibrary.ListaProdutosCarga> produtos = ModelLibrary.MetodosDeposito.ObterProdutosCarga(pCargaId);
-
-            BindingListView<ModelLibrary.ListaProdutosCarga> view = new BindingListView<ModelLibrary.ListaProdutosCarga>(produtos);
-
-            localDepositoForm.grdCargaProduto.DataSource = view;
-
-            if (produtos.Count == 0)
+            try
             {
-                localDepositoForm.mnuCargaExcluir.Visible = true;
-            } else
+                ModelLibrary.Representante representante = (ModelLibrary.Representante)localDepositoForm.cbbCargaRepresentante.SelectedItem;
+                var representanteId = representante.Id;
+                ModelLibrary.Praca praca = (ModelLibrary.Praca)localDepositoForm.cbbCargaPraca.SelectedItem;
+                var pracaId = praca.Id;
+                int mes = localDepositoForm.cbbCargaMesAno.Value.Month;
+                int ano = localDepositoForm.cbbCargaMesAno.Value.Year;
+
+
+
+                List<ModelLibrary.ListaProdutosCarga> produtos = ModelLibrary.MetodosDeposito.ObterProdutosCarga(pCargaId);
+
+                BindingListView<ModelLibrary.ListaProdutosCarga> view = new BindingListView<ModelLibrary.ListaProdutosCarga>(produtos);
+
+                localDepositoForm.grdCargaProduto.DataSource = view;
+
+                if (produtos.Count == 0)
+                {
+                    localDepositoForm.mnuCargaExcluir.Visible = true;
+                }
+                else
+                {
+                    localDepositoForm.mnuCargaExcluir.Visible = false;
+                }
+
+                /// Ocultar colunas CargaId e cCargaProdutoGradeId
+                localDepositoForm.grdCargaProduto.Columns[9].Visible = false;
+                localDepositoForm.grdCargaProduto.Columns[10].Visible = false;
+
+                /// Exibir Coluna como "Moeda"
+                localDepositoForm.grdCargaProduto.Columns[6].DefaultCellStyle.Format = "c";
+                localDepositoForm.grdCargaProduto.Columns[7].DefaultCellStyle.Format = "c";
+
+                /// Alterar Título da Coluna
+                localDepositoForm.grdCargaProduto.Columns[0].HeaderText = "Código de Barras";
+                localDepositoForm.grdCargaProduto.Columns[5].HeaderText = "Quantidade Retorno";
+                localDepositoForm.grdCargaProduto.Columns[6].HeaderText = "Valor Saída";
+                localDepositoForm.grdCargaProduto.Columns[7].HeaderText = "Valor Custo";
+            }
+            catch (Exception vE)
             {
-                localDepositoForm.mnuCargaExcluir.Visible = false;
+                Trace.WriteLine(DateTime.Now.ToString() + "Carga.CarregarGradeCargaProduto()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            /// Ocultar colunas CargaId e cCargaProdutoGradeId
-            localDepositoForm.grdCargaProduto.Columns[9].Visible = false;
-            localDepositoForm.grdCargaProduto.Columns[10].Visible = false;
-
-            /// Exibir Coluna como "Moeda"
-            localDepositoForm.grdCargaProduto.Columns[6].DefaultCellStyle.Format = "c";
-            localDepositoForm.grdCargaProduto.Columns[7].DefaultCellStyle.Format = "c";
-
-            /// Alterar Título da Coluna
-            localDepositoForm.grdCargaProduto.Columns[0].HeaderText = "Código de Barras";
-            localDepositoForm.grdCargaProduto.Columns[5].HeaderText = "Quantidade Retorno";
-            localDepositoForm.grdCargaProduto.Columns[6].HeaderText = "Valor Saída";
-            localDepositoForm.grdCargaProduto.Columns[7].HeaderText = "Valor Custo";
+            
         }
         
 
         public void LimparGradeCargaProduto()
         {
-            localDepositoForm.grdCargaProduto.DataSource = null;
-            localDepositoForm.tbcCarga.Visible = false;
+
+            try
+            {
+                localDepositoForm.grdCargaProduto.DataSource = null;
+                localDepositoForm.tbcCarga.Visible = false;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Carga.LimparGradeCargaProduto()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
 
         }
 
@@ -401,39 +522,52 @@ namespace ConsignadoDeposito
         public void PesquisarCargaProduto(string pCodigo)
         {
 
-            long vProdutoGradeId = 0;
-            List<ModelLibrary.ProdutoGrade> produtosgrade = ModelLibrary.MetodosDeposito.ObterProdutosGrade(pCodigo);
 
-            if (produtosgrade != null)
+            try
             {
-                if (produtosgrade.Count > 1)
+                long vProdutoGradeId = 0;
+                List<ModelLibrary.ProdutoGrade> produtosgrade = ModelLibrary.MetodosDeposito.ObterProdutosGrade(pCodigo);
+
+                if (produtosgrade != null)
                 {
-                    Modal.FormProdutosGrade formProdutosGrade = new Modal.FormProdutosGrade(pCodigo);
-                    
-
-                    var result = formProdutosGrade.ShowDialog();
-
-                    if (result == DialogResult.OK)
+                    if (produtosgrade.Count > 1)
                     {
-                        vProdutoGradeId = formProdutosGrade.cProdutoGradeId;
-                        ExibirProdutoGrade(vProdutoGradeId);
+                        Modal.FormProdutosGrade formProdutosGrade = new Modal.FormProdutosGrade(pCodigo);
+
+
+                        var result = formProdutosGrade.ShowDialog();
+
+                        if (result == DialogResult.OK)
+                        {
+                            vProdutoGradeId = formProdutosGrade.cProdutoGradeId;
+                            ExibirProdutoGrade(vProdutoGradeId);
+                        }
+                        else
+                        {
+                            vProdutoGradeId = 0;
+                        }
                     }
                     else
                     {
-                        vProdutoGradeId = 0;
+                        vProdutoGradeId = (produtosgrade.FirstOrDefault() != null) ? produtosgrade.FirstOrDefault().Id : 0;
+                        ExibirProdutoGrade(vProdutoGradeId);
                     }
                 }
                 else
                 {
-                    vProdutoGradeId = (produtosgrade.FirstOrDefault() != null) ? produtosgrade.FirstOrDefault().Id : 0;
+                    vProdutoGradeId = 0;
                     ExibirProdutoGrade(vProdutoGradeId);
                 }
             }
-            else
+            catch (Exception vE)
             {
-                vProdutoGradeId = 0;
-                ExibirProdutoGrade(vProdutoGradeId);
+                Trace.WriteLine(DateTime.Now.ToString() + "Carga.PesquisarCargaProduto()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+
+            
 
            
         }
@@ -441,96 +575,120 @@ namespace ConsignadoDeposito
 
         public void ExibirProdutoGrade(long pProdutoGradeId)
         {
-            var produtograde = ModelLibrary.MetodosDeposito.ObterProdutoGrade("", pProdutoGradeId);
 
-            if (produtograde != null)
+            try
             {
+                var produtograde = ModelLibrary.MetodosDeposito.ObterProdutoGrade("", pProdutoGradeId);
 
-                var produto = ModelLibrary.MetodosDeposito.ObterProduto(produtograde.CodigoBarras);
-
-
-                if (produtograde.Status != "1" || produto.Status != "1")
+                if (produtograde != null)
                 {
 
-                    MessageBox.Show("Este produto foi excluído e não pode ser inserido na carga.");
+                    var produto = ModelLibrary.MetodosDeposito.ObterProduto(produtograde.CodigoBarras);
 
-                }
-                else
-                {
-                    localDepositoForm.txtCargaProduto.Text = produto.Descricao;
 
-                    if (localDepositoForm.txtCargaCodigoBarras.Text != produtograde.CodigoBarras + produtograde.Digito)
+                    if (produtograde.Status != "1" || produto.Status != "1")
                     {
-                        localDepositoForm.txtCargaCodigoBarras.Text = produtograde.CodigoBarras + produtograde.Digito;
-                        if (localDepositoForm.chkCargaQuantidade.Checked == false)
+
+                        MessageBox.Show("Este produto foi excluído e não pode ser inserido na carga.");
+
+                    }
+                    else
+                    {
+                        localDepositoForm.txtCargaProduto.Text = produto.Descricao;
+
+                        if (localDepositoForm.txtCargaCodigoBarras.Text != produtograde.CodigoBarras + produtograde.Digito)
                         {
-                            localDepositoForm.chkCargaQuantidade.Checked = true;
-                            localDepositoForm.txtCargaQuantidade.Enabled = true;
+                            localDepositoForm.txtCargaCodigoBarras.Text = produtograde.CodigoBarras + produtograde.Digito;
+                            if (localDepositoForm.chkCargaQuantidade.Checked == false)
+                            {
+                                localDepositoForm.chkCargaQuantidade.Checked = true;
+                                localDepositoForm.txtCargaQuantidade.Enabled = true;
+                            }
+                        }
+
+
+
+                        cCargaProdutoGradeId = produtograde.Id;
+
+                        localDepositoForm.btnCargaConfirmar.Enabled = true;
+                        localDepositoForm.btnCargaCancelar.Enabled = true;
+
+                        if (localDepositoForm.chkCargaQuantidade.Checked)
+                        {
+                            localDepositoForm.txtCargaQuantidade.Focus();
+
+                        }
+                        else
+                        {
+                            //inserir direto qtd=1
+                            InserirCargaProdutoGrade();
                         }
                     }
 
 
 
-                    cCargaProdutoGradeId = produtograde.Id;
-
-                    localDepositoForm.btnCargaConfirmar.Enabled = true;
-                    localDepositoForm.btnCargaCancelar.Enabled = true;
-
-                    if (localDepositoForm.chkCargaQuantidade.Checked)
-                    {
-                        localDepositoForm.txtCargaQuantidade.Focus();
-
-                    }
-                    else
-                    {
-                        //inserir direto qtd=1
-                        InserirCargaProdutoGrade();
-                    }
                 }
+                else
+                {
+
+                    MessageBox.Show("Dígito verificador inválido. Não foi possível encontrar a grade deste produto.");
+
+                    cCargaProdutoGradeId = 0;
+                    localDepositoForm.txtCargaCodigoBarras.Text = "";
+                    localDepositoForm.txtCargaCodigoBarras.Focus();
+                    localDepositoForm.btnCargaConfirmar.Enabled = false;
+                    localDepositoForm.btnCargaCancelar.Enabled = false;
 
 
-
+                }
             }
-            else
+            catch (Exception vE)
             {
-
-                MessageBox.Show("Dígito verificador inválido. Não foi possível encontrar a grade deste produto.");
-
-                cCargaProdutoGradeId = 0;
-                localDepositoForm.txtCargaCodigoBarras.Text = "";
-                localDepositoForm.txtCargaCodigoBarras.Focus();
-                localDepositoForm.btnCargaConfirmar.Enabled = false;
-                localDepositoForm.btnCargaCancelar.Enabled = false;
-
-
+                Trace.WriteLine(DateTime.Now.ToString() + "Carga.ExibirProdutoGrade()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+
+            
         }
 
         public void ExibirCargaProdutoGrade()
         {
 
+
+            try
+            {
+                cModoCargaProduto = "Edit";
+                cCargaProdutoGradeId = Convert.ToInt32(localDepositoForm.grdCargaProduto.CurrentRow.Cells["ProdutoGradeId"].Value);
+
+                localDepositoForm.txtCargaCodigoBarras.Text = localDepositoForm.grdCargaProduto.CurrentRow.Cells["CodigoBarras"].Value.ToString();
+                localDepositoForm.txtCargaCodigoBarras.ReadOnly = true;
+
+
+                if (localDepositoForm.chkCargaQuantidade.Checked == false)
+                {
+                    localDepositoForm.chkCargaQuantidade.Checked = true;
+                    localDepositoForm.txtCargaQuantidade.Enabled = true;
+                }
+                localDepositoForm.txtCargaQuantidade.Text = localDepositoForm.grdCargaProduto.CurrentRow.Cells["Quantidade"].Value.ToString();
+
+                localDepositoForm.txtCargaProduto.Text = localDepositoForm.grdCargaProduto.CurrentRow.Cells["Descricao"].Value.ToString();
+
+
+                localDepositoForm.btnCargaConfirmar.Enabled = true;
+                localDepositoForm.btnCargaCancelar.Enabled = true;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Carga.ExibirCargaProdutoGrade()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             //ClearCargaProduto();
 
 
-            cModoCargaProduto = "Edit";
-            cCargaProdutoGradeId = Convert.ToInt32(localDepositoForm.grdCargaProduto.CurrentRow.Cells["ProdutoGradeId"].Value);
-
-            localDepositoForm.txtCargaCodigoBarras.Text = localDepositoForm.grdCargaProduto.CurrentRow.Cells["CodigoBarras"].Value.ToString();
-            localDepositoForm.txtCargaCodigoBarras.ReadOnly = true;
-
-
-            if (localDepositoForm.chkCargaQuantidade.Checked == false)
-            {
-                localDepositoForm.chkCargaQuantidade.Checked = true;
-                localDepositoForm.txtCargaQuantidade.Enabled = true;
-            }
-            localDepositoForm.txtCargaQuantidade.Text = localDepositoForm.grdCargaProduto.CurrentRow.Cells["Quantidade"].Value.ToString();
-
-            localDepositoForm.txtCargaProduto.Text = localDepositoForm.grdCargaProduto.CurrentRow.Cells["Descricao"].Value.ToString();
-
-
-            localDepositoForm.btnCargaConfirmar.Enabled = true;
-            localDepositoForm.btnCargaCancelar.Enabled = true;
+            
 
 
         }
@@ -583,8 +741,10 @@ namespace ConsignadoDeposito
 
 
             }
-            catch (IOException vE)
+            catch (Exception vE)
             {
+                Trace.WriteLine(DateTime.Now.ToString() + "Carga.InserirCargaProdutoGrade()");
+                Trace.TraceError(vE.Message);
                 MessageBox.Show("Ocorreu um erro ao Inserir o produto. Verifique os dados digitados e tente novamente. Se o erro persisitr, contate o administrador.");
                 Console.WriteLine(vE.Message);
             }
@@ -597,23 +757,25 @@ namespace ConsignadoDeposito
         public void AlterarCargaProdutoGrade()
         {
 
-            /*try
-            {*/
-
-            ModelLibrary.MetodosDeposito.AlterarCargaProduto(cCargaId, cCargaProdutoGradeId, Convert.ToDouble(localDepositoForm.txtCargaQuantidade.Text));
-
-            CarregarGradeCargaProduto(cCargaId);
-
-            CargaTotalizadores();
-
-            LimparCargaProduto();
-
-            /*} catch
+            try
             {
 
+                ModelLibrary.MetodosDeposito.AlterarCargaProduto(cCargaId, cCargaProdutoGradeId, Convert.ToDouble(localDepositoForm.txtCargaQuantidade.Text));
+
+                CarregarGradeCargaProduto(cCargaId);
+
+                CargaTotalizadores();
+
+                LimparCargaProduto();
+
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Carga.AlterarCargaProdutoGrade()");
+                Trace.TraceError(vE.Message);
                 MessageBox.Show("Não foi possível alterar o produto. Por favor, verifique os dados digitados e tente novamente");
 
-            }*/
+            }
 
 
         }
@@ -640,13 +802,24 @@ namespace ConsignadoDeposito
 
             if (MessageBox.Show("Deseja realmente excluir o produto selecionado?", "ATENÇÃO! Exclusão de Produto", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
-                LimparCargaProduto();
-                cCargaProdutoGradeId = Convert.ToInt32(localDepositoForm.grdCargaProduto.CurrentRow.Cells["grdCargaProduto"].Value);
+                try
+                {
+                    LimparCargaProduto();
+                    cCargaProdutoGradeId = Convert.ToInt32(localDepositoForm.grdCargaProduto.CurrentRow.Cells["grdCargaProduto"].Value);
 
 
-                ModelLibrary.MetodosDeposito.ExcluirCargaProduto(cCargaId, cCargaProdutoGradeId);
+                    ModelLibrary.MetodosDeposito.ExcluirCargaProduto(cCargaId, cCargaProdutoGradeId);
 
-                CarregarGradeCargaProduto(cCargaId);
+                    CarregarGradeCargaProduto(cCargaId);
+                }
+                catch (Exception vE)
+                {
+                    Trace.WriteLine(DateTime.Now.ToString() + "Carga.ExcluirCargaProdutoGrade()");
+                    Trace.TraceError(vE.Message);
+                    MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                
             }
 
 
@@ -670,9 +843,11 @@ namespace ConsignadoDeposito
                 }
                 datagrid.FirstDisplayedScrollingRowIndex = datagrid.SelectedRows[0].Index;
             }
-            catch
+            catch (Exception vE)
             {
-                ///escrever no log.
+                Trace.WriteLine(DateTime.Now.ToString() + "Carga.GridSelecionar()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);f
             }
         }
 

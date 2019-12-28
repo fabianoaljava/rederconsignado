@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -20,6 +21,8 @@ namespace ConsignadoDeposito
         public FormLogin()
         {
             InitializeComponent();
+
+
         }
 
 
@@ -71,9 +74,10 @@ namespace ConsignadoDeposito
 
                 }
 
-           } catch(IOException vE)
+           } catch(Exception vE)
             {
-                Console.WriteLine(vE.Message);
+                Trace.WriteLine("FormLogin.btnLogin_Click");
+                Trace.TraceError(vE.Message);
                 MessageBox.Show("Ocorreu um erro ao processar a autenticação do usuário. Caso o problema persista, entre em contato com o suporte técnico.", "Reder Software", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 btnLogin.Enabled = true;
                 btnLogin.Text = "Entrar";
@@ -115,5 +119,9 @@ namespace ConsignadoDeposito
                 e.Handled = true;//set to false if you need that textbox gets enter key
             }
         }
+
+
+
+
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ConsignadoDeposito;
 using System.Windows.Forms;
 using Equin.ApplicationFramework;
+using System.Diagnostics;
 
 namespace ConsignadoDeposito
 {
@@ -46,62 +47,97 @@ namespace ConsignadoDeposito
 
         public void CarregarListaRetorno()
         {
-            localDepositoForm.cbbRetornoPraca.DataSource = ModelLibrary.MetodosDeposito.ObterListaPracas();
-            localDepositoForm.cbbRetornoPraca.DisplayMember = "Descricao";
-            localDepositoForm.cbbRetornoPraca.ValueMember = "Id";
-            localDepositoForm.cbbRetornoPraca.Invalidate();
-            localDepositoForm.cbbRetornoPraca.SelectedIndex = -1;
+            try
+            {
+                localDepositoForm.cbbRetornoPraca.DataSource = ModelLibrary.MetodosDeposito.ObterListaPracas();
+                localDepositoForm.cbbRetornoPraca.DisplayMember = "Descricao";
+                localDepositoForm.cbbRetornoPraca.ValueMember = "Id";
+                localDepositoForm.cbbRetornoPraca.Invalidate();
+                localDepositoForm.cbbRetornoPraca.SelectedIndex = -1;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Retorno.CarregarListaRetorno()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
         }
 
         public void CarregarListaRepresentante()
         {
-            localDepositoForm.cbbRetornoRepresentante.DataSource = ModelLibrary.MetodosDeposito.ObterListaRepresentantes();
-            localDepositoForm.cbbRetornoRepresentante.DisplayMember = "Nome";
-            localDepositoForm.cbbRetornoRepresentante.ValueMember = "Id";
-            localDepositoForm.cbbRetornoRepresentante.Invalidate();
-            localDepositoForm.cbbRetornoRepresentante.SelectedIndex = -1;
+
+            try
+            {
+                localDepositoForm.cbbRetornoRepresentante.DataSource = ModelLibrary.MetodosDeposito.ObterListaRepresentantes();
+                localDepositoForm.cbbRetornoRepresentante.DisplayMember = "Nome";
+                localDepositoForm.cbbRetornoRepresentante.ValueMember = "Id";
+                localDepositoForm.cbbRetornoRepresentante.Invalidate();
+                localDepositoForm.cbbRetornoRepresentante.SelectedIndex = -1;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Retorno.CarregarListaRepresentante()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
         }
 
 
         public void LimparRetorno()
         {
-            localDepositoForm.cbbRetornoPraca.SelectedIndex = -1;
-            localDepositoForm.cbbRetornoRepresentante.SelectedIndex = -1;
-            localDepositoForm.txtRetornoCodPraca.Text = "";
-            localDepositoForm.txtRetornoCodRepresentante.Text = "";
-            localDepositoForm.cbbRetornoMesAno.ResetText();
 
-            localDepositoForm.tbcRetorno.Visible = false;
-            localDepositoForm.txtRetornoCodigoBarras.Text = "";
-            localDepositoForm.txtRetornoProduto.Text = "";
-            localDepositoForm.txtRetornoQuantidade.Text = "";
-            localDepositoForm.btnRetornoConfirmar.Enabled = false;
+            try
+            {
+                localDepositoForm.cbbRetornoPraca.SelectedIndex = -1;
+                localDepositoForm.cbbRetornoRepresentante.SelectedIndex = -1;
+                localDepositoForm.txtRetornoCodPraca.Text = "";
+                localDepositoForm.txtRetornoCodRepresentante.Text = "";
+                localDepositoForm.cbbRetornoMesAno.ResetText();
 
-
-            localDepositoForm.dlbRetornoDataAbertura.Text = "-";
-            localDepositoForm.dlbRetornoDataExportacao.Text = "-";
-            localDepositoForm.dlbRetornoDataRetorno.Text = "-";
-            localDepositoForm.dlbRetornoDataConferencia.Text = "-";
-            localDepositoForm.dlbRetornoDataFinalizacao.Text = "-";
+                localDepositoForm.tbcRetorno.Visible = false;
+                localDepositoForm.txtRetornoCodigoBarras.Text = "";
+                localDepositoForm.txtRetornoProduto.Text = "";
+                localDepositoForm.txtRetornoQuantidade.Text = "";
+                localDepositoForm.btnRetornoConfirmar.Enabled = false;
 
 
+                localDepositoForm.dlbRetornoDataAbertura.Text = "-";
+                localDepositoForm.dlbRetornoDataExportacao.Text = "-";
+                localDepositoForm.dlbRetornoDataRetorno.Text = "-";
+                localDepositoForm.dlbRetornoDataConferencia.Text = "-";
+                localDepositoForm.dlbRetornoDataFinalizacao.Text = "-";
 
 
-            localDepositoForm.dlbRetornoQtdProdutos.Text = "0";
-            localDepositoForm.dlbRetornoTotalProdutos.Text = "0.00";
 
 
-            localDepositoForm.dlbRetornoTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Medium;
+                localDepositoForm.dlbRetornoQtdProdutos.Text = "0";
+                localDepositoForm.dlbRetornoTotalProdutos.Text = "0.00";
 
 
-            localDepositoForm.mnuRetornoAcoes.Text = "Selecione a Carga";
-            localDepositoForm.mnuRetornoAcoes.Enabled = false;
-
-            localDepositoForm.smnRetornoAnalise.Enabled = false;
+                localDepositoForm.dlbRetornoTotalProdutos.FontSize = MetroFramework.MetroLabelSize.Medium;
 
 
-            localDepositoForm.dlbTotalAcerto.Text = "-";
-            localDepositoForm.dlbTotalAberto.Text = "-";
+                localDepositoForm.mnuRetornoAcoes.Text = "Selecione a Carga";
+                localDepositoForm.mnuRetornoAcoes.Enabled = false;
+
+                localDepositoForm.smnRetornoAnalise.Enabled = false;
+
+
+                localDepositoForm.dlbTotalAcerto.Text = "-";
+                localDepositoForm.dlbTotalAberto.Text = "-";
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Retorno.LimparRetorno()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            
 
         }
 
@@ -115,16 +151,28 @@ namespace ConsignadoDeposito
 
         public void RetornoReload()
         {
-            Cursor.Current = Cursors.WaitCursor;
-            PesquisarCarga();
-            CarregarResumo();
-            CarregarGradeRetornoProduto(cRetornoId);
-            CarregarPedidos();
-            CarregarPedidosFechados();
-            CarregarContasAReceber();
-            CarregarConferenciaProdutos();
-            CarregarAcerto();
-            Cursor.Current = Cursors.Default;
+
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                PesquisarCarga();
+                CarregarResumo();
+                CarregarGradeRetornoProduto(cRetornoId);
+                CarregarPedidos();
+                CarregarPedidosFechados();
+                CarregarContasAReceber();
+                CarregarConferenciaProdutos();
+                CarregarAcerto();
+                Cursor.Current = Cursors.Default;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Retorno.RetornoReload()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
         }
 
 
@@ -264,6 +312,8 @@ namespace ConsignadoDeposito
             {
                 MessageBox.Show("Ocorreu um erro ao processar a sua consulta. Verifique os dados digitados e tente novamente. Se o erro persisitr, contate o administrador.", "ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(vE.Message);
+                Trace.WriteLine(DateTime.Now.ToString() + "Retorno.PesquisarCarga()");
+                Trace.TraceError(vE.Message);
             }
         }
 
@@ -271,21 +321,27 @@ namespace ConsignadoDeposito
         public void CarregarFormulario()
         {
 
-            
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                localDepositoForm.tbcRetorno.SelectedTab = localDepositoForm.tabRetornoProdutos;
+                CarregarResumo();
+                CarregarGradeRetornoProduto(cRetornoId);
+                CarregarPedidos();
+                CarregarPedidosFechados();
+                CarregarContasAReceber();
+                CarregarConferenciaProdutos();
+                CarregarAcerto();
+                Cursor.Current = Cursors.Default;
 
-            Cursor.Current = Cursors.WaitCursor;
-            localDepositoForm.tbcRetorno.SelectedTab = localDepositoForm.tabRetornoProdutos;
-            CarregarResumo();
-            CarregarGradeRetornoProduto(cRetornoId);
-            CarregarPedidos();
-            CarregarPedidosFechados();            
-            CarregarContasAReceber();
-            CarregarConferenciaProdutos();
-            CarregarAcerto();
-            Cursor.Current = Cursors.Default;
-
-            localDepositoForm.tbcRetorno.Visible = true;
-
+                localDepositoForm.tbcRetorno.Visible = true;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Retorno.CarregarFormulario()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
 
         }
@@ -308,15 +364,26 @@ namespace ConsignadoDeposito
 
         public void LimparRetornoProduto()
         {
-            localDepositoForm.txtRetornoCodigoBarras.Text = "";
-            localDepositoForm.txtRetornoProduto.Text = "";
-            localDepositoForm.txtRetornoQuantidade.Text = "";
-            localDepositoForm.btnRetornoConfirmar.Enabled = false;
-            localDepositoForm.btnRetornoCancelar.Enabled = false;
-            localDepositoForm.txtRetornoCodigoBarras.ReadOnly = false;
-            cRetornoProdutoGradeId = 0;
-            cModoRetornoProduto = "Insert";
-            localDepositoForm.txtRetornoCodigoBarras.Focus();
+            try
+            {
+                localDepositoForm.txtRetornoCodigoBarras.Text = "";
+                localDepositoForm.txtRetornoProduto.Text = "";
+                localDepositoForm.txtRetornoQuantidade.Text = "";
+                localDepositoForm.btnRetornoConfirmar.Enabled = false;
+                localDepositoForm.btnRetornoCancelar.Enabled = false;
+                localDepositoForm.txtRetornoCodigoBarras.ReadOnly = false;
+                cRetornoProdutoGradeId = 0;
+                cModoRetornoProduto = "Insert";
+                localDepositoForm.txtRetornoCodigoBarras.Focus();
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Retorno.LimparRetornoProduto()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
         }
 
 
@@ -324,41 +391,51 @@ namespace ConsignadoDeposito
         void CarregarGradeRetornoProduto(int pCargaId)
         {
 
+
+            try
+            {
+                ModelLibrary.Representante representante = (ModelLibrary.Representante)localDepositoForm.cbbRetornoRepresentante.SelectedItem;
+                var representanteId = representante.Id;
+                ModelLibrary.Praca praca = (ModelLibrary.Praca)localDepositoForm.cbbRetornoPraca.SelectedItem;
+                var pracaId = praca.Id;
+                int mes = localDepositoForm.cbbRetornoMesAno.Value.Month;
+                int ano = localDepositoForm.cbbRetornoMesAno.Value.Year;
+
+                List<ModelLibrary.ListaProdutosCarga> produtos = ModelLibrary.MetodosDeposito.ObterProdutosCarga(pCargaId, true);
+
+                BindingListView<ModelLibrary.ListaProdutosCarga> view = new BindingListView<ModelLibrary.ListaProdutosCarga>(produtos);
+
+                localDepositoForm.grdRetornoProduto.DataSource = view;
+
+                localDepositoForm.grdRetornoProduto.Columns[2].Width = 250;
+
+                /// Ocultar colunas CargaId e cRetornoProdutoGradeId
+                localDepositoForm.grdRetornoProduto.Columns[9].Visible = false;
+                localDepositoForm.grdRetornoProduto.Columns[10].Visible = false;
+
+                /// Exibir Coluna como "Moeda"
+                localDepositoForm.grdRetornoProduto.Columns[6].DefaultCellStyle.Format = "c";
+                localDepositoForm.grdRetornoProduto.Columns[7].DefaultCellStyle.Format = "c";
+
+                /// Alterar Título da Coluna
+                localDepositoForm.grdRetornoProduto.Columns[0].HeaderText = "Código de Barras";
+
+                //Ocultar coluna Quantidade
+                localDepositoForm.grdRetornoProduto.Columns[4].Visible = false;
+
+                localDepositoForm.grdRetornoProduto.Columns[5].HeaderText = "Quantidade Retorno";
+
+                localDepositoForm.grdRetornoProduto.Columns[6].HeaderText = "Valor Saída";
+                localDepositoForm.grdRetornoProduto.Columns[7].HeaderText = "Valor Custo";
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Retorno.CarregarGradeRetornoProduto()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             
-
-            ModelLibrary.Representante representante = (ModelLibrary.Representante)localDepositoForm.cbbRetornoRepresentante.SelectedItem;
-            var representanteId = representante.Id;
-            ModelLibrary.Praca praca = (ModelLibrary.Praca)localDepositoForm.cbbRetornoPraca.SelectedItem;
-            var pracaId = praca.Id;
-            int mes = localDepositoForm.cbbRetornoMesAno.Value.Month;
-            int ano = localDepositoForm.cbbRetornoMesAno.Value.Year;
-
-            List<ModelLibrary.ListaProdutosCarga> produtos = ModelLibrary.MetodosDeposito.ObterProdutosCarga(pCargaId, true);
-
-            BindingListView<ModelLibrary.ListaProdutosCarga> view = new BindingListView<ModelLibrary.ListaProdutosCarga>(produtos);
-
-            localDepositoForm.grdRetornoProduto.DataSource = view;
-
-            localDepositoForm.grdRetornoProduto.Columns[2].Width = 250;
-
-            /// Ocultar colunas CargaId e cRetornoProdutoGradeId
-            localDepositoForm.grdRetornoProduto.Columns[9].Visible = false;
-            localDepositoForm.grdRetornoProduto.Columns[10].Visible = false;
-
-            /// Exibir Coluna como "Moeda"
-            localDepositoForm.grdRetornoProduto.Columns[6].DefaultCellStyle.Format = "c";
-            localDepositoForm.grdRetornoProduto.Columns[7].DefaultCellStyle.Format = "c";
-
-            /// Alterar Título da Coluna
-            localDepositoForm.grdRetornoProduto.Columns[0].HeaderText = "Código de Barras";
-
-            //Ocultar coluna Quantidade
-            localDepositoForm.grdRetornoProduto.Columns[4].Visible = false;
-
-            localDepositoForm.grdRetornoProduto.Columns[5].HeaderText = "Quantidade Retorno";
-
-            localDepositoForm.grdRetornoProduto.Columns[6].HeaderText = "Valor Saída";
-            localDepositoForm.grdRetornoProduto.Columns[7].HeaderText = "Valor Custo";
         }
 
 
@@ -373,39 +450,50 @@ namespace ConsignadoDeposito
         public void PesquisarRetornoProduto(string pCodigo)
         {
 
-            long vProdutoGradeId = 0;
-            List<ModelLibrary.ProdutoGrade> produtosgrade = ModelLibrary.MetodosDeposito.ObterProdutosGrade(pCodigo);
-
-            if (produtosgrade != null)
+            try
             {
-                if (produtosgrade.Count > 1)
+                long vProdutoGradeId = 0;
+                List<ModelLibrary.ProdutoGrade> produtosgrade = ModelLibrary.MetodosDeposito.ObterProdutosGrade(pCodigo);
+
+                if (produtosgrade != null)
                 {
-                    Modal.FormProdutosGrade formProdutosGrade = new Modal.FormProdutosGrade(pCodigo);
-                    
-
-                    var result = formProdutosGrade.ShowDialog();
-
-                    if (result == DialogResult.OK)
+                    if (produtosgrade.Count > 1)
                     {
-                        vProdutoGradeId = formProdutosGrade.cProdutoGradeId;
-                        ExibirProdutoGrade(vProdutoGradeId);
+                        Modal.FormProdutosGrade formProdutosGrade = new Modal.FormProdutosGrade(pCodigo);
+
+
+                        var result = formProdutosGrade.ShowDialog();
+
+                        if (result == DialogResult.OK)
+                        {
+                            vProdutoGradeId = formProdutosGrade.cProdutoGradeId;
+                            ExibirProdutoGrade(vProdutoGradeId);
+                        }
+                        else
+                        {
+                            vProdutoGradeId = 0;
+                        }
                     }
                     else
                     {
-                        vProdutoGradeId = 0;
+                        vProdutoGradeId = (produtosgrade.FirstOrDefault() != null) ? produtosgrade.FirstOrDefault().Id : 0;
+                        ExibirProdutoGrade(vProdutoGradeId);
                     }
                 }
                 else
                 {
-                    vProdutoGradeId = (produtosgrade.FirstOrDefault() != null) ? produtosgrade.FirstOrDefault().Id : 0;
+                    vProdutoGradeId = 0;
                     ExibirProdutoGrade(vProdutoGradeId);
                 }
             }
-            else
+            catch (Exception vE)
             {
-                vProdutoGradeId = 0;
-                ExibirProdutoGrade(vProdutoGradeId);
+                Trace.WriteLine(DateTime.Now.ToString() + "Retorno.PesquisarRetornoProduto()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            
             
 
         }
@@ -413,103 +501,126 @@ namespace ConsignadoDeposito
 
         public void ExibirProdutoGrade(long pProdutoGradeId)
         {
-            var produtograde = ModelLibrary.MetodosDeposito.ObterProdutoGrade("", pProdutoGradeId);
-
-            if (produtograde != null)
+            try
             {
+                var produtograde = ModelLibrary.MetodosDeposito.ObterProdutoGrade("", pProdutoGradeId);
 
-                var produto = ModelLibrary.MetodosDeposito.ObterProduto(produtograde.CodigoBarras);
-
-                if (produtograde.Status != "1" || produto.Status != "1")
+                if (produtograde != null)
                 {
 
-                    MessageBox.Show("Este produto foi excluído e não pode ser retornado.");
+                    var produto = ModelLibrary.MetodosDeposito.ObterProduto(produtograde.CodigoBarras);
+
+                    if (produtograde.Status != "1" || produto.Status != "1")
+                    {
+
+                        MessageBox.Show("Este produto foi excluído e não pode ser retornado.");
+
+                    }
+                    else
+                    {
+
+                        localDepositoForm.txtRetornoProduto.Text = produto.Descricao;
+
+                        if (localDepositoForm.txtRetornoCodigoBarras.Text != produtograde.CodigoBarras + produtograde.Digito)
+                        {
+                            localDepositoForm.txtRetornoCodigoBarras.Text = produtograde.CodigoBarras + produtograde.Digito;
+                            if (localDepositoForm.chkRetornoQuantidade.Checked == false)
+                            {
+                                localDepositoForm.chkRetornoQuantidade.Checked = true;
+                                localDepositoForm.txtRetornoQuantidade.Enabled = true;
+                            }
+                        }
+
+
+
+                        cRetornoProdutoGradeId = produtograde.Id;
+
+
+                        localDepositoForm.btnRetornoConfirmar.Enabled = true;
+                        localDepositoForm.btnRetornoCancelar.Enabled = true;
+
+                        if (localDepositoForm.chkRetornoQuantidade.Checked)
+                        {
+                            localDepositoForm.txtRetornoQuantidade.Focus();
+
+                        }
+                        else
+                        {
+                            //inserir direto qtd=1
+                            var cargaproduto = ModelLibrary.MetodosDeposito.ObterProdutoCarga(cRetornoId, cRetornoProdutoGradeId);
+
+                            double tempQtd = cargaproduto.Retorno.Value;
+                            localDepositoForm.txtRetornoQuantidade.Text = (tempQtd + 1).ToString();
+                            AlterarRetornoProdutoGrade();
+
+                        }
+
+                    }
+
+
 
                 }
                 else
                 {
 
-                    localDepositoForm.txtRetornoProduto.Text = produto.Descricao;
+                    MessageBox.Show("Dígito verificador inválido. Não foi possível encontrar a grade deste produto.");
 
-                    if (localDepositoForm.txtRetornoCodigoBarras.Text != produtograde.CodigoBarras + produtograde.Digito)
-                    {
-                        localDepositoForm.txtRetornoCodigoBarras.Text = produtograde.CodigoBarras + produtograde.Digito;
-                        if (localDepositoForm.chkRetornoQuantidade.Checked == false)
-                        {
-                            localDepositoForm.chkRetornoQuantidade.Checked = true;
-                            localDepositoForm.txtRetornoQuantidade.Enabled = true;
-                        }
-                    }
+                    cRetornoProdutoGradeId = 0;
+                    localDepositoForm.txtRetornoCodigoBarras.Text = "";
+                    localDepositoForm.txtRetornoCodigoBarras.Focus();
+                    localDepositoForm.btnRetornoConfirmar.Enabled = false;
+                    localDepositoForm.btnRetornoCancelar.Enabled = false;
 
-
-
-                    cRetornoProdutoGradeId = produtograde.Id;
-
-
-                    localDepositoForm.btnRetornoConfirmar.Enabled = true;
-                    localDepositoForm.btnRetornoCancelar.Enabled = true;
-
-                    if (localDepositoForm.chkRetornoQuantidade.Checked)
-                    {
-                        localDepositoForm.txtRetornoQuantidade.Focus();
-
-                    }
-                    else
-                    {
-                        //inserir direto qtd=1
-                        var cargaproduto = ModelLibrary.MetodosDeposito.ObterProdutoCarga(cRetornoId, cRetornoProdutoGradeId);
-
-                        double tempQtd = cargaproduto.Retorno.Value;
-                        localDepositoForm.txtRetornoQuantidade.Text = (tempQtd + 1).ToString();
-                        AlterarRetornoProdutoGrade();
-
-                    }
 
                 }
-
-
-
             }
-            else
+            catch (Exception vE)
             {
-
-                MessageBox.Show("Dígito verificador inválido. Não foi possível encontrar a grade deste produto.");
-
-                cRetornoProdutoGradeId = 0;
-                localDepositoForm.txtRetornoCodigoBarras.Text = "";
-                localDepositoForm.txtRetornoCodigoBarras.Focus();
-                localDepositoForm.btnRetornoConfirmar.Enabled = false;
-                localDepositoForm.btnRetornoCancelar.Enabled = false;
-
-
+                Trace.WriteLine(DateTime.Now.ToString() + "Retorno.ExibirProdutoGrade()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+
+            
         }
 
         public void ExibirRetornoProdutoGrade()
         {
 
-            //ClearRetornoProduto();
 
-
-            cModoRetornoProduto = "Edit";
-            cRetornoProdutoGradeId = Convert.ToInt32(localDepositoForm.grdRetornoProduto.CurrentRow.Cells["ProdutoGradeId"].Value);
-
-            localDepositoForm.txtRetornoCodigoBarras.Text = localDepositoForm.grdRetornoProduto.CurrentRow.Cells["CodigoBarras"].Value.ToString();
-            localDepositoForm.txtRetornoCodigoBarras.ReadOnly = true;
-
-
-            if (localDepositoForm.chkRetornoQuantidade.Checked == false)
+            try
             {
-                localDepositoForm.chkRetornoQuantidade.Checked = true;
-                localDepositoForm.txtRetornoQuantidade.Enabled = true;
+                //ClearRetornoProduto();
+
+
+                cModoRetornoProduto = "Edit";
+                cRetornoProdutoGradeId = Convert.ToInt32(localDepositoForm.grdRetornoProduto.CurrentRow.Cells["ProdutoGradeId"].Value);
+
+                localDepositoForm.txtRetornoCodigoBarras.Text = localDepositoForm.grdRetornoProduto.CurrentRow.Cells["CodigoBarras"].Value.ToString();
+                localDepositoForm.txtRetornoCodigoBarras.ReadOnly = true;
+
+
+                if (localDepositoForm.chkRetornoQuantidade.Checked == false)
+                {
+                    localDepositoForm.chkRetornoQuantidade.Checked = true;
+                    localDepositoForm.txtRetornoQuantidade.Enabled = true;
+                }
+                localDepositoForm.txtRetornoQuantidade.Text = localDepositoForm.grdRetornoProduto.CurrentRow.Cells["Retorno"].Value.ToString();
+
+                localDepositoForm.txtRetornoProduto.Text = localDepositoForm.grdRetornoProduto.CurrentRow.Cells["Descricao"].Value.ToString();
+
+
+                localDepositoForm.btnRetornoConfirmar.Enabled = true;
+                localDepositoForm.btnRetornoCancelar.Enabled = true;
             }
-            localDepositoForm.txtRetornoQuantidade.Text = localDepositoForm.grdRetornoProduto.CurrentRow.Cells["Retorno"].Value.ToString();
-
-            localDepositoForm.txtRetornoProduto.Text = localDepositoForm.grdRetornoProduto.CurrentRow.Cells["Descricao"].Value.ToString();
-
-
-            localDepositoForm.btnRetornoConfirmar.Enabled = true;
-            localDepositoForm.btnRetornoCancelar.Enabled = true;
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Retorno.ExibirRetornoProdutoGrade()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
 
 
         }
@@ -522,23 +633,23 @@ namespace ConsignadoDeposito
         public void AlterarRetornoProdutoGrade()
         {
 
-            /*try
-            {*/
 
-            ModelLibrary.MetodosDeposito.AlterarRetornoProduto(cRetornoId, cRetornoProdutoGradeId, Convert.ToDouble(localDepositoForm.txtRetornoQuantidade.Text));
-
-            CarregarGradeRetornoProduto(cRetornoId);
-
-            LimparRetornoProduto();
-
-            RetornoReload();
-
-            /*} catch
+            try
             {
+                ModelLibrary.MetodosDeposito.AlterarRetornoProduto(cRetornoId, cRetornoProdutoGradeId, Convert.ToDouble(localDepositoForm.txtRetornoQuantidade.Text));
 
-                MessageBox.Show("Não foi possível alterar o produto. Por favor, verifique os dados digitados e tente novamente");
+                CarregarGradeRetornoProduto(cRetornoId);
 
-            }*/
+                LimparRetornoProduto();
+
+                RetornoReload();
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Retorno.AlterarRetornoProdutoGrade()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
 
         }
@@ -554,21 +665,45 @@ namespace ConsignadoDeposito
 
         public void FinalizarRetorno()
         {
-            ModelLibrary.MetodosDeposito.AlterarStatusCarga(cRetornoId, "C");
 
-            MessageBox.Show("Retorno de Produtos Finalizado com Sucesso!");
+            try
+            {
+                ModelLibrary.MetodosDeposito.AlterarStatusCarga(cRetornoId, "C");
 
-            PesquisarCarga();
+                MessageBox.Show("Retorno de Produtos Finalizado com Sucesso!");
+
+                PesquisarCarga();
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Retorno.FinalizarRetorno()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
         }
 
 
         public void RefazerRetorno()
         {
-            ModelLibrary.MetodosDeposito.RefazerRetorno(cRetornoId);
 
-            MessageBox.Show("O retorno pode ser refeito agora.");
+            try
+            {
+                ModelLibrary.MetodosDeposito.RefazerRetorno(cRetornoId);
 
-            PesquisarCarga();
+                MessageBox.Show("O retorno pode ser refeito agora.");
+
+                PesquisarCarga();
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Retorno.RefazerRetorno()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
         }
 
 
@@ -581,22 +716,28 @@ namespace ConsignadoDeposito
         {
 
 
+            try
+            {
+                List<ModelLibrary.ListaPedidosRetorno> pedidos = ModelLibrary.MetodosDeposito.ObterListaPedidosRetorno(cRetornoId);
 
-            List<ModelLibrary.ListaPedidosRetorno> pedidos = ModelLibrary.MetodosDeposito.ObterListaPedidosRetorno(cRetornoId);
+                BindingListView<ModelLibrary.ListaPedidosRetorno> view = new BindingListView<ModelLibrary.ListaPedidosRetorno>(pedidos);
 
-            BindingListView<ModelLibrary.ListaPedidosRetorno> view = new BindingListView<ModelLibrary.ListaPedidosRetorno>(pedidos);
+                localDepositoForm.grdRetornoPedido.DataSource = view;
 
-            localDepositoForm.grdRetornoPedido.DataSource = view;
-
-            localDepositoForm.grdRetornoPedido.Columns[1].Visible = false;
-            localDepositoForm.grdRetornoPedido.Columns[2].Width = 450;
-            localDepositoForm.grdRetornoPedido.Columns[3].DefaultCellStyle.Format = "c";
-            localDepositoForm.grdRetornoPedido.Columns[5].Width = 200;
+                localDepositoForm.grdRetornoPedido.Columns[1].Visible = false;
+                localDepositoForm.grdRetornoPedido.Columns[2].Width = 450;
+                localDepositoForm.grdRetornoPedido.Columns[3].DefaultCellStyle.Format = "c";
+                localDepositoForm.grdRetornoPedido.Columns[5].Width = 200;
 
 
-            localDepositoForm.grdRetornoPedido.Refresh();
-
-            
+                localDepositoForm.grdRetornoPedido.Refresh();
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Retorno.CarregarPedidos()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
 
         }
@@ -609,26 +750,30 @@ namespace ConsignadoDeposito
         public void CarregarPedidosFechados(Boolean pAtual = true)
         {
 
+            try
+            {
+                List<ModelLibrary.ListaPedidosFechados> pedidos = ModelLibrary.MetodosDeposito.ObterListaPedidosFechados(cRetornoId, pAtual);
 
+                BindingListView<ModelLibrary.ListaPedidosFechados> view = new BindingListView<ModelLibrary.ListaPedidosFechados>(pedidos);
 
-            List<ModelLibrary.ListaPedidosFechados> pedidos = ModelLibrary.MetodosDeposito.ObterListaPedidosFechados(cRetornoId, pAtual);
+                localDepositoForm.grdPedidosFechado.DataSource = view;
 
-            BindingListView<ModelLibrary.ListaPedidosFechados> view = new BindingListView<ModelLibrary.ListaPedidosFechados>(pedidos);
+                localDepositoForm.grdPedidosFechado.Columns[1].Width = 250;
+                localDepositoForm.grdPedidosFechado.Columns[2].DefaultCellStyle.Format = "c";
+                localDepositoForm.grdPedidosFechado.Columns[3].DefaultCellStyle.Format = "c";
+                localDepositoForm.grdPedidosFechado.Columns[4].DefaultCellStyle.Format = "c";
+                localDepositoForm.grdPedidosFechado.Columns[5].DefaultCellStyle.Format = "c";
+                localDepositoForm.grdPedidosFechado.Columns[6].DefaultCellStyle.Format = "c";
+                localDepositoForm.grdPedidosFechado.Columns[7].DefaultCellStyle.Format = "c";
 
-            localDepositoForm.grdPedidosFechado.DataSource = view;
-
-            localDepositoForm.grdPedidosFechado.Columns[1].Width = 250;
-            localDepositoForm.grdPedidosFechado.Columns[2].DefaultCellStyle.Format = "c";
-            localDepositoForm.grdPedidosFechado.Columns[3].DefaultCellStyle.Format = "c";
-            localDepositoForm.grdPedidosFechado.Columns[4].DefaultCellStyle.Format = "c";
-            localDepositoForm.grdPedidosFechado.Columns[5].DefaultCellStyle.Format = "c";
-            localDepositoForm.grdPedidosFechado.Columns[6].DefaultCellStyle.Format = "c";
-            localDepositoForm.grdPedidosFechado.Columns[7].DefaultCellStyle.Format = "c";
-
-            localDepositoForm.grdPedidosFechado.Refresh();
-
-
-
+                localDepositoForm.grdPedidosFechado.Refresh();
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Retorno.CarregarPedidosFechados()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
@@ -639,18 +784,29 @@ namespace ConsignadoDeposito
         public void CarregarContasAReceber()
         {
 
-            List<ModelLibrary.ListaAReceber> pedidos = ModelLibrary.MetodosDeposito.ObterListaAReceber(cRetornoId);
 
-            BindingListView<ModelLibrary.ListaAReceber> view = new BindingListView<ModelLibrary.ListaAReceber>(pedidos);
+            try
+            {
+                List<ModelLibrary.ListaAReceber> pedidos = ModelLibrary.MetodosDeposito.ObterListaAReceber(cRetornoId);
+
+                BindingListView<ModelLibrary.ListaAReceber> view = new BindingListView<ModelLibrary.ListaAReceber>(pedidos);
 
 
-            localDepositoForm.grdContasAReceber.DataSource = view;
+                localDepositoForm.grdContasAReceber.DataSource = view;
 
-            localDepositoForm.grdContasAReceber.Columns[0].Visible = false;
-            localDepositoForm.grdContasAReceber.Columns[1].Visible = false;
-            localDepositoForm.grdContasAReceber.Columns[4].Width = 250;
-            localDepositoForm.grdContasAReceber.Columns[5].DefaultCellStyle.Format = "c";
-            localDepositoForm.grdContasAReceber.Columns[6].DefaultCellStyle.Format = "c";
+                localDepositoForm.grdContasAReceber.Columns[0].Visible = false;
+                localDepositoForm.grdContasAReceber.Columns[1].Visible = false;
+                localDepositoForm.grdContasAReceber.Columns[4].Width = 250;
+                localDepositoForm.grdContasAReceber.Columns[5].DefaultCellStyle.Format = "c";
+                localDepositoForm.grdContasAReceber.Columns[6].DefaultCellStyle.Format = "c";
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Retorno.CarregarContasAReceber()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
 
 
         }
@@ -667,15 +823,26 @@ namespace ConsignadoDeposito
 
         public void CarregarConferenciaProdutos()
         {
+            try
+            {
+                List<ModelLibrary.ListaProdutoConferencia> pedidos = ModelLibrary.MetodosDeposito.ObterListaProdutoConferencia(cRetornoId);
 
-            List<ModelLibrary.ListaProdutoConferencia> pedidos = ModelLibrary.MetodosDeposito.ObterListaProdutoConferencia(cRetornoId);
+                BindingListView<ModelLibrary.ListaProdutoConferencia> view = new BindingListView<ModelLibrary.ListaProdutoConferencia>(pedidos);
 
-            BindingListView<ModelLibrary.ListaProdutoConferencia> view = new BindingListView<ModelLibrary.ListaProdutoConferencia>(pedidos);
+                localDepositoForm.grdRetornoConfProdutos.DataSource = view;
 
-            localDepositoForm.grdRetornoConfProdutos.DataSource = view;
+                localDepositoForm.grdRetornoConfProdutos.Columns[1].Width = 250;
+                localDepositoForm.grdRetornoConfProdutos.Columns[9].DefaultCellStyle.Format = "c";
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Retorno.CarregarConferenciaProdutos()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-            localDepositoForm.grdRetornoConfProdutos.Columns[1].Width = 250;
-            localDepositoForm.grdRetornoConfProdutos.Columns[9].DefaultCellStyle.Format = "c";
+
+            
 
         }
 
@@ -687,37 +854,43 @@ namespace ConsignadoDeposito
 
         public void CarregarAcerto()
         {
-
-            List<ModelLibrary.ListaAcerto> acerto = ModelLibrary.MetodosDeposito.ObterListaAcerto(cRetornoId);
-
-            BindingListView<ModelLibrary.ListaAcerto> view = new BindingListView<ModelLibrary.ListaAcerto>(acerto);
-
-            localDepositoForm.grdAcerto.DataSource = view;
-
-            localDepositoForm.grdAcerto.Columns[0].Width = 250;
-            localDepositoForm.grdAcerto.Columns[1].DefaultCellStyle.Format = "c";
-            localDepositoForm.grdAcerto.Columns[2].DefaultCellStyle.Format = "c";
-            localDepositoForm.grdAcerto.Columns[3].DefaultCellStyle.Format = "c";
-            localDepositoForm.grdAcerto.Columns[4].DefaultCellStyle.Format = "c";
-            localDepositoForm.grdAcerto.Columns[5].DefaultCellStyle.Format = "c";
-            localDepositoForm.grdAcerto.Columns[6].DefaultCellStyle.Format = "c";
-
-            //Carregar Totalizadores
-
-
-            double sumValorAcerto = 0;
-            double sumValorAberto = 0; 
-            for (int i = 0; i < localDepositoForm.grdAcerto.Rows.Count; ++i)
+            try
             {
-                sumValorAcerto += Convert.ToDouble(localDepositoForm.grdAcerto.Rows[i].Cells[5].Value);
-                sumValorAberto += Convert.ToDouble(localDepositoForm.grdAcerto.Rows[i].Cells[6].Value);
+                List<ModelLibrary.ListaAcerto> acerto = ModelLibrary.MetodosDeposito.ObterListaAcerto(cRetornoId);
+
+                BindingListView<ModelLibrary.ListaAcerto> view = new BindingListView<ModelLibrary.ListaAcerto>(acerto);
+
+                localDepositoForm.grdAcerto.DataSource = view;
+
+                localDepositoForm.grdAcerto.Columns[0].Width = 250;
+                localDepositoForm.grdAcerto.Columns[1].DefaultCellStyle.Format = "c";
+                localDepositoForm.grdAcerto.Columns[2].DefaultCellStyle.Format = "c";
+                localDepositoForm.grdAcerto.Columns[3].DefaultCellStyle.Format = "c";
+                localDepositoForm.grdAcerto.Columns[4].DefaultCellStyle.Format = "c";
+                localDepositoForm.grdAcerto.Columns[5].DefaultCellStyle.Format = "c";
+                localDepositoForm.grdAcerto.Columns[6].DefaultCellStyle.Format = "c";
+
+                //Carregar Totalizadores
+
+
+                double sumValorAcerto = 0;
+                double sumValorAberto = 0;
+                for (int i = 0; i < localDepositoForm.grdAcerto.Rows.Count; ++i)
+                {
+                    sumValorAcerto += Convert.ToDouble(localDepositoForm.grdAcerto.Rows[i].Cells[5].Value);
+                    sumValorAberto += Convert.ToDouble(localDepositoForm.grdAcerto.Rows[i].Cells[6].Value);
+                }
+
+
+                localDepositoForm.dlbTotalAcerto.Text = sumValorAcerto.ToString("C");
+                localDepositoForm.dlbTotalAberto.Text = sumValorAberto.ToString("C");
             }
-
-
-            localDepositoForm.dlbTotalAcerto.Text = sumValorAcerto.ToString("C");
-            localDepositoForm.dlbTotalAberto.Text = sumValorAberto.ToString("C");
-
-
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Retorno.CarregarAcerto()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
 
         }
@@ -725,8 +898,17 @@ namespace ConsignadoDeposito
         public void FinalizarAcerto()
         {
 
-            ModelLibrary.MetodosDeposito.AlterarStatusCarga(cRetornoId, "F");
-            RetornoReload();
+            try
+            {
+                ModelLibrary.MetodosDeposito.AlterarStatusCarga(cRetornoId, "F");
+                RetornoReload();
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Retorno.FinalizarAcerto()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             
         }
