@@ -766,27 +766,12 @@ namespace ConsignadoDeposito
         private void grdRetornoPedido_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
 
-
-            //cbbPesqVendedor.Text = grdRetornoPedido.CurrentRow.Cells["Nome"].Value.ToString();
-            //tbcRetorno.SelectedTab = tabRetornoLancPedidos;
-            //cRetorno.VendedorExibir(Convert.ToInt64(grdRetornoPedido.CurrentRow.Cells["VendedorId"].Value));
-
-            /*
-            Cursor.Current = Cursors.WaitCursor;
-            tbcRetorno.SelectedTab = tabRetornoPedidoDetalhe;
-            cRetorno.ExibirDetalhesPedido(grdRetornoPedido.CurrentRow.Cells["CodigoPedido"].Value.ToString());
-            Cursor.Current = Cursors.Default;
-
-            */
-
             Cursor.Current = Cursors.WaitCursor;
             Modal.FormPedido formPedido = new Modal.FormPedido(this);
             formPedido.ExibirDetalhesPedido(grdRetornoPedido.CurrentRow.Cells["CodigoPedido"].Value.ToString());
             formPedido.ShowDialog();
             
             Cursor.Current = Cursors.Default;
-
-
 
         }
 
@@ -893,10 +878,6 @@ namespace ConsignadoDeposito
 
                 // MessageBox.Show(Convert.ToDateTime(formPesquisa.cAno.ToString() + "-" + formPesquisa.cMes.ToString() + "-01").ToString());
 
-
-
-
-
                 cCarga.PesquisarCarga();
             }
 
@@ -921,11 +902,7 @@ namespace ConsignadoDeposito
                 cbbRetornoMesAno.Value = Convert.ToDateTime(formPesquisa.cAno.ToString() + "-" + formPesquisa.cMes.ToString() + "-01");
 
 
-
-
                 cRetorno.PesquisarCarga();
-
-
 
             }
         }

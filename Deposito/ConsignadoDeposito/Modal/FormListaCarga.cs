@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -31,6 +32,18 @@ namespace ConsignadoDeposito.Modal
 
         public void CarregarListaCarga()
         {
+
+            try
+            {
+
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "FormListaCarga.CarregarListaCarga()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             cbbCargaPraca.DataSource = ModelLibrary.MetodosDeposito.ObterListaPracas();
             cbbCargaPraca.DisplayMember = "Descricao";
             cbbCargaPraca.ValueMember = "Id";
@@ -40,6 +53,16 @@ namespace ConsignadoDeposito.Modal
 
         public void CarregarListaRepresentante()
         {
+            try
+            {
+
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "FormListaCarga.CarregarListaCarga()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             cbbCargaRepresentante.DataSource = ModelLibrary.MetodosDeposito.ObterListaRepresentantes();
             cbbCargaRepresentante.DisplayMember = "Nome";
             cbbCargaRepresentante.ValueMember = "Id";
@@ -50,6 +73,7 @@ namespace ConsignadoDeposito.Modal
 
         public void LimparPesquisa()
         {
+
             txtCargaCodPraca.Text = "";
             cbbCargaPraca.SelectedIndex = -1;
             txtCargaCodRepresentante.Text = "";
@@ -73,6 +97,81 @@ namespace ConsignadoDeposito.Modal
 
             grdCarga.DataSource = null;
             grdCarga.Refresh();
+
+        }
+
+
+        public void FiltrarCarga()
+        {
+
+            try
+            {
+
+                LimparGrade();
+                Cursor.Current = Cursors.WaitCursor;
+
+
+                ModelLibrary.Representante representante = (ModelLibrary.Representante)cbbCargaRepresentante.SelectedItem;
+                var representanteId = (representante != null) ? representante.Id : 0;
+                ModelLibrary.Praca praca = (ModelLibrary.Praca)cbbCargaPraca.SelectedItem;
+                var pracaId = (praca != null) ? praca.Id : 0;
+
+
+                string vAnoMesInicial = cbbAnoMesInicial.Value.Year.ToString() + cbbAnoMesInicial.Value.Month.ToString().PadLeft(2, '0');
+                string vAnoMesFinal = cbbAnoMesFinal.Value.Year.ToString() + cbbAnoMesFinal.Value.Month.ToString().PadLeft(2, '0');
+
+
+
+                List<ModelLibrary.ListaPesquisaCarga> carga = ModelLibrary.MetodosDeposito.PesquisarCarga(pracaId, representanteId, vAnoMesInicial, vAnoMesFinal);
+
+                BindingListView<ModelLibrary.ListaPesquisaCarga> view = new BindingListView<ModelLibrary.ListaPesquisaCarga>(carga);
+
+                grdCarga.DataSource = view;
+
+
+
+                grdCarga.Columns[0].Visible = false;
+                grdCarga.Columns[1].Width = 30;
+                grdCarga.Columns[2].Width = 200;
+                grdCarga.Columns[3].Width = 30;
+                grdCarga.Columns[4].Width = 200;
+                grdCarga.Columns[5].Width = 60;
+                grdCarga.Columns[6].Width = 30;
+                grdCarga.Columns[12].Width = 30;
+                grdCarga.Columns[13].Visible = false;
+
+
+                Cursor.Current = Cursors.Default;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "FormListaCarga.FiltrarCarga()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+        }
+
+
+        public void SelecionarCarga()
+        {
+            try
+            {
+                this.cRepresentanteId = Convert.ToInt32(grdCarga.CurrentRow.Cells["RepresentanteId"].Value);
+                this.cPracaId = Convert.ToInt32(grdCarga.CurrentRow.Cells["PracaId"].Value);
+                this.cAno = Convert.ToInt32(grdCarga.CurrentRow.Cells["Ano"].Value);
+                this.cMes = Convert.ToInt32(grdCarga.CurrentRow.Cells["Mes"].Value);
+
+                btnConfirmar.Enabled = true;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "FormListaCarga.SelecionarCarga()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
@@ -253,41 +352,7 @@ namespace ConsignadoDeposito.Modal
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
 
-            LimparGrade();
-            Cursor.Current = Cursors.WaitCursor;
-
-
-            ModelLibrary.Representante representante = (ModelLibrary.Representante)cbbCargaRepresentante.SelectedItem;
-            var representanteId = (representante != null) ? representante.Id :0;
-            ModelLibrary.Praca praca = (ModelLibrary.Praca)cbbCargaPraca.SelectedItem;
-            var pracaId = (praca != null) ? praca.Id : 0;
-
-
-            string vAnoMesInicial = cbbAnoMesInicial.Value.Year.ToString() + cbbAnoMesInicial.Value.Month.ToString().PadLeft(2, '0');
-            string vAnoMesFinal = cbbAnoMesFinal.Value.Year.ToString() + cbbAnoMesFinal.Value.Month.ToString().PadLeft(2, '0');
-
-
-
-            List<ModelLibrary.ListaPesquisaCarga> carga = ModelLibrary.MetodosDeposito.PesquisarCarga(pracaId, representanteId, vAnoMesInicial, vAnoMesFinal);
-
-            BindingListView<ModelLibrary.ListaPesquisaCarga> view = new BindingListView<ModelLibrary.ListaPesquisaCarga>(carga);
-
-            grdCarga.DataSource = view;
-
-
-
-            grdCarga.Columns[0].Visible = false;
-            grdCarga.Columns[1].Width = 30;
-            grdCarga.Columns[2].Width = 200;
-            grdCarga.Columns[3].Width = 30;
-            grdCarga.Columns[4].Width = 200;
-            grdCarga.Columns[5].Width = 60;
-            grdCarga.Columns[6].Width = 30;
-            grdCarga.Columns[12].Width = 30;
-            grdCarga.Columns[13].Visible = false;
-
-
-            Cursor.Current = Cursors.Default;
+            FiltrarCarga();
 
 
         }
@@ -309,14 +374,11 @@ namespace ConsignadoDeposito.Modal
             LimparPesquisa();
         }
 
+
+
         private void grdCarga_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.cRepresentanteId = Convert.ToInt32(grdCarga.CurrentRow.Cells["RepresentanteId"].Value);
-            this.cPracaId = Convert.ToInt32(grdCarga.CurrentRow.Cells["PracaId"].Value);
-            this.cAno = Convert.ToInt32(grdCarga.CurrentRow.Cells["Ano"].Value);
-            this.cMes = Convert.ToInt32(grdCarga.CurrentRow.Cells["Mes"].Value);
-
-            btnConfirmar.Enabled = true;
+            SelecionarCarga();
         }
 
         private void grdCarga_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)

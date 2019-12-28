@@ -847,7 +847,7 @@ namespace ConsignadoDeposito
             {
                 Trace.WriteLine(DateTime.Now.ToString() + "Carga.GridSelecionar()");
                 Trace.TraceError(vE.Message);
-                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);f
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

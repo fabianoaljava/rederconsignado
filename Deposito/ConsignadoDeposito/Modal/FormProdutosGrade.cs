@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -41,34 +42,43 @@ namespace ConsignadoDeposito.Modal
 
         private void FormProdutosGrade_Load(object sender, EventArgs e)
         {
+            try
+            {
+                var vCriterio = new Dictionary<string, string>();
 
-            var vCriterio = new Dictionary<string, string>();
+                vCriterio["CodigoGeral"] = cCodigo;
 
-            vCriterio["CodigoGeral"] = cCodigo;
+                List<ModelLibrary.ListaProdutos> produtosgrade = ModelLibrary.MetodosDeposito.ObterListaProdutos(vCriterio);
 
-            List<ModelLibrary.ListaProdutos> produtosgrade = ModelLibrary.MetodosDeposito.ObterListaProdutos(vCriterio);
+                BindingListView<ModelLibrary.ListaProdutos> view = new BindingListView<ModelLibrary.ListaProdutos>(produtosgrade);
 
-            BindingListView<ModelLibrary.ListaProdutos> view = new BindingListView<ModelLibrary.ListaProdutos>(produtosgrade);
+                grdProdutoGrade.DataSource = view;
 
-            grdProdutoGrade.DataSource = view;
+                grdProdutoGrade.ColumnHeadersHeight = 40;
 
-            grdProdutoGrade.ColumnHeadersHeight = 40;
-
-            grdProdutoGrade.Columns[0].Width = 100;
-            grdProdutoGrade.Columns[1].Width = 250;
-            grdProdutoGrade.Columns[2].Width = 70;
-            grdProdutoGrade.Columns[3].Width = 70;
-            grdProdutoGrade.Columns[4].Width = 80;
-            grdProdutoGrade.Columns[4].HeaderText = "Valor Saída";
-            grdProdutoGrade.Columns[4].DefaultCellStyle.Format = "c";
-            grdProdutoGrade.Columns[5].Width = 80;
-            grdProdutoGrade.Columns[5].HeaderText = "Valor Custo";
-            grdProdutoGrade.Columns[5].DefaultCellStyle.Format = "c";
-            grdProdutoGrade.Columns[6].Width = 70;
-            grdProdutoGrade.Columns[6].HeaderText = "Saldo em Estoque";
-            grdProdutoGrade.Columns[7].Width = 80;
-            grdProdutoGrade.Columns[7].DefaultCellStyle.Format = "c";
-            grdProdutoGrade.Columns[8].Visible = false;
+                grdProdutoGrade.Columns[0].Width = 100;
+                grdProdutoGrade.Columns[1].Width = 250;
+                grdProdutoGrade.Columns[2].Width = 70;
+                grdProdutoGrade.Columns[3].Width = 70;
+                grdProdutoGrade.Columns[4].Width = 80;
+                grdProdutoGrade.Columns[4].HeaderText = "Valor Saída";
+                grdProdutoGrade.Columns[4].DefaultCellStyle.Format = "c";
+                grdProdutoGrade.Columns[5].Width = 80;
+                grdProdutoGrade.Columns[5].HeaderText = "Valor Custo";
+                grdProdutoGrade.Columns[5].DefaultCellStyle.Format = "c";
+                grdProdutoGrade.Columns[6].Width = 70;
+                grdProdutoGrade.Columns[6].HeaderText = "Saldo em Estoque";
+                grdProdutoGrade.Columns[7].Width = 80;
+                grdProdutoGrade.Columns[7].DefaultCellStyle.Format = "c";
+                grdProdutoGrade.Columns[8].Visible = false;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + " FormProdutosGrade.FormProdutosGrade_Load()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
 
 
 
@@ -77,8 +87,18 @@ namespace ConsignadoDeposito.Modal
 
         private void grdProdutoGrade_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            cProdutoGradeId = Convert.ToInt64(grdProdutoGrade.CurrentRow.Cells["ProdutoGradeId"].Value);
-            btnConfirmar.Enabled = true;
+            try
+            {
+                cProdutoGradeId = Convert.ToInt64(grdProdutoGrade.CurrentRow.Cells["ProdutoGradeId"].Value);
+                btnConfirmar.Enabled = true;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + " FormProdutosGrade.grdProdutoGrade_CellClick()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         private void grdProdutoGrade_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)

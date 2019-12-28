@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace ConsignadoDeposito.Modal
 {
@@ -49,40 +50,49 @@ namespace ConsignadoDeposito.Modal
         public void PesquisarProduto(string pCodigo)
         {
 
-            long vProdutoGradeId = 0;
-            List<ModelLibrary.ProdutoGrade> produtosgrade = ModelLibrary.MetodosDeposito.ObterProdutosGrade(pCodigo);
-
-            if (produtosgrade != null)
+            try
             {
-                if (produtosgrade.Count > 1)
+                long vProdutoGradeId = 0;
+                List<ModelLibrary.ProdutoGrade> produtosgrade = ModelLibrary.MetodosDeposito.ObterProdutosGrade(pCodigo);
+
+                if (produtosgrade != null)
                 {
-                    Modal.FormProdutosGrade formProdutosGrade = new Modal.FormProdutosGrade(pCodigo);
-
-
-                    var result = formProdutosGrade.ShowDialog();
-
-                    if (result == DialogResult.OK)
+                    if (produtosgrade.Count > 1)
                     {
-                        vProdutoGradeId = formProdutosGrade.cProdutoGradeId;
-                        ExibirProdutoGrade(vProdutoGradeId);
+                        Modal.FormProdutosGrade formProdutosGrade = new Modal.FormProdutosGrade(pCodigo);
+
+
+                        var result = formProdutosGrade.ShowDialog();
+
+                        if (result == DialogResult.OK)
+                        {
+                            vProdutoGradeId = formProdutosGrade.cProdutoGradeId;
+                            ExibirProdutoGrade(vProdutoGradeId);
+                        }
+                        else
+                        {
+                            vProdutoGradeId = 0;
+                        }
                     }
                     else
                     {
-                        vProdutoGradeId = 0;
+                        vProdutoGradeId = (produtosgrade.FirstOrDefault() != null) ? produtosgrade.FirstOrDefault().Id : 0;
+                        ExibirProdutoGrade(vProdutoGradeId);
                     }
                 }
                 else
                 {
-                    vProdutoGradeId = (produtosgrade.FirstOrDefault() != null) ? produtosgrade.FirstOrDefault().Id : 0;
+                    vProdutoGradeId = 0;
                     ExibirProdutoGrade(vProdutoGradeId);
                 }
-            }
-            else
-            {
-                vProdutoGradeId = 0;
-                ExibirProdutoGrade(vProdutoGradeId);
-            }
 
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "FormEstoque.PesquisarProduto()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
@@ -91,82 +101,98 @@ namespace ConsignadoDeposito.Modal
         public void ExibirProdutoGrade(long pProdutoGradeId)
         {
 
-            var produtograde = ModelLibrary.MetodosDeposito.ObterProdutoGrade("", pProdutoGradeId);
-
-            if (produtograde != null)
+            try
             {
+                var produtograde = ModelLibrary.MetodosDeposito.ObterProdutoGrade("", pProdutoGradeId);
 
-                var produto = ModelLibrary.MetodosDeposito.ObterProduto(produtograde.CodigoBarras);
-
-                if (produtograde.Status != "1" || produto.Status != "1")
+                if (produtograde != null)
                 {
 
-                    MessageBox.Show("Este produto foi excluído e não pode ser movimentado.");
+                    var produto = ModelLibrary.MetodosDeposito.ObterProduto(produtograde.CodigoBarras);
 
-                    Limpar();
+                    if (produtograde.Status != "1" || produto.Status != "1")
+                    {
+
+                        MessageBox.Show("Este produto foi excluído e não pode ser movimentado.");
+
+                        Limpar();
+
+                    }
+                    else
+                    {
+
+                        cProdutoGradeId = produtograde.Id;
+                        txtCodigoBarras.Text = produtograde.CodigoBarras.ToString() + produtograde.Digito.ToString();
+                        txtNome.Text = produto.Descricao;
+                        cbbTipoMovimentacao.Focus();
+
+                        CarregarMovimentacoes(produtograde.Id);
+
+                        btnAdicionar.Enabled = true;
+                        btnCancelar.Enabled = true;
+
+                    }
 
                 }
                 else
                 {
-
-                    cProdutoGradeId = produtograde.Id;
-                    txtCodigoBarras.Text = produtograde.CodigoBarras.ToString() + produtograde.Digito.ToString();
-                    txtNome.Text = produto.Descricao;
-                    cbbTipoMovimentacao.Focus();
-
-                    CarregarMovimentacoes(produtograde.Id);
-
-                    btnAdicionar.Enabled = true;
-                    btnCancelar.Enabled = true;
-
+                    MessageBox.Show("Dígito verificador inválido. Não foi possível encontrar a grade deste produto.");
+                    cProdutoGradeId = 0;
+                    Limpar();
                 }
-
-
-
             }
-            else
+            catch (Exception vE)
             {
-
-                MessageBox.Show("Dígito verificador inválido. Não foi possível encontrar a grade deste produto.");
-                cProdutoGradeId = 0;
-                Limpar();
-
-
+                Trace.WriteLine(DateTime.Now.ToString() + "FormEstoque.ExibirProdutoGrade()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            
 
 
         }
 
         public void CarregarMovimentacoes(int pProdutoGradeId)
         {
-
-
-            List<ModelLibrary.Estoque> estoque = ModelLibrary.MetodosDeposito.ObterListaEstoqueMovimentacao(pProdutoGradeId);
-
-            BindingListView<ModelLibrary.Estoque> view = new BindingListView<ModelLibrary.Estoque>(estoque);
-
-            grdEstoque.DataSource = view;
-
-
-            grdEstoque.Columns[0].Visible = false;
-            grdEstoque.Columns[1].HeaderText = "Tipo de Movimentação";
-            grdEstoque.Columns[1].Width = 150;
-            grdEstoque.Columns[3].Width = 500;
-            grdEstoque.Columns[4].Visible = false;
-            grdEstoque.Columns[5].Visible = false;
-            grdEstoque.Columns[6].Visible = false;
-
-
-            ModelLibrary.ProdutoGrade produtograde = ModelLibrary.MetodosDeposito.ObterProdutoGrade("", pProdutoGradeId);
-
-
-            if (produtograde != null)
+            try
             {
+                List<ModelLibrary.Estoque> estoque = ModelLibrary.MetodosDeposito.ObterListaEstoqueMovimentacao(pProdutoGradeId);
 
-                lblSaldo.Visible = true;
-                dlbSaldo.Visible = true;
-                dlbSaldo.Text = produtograde.Quantidade.ToString();
+                BindingListView<ModelLibrary.Estoque> view = new BindingListView<ModelLibrary.Estoque>(estoque);
+
+                grdEstoque.DataSource = view;
+
+
+                grdEstoque.Columns[0].Visible = false;
+                grdEstoque.Columns[1].HeaderText = "Tipo de Movimentação";
+                grdEstoque.Columns[1].Width = 150;
+                grdEstoque.Columns[3].Width = 500;
+                grdEstoque.Columns[4].Visible = false;
+                grdEstoque.Columns[5].Visible = false;
+                grdEstoque.Columns[6].Visible = false;
+
+
+                ModelLibrary.ProdutoGrade produtograde = ModelLibrary.MetodosDeposito.ObterProdutoGrade("", pProdutoGradeId);
+
+
+                if (produtograde != null)
+                {
+
+                    lblSaldo.Visible = true;
+                    dlbSaldo.Visible = true;
+                    dlbSaldo.Text = produtograde.Quantidade.ToString();
+                }
             }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "FormEstoque.CarregarMovimentacoes()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+            
 
 
 
@@ -174,72 +200,95 @@ namespace ConsignadoDeposito.Modal
 
         public void ExibirMovimentacao(int pEstoqueId)
         {
-
-            ModelLibrary.Estoque estoque = ModelLibrary.MetodosDeposito.ObterEstoqueMovimentacao(pEstoqueId);
-
-            if (estoque != null)
+            try
             {
+                ModelLibrary.Estoque estoque = ModelLibrary.MetodosDeposito.ObterEstoqueMovimentacao(pEstoqueId);
 
-                cEstoqueId = estoque.Id;
+                if (estoque != null)
+                {
 
-                ModelLibrary.ProdutoGrade produtograde = ModelLibrary.MetodosDeposito.ObterProdutoGrade("", estoque.ProdutoGradeId.Value);
-                ModelLibrary.Produto produto = ModelLibrary.MetodosDeposito.ObterProduto(produtograde.CodigoBarras);
+                    cEstoqueId = estoque.Id;
 
-                txtCodigoBarras.Text = produtograde.CodigoBarras + produtograde.Digito;
-                txtNome.Text = produto.Descricao;
-                
-                cbbTipoMovimentacao.Text = (estoque.TipoMovimentacao == "E")?"Entrada":"Saída";
-                txtQuantidade.Text = estoque.Quantidade.ToString();
-                txtObservacoes.Text = estoque.Observacao;
+                    ModelLibrary.ProdutoGrade produtograde = ModelLibrary.MetodosDeposito.ObterProdutoGrade("", estoque.ProdutoGradeId.Value);
+                    ModelLibrary.Produto produto = ModelLibrary.MetodosDeposito.ObterProduto(produtograde.CodigoBarras);
 
-                txtCodigoBarras.ReadOnly = true;
+                    txtCodigoBarras.Text = produtograde.CodigoBarras + produtograde.Digito;
+                    txtNome.Text = produto.Descricao;
 
-                btnAdicionar.Text = "Salvar";
-                btnAdicionar.Enabled = true;
-                btnCancelar.Enabled = true;
+                    cbbTipoMovimentacao.Text = (estoque.TipoMovimentacao == "E") ? "Entrada" : "Saída";
+                    txtQuantidade.Text = estoque.Quantidade.ToString();
+                    txtObservacoes.Text = estoque.Observacao;
 
-            } else
-            {
-                MessageBox.Show("Não foi possível carregar a Movimentação do Estoque. Por favor entre em contato com o administrador do sistema.", "Erro ao carregar título a receber", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Limpar();                
+                    txtCodigoBarras.ReadOnly = true;
+
+                    btnAdicionar.Text = "Salvar";
+                    btnAdicionar.Enabled = true;
+                    btnCancelar.Enabled = true;
+
+                }
+                else
+                {
+                    MessageBox.Show("Não foi possível carregar a Movimentação do Estoque. Por favor entre em contato com o administrador do sistema.", "Erro ao carregar título a receber", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Limpar();
+                }
             }
-            
-
-
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "FormEstoque.ExibirMovimentacao()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
         public void SalvarMovimentacao(int pEstoqueId = 0)
         {
+            try
+            {
+                string vTipoMovimentacao = (cbbTipoMovimentacao.Text == "Entrada") ? "E" : "S";
 
-            string vTipoMovimentacao = (cbbTipoMovimentacao.Text == "Entrada") ? "E" : "S";
-
-            ModelLibrary.MetodosDeposito.SalvarEstoqueMovimentacao(pEstoqueId, cProdutoGradeId, vTipoMovimentacao, Convert.ToDouble(txtQuantidade.Text), txtObservacoes.Text);
+                ModelLibrary.MetodosDeposito.SalvarEstoqueMovimentacao(pEstoqueId, cProdutoGradeId, vTipoMovimentacao, Convert.ToDouble(txtQuantidade.Text), txtObservacoes.Text);
 
 
-            MessageBox.Show("Pagamento alterado com sucesso!", "Alterar pagamento", MessageBoxButtons.OK, MessageBoxIcon.Information);            
+                MessageBox.Show("Pagamento alterado com sucesso!", "Alterar pagamento", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            CarregarMovimentacoes(cProdutoGradeId);
+                CarregarMovimentacoes(cProdutoGradeId);
 
-            txtQuantidade.Text = "";
-            cbbTipoMovimentacao.SelectedIndex = -1;
-            txtObservacoes.Text = "";
+                txtQuantidade.Text = "";
+                cbbTipoMovimentacao.SelectedIndex = -1;
+                txtObservacoes.Text = "";
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "FormEstoque.SalvarMovimentacao()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            
         }
 
         public void ExcluirMovimentacao(int pEstoqueId)
         {
+
+
             if (MessageBox.Show("Deseja realmente excluir essa movimentação?", "ATENÇÃO! Exclusão de Movimentação", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
 
-
-                ModelLibrary.MetodosDeposito.ExcluirEstoqueMovimentacao(pEstoqueId);
+                try
+                {
+                    ModelLibrary.MetodosDeposito.ExcluirEstoqueMovimentacao(pEstoqueId);
                 
-
-                MessageBox.Show("Movimentação Excluída com sucesso!", "Excluir movimentação", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
-
-                CarregarMovimentacoes(cProdutoGradeId);
-
+                    MessageBox.Show("Movimentação Excluída com sucesso!", "Excluir movimentação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
+                    CarregarMovimentacoes(cProdutoGradeId);
+                }
+                catch (Exception vE)
+                {
+                    Trace.WriteLine(DateTime.Now.ToString() + "FormEstoque.ExcluirMovimentacao()");
+                    Trace.TraceError(vE.Message);
+                    MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
             }
         }

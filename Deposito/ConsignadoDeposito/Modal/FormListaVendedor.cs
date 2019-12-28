@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -74,18 +75,32 @@ namespace ConsignadoDeposito.Modal
         public void ValidarCPFCnpj(string pCPFCnpj, object sender, System.ComponentModel.CancelEventArgs e)
         {
 
-            if (pCPFCnpj != "")
+            try
             {
-                //verificar se o CPF/CNPJ é valido
-                if (!ControllerLibrary.Funcoes.CpfCnpjUtils.IsValid(pCPFCnpj))
+                if (pCPFCnpj != "")
                 {
-                    MessageBox.Show("CPF/CNPJ Inválido!");
-                    e.Cancel = true;
-                    
-                } 
+                    //verificar se o CPF/CNPJ é valido
+                    if (!ControllerLibrary.Funcoes.CpfCnpjUtils.IsValid(pCPFCnpj))
+                    {
+                        MessageBox.Show("CPF/CNPJ Inválido!");
+                        e.Cancel = true;
 
-                
-            } 
+                    }
+
+
+                }
+
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "FormListaVendedor.ValidarCPFCnpj()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+
 
 
         }
@@ -105,26 +120,56 @@ namespace ConsignadoDeposito.Modal
 
         private void CarregarListaVendedor()
         {
-            
-            List<ModelLibrary.ListaVendedor> vendedor = ModelLibrary.MetodosDeposito.PesquisarVendedor((txtCodigo.Text == "")?0: Convert.ToInt32(txtCodigo.Text), txtCPFCnpj.Text, txtNome.Text);
 
-            BindingListView<ModelLibrary.ListaVendedor> view = new BindingListView<ModelLibrary.ListaVendedor>(vendedor);
+            try
+            {
+                List<ModelLibrary.ListaVendedor> vendedor = ModelLibrary.MetodosDeposito.PesquisarVendedor((txtCodigo.Text == "") ? 0 : Convert.ToInt32(txtCodigo.Text), txtCPFCnpj.Text, txtNome.Text);
 
-            grdVendedor.DataSource = view;
+                BindingListView<ModelLibrary.ListaVendedor> view = new BindingListView<ModelLibrary.ListaVendedor>(vendedor);
 
-
-
-            grdVendedor.Columns[0].Width = 20;
-            grdVendedor.Columns[1].Width = 230;
-            grdVendedor.Columns[2].Width = 90;
-            grdVendedor.Columns[3].Width = 110;
-            grdVendedor.Columns[4].Width = 30;
-            grdVendedor.Columns[5].Width = 230;
+                grdVendedor.DataSource = view;
 
 
 
+                grdVendedor.Columns[0].Width = 20;
+                grdVendedor.Columns[1].Width = 230;
+                grdVendedor.Columns[2].Width = 90;
+                grdVendedor.Columns[3].Width = 110;
+                grdVendedor.Columns[4].Width = 30;
+                grdVendedor.Columns[5].Width = 230;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "FormListaVendedor.CarregarListaVendedor()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
 
+
+
+
+
+
+
+        }
+
+        public void SelecionarVendedor()
+        {
+
+            try
+            {
+                this.cVendedorId = Convert.ToInt32(grdVendedor.CurrentRow.Cells["Id"].Value);
+                this.cVendedorNome = grdVendedor.CurrentRow.Cells["Nome"].Value.ToString();
+
+                btnConfirmar.Enabled = true;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "FormListaVendedor.SelecionarVendedor()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
@@ -143,10 +188,7 @@ namespace ConsignadoDeposito.Modal
 
         private void grdVendedor_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.cVendedorId = Convert.ToInt32(grdVendedor.CurrentRow.Cells["Id"].Value);
-            this.cVendedorNome = grdVendedor.CurrentRow.Cells["Nome"].Value.ToString();
-
-            btnConfirmar.Enabled = true;
+            SelecionarVendedor();
         }
 
         private void grdVendedor_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -32,26 +33,44 @@ namespace ConsignadoDeposito.Modal
 
         public void CarregarListaProdutos()
         {
-            cbbPesquisaProduto.DataSource = ModelLibrary.MetodosDeposito.ObterListaProduto();
-            cbbPesquisaProduto.DisplayMember = "Descricao";
-            cbbPesquisaProduto.ValueMember = "Id";
-            cbbPesquisaProduto.Invalidate();
-            cbbPesquisaProduto.SelectedIndex = -1;
+            try
+            {
+                cbbPesquisaProduto.DataSource = ModelLibrary.MetodosDeposito.ObterListaProduto();
+                cbbPesquisaProduto.DisplayMember = "Descricao";
+                cbbPesquisaProduto.ValueMember = "Id";
+                cbbPesquisaProduto.Invalidate();
+                cbbPesquisaProduto.SelectedIndex = -1;
 
 
-            cbbPesquisaProduto.SelectedIndexChanged += PesquisarProduto;
-
+                cbbPesquisaProduto.SelectedIndexChanged += PesquisarProduto;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "FormProduto.CarregarListaCarga()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
 
         public void CarregarListaCategoria()
         {
-            cbbCategoria.DataSource = ModelLibrary.MetodosDeposito.ObterListaCategorias();
-            cbbCategoria.DisplayMember = "Descricao";
-            cbbCategoria.ValueMember = "Id";
-            cbbCategoria.Invalidate();
-            cbbCategoria.SelectedIndex = -1;
+            try
+            {
+                cbbCategoria.DataSource = ModelLibrary.MetodosDeposito.ObterListaCategorias();
+                cbbCategoria.DisplayMember = "Descricao";
+                cbbCategoria.ValueMember = "Id";
+                cbbCategoria.Invalidate();
+                cbbCategoria.SelectedIndex = -1;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + " FormProduto.CarregarListaCategoria()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
 
         }
 
@@ -59,67 +78,101 @@ namespace ConsignadoDeposito.Modal
 
         public void CarregarListaFornecedor()
         {
-            cbbFornecedor.DataSource = ModelLibrary.MetodosDeposito.ObterListaFornecedores();
-            cbbFornecedor.DisplayMember = "NomeFantasia";
-            cbbFornecedor.ValueMember = "Id";
-            cbbFornecedor.Invalidate();
-            cbbFornecedor.SelectedIndex = -1;
+            try
+            {
+                cbbFornecedor.DataSource = ModelLibrary.MetodosDeposito.ObterListaFornecedores();
+                cbbFornecedor.DisplayMember = "NomeFantasia";
+                cbbFornecedor.ValueMember = "Id";
+                cbbFornecedor.Invalidate();
+                cbbFornecedor.SelectedIndex = -1;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + " FormProduto.CarregarListaFornecedor()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
 
         public void CarregarListaCor()
         {
-            cbbGradeCor.DataSource = ModelLibrary.MetodosDeposito.ObterListaCores();
-            cbbGradeCor.DisplayMember = "Descricao";
-            cbbGradeCor.ValueMember = "Abreviatura";
-            cbbGradeCor.Invalidate();
-            cbbGradeCor.SelectedIndex = -1;
+            try
+            {
+                cbbGradeCor.DataSource = ModelLibrary.MetodosDeposito.ObterListaCores();
+                cbbGradeCor.DisplayMember = "Descricao";
+                cbbGradeCor.ValueMember = "Abreviatura";
+                cbbGradeCor.Invalidate();
+                cbbGradeCor.SelectedIndex = -1;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + " FormProduto.CarregarListaCor()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
 
         public void CarregarListaTamanho()
         {
-            cbbGradeTamanho.DataSource = ModelLibrary.MetodosDeposito.ObterListaTamanhos();
-            cbbGradeTamanho.DisplayMember = "Descricao";
-            cbbGradeTamanho.ValueMember = "Abreviatura";
-            cbbGradeTamanho.Invalidate();
-            cbbGradeTamanho.SelectedIndex = -1;
+            try
+            {
+                cbbGradeTamanho.DataSource = ModelLibrary.MetodosDeposito.ObterListaTamanhos();
+                cbbGradeTamanho.DisplayMember = "Descricao";
+                cbbGradeTamanho.ValueMember = "Abreviatura";
+                cbbGradeTamanho.Invalidate();
+                cbbGradeTamanho.SelectedIndex = -1;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + " FormProduto.CarregarListaTamanho()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
 
         public void CarregarProdutoGrade()
         {
+            try
+            {
 
+                List<ModelLibrary.ListaProdutoGrade> produtosgrade = ModelLibrary.MetodosDeposito.ObterListaProdutoGrade(cProdutoId);
+
+                BindingListView<ModelLibrary.ListaProdutoGrade> view = new BindingListView<ModelLibrary.ListaProdutoGrade>(produtosgrade);
+
+
+                grdProdutoGrade.DataSource = view;
+
+                grdProdutoGrade.Columns[0].Visible = false;
+
+
+                grdProdutoGrade.Columns[3].Width = 300;
+                grdProdutoGrade.Columns[4].Width = 300;
+
+                grdProdutoGrade.Columns[5].DefaultCellStyle.Format = "c";
+                grdProdutoGrade.Columns[6].DefaultCellStyle.Format = "c";
+
+                grdProdutoGrade.Columns[5].HeaderText = "Valor Saída";
+                grdProdutoGrade.Columns[6].HeaderText = "Valor Custo";
+
+                grdProdutoGrade.Columns[7].Visible = false;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + " FormProduto.CarregarProdutoGrade()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             //grdProdutoGrade
 
 
-            List<ModelLibrary.ListaProdutoGrade> produtosgrade = ModelLibrary.MetodosDeposito.ObterListaProdutoGrade(cProdutoId);
-
-            BindingListView<ModelLibrary.ListaProdutoGrade> view = new BindingListView<ModelLibrary.ListaProdutoGrade>(produtosgrade);
-            
-
-            grdProdutoGrade.DataSource = view;
-
-            grdProdutoGrade.Columns[0].Visible = false;
 
 
-            grdProdutoGrade.Columns[3].Width = 300;
-            grdProdutoGrade.Columns[4].Width = 300;
-
-            grdProdutoGrade.Columns[5].DefaultCellStyle.Format = "c";
-            grdProdutoGrade.Columns[6].DefaultCellStyle.Format = "c";
-
-            grdProdutoGrade.Columns[5].HeaderText = "Valor Saída";
-            grdProdutoGrade.Columns[6].HeaderText = "Valor Custo";
-
-            grdProdutoGrade.Columns[7].Visible = false;
-
-
-
-        }
-
-        public void CarregarFormulario()
-        {
 
         }
 
@@ -171,234 +224,287 @@ namespace ConsignadoDeposito.Modal
         {
 
             if (cbbPesquisaProduto.SelectedIndex >= 0) {
-                ModelLibrary.Produto produto = (ModelLibrary.Produto)cbbPesquisaProduto.SelectedItem;
-                ExibirProduto(produto.CodigoBarras);
-                txtPesquisaCodProduto.Text = "";
+
+                try
+                {
+                    ModelLibrary.Produto produto = (ModelLibrary.Produto)cbbPesquisaProduto.SelectedItem;
+                    ExibirProduto(produto.CodigoBarras);
+                    txtPesquisaCodProduto.Text = "";
+                }
+                catch (Exception vE)
+                {
+                    Trace.WriteLine(DateTime.Now.ToString() + " FormProduto.PesquisarProduto()");
+                    Trace.TraceError(vE.Message);
+                    MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
             }
-
-
-            /*
-            try
-            {
-
-            }
-            catch
-            {
-                txtPesquisaCodProduto.Text = "";
-            }*/
         }
 
         public void ExibirProduto(string pCodigo)
         {
-
-            ModelLibrary.Produto produto = ModelLibrary.MetodosDeposito.ObterProduto(pCodigo);
-
-            if (produto != null)
+            try
             {
+                ModelLibrary.Produto produto = ModelLibrary.MetodosDeposito.ObterProduto(pCodigo);
 
-
-
-                cbbCategoria.SelectedIndex = -1;
-                cbbFornecedor.SelectedIndex = -1;
-
-                txtNomeProduto.Text = produto.Descricao;
-
-                cbbCategoria.SelectedValue = (produto.CategoriaId == null) ? -1 : produto.CategoriaId.Value;
-
-                cbbFornecedor.SelectedValue = (produto.FornecedorId == null)?-1: produto.FornecedorId.Value;
-
-                txtUnidade.Text = produto.Unidade.Trim();
-                txtCodigoBarras.Text = produto.CodigoBarras;
-                txtDigitoVerificador.Text = produto.Digito;
-                cProdutoId = produto.Id;
-                cCodigoBarras = produto.CodigoBarras;
-
-
-                if (produto.Status == "0")
+                if (produto != null)
                 {
 
-                    MessageBox.Show("Este produto foi excluído e não pode ser editado.");
+                    cbbCategoria.SelectedIndex = -1;
+                    cbbFornecedor.SelectedIndex = -1;
+
+                    txtNomeProduto.Text = produto.Descricao;
+
+                    cbbCategoria.SelectedValue = (produto.CategoriaId == null) ? -1 : produto.CategoriaId.Value;
+
+                    cbbFornecedor.SelectedValue = (produto.FornecedorId == null) ? -1 : produto.FornecedorId.Value;
+
+                    txtUnidade.Text = produto.Unidade.Trim();
+                    txtCodigoBarras.Text = produto.CodigoBarras;
+                    txtDigitoVerificador.Text = produto.Digito;
+                    cProdutoId = produto.Id;
+                    cCodigoBarras = produto.CodigoBarras;
 
 
-                    grpProduto.Enabled = false;
-                    pnlProdutoItem.Enabled = false;
-                    pnlProdutoGrade.Enabled = false;
+                    if (produto.Status == "0")
+                    {
 
-                    btnCancelarProduto.Enabled = false;
-                    btnSalvarProduto.Enabled = false;
-                    btnExcluirProduto.Enabled = false;
+                        MessageBox.Show("Este produto foi excluído e não pode ser editado.");
 
-                    btnGradeConfirmar.Enabled = false;
-                    btnGradeCancelar.Enabled = false;
 
+                        grpProduto.Enabled = false;
+                        pnlProdutoItem.Enabled = false;
+                        pnlProdutoGrade.Enabled = false;
+
+                        btnCancelarProduto.Enabled = false;
+                        btnSalvarProduto.Enabled = false;
+                        btnExcluirProduto.Enabled = false;
+
+                        btnGradeConfirmar.Enabled = false;
+                        btnGradeCancelar.Enabled = false;
+
+                    }
+                    else
+                    {
+                        grpProduto.Enabled = true;
+                        pnlProdutoItem.Enabled = true;
+                        pnlProdutoGrade.Enabled = true;
+
+                        btnCancelarProduto.Enabled = true;
+                        btnSalvarProduto.Enabled = true;
+                        btnExcluirProduto.Enabled = true;
+
+                        btnGradeConfirmar.Enabled = true;
+                        btnGradeCancelar.Enabled = true;
+                    }
+
+                    CarregarProdutoGrade();
                 }
                 else
                 {
-                    grpProduto.Enabled = true;
-                    pnlProdutoItem.Enabled = true;
-                    pnlProdutoGrade.Enabled = true;
 
-                    btnCancelarProduto.Enabled = true;
-                    btnSalvarProduto.Enabled = true;
-                    btnExcluirProduto.Enabled = true;
+                    MessageBox.Show("Produto não encontrado", "Pesquisa Produto", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-                    btnGradeConfirmar.Enabled = true;
-                    btnGradeCancelar.Enabled = true;
                 }
-
-
-
-
-                CarregarProdutoGrade();
-
-
-                
-
-
-
-
-            } else
-            {
-
-                MessageBox.Show("Produto não encontrado", "Pesquisa Produto", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
             }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + " FormProduto.ExibirProduto()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
 
         }
 
         public void SalvarProduto()
         {
-
-
-            Cursor.Current = Cursors.WaitCursor;
-
-            btnSalvarProduto.Text = "Salvando...";
-            btnSalvarProduto.Enabled = false;
-            btnCancelarProduto.Enabled = false;
-            btnExcluirProduto.Enabled = false;
-
-
-            ModelLibrary.Produto produto = new ModelLibrary.Produto();
-
-            produto.Descricao = txtNomeProduto.Text;
-            produto.Unidade = txtUnidade.Text;
-            produto.CodigoBarras = txtCodigoBarras.Text;
-            produto.Digito = txtDigitoVerificador.Text;
-            produto.CategoriaId = ((ModelLibrary.Categoria)cbbCategoria.SelectedItem).Id;
-            produto.FornecedorId = ((ModelLibrary.Fornecedor)cbbFornecedor.SelectedItem).Id;
-
-            if (cProdutoId == 0) // novo produto
+            try
             {
+                Cursor.Current = Cursors.WaitCursor;
 
-                ModelLibrary.MetodosDeposito.SalvarProduto("Create", produto);
-                ExibirProduto(txtCodigoBarras.Text);
+                btnSalvarProduto.Text = "Salvando...";
+                btnSalvarProduto.Enabled = false;
+                btnCancelarProduto.Enabled = false;
+                btnExcluirProduto.Enabled = false;
 
-            } else
+
+                ModelLibrary.Produto produto = new ModelLibrary.Produto();
+
+                produto.Descricao = txtNomeProduto.Text;
+                produto.Unidade = txtUnidade.Text;
+                produto.CodigoBarras = txtCodigoBarras.Text;
+                produto.Digito = txtDigitoVerificador.Text;
+                produto.CategoriaId = ((ModelLibrary.Categoria)cbbCategoria.SelectedItem).Id;
+                produto.FornecedorId = ((ModelLibrary.Fornecedor)cbbFornecedor.SelectedItem).Id;
+
+                if (cProdutoId == 0) // novo produto
+                {
+
+                    ModelLibrary.MetodosDeposito.SalvarProduto("Create", produto);
+                    ExibirProduto(txtCodigoBarras.Text);
+
+                }
+                else
+                {
+                    ModelLibrary.MetodosDeposito.SalvarProduto("Update", produto, cProdutoId);
+
+                }
+
+                cCodigoBarras = txtCodigoBarras.Text;
+
+
+                btnSalvarProduto.Text = "Salvar";
+                btnSalvarProduto.Enabled = true;
+                btnCancelarProduto.Enabled = true;
+                btnExcluirProduto.Enabled = true;
+
+
+                CarregarProdutoGrade();
+
+                Cursor.Current = Cursors.Default;
+            }
+            catch (Exception vE)
             {
-                ModelLibrary.MetodosDeposito.SalvarProduto("Update", produto, cProdutoId);
-
+                Trace.WriteLine(DateTime.Now.ToString() + " FormProduto.SalvarProduto()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            cCodigoBarras = txtCodigoBarras.Text;
-
             
-            btnSalvarProduto.Text = "Salvar";
-            btnSalvarProduto.Enabled = true;
-            btnCancelarProduto.Enabled = true;
-            btnExcluirProduto.Enabled = true;
-
-
-            CarregarProdutoGrade();
-
-            Cursor.Current = Cursors.Default;
 
         }
 
 
         public void ExcluirProduto()
         {
+            try
+            {
+                ModelLibrary.MetodosDeposito.ExcluirProduto(cProdutoId);
+                MessageBox.Show("Produto Excluído com Sucesso!");
+                LimparFormulario();
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + " FormProduto.ExcluirProduto()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-            ModelLibrary.MetodosDeposito.ExcluirProduto(cProdutoId);
-            MessageBox.Show("Produto Excluído com Sucesso!");
-            LimparFormulario();
+
 
         }
 
 
         public void LimparProdutoGrade()
         {
-            cProdutoGradeId = 0;
+            try
+            {
+                cProdutoGradeId = 0;
 
 
-            int maxDV = ModelLibrary.MetodosDeposito.ObterUltimoProdutoGrade(cProdutoId);
+                int maxDV = ModelLibrary.MetodosDeposito.ObterUltimoProdutoGrade(cProdutoId);
 
-            txtGradeDV.Text = maxDV.ToString(); // obter max de produtograde
-            cbbGradeCor.SelectedIndex = -1;
-            cbbGradeTamanho.SelectedIndex = -1;
-            txtValorCusto.Text = "";
-            txtValorSaida.Text = "";
+                txtGradeDV.Text = maxDV.ToString(); // obter max de produtograde
+                cbbGradeCor.SelectedIndex = -1;
+                cbbGradeTamanho.SelectedIndex = -1;
+                txtValorCusto.Text = "";
+                txtValorSaida.Text = "";
 
-            cGradeDV = "";
+                cGradeDV = "";
 
-            btnGradeConfirmar.Enabled = true;
-            btnGradeCancelar.Enabled = true;
+                btnGradeConfirmar.Enabled = true;
+                btnGradeCancelar.Enabled = true;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + " FormProduto.LimparProdutoGrade()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
 
         }
 
         public void ExibirProdutoGrade()
         {
+            try
+            {
+                cProdutoGradeId = Convert.ToInt32(grdProdutoGrade.CurrentRow.Cells["Id"].Value);
 
-            cProdutoGradeId = Convert.ToInt32(grdProdutoGrade.CurrentRow.Cells["Id"].Value);
+                txtGradeDV.Text = grdProdutoGrade.CurrentRow.Cells["Digito"].Value.ToString();
+                cbbGradeCor.SelectedValue = grdProdutoGrade.CurrentRow.Cells["Cor"].Value.ToString();
+                cbbGradeTamanho.SelectedValue = grdProdutoGrade.CurrentRow.Cells["Tamanho"].Value.ToString().Trim();
 
-            txtGradeDV.Text = grdProdutoGrade.CurrentRow.Cells["Digito"].Value.ToString();
-            cbbGradeCor.SelectedValue = grdProdutoGrade.CurrentRow.Cells["Cor"].Value.ToString();
-            cbbGradeTamanho.SelectedValue = grdProdutoGrade.CurrentRow.Cells["Tamanho"].Value.ToString().Trim();
+                txtValorCusto.Text = (grdProdutoGrade.CurrentRow.Cells["ValorCusto"].Value != null) ? grdProdutoGrade.CurrentRow.Cells["ValorCusto"].Value.ToString() : "";
+                txtValorSaida.Text = (grdProdutoGrade.CurrentRow.Cells["ValorSaida"].Value != null) ? grdProdutoGrade.CurrentRow.Cells["ValorSaida"].Value.ToString() : "";
+
+
+                btnGradeConfirmar.Enabled = true;
+                btnGradeCancelar.Enabled = true;
+
+                cGradeDV = txtGradeDV.Text;
+                cDVChanged = false;
+
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + " FormProduto.ExibirProdutoGrade()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             
-            txtValorCusto.Text = (grdProdutoGrade.CurrentRow.Cells["ValorCusto"].Value!= null)?grdProdutoGrade.CurrentRow.Cells["ValorCusto"].Value.ToString():"";
-            txtValorSaida.Text = (grdProdutoGrade.CurrentRow.Cells["ValorSaida"].Value != null) ? grdProdutoGrade.CurrentRow.Cells["ValorSaida"].Value.ToString() : "";
-
-
-            btnGradeConfirmar.Enabled = true;
-            btnGradeCancelar.Enabled = true;
-
-            cGradeDV = txtGradeDV.Text;
-            cDVChanged = false;
-
 
 
         }
 
         public void SalvarProdutoGrade()
         {
+            try
+            {
+                ModelLibrary.ProdutoGrade produtograde = new ModelLibrary.ProdutoGrade();
 
-            ModelLibrary.ProdutoGrade produtograde = new ModelLibrary.ProdutoGrade();
-
-            produtograde.CodigoBarras = cCodigoBarras;
-            produtograde.Digito = txtGradeDV.Text;
-            produtograde.ProdutoId = cProdutoId;
-            produtograde.Tamanho = cbbGradeTamanho.SelectedValue.ToString();
-            produtograde.Cor = cbbGradeCor.SelectedValue.ToString();
-            produtograde.ValorCusto = (txtValorCusto.Text != "")?Convert.ToDouble(txtValorCusto.Text):0;
-            produtograde.ValorSaida = (txtValorSaida.Text != "")?Convert.ToDouble(txtValorSaida.Text):0;
-            produtograde.DataInicial = DateTime.Now;
-            produtograde.PesoBruto = 0;
-            produtograde.PesoLiquido = 0;
+                produtograde.CodigoBarras = cCodigoBarras;
+                produtograde.Digito = txtGradeDV.Text;
+                produtograde.ProdutoId = cProdutoId;
+                produtograde.Tamanho = cbbGradeTamanho.SelectedValue.ToString();
+                produtograde.Cor = cbbGradeCor.SelectedValue.ToString();
+                produtograde.ValorCusto = (txtValorCusto.Text != "") ? Convert.ToDouble(txtValorCusto.Text) : 0;
+                produtograde.ValorSaida = (txtValorSaida.Text != "") ? Convert.ToDouble(txtValorSaida.Text) : 0;
+                produtograde.DataInicial = DateTime.Now;
+                produtograde.PesoBruto = 0;
+                produtograde.PesoLiquido = 0;
 
 
-            ModelLibrary.MetodosDeposito.SalvarProdutoGrade(produtograde, cProdutoGradeId);
+                ModelLibrary.MetodosDeposito.SalvarProdutoGrade(produtograde, cProdutoGradeId);
 
-            cGradeDV = txtGradeDV.Text;
-            CarregarProdutoGrade();
-
+                cGradeDV = txtGradeDV.Text;
+                CarregarProdutoGrade();
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + " FormProduto.SalvarProdutoGrade()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
 
         }
 
         public void ExcluirProdutoGrade()
         {
+            try
+            {
+                ModelLibrary.MetodosDeposito.ProdutoGradeExcluir(Convert.ToInt32(grdProdutoGrade.CurrentRow.Cells["Id"].Value));
+                CarregarProdutoGrade();
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + " FormProduto.ExcluirProdutoGrade()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-            ModelLibrary.MetodosDeposito.ProdutoGradeExcluir(Convert.ToInt32(grdProdutoGrade.CurrentRow.Cells["Id"].Value));
-            CarregarProdutoGrade();
 
         }
 
@@ -562,16 +668,25 @@ namespace ConsignadoDeposito.Modal
 
         private void grdProdutoGrade_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-
-            Font fontriscada = new Font(FontFamily.GenericSansSerif, 8, FontStyle.Strikeout, GraphicsUnit.Point);
-
-
-            if (grdProdutoGrade.Rows[e.RowIndex].Cells["DataFinal"].Value != null)
+            try
             {
-                grdProdutoGrade.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
-                grdProdutoGrade.Rows[e.RowIndex].DefaultCellStyle.Font = fontriscada;
+                Font fontriscada = new Font(FontFamily.GenericSansSerif, 8, FontStyle.Strikeout, GraphicsUnit.Point);
 
+
+                if (grdProdutoGrade.Rows[e.RowIndex].Cells["DataFinal"].Value != null)
+                {
+                    grdProdutoGrade.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
+                    grdProdutoGrade.Rows[e.RowIndex].DefaultCellStyle.Font = fontriscada;
+
+                }
             }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + " FormProduto.grdProdutoGrade_RowPostPaint()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void btnFechar_Click(object sender, EventArgs e)

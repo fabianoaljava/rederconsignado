@@ -76,7 +76,7 @@ namespace ConsignadoDeposito
 
            } catch(Exception vE)
             {
-                Trace.WriteLine("FormLogin.btnLogin_Click");
+                Trace.WriteLine(DateTime.Now.ToString() + " FormLogin.btnLogin_Click");
                 Trace.TraceError(vE.Message);
                 MessageBox.Show("Ocorreu um erro ao processar a autenticação do usuário. Caso o problema persista, entre em contato com o suporte técnico.", "Reder Software", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 btnLogin.Enabled = true;

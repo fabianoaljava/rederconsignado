@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -30,129 +31,165 @@ namespace ConsignadoDeposito.Modal
 
         public void AdicionarTitulo()
         {
-            //insert AReceber
 
 
-            ModelLibrary.Receber receber = new ModelLibrary.Receber();
-
-            receber.VendedorId = Convert.ToInt32(txtVendedorId.Text);
-            receber.CargaId = Convert.ToInt32(txtCargaId.Text);
-            receber.Documento = Convert.ToInt32(txtDocumento.Text);
-            receber.Serie = txtSerie.Text;
-            receber.ValorNF = Convert.ToDouble(txtValorNF.Text);
-            receber.ValorDuplicata = Convert.ToDouble(txtValorDuplicata.Text);
-            receber.ValorAReceber = Convert.ToDouble(txtValorAReceber.Text);
-            receber.DataEmissao = cbbDataEmissao.Value;
-            receber.DataLancamento = cbbDataLancamento.Value;
-            receber.DataVencimento = cbbDataVencimento.Value;
-            receber.Observacoes = txtObservacoes.Text;
-            receber.Status = "0";
+            try
+            {
+                //insert AReceber
 
 
-            ModelLibrary.MetodosDeposito.InserirReceber(receber);
+                ModelLibrary.Receber receber = new ModelLibrary.Receber();
 
-            MessageBox.Show("Título incluído com sucesso!", "Incluir título a receber", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                receber.VendedorId = Convert.ToInt32(txtVendedorId.Text);
+                receber.CargaId = Convert.ToInt32(txtCargaId.Text);
+                receber.Documento = Convert.ToInt32(txtDocumento.Text);
+                receber.Serie = txtSerie.Text;
+                receber.ValorNF = Convert.ToDouble(txtValorNF.Text);
+                receber.ValorDuplicata = Convert.ToDouble(txtValorDuplicata.Text);
+                receber.ValorAReceber = Convert.ToDouble(txtValorAReceber.Text);
+                receber.DataEmissao = cbbDataEmissao.Value;
+                receber.DataLancamento = cbbDataLancamento.Value;
+                receber.DataVencimento = cbbDataVencimento.Value;
+                receber.Observacoes = txtObservacoes.Text;
+                receber.Status = "0";
 
-            localDepositoForm.cRetorno.CarregarContasAReceber();
 
-            this.Close();
+                ModelLibrary.MetodosDeposito.InserirReceber(receber);
+
+                MessageBox.Show("Título incluído com sucesso!", "Incluir título a receber", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                localDepositoForm.cRetorno.CarregarContasAReceber();
+
+                this.Close();
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "FormAReceber.AdicionarTitulo()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+            
         }
 
         public void ExibirTitulo()
         {
-            if (cModo == "Update") // get the current and check if is selected {
+
+            try
             {
-                //load and show data from AReceber
-
-                cAReceberId = Convert.ToInt32(localDepositoForm.grdContasAReceber.CurrentRow.Cells["Id"].Value);
-
-
-                ModelLibrary.Receber receber = ModelLibrary.MetodosDeposito.ObterAReceber(cAReceberId);
-
-                if (receber != null)
+                if (cModo == "Update") // get the current and check if is selected {
                 {
+                    //load and show data from AReceber
 
-                    txtVendedorId.Text = receber.VendedorId.ToString();
+                    cAReceberId = Convert.ToInt32(localDepositoForm.grdContasAReceber.CurrentRow.Cells["Id"].Value);
 
-                    ModelLibrary.Vendedor vendedor = ModelLibrary.MetodosDeposito.ObterVendedor(Convert.ToUInt32(receber.VendedorId));
 
-                    txtNome.Text = (vendedor != null) ? vendedor.Nome : "";
+                    ModelLibrary.Receber receber = ModelLibrary.MetodosDeposito.ObterAReceber(cAReceberId);
 
-                    txtDocumento.Text = receber.Documento.ToString();
-                    txtSerie.Text = receber.Serie;
-
-                    txtCargaId.Text = receber.CargaId.ToString();
-
-                    txtValorNF.Text = receber.ValorNF.ToString();
-
-                    txtValorDuplicata.Text = receber.ValorDuplicata.ToString();
-
-                    txtValorAReceber.Text = receber.ValorAReceber.ToString();
-
-                    cbbDataEmissao.Value = receber.DataEmissao.Value;
-                    cbbDataLancamento.Value = receber.DataLancamento.Value;
-                    cbbDataVencimento.Value = receber.DataVencimento.Value;
-
-                    if (receber.DataPagamento != null)
+                    if (receber != null)
                     {
-                        lblDataPagamento.Visible = true;
-                        cbbDataPagamento.Visible = true;
-                        cbbDataPagamento.Value = receber.DataPagamento.Value;
+
+                        txtVendedorId.Text = receber.VendedorId.ToString();
+
+                        ModelLibrary.Vendedor vendedor = ModelLibrary.MetodosDeposito.ObterVendedor(Convert.ToUInt32(receber.VendedorId));
+
+                        txtNome.Text = (vendedor != null) ? vendedor.Nome : "";
+
+                        txtDocumento.Text = receber.Documento.ToString();
+                        txtSerie.Text = receber.Serie;
+
+                        txtCargaId.Text = receber.CargaId.ToString();
+
+                        txtValorNF.Text = receber.ValorNF.ToString();
+
+                        txtValorDuplicata.Text = receber.ValorDuplicata.ToString();
+
+                        txtValorAReceber.Text = receber.ValorAReceber.ToString();
+
+                        cbbDataEmissao.Value = receber.DataEmissao.Value;
+                        cbbDataLancamento.Value = receber.DataLancamento.Value;
+                        cbbDataVencimento.Value = receber.DataVencimento.Value;
+
+                        if (receber.DataPagamento != null)
+                        {
+                            lblDataPagamento.Visible = true;
+                            cbbDataPagamento.Visible = true;
+                            cbbDataPagamento.Value = receber.DataPagamento.Value;
+                        }
+
+
+
+                        txtObservacoes.Text = receber.Observacoes;
+
+                        btnConfirmar.Enabled = true;
+
+
                     }
-                    
+                    else
+                    {
+
+                        MessageBox.Show("Não foi possível carregar o Título a Receber. Por favor entre em contato com o administrador do sistema.", "Erro ao carregar título a receber", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        LimparTitulo();
+                        this.Close();
+
+                    }
 
 
-                    txtObservacoes.Text = receber.Observacoes;
 
-                    btnConfirmar.Enabled = true;
-
-
-                } else
-                {
-
-                    MessageBox.Show("Não foi possível carregar o Título a Receber. Por favor entre em contato com o administrador do sistema.", "Erro ao carregar título a receber", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    LimparTitulo();
-                    this.Close();
 
                 }
+                else
+                {
+                    LimparTitulo();
 
-
-
-
-            } else
-            {
-                LimparTitulo();
-
-                btnConfirmar.Enabled = true;
-
-
-
+                    btnConfirmar.Enabled = true;
+                }
             }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "FormAReceber.ExibirTitulo()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+            
         }
 
         public void AlterarTitulo()
         {
-            //Update AReceber
+            try
+            {
+                //Update AReceber
 
-            ModelLibrary.Receber receber = new ModelLibrary.Receber();
+                ModelLibrary.Receber receber = new ModelLibrary.Receber();
 
-            receber.Id = cAReceberId;
-            receber.ValorNF = Convert.ToDouble(txtValorNF.Text);
-            receber.ValorDuplicata = Convert.ToDouble(txtValorDuplicata.Text);
-            receber.ValorAReceber = Convert.ToDouble(txtValorAReceber.Text);
-            receber.DataEmissao = cbbDataEmissao.Value;
-            receber.DataLancamento = cbbDataLancamento.Value;
-            receber.DataVencimento = cbbDataVencimento.Value;
-            receber.Observacoes = txtObservacoes.Text;
+                receber.Id = cAReceberId;
+                receber.ValorNF = Convert.ToDouble(txtValorNF.Text);
+                receber.ValorDuplicata = Convert.ToDouble(txtValorDuplicata.Text);
+                receber.ValorAReceber = Convert.ToDouble(txtValorAReceber.Text);
+                receber.DataEmissao = cbbDataEmissao.Value;
+                receber.DataLancamento = cbbDataLancamento.Value;
+                receber.DataVencimento = cbbDataVencimento.Value;
+                receber.Observacoes = txtObservacoes.Text;
 
 
-            ModelLibrary.MetodosDeposito.AtualizarReceber(receber);
+                ModelLibrary.MetodosDeposito.AtualizarReceber(receber);
 
-            MessageBox.Show("Título alterado com sucesso!", "Alterar título a receber", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Título alterado com sucesso!", "Alterar título a receber", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            localDepositoForm.cRetorno.CarregarContasAReceber();
+                localDepositoForm.cRetorno.CarregarContasAReceber();
 
-            this.Close();
+                this.Close();
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "FormAReceber.AlterarTitulo()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            
 
         }
 
@@ -160,28 +197,38 @@ namespace ConsignadoDeposito.Modal
         public void ExcluirTitulo()
         {
 
-            
-
-            if (MessageBox.Show("Deseja realmente excluir o lançamento selecionado?", "ATENÇÃO! Exclusão de Título a Receber", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            try
             {
-
-                //verificar se existem registros associados
-                if (ModelLibrary.MetodosDeposito.ExcluirAReceber(cAReceberId))
+                if (MessageBox.Show("Deseja realmente excluir o lançamento selecionado?", "ATENÇÃO! Exclusão de Título a Receber", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
-                    MessageBox.Show("Título excluído com sucesso!", "Excluir título a receber", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //Limpar Form
-                    LimparTitulo();
 
-                    this.Close();
-                } else
-                {
-                    MessageBox.Show("Não foi possível excluir o título selecionado, pois existem pagamentos relacionados.", "Excluir título a receber", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //verificar se existem registros associados
+                    if (ModelLibrary.MetodosDeposito.ExcluirAReceber(cAReceberId))
+                    {
+                        MessageBox.Show("Título excluído com sucesso!", "Excluir título a receber", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //Limpar Form
+                        LimparTitulo();
+
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Não foi possível excluir o título selecionado, pois existem pagamentos relacionados.", "Excluir título a receber", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+
+
+
                 }
-
-
-                
-                
             }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "FormAReceber.ExcluirTitulo()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            
 
         }
 
@@ -244,29 +291,45 @@ namespace ConsignadoDeposito.Modal
 
         }
 
+        public void PesquisarVendedor()
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                Modal.FormListaVendedor formListaVendedor = new Modal.FormListaVendedor();
+
+                var result = formListaVendedor.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+
+                    txtVendedorId.Text = formListaVendedor.cVendedorId.ToString();
+                    txtNome.Text = formListaVendedor.cVendedorNome.ToString();
+                    txtDocumento.Text = txtVendedorId.Text;
+                    txtValorNF.Focus();
+                }
+
+
+                Cursor.Current = Cursors.Default;
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "FormAReceber.txtNome_ButtonClick()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void txtNome_ButtonClick(object sender, EventArgs e)
         {
-            Cursor.Current = Cursors.WaitCursor;
-            Modal.FormListaVendedor formListaVendedor = new Modal.FormListaVendedor();
 
-            var result = formListaVendedor.ShowDialog();
+            PesquisarVendedor();
 
-            if (result == DialogResult.OK)
-            {
-
-                txtVendedorId.Text = formListaVendedor.cVendedorId.ToString();
-                txtNome.Text = formListaVendedor.cVendedorNome.ToString();
-                txtDocumento.Text = txtVendedorId.Text;
-                txtValorNF.Focus();
-            }
-
-
-            Cursor.Current = Cursors.Default;
         }
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            
+
             if (txtVendedorId.Text != "")
             {
                 // verificar se está no modo Create ou Update
@@ -278,12 +341,12 @@ namespace ConsignadoDeposito.Modal
                 {
                     AdicionarTitulo();
                 }
-            } else
+            }
+            else
             {
                 MessageBox.Show("Selecione o vendedor (clique na lupa para localizar).", "Confirmar Titulo a Receber", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtNome.Focus();
             }
-
 
         }
 

@@ -47,11 +47,11 @@
             this.lblCargaRepresentante = new MetroFramework.Controls.MetroLabel();
             this.lblCargaPraca = new MetroFramework.Controls.MetroLabel();
             this.pnlBottomForm = new MetroFramework.Controls.MetroPanel();
+            this.btnNothing = new MetroFramework.Controls.MetroButton();
             this.btnCancelar = new MetroFramework.Controls.MetroButton();
             this.btnConfirmar = new MetroFramework.Controls.MetroButton();
             this.pnlMainGrid = new MetroFramework.Controls.MetroPanel();
             this.grdCarga = new MetroFramework.Controls.MetroGrid();
-            this.btnNothing = new MetroFramework.Controls.MetroButton();
             this.pnlSelecionarCarga.SuspendLayout();
             this.pnlBottomForm.SuspendLayout();
             this.pnlMainGrid.SuspendLayout();
@@ -302,6 +302,17 @@
             this.pnlBottomForm.VerticalScrollbarHighlightOnWheel = false;
             this.pnlBottomForm.VerticalScrollbarSize = 10;
             // 
+            // btnNothing
+            // 
+            this.btnNothing.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnNothing.Location = new System.Drawing.Point(335, 5);
+            this.btnNothing.Name = "btnNothing";
+            this.btnNothing.Size = new System.Drawing.Size(90, 30);
+            this.btnNothing.TabIndex = 11;
+            this.btnNothing.Text = "Nothing";
+            this.btnNothing.UseSelectable = true;
+            this.btnNothing.Visible = false;
+            // 
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
@@ -401,17 +412,6 @@
             this.grdCarga.UseStyleColors = true;
             this.grdCarga.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdCarga_CellClick);
             this.grdCarga.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdCarga_CellContentDoubleClick);
-            // 
-            // btnNothing
-            // 
-            this.btnNothing.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnNothing.Location = new System.Drawing.Point(335, 5);
-            this.btnNothing.Name = "btnNothing";
-            this.btnNothing.Size = new System.Drawing.Size(90, 30);
-            this.btnNothing.TabIndex = 11;
-            this.btnNothing.Text = "Nothing";
-            this.btnNothing.UseSelectable = true;
-            this.btnNothing.Visible = false;
             // 
             // FormListaCarga
             // 
