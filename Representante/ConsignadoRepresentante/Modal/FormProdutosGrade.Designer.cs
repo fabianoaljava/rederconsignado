@@ -35,10 +35,10 @@
             this.pnlProdutoGradeTop = new MetroFramework.Controls.MetroPanel();
             this.lblInfo = new MetroFramework.Controls.MetroLabel();
             this.pnlProdutoGradeBottom = new MetroFramework.Controls.MetroPanel();
+            this.btnCancelar = new MetroFramework.Controls.MetroButton();
+            this.btnConfirmar = new MetroFramework.Controls.MetroButton();
             this.pnlProdutoGradeMain = new MetroFramework.Controls.MetroPanel();
             this.grdProdutoGrade = new MetroFramework.Controls.MetroGrid();
-            this.btnConfirmar = new MetroFramework.Controls.MetroButton();
-            this.btnCancelar = new MetroFramework.Controls.MetroButton();
             this.pnlProdutoGradeTop.SuspendLayout();
             this.pnlProdutoGradeBottom.SuspendLayout();
             this.pnlProdutoGradeMain.SuspendLayout();
@@ -85,6 +85,30 @@
             this.pnlProdutoGradeBottom.VerticalScrollbarBarColor = true;
             this.pnlProdutoGradeBottom.VerticalScrollbarHighlightOnWheel = false;
             this.pnlProdutoGradeBottom.VerticalScrollbarSize = 10;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnCancelar.Location = new System.Drawing.Point(0, 0);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 39);
+            this.btnCancelar.TabIndex = 4;
+            this.btnCancelar.Text = "Ca&ncelar";
+            this.btnCancelar.UseSelectable = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // btnConfirmar
+            // 
+            this.btnConfirmar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnConfirmar.Enabled = false;
+            this.btnConfirmar.Location = new System.Drawing.Point(585, 0);
+            this.btnConfirmar.Name = "btnConfirmar";
+            this.btnConfirmar.Size = new System.Drawing.Size(75, 39);
+            this.btnConfirmar.TabIndex = 3;
+            this.btnConfirmar.Text = "&Confirmar";
+            this.btnConfirmar.UseSelectable = true;
+            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
             // pnlProdutoGradeMain
             // 
@@ -162,30 +186,6 @@
             this.grdProdutoGrade.UseStyleColors = true;
             this.grdProdutoGrade.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdProdutoGrade_CellClick);
             this.grdProdutoGrade.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdProdutoGrade_CellContentDoubleClick);
-            // 
-            // btnConfirmar
-            // 
-            this.btnConfirmar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnConfirmar.Enabled = false;
-            this.btnConfirmar.Location = new System.Drawing.Point(585, 0);
-            this.btnConfirmar.Name = "btnConfirmar";
-            this.btnConfirmar.Size = new System.Drawing.Size(75, 39);
-            this.btnConfirmar.TabIndex = 3;
-            this.btnConfirmar.Text = "&Confirmar";
-            this.btnConfirmar.UseSelectable = true;
-            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnCancelar.Location = new System.Drawing.Point(0, 0);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 39);
-            this.btnCancelar.TabIndex = 4;
-            this.btnCancelar.Text = "Ca&ncelar";
-            this.btnCancelar.UseSelectable = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // FormProdutosGrade
             // 

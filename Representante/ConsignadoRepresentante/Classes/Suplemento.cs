@@ -45,13 +45,17 @@ namespace ConsignadoRepresentante
 
         public void SuplementoProdutoLimpar()
         {
+
+            cProdutoGradeId = 0;
+
             localDeposito.txtSuplCodigoBarras.Text = "";
             localDeposito.txtSuplProduto.Text = "";
             localDeposito.txtSuplQuantidade.Text = "";
+            localDeposito.chkSuplQuantidade.Checked = false;
             localDeposito.btnSuplConfirmar.Enabled = false;
             localDeposito.btnSuplCancelar.Enabled = false;
             localDeposito.txtSuplCodigoBarras.ReadOnly = false;
-            cProdutoGradeId = 0;
+
             cModoSuplemento = "Insert";
             localDeposito.txtSuplCodigoBarras.Focus();
         }

@@ -294,7 +294,14 @@ namespace ModelLibrary
 
                     if (pCriterio.ContainsKey("CodigoGeral"))
                     {
-                        vCriterio = "((Produto.CodigoBarras || '' || Produto.Digito  LIKE '%" + pCriterio["CodigoGeral"] + "%') OR Produto.Id = " + pCriterio["CodigoGeral"] + ")";
+                        if (pCriterio["CodigoGeral"].Length > 6) //pesquisa pelo codigo de barras
+                        {
+                            vCriterio = " Produto.CodigoBarras || '' || Produto.Digito  LIKE '%" + pCriterio["CodigoGeral"] + "%' ";
+                        } else // pesquisa pelo ID
+                        {
+                            vCriterio = " Produto.Id = " + pCriterio["CodigoGeral"] + " ";
+                        }
+                        
                     }
 
                     if (pCriterio.ContainsKey("Nome"))
@@ -358,18 +365,30 @@ namespace ModelLibrary
             {
                 if (pPesquisa != "")
                 {
-                    string vCodigoSemDigito = pPesquisa.Substring(0, pPesquisa.Length - 1);
-                    string vDigito = pPesquisa.Substring(pPesquisa.Length - 1);
 
-                    long vProdutoId = Convert.ToInt64(pPesquisa);
 
-                    Console.WriteLine(vCodigoSemDigito + ':' + vDigito);
+                    if (pPesquisa.Length > 6) // pesquisa pelo codigo de barras
+                    {
+                        string vCodigoSemDigito = pPesquisa.Substring(0, pPesquisa.Length - 1);
+                        string vDigito = pPesquisa.Substring(pPesquisa.Length - 1);
 
-                    var produtograde = (from pg in representante.RepProdutoGrade
-                                        where ((pg.CodigoBarras == vCodigoSemDigito && pg.Digito == vDigito) || pg.ProdutoId == vProdutoId)
-                                        select pg).ToList<RepProdutoGrade>();
+                        return (from pg in representante.RepProdutoGrade
+                                            where ((pg.CodigoBarras == vCodigoSemDigito && pg.Digito == vDigito))
+                                            select pg).ToList<RepProdutoGrade>();
+                    } else // pesquisa pelo ID
+                    {
+                        long vProdutoId = Convert.ToInt64(pPesquisa);
 
-                    return produtograde;
+
+                        return  (from pg in representante.RepProdutoGrade
+                                            where (pg.ProdutoId == vProdutoId)
+                                            select pg).ToList<RepProdutoGrade>();
+                  
+                    }
+
+
+
+                    
 
                 } else
                 {
@@ -667,12 +686,11 @@ namespace ModelLibrary
                                     CASE WHEN PedidoAnterior.VendedorId IS NOT NULL
                                             THEN true
                                             ELSE false
-                                            END AS PedidoAnterior,
+                                            END AS PedidoAnterior, 
                                     CASE 
 	                                    WHEN ValorAberto  <= 0 THEN 'Total'
-	                                    WHEN ValorAcerto >0  THEN 'Parcial '
+	                                    WHEN ValorRecebido = 0  THEN 'Não ' || QuantidadeRemarcado
 										WHEN ValorRecebido >0  THEN 'Parcial ' || QuantidadeRemarcado
-	                                    ELSE 'Não ' || QuantidadeRemarcado
 	                                    END AS Recebido,	   
                                     CASE WHEN PedidoAtual.VendedorId IS NOT NULL
                                             THEN true
@@ -688,8 +706,8 @@ namespace ModelLibrary
 										ELSE false
 										END AS Negativado									
                                     FROM RepVendedor
-                                    LEFT JOIN (SELECT VendedorId, CodigoPedido, DataRetorno, ValorAcerto FROM RepPedido WHERE CargaId = CargaOriginal) AS PedidoAtual ON RepVendedor.Id = PedidoAtual.VendedorId
-                                    LEFT JOIN (SELECT VendedorId, SUM(QuantidadeRemarcado)-1 QuantidadeRemarcado, SUM(ValorLiquido - ValorAcerto) ValorAberto, ValorAcerto as ValorRecebido FROM RepPedido WHERE CargaId != CargaOriginal GROUP BY VendedorId) AS PedidoAnterior ON RepVendedor.Id = PedidoAnterior.VendedorId
+                                    LEFT JOIN (SELECT max(CodigoPedido) CodigoPedido, VendedorId From RepPedido WHERE CargaId = CargaOriginal GROUP BY VendedorId) AS PedidoAtual ON RepVendedor.Id = PedidoAtual.VendedorId
+                                    LEFT JOIN (SELECT VendedorId, SUM(QuantidadeRemarcado)-1 QuantidadeRemarcado, SUM(ValorLiquido - ValorAcerto) ValorAberto, ValorAcerto as ValorRecebido FROM RepPedido WHERE (RepPedido.CodigoPedido NOT IN (SELECT max(CodigoPedido) FROM RepPedido GROUP BY VendedorId) OR CargaId != CargaOriginal) GROUP BY CodigoPedido) AS PedidoAnterior ON RepVendedor.Id = PedidoAnterior.VendedorId
                                     LEFT JOIN (SELECT DISTINCT VendedorId as Receber FROM RepReceber WHERE ValorAReceber > 0) AS Receber ON RepVendedor.Id = Receber.Receber";
 
 

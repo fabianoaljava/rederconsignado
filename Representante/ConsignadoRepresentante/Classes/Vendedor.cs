@@ -677,11 +677,11 @@ namespace ConsignadoRepresentante
             ExibirAcerto();
             ExibirTitulos();
             ExibirInicio();
-            //localRepresentanteForm.RecarregarDados();
-            //localRepresentanteForm.cHome.CarregarFormulario();
-            //localRepresentanteForm.cFinanceiro.ExibirPosicaoFinancera();
-            //localRepresentanteForm.tabPosicaoFinanceira.Refresh();
-            //localRepresentanteForm.cProduto.ExibirProdutos();
+
+            localRepresentanteForm.cHome.CarregarFormulario();
+            localRepresentanteForm.cFinanceiro.ExibirPosicaoFinancera();
+            localRepresentanteForm.tabPosicaoFinanceira.Refresh();
+            localRepresentanteForm.cProduto.ExibirProdutos();
         }
 
 
@@ -766,6 +766,7 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.txtPedidoCodigoBarras.Text = "";
             localRepresentanteForm.txtPedidoProduto.Text = "";
             localRepresentanteForm.txtPedidoQuantidade.Text = "";
+            localRepresentanteForm.chkPedidoQuantidade.Checked = false;
             localRepresentanteForm.txtPedidoPrecoUnit.Text = "";
             localRepresentanteForm.txtPedidoProdutoGradeId.Text = "";
 
@@ -1252,8 +1253,7 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.txtRetornoProdutoGradeId.Text = "";
             localRepresentanteForm.txtRetornoProduto.Text = "";
             localRepresentanteForm.txtRetornoQuantidade.Text = "";
-
-            
+            localRepresentanteForm.chkRetornoQuantidade.Checked = false;
 
 
             localRepresentanteForm.btnRetornoConfirmar.Enabled = false;

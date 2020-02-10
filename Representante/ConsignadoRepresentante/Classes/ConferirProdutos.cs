@@ -53,6 +53,7 @@ namespace ConsignadoRepresentante
             localDeposito.txtConfCodigoBarras.Text = "";
             localDeposito.txtConfProduto.Text = "";
             localDeposito.txtConfQuantidade.Text = "";
+            localDeposito.chkConfQuantidade.Checked = false;
             localDeposito.btnConferenciaConfirmar.Enabled = false;
             localDeposito.btnConfCancelar.Enabled = false;
             localDeposito.txtConfCodigoBarras.ReadOnly = false;
@@ -213,6 +214,9 @@ namespace ConsignadoRepresentante
             localDeposito.grdConfProduto.Columns[3].HeaderText = "Quantidade Informada";
             localDeposito.grdConfProduto.Columns[4].HeaderText = "Diferença";
             localDeposito.grdConfProduto.Columns[5].HeaderText = "Valor Diferença";
+
+
+            localDeposito.grdConfProduto.Columns[1].Width = 250;
 
 
             bool vFinalizado = true;

@@ -61,7 +61,6 @@
             this.tbcPrincipal = new MetroFramework.Controls.MetroTabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
             this.panelHome = new MetroFramework.Controls.MetroPanel();
-            this.lblHome = new MetroFramework.Controls.MetroLabel();
             this.menuHome = new System.Windows.Forms.MenuStrip();
             this.mnuConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.smnSistema = new System.Windows.Forms.ToolStripMenuItem();
@@ -343,7 +342,7 @@
             this.tbcPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tbcPrincipal.Name = "tbcPrincipal";
-            this.tbcPrincipal.SelectedIndex = 5;
+            this.tbcPrincipal.SelectedIndex = 0;
             this.tbcPrincipal.Size = new System.Drawing.Size(860, 645);
             this.tbcPrincipal.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tbcPrincipal.TabIndex = 11;
@@ -360,7 +359,6 @@
             // 
             // panelHome
             // 
-            this.panelHome.Controls.Add(this.lblHome);
             this.panelHome.Controls.Add(this.menuHome);
             this.panelHome.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelHome.HorizontalScrollbarBarColor = true;
@@ -373,15 +371,6 @@
             this.panelHome.VerticalScrollbarBarColor = true;
             this.panelHome.VerticalScrollbarHighlightOnWheel = false;
             this.panelHome.VerticalScrollbarSize = 10;
-            // 
-            // lblHome
-            // 
-            this.lblHome.AutoSize = true;
-            this.lblHome.Location = new System.Drawing.Point(55, 128);
-            this.lblHome.Name = "lblHome";
-            this.lblHome.Size = new System.Drawing.Size(187, 19);
-            this.lblHome.TabIndex = 2;
-            this.lblHome.Text = "Gráficos, Relatórios, Destaques";
             // 
             // menuHome
             // 
@@ -1243,8 +1232,6 @@
             // chkConfQuantidade
             // 
             this.chkConfQuantidade.AutoSize = true;
-            this.chkConfQuantidade.Checked = true;
-            this.chkConfQuantidade.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkConfQuantidade.Location = new System.Drawing.Point(496, 43);
             this.chkConfQuantidade.Name = "chkConfQuantidade";
             this.chkConfQuantidade.Size = new System.Drawing.Size(97, 15);
@@ -1524,8 +1511,6 @@
             // chkSuplQuantidade
             // 
             this.chkSuplQuantidade.AutoSize = true;
-            this.chkSuplQuantidade.Checked = true;
-            this.chkSuplQuantidade.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkSuplQuantidade.Location = new System.Drawing.Point(490, 37);
             this.chkSuplQuantidade.Name = "chkSuplQuantidade";
             this.chkSuplQuantidade.Size = new System.Drawing.Size(97, 15);
@@ -2256,7 +2241,6 @@
         private System.Windows.Forms.TabPage tabImportar;
         private System.Windows.Forms.TabPage tabExportar;
         private MetroFramework.Controls.MetroPanel panelHome;
-        private MetroFramework.Controls.MetroLabel lblHome;
         private System.Windows.Forms.Label lblSair;
         public MetroFramework.Controls.MetroPanel pnlImportarPesquisa;
         private MetroFramework.Controls.MetroLabel lblTotalProdutos;
