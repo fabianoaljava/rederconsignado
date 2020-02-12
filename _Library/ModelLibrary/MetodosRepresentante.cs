@@ -1922,6 +1922,9 @@ namespace ModelLibrary
 
             using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
+                // Limpar Itens com quantidade = 0
+                representante.Database.ExecuteSqlCommand("DELETE FROM RepPedidoItem where Quantidade = 0 AND Retorno = 0");
+
                 // Limpar Pedidos sem Itens                
                 representante.Database.ExecuteSqlCommand("DELETE FROM RepPedido WHERE Id NOT IN (SELECT PedidoId FROM RepPedidoItem)");
                 // Reajustar Status do Pedido o pedido novo não tiver itens
@@ -1938,6 +1941,8 @@ namespace ModelLibrary
                 // Reajustar DataPagamento do Receber Quando não houver recebimento
                 representante.Database.ExecuteSqlCommand("UPDATE RepReceber SET DataPagamento = null, Status = '0' WHERE DataPagamento IS NOT NULL AND Id NOT IN (SELECT ReceberId FROM RepRecebimento)");
 
+
+               
             }
 
 

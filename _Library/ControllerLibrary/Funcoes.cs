@@ -261,5 +261,26 @@ namespace ControllerLibrary
         }
 
 
+        public static bool ValidarNotEmpty(String text, String message, bool forcefalse = true)
+        {
+
+            if (!forcefalse)
+            {
+                return false;
+            } else
+            {
+                if (text == null || text == "" || text.Length == 0)
+                {
+                    MessageBox.Show(message, "Validação de Cadastro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+
+        }
+
     }
 }

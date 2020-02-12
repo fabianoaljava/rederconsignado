@@ -247,6 +247,55 @@ namespace ConsignadoRepresentante
         }
 
 
+
+        public string RemoverMascaraTelefone(string pTelefone)
+        {
+
+            pTelefone = pTelefone.Replace(")", "");
+            pTelefone = pTelefone.Replace("-", "");
+            pTelefone = pTelefone.Replace("(", "");
+
+            return pTelefone;
+        }
+
+        public string MascaraTelefone(string pTelefone)
+        {
+            string result = "";
+
+            pTelefone = pTelefone.Replace(")", "");
+            pTelefone = pTelefone.Replace("-", "");
+            pTelefone = pTelefone.Replace("(", "");
+
+
+
+
+
+            if (pTelefone.Length == 8) // 8/9 - telefone sem DDD
+            {
+                result = pTelefone.Insert(4, "-");
+            }
+            else if (pTelefone.Length == 9) // 8/9 - celular sem DDD
+            {
+                result = pTelefone.Insert(5, "-"); 
+            }
+            else if (pTelefone.Length == 10) // 10 - telefone com DDD ex. 2212344321 (22)1234-4321
+            {
+                result = pTelefone.Insert(0, "(").Insert(3, ")").Insert(8, "-");
+            }
+            else if (pTelefone.Length == 11) // 11 - celular com ddd
+            {
+                result = pTelefone.Insert(0, "(").Insert(3, ")").Insert(9, "-");
+            }
+            else
+            {
+                result = pTelefone;
+            }
+
+            return result;
+
+
+        }
+
         public void ControlOnlyNumbers(object sender, KeyPressEventArgs e)
         {
 
@@ -354,18 +403,31 @@ namespace ConsignadoRepresentante
 
         private void txtCPFCnpj_Leave(object sender, EventArgs e)
         {
-            if (txtCPFCnpj.Text != "")
+
+            if (txtCPFCnpj.Text == "")
             {
-                txtCPFCnpj.Text = MascaraCnpjCpf(txtCPFCnpj.Text);
-
-                if (cVendedor.cVendedorModo == "Create") cVendedor.VerificarCPFCnpjExistente(txtCPFCnpj.Text);
+                txtCPFCnpj.Focus();
             }
-
         }
 
         private void txtCPFCnpj_Validating(object sender, CancelEventArgs e)
         {
-            cVendedor.ValidarCPFCnpj(txtCPFCnpj.Text, sender, e);
+            if (txtCPFCnpj.Text != "")
+            {
+                txtCPFCnpj.Text = MascaraCnpjCpf(txtCPFCnpj.Text);
+
+                if (cVendedor.ValidarCPFCnpj(txtCPFCnpj.Text, sender, e))
+                {
+                    if (cVendedor.cVendedorModo == "Create") cVendedor.VerificarCPFCnpjExistente(txtCPFCnpj.Text);
+                } else
+                {
+                    txtCPFCnpj.Text = "";
+                    txtCPFCnpj.Focus();
+                }
+                
+            }
+
+            
         }
 
         private void txtCep_ButtonClick(object sender, EventArgs e)
@@ -495,31 +557,10 @@ namespace ConsignadoRepresentante
         private void btnProdRetConfirmar_Click(object sender, EventArgs e)
         {
 
-            Boolean vAlerta;
 
-            int vTotal = 0;
 
-            for (int i = 0; i < grdVendedorRetorno.Rows.Count; i++)
-            {
-                if (grdVendedorRetorno.Rows[i].Cells[8] != null && grdVendedorRetorno.Rows[i].Cells[8].Value != null)
-                {
-                    vTotal += int.Parse(grdVendedorRetorno.Rows[i].Cells[8].Value.ToString());
-                }
-            }
+            cVendedor.ConfirmarRetornoProduto();
 
-            if (vTotal <= 0)
-            {
-                vAlerta = MessageBox.Show("Deseja realmente retornar os produtos deste pedido? ATENÇÂO: Caso confirme essa ação, NÃO será possível adicionar produtos ao pedido novamente.", "Retornar Produtos", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes;
-            } else
-            {
-                vAlerta = true;
-            }
-
-            if (vAlerta)
-            {
-                cVendedor.ConfirmarRetornoProduto();
-            }
-            
 
         }
 
@@ -687,7 +728,10 @@ namespace ConsignadoRepresentante
 
         private void txtEmail_Validating(object sender, CancelEventArgs e)
         {
-            cVendedor.ValidarEmail(txtEmail.Text, sender, e);
+            if (!cVendedor.ValidarEmail(txtEmail.Text, sender, e))
+            {
+                txtEmail.Text = "";
+            }
         }
 
         private void PesquisarProdutos_KeyUp(object sender, KeyEventArgs e)
@@ -884,6 +928,25 @@ namespace ConsignadoRepresentante
         private void FormRepresentante_FormClosing(object sender, FormClosingEventArgs e)
         {
             ModelLibrary.MetodosRepresentante.Manutencao();
+        }
+
+        private void txtNome_Leave(object sender, EventArgs e)
+        {
+            if(cbbTipoPessoa.Text == "Pessoa Jurídica" && txtNome.Text!= "" && txtRazaoSocial.Text == "")
+            {
+                txtRazaoSocial.Text = txtNome.Text;
+            }
+        }
+
+
+        private void Telefone_Enter(object sender, EventArgs e)
+        {
+            (sender as MetroFramework.Controls.MetroTextBox).Text = RemoverMascaraTelefone((sender as MetroFramework.Controls.MetroTextBox).Text);
+        }
+
+        private void Telefone_Leave(object sender, EventArgs e)
+        {
+            (sender as MetroFramework.Controls.MetroTextBox).Text = MascaraTelefone((sender as MetroFramework.Controls.MetroTextBox).Text);
         }
     }
 }

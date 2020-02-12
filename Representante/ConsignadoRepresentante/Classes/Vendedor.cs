@@ -160,8 +160,12 @@ namespace ConsignadoRepresentante
                 localRepresentanteForm.lblRGInscricao.Text = "RG";
                 localRepresentanteForm.txtRGInscricao.WaterMark = "RG";
                 cTipoPessoa = "PF";
+
+                VendedorHabilitar();
+
+                localRepresentanteForm.txtCPFCnpj.Focus();
             }
-            else
+            else if (pTipoPessoa == "Pessoa Jurídica")
             {
                 localRepresentanteForm.lblCPFCNPJ.Text = "CNPJ";
                 localRepresentanteForm.txtCPFCnpj.WaterMark = "CNPJ";
@@ -169,6 +173,13 @@ namespace ConsignadoRepresentante
                 localRepresentanteForm.lblRGInscricao.Text = "Insc. Estadual";
                 localRepresentanteForm.txtRGInscricao.WaterMark = "Insc. Estadual";
                 cTipoPessoa = "PJ";
+
+                VendedorHabilitar();
+
+                localRepresentanteForm.txtCPFCnpj.Focus();
+            } else
+            {
+                VendedorDesabilitar();
             }
         }
 
@@ -184,7 +195,7 @@ namespace ConsignadoRepresentante
         ///////////////////////////////////////////////
 
 
-        public void ValidarCPFCnpj(string pCPFCnpj, object sender, System.ComponentModel.CancelEventArgs e)
+        public bool ValidarCPFCnpj(string pCPFCnpj, object sender, System.ComponentModel.CancelEventArgs e)
         {
            
             if (pCPFCnpj != "")
@@ -195,7 +206,15 @@ namespace ConsignadoRepresentante
                     MessageBox.Show("CPF/CNPJ Inválido!");
                     e.Cancel = true;
 
+                    return false;
+                } else
+                {
+                    return true;
                 }
+                
+            } else
+            {
+                return false;
             }
 
 
@@ -305,7 +324,7 @@ namespace ConsignadoRepresentante
         }
 
 
-        public void ValidarEmail(string pEmail, object sender, System.ComponentModel.CancelEventArgs e)
+        public bool ValidarEmail(string pEmail, object sender, System.ComponentModel.CancelEventArgs e)
         {
 
             if (pEmail != "")
@@ -315,7 +334,15 @@ namespace ConsignadoRepresentante
                 {
                     MessageBox.Show("Email Inválido!");
                     e.Cancel = true;
+
+                    return false;
+                } else
+                {
+                    return true;
                 }
+            } else
+            {
+                return false;
             }
 
 
@@ -429,6 +456,7 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.cbbDataNasc.ResetText();
             localRepresentanteForm.txtCep.Text = "";
             localRepresentanteForm.txtEndereco.Text = "";
+            localRepresentanteForm.txtNumero.Text = "";
             localRepresentanteForm.txtComplemento.Text = "";
             localRepresentanteForm.txtBairro.Text = "";
             localRepresentanteForm.cbbUF.SelectedIndex = -1;
@@ -473,6 +501,63 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.smnVendedorPedidoIncluir.Visible = false;            
             localRepresentanteForm.smnVendedorRelatorioPedido.Enabled = false;
             localRepresentanteForm.smnVendedorRelatorioRetorno.Enabled = false;
+
+        }
+
+        public void VendedorHabilitar()
+        {
+            localRepresentanteForm.txtCPFCnpj.Enabled = true;
+            localRepresentanteForm.txtDataInicial.Enabled = true;
+            localRepresentanteForm.txtDataFinal.Enabled = true;
+            localRepresentanteForm.txtStatus.Enabled = true;
+            localRepresentanteForm.txtNome.Enabled = true;
+            localRepresentanteForm.txtRazaoSocial.Enabled = true;
+            localRepresentanteForm.txtRGInscricao.Enabled = true;
+            localRepresentanteForm.cbbDataNasc.Enabled = true;
+            localRepresentanteForm.txtCep.Enabled = true;
+            localRepresentanteForm.txtEndereco.Enabled = true;
+            localRepresentanteForm.txtNumero.Enabled = true;
+            localRepresentanteForm.txtComplemento.Enabled = true;
+            localRepresentanteForm.txtBairro.Enabled = true;
+            localRepresentanteForm.cbbUF.Enabled = true;
+            localRepresentanteForm.cbbCidade.Enabled = true;
+            localRepresentanteForm.txtTelefone.Enabled = true;
+            localRepresentanteForm.txtTelefoneComercial.Enabled = true;
+            localRepresentanteForm.txtCelular.Enabled = true;
+            localRepresentanteForm.txtEmail.Enabled = true;
+           localRepresentanteForm.txtObservacao.Enabled = true;
+
+            localRepresentanteForm.btnVendedorSalvar.Enabled = true;
+
+
+        }
+
+
+        public void VendedorDesabilitar()
+        {
+            localRepresentanteForm.txtCPFCnpj.Enabled = false;
+            localRepresentanteForm.txtDataInicial.Enabled = false;
+            localRepresentanteForm.txtDataFinal.Enabled = false;
+            localRepresentanteForm.txtStatus.Enabled = false;
+            localRepresentanteForm.txtNome.Enabled = false;
+            localRepresentanteForm.txtRazaoSocial.Enabled = false;
+            localRepresentanteForm.txtRGInscricao.Enabled = false;
+            localRepresentanteForm.cbbDataNasc.Enabled = false;
+            localRepresentanteForm.txtCep.Enabled = false;
+            localRepresentanteForm.txtEndereco.Enabled = false;
+            localRepresentanteForm.txtNumero.Enabled = false;
+            localRepresentanteForm.txtComplemento.Enabled = false;
+            localRepresentanteForm.txtBairro.Enabled = false;
+            localRepresentanteForm.cbbUF.Enabled = false;
+            localRepresentanteForm.cbbCidade.Enabled = false;
+            localRepresentanteForm.txtTelefone.Enabled = false;
+            localRepresentanteForm.txtTelefoneComercial.Enabled = false;
+            localRepresentanteForm.txtCelular.Enabled = false;
+            localRepresentanteForm.txtEmail.Enabled = false;
+            localRepresentanteForm.txtObservacao.Enabled = false;
+
+            localRepresentanteForm.btnVendedorSalvar.Enabled = false;
+
 
         }
 
@@ -525,6 +610,7 @@ namespace ConsignadoRepresentante
                 localRepresentanteForm.cbbDataNasc.Text = vendedor.DataNascimento.ToString();
                 localRepresentanteForm.txtCep.Text = vendedor.Cep.Trim();
                 localRepresentanteForm.txtEndereco.Text = vendedor.Endereco.Trim();
+                //localRepresentanteForm.txtNumero.Text = vendedor.Numero.Trim();
                 localRepresentanteForm.txtComplemento.Text = vendedor.Complemento.Trim();
                 localRepresentanteForm.txtBairro.Text = vendedor.Bairro.Trim();
                 localRepresentanteForm.cbbUF.Text = vendedor.UF.Trim();
@@ -598,6 +684,26 @@ namespace ConsignadoRepresentante
 
         }
 
+
+
+
+        public bool VendedorValidar()
+        {
+            bool result = true;
+
+            result = ControllerLibrary.Funcoes.ValidarNotEmpty(localRepresentanteForm.cbbTipoPessoa.Text, "Informe o Tipo Pessoa", result);
+            result = ControllerLibrary.Funcoes.ValidarNotEmpty(localRepresentanteForm.txtCPFCnpj.Text, "Informe o CPF/CNPJ", result);
+            result = ControllerLibrary.Funcoes.ValidarNotEmpty(localRepresentanteForm.txtNome.Text, "Informe o Nome", result);
+            result = ControllerLibrary.Funcoes.ValidarNotEmpty(localRepresentanteForm.txtEndereco.Text, "Informe o Endereço", result);
+            result = ControllerLibrary.Funcoes.ValidarNotEmpty(localRepresentanteForm.txtBairro.Text, "Informe o Bairro", result);
+            result = ControllerLibrary.Funcoes.ValidarNotEmpty(localRepresentanteForm.txtCep.Text, "Informe o Cep", result);
+
+            localRepresentanteForm.txtCPFCnpj.Focus();
+
+            return result;
+
+        }
+
         public void VendedorSalvar()
         {
 
@@ -606,61 +712,64 @@ namespace ConsignadoRepresentante
 
             Cursor.Current = Cursors.WaitCursor;
 
-            ModelLibrary.RepVendedor vendedor = new ModelLibrary.RepVendedor();
+
+            if (VendedorValidar())
+            {
+                ModelLibrary.RepVendedor vendedor = new ModelLibrary.RepVendedor();
 
 
-            vendedor.TipoPessoa = localRepresentanteForm.cbbTipoPessoa.Text == "Pessoa Física" ? "PF" : "PJ";
-            vendedor.CpfCnpj = localRepresentanteForm.txtCPFCnpj.Text;
-            vendedor.DataInicial = DateTime.Now.Date;
-            vendedor.Nome = localRepresentanteForm.txtNome.Text;
-            vendedor.RazaoSocial = localRepresentanteForm.txtRazaoSocial.Text;
-            vendedor.RGInscricao = localRepresentanteForm.txtRGInscricao.Text;
-            vendedor.DataNascimento = localRepresentanteForm.cbbDataNasc.Value;
-            vendedor.Cep = localRepresentanteForm.txtCep.Text;
-            vendedor.Endereco = localRepresentanteForm.txtEndereco.Text;
-            vendedor.Complemento = localRepresentanteForm.txtComplemento.Text;
-            vendedor.Bairro = localRepresentanteForm.txtBairro.Text;
-            vendedor.UF = localRepresentanteForm.cbbUF.Text;
-            vendedor.Cidade = localRepresentanteForm.cbbCidade.Text;
-            vendedor.Telefone = localRepresentanteForm.txtTelefone.Text;
-            vendedor.TelefoneComercial = localRepresentanteForm.txtTelefoneComercial.Text;
-            vendedor.Celular = localRepresentanteForm.txtCelular.Text;
-            vendedor.Email = localRepresentanteForm.txtEmail.Text;
-            vendedor.LimitePedido = localRepresentanteForm.txtLimitePedido.Text != "" ? Convert.ToDecimal(localRepresentanteForm.txtLimitePedido.Text) : 0;
-            vendedor.LimiteCredito = localRepresentanteForm.txtLimiteCredito.Text != "" ? Convert.ToDecimal(localRepresentanteForm.txtLimiteCredito.Text) : 0;
-            vendedor.Observacao = localRepresentanteForm.txtObservacao.Text;
+                vendedor.TipoPessoa = localRepresentanteForm.cbbTipoPessoa.Text == "Pessoa Física" ? "PF" : "PJ";
+                vendedor.CpfCnpj = localRepresentanteForm.txtCPFCnpj.Text;
+                vendedor.DataInicial = DateTime.Now.Date;
+                vendedor.Nome = localRepresentanteForm.txtNome.Text;
+                vendedor.RazaoSocial = localRepresentanteForm.txtRazaoSocial.Text;
+                vendedor.RGInscricao = localRepresentanteForm.txtRGInscricao.Text;
+                vendedor.DataNascimento = localRepresentanteForm.cbbDataNasc.Value;
+                vendedor.Cep = localRepresentanteForm.txtCep.Text;
+                vendedor.Endereco = localRepresentanteForm.txtEndereco.Text;
+                //vendedor.Numero = localRepresentanteForm.txtNumero.Text;
+                vendedor.Complemento = localRepresentanteForm.txtComplemento.Text;
+                vendedor.Bairro = localRepresentanteForm.txtBairro.Text;
+                vendedor.UF = localRepresentanteForm.cbbUF.Text;
+                vendedor.Cidade = localRepresentanteForm.cbbCidade.Text;
+                vendedor.Telefone = localRepresentanteForm.txtTelefone.Text;
+                vendedor.TelefoneComercial = localRepresentanteForm.txtTelefoneComercial.Text;
+                vendedor.Celular = localRepresentanteForm.txtCelular.Text;
+                vendedor.Email = localRepresentanteForm.txtEmail.Text;
+                vendedor.LimitePedido = localRepresentanteForm.txtLimitePedido.Text != "" ? Convert.ToDecimal(localRepresentanteForm.txtLimitePedido.Text) : 0;
+                vendedor.LimiteCredito = localRepresentanteForm.txtLimiteCredito.Text != "" ? Convert.ToDecimal(localRepresentanteForm.txtLimiteCredito.Text) : 0;
+                vendedor.Observacao = localRepresentanteForm.txtObservacao.Text;
 
 
-            ModelLibrary.MetodosRepresentante.SalvarVendedor(cVendedorModo, vendedor, cVendedorId);
+                ModelLibrary.MetodosRepresentante.SalvarVendedor(cVendedorModo, vendedor, cVendedorId);
+
+
+                if (cVendedorModo == "Create")
+                {
+                    MessageBox.Show("Vendedor Incluído com Sucesso");
+                    cVendedorModo = "Edit";
+                    string NovoCPF = localRepresentanteForm.txtCPFCnpj.Text;
+                    CarregarFormulario();
+                    VendedorLimpar();
+
+                    localRepresentanteForm.txtVendedorPesqCpfCnpj.Text = NovoCPF;
+                    VendedorPesquisar();
+
+                }
+                else
+                {
+                    MessageBox.Show("Vendedor Alterado com Sucesso");
+                }
+
+                VendedorReload();
+            }
+
+            
 
             Cursor.Current = Cursors.Default;
 
             localRepresentanteForm.btnVendedorSalvar.Text = "Salvar";
             localRepresentanteForm.btnVendedorSalvar.Enabled = true;
-
-
-
-            if (cVendedorModo == "Create")
-            {
-                MessageBox.Show("Vendedor Incluído com Sucesso");
-                cVendedorModo = "Edit";
-                string NovoCPF = localRepresentanteForm.txtCPFCnpj.Text;
-                CarregarFormulario();
-                VendedorLimpar();
-
-                localRepresentanteForm.txtVendedorPesqCpfCnpj.Text = NovoCPF;
-                VendedorPesquisar();
-
-            }
-            else
-            {
-                MessageBox.Show("Vendedor Alterado com Sucesso");
-            }
-
-            VendedorReload();
-
-            
-
 
         }
 
@@ -728,6 +837,7 @@ namespace ConsignadoRepresentante
                 localRepresentanteForm.cbbDataNasc.Text = vendedor.DataNascimento.ToString();
                 localRepresentanteForm.txtCep.Text = vendedor.Cep.Trim();
                 localRepresentanteForm.txtEndereco.Text = vendedor.Endereco.Trim();
+                //localRepresentanteForm.txtNumero.Text = vendedor.Numero.Trim();
                 localRepresentanteForm.txtComplemento.Text = vendedor.Complemento.Trim();
                 localRepresentanteForm.txtBairro.Text = vendedor.Bairro.Trim();
                 localRepresentanteForm.cbbUF.Text = vendedor.UF.Trim();
@@ -1389,26 +1499,57 @@ namespace ConsignadoRepresentante
         public void ConfirmarRetornoProduto()
         {
 
-            Console.WriteLine("Atualizando Retorno de Produtos do Pedido...");
 
+            Boolean vAlerta;
 
-            decimal valorpedido = (Convert.ToDecimal(localRepresentanteForm.txtRetornoQtdPedido.Text) - Convert.ToDecimal(localRepresentanteForm.txtRetornoQuantidade.Text)) * Convert.ToDecimal(localRepresentanteForm.txtRetornoPreco.Text);            
-            var pedidoliberado = PedidoValidar(-valorpedido);
+            int vTotal = 0;
 
-
-            if (pedidoliberado)
+            for (int i = 0; i < localRepresentanteForm.grdVendedorRetorno.Rows.Count; i++)
             {
-                ModelLibrary.MetodosRepresentante.RetornarPedidoItem(cPedidoId, Convert.ToInt64(localRepresentanteForm.txtRetornoProdutoGradeId.Text), Convert.ToDecimal(localRepresentanteForm.txtRetornoQuantidade.Text));
-
-                //ExibirRetornoProduto(cVendedorId);
-
-                VendedorReload();
-
-
-                GridSelecionar(localRepresentanteForm.grdVendedorRetorno, localRepresentanteForm.txtRetornoCodigoBarras.Text);
-
-                RetornoProdutoLimpar();
+                if (localRepresentanteForm.grdVendedorRetorno.Rows[i].Cells[8] != null && localRepresentanteForm.grdVendedorRetorno.Rows[i].Cells[8].Value != null)
+                {
+                    vTotal += int.Parse(localRepresentanteForm.grdVendedorRetorno.Rows[i].Cells[8].Value.ToString());
+                }
             }
+
+            if (vTotal <= 0)
+            {
+                vAlerta = MessageBox.Show("Deseja realmente retornar os produtos deste pedido? ATENÇÂO: Caso confirme essa ação, NÃO será possível adicionar produtos ao pedido novamente.", "Retornar Produtos", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes;
+            }
+            else
+            {
+                vAlerta = true;
+            }
+
+            if (vAlerta)
+            {
+
+
+
+                Console.WriteLine("Atualizando Retorno de Produtos do Pedido...");
+
+
+                decimal valorpedido = (Convert.ToDecimal(localRepresentanteForm.txtRetornoQtdPedido.Text) - Convert.ToDecimal(localRepresentanteForm.txtRetornoQuantidade.Text)) * Convert.ToDecimal(localRepresentanteForm.txtRetornoPreco.Text);
+                var pedidoliberado = PedidoValidar(-valorpedido);
+
+
+                if (pedidoliberado)
+                {
+                    ModelLibrary.MetodosRepresentante.RetornarPedidoItem(cPedidoId, Convert.ToInt64(localRepresentanteForm.txtRetornoProdutoGradeId.Text), Convert.ToDecimal(localRepresentanteForm.txtRetornoQuantidade.Text));
+
+                    //ExibirRetornoProduto(cVendedorId);
+
+                    VendedorReload();
+
+
+                    GridSelecionar(localRepresentanteForm.grdVendedorRetorno, localRepresentanteForm.txtRetornoCodigoBarras.Text);
+
+                    RetornoProdutoLimpar();
+                }
+
+            }
+
+
 
 
 
