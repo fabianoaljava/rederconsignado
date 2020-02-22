@@ -841,7 +841,7 @@ namespace ConsignadoDeposito
                     if (row.Cells["CodigoBarras"].Value.ToString() == pCodigoBarras)
                         row.Selected = true;
                 }
-                datagrid.FirstDisplayedScrollingRowIndex = datagrid.SelectedRows[0].Index;
+                //datagrid.FirstDisplayedScrollingRowIndex = datagrid.SelectedRows[0].Index;
             }
             catch (Exception vE)
             {

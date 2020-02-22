@@ -462,7 +462,16 @@ namespace ModelLibrary
 
                     if (pCriterio.ContainsKey("CodigoGeral"))
                     {
-                        vCriterio = "(ProdutoGrade.CodigoBarras + '' + ProdutoGrade.Digito = '" + pCriterio["CodigoGeral"] + "' OR ProdutoGrade.ProdutoId = " + pCriterio["CodigoGeral"] + ")";
+                        //vCriterio = "(ProdutoGrade.CodigoBarras + '' + ProdutoGrade.Digito = '" + pCriterio["CodigoGeral"] + "' OR ProdutoGrade.ProdutoId = " + pCriterio["CodigoGeral"] + ")";
+
+                        if (pCriterio["CodigoGeral"].Length > 6) //pesquisa pelo codigo de barras
+                        {
+                            vCriterio = " Produto.CodigoBarras + '' + Produto.Digito  LIKE '%" + pCriterio["CodigoGeral"] + "%' ";
+                        }
+                        else // pesquisa pelo ID
+                        {
+                            vCriterio = " Produto.Id = " + pCriterio["CodigoGeral"] + " ";
+                        }
                     }
 
                     if (pCriterio.ContainsKey("Nome"))
@@ -767,32 +776,32 @@ namespace ModelLibrary
 
 
                 string query = @"SELECT ProdutoGrade.CodigoBarras + '' + ProdutoGrade.Digito as CodigoBarras, Produto.Descricao + ' ' + ProdutoGrade.Tamanho Descricao,
-	                                    SUM(ISNULL(Retornado.Vendido,0)) Vendido,
+                                        SUM(ISNULL(Retornado.Vendido,0)) Vendido,
 	                                    SUM(ISNULL(CargaProduto.Quantidade,0)) Carga,	
 	                                    SUM(ISNULL(Retornado.Retorno,0)) Retorno,
-	                                    SUM(ISNULL(Consignado.Consignado,0)) Consignado,
-	                                    SUM(ISNULL(CargaProduto.Quantidade,0))-SUM(ISNULL(Retornado.Vendido,0))+SUM(ISNULL(Retornado.Retorno,0))-SUM(ISNULL(Consignado.Consignado,0)) AS SaldoCarro,
-	                                    SUM(ISNULL(CargaProduto.Retorno,0)) ContagemCarro,
-	                                    SUM(ISNULL(CargaProduto.Retorno,0)) - (SUM(ISNULL(CargaProduto.Quantidade,0))-SUM(ISNULL(Retornado.Vendido,0))+SUM(ISNULL(Retornado.Retorno,0))-SUM(ISNULL(Consignado.Consignado,0))) AS Falta,
-	                                    (SUM(ISNULL(CargaProduto.Retorno,0)) - (SUM(ISNULL(CargaProduto.Quantidade,0))-SUM(ISNULL(Retornado.Vendido,0))+SUM(ISNULL(Retornado.Retorno,0))-SUM(ISNULL(Consignado.Consignado,0)))) * ISNULL(ProdutoGrade.ValorSaida,0) VrDiferenca 	
-	                            FROM Produto
+										SUM(ISNULL(Consignado.Consignado,0)) Consignado,
+										SUM(ISNULL(CargaProduto.Quantidade,0))+SUM(ISNULL(Retornado.Retorno,0)) AS SaldoCarro,
+										SUM(ISNULL(CargaProduto.Retorno,0)) ContagemCarro,
+	                                    SUM(ISNULL(CargaProduto.Retorno,0)) - (SUM(ISNULL(CargaProduto.Quantidade,0))+SUM(ISNULL(Retornado.Retorno,0))) AS Falta,
+	                                    (SUM(ISNULL(CargaProduto.Retorno,0)) - (SUM(ISNULL(CargaProduto.Quantidade,0))+SUM(ISNULL(Retornado.Retorno,0)))) * ISNULL(ProdutoGrade.ValorSaida,0) VrDiferenca 
+								FROM Produto
 	                               INNER JOIN ProdutoGrade ON Produto.Id = ProdutoGrade.ProdutoId
 	                               LEFT JOIN CargaProduto on CargaProduto.ProdutoGradeId = ProdutoGrade.Id
 	                               LEFT JOIN Carga ON CargaProduto.CargaId = Carga.Id
-	                               LEFT JOIN (
-		                                    SELECT ProdutoGradeId, CargaId, SUM(ISNULL(PedidoItem.Quantidade,0)) Vendido, SUM(ISNULL(PedidoItem.Retorno,0)) Retorno FROM Pedido
+								   LEFT JOIN (
+		                                    SELECT ProdutoGradeId, CargaId, SUM(ISNULL(PedidoItem.Quantidade,0))-SUM(ISNULL(PedidoItem.Retorno,0)) Vendido, SUM(ISNULL(PedidoItem.Retorno,0)) Retorno FROM Pedido
 			                                    LEFT JOIN PedidoItem ON PedidoItem.PedidoId = Pedido.Id
-			                                WHERE Pedido.CargaId = @p0 AND Status >= 2
+			                                WHERE Pedido.CargaId = 1693 AND (Status > 2 OR Retorno > 0)
 			                                GROUP BY ProdutoGradeId, CargaId
                                             ) as Retornado ON Retornado.ProdutoGradeId = ProdutoGrade.Id AND Retornado.CargaId = Carga.Id
-	                                LEFT JOIN (
-                                            SELECT ProdutoGradeId, CargaId, SUM(ISNULL(PedidoItem.Quantidade,0)) Consignado FROM Pedido
-			                                    LEFT JOIN PedidoItem ON PedidoItem.PedidoId = Pedido.Id
-			                                WHERE Pedido.CargaId = @p0 AND Status < 2
-			                                GROUP BY ProdutoGradeId, CargaId
-                                            ) as Consignado ON Consignado.ProdutoGradeId = ProdutoGrade.Id AND Consignado.CargaId = Carga.Id
-                                 WHERE Carga.Id = @p0
-                                    AND CargaProduto.Tipo != 'I'
+								   LEFT JOIN (
+										SELECT ProdutoGradeId, CargaId, SUM(ISNULL(PedidoItem.Quantidade,0))-SUM(ISNULL(PedidoItem.Retorno,0))  Consignado FROM Pedido
+											LEFT JOIN PedidoItem ON PedidoItem.PedidoId = Pedido.Id
+										WHERE Pedido.CargaId = 1693 AND Status <= 2
+										GROUP BY ProdutoGradeId, CargaId
+										) as Consignado ON Consignado.ProdutoGradeId = ProdutoGrade.Id AND Consignado.CargaId = Carga.Id
+                                    WHERE Carga.Id = 1693
+                                    --AND CargaProduto.Tipo != 'I'
                                  GROUP BY ProdutoGrade.CodigoBarras, ProdutoGrade.Digito, Produto.Descricao, ProdutoGrade.Tamanho, Carga.Id, ProdutoGrade.ValorSaida";
 
                 var result = deposito.Database.SqlQuery<ListaProdutoConferencia>(query, vCargaId);
