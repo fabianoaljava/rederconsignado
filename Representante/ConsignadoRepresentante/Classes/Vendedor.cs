@@ -510,8 +510,7 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.txtDataInicial.Enabled = true;
             localRepresentanteForm.txtDataFinal.Enabled = true;
             localRepresentanteForm.txtStatus.Enabled = true;
-            localRepresentanteForm.txtNome.Enabled = true;
-            localRepresentanteForm.txtRazaoSocial.Enabled = true;
+            localRepresentanteForm.txtNome.Enabled = true;           
             localRepresentanteForm.txtRGInscricao.Enabled = true;
             localRepresentanteForm.cbbDataNasc.Enabled = true;
             localRepresentanteForm.txtCep.Enabled = true;
@@ -610,7 +609,7 @@ namespace ConsignadoRepresentante
                 localRepresentanteForm.cbbDataNasc.Text = vendedor.DataNascimento.ToString();
                 localRepresentanteForm.txtCep.Text = vendedor.Cep.Trim();
                 localRepresentanteForm.txtEndereco.Text = vendedor.Endereco.Trim();
-                //localRepresentanteForm.txtNumero.Text = vendedor.Numero.Trim();
+                localRepresentanteForm.txtNumero.Text = vendedor.Numero.ToString();
                 localRepresentanteForm.txtComplemento.Text = vendedor.Complemento.Trim();
                 localRepresentanteForm.txtBairro.Text = vendedor.Bairro.Trim();
                 localRepresentanteForm.cbbUF.Text = vendedor.UF.Trim();
@@ -694,6 +693,7 @@ namespace ConsignadoRepresentante
             result = ControllerLibrary.Funcoes.ValidarNotEmpty(localRepresentanteForm.cbbTipoPessoa.Text, "Informe o Tipo Pessoa", result);
             result = ControllerLibrary.Funcoes.ValidarNotEmpty(localRepresentanteForm.txtCPFCnpj.Text, "Informe o CPF/CNPJ", result);
             result = ControllerLibrary.Funcoes.ValidarNotEmpty(localRepresentanteForm.txtNome.Text, "Informe o Nome", result);
+            result = ControllerLibrary.Funcoes.ValidarNotEmpty(localRepresentanteForm.txtRGInscricao.Text, "Informe o RG/Inscrição Estadual", result);
             result = ControllerLibrary.Funcoes.ValidarNotEmpty(localRepresentanteForm.txtEndereco.Text, "Informe o Endereço", result);
             result = ControllerLibrary.Funcoes.ValidarNotEmpty(localRepresentanteForm.txtBairro.Text, "Informe o Bairro", result);
             result = ControllerLibrary.Funcoes.ValidarNotEmpty(localRepresentanteForm.txtCep.Text, "Informe o Cep", result);
@@ -727,7 +727,7 @@ namespace ConsignadoRepresentante
                 vendedor.DataNascimento = localRepresentanteForm.cbbDataNasc.Value;
                 vendedor.Cep = localRepresentanteForm.txtCep.Text;
                 vendedor.Endereco = localRepresentanteForm.txtEndereco.Text;
-                //vendedor.Numero = localRepresentanteForm.txtNumero.Text;
+                vendedor.Numero = Convert.ToInt32(localRepresentanteForm.txtNumero.Text);
                 vendedor.Complemento = localRepresentanteForm.txtComplemento.Text;
                 vendedor.Bairro = localRepresentanteForm.txtBairro.Text;
                 vendedor.UF = localRepresentanteForm.cbbUF.Text;
@@ -837,7 +837,7 @@ namespace ConsignadoRepresentante
                 localRepresentanteForm.cbbDataNasc.Text = vendedor.DataNascimento.ToString();
                 localRepresentanteForm.txtCep.Text = vendedor.Cep.Trim();
                 localRepresentanteForm.txtEndereco.Text = vendedor.Endereco.Trim();
-                //localRepresentanteForm.txtNumero.Text = vendedor.Numero.Trim();
+                localRepresentanteForm.txtNumero.Text = vendedor.Numero.ToString();
                 localRepresentanteForm.txtComplemento.Text = vendedor.Complemento.Trim();
                 localRepresentanteForm.txtBairro.Text = vendedor.Bairro.Trim();
                 localRepresentanteForm.cbbUF.Text = vendedor.UF.Trim();

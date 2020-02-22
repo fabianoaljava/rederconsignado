@@ -682,7 +682,7 @@ namespace ModelLibrary
             using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
 
-                string query = @"SELECT RepVendedor.Id, Nome, CpfCnpj as Documento, Endereco, Complemento, Bairro, Cidade || '/' || UF as CidadeUF, Telefone || '/' || Celular as Telefones,
+                string query = @"SELECT RepVendedor.Id, Nome, CpfCnpj as Documento, Endereco || ' ' || IFNULL(Numero, '') Endereco, Complemento, Bairro, Cidade || '/' || UF as CidadeUF, Telefone || '/' || Celular as Telefones,
                                     CASE WHEN PedidoAnterior.VendedorId IS NOT NULL
                                             THEN true
                                             ELSE false
@@ -795,6 +795,7 @@ namespace ModelLibrary
                         result.DataNascimento = pVendedor.DataNascimento;
                         result.Cep = pVendedor.Cep;
                         result.Endereco = pVendedor.Endereco;
+                        result.Numero = pVendedor.Numero;
                         result.Complemento = pVendedor.Complemento;
                         result.Bairro = pVendedor.Bairro;
                         result.UF = pVendedor.UF;

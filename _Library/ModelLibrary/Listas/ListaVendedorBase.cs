@@ -12,6 +12,7 @@ namespace ModelLibrary
         public string Nome { get; set; }
         public string RazaoSocial { get; set; }
         public string Endereco { get; set; }
+        public Nullable<int> Numero { get; set; }
         public string Complemento { get; set; }
         public string Bairro { get; set; }
         public string Cidade { get; set; }

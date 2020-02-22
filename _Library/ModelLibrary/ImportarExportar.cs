@@ -592,7 +592,7 @@ namespace ModelLibrary
                             Login = row.Login.Trim(),
                             Senha = row.Senha.Trim(),
                             TipoModulo = row.TipoModulo,
-                            Endereco = row.Endereco,
+                            Endereco = row.Endereco,                            
                             Complemento = row.Complemento,
                             Bairro = row.Bairro,
                             Cidade = row.Cidade,
@@ -1156,6 +1156,7 @@ namespace ModelLibrary
                             Nome = row.Nome,
                             RazaoSocial = row.RazaoSocial,
                             Endereco = row.Endereco,
+                            Numero = row.Numero,
                             Complemento = row.Complemento,
                             Bairro = row.Bairro,
                             Cidade = row.Cidade.Trim(),
@@ -1224,6 +1225,7 @@ namespace ModelLibrary
                                             Vendedor.Nome,
                                             Vendedor.RazaoSocial,
                                             Vendedor.Endereco,
+                                            Vendedor.Numero,
                                             Vendedor.Complemento,
                                             Vendedor.Bairro,
                                             Vendedor.Cidade,
@@ -1283,7 +1285,8 @@ namespace ModelLibrary
                             Id = row.Id,
                             Nome = row.Nome,
                             RazaoSocial = row.RazaoSocial,
-                            Endereco = row.Endereco,
+                            Endereco = row.Endereco,        
+                            Numero = row.Numero,
                             Complemento = row.Complemento,
                             Bairro = row.Bairro,
                             Cidade = row.Cidade,
@@ -2014,6 +2017,7 @@ namespace ModelLibrary
                             Nome = row.Nome,
                             RazaoSocial = row.RazaoSocial,
                             Endereco = row.Endereco,
+                            Numero = Convert.ToInt32(row.Numero),
                             Complemento = row.Complemento,
                             Bairro = row.Bairro,
                             Cidade = row.Cidade,
@@ -2072,6 +2076,7 @@ namespace ModelLibrary
                     vVendedor.Nome = pVendedor.Nome;
                     vVendedor.RazaoSocial = pVendedor.RazaoSocial;
                     vVendedor.Endereco = pVendedor.Endereco;
+                    vVendedor.Numero = pVendedor.Numero;
                     vVendedor.Complemento = pVendedor.Complemento;
                     vVendedor.Bairro = pVendedor.Bairro;
                     vVendedor.Cidade = pVendedor.Cidade;

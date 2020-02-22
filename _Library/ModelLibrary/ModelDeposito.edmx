@@ -203,7 +203,7 @@
           <Property Name="VendedorId" Type="int" />
           <Property Name="CargaId" Type="int" />
           <Property Name="Documento" Type="int" />
-          <Property Name="Serie" Type="nvarchar" MaxLength="5" />
+          <Property Name="Serie" Type="nvarchar" MaxLength="10" />
           <Property Name="ValorNF" Type="float" />
           <Property Name="ValorDuplicata" Type="float" />
           <Property Name="ValorAReceber" Type="float" />
@@ -288,6 +288,7 @@
           <Property Name="Nome" Type="nvarchar" MaxLength="55" />
           <Property Name="RazaoSocial" Type="nvarchar" MaxLength="55" />
           <Property Name="Endereco" Type="nvarchar" MaxLength="155" />
+          <Property Name="Numero" Type="int" />
           <Property Name="Complemento" Type="nvarchar" MaxLength="50" />
           <Property Name="Bairro" Type="nvarchar" MaxLength="45" />
           <Property Name="Cidade" Type="nvarchar" MaxLength="65" />
@@ -1201,6 +1202,7 @@ warning 6002: The table/view 'RederConsignado.dbo.Representante' does not have a
           <Property Name="temp_old_id" Type="Int32" />
           <NavigationProperty Name="Pedido" Relationship="ModelDeposito.FK_Pedido_Vendedor" FromRole="Vendedor" ToRole="Pedido" />
           <NavigationProperty Name="Receber" Relationship="ModelDeposito.FK_Receber_Vendedor" FromRole="Vendedor" ToRole="Receber" />
+          <Property Name="Numero" Type="Int32" />
         </EntityType>
         <Association Name="FK_Pedido_Carga">
           <End Type="ModelDeposito.Carga" Role="Carga" Multiplicity="1" />
@@ -1665,6 +1667,7 @@ warning 6002: The table/view 'RederConsignado.dbo.Representante' does not have a
           <EntitySetMapping Name="Vendedor">
             <EntityTypeMapping TypeName="ModelDeposito.Vendedor">
               <MappingFragment StoreEntitySet="Vendedor">
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
                 <ScalarProperty Name="temp_old_id" ColumnName="temp_old_id" />
                 <ScalarProperty Name="Observacao" ColumnName="Observacao" />
                 <ScalarProperty Name="Status" ColumnName="Status" />

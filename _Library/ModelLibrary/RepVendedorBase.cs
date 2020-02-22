@@ -39,5 +39,6 @@ namespace ModelLibrary
         public string Observacao { get; set; }
         public string PedidoAberto { get; set; }
         public Nullable<decimal> DebitoAReceber { get; set; }
+        public Nullable<long> Numero { get; set; }
     }
 }

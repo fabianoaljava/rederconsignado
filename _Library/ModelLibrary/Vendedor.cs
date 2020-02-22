@@ -45,6 +45,7 @@ namespace ModelLibrary
         public string Status { get; set; }
         public string Observacao { get; set; }
         public Nullable<int> temp_old_id { get; set; }
+        public Nullable<int> Numero { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pedido> Pedido { get; set; }

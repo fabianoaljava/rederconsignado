@@ -37,5 +37,6 @@ namespace ModelLibrary
         public Nullable<decimal> LimiteCredito { get; set; }
         public string Status { get; set; }
         public string Observacao { get; set; }
+        public Nullable<long> Numero { get; set; }
     }
 }
