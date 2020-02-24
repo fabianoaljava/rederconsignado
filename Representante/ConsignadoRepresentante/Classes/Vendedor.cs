@@ -395,7 +395,9 @@ namespace ConsignadoRepresentante
                 }
 
                 localRepresentanteForm.smnVendedorRelatorioPedido.Enabled = true;
+                localRepresentanteForm.btnPedidoImprimir.Enabled = true;
                 localRepresentanteForm.smnVendedorRelatorioRetorno.Enabled = true;
+                localRepresentanteForm.btnRetornoImprimir.Enabled = true;
 
             } else
             {
@@ -409,7 +411,9 @@ namespace ConsignadoRepresentante
 
                 localRepresentanteForm.dlbLimitePedidoUtilizado.Text = "0";
                 localRepresentanteForm.smnVendedorRelatorioPedido.Enabled = false;
+                localRepresentanteForm.btnPedidoImprimir.Enabled = false;
                 localRepresentanteForm.smnVendedorRelatorioRetorno.Enabled = false;
+                localRepresentanteForm.btnRetornoImprimir.Enabled = false;
 
             }
 
@@ -500,7 +504,9 @@ namespace ConsignadoRepresentante
 
             localRepresentanteForm.smnVendedorPedidoIncluir.Visible = false;            
             localRepresentanteForm.smnVendedorRelatorioPedido.Enabled = false;
+            localRepresentanteForm.btnPedidoImprimir.Enabled = false;
             localRepresentanteForm.smnVendedorRelatorioRetorno.Enabled = false;
+            localRepresentanteForm.btnRetornoImprimir.Enabled = false;
 
         }
 
@@ -1071,11 +1077,13 @@ namespace ConsignadoRepresentante
             if (countpedidos == 1)
             {
                 localRepresentanteForm.smnVendedorPedidoIncluir.Visible = true;
+                localRepresentanteForm.btnPedidoImprimir.Enabled = true;
                 localRepresentanteForm.smnVendedorRelatorioPedido.Enabled = true;
             }
             else
             {
                 localRepresentanteForm.smnVendedorPedidoIncluir.Visible = false;
+                localRepresentanteForm.btnPedidoImprimir.Enabled = true;
                 localRepresentanteForm.smnVendedorRelatorioPedido.Enabled = false;
             }
 

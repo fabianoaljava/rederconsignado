@@ -749,20 +749,6 @@ namespace ConsignadoRepresentante
             cProduto.ProdutosLimpar();
         }
 
-        private void btnPedidoImprimir_Click(object sender, EventArgs e)
-        {
-
-
-
-        }
-
-        private void btnImprimirRetorno_Click(object sender, EventArgs e)
-        {
-
-
-
-        }
-
         private void txtPedidoCodigoBarras_Validating(object sender, CancelEventArgs e)
         {
             if (txtPedidoCodigoBarras.Text != "")
@@ -948,5 +934,6 @@ namespace ConsignadoRepresentante
         {
             (sender as MetroFramework.Controls.MetroTextBox).Text = MascaraTelefone((sender as MetroFramework.Controls.MetroTextBox).Text);
         }
+
     }
 }

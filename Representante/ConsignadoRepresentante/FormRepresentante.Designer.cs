@@ -279,6 +279,8 @@
             this.grdEstoque = new MetroFramework.Controls.MetroGrid();
             this.tabAjuda = new System.Windows.Forms.TabPage();
             this.pnlAjuda = new MetroFramework.Drawing.Html.HtmlPanel();
+            this.btnPedidoImprimir = new MetroFramework.Controls.MetroButton();
+            this.btnRetornoImprimir = new MetroFramework.Controls.MetroButton();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
@@ -299,11 +301,13 @@
             this.pnlVendedorDados.SuspendLayout();
             this.tabVendedorPedidos.SuspendLayout();
             this.pnlVendedorPedidoMain.SuspendLayout();
+            this.pnlVendedorPedidoLegenda.SuspendLayout();
             this.pnlVendedorPedidoGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdVendedorPedido)).BeginInit();
             this.pnlVendedorPedidoMontar.SuspendLayout();
             this.tabVendedorRetorno.SuspendLayout();
             this.pnlVendedorRetornoMain.SuspendLayout();
+            this.pnlVendedorRetornoLegenda.SuspendLayout();
             this.pnlVendedorRetornoGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdVendedorRetorno)).BeginInit();
             this.pnlVendedorRetorno.SuspendLayout();
@@ -754,7 +758,7 @@
             this.tbcVendedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcVendedor.Location = new System.Drawing.Point(0, 0);
             this.tbcVendedor.Name = "tbcVendedor";
-            this.tbcVendedor.SelectedIndex = 1;
+            this.tbcVendedor.SelectedIndex = 3;
             this.tbcVendedor.Size = new System.Drawing.Size(960, 354);
             this.tbcVendedor.TabIndex = 2;
             this.tbcVendedor.UseSelectable = true;
@@ -1630,7 +1634,7 @@
             this.cbbDataNasc.Enabled = false;
             this.cbbDataNasc.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.cbbDataNasc.Location = new System.Drawing.Point(810, 76);
-            this.cbbDataNasc.MinimumSize = new System.Drawing.Size(0, 29);
+            this.cbbDataNasc.MinimumSize = new System.Drawing.Size(4, 29);
             this.cbbDataNasc.Name = "cbbDataNasc";
             this.cbbDataNasc.Size = new System.Drawing.Size(111, 29);
             this.cbbDataNasc.TabIndex = 11;
@@ -2021,13 +2025,14 @@
             // 
             // pnlVendedorPedidoLegenda
             // 
+            this.pnlVendedorPedidoLegenda.Controls.Add(this.btnPedidoImprimir);
             this.pnlVendedorPedidoLegenda.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlVendedorPedidoLegenda.HorizontalScrollbarBarColor = true;
             this.pnlVendedorPedidoLegenda.HorizontalScrollbarHighlightOnWheel = false;
             this.pnlVendedorPedidoLegenda.HorizontalScrollbarSize = 10;
-            this.pnlVendedorPedidoLegenda.Location = new System.Drawing.Point(0, 231);
+            this.pnlVendedorPedidoLegenda.Location = new System.Drawing.Point(0, 192);
             this.pnlVendedorPedidoLegenda.Name = "pnlVendedorPedidoLegenda";
-            this.pnlVendedorPedidoLegenda.Size = new System.Drawing.Size(952, 8);
+            this.pnlVendedorPedidoLegenda.Size = new System.Drawing.Size(952, 47);
             this.pnlVendedorPedidoLegenda.TabIndex = 3;
             this.pnlVendedorPedidoLegenda.VerticalScrollbarBarColor = true;
             this.pnlVendedorPedidoLegenda.VerticalScrollbarHighlightOnWheel = false;
@@ -2044,7 +2049,7 @@
             this.pnlVendedorPedidoGrid.HorizontalScrollbarSize = 10;
             this.pnlVendedorPedidoGrid.Location = new System.Drawing.Point(0, 0);
             this.pnlVendedorPedidoGrid.Name = "pnlVendedorPedidoGrid";
-            this.pnlVendedorPedidoGrid.Size = new System.Drawing.Size(952, 231);
+            this.pnlVendedorPedidoGrid.Size = new System.Drawing.Size(952, 192);
             this.pnlVendedorPedidoGrid.TabIndex = 2;
             this.pnlVendedorPedidoGrid.VerticalScrollbar = true;
             this.pnlVendedorPedidoGrid.VerticalScrollbarBarColor = true;
@@ -2100,9 +2105,10 @@
             this.grdVendedorPedido.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grdVendedorPedido.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdVendedorPedido.ShowEditingIcon = false;
-            this.grdVendedorPedido.Size = new System.Drawing.Size(952, 231);
+            this.grdVendedorPedido.Size = new System.Drawing.Size(952, 192);
             this.grdVendedorPedido.TabIndex = 4;
             this.grdVendedorPedido.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdVendedorPedido_CellDoubleClick);
+            this.grdVendedorPedido.KeyUp += new System.Windows.Forms.KeyEventHandler(this.grdVendedorPedido_KeyUp);
             // 
             // pnlVendedorPedidoMontar
             // 
@@ -2479,13 +2485,14 @@
             // 
             // pnlVendedorRetornoLegenda
             // 
+            this.pnlVendedorRetornoLegenda.Controls.Add(this.btnRetornoImprimir);
             this.pnlVendedorRetornoLegenda.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlVendedorRetornoLegenda.HorizontalScrollbarBarColor = true;
             this.pnlVendedorRetornoLegenda.HorizontalScrollbarHighlightOnWheel = false;
             this.pnlVendedorRetornoLegenda.HorizontalScrollbarSize = 10;
-            this.pnlVendedorRetornoLegenda.Location = new System.Drawing.Point(0, 234);
+            this.pnlVendedorRetornoLegenda.Location = new System.Drawing.Point(0, 191);
             this.pnlVendedorRetornoLegenda.Name = "pnlVendedorRetornoLegenda";
-            this.pnlVendedorRetornoLegenda.Size = new System.Drawing.Size(952, 4);
+            this.pnlVendedorRetornoLegenda.Size = new System.Drawing.Size(952, 47);
             this.pnlVendedorRetornoLegenda.TabIndex = 3;
             this.pnlVendedorRetornoLegenda.VerticalScrollbarBarColor = true;
             this.pnlVendedorRetornoLegenda.VerticalScrollbarHighlightOnWheel = false;
@@ -2502,7 +2509,7 @@
             this.pnlVendedorRetornoGrid.HorizontalScrollbarSize = 10;
             this.pnlVendedorRetornoGrid.Location = new System.Drawing.Point(0, 0);
             this.pnlVendedorRetornoGrid.Name = "pnlVendedorRetornoGrid";
-            this.pnlVendedorRetornoGrid.Size = new System.Drawing.Size(952, 234);
+            this.pnlVendedorRetornoGrid.Size = new System.Drawing.Size(952, 191);
             this.pnlVendedorRetornoGrid.TabIndex = 2;
             this.pnlVendedorRetornoGrid.VerticalScrollbar = true;
             this.pnlVendedorRetornoGrid.VerticalScrollbarBarColor = true;
@@ -2538,7 +2545,7 @@
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.grdVendedorRetorno.DefaultCellStyle = dataGridViewCellStyle11;
-            this.grdVendedorRetorno.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdVendedorRetorno.Dock = System.Windows.Forms.DockStyle.Top;
             this.grdVendedorRetorno.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.grdVendedorRetorno.EnableHeadersVisualStyles = false;
             this.grdVendedorRetorno.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
@@ -2559,7 +2566,7 @@
             this.grdVendedorRetorno.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grdVendedorRetorno.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdVendedorRetorno.ShowEditingIcon = false;
-            this.grdVendedorRetorno.Size = new System.Drawing.Size(952, 234);
+            this.grdVendedorRetorno.Size = new System.Drawing.Size(952, 147);
             this.grdVendedorRetorno.TabIndex = 3;
             this.grdVendedorRetorno.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdVendedorRetorno_CellDoubleClick);
             // 
@@ -3477,14 +3484,14 @@
             // smnVendedorRelatorioPedido
             // 
             this.smnVendedorRelatorioPedido.Name = "smnVendedorRelatorioPedido";
-            this.smnVendedorRelatorioPedido.Size = new System.Drawing.Size(165, 22);
+            this.smnVendedorRelatorioPedido.Size = new System.Drawing.Size(180, 22);
             this.smnVendedorRelatorioPedido.Text = "Imprimir Pedido";
             this.smnVendedorRelatorioPedido.Click += new System.EventHandler(this.smnVendedorRelatorioPedido_Click);
             // 
             // smnVendedorRelatorioRetorno
             // 
             this.smnVendedorRelatorioRetorno.Name = "smnVendedorRelatorioRetorno";
-            this.smnVendedorRelatorioRetorno.Size = new System.Drawing.Size(165, 22);
+            this.smnVendedorRelatorioRetorno.Size = new System.Drawing.Size(180, 22);
             this.smnVendedorRelatorioRetorno.Text = "Imprimir Retorno";
             this.smnVendedorRelatorioRetorno.Click += new System.EventHandler(this.smnVendedorRelatorioRetorno_Click);
             // 
@@ -3960,6 +3967,26 @@
             this.pnlAjuda.TabIndex = 0;
             this.pnlAjuda.Text = "<b>Conteudo da Ajuda</b> <br> <i>Em breve...</i>";
             // 
+            // btnPedidoImprimir
+            // 
+            this.btnPedidoImprimir.Location = new System.Drawing.Point(8, 4);
+            this.btnPedidoImprimir.Name = "btnPedidoImprimir";
+            this.btnPedidoImprimir.Size = new System.Drawing.Size(152, 38);
+            this.btnPedidoImprimir.TabIndex = 23;
+            this.btnPedidoImprimir.Text = "Imprimir Pedido";
+            this.btnPedidoImprimir.UseSelectable = true;
+            this.btnPedidoImprimir.Click += new System.EventHandler(this.smnVendedorRelatorioPedido_Click);
+            // 
+            // btnRetornoImprimir
+            // 
+            this.btnRetornoImprimir.Location = new System.Drawing.Point(5, 3);
+            this.btnRetornoImprimir.Name = "btnRetornoImprimir";
+            this.btnRetornoImprimir.Size = new System.Drawing.Size(152, 38);
+            this.btnRetornoImprimir.TabIndex = 24;
+            this.btnRetornoImprimir.Text = "Imprimir Retorno";
+            this.btnRetornoImprimir.UseSelectable = true;
+            this.btnRetornoImprimir.Click += new System.EventHandler(this.smnVendedorRelatorioRetorno_Click);
+            // 
             // FormRepresentante
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3999,12 +4026,14 @@
             this.pnlVendedorDados.PerformLayout();
             this.tabVendedorPedidos.ResumeLayout(false);
             this.pnlVendedorPedidoMain.ResumeLayout(false);
+            this.pnlVendedorPedidoLegenda.ResumeLayout(false);
             this.pnlVendedorPedidoGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdVendedorPedido)).EndInit();
             this.pnlVendedorPedidoMontar.ResumeLayout(false);
             this.pnlVendedorPedidoMontar.PerformLayout();
             this.tabVendedorRetorno.ResumeLayout(false);
             this.pnlVendedorRetornoMain.ResumeLayout(false);
+            this.pnlVendedorRetornoLegenda.ResumeLayout(false);
             this.pnlVendedorRetornoGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdVendedorRetorno)).EndInit();
             this.pnlVendedorRetorno.ResumeLayout(false);
@@ -4264,5 +4293,7 @@
         public System.Windows.Forms.ToolStripMenuItem smnVendedorPedidoIncluir;
         public MetroFramework.Controls.MetroTextBox txtNumero;
         private MetroFramework.Controls.MetroLabel lblNumero;
+        public MetroFramework.Controls.MetroButton btnPedidoImprimir;
+        public MetroFramework.Controls.MetroButton btnRetornoImprimir;
     }
 }
