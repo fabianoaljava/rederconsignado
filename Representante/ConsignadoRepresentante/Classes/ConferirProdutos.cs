@@ -247,6 +247,23 @@ namespace ConsignadoRepresentante
 
 
 
+        public bool Finalizado() // verifica se a conferencia foi finalizada
+        {
+
+            bool result = ModelLibrary.MetodosRepresentante.ConferenciaFinalizada();
+
+            if (result)
+            {
+                return true;
+            }                
+            else
+            {
+                return false;
+            }
+
+        }
+
+
         public void InserirCargaProdutoConferencia()
         {
             try

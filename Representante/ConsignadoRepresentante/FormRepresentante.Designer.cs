@@ -170,6 +170,7 @@
             this.tabVendedorPedidos = new System.Windows.Forms.TabPage();
             this.pnlVendedorPedidoMain = new MetroFramework.Controls.MetroPanel();
             this.pnlVendedorPedidoLegenda = new MetroFramework.Controls.MetroPanel();
+            this.btnPedidoImprimir = new MetroFramework.Controls.MetroButton();
             this.pnlVendedorPedidoGrid = new MetroFramework.Controls.MetroPanel();
             this.grdVendedorPedido = new MetroFramework.Controls.MetroGrid();
             this.pnlVendedorPedidoMontar = new MetroFramework.Controls.MetroPanel();
@@ -191,6 +192,7 @@
             this.tabVendedorRetorno = new System.Windows.Forms.TabPage();
             this.pnlVendedorRetornoMain = new MetroFramework.Controls.MetroPanel();
             this.pnlVendedorRetornoLegenda = new MetroFramework.Controls.MetroPanel();
+            this.btnRetornoImprimir = new MetroFramework.Controls.MetroButton();
             this.pnlVendedorRetornoGrid = new MetroFramework.Controls.MetroPanel();
             this.grdVendedorRetorno = new MetroFramework.Controls.MetroGrid();
             this.pnlVendedorRetorno = new MetroFramework.Controls.MetroPanel();
@@ -279,8 +281,6 @@
             this.grdEstoque = new MetroFramework.Controls.MetroGrid();
             this.tabAjuda = new System.Windows.Forms.TabPage();
             this.pnlAjuda = new MetroFramework.Drawing.Html.HtmlPanel();
-            this.btnPedidoImprimir = new MetroFramework.Controls.MetroButton();
-            this.btnRetornoImprimir = new MetroFramework.Controls.MetroButton();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
@@ -446,7 +446,7 @@
             this.tbcPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tbcPrincipal.Name = "tbcPrincipal";
-            this.tbcPrincipal.SelectedIndex = 1;
+            this.tbcPrincipal.SelectedIndex = 4;
             this.tbcPrincipal.Size = new System.Drawing.Size(968, 546);
             this.tbcPrincipal.TabIndex = 0;
             this.tbcPrincipal.UseSelectable = true;
@@ -758,7 +758,7 @@
             this.tbcVendedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcVendedor.Location = new System.Drawing.Point(0, 0);
             this.tbcVendedor.Name = "tbcVendedor";
-            this.tbcVendedor.SelectedIndex = 3;
+            this.tbcVendedor.SelectedIndex = 0;
             this.tbcVendedor.Size = new System.Drawing.Size(960, 354);
             this.tbcVendedor.TabIndex = 2;
             this.tbcVendedor.UseSelectable = true;
@@ -2038,6 +2038,16 @@
             this.pnlVendedorPedidoLegenda.VerticalScrollbarHighlightOnWheel = false;
             this.pnlVendedorPedidoLegenda.VerticalScrollbarSize = 10;
             // 
+            // btnPedidoImprimir
+            // 
+            this.btnPedidoImprimir.Location = new System.Drawing.Point(8, 4);
+            this.btnPedidoImprimir.Name = "btnPedidoImprimir";
+            this.btnPedidoImprimir.Size = new System.Drawing.Size(152, 38);
+            this.btnPedidoImprimir.TabIndex = 23;
+            this.btnPedidoImprimir.Text = "Imprimir Pedido";
+            this.btnPedidoImprimir.UseSelectable = true;
+            this.btnPedidoImprimir.Click += new System.EventHandler(this.smnVendedorRelatorioPedido_Click);
+            // 
             // pnlVendedorPedidoGrid
             // 
             this.pnlVendedorPedidoGrid.AutoScroll = true;
@@ -2497,6 +2507,16 @@
             this.pnlVendedorRetornoLegenda.VerticalScrollbarBarColor = true;
             this.pnlVendedorRetornoLegenda.VerticalScrollbarHighlightOnWheel = false;
             this.pnlVendedorRetornoLegenda.VerticalScrollbarSize = 10;
+            // 
+            // btnRetornoImprimir
+            // 
+            this.btnRetornoImprimir.Location = new System.Drawing.Point(5, 3);
+            this.btnRetornoImprimir.Name = "btnRetornoImprimir";
+            this.btnRetornoImprimir.Size = new System.Drawing.Size(152, 38);
+            this.btnRetornoImprimir.TabIndex = 24;
+            this.btnRetornoImprimir.Text = "Imprimir Retorno";
+            this.btnRetornoImprimir.UseSelectable = true;
+            this.btnRetornoImprimir.Click += new System.EventHandler(this.smnVendedorRelatorioRetorno_Click);
             // 
             // pnlVendedorRetornoGrid
             // 
@@ -3484,14 +3504,14 @@
             // smnVendedorRelatorioPedido
             // 
             this.smnVendedorRelatorioPedido.Name = "smnVendedorRelatorioPedido";
-            this.smnVendedorRelatorioPedido.Size = new System.Drawing.Size(180, 22);
+            this.smnVendedorRelatorioPedido.Size = new System.Drawing.Size(165, 22);
             this.smnVendedorRelatorioPedido.Text = "Imprimir Pedido";
             this.smnVendedorRelatorioPedido.Click += new System.EventHandler(this.smnVendedorRelatorioPedido_Click);
             // 
             // smnVendedorRelatorioRetorno
             // 
             this.smnVendedorRelatorioRetorno.Name = "smnVendedorRelatorioRetorno";
-            this.smnVendedorRelatorioRetorno.Size = new System.Drawing.Size(180, 22);
+            this.smnVendedorRelatorioRetorno.Size = new System.Drawing.Size(165, 22);
             this.smnVendedorRelatorioRetorno.Text = "Imprimir Retorno";
             this.smnVendedorRelatorioRetorno.Click += new System.EventHandler(this.smnVendedorRelatorioRetorno_Click);
             // 
@@ -3966,26 +3986,6 @@
             this.pnlAjuda.Size = new System.Drawing.Size(960, 504);
             this.pnlAjuda.TabIndex = 0;
             this.pnlAjuda.Text = "<b>Conteudo da Ajuda</b> <br> <i>Em breve...</i>";
-            // 
-            // btnPedidoImprimir
-            // 
-            this.btnPedidoImprimir.Location = new System.Drawing.Point(8, 4);
-            this.btnPedidoImprimir.Name = "btnPedidoImprimir";
-            this.btnPedidoImprimir.Size = new System.Drawing.Size(152, 38);
-            this.btnPedidoImprimir.TabIndex = 23;
-            this.btnPedidoImprimir.Text = "Imprimir Pedido";
-            this.btnPedidoImprimir.UseSelectable = true;
-            this.btnPedidoImprimir.Click += new System.EventHandler(this.smnVendedorRelatorioPedido_Click);
-            // 
-            // btnRetornoImprimir
-            // 
-            this.btnRetornoImprimir.Location = new System.Drawing.Point(5, 3);
-            this.btnRetornoImprimir.Name = "btnRetornoImprimir";
-            this.btnRetornoImprimir.Size = new System.Drawing.Size(152, 38);
-            this.btnRetornoImprimir.TabIndex = 24;
-            this.btnRetornoImprimir.Text = "Imprimir Retorno";
-            this.btnRetornoImprimir.UseSelectable = true;
-            this.btnRetornoImprimir.Click += new System.EventHandler(this.smnVendedorRelatorioRetorno_Click);
             // 
             // FormRepresentante
             // 

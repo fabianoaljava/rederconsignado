@@ -833,6 +833,19 @@ namespace ConsignadoDeposito
 
                 localDepositoForm.grdRetornoConfProdutos.Columns[1].Width = 250;
                 localDepositoForm.grdRetornoConfProdutos.Columns[9].DefaultCellStyle.Format = "c";
+
+
+
+                List<ModelLibrary.ListaProdutoConferencia> totalpedidos = ModelLibrary.MetodosDeposito.ObterTotalProdutoConferencia(cRetornoId);
+
+                BindingListView<ModelLibrary.ListaProdutoConferencia> total = new BindingListView<ModelLibrary.ListaProdutoConferencia>(totalpedidos);
+
+                localDepositoForm.grdRetornoTotalConfProdutos.DataSource = total;
+
+                localDepositoForm.grdRetornoTotalConfProdutos.Columns[1].Width = 250;
+                localDepositoForm.grdRetornoTotalConfProdutos.Columns[9].DefaultCellStyle.Format = "c";
+
+
             }
             catch (Exception vE)
             {

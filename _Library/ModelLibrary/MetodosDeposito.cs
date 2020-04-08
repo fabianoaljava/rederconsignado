@@ -783,7 +783,7 @@ namespace ModelLibrary
 										SUM(ISNULL(CargaProduto.Quantidade,0))+SUM(ISNULL(Retornado.Retorno,0)) AS SaldoCarro,
 										SUM(ISNULL(CargaProduto.Retorno,0)) ContagemCarro,
 	                                    SUM(ISNULL(CargaProduto.Retorno,0)) - (SUM(ISNULL(CargaProduto.Quantidade,0))+SUM(ISNULL(Retornado.Retorno,0))) AS Falta,
-	                                    (SUM(ISNULL(CargaProduto.Retorno,0)) - (SUM(ISNULL(CargaProduto.Quantidade,0))+SUM(ISNULL(Retornado.Retorno,0)))) * ISNULL(ProdutoGrade.ValorSaida,0) VrDiferenca 
+	                                    (SUM(ISNULL(CargaProduto.Retorno,0)) - (SUM(ISNULL(CargaProduto.Quantidade,0))+SUM(ISNULL(Retornado.Retorno,0)))) * ISNULL(SUM(ProdutoGrade.ValorSaida),0) VrDiferenca 
 								FROM Produto
 	                               INNER JOIN ProdutoGrade ON Produto.Id = ProdutoGrade.ProdutoId
 	                               LEFT JOIN CargaProduto on CargaProduto.ProdutoGradeId = ProdutoGrade.Id
@@ -791,18 +791,66 @@ namespace ModelLibrary
 								   LEFT JOIN (
 		                                    SELECT ProdutoGradeId, CargaId, SUM(ISNULL(PedidoItem.Quantidade,0))-SUM(ISNULL(PedidoItem.Retorno,0)) Vendido, SUM(ISNULL(PedidoItem.Retorno,0)) Retorno FROM Pedido
 			                                    LEFT JOIN PedidoItem ON PedidoItem.PedidoId = Pedido.Id
-			                                WHERE Pedido.CargaId = 1693 AND (Status > 2 OR Retorno > 0)
+			                                WHERE Pedido.CargaId = @p0 AND (Status > 2 OR Retorno > 0)
 			                                GROUP BY ProdutoGradeId, CargaId
                                             ) as Retornado ON Retornado.ProdutoGradeId = ProdutoGrade.Id AND Retornado.CargaId = Carga.Id
 								   LEFT JOIN (
 										SELECT ProdutoGradeId, CargaId, SUM(ISNULL(PedidoItem.Quantidade,0))-SUM(ISNULL(PedidoItem.Retorno,0))  Consignado FROM Pedido
 											LEFT JOIN PedidoItem ON PedidoItem.PedidoId = Pedido.Id
-										WHERE Pedido.CargaId = 1693 AND Status <= 2
+										WHERE Pedido.CargaId = @p0 AND Status <= 2
 										GROUP BY ProdutoGradeId, CargaId
 										) as Consignado ON Consignado.ProdutoGradeId = ProdutoGrade.Id AND Consignado.CargaId = Carga.Id
-                                    WHERE Carga.Id = 1693
-                                    --AND CargaProduto.Tipo != 'I'
+                                    WHERE Carga.Id = @p0
                                  GROUP BY ProdutoGrade.CodigoBarras, ProdutoGrade.Digito, Produto.Descricao, ProdutoGrade.Tamanho, Carga.Id, ProdutoGrade.ValorSaida";
+
+                var result = deposito.Database.SqlQuery<ListaProdutoConferencia>(query, vCargaId);
+
+                return result.ToList<ListaProdutoConferencia>();
+
+            }
+
+        }
+
+
+        public static List<ListaProdutoConferencia> ObterTotalProdutoConferencia(long pCargaId)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+
+                var carga = deposito.Carga.FirstOrDefault(c => c.Id == pCargaId);
+
+
+                int vCargaId = carga != null ? carga.Id : 0;
+
+
+                string query = @"SELECT '' as CodigoBarras, 'Total' Descricao,
+                                        SUM(ISNULL(Retornado.Vendido,0)) Vendido,
+	                                    SUM(ISNULL(CargaProduto.Quantidade,0)) Carga,	
+	                                    SUM(ISNULL(Retornado.Retorno,0)) Retorno,
+										SUM(ISNULL(Consignado.Consignado,0)) Consignado,
+										SUM(ISNULL(CargaProduto.Quantidade,0))+SUM(ISNULL(Retornado.Retorno,0)) AS SaldoCarro,
+										SUM(ISNULL(CargaProduto.Retorno,0)) ContagemCarro,
+	                                    SUM(ISNULL(CargaProduto.Retorno,0)) - (SUM(ISNULL(CargaProduto.Quantidade,0))+SUM(ISNULL(Retornado.Retorno,0))) AS Falta,
+	                                    (SUM(ISNULL(CargaProduto.Retorno,0)) - (SUM(ISNULL(CargaProduto.Quantidade,0))+SUM(ISNULL(Retornado.Retorno,0)))) * ISNULL(SUM(ProdutoGrade.ValorSaida),0) VrDiferenca 
+								FROM Produto
+	                               INNER JOIN ProdutoGrade ON Produto.Id = ProdutoGrade.ProdutoId
+	                               LEFT JOIN CargaProduto on CargaProduto.ProdutoGradeId = ProdutoGrade.Id
+	                               LEFT JOIN Carga ON CargaProduto.CargaId = Carga.Id
+								   LEFT JOIN (
+		                                    SELECT ProdutoGradeId, CargaId, SUM(ISNULL(PedidoItem.Quantidade,0))-SUM(ISNULL(PedidoItem.Retorno,0)) Vendido, SUM(ISNULL(PedidoItem.Retorno,0)) Retorno FROM Pedido
+			                                    LEFT JOIN PedidoItem ON PedidoItem.PedidoId = Pedido.Id
+			                                WHERE Pedido.CargaId = @p0 AND (Status > 2 OR Retorno > 0)
+			                                GROUP BY ProdutoGradeId, CargaId
+                                            ) as Retornado ON Retornado.ProdutoGradeId = ProdutoGrade.Id AND Retornado.CargaId = Carga.Id
+								   LEFT JOIN (
+										SELECT ProdutoGradeId, CargaId, SUM(ISNULL(PedidoItem.Quantidade,0))-SUM(ISNULL(PedidoItem.Retorno,0))  Consignado FROM Pedido
+											LEFT JOIN PedidoItem ON PedidoItem.PedidoId = Pedido.Id
+										WHERE Pedido.CargaId = @p0 AND Status <= 2
+										GROUP BY ProdutoGradeId, CargaId
+										) as Consignado ON Consignado.ProdutoGradeId = ProdutoGrade.Id AND Consignado.CargaId = Carga.Id
+                                    WHERE Carga.Id = @p0";
 
                 var result = deposito.Database.SqlQuery<ListaProdutoConferencia>(query, vCargaId);
 
@@ -876,7 +924,7 @@ namespace ModelLibrary
                 }
 
 
-                //atualizar estoque produto
+                //TODO: atualizar estoque produto
 
 
 
@@ -904,7 +952,7 @@ namespace ModelLibrary
                     deposito.SaveChanges();
                 }
 
-                //atualizar estoque produto
+                //TODO: atualizar estoque produto
             }
 
 
@@ -920,7 +968,7 @@ namespace ModelLibrary
 
                 deposito.Database.ExecuteSqlCommand("DELETE FROM CargaProduto WHERE CargaId = @pCargaId AND ProdutoGradeId = @pProdutoGradeId", new SqlParameter("@pCargaId", pCargaId), new SqlParameter("@pProdutoGradeId", pCargaProdutoGradeId));
 
-                //atualizar estoque produto
+                //TODO: atualizar estoque produto
             }
         }
 
@@ -943,8 +991,6 @@ namespace ModelLibrary
         public static void AlterarRetornoProduto(int pCargaId, int pRetornoProdutoGradeId, double pQuantidade)
         {
 
-
-            ///alterar com base no 
             using (DepositoDBEntities deposito = new DepositoDBEntities())
             {
                 var result = deposito.CargaProduto.SingleOrDefault(cp => cp.CargaId == pCargaId && cp.ProdutoGradeId == pRetornoProdutoGradeId);
@@ -953,6 +999,8 @@ namespace ModelLibrary
                     Console.WriteLine("Alterando Retorno Produto - CargaId: " + pCargaId.ToString() + " ProdutoId: " + pRetornoProdutoGradeId.ToString());
                     result.Retorno = pQuantidade;
                     deposito.SaveChanges();
+
+                    //TODO: atualizar estoque produto
                 } else
                 {
                     var novacargaproduto = new CargaProduto
@@ -965,6 +1013,9 @@ namespace ModelLibrary
 
                     deposito.CargaProduto.Add(novacargaproduto);
                     deposito.SaveChanges();
+
+
+                    //TODO: atualizar estoque produto
 
                 }
             }

@@ -250,6 +250,32 @@ namespace ModelLibrary
             }
         }
 
+        public static Boolean ConferenciaFinalizada()
+        {
+
+            using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
+            {
+                string query = @"SELECT SUM(RepCargaProduto.Quantidade - IFNULL(RepCargaConferencia.Quantidade, 0)) as Diferenca
+	                            FROM RepCarga 
+                                    INNER JOIN RepCargaProduto ON RepCarga.Id = RepCargaProduto.CargaId
+                                    INNER JOIN RepProdutoGrade ON RepCargaProduto.ProdutoGradeId = RepProdutoGrade.Id
+                                    INNER JOIN RepProduto ON RepProdutoGrade.ProdutoId = RepProduto.Id
+                                    LEFT JOIN RepCargaConferencia ON RepCargaConferencia.CargaId = RepCarga.Id AND RepCargaConferencia.ProdutoGradeId = RepProdutoGrade.Id
+                                WHERE Tipo != 'S' AND Tipo != 'P'";
+
+                var result = representante.Database.SqlQuery<int>(query);
+
+                if (result.FirstOrDefault<int>() > 0)
+                {
+                    return false;
+                } else
+                {
+                    return true;
+                }
+            }
+
+        }
+
 
         public static List<ListaRepProdutos> ObterListaProdutos(Dictionary<string, string> pCriterio = null)
         {
@@ -688,6 +714,7 @@ namespace ModelLibrary
                                             ELSE false
                                             END AS PedidoAnterior, 
                                     CASE 
+										WHEN cast(PedidoAnterior.Status as integer) < 2 THEN 'Retornar'
 	                                    WHEN ValorAberto  <= 0 THEN 'Total'
 	                                    WHEN ValorRecebido = 0  THEN 'Não ' || QuantidadeRemarcado
 										WHEN ValorRecebido >0  THEN 'Parcial ' || QuantidadeRemarcado
@@ -707,7 +734,7 @@ namespace ModelLibrary
 										END AS Negativado									
                                     FROM RepVendedor
                                     LEFT JOIN (SELECT max(CodigoPedido) CodigoPedido, VendedorId From RepPedido WHERE CargaId = CargaOriginal GROUP BY VendedorId) AS PedidoAtual ON RepVendedor.Id = PedidoAtual.VendedorId
-                                    LEFT JOIN (SELECT VendedorId, SUM(QuantidadeRemarcado)-1 QuantidadeRemarcado, SUM(ValorLiquido - ValorAcerto) ValorAberto, ValorAcerto as ValorRecebido FROM RepPedido WHERE (RepPedido.CodigoPedido NOT IN (SELECT max(CodigoPedido) FROM RepPedido GROUP BY VendedorId) OR CargaId != CargaOriginal) GROUP BY CodigoPedido) AS PedidoAnterior ON RepVendedor.Id = PedidoAnterior.VendedorId
+                                    LEFT JOIN (SELECT VendedorId, SUM(QuantidadeRemarcado)-1 QuantidadeRemarcado, SUM(ValorLiquido - ValorAcerto) ValorAberto, ValorAcerto as ValorRecebido, Status FROM RepPedido WHERE (RepPedido.CodigoPedido NOT IN (SELECT max(CodigoPedido) FROM RepPedido GROUP BY VendedorId) OR CargaId != CargaOriginal) GROUP BY CodigoPedido, Status) AS PedidoAnterior ON RepVendedor.Id = PedidoAnterior.VendedorId
                                     LEFT JOIN (SELECT DISTINCT VendedorId as Receber FROM RepReceber WHERE ValorAReceber > 0) AS Receber ON RepVendedor.Id = Receber.Receber";
 
 
@@ -1877,35 +1904,30 @@ namespace ModelLibrary
             {
 
 
-                string query = @"SELECT Produto.CodigoBarras || '' || Produto.Digito as CodigoBarras, 
-	                                Produto.Descricao || ' ' || Produto.Tamanho Descricao,
-	                                IFNULL(Vendido.Vendido,0) Vendido, 
-	                                IFNULL(Carga.ViagemPlus,0) Carga, 
-	                                IFNULL(Vendido.RetornoPlus,0)+IFNULL(Consignado.ConsignadoRetorno,0) Retorno, 
-	                                IFNULL(Consignado.Consignado,0) Consignado, 
-	                                (IFNULL(Carga.ViagemPlus,0) - IFNULL(Vendido.Vendido,0) - IFNULL(Vendido.RetornoPlus,0)+IFNULL(Consignado.ConsignadoRetorno,0)  - IFNULL(Consignado.Consignado,0)) SaldoCarro	
-	                                FROM
-		                                (SELECT RepProduto.Id Id, RepProdutoGrade.Id ProdutoGradeId, RepProduto.CodigoBarras, RepProdutoGrade.Digito, RepProduto.Descricao, RepProdutoGrade.Tamanho 
-			                                FROM RepProduto 
-			                                INNER JOIN RepProdutoGrade ON RepProdutoGrade.ProdutoId = RepProduto.Id) AS Produto
-	                                LEFT JOIN 
-		                                (SELECT RepProdutoGrade.Id ProdutoGradeId, RepProdutoGrade.ValorSaida Preco, RepCargaProduto.Quantidade ViagemPlus, RepCargaProduto.Retorno ContagemCarro 
-			                                FROM RepCargaProduto 
-			                                INNER JOIN RepProdutoGrade ON RepProdutoGrade.Id = RepCargaProduto.ProdutoGradeId WHERE RepCargaProduto.Tipo != 'S') AS Carga ON Produto.ProdutoGradeId = Carga.ProdutoGradeId
-	                                LEFT JOIN 
-		                                (SELECT ProdutoGradeId, SUM(RepPedidoItem.Retorno) ConsignadoRetorno, SUM(RepPedidoItem.Quantidade) Consignado 
-			                                FROM RepPedido
-			                                INNER JOIN RepPedidoItem ON RepPedidoItem.PedidoId = RepPedido.Id
-			                                WHERE  RepPedido.ValorAcerto <= 0 OR RepPedido.ValorAcerto IS NULL											
-			                                GROUP BY ProdutoGradeId) AS Consignado ON Produto.ProdutoGradeId = Consignado.ProdutoGradeId
-	                                LEFT JOIN 
-		                                (SELECT ProdutoGradeId, SUM(RepPedidoItem.Quantidade) Vendido, SUM(RepPedidoItem.Retorno) RetornoPlus  
-			                                FROM RepPedido
-			                                INNER JOIN RepPedidoItem ON RepPedidoItem.PedidoId = RepPedido.Id
-			                                WHERE RepPedido.ValorAcerto > 0
-			                                GROUP BY ProdutoGradeId) AS Vendido ON Produto.ProdutoGradeId = Vendido.ProdutoGradeId
-	                                WHERE  Carga.ProdutoGradeId IS NOT NULL
-	                                ORDER BY Descricao";
+                string query = @"SELECT RepProdutoGrade.CodigoBarras || '' || RepProdutoGrade.Digito as CodigoBarras, RepProduto.Descricao || ' ' || RepProdutoGrade.Tamanho Descricao,
+                                        SUM(IFNULL(Retornado.Vendido,0)) Vendido,
+	                                    SUM(IFNULL(RepCargaProduto.Quantidade,0)) Carga,	
+	                                    SUM(IFNULL(Retornado.Retorno,0)) Retorno,
+										SUM(IFNULL(Consignado.Consignado,0)) Consignado,
+										SUM(IFNULL(RepCargaProduto.Quantidade,0))+SUM(IFNULL(Retornado.Retorno,0)) AS SaldoCarro
+								FROM RepProduto
+	                               INNER JOIN RepProdutoGrade ON RepProduto.Id = RepProdutoGrade.ProdutoId
+	                               LEFT JOIN RepCargaProduto on RepCargaProduto.ProdutoGradeId = RepProdutoGrade.Id
+	                               LEFT JOIN RepCarga ON RepCargaProduto.CargaId = RepCarga.Id
+								   LEFT JOIN (
+		                                    SELECT ProdutoGradeId, CargaId, SUM(IFNULL(RepPedidoItem.Quantidade,0))-SUM(IFNULL(RepPedidoItem.Retorno,0)) Vendido, SUM(IFNULL(RepPedidoItem.Retorno,0)) Retorno FROM RepPedido
+			                                    LEFT JOIN RepPedidoItem ON RepPedidoItem.PedidoId = RepPedido.Id
+			                                WHERE (Status > 2 OR Retorno > 0)
+			                                GROUP BY ProdutoGradeId, CargaId
+                                            ) as Retornado ON Retornado.ProdutoGradeId = RepProdutoGrade.Id AND Retornado.CargaId = RepCarga.Id
+								   LEFT JOIN (
+										SELECT ProdutoGradeId, CargaId, SUM(IFNULL(RepPedidoItem.Quantidade,0))-SUM(IFNULL(RepPedidoItem.Retorno,0))  Consignado FROM RepPedido
+											LEFT JOIN RepPedidoItem ON RepPedidoItem.PedidoId = RepPedido.Id
+										WHERE Status <= 2
+										GROUP BY ProdutoGradeId, CargaId
+										) as Consignado ON Consignado.ProdutoGradeId = RepProdutoGrade.Id AND Consignado.CargaId = RepCarga.Id
+									WHERE RepCargaProduto.Id IS NOT NULL
+                                 GROUP BY RepProdutoGrade.CodigoBarras, RepProdutoGrade.Digito, RepProduto.Descricao, RepProdutoGrade.Tamanho, RepCarga.Id, RepProdutoGrade.ValorSaida";
 
 
                 var result = representante.Database.SqlQuery<ListaRepEstoque>(query);

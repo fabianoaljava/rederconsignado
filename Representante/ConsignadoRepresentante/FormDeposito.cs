@@ -918,5 +918,16 @@ namespace ConsignadoRepresentante
                 cConferirProdutos.ExibirConferenciaProduto(cCargaId);
             }
         }
+
+        private void FormDeposito_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //
+
+            if (!cConferirProdutos.Finalizado())
+            {
+                MessageBox.Show("A conferencia de produtos não foi finalizada. Resolva todos os conflitos antes de fechar o aplicativo.", "Conferencia não Finalizada", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                e.Cancel = true;
+            }
+        }
     }
 }

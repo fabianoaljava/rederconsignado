@@ -342,7 +342,7 @@
             this.tbcPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tbcPrincipal.Name = "tbcPrincipal";
-            this.tbcPrincipal.SelectedIndex = 0;
+            this.tbcPrincipal.SelectedIndex = 2;
             this.tbcPrincipal.Size = new System.Drawing.Size(860, 645);
             this.tbcPrincipal.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tbcPrincipal.TabIndex = 11;
@@ -2177,6 +2177,7 @@
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "Reder Consignado | Módulo Depósito";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormDeposito_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormDeposito_FormClosed);
             this.Load += new System.EventHandler(this.FormDeposito_Load);
             this.panelHeader.ResumeLayout(false);
