@@ -1257,6 +1257,44 @@ namespace ModelLibrary
 
 
 
+        public static List<ListaPedidosFechados> ObterTotalPedidosFechados(long pCargaId, bool pAtual = true)
+        {
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                long vCargaId;
+
+                if (pAtual)
+                {
+                    vCargaId = pCargaId;
+
+                }
+                else
+                {
+
+                    var carga = deposito.Carga.FirstOrDefault(c => c.Id == pCargaId);
+
+                    var cargaanterior = deposito.Carga.Where(c => c.PracaId == carga.PracaId && c.Id < pCargaId).OrderByDescending(i => i.Id).FirstOrDefault();
+
+                    vCargaId = cargaanterior != null ? cargaanterior.Id : 0;
+                }
+
+                string query = @"SELECT '' CodigoPedido, 'Total' Nome, SUM(ValorPedido) ValorPedido, SUM(ValorCompra) ValorCompra, SUM(ValorLiquido) ValorLiquido, SUM(ValorAReceber) ValorAReceber, SUM(ValorAcerto) ValorAcerto, SUM(ValorLiquido+ValorAReceber-ValorAcerto) as ValorAberto, null DataLancamento, '' as Status
+	                            FROM Pedido 
+	                            INNER JOIN Vendedor ON Pedido.VendedorId = Vendedor.Id
+                                WHERE (CargaId = @p0 OR CargaOriginal = @p0) AND DataRetorno IS NOT NULL";
+
+                var result = deposito.Database.SqlQuery<ListaPedidosFechados>(query, vCargaId);
+
+                return result.ToList<ListaPedidosFechados>();
+
+            }
+
+        }
+
+
+
         public static List<ListaPedidoItem> ObterListaPedidoItem(long pPedidoId)
         {
 

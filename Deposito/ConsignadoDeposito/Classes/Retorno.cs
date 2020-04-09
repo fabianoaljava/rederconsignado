@@ -731,6 +731,22 @@ namespace ConsignadoDeposito
 
 
                 localDepositoForm.grdRetornoPedido.Refresh();
+
+
+                //Carregar Totalizadores
+
+
+                double sumValorPedido = 0;
+                double sumQtdPedido = localDepositoForm.grdRetornoPedido.Rows.Count;
+                for (int i = 0; i < localDepositoForm.grdRetornoPedido.Rows.Count; ++i)
+                {
+                    sumValorPedido += Convert.ToDouble(localDepositoForm.grdRetornoPedido.Rows[i].Cells[3].Value);                    
+                }
+
+
+                localDepositoForm.dlbValorPedido.Text = sumValorPedido.ToString("C");
+                localDepositoForm.dlbQuantidadePedido.Text = sumQtdPedido.ToString();
+
             }
             catch (Exception vE)
             {
@@ -767,6 +783,26 @@ namespace ConsignadoDeposito
                 localDepositoForm.grdPedidosFechado.Columns[7].DefaultCellStyle.Format = "c";
 
                 localDepositoForm.grdPedidosFechado.Refresh();
+
+
+                List<ModelLibrary.ListaPedidosFechados> totalpedidos = ModelLibrary.MetodosDeposito.ObterTotalPedidosFechados(cRetornoId, pAtual);
+
+                BindingListView<ModelLibrary.ListaPedidosFechados> viewtotal = new BindingListView<ModelLibrary.ListaPedidosFechados>(totalpedidos);
+
+                localDepositoForm.grdPedidosFechadoTotal.DataSource = viewtotal;
+
+                localDepositoForm.grdPedidosFechadoTotal.Columns[1].Width = 250;
+                localDepositoForm.grdPedidosFechadoTotal.Columns[2].DefaultCellStyle.Format = "c";
+                localDepositoForm.grdPedidosFechadoTotal.Columns[3].DefaultCellStyle.Format = "c";
+                localDepositoForm.grdPedidosFechadoTotal.Columns[4].DefaultCellStyle.Format = "c";
+                localDepositoForm.grdPedidosFechadoTotal.Columns[5].DefaultCellStyle.Format = "c";
+                localDepositoForm.grdPedidosFechadoTotal.Columns[6].DefaultCellStyle.Format = "c";
+                localDepositoForm.grdPedidosFechadoTotal.Columns[7].DefaultCellStyle.Format = "c";
+
+                localDepositoForm.grdPedidosFechadoTotal.Refresh();
+
+
+
             }
             catch (Exception vE)
             {
@@ -799,6 +835,25 @@ namespace ConsignadoDeposito
                 localDepositoForm.grdContasAReceber.Columns[4].Width = 250;
                 localDepositoForm.grdContasAReceber.Columns[5].DefaultCellStyle.Format = "c";
                 localDepositoForm.grdContasAReceber.Columns[6].DefaultCellStyle.Format = "c";
+
+
+                //Carregar Totalizadores
+
+
+                double sumValorTotal = 0;
+                double sumValorAReceber = 0;
+                double sumValorPago = 0;
+                for (int i = 0; i < localDepositoForm.grdContasAReceber.Rows.Count; ++i)
+                {
+                    sumValorTotal += Convert.ToDouble(localDepositoForm.grdContasAReceber.Rows[i].Cells[5].Value);
+                    sumValorAReceber += Convert.ToDouble(localDepositoForm.grdContasAReceber.Rows[i].Cells[6].Value);
+                    sumValorPago += Convert.ToDouble(localDepositoForm.grdContasAReceber.Rows[i].Cells[7].Value);
+                }
+
+
+                localDepositoForm.dlbTitulosTotal.Text = sumValorTotal.ToString("C");
+                localDepositoForm.dlbTitulosAReceber.Text = sumValorAReceber.ToString("C");
+                localDepositoForm.dlbTitulosPago.Text = sumValorPago.ToString("C");
             }
             catch (Exception vE)
             {
