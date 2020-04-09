@@ -374,14 +374,6 @@ namespace ConsignadoDeposito
             }
         }
 
-        private void txtCargaCodigoBarras_Leave(object sender, EventArgs e)
-        {
-            //if (txtCargaCodigoBarras.Text != "")
-            //{
-            //    cCarga.PesquisarCargaProduto(txtCargaCodigoBarras.Text);
-            //}
-        }
-
         private void chkCargaQuantidade_CheckedChanged(object sender, EventArgs e)
         {
             if (cCarga.cCargaProdutoGradeId != 0)

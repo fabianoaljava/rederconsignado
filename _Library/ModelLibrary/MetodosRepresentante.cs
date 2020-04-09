@@ -399,8 +399,9 @@ namespace ModelLibrary
                         string vDigito = pPesquisa.Substring(pPesquisa.Length - 1);
 
                         return (from pg in representante.RepProdutoGrade
-                                            where ((pg.CodigoBarras == vCodigoSemDigito && pg.Digito == vDigito))
-                                            select pg).ToList<RepProdutoGrade>();
+                                            where (((pg.CodigoBarras.ToString() + pg.Digito.ToString()).Contains(pPesquisa)))
+                                select pg).ToList<RepProdutoGrade>();
+
                     } else // pesquisa pelo ID
                     {
                         long vProdutoId = Convert.ToInt64(pPesquisa);

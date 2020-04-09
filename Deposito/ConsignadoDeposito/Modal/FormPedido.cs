@@ -202,9 +202,158 @@ namespace ConsignadoDeposito.Modal
             
 
         }
-
-
         public void LancamentoPedidoPesquisar(string pCodigo)
+        {
+
+        }
+
+        public void PesquisarCargaProduto(string pCodigo)
+        {
+
+
+            try
+            {
+                long vProdutoGradeId = 0;
+                List<ModelLibrary.ProdutoGrade> produtosgrade = ModelLibrary.MetodosDeposito.ObterProdutosGrade(pCodigo);
+
+                if (produtosgrade != null)
+                {
+                    if (produtosgrade.Count > 1)
+                    {
+                        Modal.FormProdutosGrade formProdutosGrade = new Modal.FormProdutosGrade(pCodigo);
+
+
+                        var result = formProdutosGrade.ShowDialog();
+
+                        if (result == DialogResult.OK)
+                        {
+                            vProdutoGradeId = formProdutosGrade.cProdutoGradeId;
+                            ExibirProdutoGrade(vProdutoGradeId);
+                        }
+                        else
+                        {
+                            vProdutoGradeId = 0;
+                        }
+                    }
+                    else
+                    {
+                        vProdutoGradeId = (produtosgrade.FirstOrDefault() != null) ? produtosgrade.FirstOrDefault().Id : 0;
+                        ExibirProdutoGrade(vProdutoGradeId);
+                    }
+                }
+                else
+                {
+                    vProdutoGradeId = 0;
+                    ExibirProdutoGrade(vProdutoGradeId);
+                }
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Carga.PesquisarCargaProduto()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+
+
+        }
+
+
+
+        public void ExibirProdutoGrade(long pProdutoGradeId)
+        {
+
+            try
+            {
+                var produtograde = ModelLibrary.MetodosDeposito.ObterProdutoGrade("", pProdutoGradeId);
+
+                if (produtograde != null)
+                {
+
+                    var produto = ModelLibrary.MetodosDeposito.ObterProduto(produtograde.CodigoBarras);
+
+
+                    if (produtograde.Status != "1" || produto.Status != "1")
+                    {
+
+                        MessageBox.Show("Este produto foi excluído e não pode ser inserido na carga.");
+
+                    }
+                    else
+                    {
+
+                        txtLancPedProduto.Text = produto.Descricao;
+                        txtLancPedQuantidade.Text = "";
+                        txtLancPedQtdRetorno.Text = "";
+                        txtLancPedPreco.Text = produtograde.ValorSaida.ToString();
+
+                        cPedidoProdutoGradeId = produtograde.Id;
+                        cModoPedidoItem = "Insert";
+
+
+
+
+
+                        if (txtLancPedCodigoBarras.Text != produtograde.CodigoBarras + produtograde.Digito)
+                        {
+                            txtLancPedCodigoBarras.Text = produtograde.CodigoBarras + produtograde.Digito;
+                            if (chkLancPedQuantidade.Checked == false)
+                            {
+                                chkLancPedQuantidade.Checked = true;
+                                txtLancPedQuantidade.Enabled = true;
+                            }
+                        }
+
+
+                        btnLancPedConfirmar.Enabled = true;
+                        btnLancPedCancelar.Enabled = true;
+
+                        if (chkLancPedQuantidade.Checked)
+                        {
+                            txtLancPedQuantidade.Focus();
+
+                        }
+                        else
+                        {
+                            //inserir direto qtd=1
+                            SalvarLancamentoPedido();
+                        }
+                    }
+
+
+
+                }
+                else
+                {
+
+                    MessageBox.Show("Dígito verificador inválido. Não foi possível encontrar a grade deste produto.");
+
+                    cPedidoProdutoGradeId = 0;
+                    localDepositoForm.txtCargaCodigoBarras.Text = "";
+                    localDepositoForm.txtCargaCodigoBarras.Focus();
+                    localDepositoForm.btnCargaConfirmar.Enabled = false;
+                    localDepositoForm.btnCargaCancelar.Enabled = false;
+
+
+
+
+
+                }
+            }
+            catch (Exception vE)
+            {
+                Trace.WriteLine(DateTime.Now.ToString() + "Carga.ExibirProdutoGrade()");
+                Trace.TraceError(vE.Message);
+                MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+
+        }
+
+        public void LancamentoPedidoPesquisar_old(string pCodigo)
         {
             try
             {
@@ -214,7 +363,6 @@ namespace ConsignadoDeposito.Modal
                     .Cast<DataGridViewRow>()
                     .Where(r => r.Cells["CodigoBarras"].Value.ToString().Equals(pCodigo) || r.Cells["ProdutoGradeId"].Value.ToString().Equals(pCodigo))
                     .FirstOrDefault();
-
 
                 if (pedidoitem != null)
                 {
@@ -323,23 +471,40 @@ namespace ConsignadoDeposito.Modal
         {
             try
             {
+
                 if (cModoPedidoItem == "Edit")
                 {
 
                     ModelLibrary.MetodosDeposito.AlterarPedidoItem(cPedidoItemId, Convert.ToDouble(txtLancPedQuantidade.Text), Convert.ToDouble(txtLancPedQtdRetorno.Text), Convert.ToDouble(txtLancPedPreco.Text));
 
+                    CarregarListaLancamentoPedido();
+                    LancamentoPedidoItemLimpar();
+                    LancamentoPedidoReload();
                 }
                 else
                 {
                     if (txtLancPedQuantidade.Text == "") txtLancPedQuantidade.Text = "0";
                     if (txtLancPedQtdRetorno.Text == "") txtLancPedQtdRetorno.Text = "0";
-                    ModelLibrary.MetodosDeposito.InserirPedidoItem(cPedidoId, cPedidoProdutoGradeId, Convert.ToDouble(txtLancPedQuantidade.Text), Convert.ToDouble(txtLancPedQtdRetorno.Text), Convert.ToDouble(txtLancPedPreco.Text));
+
+                    if (!chkLancPedQuantidade.Checked) txtLancPedQuantidade.Text = "1";
+
+                    if (txtLancPedQuantidade.Text == "0" && txtLancPedQtdRetorno.Text == "0")
+                    {
+                        MessageBox.Show("Informe a quantidade", "Lançamento de Pedido", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                        txtLancPedQuantidade.Focus();
+                    } else
+                    {
+                        
+                        ModelLibrary.MetodosDeposito.InserirPedidoItem(cPedidoId, cPedidoProdutoGradeId, Convert.ToDouble(txtLancPedQuantidade.Text), Convert.ToDouble(txtLancPedQtdRetorno.Text), Convert.ToDouble(txtLancPedPreco.Text));
+
+                        CarregarListaLancamentoPedido();
+                        LancamentoPedidoItemLimpar();
+                        LancamentoPedidoReload();
+                    }                    
 
                 }
 
-                CarregarListaLancamentoPedido();
-                LancamentoPedidoItemLimpar();
-                LancamentoPedidoReload();
+
             }
             catch (Exception vE)
             {
@@ -437,7 +602,7 @@ namespace ConsignadoDeposito.Modal
         {
             if (txtLancPedCodigoBarras.Text != "")
             {
-                LancamentoPedidoPesquisar(txtLancPedCodigoBarras.Text);
+                PesquisarCargaProduto(txtLancPedCodigoBarras.Text);
 
             }
         }

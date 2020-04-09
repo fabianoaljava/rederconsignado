@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ModelLibrary
@@ -614,18 +615,38 @@ namespace ModelLibrary
             {
                 if (pPesquisa != "")
                 {
-                    string vCodigoSemDigito = pPesquisa.Substring(0, pPesquisa.Length - 1);
-                    string vDigito = pPesquisa.Substring(pPesquisa.Length - 1);
 
-                    long vProdutoId = Convert.ToInt64(pPesquisa);
 
-                    Console.WriteLine(vCodigoSemDigito + ':' + vDigito);
+                    if (pPesquisa.Length > 6) // pesquisa pelo codigo de barras
+                    {
+                        string vCodigoSemDigito = pPesquisa.Substring(0, pPesquisa.Length - 1);
+                        string vDigito = pPesquisa.Substring(pPesquisa.Length - 1);
 
-                    var produtograde = (from pg in deposito.ProdutoGrade
-                                        where ((pg.CodigoBarras == vCodigoSemDigito && pg.Digito == vDigito) || pg.ProdutoId == vProdutoId)
-                                        select pg).ToList<ProdutoGrade>();
 
-                    return produtograde;
+                        long vProdutoId = Convert.ToInt64(pPesquisa);
+
+                        Console.WriteLine(vCodigoSemDigito + ':' + vDigito);
+
+
+                        //string query = "SELECT * FROM ProdutoGrade WHERE CodigoBarras+''+Digito = '@p0'";
+
+                        //return deposito.Database.SqlQuery<ProdutoGrade>(query, pPesquisa).ToList<ProdutoGrade>();
+
+                        return (from pg in deposito.ProdutoGrade
+                                where (((pg.CodigoBarras.ToString()+ pg.Digito.ToString()).Contains(pPesquisa)))
+                                select pg).ToList<ProdutoGrade>();
+
+                    }
+                    else // pesquisa pelo ID
+                    {
+                        long vProdutoId = Convert.ToInt64(pPesquisa);
+
+
+                        return (from pg in deposito.ProdutoGrade
+                                where (pg.ProdutoId == vProdutoId)
+                                select pg).ToList<ProdutoGrade>();
+
+                    }
 
                 }
                 else
@@ -1348,23 +1369,43 @@ namespace ModelLibrary
             {
 
 
-                DateTime dataabertura = DateTime.Now;
+                var result = deposito.PedidoItem.SingleOrDefault(pi => pi.ProdutoGradeId == pProdutoGradeId && pi.PedidoId == pPedidoId);
 
-                var maxPedidoItem = deposito.PedidoItem.OrderByDescending(i => i.Id).FirstOrDefault();
-
-                int newId = maxPedidoItem == null ? 1 : maxPedidoItem.Id + 1;
-
-                var novopedidoitem = new PedidoItem
+                if (result != null)
                 {
-                    Id = newId,
-                    PedidoId = pPedidoId,
-                    ProdutoGradeId = pProdutoGradeId,
-                    Quantidade = pQuantidade,
-                    Retorno = pQtdRetorno,
-                    Preco = pPreco
-                };                
 
-                deposito.PedidoItem.Add(novopedidoitem);
+                    var tmpQtd = result.Quantidade;
+                    var tmpRet = result.Retorno;
+
+                    Console.WriteLine("Valor:" + tmpQtd.ToString());
+                    result.Quantidade = tmpQtd + pQuantidade;
+                    result.Retorno = tmpRet + pQtdRetorno;
+
+                } else
+                {
+                    DateTime dataabertura = DateTime.Now;
+
+                    var maxPedidoItem = deposito.PedidoItem.OrderByDescending(i => i.Id).FirstOrDefault();
+
+                    int newId = maxPedidoItem == null ? 1 : maxPedidoItem.Id + 1;
+
+                    var novopedidoitem = new PedidoItem
+                    {
+                        Id = newId,
+                        PedidoId = pPedidoId,
+                        ProdutoGradeId = pProdutoGradeId,
+                        Quantidade = pQuantidade,
+                        Retorno = pQtdRetorno,
+                        Preco = pPreco
+                    };
+
+                    deposito.PedidoItem.Add(novopedidoitem);
+                }
+
+
+                          
+
+                
                 deposito.SaveChanges();
 
 
