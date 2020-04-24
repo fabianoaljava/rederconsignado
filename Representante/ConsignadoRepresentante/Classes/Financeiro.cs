@@ -54,8 +54,16 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.grdPosicaoFinanceira.Columns[4].DefaultCellStyle.Format = "n";
 
 
+
+            Decimal vTotalAReceber =0, vTotalRecebido=0, vTotalAberto = 0;
+
             foreach (DataGridViewRow row in localRepresentanteForm.grdPosicaoFinanceira.Rows)
             {
+
+
+                vTotalAReceber = vTotalAReceber + Convert.ToDecimal(localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].Cells[2].Value.ToString());
+                vTotalRecebido = vTotalRecebido + Convert.ToDecimal(localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].Cells[3].Value.ToString());
+                vTotalAberto = vTotalAberto + Convert.ToDecimal(localRepresentanteForm.grdPosicaoFinanceira.Rows[row.Index].Cells[4].Value.ToString());
 
 
 
@@ -93,6 +101,12 @@ namespace ConsignadoRepresentante
             localRepresentanteForm.grdPosicaoFinanceira.Columns[7].Visible = false;
             localRepresentanteForm.grdPosicaoFinanceira.Columns[8].Visible = false;
             localRepresentanteForm.grdPosicaoFinanceira.Columns[9].Visible = false;
+
+
+            localRepresentanteForm.dlbPosicaoFinanceiraTotalAReceber.Text = vTotalAReceber.ToString("C");
+            localRepresentanteForm.dlbPosicaoFinanceiraTotalRecebido.Text = vTotalRecebido.ToString("C");
+            localRepresentanteForm.dlbPosicaoFinanceiraTotalAberto.Text = vTotalAberto.ToString("C");
+
 
 
 

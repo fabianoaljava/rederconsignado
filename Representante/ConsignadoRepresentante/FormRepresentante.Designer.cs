@@ -77,20 +77,6 @@
             this.chkVendedorComPedidoAnterior = new MetroFramework.Controls.MetroCheckBox();
             this.pnlHomeGrid = new MetroFramework.Controls.MetroPanel();
             this.grdHome = new MetroFramework.Controls.MetroGrid();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.documentoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.enderecoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.complementoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bairroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cidadeUFDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.telefonesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pedidoAnteriorDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.recebidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pedidoAtualDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.codigoPedidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.receberDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.listaRepVendedorHomeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabVendedores = new System.Windows.Forms.TabPage();
             this.pnlVendedorResultado = new MetroFramework.Controls.MetroPanel();
             this.tbcVendedor = new MetroFramework.Controls.MetroTabControl();
@@ -281,6 +267,27 @@
             this.grdEstoque = new MetroFramework.Controls.MetroGrid();
             this.tabAjuda = new System.Windows.Forms.TabPage();
             this.pnlAjuda = new MetroFramework.Drawing.Html.HtmlPanel();
+            this.pnlPosicaoFinanceiraTotalizador = new MetroFramework.Controls.MetroPanel();
+            this.lblPosicaoFinanceiraTotalRecebido = new MetroFramework.Controls.MetroLabel();
+            this.lblPosicaoFinanceiraTotalAReceber = new MetroFramework.Controls.MetroLabel();
+            this.lblPosicaoFinanceiraTotalAberto = new MetroFramework.Controls.MetroLabel();
+            this.dlbPosicaoFinanceiraTotalAReceber = new MetroFramework.Controls.MetroLabel();
+            this.dlbPosicaoFinanceiraTotalRecebido = new MetroFramework.Controls.MetroLabel();
+            this.dlbPosicaoFinanceiraTotalAberto = new MetroFramework.Controls.MetroLabel();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.documentoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.enderecoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.complementoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bairroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cidadeUFDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.telefonesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pedidoAnteriorDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.recebidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pedidoAtualDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.codigoPedidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.receberDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.listaRepVendedorHomeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
@@ -291,7 +298,6 @@
             this.pnlHomeFiltros.SuspendLayout();
             this.pnlHomeGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdHome)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.listaRepVendedorHomeBindingSource)).BeginInit();
             this.tabVendedores.SuspendLayout();
             this.pnlVendedorResultado.SuspendLayout();
             this.tbcVendedor.SuspendLayout();
@@ -331,6 +337,8 @@
             this.pnlEstoqueMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdEstoque)).BeginInit();
             this.tabAjuda.SuspendLayout();
+            this.pnlPosicaoFinanceiraTotalizador.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.listaRepVendedorHomeBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -446,7 +454,7 @@
             this.tbcPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tbcPrincipal.Name = "tbcPrincipal";
-            this.tbcPrincipal.SelectedIndex = 4;
+            this.tbcPrincipal.SelectedIndex = 2;
             this.tbcPrincipal.Size = new System.Drawing.Size(968, 546);
             this.tbcPrincipal.TabIndex = 0;
             this.tbcPrincipal.UseSelectable = true;
@@ -627,101 +635,6 @@
             this.grdHome.TabIndex = 2;
             this.grdHome.VirtualMode = true;
             this.grdHome.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdHome_CellContentDoubleClick);
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.Width = 40;
-            // 
-            // nomeDataGridViewTextBoxColumn
-            // 
-            this.nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
-            this.nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
-            this.nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
-            this.nomeDataGridViewTextBoxColumn.Width = 60;
-            // 
-            // documentoDataGridViewTextBoxColumn
-            // 
-            this.documentoDataGridViewTextBoxColumn.DataPropertyName = "Documento";
-            this.documentoDataGridViewTextBoxColumn.HeaderText = "Documento";
-            this.documentoDataGridViewTextBoxColumn.Name = "documentoDataGridViewTextBoxColumn";
-            this.documentoDataGridViewTextBoxColumn.Width = 90;
-            // 
-            // enderecoDataGridViewTextBoxColumn
-            // 
-            this.enderecoDataGridViewTextBoxColumn.DataPropertyName = "Endereco";
-            this.enderecoDataGridViewTextBoxColumn.HeaderText = "Endereco";
-            this.enderecoDataGridViewTextBoxColumn.Name = "enderecoDataGridViewTextBoxColumn";
-            this.enderecoDataGridViewTextBoxColumn.Width = 78;
-            // 
-            // complementoDataGridViewTextBoxColumn
-            // 
-            this.complementoDataGridViewTextBoxColumn.DataPropertyName = "Complemento";
-            this.complementoDataGridViewTextBoxColumn.HeaderText = "Complemento";
-            this.complementoDataGridViewTextBoxColumn.Name = "complementoDataGridViewTextBoxColumn";
-            this.complementoDataGridViewTextBoxColumn.Width = 102;
-            // 
-            // bairroDataGridViewTextBoxColumn
-            // 
-            this.bairroDataGridViewTextBoxColumn.DataPropertyName = "Bairro";
-            this.bairroDataGridViewTextBoxColumn.HeaderText = "Bairro";
-            this.bairroDataGridViewTextBoxColumn.Name = "bairroDataGridViewTextBoxColumn";
-            this.bairroDataGridViewTextBoxColumn.Width = 61;
-            // 
-            // cidadeUFDataGridViewTextBoxColumn
-            // 
-            this.cidadeUFDataGridViewTextBoxColumn.DataPropertyName = "CidadeUF";
-            this.cidadeUFDataGridViewTextBoxColumn.HeaderText = "CidadeUF";
-            this.cidadeUFDataGridViewTextBoxColumn.Name = "cidadeUFDataGridViewTextBoxColumn";
-            this.cidadeUFDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // telefonesDataGridViewTextBoxColumn
-            // 
-            this.telefonesDataGridViewTextBoxColumn.DataPropertyName = "Telefones";
-            this.telefonesDataGridViewTextBoxColumn.HeaderText = "Telefones";
-            this.telefonesDataGridViewTextBoxColumn.Name = "telefonesDataGridViewTextBoxColumn";
-            this.telefonesDataGridViewTextBoxColumn.Width = 78;
-            // 
-            // pedidoAnteriorDataGridViewCheckBoxColumn
-            // 
-            this.pedidoAnteriorDataGridViewCheckBoxColumn.DataPropertyName = "PedidoAnterior";
-            this.pedidoAnteriorDataGridViewCheckBoxColumn.HeaderText = "PedidoAnterior";
-            this.pedidoAnteriorDataGridViewCheckBoxColumn.Name = "pedidoAnteriorDataGridViewCheckBoxColumn";
-            this.pedidoAnteriorDataGridViewCheckBoxColumn.Width = 89;
-            // 
-            // recebidoDataGridViewTextBoxColumn
-            // 
-            this.recebidoDataGridViewTextBoxColumn.DataPropertyName = "Recebido";
-            this.recebidoDataGridViewTextBoxColumn.HeaderText = "Recebido";
-            this.recebidoDataGridViewTextBoxColumn.Name = "recebidoDataGridViewTextBoxColumn";
-            this.recebidoDataGridViewTextBoxColumn.Width = 78;
-            // 
-            // pedidoAtualDataGridViewCheckBoxColumn
-            // 
-            this.pedidoAtualDataGridViewCheckBoxColumn.DataPropertyName = "PedidoAtual";
-            this.pedidoAtualDataGridViewCheckBoxColumn.HeaderText = "PedidoAtual";
-            this.pedidoAtualDataGridViewCheckBoxColumn.Name = "pedidoAtualDataGridViewCheckBoxColumn";
-            this.pedidoAtualDataGridViewCheckBoxColumn.Width = 74;
-            // 
-            // codigoPedidoDataGridViewTextBoxColumn
-            // 
-            this.codigoPedidoDataGridViewTextBoxColumn.DataPropertyName = "CodigoPedido";
-            this.codigoPedidoDataGridViewTextBoxColumn.HeaderText = "CodigoPedido";
-            this.codigoPedidoDataGridViewTextBoxColumn.Name = "codigoPedidoDataGridViewTextBoxColumn";
-            this.codigoPedidoDataGridViewTextBoxColumn.Width = 104;
-            // 
-            // receberDataGridViewCheckBoxColumn
-            // 
-            this.receberDataGridViewCheckBoxColumn.DataPropertyName = "Receber";
-            this.receberDataGridViewCheckBoxColumn.HeaderText = "Receber";
-            this.receberDataGridViewCheckBoxColumn.Name = "receberDataGridViewCheckBoxColumn";
-            this.receberDataGridViewCheckBoxColumn.Width = 52;
-            // 
-            // listaRepVendedorHomeBindingSource
-            // 
-            this.listaRepVendedorHomeBindingSource.DataSource = typeof(ModelLibrary.ListaRepVendedorHome);
             // 
             // tabVendedores
             // 
@@ -3519,6 +3432,7 @@
             // 
             this.tabPosicaoFinanceira.Controls.Add(this.pnlPosicaoFinanceiraMain);
             this.tabPosicaoFinanceira.Controls.Add(this.pnlPosicaoFinanceiraLegenda);
+            this.tabPosicaoFinanceira.Controls.Add(this.pnlPosicaoFinanceiraTotalizador);
             this.tabPosicaoFinanceira.Location = new System.Drawing.Point(4, 38);
             this.tabPosicaoFinanceira.Name = "tabPosicaoFinanceira";
             this.tabPosicaoFinanceira.Size = new System.Drawing.Size(960, 504);
@@ -3534,7 +3448,7 @@
             this.pnlPosicaoFinanceiraMain.HorizontalScrollbarSize = 10;
             this.pnlPosicaoFinanceiraMain.Location = new System.Drawing.Point(0, 60);
             this.pnlPosicaoFinanceiraMain.Name = "pnlPosicaoFinanceiraMain";
-            this.pnlPosicaoFinanceiraMain.Size = new System.Drawing.Size(960, 444);
+            this.pnlPosicaoFinanceiraMain.Size = new System.Drawing.Size(960, 384);
             this.pnlPosicaoFinanceiraMain.TabIndex = 1;
             this.pnlPosicaoFinanceiraMain.VerticalScrollbarBarColor = true;
             this.pnlPosicaoFinanceiraMain.VerticalScrollbarHighlightOnWheel = false;
@@ -3589,7 +3503,7 @@
             this.grdPosicaoFinanceira.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grdPosicaoFinanceira.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdPosicaoFinanceira.ShowEditingIcon = false;
-            this.grdPosicaoFinanceira.Size = new System.Drawing.Size(960, 444);
+            this.grdPosicaoFinanceira.Size = new System.Drawing.Size(960, 384);
             this.grdPosicaoFinanceira.TabIndex = 2;
             this.grdPosicaoFinanceira.UseCustomForeColor = true;
             this.grdPosicaoFinanceira.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdPosicaoFinanceira_CellDoubleClick);
@@ -3987,6 +3901,178 @@
             this.pnlAjuda.TabIndex = 0;
             this.pnlAjuda.Text = "<b>Conteudo da Ajuda</b> <br> <i>Em breve...</i>";
             // 
+            // pnlPosicaoFinanceiraTotalizador
+            // 
+            this.pnlPosicaoFinanceiraTotalizador.Controls.Add(this.dlbPosicaoFinanceiraTotalAberto);
+            this.pnlPosicaoFinanceiraTotalizador.Controls.Add(this.dlbPosicaoFinanceiraTotalRecebido);
+            this.pnlPosicaoFinanceiraTotalizador.Controls.Add(this.dlbPosicaoFinanceiraTotalAReceber);
+            this.pnlPosicaoFinanceiraTotalizador.Controls.Add(this.lblPosicaoFinanceiraTotalAberto);
+            this.pnlPosicaoFinanceiraTotalizador.Controls.Add(this.lblPosicaoFinanceiraTotalAReceber);
+            this.pnlPosicaoFinanceiraTotalizador.Controls.Add(this.lblPosicaoFinanceiraTotalRecebido);
+            this.pnlPosicaoFinanceiraTotalizador.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlPosicaoFinanceiraTotalizador.HorizontalScrollbarBarColor = true;
+            this.pnlPosicaoFinanceiraTotalizador.HorizontalScrollbarHighlightOnWheel = false;
+            this.pnlPosicaoFinanceiraTotalizador.HorizontalScrollbarSize = 10;
+            this.pnlPosicaoFinanceiraTotalizador.Location = new System.Drawing.Point(0, 444);
+            this.pnlPosicaoFinanceiraTotalizador.Name = "pnlPosicaoFinanceiraTotalizador";
+            this.pnlPosicaoFinanceiraTotalizador.Size = new System.Drawing.Size(960, 60);
+            this.pnlPosicaoFinanceiraTotalizador.TabIndex = 2;
+            this.pnlPosicaoFinanceiraTotalizador.VerticalScrollbarBarColor = true;
+            this.pnlPosicaoFinanceiraTotalizador.VerticalScrollbarHighlightOnWheel = false;
+            this.pnlPosicaoFinanceiraTotalizador.VerticalScrollbarSize = 10;
+            // 
+            // lblPosicaoFinanceiraTotalRecebido
+            // 
+            this.lblPosicaoFinanceiraTotalRecebido.AutoSize = true;
+            this.lblPosicaoFinanceiraTotalRecebido.Location = new System.Drawing.Point(227, 20);
+            this.lblPosicaoFinanceiraTotalRecebido.Name = "lblPosicaoFinanceiraTotalRecebido";
+            this.lblPosicaoFinanceiraTotalRecebido.Size = new System.Drawing.Size(98, 19);
+            this.lblPosicaoFinanceiraTotalRecebido.TabIndex = 2;
+            this.lblPosicaoFinanceiraTotalRecebido.Text = "Total Recebido:";
+            // 
+            // lblPosicaoFinanceiraTotalAReceber
+            // 
+            this.lblPosicaoFinanceiraTotalAReceber.AutoSize = true;
+            this.lblPosicaoFinanceiraTotalAReceber.Location = new System.Drawing.Point(18, 20);
+            this.lblPosicaoFinanceiraTotalAReceber.Name = "lblPosicaoFinanceiraTotalAReceber";
+            this.lblPosicaoFinanceiraTotalAReceber.Size = new System.Drawing.Size(105, 19);
+            this.lblPosicaoFinanceiraTotalAReceber.TabIndex = 3;
+            this.lblPosicaoFinanceiraTotalAReceber.Text = "Total A Receber:";
+            // 
+            // lblPosicaoFinanceiraTotalAberto
+            // 
+            this.lblPosicaoFinanceiraTotalAberto.AutoSize = true;
+            this.lblPosicaoFinanceiraTotalAberto.Location = new System.Drawing.Point(426, 20);
+            this.lblPosicaoFinanceiraTotalAberto.Name = "lblPosicaoFinanceiraTotalAberto";
+            this.lblPosicaoFinanceiraTotalAberto.Size = new System.Drawing.Size(85, 19);
+            this.lblPosicaoFinanceiraTotalAberto.TabIndex = 4;
+            this.lblPosicaoFinanceiraTotalAberto.Text = "Total Aberto:";
+            // 
+            // dlbPosicaoFinanceiraTotalAReceber
+            // 
+            this.dlbPosicaoFinanceiraTotalAReceber.AutoSize = true;
+            this.dlbPosicaoFinanceiraTotalAReceber.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.dlbPosicaoFinanceiraTotalAReceber.Location = new System.Drawing.Point(120, 20);
+            this.dlbPosicaoFinanceiraTotalAReceber.Name = "dlbPosicaoFinanceiraTotalAReceber";
+            this.dlbPosicaoFinanceiraTotalAReceber.Size = new System.Drawing.Size(17, 19);
+            this.dlbPosicaoFinanceiraTotalAReceber.TabIndex = 5;
+            this.dlbPosicaoFinanceiraTotalAReceber.Text = "0";
+            // 
+            // dlbPosicaoFinanceiraTotalRecebido
+            // 
+            this.dlbPosicaoFinanceiraTotalRecebido.AutoSize = true;
+            this.dlbPosicaoFinanceiraTotalRecebido.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.dlbPosicaoFinanceiraTotalRecebido.Location = new System.Drawing.Point(322, 20);
+            this.dlbPosicaoFinanceiraTotalRecebido.Name = "dlbPosicaoFinanceiraTotalRecebido";
+            this.dlbPosicaoFinanceiraTotalRecebido.Size = new System.Drawing.Size(17, 19);
+            this.dlbPosicaoFinanceiraTotalRecebido.TabIndex = 6;
+            this.dlbPosicaoFinanceiraTotalRecebido.Text = "0";
+            // 
+            // dlbPosicaoFinanceiraTotalAberto
+            // 
+            this.dlbPosicaoFinanceiraTotalAberto.AutoSize = true;
+            this.dlbPosicaoFinanceiraTotalAberto.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.dlbPosicaoFinanceiraTotalAberto.Location = new System.Drawing.Point(512, 20);
+            this.dlbPosicaoFinanceiraTotalAberto.Name = "dlbPosicaoFinanceiraTotalAberto";
+            this.dlbPosicaoFinanceiraTotalAberto.Size = new System.Drawing.Size(17, 19);
+            this.dlbPosicaoFinanceiraTotalAberto.TabIndex = 7;
+            this.dlbPosicaoFinanceiraTotalAberto.Text = "0";
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.Width = 40;
+            // 
+            // nomeDataGridViewTextBoxColumn
+            // 
+            this.nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
+            this.nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
+            this.nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
+            this.nomeDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // documentoDataGridViewTextBoxColumn
+            // 
+            this.documentoDataGridViewTextBoxColumn.DataPropertyName = "Documento";
+            this.documentoDataGridViewTextBoxColumn.HeaderText = "Documento";
+            this.documentoDataGridViewTextBoxColumn.Name = "documentoDataGridViewTextBoxColumn";
+            this.documentoDataGridViewTextBoxColumn.Width = 90;
+            // 
+            // enderecoDataGridViewTextBoxColumn
+            // 
+            this.enderecoDataGridViewTextBoxColumn.DataPropertyName = "Endereco";
+            this.enderecoDataGridViewTextBoxColumn.HeaderText = "Endereco";
+            this.enderecoDataGridViewTextBoxColumn.Name = "enderecoDataGridViewTextBoxColumn";
+            this.enderecoDataGridViewTextBoxColumn.Width = 78;
+            // 
+            // complementoDataGridViewTextBoxColumn
+            // 
+            this.complementoDataGridViewTextBoxColumn.DataPropertyName = "Complemento";
+            this.complementoDataGridViewTextBoxColumn.HeaderText = "Complemento";
+            this.complementoDataGridViewTextBoxColumn.Name = "complementoDataGridViewTextBoxColumn";
+            this.complementoDataGridViewTextBoxColumn.Width = 102;
+            // 
+            // bairroDataGridViewTextBoxColumn
+            // 
+            this.bairroDataGridViewTextBoxColumn.DataPropertyName = "Bairro";
+            this.bairroDataGridViewTextBoxColumn.HeaderText = "Bairro";
+            this.bairroDataGridViewTextBoxColumn.Name = "bairroDataGridViewTextBoxColumn";
+            this.bairroDataGridViewTextBoxColumn.Width = 61;
+            // 
+            // cidadeUFDataGridViewTextBoxColumn
+            // 
+            this.cidadeUFDataGridViewTextBoxColumn.DataPropertyName = "CidadeUF";
+            this.cidadeUFDataGridViewTextBoxColumn.HeaderText = "CidadeUF";
+            this.cidadeUFDataGridViewTextBoxColumn.Name = "cidadeUFDataGridViewTextBoxColumn";
+            this.cidadeUFDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // telefonesDataGridViewTextBoxColumn
+            // 
+            this.telefonesDataGridViewTextBoxColumn.DataPropertyName = "Telefones";
+            this.telefonesDataGridViewTextBoxColumn.HeaderText = "Telefones";
+            this.telefonesDataGridViewTextBoxColumn.Name = "telefonesDataGridViewTextBoxColumn";
+            this.telefonesDataGridViewTextBoxColumn.Width = 78;
+            // 
+            // pedidoAnteriorDataGridViewCheckBoxColumn
+            // 
+            this.pedidoAnteriorDataGridViewCheckBoxColumn.DataPropertyName = "PedidoAnterior";
+            this.pedidoAnteriorDataGridViewCheckBoxColumn.HeaderText = "PedidoAnterior";
+            this.pedidoAnteriorDataGridViewCheckBoxColumn.Name = "pedidoAnteriorDataGridViewCheckBoxColumn";
+            this.pedidoAnteriorDataGridViewCheckBoxColumn.Width = 89;
+            // 
+            // recebidoDataGridViewTextBoxColumn
+            // 
+            this.recebidoDataGridViewTextBoxColumn.DataPropertyName = "Recebido";
+            this.recebidoDataGridViewTextBoxColumn.HeaderText = "Recebido";
+            this.recebidoDataGridViewTextBoxColumn.Name = "recebidoDataGridViewTextBoxColumn";
+            this.recebidoDataGridViewTextBoxColumn.Width = 78;
+            // 
+            // pedidoAtualDataGridViewCheckBoxColumn
+            // 
+            this.pedidoAtualDataGridViewCheckBoxColumn.DataPropertyName = "PedidoAtual";
+            this.pedidoAtualDataGridViewCheckBoxColumn.HeaderText = "PedidoAtual";
+            this.pedidoAtualDataGridViewCheckBoxColumn.Name = "pedidoAtualDataGridViewCheckBoxColumn";
+            this.pedidoAtualDataGridViewCheckBoxColumn.Width = 74;
+            // 
+            // codigoPedidoDataGridViewTextBoxColumn
+            // 
+            this.codigoPedidoDataGridViewTextBoxColumn.DataPropertyName = "CodigoPedido";
+            this.codigoPedidoDataGridViewTextBoxColumn.HeaderText = "CodigoPedido";
+            this.codigoPedidoDataGridViewTextBoxColumn.Name = "codigoPedidoDataGridViewTextBoxColumn";
+            this.codigoPedidoDataGridViewTextBoxColumn.Width = 104;
+            // 
+            // receberDataGridViewCheckBoxColumn
+            // 
+            this.receberDataGridViewCheckBoxColumn.DataPropertyName = "Receber";
+            this.receberDataGridViewCheckBoxColumn.HeaderText = "Receber";
+            this.receberDataGridViewCheckBoxColumn.Name = "receberDataGridViewCheckBoxColumn";
+            this.receberDataGridViewCheckBoxColumn.Width = 52;
+            // 
+            // listaRepVendedorHomeBindingSource
+            // 
+            this.listaRepVendedorHomeBindingSource.DataSource = typeof(ModelLibrary.ListaRepVendedorHome);
+            // 
             // FormRepresentante
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4014,7 +4100,6 @@
             this.pnlHomeFiltros.PerformLayout();
             this.pnlHomeGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdHome)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.listaRepVendedorHomeBindingSource)).EndInit();
             this.tabVendedores.ResumeLayout(false);
             this.pnlVendedorResultado.ResumeLayout(false);
             this.tbcVendedor.ResumeLayout(false);
@@ -4066,6 +4151,9 @@
             this.pnlEstoqueMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdEstoque)).EndInit();
             this.tabAjuda.ResumeLayout(false);
+            this.pnlPosicaoFinanceiraTotalizador.ResumeLayout(false);
+            this.pnlPosicaoFinanceiraTotalizador.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.listaRepVendedorHomeBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -4295,5 +4383,12 @@
         private MetroFramework.Controls.MetroLabel lblNumero;
         public MetroFramework.Controls.MetroButton btnPedidoImprimir;
         public MetroFramework.Controls.MetroButton btnRetornoImprimir;
+        private MetroFramework.Controls.MetroPanel pnlPosicaoFinanceiraTotalizador;
+        private MetroFramework.Controls.MetroLabel lblPosicaoFinanceiraTotalAReceber;
+        private MetroFramework.Controls.MetroLabel lblPosicaoFinanceiraTotalRecebido;
+        private MetroFramework.Controls.MetroLabel lblPosicaoFinanceiraTotalAberto;
+        public MetroFramework.Controls.MetroLabel dlbPosicaoFinanceiraTotalAReceber;
+        public MetroFramework.Controls.MetroLabel dlbPosicaoFinanceiraTotalAberto;
+        public MetroFramework.Controls.MetroLabel dlbPosicaoFinanceiraTotalRecebido;
     }
 }
