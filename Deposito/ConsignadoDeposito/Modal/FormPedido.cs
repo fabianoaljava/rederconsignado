@@ -202,10 +202,6 @@ namespace ConsignadoDeposito.Modal
             
 
         }
-        public void LancamentoPedidoPesquisar(string pCodigo)
-        {
-
-        }
 
         public void PesquisarCargaProduto(string pCodigo)
         {
@@ -353,7 +349,7 @@ namespace ConsignadoDeposito.Modal
 
         }
 
-        public void LancamentoPedidoPesquisar_old(string pCodigo)
+        public void LancamentoPedidoPesquisar(string pCodigo)
         {
             try
             {
@@ -615,6 +611,30 @@ namespace ConsignadoDeposito.Modal
         private void FormPedido_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void grdLancPedido_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Delete)
+            {
+
+                if (MessageBox.Show("Deseja realmente excluir o produto selecionado?", "ATENÇÃO! Exclusão de Produto", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        cPedidoItemId = Convert.ToInt32(grdLancPedido.CurrentRow.Cells["PedidoItemId"].Value);
+                        ExcluirLancamentoPedido(cPedidoItemId);
+                    }
+                    catch (Exception vE)
+                    {
+                        Trace.WriteLine(DateTime.Now.ToString() + "FormPedido.ExcluirLancamentoPedido()");
+                        Trace.TraceError(vE.Message);
+                        MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+
+                }
+            }
         }
     }
 }

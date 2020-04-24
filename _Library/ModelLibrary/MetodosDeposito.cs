@@ -2368,7 +2368,7 @@ namespace ModelLibrary
 
 
 
-        public static ListaTotalizadoresDeposito ObterTotalizadores(int pCargaId)
+        public static ListaTotalizadoresDeposito ObterTotalizadoresCarga(int pCargaId)
         {
 
 
@@ -2379,7 +2379,7 @@ namespace ModelLibrary
 
 
 
-                string query = @"SELECT Carga.Id, sum(CargaProduto.Quantidade) QtdProdutos, sum(CargaProduto.Quantidade)*sum(ValorSaida) TotalProdutos  
+                string query = @"SELECT Carga.Id, sum(CargaProduto.Quantidade) QtdProdutos, sum(CargaProduto.Quantidade * ValorSaida) TotalProdutos  
                                     FROM Carga 
                                     INNER JOIN CargaProduto On CargaProduto.CargaId = Carga.Id 
                                     INNER JOIN ProdutoGrade ON ProdutoGradeId = ProdutoGrade.Id 
@@ -2395,6 +2395,49 @@ namespace ModelLibrary
                     vTotalizador.QtdProdutos = totalizador.QtdProdutos;
                     vTotalizador.TotalProdutos = totalizador.TotalProdutos;
                 } else
+                {
+                    vTotalizador.QtdProdutos = 0;
+                    vTotalizador.TotalProdutos = 0;
+                }
+
+
+
+                return vTotalizador;
+
+
+            }
+
+        }
+
+
+        public static ListaTotalizadoresDeposito ObterTotalizadoresRetorno(int pRetornoId)
+        {
+
+
+            using (DepositoDBEntities deposito = new DepositoDBEntities())
+            {
+
+                ListaTotalizadoresDeposito vTotalizador = new ListaTotalizadoresDeposito();
+
+
+
+                string query = @"SELECT Carga.Id, sum(CargaProduto.Quantidade-CargaProduto.Retorno) QtdProdutos, sum((CargaProduto.Quantidade-CargaProduto.Retorno) * ValorSaida) TotalProdutos  
+                                    FROM Carga 
+                                    INNER JOIN CargaProduto On CargaProduto.CargaId = Carga.Id 
+                                    INNER JOIN ProdutoGrade ON ProdutoGradeId = ProdutoGrade.Id 
+                                 WHERE Carga.Id = @p0
+                                 GROUP BY Carga.Id";
+
+
+
+                var totalizador = deposito.Database.SqlQuery<ListaTotalizadoresDeposito>(query, pRetornoId).FirstOrDefault();
+
+                if (totalizador != null)
+                {
+                    vTotalizador.QtdProdutos = totalizador.QtdProdutos;
+                    vTotalizador.TotalProdutos = totalizador.TotalProdutos;
+                }
+                else
                 {
                     vTotalizador.QtdProdutos = 0;
                     vTotalizador.TotalProdutos = 0;

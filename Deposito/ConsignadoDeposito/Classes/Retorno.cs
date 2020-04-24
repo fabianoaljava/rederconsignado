@@ -208,7 +208,7 @@ namespace ConsignadoDeposito
 
                     cRetornoId = carga.Id;                    
 
-                    var totalizadores = ModelLibrary.MetodosDeposito.ObterTotalizadores(cRetornoId);
+                    var totalizadores = ModelLibrary.MetodosDeposito.ObterTotalizadoresRetorno(cRetornoId);
 
                     localDepositoForm.dlbRetornoQtdProdutos.Text = totalizadores.QtdProdutos.ToString();
                     localDepositoForm.dlbRetornoTotalProdutos.Text = String.Format("{0:C2}", totalizadores.TotalProdutos);

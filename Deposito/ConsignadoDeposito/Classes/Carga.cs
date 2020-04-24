@@ -378,7 +378,7 @@ namespace ConsignadoDeposito
 
             try
             {
-                var totalizadores = ModelLibrary.MetodosDeposito.ObterTotalizadores(cCargaId);
+                var totalizadores = ModelLibrary.MetodosDeposito.ObterTotalizadoresCarga(cCargaId);
 
                 localDepositoForm.dlbCargaQtdProdutos.Text = totalizadores.QtdProdutos.ToString();
                 localDepositoForm.dlbCargaTotalProdutos.Text = String.Format("{0:C}", totalizadores.TotalProdutos);
