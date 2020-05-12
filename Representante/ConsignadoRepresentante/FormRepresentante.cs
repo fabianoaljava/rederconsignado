@@ -23,12 +23,17 @@ namespace ConsignadoRepresentante
 
         public long cCargaId;
 
+        public long cVendedorId;
+
         public RepresentanteHome cHome;
         public Vendedor cVendedor;
         public Financeiro cFinanceiro;
         public Produto cProduto;
         public Estoque cEstoque;
         public Ajuda cAjuda;
+
+
+
 
 
 
@@ -366,6 +371,11 @@ namespace ConsignadoRepresentante
 
         private void cbbPesqVendedor_SelectedValueChanged(object sender, EventArgs e)
         {
+            //cVendedor.PesquisaVendedor_Change(sender, e);
+        }
+
+        private void cbbPesqVendedor_Validating(object sender, CancelEventArgs e)
+        {
             cVendedor.PesquisaVendedor_Change(sender, e);
         }
 
@@ -393,7 +403,7 @@ namespace ConsignadoRepresentante
 
         private void cbbTipoPessoa_SelectedValueChanged(object sender, EventArgs e)
         {
-            cVendedor.SelecionarTipoPessoa(cbbTipoPessoa.Text);
+            //cVendedor.SelecionarTipoPessoa(cbbTipoPessoa.Text);
         }
 
         private void txtCPFCnpj_Enter(object sender, EventArgs e)
@@ -480,7 +490,7 @@ namespace ConsignadoRepresentante
 
         private void grdHome_DoubleClick(object sender, EventArgs e)
         {
-            cVendedor.VendedorExibir(Convert.ToInt32(grdHome.CurrentRow.Cells[0].Value));
+            cVendedor.VendedorExibir(Convert.ToInt32(grdHome.CurrentRow.Cells[0].Value), grdHome.CurrentRow.Cells[11].Value.ToString());
             tbcPrincipal.SelectedTab = tabVendedores;
             tbcVendedor.SelectedTab = tabVendedorInicio;
         }
@@ -634,7 +644,7 @@ namespace ConsignadoRepresentante
 
         private void grdHome_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            cVendedor.VendedorExibir(Convert.ToInt32(grdHome.CurrentRow.Cells[0].Value));
+            cVendedor.VendedorExibir(Convert.ToInt32(grdHome.CurrentRow.Cells[0].Value), Convert.ToString(grdHome.CurrentRow.Cells[11].Value));
             tbcPrincipal.SelectedTab = tabVendedores;
             tbcVendedor.SelectedTab = tabVendedorInicio;
         }
@@ -684,6 +694,9 @@ namespace ConsignadoRepresentante
                 }
 
                 grdPosicaoFinanceira.Rows[e.RowIndex].DefaultCellStyle.ForeColor = vColour;
+
+
+                grdPosicaoFinanceira.Rows[e.RowIndex].ContextMenuStrip = cmsPosicaoFinanceira;
 
                 Console.WriteLine("Posição Financeira - Colorindo de " + vColour.ToString() + " o vendedor Id: " + grdPosicaoFinanceira.Rows[e.RowIndex].Cells["Id"].Value.ToString());
 
@@ -741,7 +754,7 @@ namespace ConsignadoRepresentante
 
         private void PesquisarProdutos(object sender, EventArgs e)
         {
-            cProduto.PesquisarProdutos();
+            //cProduto.PesquisarProdutos();
         }
 
         private void btnProdutosLimpar_Click(object sender, EventArgs e)
@@ -788,7 +801,7 @@ namespace ConsignadoRepresentante
 
             if (vAlerta)
             {
-                tbcVendedor.SelectedTab = tabVendedorPedidos;
+                tbcVendedor.SelectedTab = tabVendedorPedido;
                 cVendedor.PedidoNovo();
             }
 
@@ -893,13 +906,12 @@ namespace ConsignadoRepresentante
                 smnVendedorRelatorioPedido.Enabled = true;
                 Cursor.Current = Cursors.Default;
 
-
                 //FormRelatorio formRelatorio = new FormRelatorio();
                 //formRelatorio.Show();
 
-
                 //formRelatorio.crvRelatorio.ReportSource = relatoriopedido;
                 //formRelatorio.crvRelatorio.RefreshReport();
+
             }
 
         }
@@ -935,5 +947,53 @@ namespace ConsignadoRepresentante
             (sender as MetroFramework.Controls.MetroTextBox).Text = MascaraTelefone((sender as MetroFramework.Controls.MetroTextBox).Text);
         }
 
+        private void tabHome_Enter(object sender, EventArgs e)
+        {
+            //btnHomeAtualizar_Click(sender, e);
+        }
+
+        private void cbbTipoPessoa_Validating(object sender, CancelEventArgs e)
+        {
+            cVendedor.SelecionarTipoPessoa(cbbTipoPessoa.Text);
+        }
+
+        private void cbbProdutoSaldo_Validating(object sender, CancelEventArgs e)
+        {
+            cProduto.PesquisarProdutos();
+        }
+
+        private void tsmVendedor_Click(object sender, EventArgs e)
+        {
+            cVendedor.VendedorExibir(cVendedorId);
+
+            tbcPrincipal.SelectedTab = tabVendedores;
+            tbcVendedor.SelectedTab = tabVendedorInicio;
+        }
+
+        private void tsmPagamento_Click(object sender, EventArgs e)
+        {
+
+            cVendedor.VendedorExibir(cVendedorId);
+
+            Modal.FormReceberPagamento formReceberPagamento = new Modal.FormReceberPagamento(this);
+
+            var result = formReceberPagamento.ShowDialog();
+        }
+
+        private void grdPosicaoFinanceira_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+
+                var hti = grdPosicaoFinanceira.HitTest(e.X, e.Y);
+                grdPosicaoFinanceira.ClearSelection();
+                grdPosicaoFinanceira.Rows[hti.RowIndex].Selected = true;
+
+
+                cVendedorId = Convert.ToInt64(grdPosicaoFinanceira.Rows[hti.RowIndex].Cells[0].Value);
+
+
+            }
+        }
     }
 }

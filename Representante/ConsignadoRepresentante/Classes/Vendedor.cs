@@ -568,7 +568,7 @@ namespace ConsignadoRepresentante
 
 
 
-        public void VendedorExibir(long pVendedorId)
+        public void VendedorExibir(long pVendedorId, string pCodigoPedido = "")
         {
 
             PedidoLimpar();
@@ -652,7 +652,7 @@ namespace ConsignadoRepresentante
                 localRepresentanteForm.dlbVendedorTelefone.Text = vendedor.Telefone + " / " + vendedor.Celular;
 
 
-                ExibirPedido(cVendedorId);
+                ExibirPedido(cVendedorId, pCodigoPedido);
                 ExibirRetornoProduto(cVendedorId);
                 //ExibirAcerto(); //--> Inserido em ExibirPedido
                 ExibirTitulos();
@@ -1008,14 +1008,14 @@ namespace ConsignadoRepresentante
         }
 
 
-        public void ExibirPedido(long pVendedorId)
+        public void ExibirPedido(long pVendedorId, string pCodigoPedido = "")
         {
 
+            
 
 
 
-
-            var pedido = ModelLibrary.MetodosRepresentante.ObterVendedorPedido(pVendedorId, localRepresentanteForm.cCargaId);
+            var pedido = ModelLibrary.MetodosRepresentante.ObterVendedorPedido(pVendedorId, localRepresentanteForm.cCargaId, pCodigoPedido);
             cPedidoId = pedido != null ? pedido.Id : 0;
 
             List<ModelLibrary.ListaRepVendedorPedido> listapedido = ModelLibrary.MetodosRepresentante.ObterVendedorPedidoItem(cPedidoId);
@@ -1049,6 +1049,13 @@ namespace ConsignadoRepresentante
             if (pedido != null)
             {
 
+
+                if (pedido.ValorCompra == 0)
+                {
+
+                    ModelLibrary.MetodosRepresentante.AtualizarPedido(pedido.Id, Convert.ToDecimal(pedido.ValorPedido));
+
+                }
                
                 localRepresentanteForm.dlbPedidoTotal.Text = String.Format("{0:C2}", pedido.ValorPedido);
                 localRepresentanteForm.dlbPedidoLimite.Text = (localRepresentanteForm.txtLimitePedido.Text == "0,00") ? "<ILIMITADO>" : String.Format("{0:C2}", localRepresentanteForm.txtLimitePedido.Text);
@@ -1532,28 +1539,40 @@ namespace ConsignadoRepresentante
             if (vAlerta)
             {
 
-
-
-                Console.WriteLine("Atualizando Retorno de Produtos do Pedido...");
-
-
-                decimal valorpedido = (Convert.ToDecimal(localRepresentanteForm.txtRetornoQtdPedido.Text) - Convert.ToDecimal(localRepresentanteForm.txtRetornoQuantidade.Text)) * Convert.ToDecimal(localRepresentanteForm.txtRetornoPreco.Text);
-                var pedidoliberado = PedidoValidar(-valorpedido);
-
-
-                if (pedidoliberado)
+                if (Convert.ToInt32(localRepresentanteForm.txtRetornoQuantidade.Text) > Convert.ToInt32(localRepresentanteForm.txtRetornoQtdPedido.Text))
                 {
-                    ModelLibrary.MetodosRepresentante.RetornarPedidoItem(cPedidoId, Convert.ToInt64(localRepresentanteForm.txtRetornoProdutoGradeId.Text), Convert.ToDecimal(localRepresentanteForm.txtRetornoQuantidade.Text));
 
-                    //ExibirRetornoProduto(cVendedorId);
+                    MessageBox.Show("A quantidade retornada não pode ser maior que a quantidade do pedido. Verifique os dados digitados.", "Retornar Produtos", MessageBoxButtons.OK, MessageBoxIcon.Stop);
 
-                    VendedorReload();
+                } else
+                {
+
+                    Console.WriteLine("Atualizando Retorno de Produtos do Pedido...");
 
 
-                    GridSelecionar(localRepresentanteForm.grdVendedorRetorno, localRepresentanteForm.txtRetornoCodigoBarras.Text);
+                    decimal valorpedido = (Convert.ToDecimal(localRepresentanteForm.txtRetornoQtdPedido.Text) - Convert.ToDecimal(localRepresentanteForm.txtRetornoQuantidade.Text)) * Convert.ToDecimal(localRepresentanteForm.txtRetornoPreco.Text);
+                    var pedidoliberado = PedidoValidar(-valorpedido);
 
-                    RetornoProdutoLimpar();
+
+                    if (pedidoliberado)
+                    {
+
+
+                        ModelLibrary.MetodosRepresentante.RetornarPedidoItem(cPedidoId, Convert.ToInt64(localRepresentanteForm.txtRetornoProdutoGradeId.Text), Convert.ToDecimal(localRepresentanteForm.txtRetornoQuantidade.Text));
+
+                        //ExibirRetornoProduto(cVendedorId);
+
+                        VendedorReload();
+
+
+                        GridSelecionar(localRepresentanteForm.grdVendedorRetorno, localRepresentanteForm.txtRetornoCodigoBarras.Text);
+
+                        RetornoProdutoLimpar();
+                    }
+
                 }
+
+                
 
             }
 

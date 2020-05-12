@@ -247,12 +247,19 @@ namespace ConsignadoRepresentante.Modal
                     var pedido = ModelLibrary.MetodosRepresentante.ObterPedido(vPedidoId);
                     vCodigoPedido = (pedido != null) ? pedido.CodigoPedido : "";
                     vReceberId = 0;
+
+                    if (pedido.Status == "0" || pedido.Status == "1")
+                    {
+                        ModelLibrary.MetodosRepresentante.RetornarPedido(vPedidoId);
+                    }
                 }
                 else
                 {
                     vReceberId = Convert.ToInt32(vReferencia[1]);
                     vPedidoId = 0;
                 }
+
+
 
 
 
@@ -337,12 +344,13 @@ namespace ConsignadoRepresentante.Modal
                         btnConfirmar.Enabled = false;
                         lblStatus.Visible = true;
                         lblStatus.Text = "Este pedido foi fechado na criação de um novo e não pode ser editado";
-                    } else if (pedido.Status == "0" || pedido.Status == "1")
-                    {
-                        btnConfirmar.Enabled = false;
-                        lblStatus.Text = "Este pedido ainda não foi retornado e por isso não é possível fazer o acerto. Por favor, realize o retorno primeiro.";
-                        lblStatus.Visible = true;
-                    }
+                    } 
+                    //else if (pedido.Status == "0" || pedido.Status == "1")
+                    //{
+                    //    btnConfirmar.Enabled = false;
+                    //    lblStatus.Text = "Este pedido ainda não foi retornado e por isso não é possível fazer o acerto. Por favor, realize o retorno primeiro.";
+                    //    lblStatus.Visible = true;
+                    //}
                     else
                     {
                         localRepresentanteForm.dlbTotalAcerto.Text = String.Format("{0:0.00}", pedido.ValorAcerto);
@@ -461,13 +469,13 @@ namespace ConsignadoRepresentante.Modal
         private void cbbReferencia_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            CarregarTotalizador();
+            //CarregarTotalizador();
 
         }
 
         private void txtValorRecebido_Validating(object sender, CancelEventArgs e)
         {
-            
+            CarregarTotalizador();
         }
 
         private void FormReceberPagamento_FormClosing(object sender, FormClosingEventArgs e)
@@ -477,6 +485,11 @@ namespace ConsignadoRepresentante.Modal
             //localRepresentanteForm.cVendedor.ExibirAcerto();
             //localRepresentanteForm.cVendedor.ExibirPedido(localRepresentanteForm.cVendedor.cVendedorId);
             //localRepresentanteForm.cVendedor.ExibirRetornoProduto(localRepresentanteForm.cVendedor.cVendedorId);
+        }
+
+        private void cbbReferencia_Validating(object sender, CancelEventArgs e)
+        {
+
         }
     }
 }

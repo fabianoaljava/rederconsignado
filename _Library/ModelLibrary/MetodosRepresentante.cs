@@ -724,7 +724,10 @@ namespace ModelLibrary
                                             THEN true
                                             ELSE false
                                             END AS PedidoAtual, 
-                                    CodigoPedido,
+									CASE WHEN PedidoAtual.VendedorId IS NOT NULL AND ValorAberto  <= 0
+										THEN CodigoPedidoAnterior
+										ELSE CodigoPedidoAtual
+										END AS CodigoPedido,
                                     CASE 
 										WHEN (IFNULL(ValorAberto,0) > 0 OR IFNULL(Receber,0) > 0) AND IFNULL(ValorRecebido,0) <= 0 THEN true
 	                                    ELSE false
@@ -734,8 +737,8 @@ namespace ModelLibrary
 										ELSE false
 										END AS Negativado									
                                     FROM RepVendedor
-                                    LEFT JOIN (SELECT max(CodigoPedido) CodigoPedido, VendedorId From RepPedido WHERE CargaId = CargaOriginal GROUP BY VendedorId) AS PedidoAtual ON RepVendedor.Id = PedidoAtual.VendedorId
-                                    LEFT JOIN (SELECT VendedorId, SUM(QuantidadeRemarcado)-1 QuantidadeRemarcado, SUM(ValorLiquido - ValorAcerto) ValorAberto, ValorAcerto as ValorRecebido, Status FROM RepPedido WHERE (RepPedido.CodigoPedido NOT IN (SELECT max(CodigoPedido) FROM RepPedido GROUP BY VendedorId) OR CargaId != CargaOriginal) GROUP BY CodigoPedido, Status) AS PedidoAnterior ON RepVendedor.Id = PedidoAnterior.VendedorId
+                                    LEFT JOIN (SELECT max(CodigoPedido) CodigoPedidoAtual, VendedorId From RepPedido WHERE CargaId = CargaOriginal GROUP BY VendedorId) AS PedidoAtual ON RepVendedor.Id = PedidoAtual.VendedorId
+                                    LEFT JOIN (SELECT VendedorId, max(CodigoPedido) CodigoPedidoAnterior, SUM(QuantidadeRemarcado)-1 QuantidadeRemarcado, SUM(ValorLiquido - ValorAcerto) ValorAberto, ValorAcerto as ValorRecebido, Status FROM RepPedido /*WHERE (RepPedido.CodigoPedido NOT IN (SELECT max(CodigoPedido) FROM RepPedido GROUP BY VendedorId) OR CargaId != CargaOriginal)*/ GROUP BY CodigoPedido, Status) AS PedidoAnterior ON RepVendedor.Id = PedidoAnterior.VendedorId
                                     LEFT JOIN (SELECT DISTINCT VendedorId as Receber FROM RepReceber WHERE ValorAReceber > 0) AS Receber ON RepVendedor.Id = Receber.Receber";
 
 
@@ -875,11 +878,20 @@ namespace ModelLibrary
 
 
 
-        public static RepPedido ObterVendedorPedido(long pVendedorId, long pCargaId)
+        public static RepPedido ObterVendedorPedido(long pVendedorId, long pCargaId, string pCodigoPedido = "")
         {
             using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
-                var pedido = representante.RepPedido.OrderByDescending(i => i.Id).FirstOrDefault(p => p.VendedorId == pVendedorId && p.CargaId == pCargaId);
+                RepPedido pedido;
+
+                if (pCodigoPedido != "")
+                {
+                    pedido = representante.RepPedido.OrderByDescending(i => i.Id).FirstOrDefault(p => p.CodigoPedido == pCodigoPedido);
+                } else
+                {
+                    pedido = representante.RepPedido.OrderByDescending(i => i.Id).FirstOrDefault(p => p.VendedorId == pVendedorId && p.CargaId == pCargaId);
+                }
+                
                 return pedido;
             }
             
@@ -896,11 +908,20 @@ namespace ModelLibrary
 
         }
 
-        public static RepPedido ObterPedido(long pPedidoId)
+        public static RepPedido ObterPedido(long pPedidoId, string pCodigoPedido = "")
         {
             using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
             {
-                var pedido = representante.RepPedido.OrderByDescending(i => i.Id).FirstOrDefault(p => p.Id == pPedidoId);
+                RepPedido pedido; 
+
+                if (pCodigoPedido != "")
+                {
+                    pedido = representante.RepPedido.OrderByDescending(i => i.Id).FirstOrDefault(p => p.CodigoPedido == pCodigoPedido);
+                } else
+                {
+                    pedido = representante.RepPedido.OrderByDescending(i => i.Id).FirstOrDefault(p => p.Id == pPedidoId);
+                }
+                
                 return pedido;
             }
 
@@ -1134,6 +1155,8 @@ namespace ModelLibrary
         }
 
 
+
+
         public static List<ListaRepVendedorPedido> ObterVendedorPedidoItem(long pPedidoId)
         {
             using (RepresentanteDBEntities representante = new RepresentanteDBEntities())
@@ -1301,6 +1324,7 @@ namespace ModelLibrary
                 {
 
                     //= pQuantidade;
+
 
                     //decimal vValor = Convert.ToDecimal((pedidoitem.Quantidade - pedidoitem.Retorno) * pedidoitem.Preco);
                     pedidoitem.Retorno = pQuantidade;
@@ -1706,7 +1730,7 @@ namespace ModelLibrary
             {
 
 
-                string query = @"SELECT RepVendedor.Id, RepVendedor.Nome, SUM(IFNULL(ValorAReceber,0)) Receber, SUM(IFNULL(ValorRecebido,0)) Recebido, SUM(IFNULL(ValorAReceber,0))-SUM(IFNULL(ValorRecebido,0)) Aberto , SUM(Quantidade) Quantidade, SUM(Retorno) Retorno, SUM(Remarcado) Remarcado, 
+                string query = @"SELECT RepVendedor.Id, RepVendedor.Nome, SUM(IFNULL(ValorAReceber,0)) Receber, SUM(IFNULL(ValorRecebido,0)) Recebido, SUM(IFNULL(ValorAReceber,0))-SUM(IFNULL(ValorRecebido,0)) Aberto , SUM(IFNULL(Quantidade,0)) Quantidade, SUM(IFNULL(Retorno,0)) Retorno, SUM(IFNULL(Remarcado,0)) Remarcado, 
                                     CASE 
                                       WHEN Receber.VendedorId IS NULL THEN FALSE
                                       WHEN ValorRecebido IS NULL THEN FALSE
