@@ -311,6 +311,12 @@ namespace ConsignadoDeposito.Modal
         private void cbbCargaPraca_SelectedValueChanged(object sender, EventArgs e)
         {
 
+
+        }
+
+        private void cbbCargaPraca_Validating(object sender, CancelEventArgs e)
+        {
+
             try
             {
                 ModelLibrary.Praca praca = (ModelLibrary.Praca)cbbCargaPraca.SelectedItem;
@@ -321,11 +327,17 @@ namespace ConsignadoDeposito.Modal
             {
                 txtCargaCodPraca.Text = "";
             }
-
         }
 
         private void cbbCargaRepresentante_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+        }
+
+
+        private void cbbCargaRepresentante_Validating(object sender, CancelEventArgs e)
+        {
+
             try
             {
                 ModelLibrary.Representante representante = (ModelLibrary.Representante)cbbCargaRepresentante.SelectedItem;
@@ -368,6 +380,8 @@ namespace ConsignadoDeposito.Modal
             LimparPesquisa();
             this.Close();
         }
+
+
 
         private void btnLimpar_Click(object sender, EventArgs e)
         {

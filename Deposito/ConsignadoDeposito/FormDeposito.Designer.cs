@@ -1227,6 +1227,7 @@
             this.cbbCargaRepresentante.TabIndex = 3;
             this.cbbCargaRepresentante.UseSelectable = true;
             this.cbbCargaRepresentante.SelectedIndexChanged += new System.EventHandler(this.cbbCargaRepresentante_SelectedIndexChanged);
+            this.cbbCargaRepresentante.Validating += new System.ComponentModel.CancelEventHandler(this.cbbCargaRepresentante_Validating);
             // 
             // cbbCargaPraca
             // 
@@ -1240,6 +1241,7 @@
             this.cbbCargaPraca.TabIndex = 1;
             this.cbbCargaPraca.UseSelectable = true;
             this.cbbCargaPraca.SelectedValueChanged += new System.EventHandler(this.cbbCargaPraca_SelectedValueChanged);
+            this.cbbCargaPraca.Validating += new System.ComponentModel.CancelEventHandler(this.cbbCargaPraca_Validating);
             // 
             // lblCargaMesAno
             // 
@@ -2803,6 +2805,7 @@
             this.cbbRetornoRepresentante.TabIndex = 6;
             this.cbbRetornoRepresentante.UseSelectable = true;
             this.cbbRetornoRepresentante.SelectedIndexChanged += new System.EventHandler(this.cbbRetornoRepresentante_SelectedIndexChanged);
+            this.cbbRetornoRepresentante.Validating += new System.ComponentModel.CancelEventHandler(this.cbbRetornoRepresentante_Validating);
             // 
             // cbbRetornoPraca
             // 
@@ -2816,6 +2819,7 @@
             this.cbbRetornoPraca.TabIndex = 5;
             this.cbbRetornoPraca.UseSelectable = true;
             this.cbbRetornoPraca.SelectedValueChanged += new System.EventHandler(this.cbbRetornoPraca_SelectedValueChanged);
+            this.cbbRetornoPraca.Validating += new System.ComponentModel.CancelEventHandler(this.cbbRetornoPraca_Validating);
             // 
             // lblRetornoMesAno
             // 
@@ -3000,6 +3004,7 @@
             this.cbbProdutoSaldo.TabIndex = 28;
             this.cbbProdutoSaldo.UseSelectable = true;
             this.cbbProdutoSaldo.SelectedValueChanged += new System.EventHandler(this.cbbProdutoSaldo_SelectedValueChanged);
+            this.cbbProdutoSaldo.Validating += new System.ComponentModel.CancelEventHandler(this.cbbProdutoSaldo_Validating);
             // 
             // lblProdutoPesquisar
             // 

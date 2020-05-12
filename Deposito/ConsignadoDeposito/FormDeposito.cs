@@ -207,6 +207,12 @@ namespace ConsignadoDeposito
         private void cbbCargaPraca_SelectedValueChanged(object sender, EventArgs e)
         {
 
+
+        }
+
+        private void cbbCargaPraca_Validating(object sender, CancelEventArgs e)
+        {
+
             try
             {
                 ModelLibrary.Praca praca = (ModelLibrary.Praca)cbbCargaPraca.SelectedItem;
@@ -217,7 +223,6 @@ namespace ConsignadoDeposito
             {
                 txtCargaCodPraca.Text = "";
             }
-
         }
 
         private void txtCargaCodPraca_Leave(object sender, EventArgs e)
@@ -263,6 +268,11 @@ namespace ConsignadoDeposito
         }
 
         private void cbbCargaRepresentante_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbbCargaRepresentante_Validating(object sender, CancelEventArgs e)
         {
             try
             {
@@ -481,6 +491,12 @@ namespace ConsignadoDeposito
         private void cbbRetornoPraca_SelectedValueChanged(object sender, EventArgs e)
         {
 
+
+
+        }
+
+        private void cbbRetornoPraca_Validating(object sender, CancelEventArgs e)
+        {
             try
             {
                 ModelLibrary.Praca praca = (ModelLibrary.Praca)cbbRetornoPraca.SelectedItem;
@@ -491,7 +507,6 @@ namespace ConsignadoDeposito
             {
                 txtRetornoCodPraca.Text = "";
             }
-
         }
 
         private void txtRetornoCodPraca_Leave(object sender, EventArgs e)
@@ -538,6 +553,11 @@ namespace ConsignadoDeposito
 
         private void cbbRetornoRepresentante_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void cbbRetornoRepresentante_Validating(object sender, CancelEventArgs e)
+        {
             try
             {
                 ModelLibrary.Representante representante = (ModelLibrary.Representante)cbbRetornoRepresentante.SelectedItem;
@@ -549,6 +569,7 @@ namespace ConsignadoDeposito
                 txtRetornoCodRepresentante.Text = "";
             }
         }
+
 
         private void txtRetornoCodRepresentante_Leave(object sender, EventArgs e)
         {
@@ -841,6 +862,11 @@ namespace ConsignadoDeposito
         }
 
         private void cbbProdutoSaldo_SelectedValueChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void cbbProdutoSaldo_Validating(object sender, CancelEventArgs e)
         {
             cEstoque.PesquisarProdutos();
         }
@@ -1149,6 +1175,16 @@ namespace ConsignadoDeposito
         {
             cCarga.CargaExcluir();
         }
+
+
+
+
+
+
+
+
+
+
 
 
 
