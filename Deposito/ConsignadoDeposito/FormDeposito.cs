@@ -11,7 +11,8 @@ using System.Windows.Forms;
 using ConsignadoDeposito;
 using CrystalDecisions.CrystalReports.Engine;
 using ConsignadoDeposito.Reports;
-
+using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 namespace ConsignadoDeposito
 {
@@ -1020,63 +1021,7 @@ namespace ConsignadoDeposito
 
         private void mnuProdutoImprimir_Click(object sender, EventArgs e)
         {
-            Cursor.Current = Cursors.WaitCursor;
-
-            mnuProdutoImprimir.Text = "Imprimindo...";
-            mnuProdutoImprimir.Enabled = false;
-
-
-
-            var vCriterio = new Dictionary<string, string>();
-
-            if (txtProdutosCodigoBarras.Text != "") vCriterio["CodigoGeral"] = txtProdutosCodigoBarras.Text;
-
-            if (txtProdutosNome.Text != "") vCriterio["Nome"] = txtProdutosNome.Text;
-
-
-            if (cbbProdutoSaldo.Text == "Com Saldo em Estoque")
-            {
-                vCriterio["SaldoEstoque"] = "Y";
-            }
-            else if (cbbProdutoSaldo.Text == "Sem Saldo em Estoque")
-            {
-                vCriterio["SaldoEstoque"] = "N";
-            }
-
-
-            List<ModelLibrary.RelatoriosDeposito.EstoqueProduto> estoqueproduto = ModelLibrary.RelatoriosDeposito.RelatorioEstoqueProduto(vCriterio);
-
-            if (estoqueproduto == null)
-            {
-                MessageBox.Show("Erro ao imprimir relatório - Não foi possível encontrar produto.", "Reder - Impressão", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-
-                BindingSource bs = new BindingSource();
-
-                Reports.EstoqueProduto relatorioEstoqueProduto = new Reports.EstoqueProduto();
-
-                bs.DataSource = estoqueproduto;
-                relatorioEstoqueProduto.SetDataSource(bs);
-
-
-                relatorioEstoqueProduto.PrintToPrinter(1, true, 0, 0);
-
-                mnuProdutoImprimir.Text = "Imprimir";
-                mnuProdutoImprimir.Enabled = true;
-                Cursor.Current = Cursors.Default;
-
-
-                //FormRelatorio formRelatorio = new FormRelatorio();
-                //formRelatorio.Show();
-
-
-                //formRelatorio.crvRelatorio.ReportSource = relatorioEstoqueProduto;
-                //formRelatorio.crvRelatorio.RefreshReport();
-            }
-
-
+            
 
 
         }
@@ -1174,6 +1119,185 @@ namespace ConsignadoDeposito
         private void mnuCargaExcluir_Click(object sender, EventArgs e)
         {
             cCarga.CargaExcluir();
+        }
+
+        private void estoqueProdutoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+
+
+
+
+            var vCriterio = new Dictionary<string, string>();
+
+            if (txtProdutosCodigoBarras.Text != "") vCriterio["CodigoGeral"] = txtProdutosCodigoBarras.Text;
+
+            if (txtProdutosNome.Text != "") vCriterio["Nome"] = txtProdutosNome.Text;
+
+
+            if (cbbProdutoSaldo.Text == "Com Saldo em Estoque")
+            {
+                vCriterio["SaldoEstoque"] = "Y";
+            }
+            else if (cbbProdutoSaldo.Text == "Sem Saldo em Estoque")
+            {
+                vCriterio["SaldoEstoque"] = "N";
+            }
+
+
+            List<ModelLibrary.RelatoriosDeposito.EstoqueProduto> estoqueproduto = ModelLibrary.RelatoriosDeposito.RelatorioEstoqueProduto(vCriterio);
+
+            if (estoqueproduto == null)
+            {
+                MessageBox.Show("Erro ao imprimir relatório - Não foi possível encontrar produto.", "Reder - Impressão", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+
+                BindingSource bs = new BindingSource();
+
+                Reports.EstoqueProduto relatorioEstoqueProduto = new Reports.EstoqueProduto();
+
+                bs.DataSource = estoqueproduto;
+                relatorioEstoqueProduto.SetDataSource(bs);
+
+
+                relatorioEstoqueProduto.PrintToPrinter(1, true, 0, 0);
+
+
+                Cursor.Current = Cursors.Default;
+
+
+                //FormRelatorio formRelatorio = new FormRelatorio();
+                //formRelatorio.Show();
+
+
+                //formRelatorio.crvRelatorio.ReportSource = relatorioEstoqueProduto;
+                //formRelatorio.crvRelatorio.RefreshReport();
+            }
+
+
+        }
+
+        private void etiquetasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+
+            if (grdProdutos.CurrentRow != null)
+            {
+
+
+
+
+
+
+                decimal vQuantidade = ControllerLibrary.Funcoes.ShowDialogNumeric("Quantidade", "Informe a quantidade de etiquetas");
+
+                if (vQuantidade > 0)
+                {
+
+                    StringBuilder vZplBuilder = new StringBuilder();
+
+                    vZplBuilder.AppendLine("^XA");
+                    vZplBuilder.AppendLine("^LL0200");
+                    vZplBuilder.AppendLine("^PW850");
+                    vZplBuilder.AppendLine("^LH0,0^FS");
+                    vZplBuilder.AppendLine("~^FS");
+                    vZplBuilder.AppendLine("~JUS^FS");
+                    vZplBuilder.AppendLine("^MD10");
+                    vZplBuilder.AppendLine("^XZ");
+
+
+                    String vCodigoBarras, vDescricao, vTamanho;
+
+                    vCodigoBarras = grdProdutos.CurrentRow.Cells["CodigoBarras"].Value.ToString();
+                    vDescricao = grdProdutos.CurrentRow.Cells["Descricao"].Value.ToString();
+                    vTamanho = grdProdutos.CurrentRow.Cells["Tamanho"].Value.ToString();
+
+                    Int32 vLinha = 1, vColuna = 1;
+
+                    String[] vFormatoDescricao = { "^FO50,15", "^FO320,15", "^FO590,15" };
+                    String[] vFormatoTamanho = { "^FO50,40", "^FO320,40", "^FO590,40" };
+                    String[] vFormatoCodigoBarras = { "^FO60,70", "^FO330,70", "^FO600,70" };
+
+
+
+                    for (int i = 0; i < vQuantidade; i++)
+                    {
+
+
+                        if (vColuna == 1)
+                        {
+                            vZplBuilder.AppendLine("^XA");                            
+                        }
+
+                        
+
+                        vZplBuilder.AppendLine(vFormatoDescricao[vColuna-1]); 
+                        vZplBuilder.AppendLine("^AJ,N,10,25");
+                        vZplBuilder.AppendLine("^FD" + vDescricao + "^FS");
+                        vZplBuilder.AppendLine(vFormatoTamanho[vColuna - 1]); 
+                        vZplBuilder.AppendLine("^AJ,N,10,25 ");
+                        vZplBuilder.AppendLine("^FD13,99-" + vTamanho + " ^FS");
+                        vZplBuilder.AppendLine(vFormatoCodigoBarras[vColuna - 1]); 
+                        vZplBuilder.AppendLine("^BEN,80,Y,N");
+                        vZplBuilder.AppendLine("^FD" + vCodigoBarras + "^FS");
+
+
+                        
+                        if (vColuna == 3)
+                        {
+                            vColuna = 0;
+                            vLinha = vLinha + 1;
+
+                            vZplBuilder.AppendLine("^XZ");
+                        }
+
+
+
+                        if (i == vQuantidade-1 && ((i+1) % 3 > 0))
+                        {
+                            vZplBuilder.AppendLine("^XZ");                        
+                        }
+
+
+                        vColuna = vColuna + 1;
+
+                    }
+
+
+                    string vPath = @"C:\RederConsignado\Etiquetas" + vCodigoBarras + ".txt";
+
+                    using (StreamWriter sw = File.CreateText(vPath))
+                    {
+                        sw.Write(vZplBuilder);
+                    }
+
+                    if (MessageBox.Show((vLinha).ToString() + " linhas geradas " + "Arquivo gerado com sucesso em " + vPath + ". Deseja abrir o arquivo?", "Impressão de Etiquetas", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                    {
+                        Process.Start("notepad.exe", vPath);
+                    }
+
+                }
+
+
+
+
+
+
+
+
+            } else
+            {
+                MessageBox.Show("Nenhum produto selecionado.", "Impressão de Etiquetas", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+            
+
+
+
+
+
+
         }
 
 

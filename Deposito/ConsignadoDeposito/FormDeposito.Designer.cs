@@ -247,19 +247,21 @@
             this.menuProdutos = new System.Windows.Forms.MenuStrip();
             this.mnuProdutoAdicionar = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuProdutoMovimentar = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuProdutoImprimir = new System.Windows.Forms.ToolStripMenuItem();
             this.tabConfiguracoes = new System.Windows.Forms.TabPage();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.lblConfiguracoes = new MetroFramework.Controls.MetroLabel();
             this.tabAjuda = new System.Windows.Forms.TabPage();
             this.htmlPanel1 = new MetroFramework.Drawing.Html.HtmlPanel();
-            this.menuaJUDA = new System.Windows.Forms.MenuStrip();
+            this.menuAjuda = new System.Windows.Forms.MenuStrip();
             this.mnuAjudaAtualizacoes = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAjudaSobre = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsRetornoAcerto = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.smnRetornoAcertoTitulo = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.smnRetornoAcertoPagamento = new System.Windows.Forms.ToolStripMenuItem();
+            this.relatórioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.estoqueProdutoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.etiquetasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
@@ -323,7 +325,7 @@
             this.tabConfiguracoes.SuspendLayout();
             this.metroPanel1.SuspendLayout();
             this.tabAjuda.SuspendLayout();
-            this.menuaJUDA.SuspendLayout();
+            this.menuAjuda.SuspendLayout();
             this.cmsRetornoAcerto.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -434,7 +436,7 @@
             this.tbcPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbcPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tbcPrincipal.Name = "tbcPrincipal";
-            this.tbcPrincipal.SelectedIndex = 1;
+            this.tbcPrincipal.SelectedIndex = 3;
             this.tbcPrincipal.Size = new System.Drawing.Size(860, 645);
             this.tbcPrincipal.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tbcPrincipal.TabIndex = 0;
@@ -3097,7 +3099,7 @@
             this.menuProdutos.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuProdutoAdicionar,
             this.mnuProdutoMovimentar,
-            this.mnuProdutoImprimir});
+            this.relatórioToolStripMenuItem});
             this.menuProdutos.Location = new System.Drawing.Point(0, 0);
             this.menuProdutos.Name = "menuProdutos";
             this.menuProdutos.Size = new System.Drawing.Size(852, 24);
@@ -3117,13 +3119,6 @@
             this.mnuProdutoMovimentar.Size = new System.Drawing.Size(130, 20);
             this.mnuProdutoMovimentar.Text = "Movimentar Produto";
             this.mnuProdutoMovimentar.Click += new System.EventHandler(this.mnuProdutoMovimentar_Click);
-            // 
-            // mnuProdutoImprimir
-            // 
-            this.mnuProdutoImprimir.Name = "mnuProdutoImprimir";
-            this.mnuProdutoImprimir.Size = new System.Drawing.Size(65, 20);
-            this.mnuProdutoImprimir.Text = "Imprimir";
-            this.mnuProdutoImprimir.Click += new System.EventHandler(this.mnuProdutoImprimir_Click);
             // 
             // tabConfiguracoes
             // 
@@ -3162,7 +3157,7 @@
             // tabAjuda
             // 
             this.tabAjuda.Controls.Add(this.htmlPanel1);
-            this.tabAjuda.Controls.Add(this.menuaJUDA);
+            this.tabAjuda.Controls.Add(this.menuAjuda);
             this.tabAjuda.Location = new System.Drawing.Point(4, 38);
             this.tabAjuda.Name = "tabAjuda";
             this.tabAjuda.Size = new System.Drawing.Size(852, 603);
@@ -3181,16 +3176,16 @@
             this.htmlPanel1.TabIndex = 5;
             this.htmlPanel1.Text = "Em desenvolvimento...";
             // 
-            // menuaJUDA
+            // menuAjuda
             // 
-            this.menuaJUDA.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuAjuda.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuAjudaAtualizacoes,
             this.mnuAjudaSobre});
-            this.menuaJUDA.Location = new System.Drawing.Point(0, 0);
-            this.menuaJUDA.Name = "menuaJUDA";
-            this.menuaJUDA.Size = new System.Drawing.Size(852, 24);
-            this.menuaJUDA.TabIndex = 4;
-            this.menuaJUDA.Text = "menuHome";
+            this.menuAjuda.Location = new System.Drawing.Point(0, 0);
+            this.menuAjuda.Name = "menuAjuda";
+            this.menuAjuda.Size = new System.Drawing.Size(852, 24);
+            this.menuAjuda.TabIndex = 4;
+            this.menuAjuda.Text = "menuHome";
             // 
             // mnuAjudaAtualizacoes
             // 
@@ -3233,6 +3228,29 @@
             this.smnRetornoAcertoPagamento.Size = new System.Drawing.Size(201, 22);
             this.smnRetornoAcertoPagamento.Text = "Exibir/Editar Pagamento";
             this.smnRetornoAcertoPagamento.Click += new System.EventHandler(this.smnRetornoAcertoPagamento_Click);
+            // 
+            // relatórioToolStripMenuItem
+            // 
+            this.relatórioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.estoqueProdutoToolStripMenuItem,
+            this.etiquetasToolStripMenuItem});
+            this.relatórioToolStripMenuItem.Name = "relatórioToolStripMenuItem";
+            this.relatórioToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.relatórioToolStripMenuItem.Text = "&Relatórios";
+            // 
+            // estoqueProdutoToolStripMenuItem
+            // 
+            this.estoqueProdutoToolStripMenuItem.Name = "estoqueProdutoToolStripMenuItem";
+            this.estoqueProdutoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.estoqueProdutoToolStripMenuItem.Text = "Estoque &Produto";
+            this.estoqueProdutoToolStripMenuItem.Click += new System.EventHandler(this.estoqueProdutoToolStripMenuItem_Click);
+            // 
+            // etiquetasToolStripMenuItem
+            // 
+            this.etiquetasToolStripMenuItem.Name = "etiquetasToolStripMenuItem";
+            this.etiquetasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.etiquetasToolStripMenuItem.Text = "&Etiquetas";
+            this.etiquetasToolStripMenuItem.Click += new System.EventHandler(this.etiquetasToolStripMenuItem_Click);
             // 
             // FormDeposito
             // 
@@ -3333,8 +3351,8 @@
             this.metroPanel1.PerformLayout();
             this.tabAjuda.ResumeLayout(false);
             this.tabAjuda.PerformLayout();
-            this.menuaJUDA.ResumeLayout(false);
-            this.menuaJUDA.PerformLayout();
+            this.menuAjuda.ResumeLayout(false);
+            this.menuAjuda.PerformLayout();
             this.cmsRetornoAcerto.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -3486,13 +3504,12 @@
         private System.Windows.Forms.ToolStripMenuItem mnuRetornoPesquisar;
         private System.Windows.Forms.ToolStripMenuItem mnuRetornoRelatorios;
         private System.Windows.Forms.MenuStrip menuProdutos;
-        private System.Windows.Forms.ToolStripMenuItem mnuProdutoImprimir;
         private System.Windows.Forms.ToolStripMenuItem mnuProdutoAdicionar;
         private System.Windows.Forms.ToolStripMenuItem mnuProdutoMovimentar;
         private System.Windows.Forms.TabPage tabConfiguracoes;
         private System.Windows.Forms.TabPage tabAjuda;
         private MetroFramework.Drawing.Html.HtmlPanel htmlPanel1;
-        private System.Windows.Forms.MenuStrip menuaJUDA;
+        private System.Windows.Forms.MenuStrip menuAjuda;
         private System.Windows.Forms.ToolStripMenuItem mnuAjudaAtualizacoes;
         private System.Windows.Forms.ToolStripMenuItem mnuAjudaSobre;
         private MetroFramework.Controls.MetroPanel metroPanel1;
@@ -3530,5 +3547,8 @@
         private MetroFramework.Controls.MetroLabel lblTitulosAReceber;
         public MetroFramework.Controls.MetroLabel dlbTitulosTotal;
         private MetroFramework.Controls.MetroLabel lblTitulosTotal;
+        private System.Windows.Forms.ToolStripMenuItem relatórioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem estoqueProdutoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem etiquetasToolStripMenuItem;
     }
 }

@@ -250,7 +250,7 @@ namespace ConsignadoDeposito.Modal
                 ModelLibrary.MetodosDeposito.SalvarEstoqueMovimentacao(pEstoqueId, cProdutoGradeId, vTipoMovimentacao, Convert.ToDouble(txtQuantidade.Text), txtObservacoes.Text);
 
 
-                MessageBox.Show("Pagamento alterado com sucesso!", "Alterar pagamento", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Estoque alterado com sucesso!", "Alterar estoque", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 CarregarMovimentacoes(cProdutoGradeId);
 
