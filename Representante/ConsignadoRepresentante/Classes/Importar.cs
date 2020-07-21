@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media;
 using ConsignadoRepresentante;
+using Color = System.Drawing.Color;
 
 namespace ConsignadoRepresentante
 {
@@ -280,10 +283,10 @@ namespace ConsignadoRepresentante
         public Task ProcessarImportacao(string pRotina, int row)
         {
 
-
-
-            localDeposito.grdImportacao.Rows[row].Cells["Status"].Value = "...";
+            //localDeposito.grdImportacao.Rows[row].Cells["Status"].Value = "...";
             //localDeposito.grdImportacao.Rows[row].DefaultCellStyle.ForeColor = Color.Orange;
+
+
 
             Console.WriteLine("Index row = " + row.ToString());
 
@@ -294,18 +297,23 @@ namespace ConsignadoRepresentante
             if (result == true)
             {
 
-                localDeposito.grdImportacao.Rows[row].Cells["Status"].Value = "Importado";
-                localDeposito.grdImportacao.Rows[row].DefaultCellStyle.ForeColor = Color.Green;
+                //localDeposito.grdImportacao.Rows[row].Cells["Status"].Value = "Importado";
+                //localDeposito.grdImportacao.Rows[row].DefaultCellStyle.ForeColor = Color.Green;
+
+                return Task.CompletedTask;
 
             }
             else
             {
 
-                localDeposito.grdImportacao.Rows[row].Cells["Status"].Value = "Erro";
-                localDeposito.grdImportacao.Rows[row].DefaultCellStyle.ForeColor = Color.Red;
+                //localDeposito.grdImportacao.Rows[row].Cells["Status"].Value = "Erro";
+                //localDeposito.grdImportacao.Rows[row].DefaultCellStyle.ForeColor = Color.Red;
+
+                return null;
+
             }
 
-            return Task.CompletedTask;
+            
 
 
 
@@ -390,8 +398,10 @@ namespace ConsignadoRepresentante
 
 
             //Exibir opção para Re-importar
-            localDeposito.btnExcluirImportacao.Visible = true;
-            localDeposito.btnExcluirImportacao.Enabled = true;
+            localDeposito.smnExcluirCarga.Enabled = true;
+
+
+
 
 
             //obtem dados da carga (local) com tudo bloqueado
@@ -430,9 +440,9 @@ namespace ConsignadoRepresentante
         {
 
 
+            localDeposito.smnExcluirCarga.Text = "Excluindo...";
+            localDeposito.smnExcluirCarga.Enabled = false;
 
-            localDeposito.btnExcluirImportacao.Text = "Excluindo...";
-            localDeposito.btnExcluirImportacao.Enabled = false;
             Cursor.Current = Cursors.WaitCursor;
             ModelLibrary.ImportarExportar.ExcluirImportacao();
 
@@ -445,11 +455,14 @@ namespace ConsignadoRepresentante
             }
 
             MessageBox.Show("Importação excluída com sucesso!");
-            localDeposito.btnExcluirImportacao.Text = "Exclur \n Importação";
+
+            localDeposito.smnExcluirCarga.Text = "Excluir \n Importação";
+
             ImportarLimpar();
             localDeposito.CarregarRepresentante();
-            localDeposito.btnExcluirImportacao.Text = "Excluir";
-            localDeposito.btnExcluirImportacao.Visible = false;
+
+            localDeposito.smnExcluirCarga.Text = "&Excluir Carga";
+            localDeposito.smnExcluirCarga.Enabled = false;
 
 
             localDeposito.grdImportacao.ClearSelection();

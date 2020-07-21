@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -36,6 +37,7 @@ namespace ConsignadoRepresentante
 
 
         public System.Windows.Forms.Form loginWindow = null;
+
 
 
 
@@ -236,7 +238,8 @@ namespace ConsignadoRepresentante
 
 
 
-        private void cbbCargaPraca_SelectedValueChanged(object sender, EventArgs e)
+
+        private void cbbImportarPraca_Validating(object sender, CancelEventArgs e)
         {
 
             try
@@ -248,7 +251,6 @@ namespace ConsignadoRepresentante
             {
                 txtImportarCodPraca.Text = "";
             }
-
         }
 
 
@@ -284,7 +286,7 @@ namespace ConsignadoRepresentante
         }
 
 
-        private void cbbCargaRepresentante_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbbImportarRepresentante_Validating(object sender, CancelEventArgs e)
         {
             try
             {
@@ -296,6 +298,7 @@ namespace ConsignadoRepresentante
                 txtImportarCodRepresentante.Text = "";
             }
         }
+
 
         private void txtImportarCodRepresentante_ButtonClick(object sender, EventArgs e)
         {
@@ -411,10 +414,8 @@ namespace ConsignadoRepresentante
         }
 
 
-        private void btnExcluirImportacao_Click(object sender, EventArgs e)
+        private void smnExcluirCarga_Click(object sender, EventArgs e)
         {
-
-
             if (MessageBox.Show("ATENÇÃO: TODOS OS DADOS SERÃO APAGADOS. Deseja realmente excluir a importação?", "ATENÇÃO!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
 
@@ -430,7 +431,8 @@ namespace ConsignadoRepresentante
                         {
                             cImportar.ExcluirImportacao(false);
                         }
-                    } else
+                    }
+                    else
                     {
                         cImportar.ExcluirImportacao(false);
                     }
@@ -447,6 +449,9 @@ namespace ConsignadoRepresentante
 
             }
         }
+
+
+
 
         ////////////////////////////////////////
         /// CONFERIR PRODUTOS
@@ -607,12 +612,46 @@ namespace ConsignadoRepresentante
 
         private void bgwImportar_DoWork(object sender, DoWorkEventArgs e)
         {
-            Cursor.Current = Cursors.WaitCursor;
-            foreach (DataGridViewRow row in grdImportacao.Rows)
+            
+            try
             {
-                Console.WriteLine(row.Cells["Rotina"].Value.ToString() + " em row:" + row.Index.ToString());
-                cImportar.ProcessarImportacao(row.Cells["Rotina"].Value.ToString(), row.Index);
+                Cursor.Current = Cursors.WaitCursor;
+                foreach (DataGridViewRow row in grdImportacao.Rows)
+                {
+
+                    //row.Cells["Status"].Value = "...";
+                    Console.WriteLine(row.Cells["Rotina"].Value.ToString() + " em row:" + row.Index.ToString());
+                    Task vResult = cImportar.ProcessarImportacao(row.Cells["Rotina"].Value.ToString(), row.Index);
+
+                    if (vResult == null)
+                    {
+                        row.Cells["Status"].Value = "Erro";
+                        row.DefaultCellStyle.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        row.Cells["Status"].Value = "Importado";
+                        row.DefaultCellStyle.ForeColor = Color.Green;
+                    }
+                }
             }
+            catch (Exception vE)
+            {
+
+                if (vE.Message == "Cross-thread operation not valid: Control '' accessed from a thread other than the thread it was created on.")
+                {
+                    //erro conhecido - ignorado
+                    Trace.WriteLine(DateTime.Now.ToString() + "FormDeposito.bgwImportar_DoWork()");
+                    Trace.TraceError(vE.Message);
+                } else
+                {
+                    Trace.WriteLine(DateTime.Now.ToString() + "FormDeposito.bgwImportar_DoWork()");
+                    Trace.TraceError(vE.Message);
+                    MessageBox.Show(vE.Message, vE.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+
         }
 
         private void bgwImportar_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -929,5 +968,7 @@ namespace ConsignadoRepresentante
                 e.Cancel = true;
             }
         }
+
+
     }
 }

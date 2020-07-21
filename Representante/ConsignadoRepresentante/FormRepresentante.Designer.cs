@@ -681,7 +681,7 @@
             this.bairroDataGridViewTextBoxColumn.DataPropertyName = "Bairro";
             this.bairroDataGridViewTextBoxColumn.HeaderText = "Bairro";
             this.bairroDataGridViewTextBoxColumn.Name = "bairroDataGridViewTextBoxColumn";
-            this.bairroDataGridViewTextBoxColumn.Width = 61;
+            this.bairroDataGridViewTextBoxColumn.Width = 60;
             // 
             // cidadeUFDataGridViewTextBoxColumn
             // 
@@ -695,7 +695,7 @@
             this.telefonesDataGridViewTextBoxColumn.DataPropertyName = "Telefones";
             this.telefonesDataGridViewTextBoxColumn.HeaderText = "Telefones";
             this.telefonesDataGridViewTextBoxColumn.Name = "telefonesDataGridViewTextBoxColumn";
-            this.telefonesDataGridViewTextBoxColumn.Width = 78;
+            this.telefonesDataGridViewTextBoxColumn.Width = 79;
             // 
             // pedidoAnteriorDataGridViewCheckBoxColumn
             // 
@@ -1647,7 +1647,7 @@
             this.cbbDataNasc.Enabled = false;
             this.cbbDataNasc.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.cbbDataNasc.Location = new System.Drawing.Point(810, 76);
-            this.cbbDataNasc.MinimumSize = new System.Drawing.Size(0, 29);
+            this.cbbDataNasc.MinimumSize = new System.Drawing.Size(4, 29);
             this.cbbDataNasc.Name = "cbbDataNasc";
             this.cbbDataNasc.Size = new System.Drawing.Size(111, 29);
             this.cbbDataNasc.TabIndex = 11;
@@ -3307,7 +3307,7 @@
             // smnReceberPagamentos
             // 
             this.smnReceberPagamentos.Name = "smnReceberPagamentos";
-            this.smnReceberPagamentos.Size = new System.Drawing.Size(163, 20);
+            this.smnReceberPagamentos.Size = new System.Drawing.Size(164, 20);
             this.smnReceberPagamentos.Text = "&Exibir/Receber Pagamentos";
             this.smnReceberPagamentos.Click += new System.EventHandler(this.smnReceberPagamentos_Click);
             // 
@@ -4089,19 +4089,19 @@
             this.tsmVendedor,
             this.tsmPagamento});
             this.cmsPosicaoFinanceira.Name = "cmsPosicaoFinanceira";
-            this.cmsPosicaoFinanceira.Size = new System.Drawing.Size(172, 48);
+            this.cmsPosicaoFinanceira.Size = new System.Drawing.Size(173, 48);
             // 
             // tsmVendedor
             // 
             this.tsmVendedor.Name = "tsmVendedor";
-            this.tsmVendedor.Size = new System.Drawing.Size(171, 22);
+            this.tsmVendedor.Size = new System.Drawing.Size(172, 22);
             this.tsmVendedor.Text = "Exibir Vendedor";
             this.tsmVendedor.Click += new System.EventHandler(this.tsmVendedor_Click);
             // 
             // tsmPagamento
             // 
             this.tsmPagamento.Name = "tsmPagamento";
-            this.tsmPagamento.Size = new System.Drawing.Size(171, 22);
+            this.tsmPagamento.Size = new System.Drawing.Size(172, 22);
             this.tsmPagamento.Text = "Exibir Pagamentos";
             this.tsmPagamento.Click += new System.EventHandler(this.tsmPagamento_Click);
             // 

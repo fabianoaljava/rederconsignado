@@ -33,9 +33,8 @@ namespace ModelLibrary
 
             Type vTipo = Type.GetType("ModelLibrary.ImportarExportar");
             MethodInfo vMetodo = vTipo.GetMethod(pRotina);
+
             Boolean result = (Boolean)vMetodo.Invoke(null, null);
-
-
 
             return result;
 
@@ -1715,9 +1714,10 @@ namespace ModelLibrary
             }
         }
 
-        public static void ImportarFinalizar()
+        public static Boolean ImportarFinalizar()
         {
             Thread.Sleep(1000);
+            return true;
         }
 
 

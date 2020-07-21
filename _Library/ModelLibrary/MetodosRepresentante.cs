@@ -263,15 +263,20 @@ namespace ModelLibrary
                                     LEFT JOIN RepCargaConferencia ON RepCargaConferencia.CargaId = RepCarga.Id AND RepCargaConferencia.ProdutoGradeId = RepProdutoGrade.Id
                                 WHERE Tipo != 'S' AND Tipo != 'P'";
 
-                var result = representante.Database.SqlQuery<int>(query);
+                var result = representante.Database.SqlQuery<int?>(query);
 
-                if (result.FirstOrDefault<int>() > 0)
+
+                if (result != null && result.FirstOrDefault<int?>() > 0)
                 {
                     return false;
-                } else
+                }
+                else
                 {
                     return true;
                 }
+
+
+
             }
 
         }
